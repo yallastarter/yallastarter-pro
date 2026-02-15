@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover Vision 2030 aligned projects on YallaStarter. Support Saudi innovation that drives the Kingdom's ambitious transformation goals.">
+    <meta name="keywords" content="Vision 2030, Saudi innovation, transformation projects, crowdfunding">
+    <meta name="author" content="YallaStarter">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="YallaStarter Vision 2030 Projects - Innovation Projects in Saudi Arabia">
+    <meta property="og:description" content="Discover Vision 2030 aligned projects on YallaStarter. Support Saudi innovation that drives the Kingdom's ambitious transformation goals.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yallastarter.com/vision2030">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" as="style">
+    
+    <title>YallaStarter Vision 2030 Projects - Innovation Projects in Saudi Arabia</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile-menu.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .vision-hero {
+            background: linear-gradient(135deg, #006c35 0%, #004d26 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .vision-hero-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .vision-hero-subtitle {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .vision-categories {
+            padding: 4rem 0;
+            background-color: var(--neutral-100);
+        }
+        
+        .vision-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .vision-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .vision-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .vision-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #006c35 0%, #004d26 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 2rem auto 1.5rem;
+        }
+        
+        .vision-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--neutral-900);
+        }
+        
+        .vision-description {
+            color: var(--neutral-700);
+            margin-bottom: 1.5rem;
+            padding: 0 1.5rem;
+        }
+        
+        .language-switcher {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: auto;
+        }
+        
+        .language-btn {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .language-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-1px);
+        }
+        
+        .language-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .back-to-home {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .back-to-home a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .back-to-home a:hover {
+            color: var(--primary-dark);
+        }
+        
+        .vision2030-info {
+            background: linear-gradient(135deg, #006c35 0%, #004d26 100%);
+            color: white;
+            padding: 3rem 0;
+            margin: 2rem 0;
+        }
+        
+        .vision2030-info h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+        
+        .vision2030-info p {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        /* Logo Text Fallback Styling */
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: none;
+        }
+        
+        /* Featured Innovation Projects Styling */
+        .featured-innovation-projects {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f8f9fa 100%);
+        }
+        
+        .featured-innovation-projects .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .featured-innovation-projects .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--neutral-900);
+            margin-bottom: 1rem;
+        }
+        
+        .featured-innovation-projects .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--neutral-600);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .featured-innovation-projects .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .featured-innovation-projects .project-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .featured-innovation-projects .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .featured-innovation-projects .project-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .featured-innovation-projects .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .featured-innovation-projects .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+        
+        .featured-innovation-projects .project-content {
+            padding: 1.5rem;
+        }
+        
+        .featured-innovation-projects .project-category {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .featured-innovation-projects .project-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--neutral-900);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+        
+        .featured-innovation-projects .project-description {
+            color: var(--neutral-700);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .featured-innovation-projects .project-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--neutral-600);
+        }
+        
+        .featured-innovation-projects .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: var(--neutral-200);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .featured-innovation-projects .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        
+        /* Responsive Design for Innovation Projects */
+        @media (max-width: 768px) {
+            .featured-innovation-projects .section-title {
+                font-size: 2rem;
+            }
+            
+            .featured-innovation-projects .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <span class="logo-text">YallaStarter</span>
+            </a>
+        
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="entertainment.html">Entertainment Projects</a></li>
+                <li><a href="vision2030.html" class="active">Vision 2030 Projects</a></li>
+                <li><a href="mind71.html">MIND71 AI</a></li>
+                <li><a href="projects.html">Browse Projects</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            
+            <div class="language-switcher">
+                <button class="language-btn active" onclick="switchLanguage('en')">English</button>
+                <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
+            </div>
+            
+            <div class="auth-buttons">
+                <a href="create-project.html" class="btn btn-primary">Start a Project</a>
+                <a href="login.html" class="btn btn-link">Log In</a>
+            </div>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+        
+        <div class="mobile-menu">
+            <div class="mobile-menu-header">
+                
+                <button class="mobile-close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="entertainment.html">Entertainment Projects</a></li>
+                <li><a href="vision2030.html" class="active">Vision 2030 Projects</a></li>
+                <li><a href="mind71.html">MIND71 AI</a></li>
+                <li><a href="projects.html">Browse Projects</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="language-switcher">
+                <button class="language-btn active" onclick="switchLanguage('en')">English</button>
+                <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
+            </div>
+            <div class="auth-buttons">
+                <a href="create-project.html" class="btn btn-primary">Start a Project</a>
+                <a href="login.html" class="btn btn-link">Log In</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Vision 2030 Hero -->
+    <section class="vision-hero">
+        <div class="container">
+                    <h1 class="vision-hero-title">YallaStarter Vision 2030 Projects</h1>
+            <p class="vision-hero-subtitle">Support innovative projects that align with Saudi Arabia's transformation goals and drive the Kingdom's future growth</p>
+        </div>
+    </section>
+
+
+    <!-- Vision Categories -->
+    <section class="vision-categories">
+        <div class="container">
+            <h2 class="section-title">Vision 2030 Project Categories</h2>
+            <p class="section-subtitle">Discover projects driving Saudi Arabia's transformation</p>
+            
+            <div class="vision-grid">
+                <div class="vision-card">
+                    <div class="vision-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="vision-title">Technology & Innovation</h3>
+                    <p class="vision-description">Support Saudi tech startups, AI projects, and digital transformation initiatives.</p>
+                    <a href="vision2030-technology.html" class="btn btn-outline">Explore Tech</a>
+                </div>
+                
+                <div class="vision-card">
+                    <div class="vision-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3 class="vision-title">Sustainability & Environment</h3>
+                    <p class="vision-description">Discover green energy, waste management, and environmental protection projects.</p>
+                    <a href="vision2030-sustainability.html" class="btn btn-outline">Explore Green</a>
+                </div>
+                
+                <div class="vision-card">
+                    <div class="vision-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="vision-title">Education & Skills</h3>
+                    <p class="vision-description">Support educational initiatives, skill development, and knowledge sharing projects.</p>
+                    <a href="vision2030-education.html" class="btn btn-outline">Explore Education</a>
+                </div>
+                
+                <div class="vision-card">
+                    <div class="vision-icon">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <h3 class="vision-title">Industrial Development</h3>
+                    <p class="vision-description">Discover manufacturing, logistics, and industrial innovation projects.</p>
+                    <a href="vision2030-industrial.html" class="btn btn-outline">Explore Industry</a>
+                </div>
+                
+                <div class="vision-card">
+                    <div class="vision-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3 class="vision-title">Healthcare & Wellness</h3>
+                    <p class="vision-description">Support medical innovation, health tech, and wellness initiatives.</p>
+                    <a href="vision2030-healthcare.html" class="btn btn-outline">Explore Health</a>
+                </div>
+                
+                <div class="vision-card">
+                    <div class="vision-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="vision-title">Financial Services</h3>
+                    <p class="vision-description">Discover fintech, financial inclusion, and economic empowerment projects.</p>
+                    <a href="vision2030-financial.html" class="btn btn-outline">Explore Finance</a>
+                </div>
+                
+                <div class="vision-card">
+                    <div class="vision-icon">
+                        <i class="fas fa-route"></i>
+                    </div>
+                    <h3 class="vision-title">Tourism & Hospitality</h3>
+                    <p class="vision-description">Support tourism innovation, cultural experiences, and hospitality projects.</p>
+                    <a href="vision2030-tourism.html" class="btn btn-outline">Explore Tourism</a>
+                </div>
+                
+                <div class="vision-card">
+                    <div class="vision-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3 class="vision-title">Logistics & Transport</h3>
+                    <p class="vision-description">Discover smart mobility, logistics solutions, and transportation innovation.</p>
+                    <a href="vision2030-logistics.html" class="btn btn-outline">Explore Transport</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Innovation Projects -->
+    <section class="featured-innovation-projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Innovation Projects</h2>
+                <p class="section-subtitle">Discover cutting-edge projects driving Saudi Arabia's Vision 2030 transformation</p>
+            </div>
+            
+            <div class="projects-grid">
+                <a href="project-smart-city-iot.html" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Smart City IoT Platform" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Smart Cities & IoT</div>
+                        <h3 class="project-title">Smart City IoT Platform for Saudi Arabia</h3>
+                        <p class="project-description">A comprehensive IoT platform integrating smart sensors, AI analytics, and real-time monitoring to optimize urban infrastructure, energy management, and public services across Saudi cities.</p>
+                        <div class="project-meta">
+                            <div>SAR 450,000 raised</div>
+                            <div>78% funded</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 78%;"></div>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="project-solar-energy.html" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Renewable Energy System" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Clean Energy</div>
+                        <h3 class="project-title">Advanced Solar Energy Storage System</h3>
+                        <p class="project-description">Next-generation solar energy storage technology with AI-powered optimization, designed for Saudi Arabia's unique climate conditions and energy demands.</p>
+                        <div class="project-meta">
+                            <div>SAR 320,000 raised</div>
+                            <div>65% funded</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 65%;"></div>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="project-digital-art-gallery.html" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Digital Art Platform" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Digital Innovation</div>
+                        <h3 class="project-title">Saudi Digital Art & NFT Marketplace</h3>
+                        <p class="project-description">A blockchain-powered digital art platform showcasing Saudi artists and creators, enabling secure NFT trading and digital asset management.</p>
+                        <div class="project-meta">
+                            <div>SAR 180,000 raised</div>
+                            <div>89% funded</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 89%;"></div>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="project-ai-disease-detection.html" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="AI Healthcare System" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">AI & Healthcare</div>
+                        <h3 class="project-title">AI-Powered Early Disease Detection System</h3>
+                        <p class="project-description">An advanced AI system that analyzes medical imaging data to detect early signs of diseases, improving diagnostic accuracy and patient outcomes in Saudi healthcare facilities.</p>
+                        <div class="project-meta">
+                            <div>SAR 38,000 raised</div>
+                            <div>55% funded</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 55%;"></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Back to Home -->
+    <div class="back-to-home">
+        <div class="container">
+            <a href="index.html">
+                <i class="fas fa-arrow-left"></i>
+                Back to Home
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>YallaStarter</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="projects.html">Browse Projects</a></li>
+                        <li><a href="how-it-works.html">How It Works</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>For Creators</h3>
+                    <ul class="footer-links">
+                        <li><a href="create-project.html">Start a Project</a></li>
+                        <li><a href="#">Creator Handbook</a></li>
+                        <li><a href="#">Creator Resources</a></li>
+                        <li><a href="#">Creator FAQs</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>For Backers</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Backer FAQs</a></li>
+                        <li><a href="#">Trust & Safety</a></li>
+                        <li><a href="#">Backer Resources</a></li>
+                        <li><a href="#">Payment Methods</a></li>
+                        <li><a href="#">Backer Protection</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Connect With Us</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Newsletter</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Events</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Community Guidelines</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; 2025 YallaStarter. All rights reserved.
+                </div>
+                
+                <div class="footer-social">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Language Switcher
+        function switchLanguage(lang) {
+            if (lang === 'en') {
+                window.location.href = 'vision2030.html';
+            } else if (lang === 'ar') {
+                window.location.href = 'vision2030-ar.html';
+            }
+        }
+        
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.style.display = mobileMenu.style.display === 'none' ? 'block' : 'none';
+        });
+    </script>    <!-- Universal Mobile Menu Script --><script src="mobile-menu.js"></script>    <!-- Password Protection Script -->\n    <script src="assets/js/password-clear.js"></script>\n</body></html>
+
+

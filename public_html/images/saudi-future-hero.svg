@@ -1,0 +1,60 @@
+<svg width="2000" height="1200" viewBox="0 0 2000 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<radialGradient id="gradient" cx="50%" cy="50%" r="70%">
+<stop offset="0%" style="stop-color:#006c35;stop-opacity:1" />
+<stop offset="100%" style="stop-color:#004d26;stop-opacity:1" />
+</radialGradient>
+</defs>
+
+<!-- Background -->
+<rect width="2000" height="1200" fill="url(#gradient)" />
+
+<!-- Cityscape Silhouettes -->
+<rect x="100" y="400" width="100" height="300" fill="#333" opacity="0.3" />
+<rect x="200" y="300" width="150" height="400" fill="#333" opacity="0.3" />
+<rect x="400" y="200" width="120" height="500" fill="#333" opacity="0.3" />
+<rect x="600" y="250" width="100" height="450" fill="#333" opacity="0.3" />
+<rect x="800" y="300" width="100" height="400" fill="#333" opacity="0.3" />
+<rect x="1000" y="400" width="100" height="300" fill="#333" opacity="0.3" />
+<rect x="1200" y="350" width="80" height="350" fill="#333" opacity="0.3" />
+<rect x="1400" y="280" width="90" height="420" fill="#333" opacity="0.3" />
+<rect x="1600" y="320" width="110" height="380" fill="#333" opacity="0.3" />
+
+<!-- Saudi People Silhouettes -->
+<circle cx="400" cy="900" r="30" fill="#fff" opacity="0.8" />
+<circle cx="500" cy="850" r="25" fill="#fff" opacity="0.8" />
+<circle cx="600" cy="900" r="30" fill="#fff" opacity="0.8" />
+<circle cx="700" cy="850" r="25" fill="#fff" opacity="0.8" />
+<circle cx="800" cy="900" r="30" fill="#fff" opacity="0.8" />
+<circle cx="900" cy="870" r="28" fill="#fff" opacity="0.8" />
+<circle cx="1000" cy="920" r="32" fill="#fff" opacity="0.8" />
+
+<!-- Digital Overlays -->
+<circle cx="300" cy="200" r="50" fill="none" stroke="#fff" stroke-width="3" opacity="0.6" />
+<circle cx="300" cy="200" r="30" fill="none" stroke="#fff" stroke-width="2" opacity="0.6" />
+<circle cx="300" cy="200" r="10" fill="#fff" opacity="0.6" />
+
+<circle cx="700" cy="150" r="40" fill="none" stroke="#fff" stroke-width="3" opacity="0.6" />
+<circle cx="700" cy="150" r="20" fill="none" stroke="#fff" stroke-width="2" opacity="0.6" />
+<circle cx="700" cy="150" r="5" fill="#fff" opacity="0.6" />
+
+<!-- Rocket -->
+<path d="M1500 700 L1500 400 L1450 350 L1400 400 L1400 700 Z" fill="#fff" opacity="0.8" />
+<path d="M1450 350 L1500 400 L1400 400 Z" fill="#fff" opacity="0.8" />
+
+<!-- Data Visualization Lines -->
+<path d="M200 100 Q400 150 600 120 T1000 180" stroke="#fff" stroke-width="2" opacity="0.5" fill="none" />
+<path d="M1200 80 Q1400 130 1600 90 T1800 160" stroke="#fff" stroke-width="2" opacity="0.5" fill="none" />
+
+<!-- Text Overlay -->
+<text x="1000" y="600" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#fff" text-anchor="middle" opacity="0.9">Saudi Vision 2030</text>
+<text x="1000" y="660" font-family="Arial, sans-serif" font-size="24" fill="#fff" text-anchor="middle" opacity="0.8">Innovation & Future</text>
+
+<!-- Additional Digital Elements -->
+<rect x="1800" y="100" width="60" height="40" fill="none" stroke="#fff" stroke-width="2" opacity="0.4" />
+<rect x="1810" y="110" width="40" height="20" fill="#fff" opacity="0.3" />
+
+<circle cx="200" cy="150" r="15" fill="none" stroke="#fff" stroke-width="2" opacity="0.4" />
+<circle cx="200" cy="150" r="8" fill="#fff" opacity="0.3" />
+
+</svg>

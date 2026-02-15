@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tourism & Hospitality - Vision 2030 Projects | YallaStarter</title>
+    <meta name="description" content="Discover innovative tourism and hospitality projects driving Saudi Arabia's Vision 2030 transformation. Support tourism innovation, cultural experiences, and hospitality initiatives.">
+    <meta name="keywords" content="tourism, hospitality, cultural experiences, entertainment, Saudi Arabia, Vision 2030">
+    <meta name="author" content="YallaStarter">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Tourism & Hospitality - Vision 2030 Projects | YallaStarter">
+    <meta property="og:description" content="Discover innovative tourism and hospitality projects driving Saudi Arabia's Vision 2030 transformation.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yallastarter.com/vision2030-tourism">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" as="style">
+    
+    <title>Tourism & Hospitality - Vision 2030 Projects | YallaStarter</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile-menu.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --tourism-primary: #dc2626;
+            --tourism-primary-dark: #b91c1c;
+            --tourism-secondary: #ef4444;
+            --tourism-accent: #f87171;
+            --tourism-gradient: linear-gradient(135deg, #dc2626 0%, #ef4444 50%, #f87171 100%);
+            --tourism-glow: 0 0 30px rgba(220, 38, 38, 0.3);
+            --tourism-text: #1e293b;
+            --tourism-text-light: #64748b;
+            --tourism-bg: #fef2f2;
+            --tourism-card: #ffffff;
+            --tourism-border: #fecaca;
+        }
+
+        body {
+            font-family: 'Poppins', 'Tajawal', sans-serif;
+            background: var(--tourism-bg);
+            color: var(--tourism-text);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--tourism-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: var(--tourism-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--tourism-primary);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--tourism-gradient);
+            border-radius: 1px;
+        }
+
+        .language-switcher {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .language-btn {
+            background: none;
+            border: 1px solid var(--tourism-border);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .language-btn.active,
+        .language-btn:hover {
+            background: var(--tourism-primary);
+            color: white;
+            border-color: var(--tourism-primary);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--tourism-gradient);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--tourism-glow);
+        }
+
+        .btn-link {
+            color: var(--tourism-text);
+            background: none;
+            border: 1px solid var(--tourism-border);
+        }
+
+        .btn-link:hover {
+            background: var(--tourism-primary);
+            color: white;
+            border-color: var(--tourism-primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--tourism-text);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .tourism-hero {
+            background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 50%, #b91c1c 100%);
+            color: white;
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tourism-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="tourism" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M10 0 L20 10 L10 20 L0 10 Z" fill="none" stroke="%23dc2626" stroke-width="0.5" opacity="0.3"/></pattern></defs><rect width="100" height="100" fill="url(%23tourism)"/></svg>');
+            opacity: 0.1;
+        }
+
+        .tourism-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .tourism-hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: var(--tourism-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: tourism-glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes tourism-glow {
+            from { filter: drop-shadow(0 0 20px rgba(220, 38, 38, 0.5)); }
+            to { filter: drop-shadow(0 0 30px rgba(220, 38, 38, 0.8)); }
+        }
+
+        .tourism-hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        .tourism-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tourism-stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .tourism-stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--tourism-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .tourism-stat-label {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* Tourism Categories */
+        .tourism-categories {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--tourism-text);
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            text-align: center;
+            color: var(--tourism-text-light);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .tourism-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tourism-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--tourism-border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tourism-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--tourism-gradient);
+        }
+
+        .tourism-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(220, 38, 38, 0.15);
+        }
+
+        .tourism-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--tourism-gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .tourism-card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--tourism-text);
+        }
+
+        .tourism-card-description {
+            color: var(--tourism-text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .tourism-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .tourism-features li {
+            padding: 0.5rem 0;
+            color: var(--tourism-text-light);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .tourism-features li::before {
+            content: '🏛️';
+            position: absolute;
+            left: 0;
+            color: var(--tourism-primary);
+            font-weight: bold;
+        }
+
+        /* Featured Projects */
+        .featured-projects {
+            padding: 6rem 0;
+            background: var(--tourism-bg);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(220, 38, 38, 0.15);
+        }
+
+        .project-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-category {
+            color: var(--tourism-primary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--tourism-text);
+        }
+
+        .project-description {
+            color: var(--tourism-text-light);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--tourism-text-light);
+        }
+
+        .funding-progress {
+            width: 100%;
+            height: 6px;
+            background: #fecaca;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .funding-progress-bar {
+            height: 100%;
+            background: var(--tourism-gradient);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 0;
+            background: var(--tourism-gradient);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .cta-description {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--tourism-primary);
+            border: none;
+        }
+
+        .btn-white:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-white {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline-white:hover {
+            background: white;
+            color: var(--tourism-primary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links,
+            .auth-buttons {
+                display: none;
+            }
+
+            .tourism-hero-title {
+                font-size: 2.5rem;
+            }
+
+            .tourism-hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .tourism-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-buttons .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <span class="logo-text">YallaStarter</span>
+            </a>
+        
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="entertainment.html">Entertainment Projects</a></li>
+                <li><a href="vision2030.html" class="active">Vision 2030 Projects</a></li>
+                <li><a href="mind71.html">MIND71 AI</a></li>
+                <li><a href="projects.html">Browse Projects</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            
+            <div class="language-switcher">
+                <button class="language-btn active" onclick="switchLanguage('en')">English</button>
+                <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
+            </div>
+            
+            <div class="auth-buttons">
+                <a href="create-project.html" class="btn btn-primary">Start a Project</a>
+                <a href="login.html" class="btn btn-link">Log In</a>
+            </div>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+        
+        <div class="mobile-menu">
+            <div class="mobile-menu-header">
+                <button class="mobile-close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="entertainment.html">Entertainment Projects</a></li>
+                <li><a href="vision2030.html" class="active">Vision 2030 Projects</a></li>
+                <li><a href="mind71.html">MIND71 AI</a></li>
+                <li><a href="projects.html">Browse Projects</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <a href="create-project.html" class="btn btn-primary">Start a Project</a>
+                <a href="login.html" class="btn btn-link">Log In</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Tourism Hero -->
+    <section class="tourism-hero">
+        <div class="container">
+            <div class="tourism-hero-content">
+                <h1 class="tourism-hero-title">Tourism & Hospitality</h1>
+                <p class="tourism-hero-subtitle">Showcasing Saudi Arabia's rich heritage and culture through innovative tourism experiences, world-class hospitality, and entertainment projects that attract visitors from around the globe.</p>
+                
+                <div class="tourism-stats">
+                    <div class="tourism-stat">
+                        <div class="tourism-stat-number">120+</div>
+                        <div class="tourism-stat-label">Tourism Projects</div>
+                    </div>
+                    <div class="tourism-stat">
+                        <div class="tourism-stat-number">SAR 4.5B</div>
+                        <div class="tourism-stat-label">Tourism Investment</div>
+                    </div>
+                    <div class="tourism-stat">
+                        <div class="tourism-stat-number">95%</div>
+                        <div class="tourism-stat-label">Success Rate</div>
+                    </div>
+                    <div class="tourism-stat">
+                        <div class="tourism-stat-number">5M+</div>
+                        <div class="tourism-stat-label">Visitors Annually</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tourism Categories -->
+    <section class="tourism-categories">
+        <div class="container">
+            <h2 class="section-title">Revolutionary Tourism Experiences</h2>
+            <p class="section-subtitle">Explore cutting-edge tourism and hospitality innovations transforming Saudi Arabia's visitor experience</p>
+            
+            <div class="tourism-grid">
+                <div class="tourism-card">
+                    <div class="tourism-icon">
+                        <i class="fas fa-mountain"></i>
+                    </div>
+                    <h3 class="tourism-card-title">Adventure & Eco-Tourism</h3>
+                    <p class="tourism-card-description">Thrilling adventure experiences and sustainable eco-tourism initiatives showcasing Saudi Arabia's natural beauty and landscapes.</p>
+                    <ul class="tourism-features">
+                        <li>Desert Safari Adventures</li>
+                        <li>Mountain Climbing Expeditions</li>
+                        <li>Red Sea Diving Experiences</li>
+                        <li>Wildlife Conservation Tours</li>
+                        <li>Camping & Glamping</li>
+                    </ul>
+                </div>
+
+                <div class="tourism-card">
+                    <div class="tourism-icon">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <h3 class="tourism-card-title">Cultural Heritage Tourism</h3>
+                    <p class="tourism-card-description">Immersive cultural experiences and heritage sites that showcase Saudi Arabia's rich history and traditions.</p>
+                    <ul class="tourism-features">
+                        <li>Historical Site Tours</li>
+                        <li>Cultural Festivals</li>
+                        <li>Traditional Arts & Crafts</li>
+                        <li>Museum Experiences</li>
+                        <li>Heritage Village Visits</li>
+                    </ul>
+                </div>
+
+                <div class="tourism-card">
+                    <div class="tourism-icon">
+                        <i class="fas fa-hotel"></i>
+                    </div>
+                    <h3 class="tourism-card-title">Luxury Hospitality</h3>
+                    <p class="tourism-card-description">World-class hotels, resorts, and hospitality services providing exceptional guest experiences and luxury accommodations.</p>
+                    <ul class="tourism-features">
+                        <li>5-Star Resort Developments</li>
+                        <li>Luxury Hotel Chains</li>
+                        <li>Boutique Hotels</li>
+                        <li>Concierge Services</li>
+                        <li>Fine Dining Experiences</li>
+                    </ul>
+                </div>
+
+                <div class="tourism-card">
+                    <div class="tourism-icon">
+                        <i class="fas fa-vr-cardboard"></i>
+                    </div>
+                    <h3 class="tourism-card-title">Digital Tourism Experiences</h3>
+                    <p class="tourism-card-description">Virtual reality tours, augmented reality experiences, and digital platforms enhancing visitor engagement and accessibility.</p>
+                    <ul class="tourism-features">
+                        <li>Virtual Reality Tours</li>
+                        <li>Augmented Reality Apps</li>
+                        <li>Digital Museum Guides</li>
+                        <li>Online Booking Platforms</li>
+                        <li>Smart Tourism Solutions</li>
+                    </ul>
+                </div>
+
+                <div class="tourism-card">
+                    <div class="tourism-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3 class="tourism-card-title">Culinary Tourism</h3>
+                    <p class="tourism-card-description">Gastronomic experiences and culinary tourism initiatives showcasing Saudi Arabia's diverse food culture and traditions.</p>
+                    <ul class="tourism-features">
+                        <li>Food Tours & Tastings</li>
+                        <li>Cooking Classes</li>
+                        <li>Traditional Restaurants</li>
+                        <li>Food Festivals</li>
+                        <li>Culinary Workshops</li>
+                    </ul>
+                </div>
+
+                <div class="tourism-card">
+                    <div class="tourism-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <h3 class="tourism-card-title">MICE Tourism</h3>
+                    <p class="tourism-card-description">Meetings, Incentives, Conferences, and Exhibitions tourism infrastructure supporting business and professional events.</p>
+                    <ul class="tourism-features">
+                        <li>Convention Centers</li>
+                        <li>Conference Facilities</li>
+                        <li>Exhibition Halls</li>
+                        <li>Event Management</li>
+                        <li>Business Tourism</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section class="featured-projects">
+        <div class="container">
+            <h2 class="section-title">Featured Tourism Projects</h2>
+            <p class="section-subtitle">Discover groundbreaking tourism projects that are transforming Saudi Arabia's visitor experience</p>
+            
+            <div class="projects-grid">
+                <a href="project-abyss.html" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="The Abyss Underground Rollercoaster" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Entertainment & Thrills</div>
+                        <h3 class="project-title">The Abyss: World's Biggest Underground Rollercoaster</h3>
+                        <p class="project-description">Experience the ultimate thrill with the world's biggest underground rollercoaster, featuring cutting-edge technology and immersive entertainment experiences.</p>
+                        <div class="project-meta">
+                            <div>SAR 2,500,000 raised</div>
+                            <div>100% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 100%;"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Red Sea Resort" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Luxury Hospitality</div>
+                        <h3 class="project-title">Red Sea Luxury Resort Complex</h3>
+                        <p class="project-description">Exclusive luxury resort development on the Red Sea coast featuring overwater villas, world-class dining, and pristine marine experiences.</p>
+                        <div class="project-meta">
+                            <div>SAR 8,500,000 raised</div>
+                            <div>75% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 75%;"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Cultural Heritage Center" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Cultural Heritage</div>
+                        <h3 class="project-title">Saudi Cultural Heritage Center</h3>
+                        <p class="project-description">Interactive cultural center showcasing Saudi Arabia's rich heritage through immersive exhibits, traditional performances, and educational programs.</p>
+                        <div class="project-meta">
+                            <div>SAR 3,200,000 raised</div>
+                            <div>68% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 68%;"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Desert Adventure Park" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Adventure Tourism</div>
+                        <h3 class="project-title">Saudi Desert Adventure Park</h3>
+                        <p class="project-description">Thrilling desert adventure park featuring sandboarding, dune bashing, camel trekking, and traditional Bedouin experiences.</p>
+                        <div class="project-meta">
+                            <div>SAR 1,800,000 raised</div>
+                            <div>82% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 82%;"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="VR Tourism Platform" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Digital Tourism</div>
+                        <h3 class="project-title">Saudi VR Tourism Platform</h3>
+                        <p class="project-description">Immersive virtual reality platform allowing global visitors to explore Saudi Arabia's landmarks and attractions from anywhere in the world.</p>
+                        <div class="project-meta">
+                            <div>SAR 950,000 raised</div>
+                            <div>88% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 88%;"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Culinary Tourism Center" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Culinary Tourism</div>
+                        <h3 class="project-title">Saudi Culinary Tourism Center</h3>
+                        <p class="project-description">Comprehensive culinary tourism center featuring cooking schools, food tours, and traditional restaurant experiences showcasing Saudi cuisine.</p>
+                        <div class="project-meta">
+                            <div>SAR 1,200,000 raised</div>
+                            <div>72% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 72%;"></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title">Ready to Welcome the World?</h2>
+            <p class="cta-description">Join the tourism revolution and help showcase Saudi Arabia's incredible heritage, culture, and natural beauty to visitors from around the globe through innovative tourism and hospitality projects.</p>
+            <div class="cta-buttons">
+                <a href="create-project.html" class="btn btn-white">Start Your Tourism Project</a>
+                <a href="projects.html?category=tourism" class="btn btn-outline-white">Explore All Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mobile Menu Script -->
+    <script src="mobile-menu.js"></script>
+    
+    <!-- Language Switcher Script -->
+    <script>
+        function switchLanguage(lang) {
+            if (lang === 'ar') {
+                window.location.href = 'vision2030-tourism-ar.html';
+            } else {
+                window.location.href = 'vision2030-tourism.html';
+            }
+        }
+    </script>
+</body>
+</html>

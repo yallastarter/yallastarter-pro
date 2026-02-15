@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ادعم مشاريع التخرج المبتكرة من الجامعات السعودية على يلا ستارتر. ساعد الطلاب في تحويل أفكارهم الأكاديمية إلى واقع من خلال التمويل الجماعي.">
+    <meta name="keywords" content="مشاريع التخرج, مشاريع التخرج, الجامعات السعودية, التمويل الجماعي, الابتكار, تمويل الطلاب">
+    <meta name="author" content="يلا ستارتر">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="مشاريع التخرج - يلا ستارتر">
+    <meta property="og:description" content="ادعم مشاريع التخرج المبتكرة من الجامعات السعودية على يلا ستارتر. ساعد الطلاب في تحويل أفكارهم الأكاديمية إلى واقع من خلال التمويل الجماعي.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yallastarter.com/capstone-projects-ar">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" as="style">
+    
+    <!-- Critical CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile-menu.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <title>مشاريع التخرج - يلا ستارتر</title>
+    
+    <style>
+        :root {
+            --primary: #10B981;
+            --primary-dark: #059669;
+            --secondary: #F59E0B;
+            --accent: #8B5CF6;
+            --neutral-50: #F9FAFB;
+            --neutral-100: #F3F4F6;
+            --neutral-200: #E5E7EB;
+            --neutral-300: #D1D5DB;
+            --neutral-400: #9CA3AF;
+            --neutral-500: #6B7280;
+            --neutral-600: #4B5563;
+            --neutral-700: #374151;
+            --neutral-800: #1F2937;
+            --neutral-900: #111827;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Tajawal', 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--neutral-800);
+            background-color: var(--neutral-50);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        
+        .logo-text {
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--neutral-700);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+        }
+        
+        .language-switcher {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .language-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--primary);
+            background: white;
+            color: var(--primary);
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        
+        .language-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .language-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+        
+        .btn-link {
+            color: var(--neutral-700);
+            background: none;
+            padding: 0.5rem 1rem;
+        }
+        
+        .btn-link:hover {
+            color: var(--primary);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--neutral-700);
+            cursor: pointer;
+        }
+        
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100vh;
+            background: white;
+            z-index: 2000;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+        
+        .mobile-menu.active {
+            display: block;
+        }
+        
+        .mobile-menu-header {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 2rem;
+        }
+        
+        .mobile-close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--neutral-700);
+            cursor: pointer;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .capstone-projects {
+            padding: 4rem 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--neutral-800);
+            margin-bottom: 1rem;
+        }
+        
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--neutral-600);
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .capstone-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--secondary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 10;
+        }
+        
+        .project-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+        }
+        
+        .project-category {
+            color: var(--primary);
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--neutral-800);
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+        
+        .project-description {
+            color: var(--neutral-600);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .capstone-info {
+            background: var(--neutral-50);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .university {
+            font-weight: 600;
+            color: var(--neutral-800);
+            margin-bottom: 0.25rem;
+        }
+        
+        .student {
+            color: var(--neutral-600);
+            font-size: 0.875rem;
+        }
+        
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .progress-bar {
+            height: 0.5rem;
+            background: var(--neutral-200);
+            border-radius: 0.25rem;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .cta {
+            background: var(--neutral-800);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-subtitle {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .cta-button {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.125rem;
+            transition: background 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            background: var(--primary-dark);
+        }
+        
+        .footer {
+            background-color: var(--neutral-900);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-links a {
+            color: var(--neutral-300);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid var(--neutral-700);
+            padding-top: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .footer-copyright {
+            color: var(--neutral-400);
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-icon {
+            color: var(--neutral-400);
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            color: var(--primary);
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="index-ar.html" class="logo">
+                <span class="logo-text">يلا ستارتر</span>
+            </a>
+        
+            <ul class="nav-links">
+                <li><a href="index-ar.html">الرئيسية</a></li>
+                <li><a href="entertainment-ar.html">الترفيه الإبداعي</a></li>
+                <li><a href="vision2030-ar.html">مشاريع ابداعية من رؤية 2030</a></li>
+                <li><a href="mind71-ar.html">MIND71 AI</a></li>
+                <li><a href="projects-ar.html">المشاريع</a></li>
+                <li><a href="how-it-works-ar.html">كيف يعمل</a></li>
+                <li><a href="contact-ar.html">اتصل بنا</a></li>
+            </ul>
+            
+            <div class="language-switcher">
+                <button class="language-btn active" onclick="switchLanguage('ar')">العربية</button>
+                <button class="language-btn" onclick="switchLanguage('en')">English</button>
+            </div>
+            
+            <div class="auth-buttons">
+                <a href="create-project-ar.html" class="btn btn-primary">ابدأ مشروعك</a>
+                <a href="login-ar.html" class="btn btn-link">تسجيل الدخول</a>
+            </div>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+        
+        <div class="mobile-menu">
+            <div class="mobile-menu-header">
+                <button class="mobile-close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index-ar.html">الرئيسية</a></li>
+                <li><a href="entertainment-ar.html">الترفيه الإبداعي</a></li>
+                <li><a href="vision2030-ar.html">مشاريع ابداعية من رؤية 2030</a></li>
+                <li><a href="mind71-ar.html">MIND71 AI</a></li>
+                <li><a href="projects-ar.html">المشاريع</a></li>
+                <li><a href="how-it-works-ar.html">كيف يعمل</a></li>
+                <li><a href="contact-ar.html">اتصل بنا</a></li>
+            </ul>
+            <div class="language-switcher">
+                <button class="language-btn active" onclick="switchLanguage('ar')">العربية</button>
+                <button class="language-btn" onclick="switchLanguage('en')">English</button>
+            </div>
+            <div class="auth-buttons">
+                <a href="create-project-ar.html" class="btn btn-primary">ابدأ مشروعك</a>
+                <a href="login-ar.html" class="btn btn-link">تسجيل الدخول</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">مشاريع التخرج</h1>
+            <p class="hero-subtitle">ادعم مشاريع التخرج المبتكرة من الجامعات السعودية وساعد الطلاب في تحويل أفكارهم الأكاديمية إلى واقع</p>
+            <div class="hero-buttons">
+                <a href="create-project-ar.html" class="btn btn-primary">قدم مشروعك</a>
+                <a href="#projects" class="btn btn-secondary">تصفح المشاريع</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Capstone Projects Grid -->
+    <section id="projects" class="capstone-projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">مشاريع التخرج المميزة</h2>
+                <p class="section-subtitle">اكتشف مشاريع التخرج المبتكرة التي تسعى للحصول على التمويل لتصبح حقيقة</p>
+            </div>
+            
+            <div class="projects-grid">
+                <div class="project-card capstone-card">
+                    <div class="capstone-badge">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>مشروع تخرج</span>
+                    </div>
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="منصة إنترنت الأشياء للمدن الذكية" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">التقنية والابتكار</div>
+                        <h3 class="project-title">منصة إنترنت الأشياء للمدن الذكية: التنمية الحضرية المستدامة</h3>
+                        <p class="project-description">منصة شاملة لإنترنت الأشياء لإدارة المدن الذكية، تتميز بمراقبة استهلاك الطاقة وحركة المرور والبيانات البيئية في الوقت الفعلي لإنشاء بيئات حضرية مستدامة.</p>
+                        <div class="capstone-info">
+                            <div class="university">جامعة الملك فهد للبترول والمعادن</div>
+                            <div class="student">أحمد الراشد - هندسة الحاسوب</div>
+                        </div>
+                        <div class="project-meta">
+                            <div>45,000 ريال مطلوب</div>
+                            <div>60% من الهدف</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 60%;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card capstone-card">
+                    <div class="capstone-badge">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>مشروع تخرج</span>
+                    </div>
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="نظام تحلية المياه بالطاقة الشمسية" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">الهندسة البيئية</div>
+                        <h3 class="project-title">نظام تحلية المياه بالطاقة الشمسية للمجتمعات النائية</h3>
+                        <p class="project-description">نظام مبتكر لتحلية المياه بالطاقة الشمسية مصمم لتوفير مياه الشرب النظيفة للمجتمعات النائية في السعودية، يجمع بين الطاقة المتجددة وتقنية تنقية المياه المتقدمة.</p>
+                        <div class="capstone-info">
+                            <div class="university">جامعة الملك عبدالله للعلوم والتقنية</div>
+                            <div class="student">فاطمة الزهراء - الهندسة البيئية</div>
+                        </div>
+                        <div class="project-meta">
+                            <div>32,000 ريال مطلوب</div>
+                            <div>75% من الهدف</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 75%;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card capstone-card">
+                    <div class="capstone-badge">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>مشروع تخرج</span>
+                    </div>
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="منصة الفن الرقمي للتراث السعودي" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">الفنون الرقمية والإعلام</div>
+                        <h3 class="project-title">منصة الفن الرقمي للتراث السعودي</h3>
+                        <p class="project-description">منصة رقمية تفاعلية تعرض التراث الثقافي السعودي من خلال تجارب ثلاثية الأبعاد غامرة وجولات الواقع الافتراضي والسرد الرقمي، للحفاظ على التقاليد للأجيال القادمة.</p>
+                        <div class="capstone-info">
+                            <div class="university">جامعة الأميرة نورة بنت عبدالرحمن</div>
+                            <div class="student">ليلى المنصوري - فنون الإعلام الرقمي</div>
+                        </div>
+                        <div class="project-meta">
+                            <div>28,000 ريال مطلوب</div>
+                            <div>45% من الهدف</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 45%;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card capstone-card">
+                    <div class="capstone-badge">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>مشروع تخرج</span>
+                    </div>
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="نظام الكشف المبكر عن الأمراض بالذكاء الاصطناعي" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">تقنية الرعاية الصحية</div>
+                        <h3 class="project-title">نظام الكشف المبكر عن الأمراض بالذكاء الاصطناعي</h3>
+                        <p class="project-description">منصة ذكاء اصطناعي تحلل بيانات التصوير الطبي للكشف عن العلامات المبكرة للأمراض، مما يحسن دقة التشخيص ونتائج المرضى في المرافق الصحية السعودية.</p>
+                        <div class="capstone-info">
+                            <div class="university">جامعة الملك سعود</div>
+                            <div class="student">عمر الحمدان - الهندسة الطبية الحيوية</div>
+                        </div>
+                        <div class="project-meta">
+                            <div>38,000 ريال مطلوب</div>
+                            <div>55% من الهدف</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 55%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2 class="cta-title">مستعد لتقديم مشروع تخرجك؟</h2>
+            <p class="cta-subtitle">انضم إلى مئات الطلاب الذين نجحوا في تمويل مشاريع تخرجهم على يلا ستارتر.</p>
+            <a href="create-project-ar.html" class="cta-button">قدم مشروعك</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>يلا ستارتر</h3>
+                    <ul class="footer-links">
+                        <li><a href="index-ar.html">الرئيسية</a></li>
+                        <li><a href="about-ar.html">من نحن</a></li>
+                        <li><a href="projects-ar.html">المشاريع</a></li>
+                        <li><a href="how-it-works-ar.html">كيف يعمل</a></li>
+                        <li><a href="contact-ar.html">اتصل بنا</a></li>
+                        <li><a href="careers-ar.html">الوظائف</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>للمبدعين</h3>
+                    <ul class="footer-links">
+                        <li><a href="create-project-ar.html">ابدأ مشروعك</a></li>
+                        <li><a href="capstone-projects-ar.html">مشاريع التخرج</a></li>
+                        <li><a href="creator-handbook-ar.html">دليل المبدع</a></li>
+                        <li><a href="creator-resources-ar.html">موارد المبدع</a></li>
+                        <li><a href="creator-faqs-ar.html">الأسئلة الشائعة للمبدعين</a></li>
+                        <li><a href="success-stories-ar.html">قصص النجاح</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>للداعمين</h3>
+                    <ul class="footer-links">
+                        <li><a href="backer-faqs-ar.html">الأسئلة الشائعة للداعمين</a></li>
+                        <li><a href="trust-safety-ar.html">الثقة والأمان</a></li>
+                        <li><a href="backer-resources-ar.html">موارد الداعمين</a></li>
+                        <li><a href="payment-methods-ar.html">طرق الدفع</a></li>
+                        <li><a href="backer-protection-ar.html">حماية الداعمين</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>معلومات إضافية</h3>
+                    <ul class="footer-links">
+                        <li><a href="newsletter-ar.html">النشرة الإخبارية</a></li>
+                        <li><a href="blog-ar.html">المدونة</a></li>
+                        <li><a href="events-ar.html">الفعاليات</a></li>
+                        <li><a href="support-ar.html">الدعم</a></li>
+                        <li><a href="community-guidelines-ar.html">إرشادات المجتمع</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; 2025 يلا ستارتر. جميع الحقوق محفوظة.
+                </div>
+                
+                <div class="footer-social">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Universal Mobile Menu Script -->
+    <script src="mobile-menu.js"></script>
+    
+    <!-- Password Protection Script -->
+    <script src="assets/js/password-mobile.js"></script>
+    
+    <script>
+        // Language Switcher
+        function switchLanguage(lang) {
+            if (lang === 'en') {
+                window.location.href = 'capstone-projects.html';
+            } else if (lang === 'ar') {
+                window.location.href = 'capstone-projects-ar.html';
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add fade-in animation to project cards
+            const projectCards = document.querySelectorAll('.project-card');
+            const cardObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in-up');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            projectCards.forEach(card => cardObserver.observe(card));
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technology & Innovation - Vision 2030 Projects | YallaStarter</title>
+    <meta name="description" content="Discover cutting-edge technology and innovation projects driving Saudi Arabia's Vision 2030 transformation. Support AI, IoT, smart cities, and digital transformation initiatives.">
+    <meta name="keywords" content="technology, innovation, AI, IoT, smart cities, digital transformation, Saudi Arabia, Vision 2030">
+    <meta name="author" content="YallaStarter">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Technology & Innovation - Vision 2030 Projects | YallaStarter">
+    <meta property="og:description" content="Discover cutting-edge technology and innovation projects driving Saudi Arabia's Vision 2030 transformation.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yallastarter.com/vision2030-technology">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" as="style">
+    
+    <title>Technology & Innovation - Vision 2030 Projects | YallaStarter</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile-menu.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --tech-primary: #00d4ff;
+            --tech-primary-dark: #0099cc;
+            --tech-secondary: #7c3aed;
+            --tech-accent: #06b6d4;
+            --tech-gradient: linear-gradient(135deg, #00d4ff 0%, #7c3aed 50%, #06b6d4 100%);
+            --tech-glow: 0 0 30px rgba(0, 212, 255, 0.3);
+            --tech-text: #1e293b;
+            --tech-text-light: #64748b;
+            --tech-bg: #f8fafc;
+            --tech-card: #ffffff;
+            --tech-border: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Poppins', 'Tajawal', sans-serif;
+            background: var(--tech-bg);
+            color: var(--tech-text);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--tech-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: var(--tech-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--tech-primary);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--tech-gradient);
+            border-radius: 1px;
+        }
+
+        .language-switcher {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .language-btn {
+            background: none;
+            border: 1px solid var(--tech-border);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .language-btn.active,
+        .language-btn:hover {
+            background: var(--tech-primary);
+            color: white;
+            border-color: var(--tech-primary);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--tech-gradient);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--tech-glow);
+        }
+
+        .btn-link {
+            color: var(--tech-text);
+            background: none;
+            border: 1px solid var(--tech-border);
+        }
+
+        .btn-link:hover {
+            background: var(--tech-primary);
+            color: white;
+            border-color: var(--tech-primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--tech-text);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .tech-hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            color: white;
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%2300d4ff" stroke-width="0.5" opacity="0.3"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.1;
+        }
+
+        .tech-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .tech-hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: var(--tech-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.5)); }
+            to { filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.8)); }
+        }
+
+        .tech-hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        .tech-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tech-stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .tech-stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--tech-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .tech-stat-label {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* Technology Categories */
+        .tech-categories {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--tech-text);
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            text-align: center;
+            color: var(--tech-text-light);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tech-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--tech-border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--tech-gradient);
+        }
+
+        .tech-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 212, 255, 0.15);
+        }
+
+        .tech-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--tech-gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .tech-card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--tech-text);
+        }
+
+        .tech-card-description {
+            color: var(--tech-text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .tech-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .tech-features li {
+            padding: 0.5rem 0;
+            color: var(--tech-text-light);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .tech-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--tech-primary);
+            font-weight: bold;
+        }
+
+        /* Featured Projects */
+        .featured-projects {
+            padding: 6rem 0;
+            background: var(--tech-bg);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 212, 255, 0.15);
+        }
+
+        .project-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-category {
+            color: var(--tech-primary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--tech-text);
+        }
+
+        .project-description {
+            color: var(--tech-text-light);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--tech-text-light);
+        }
+
+        .funding-progress {
+            width: 100%;
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .funding-progress-bar {
+            height: 100%;
+            background: var(--tech-gradient);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 0;
+            background: var(--tech-gradient);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .cta-description {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--tech-primary);
+            border: none;
+        }
+
+        .btn-white:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-white {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline-white:hover {
+            background: white;
+            color: var(--tech-primary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links,
+            .auth-buttons {
+                display: none;
+            }
+
+            .tech-hero-title {
+                font-size: 2.5rem;
+            }
+
+            .tech-hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .tech-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-buttons .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <span class="logo-text">YallaStarter</span>
+            </a>
+        
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="entertainment.html">Entertainment Projects</a></li>
+                <li><a href="vision2030.html" class="active">Vision 2030 Projects</a></li>
+                <li><a href="mind71.html">MIND71 AI</a></li>
+                <li><a href="projects.html">Browse Projects</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            
+            <div class="language-switcher">
+                <button class="language-btn active" onclick="switchLanguage('en')">English</button>
+                <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
+            </div>
+            
+            <div class="auth-buttons">
+                <a href="create-project.html" class="btn btn-primary">Start a Project</a>
+                <a href="login.html" class="btn btn-link">Log In</a>
+            </div>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+        
+        <div class="mobile-menu">
+            <div class="mobile-menu-header">
+                <button class="mobile-close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="entertainment.html">Entertainment Projects</a></li>
+                <li><a href="vision2030.html" class="active">Vision 2030 Projects</a></li>
+                <li><a href="mind71.html">MIND71 AI</a></li>
+                <li><a href="projects.html">Browse Projects</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <a href="create-project.html" class="btn btn-primary">Start a Project</a>
+                <a href="login.html" class="btn btn-link">Log In</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Technology Hero -->
+    <section class="tech-hero">
+        <div class="container">
+            <div class="tech-hero-content">
+                <h1 class="tech-hero-title">Technology & Innovation</h1>
+                <p class="tech-hero-subtitle">Pioneering the future of Saudi Arabia through cutting-edge technology, artificial intelligence, and digital transformation that will reshape industries and create unprecedented opportunities.</p>
+                
+                <div class="tech-stats">
+                    <div class="tech-stat">
+                        <div class="tech-stat-number">500+</div>
+                        <div class="tech-stat-label">Tech Projects</div>
+                    </div>
+                    <div class="tech-stat">
+                        <div class="tech-stat-number">SAR 2.5B</div>
+                        <div class="tech-stat-label">Total Funding</div>
+                    </div>
+                    <div class="tech-stat">
+                        <div class="tech-stat-number">85%</div>
+                        <div class="tech-stat-label">Success Rate</div>
+                    </div>
+                    <div class="tech-stat">
+                        <div class="tech-stat-number">50K+</div>
+                        <div class="tech-stat-label">Jobs Created</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Categories -->
+    <section class="tech-categories">
+        <div class="container">
+            <h2 class="section-title">Revolutionary Technology Domains</h2>
+            <p class="section-subtitle">Explore the cutting-edge technologies driving Saudi Arabia's digital transformation and economic diversification</p>
+            
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="tech-card-title">Artificial Intelligence & Machine Learning</h3>
+                    <p class="tech-card-description">Advanced AI systems, neural networks, and machine learning algorithms transforming industries and decision-making processes.</p>
+                    <ul class="tech-features">
+                        <li>Computer Vision & Image Recognition</li>
+                        <li>Natural Language Processing</li>
+                        <li>Predictive Analytics</li>
+                        <li>Autonomous Systems</li>
+                        <li>AI-Powered Healthcare</li>
+                    </ul>
+                </div>
+
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3 class="tech-card-title">Internet of Things (IoT)</h3>
+                    <p class="tech-card-description">Connected devices and smart sensors creating intelligent ecosystems for cities, industries, and daily life.</p>
+                    <ul class="tech-features">
+                        <li>Smart City Infrastructure</li>
+                        <li>Industrial IoT Solutions</li>
+                        <li>Environmental Monitoring</li>
+                        <li>Smart Agriculture</li>
+                        <li>Connected Healthcare</li>
+                    </ul>
+                </div>
+
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="tech-card-title">Cybersecurity & Blockchain</h3>
+                    <p class="tech-card-description">Advanced security solutions and decentralized technologies protecting digital assets and enabling trustless transactions.</p>
+                    <ul class="tech-features">
+                        <li>Quantum-Safe Cryptography</li>
+                        <li>Blockchain Applications</li>
+                        <li>Zero-Trust Security</li>
+                        <li>Digital Identity Solutions</li>
+                        <li>Smart Contracts</li>
+                    </ul>
+                </div>
+
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3 class="tech-card-title">Cloud Computing & Edge Computing</h3>
+                    <p class="tech-card-description">Scalable computing infrastructure enabling real-time processing and global accessibility of applications and services.</p>
+                    <ul class="tech-features">
+                        <li>Multi-Cloud Solutions</li>
+                        <li>Edge Computing Networks</li>
+                        <li>Serverless Architecture</li>
+                        <li>Container Orchestration</li>
+                        <li>Hybrid Cloud Management</li>
+                    </ul>
+                </div>
+
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="tech-card-title">Robotics & Automation</h3>
+                    <p class="tech-card-description">Intelligent robots and automated systems revolutionizing manufacturing, healthcare, and service industries.</p>
+                    <ul class="tech-features">
+                        <li>Industrial Robotics</li>
+                        <li>Service Robots</li>
+                        <li>Autonomous Vehicles</li>
+                        <li>Drone Technology</li>
+                        <li>Human-Robot Collaboration</li>
+                    </ul>
+                </div>
+
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-vr-cardboard"></i>
+                    </div>
+                    <h3 class="tech-card-title">Extended Reality (XR)</h3>
+                    <p class="tech-card-description">Virtual, augmented, and mixed reality technologies creating immersive experiences and new ways of interaction.</p>
+                    <ul class="tech-features">
+                        <li>Virtual Reality (VR)</li>
+                        <li>Augmented Reality (AR)</li>
+                        <li>Mixed Reality (MR)</li>
+                        <li>Haptic Technology</li>
+                        <li>Immersive Training</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section class="featured-projects">
+        <div class="container">
+            <h2 class="section-title">Featured Technology Projects</h2>
+            <p class="section-subtitle">Discover groundbreaking technology projects that are shaping Saudi Arabia's digital future</p>
+            
+            <div class="projects-grid">
+                <a href="project-smart-city-iot.html" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Smart City IoT Platform" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Smart Cities & IoT</div>
+                        <h3 class="project-title">Smart City IoT Platform for Saudi Arabia</h3>
+                        <p class="project-description">A comprehensive IoT platform integrating smart sensors, AI analytics, and real-time monitoring to optimize urban infrastructure, energy management, and public services across Saudi cities.</p>
+                        <div class="project-meta">
+                            <div>SAR 450,000 raised</div>
+                            <div>85% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="project-ai-disease-detection.html" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="AI Disease Detection System" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">AI & Healthcare</div>
+                        <h3 class="project-title">AI-Powered Early Disease Detection System</h3>
+                        <p class="project-description">Revolutionary AI system using machine learning and computer vision to detect diseases at early stages, improving healthcare outcomes and reducing treatment costs.</p>
+                        <div class="project-meta">
+                            <div>SAR 320,000 raised</div>
+                            <div>92% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 92%;"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Blockchain Financial Platform" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Blockchain & Fintech</div>
+                        <h3 class="project-title">Saudi Blockchain Financial Platform</h3>
+                        <p class="project-description">Secure, decentralized financial platform built on blockchain technology, enabling transparent transactions and smart contracts for Saudi businesses.</p>
+                        <div class="project-meta">
+                            <div>SAR 280,000 raised</div>
+                            <div>78% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 78%;"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Quantum Computing Research" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Quantum Computing</div>
+                        <h3 class="project-title">Saudi Quantum Computing Initiative</h3>
+                        <p class="project-description">Pioneering quantum computing research and development, building the foundation for next-generation computing power in Saudi Arabia.</p>
+                        <div class="project-meta">
+                            <div>SAR 1,200,000 raised</div>
+                            <div>65% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 65%;"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1592478411213-6153e4c4a8b4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="5G Network Infrastructure" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">5G & Telecommunications</div>
+                        <h3 class="project-title">Next-Gen 5G Network Infrastructure</h3>
+                        <p class="project-description">Advanced 5G network deployment across Saudi Arabia, enabling ultra-fast connectivity and supporting IoT, autonomous vehicles, and smart city applications.</p>
+                        <div class="project-meta">
+                            <div>SAR 800,000 raised</div>
+                            <div>88% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 88%;"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Autonomous Vehicle Technology" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Autonomous Vehicles</div>
+                        <h3 class="project-title">Saudi Autonomous Vehicle Ecosystem</h3>
+                        <p class="project-description">Complete autonomous vehicle technology stack including sensors, AI algorithms, and infrastructure for self-driving cars in Saudi cities.</p>
+                        <div class="project-meta">
+                            <div>SAR 1,500,000 raised</div>
+                            <div>72% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 72%;"></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title">Ready to Build the Future?</h2>
+            <p class="cta-description">Join thousands of innovators, entrepreneurs, and technologists who are already transforming Saudi Arabia through cutting-edge technology projects.</p>
+            <div class="cta-buttons">
+                <a href="create-project.html" class="btn btn-white">Start Your Tech Project</a>
+                <a href="projects.html?category=technology" class="btn btn-outline-white">Explore All Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mobile Menu Script -->
+    <script src="mobile-menu.js"></script>
+    
+    <!-- Language Switcher Script -->
+    <script>
+        function switchLanguage(lang) {
+            if (lang === 'ar') {
+                window.location.href = 'vision2030-technology-ar.html';
+            } else {
+                window.location.href = 'vision2030-technology.html';
+            }
+        }
+    </script>
+</body>
+</html>

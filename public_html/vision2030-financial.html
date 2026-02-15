@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Services - Vision 2030 Projects | YallaStarter</title>
+    <meta name="description" content="Discover innovative financial services projects driving Saudi Arabia's Vision 2030 transformation. Support fintech, financial inclusion, and economic empowerment initiatives.">
+    <meta name="keywords" content="financial services, fintech, banking, financial inclusion, economic empowerment, Saudi Arabia, Vision 2030">
+    <meta name="author" content="YallaStarter">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Financial Services - Vision 2030 Projects | YallaStarter">
+    <meta property="og:description" content="Discover innovative financial services projects driving Saudi Arabia's Vision 2030 transformation.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yallastarter.com/vision2030-financial">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" as="style">
+    
+    <title>Financial Services - Vision 2030 Projects | YallaStarter</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile-menu.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --finance-primary: #059669;
+            --finance-primary-dark: #047857;
+            --finance-secondary: #10b981;
+            --finance-accent: #34d399;
+            --finance-gradient: linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%);
+            --finance-glow: 0 0 30px rgba(5, 150, 105, 0.3);
+            --finance-text: #1e293b;
+            --finance-text-light: #64748b;
+            --finance-bg: #ecfdf5;
+            --finance-card: #ffffff;
+            --finance-border: #a7f3d0;
+        }
+
+        body {
+            font-family: 'Poppins', 'Tajawal', sans-serif;
+            background: var(--finance-bg);
+            color: var(--finance-text);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--finance-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: var(--finance-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--finance-primary);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--finance-gradient);
+            border-radius: 1px;
+        }
+
+        .language-switcher {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .language-btn {
+            background: none;
+            border: 1px solid var(--finance-border);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .language-btn.active,
+        .language-btn:hover {
+            background: var(--finance-primary);
+            color: white;
+            border-color: var(--finance-primary);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--finance-gradient);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--finance-glow);
+        }
+
+        .btn-link {
+            color: var(--finance-text);
+            background: none;
+            border: 1px solid var(--finance-border);
+        }
+
+        .btn-link:hover {
+            background: var(--finance-primary);
+            color: white;
+            border-color: var(--finance-primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--finance-text);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .finance-hero {
+            background: linear-gradient(135deg, #064e3b 0%, #065f46 50%, #047857 100%);
+            color: white;
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .finance-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="finance" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M10 0 L20 10 L10 20 L0 10 Z" fill="none" stroke="%23059669" stroke-width="0.5" opacity="0.3"/></pattern></defs><rect width="100" height="100" fill="url(%23finance)"/></svg>');
+            opacity: 0.1;
+        }
+
+        .finance-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .finance-hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: var(--finance-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: money-flow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes money-flow {
+            from { filter: drop-shadow(0 0 20px rgba(5, 150, 105, 0.5)); }
+            to { filter: drop-shadow(0 0 30px rgba(5, 150, 105, 0.8)); }
+        }
+
+        .finance-hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        .finance-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .finance-stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .finance-stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--finance-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .finance-stat-label {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* Finance Categories */
+        .finance-categories {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--finance-text);
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            text-align: center;
+            color: var(--finance-text-light);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .finance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .finance-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--finance-border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .finance-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--finance-gradient);
+        }
+
+        .finance-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(5, 150, 105, 0.15);
+        }
+
+        .finance-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--finance-gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .finance-card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--finance-text);
+        }
+
+        .finance-card-description {
+            color: var(--finance-text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .finance-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .finance-features li {
+            padding: 0.5rem 0;
+            color: var(--finance-text-light);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .finance-features li::before {
+            content: '💰';
+            position: absolute;
+            left: 0;
+            color: var(--finance-primary);
+            font-weight: bold;
+        }
+
+        /* Featured Projects */
+        .featured-projects {
+            padding: 6rem 0;
+            background: var(--finance-bg);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(5, 150, 105, 0.15);
+        }
+
+        .project-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-category {
+            color: var(--finance-primary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--finance-text);
+        }
+
+        .project-description {
+            color: var(--finance-text-light);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--finance-text-light);
+        }
+
+        .funding-progress {
+            width: 100%;
+            height: 6px;
+            background: #a7f3d0;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .funding-progress-bar {
+            height: 100%;
+            background: var(--finance-gradient);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 0;
+            background: var(--finance-gradient);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .cta-description {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--finance-primary);
+            border: none;
+        }
+
+        .btn-white:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-white {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline-white:hover {
+            background: white;
+            color: var(--finance-primary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links,
+            .auth-buttons {
+                display: none;
+            }
+
+            .finance-hero-title {
+                font-size: 2.5rem;
+            }
+
+            .finance-hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .finance-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-buttons .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <span class="logo-text">YallaStarter</span>
+            </a>
+        
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="entertainment.html">Entertainment Projects</a></li>
+                <li><a href="vision2030.html" class="active">Vision 2030 Projects</a></li>
+                <li><a href="mind71.html">MIND71 AI</a></li>
+                <li><a href="projects.html">Browse Projects</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            
+            <div class="language-switcher">
+                <button class="language-btn active" onclick="switchLanguage('en')">English</button>
+                <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
+            </div>
+            
+            <div class="auth-buttons">
+                <a href="create-project.html" class="btn btn-primary">Start a Project</a>
+                <a href="login.html" class="btn btn-link">Log In</a>
+            </div>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+        
+        <div class="mobile-menu">
+            <div class="mobile-menu-header">
+                <button class="mobile-close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="entertainment.html">Entertainment Projects</a></li>
+                <li><a href="vision2030.html" class="active">Vision 2030 Projects</a></li>
+                <li><a href="mind71.html">MIND71 AI</a></li>
+                <li><a href="projects.html">Browse Projects</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <a href="create-project.html" class="btn btn-primary">Start a Project</a>
+                <a href="login.html" class="btn btn-link">Log In</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Finance Hero -->
+    <section class="finance-hero">
+        <div class="container">
+            <div class="finance-hero-content">
+                <h1 class="finance-hero-title">Financial Services</h1>
+                <p class="finance-hero-subtitle">Revolutionizing Saudi Arabia's financial landscape through innovative fintech solutions, digital banking, and financial inclusion initiatives that empower citizens and drive economic growth.</p>
+                
+                <div class="finance-stats">
+                    <div class="finance-stat">
+                        <div class="finance-stat-number">180+</div>
+                        <div class="finance-stat-label">Fintech Projects</div>
+                    </div>
+                    <div class="finance-stat">
+                        <div class="finance-stat-number">SAR 2.8B</div>
+                        <div class="finance-stat-label">Financial Investment</div>
+                    </div>
+                    <div class="finance-stat">
+                        <div class="finance-stat-number">92%</div>
+                        <div class="finance-stat-label">Success Rate</div>
+                    </div>
+                    <div class="finance-stat">
+                        <div class="finance-stat-number">2M+</div>
+                        <div class="finance-stat-label">Users Served</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Finance Categories -->
+    <section class="finance-categories">
+        <div class="container">
+            <h2 class="section-title">Revolutionary Financial Solutions</h2>
+            <p class="section-subtitle">Explore cutting-edge fintech and financial services transforming Saudi Arabia's economy</p>
+            
+            <div class="finance-grid">
+                <div class="finance-card">
+                    <div class="finance-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="finance-card-title">Digital Banking & Payments</h3>
+                    <p class="finance-card-description">Advanced digital banking platforms and payment solutions providing seamless financial services and transactions.</p>
+                    <ul class="finance-features">
+                        <li>Mobile Banking Apps</li>
+                        <li>Digital Wallets</li>
+                        <li>Contactless Payments</li>
+                        <li>QR Code Payments</li>
+                        <li>Biometric Authentication</li>
+                    </ul>
+                </div>
+
+                <div class="finance-card">
+                    <div class="finance-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h3 class="finance-card-title">Cryptocurrency & Blockchain</h3>
+                    <p class="finance-card-description">Secure cryptocurrency platforms and blockchain-based financial services enabling decentralized transactions.</p>
+                    <ul class="finance-features">
+                        <li>Digital Currency Exchange</li>
+                        <li>Smart Contracts</li>
+                        <li>DeFi Platforms</li>
+                        <li>NFT Marketplaces</li>
+                        <li>Cross-Border Payments</li>
+                    </ul>
+                </div>
+
+                <div class="finance-card">
+                    <div class="finance-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="finance-card-title">Investment & Wealth Management</h3>
+                    <p class="finance-card-description">AI-powered investment platforms and wealth management solutions for personalized financial planning.</p>
+                    <ul class="finance-features">
+                        <li>Robo-Advisors</li>
+                        <li>Portfolio Management</li>
+                        <li>Risk Assessment Tools</li>
+                        <li>Retirement Planning</li>
+                        <li>Tax Optimization</li>
+                    </ul>
+                </div>
+
+                <div class="finance-card">
+                    <div class="finance-icon">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <h3 class="finance-card-title">Lending & Credit Solutions</h3>
+                    <p class="finance-card-description">Innovative lending platforms and credit solutions providing accessible financing options for individuals and businesses.</p>
+                    <ul class="finance-features">
+                        <li>Peer-to-Peer Lending</li>
+                        <li>Microfinance Solutions</li>
+                        <li>Credit Scoring AI</li>
+                        <li>Business Loans</li>
+                        <li>Personal Finance</li>
+                    </ul>
+                </div>
+
+                <div class="finance-card">
+                    <div class="finance-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="finance-card-title">Financial Security & Compliance</h3>
+                    <p class="finance-card-description">Advanced security solutions and compliance platforms protecting financial transactions and ensuring regulatory adherence.</p>
+                    <ul class="finance-features">
+                        <li>Fraud Detection Systems</li>
+                        <li>Anti-Money Laundering</li>
+                        <li>KYC/AML Solutions</li>
+                        <li>Regulatory Compliance</li>
+                        <li>Data Protection</li>
+                    </ul>
+                </div>
+
+                <div class="finance-card">
+                    <div class="finance-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="finance-card-title">Financial Inclusion</h3>
+                    <p class="finance-card-description">Inclusive financial services and solutions ensuring access to banking and financial products for all citizens.</p>
+                    <ul class="finance-features">
+                        <li>Basic Banking Services</li>
+                        <li>Financial Literacy Programs</li>
+                        <li>Rural Banking Solutions</li>
+                        <li>Women's Financial Services</li>
+                        <li>Youth Banking Programs</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section class="featured-projects">
+        <div class="container">
+            <h2 class="section-title">Featured Financial Projects</h2>
+            <p class="section-subtitle">Discover groundbreaking financial projects that are transforming banking and fintech in Saudi Arabia</p>
+            
+            <div class="projects-grid">
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Digital Banking Platform" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Digital Banking</div>
+                        <h3 class="project-title">Saudi Digital Banking Platform</h3>
+                        <p class="project-description">Comprehensive digital banking platform offering mobile banking, digital wallets, and AI-powered financial advisory services for Saudi consumers.</p>
+                        <div class="project-meta">
+                            <div>SAR 1,500,000 raised</div>
+                            <div>85% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Blockchain Payment System" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Blockchain & Payments</div>
+                        <h3 class="project-title">Saudi Blockchain Payment Network</h3>
+                        <p class="project-description">Secure blockchain-based payment network enabling fast, low-cost transactions and cross-border payments across Saudi Arabia and the region.</p>
+                        <div class="project-meta">
+                            <div>SAR 2,200,000 raised</div>
+                            <div>72% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 72%;"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="AI Investment Platform" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Investment & AI</div>
+                        <h3 class="project-title">AI-Powered Investment Platform</h3>
+                        <p class="project-description">Intelligent investment platform using machine learning to provide personalized investment advice and automated portfolio management for Saudi investors.</p>
+                        <div class="project-meta">
+                            <div>SAR 800,000 raised</div>
+                            <div>88% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 88%;"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="P2P Lending Platform" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Lending & Credit</div>
+                        <h3 class="project-title">Saudi P2P Lending Platform</h3>
+                        <p class="project-description">Peer-to-peer lending platform connecting borrowers with lenders, providing alternative financing options for individuals and small businesses.</p>
+                        <div class="project-meta">
+                            <div>SAR 650,000 raised</div>
+                            <div>78% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 78%;"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Financial Security System" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Security & Compliance</div>
+                        <h3 class="project-title">Advanced Financial Security System</h3>
+                        <p class="project-description">Comprehensive security platform using AI and machine learning to detect fraud, prevent money laundering, and ensure regulatory compliance.</p>
+                        <div class="project-meta">
+                            <div>SAR 1,200,000 raised</div>
+                            <div>65% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 65%;"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Financial Inclusion App" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Financial Inclusion</div>
+                        <h3 class="project-title">Saudi Financial Inclusion Initiative</h3>
+                        <p class="project-description">Comprehensive financial inclusion program providing basic banking services, financial literacy, and microfinance solutions to underserved communities.</p>
+                        <div class="project-meta">
+                            <div>SAR 950,000 raised</div>
+                            <div>82% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 82%;"></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title">Ready to Finance the Future?</h2>
+            <p class="cta-description">Join the financial revolution and help build a more inclusive and innovative financial ecosystem in Saudi Arabia through cutting-edge fintech and banking solutions.</p>
+            <div class="cta-buttons">
+                <a href="create-project.html" class="btn btn-white">Start Your Financial Project</a>
+                <a href="projects.html?category=fintech" class="btn btn-outline-white">Explore All Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mobile Menu Script -->
+    <script src="mobile-menu.js"></script>
+    
+    <!-- Language Switcher Script -->
+    <script>
+        function switchLanguage(lang) {
+            if (lang === 'ar') {
+                window.location.href = 'vision2030-financial-ar.html';
+            } else {
+                window.location.href = 'vision2030-financial.html';
+            }
+        }
+    </script>
+</body>
+</html>

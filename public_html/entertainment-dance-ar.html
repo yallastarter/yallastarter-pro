@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dance Projects - YallaStarter Entertainment</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile-menu.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .header { background-color: white; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); position: sticky; top: 0; z-index: 100; padding: 0.5rem 1rem; }
+        .navbar { display: flex; align-items: center; justify-content: flex-start; gap: 1rem; width: 100%; }
+        .logo { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; margin-right: 0.8rem; transition: transform 0.2s ease; }
+        .logo:hover { transform: scale(1.02); }
+        .logo-text { font-size: 1.5rem; font-weight: 700; color: var(--primary); display: block; letter-spacing: -0.02em; }
+        .nav-links { display: flex; align-items: center; gap: 0.8rem; margin: 0; padding: 0; list-style: none; flex: 0 1 auto; justify-content: flex-start; }
+        .nav-links li { list-style: none; }
+        .nav-links a { color: var(--neutral-800); font-weight: 500; text-decoration: none; padding: 0.5rem 1rem; border-radius: 6px; transition: all 0.3s ease; white-space: nowrap; font-size: 1rem; border-bottom: 2px solid transparent; }
+        .nav-links a:hover { color: var(--primary); background-color: rgba(0, 108, 53, 0.05); }
+        .nav-links a.active { color: var(--primary); font-weight: 600; background-color: rgba(0, 108, 53, 0.1); padding: 0.5rem 1rem; border-bottom: 2px solid var(--primary); }
+        .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.3rem; color: var(--neutral-700); cursor: pointer; padding: 0.6rem; border-radius: 6px; transition: all 0.3s ease; }
+        .mobile-menu-btn:hover { background-color: rgba(0, 108, 53, 0.05); color: var(--primary); }
+        .mobile-menu { width: 100%; background-color: white; padding: 1rem; margin-top: 1rem; display: none; opacity: 0; transform: translateY(-10px); transition: all 0.3s ease; }
+        .mobile-menu.show { opacity: 1; transform: translateY(0); }
+        .mobile-menu .nav-links { list-style: none; margin: 1rem 0; }
+        .mobile-menu .nav-links li { margin-bottom: 0.8rem; }
+        .mobile-menu .nav-links a { color: var(--neutral-800); font-weight: 500; display: block; padding: 0.8rem 0; font-size: 1rem; }
+        .mobile-menu .auth-buttons { display: flex; flex-direction: column; gap: 0.8rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--neutral-200); }
+        .mobile-menu .auth-buttons a { width: 100%; text-align: center; padding: 0.8rem 1rem; border-radius: 8px; font-weight: 600; }
+        .auth-buttons { display: flex; gap: 0.6rem; align-items: center; }
+        .auth-buttons .btn { padding: 0.6rem 1.2rem; font-size: 0.95rem; font-weight: 600; border-radius: 25px; transition: all 0.3s ease; text-decoration: none; }
+        .auth-buttons .btn-primary { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: white; border: 2px solid var(--primary); box-shadow: 0 2px 8px rgba(0, 108, 53, 0.2); }
+        .auth-buttons .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0, 108, 53, 0.3); }
+        .auth-buttons .btn-secondary { background: transparent; color: var(--primary); border: 2px solid var(--primary); font-weight: 600; }
+        .auth-buttons .btn-secondary:hover { background: var(--primary); color: white; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0, 108, 53, 0.3); }
+        .auth-buttons .btn-link { background: transparent; color: var(--neutral-600); border: none; padding: 0.6rem 1rem; }
+        .auth-buttons .btn-link:hover { color: var(--primary); }
+        .language-switcher { display: flex; align-items: center; gap: 0.5rem; margin-left: auto; }
+        .language-btn { background: transparent; border: 2px solid var(--primary); color: var(--primary); padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; font-size: 0.9rem; }
+        .language-btn:hover { background: var(--primary); color: white; transform: translateY(-1px); }
+        .language-btn.active { background: var(--primary); color: white; }
+        @media (max-width: 768px) { .header { padding: 0.3rem 0.8rem; } .navbar { gap: 0.5rem; } .logo-text { font-size: 1.3rem; } .nav-links { display: none; } .auth-buttons { display: none; } .mobile-menu-btn { display: block; } .mobile-menu { padding: 0.8rem; } .mobile-menu .nav-links a { padding: 0.6rem 0; font-size: 0.95rem; } }
+        .dance-hero { background: linear-gradient(135deg, #A855F7 0%, #9333EA 50%, #7C3AED 100%); color: white; padding: 4rem 0; text-align: center; position: relative; overflow: hidden; }
+        .dance-hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dance-pattern" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M10 0 L20 10 L10 20 L0 10 Z" fill="none" stroke="%23A855F7" stroke-width="0.5" opacity="0.3"/></pattern></defs><rect width="100" height="100" fill="url(%23dance-pattern)"/></svg>'); opacity: 0.1; }
+        .dance-hero-content { position: relative; z-index: 2; }
+        .dance-hero-title { font-size: 3rem; font-weight: 700; margin-bottom: 1rem; background: linear-gradient(45deg, #ffffff, #f0f0f0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: dance-glow 2s ease-in-out infinite alternate; }
+        @keyframes dance-glow { from { filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.5)); } to { filter: drop-shadow(0 0 30px rgba(168, 85, 247, 0.8)); } }
+        .dance-hero-subtitle { font-size: 1.2rem; max-width: 700px; margin: 0 auto 2rem; opacity: 0.9; }
+        .dance-slogan { margin-top: 2rem; padding: 1rem 2rem; background: rgba(255, 255, 255, 0.15); border-radius: 50px; backdrop-filter: blur(10px); border: 2px solid rgba(255, 255, 255, 0.3); display: inline-block; }
+        .slogan-text { font-size: 1.3rem; font-weight: 600; color: white; text-align: center; letter-spacing: 0.5px; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); }
+        .dance-categories { padding: 4rem 0; background-color: var(--neutral-100); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        .section-title { font-size: 2.5rem; font-weight: 700; text-align: center; margin-bottom: 1rem; color: var(--neutral-900); }
+        .section-subtitle { font-size: 1.2rem; text-align: center; color: var(--neutral-600); max-width: 600px; margin: 0 auto 3rem; }
+        .dance-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .dance-card { background-color: white; border-radius: var(--border-radius); overflow: hidden; box-shadow: var(--box-shadow); transition: var(--transition); text-align: center; }
+        .dance-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); }
+        .dance-icon { width: 80px; height: 80px; background: linear-gradient(135deg, #A855F7 0%, #9333EA 50%, #7C3AED 100%); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 2rem auto 1.5rem; }
+        .dance-title { font-size: 1.3rem; font-weight: 600; margin-bottom: 1rem; color: var(--neutral-900); }
+        .dance-description { color: var(--neutral-700); margin-bottom: 1.5rem; padding: 0 1.5rem; }
+        .back-to-home { text-align: center; margin: 2rem 0; }
+        .back-to-home a { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--primary); font-weight: 500; text-decoration: none; }
+        .back-to-home a:hover { color: var(--primary-dark); }
+    </style>
+
+    <style>
+        body { direction: rtl; text-align: right; font-family: 'Tajawal', 'Poppins', sans-serif; }
+        .navbar .nav-links { margin-left: 0; margin-right: auto; }
+        .navbar .logo { margin-left: 1rem; margin-right: 0; }
+        .footer-links { padding-right: 0; }
+        .footer-column h3 { text-align: right; }
+        /* Add more RTL fixes as needed */
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <a href="index-ar.html" class="logo"><span class="logo-text">YallaStarter</span></a>
+            <ul class="nav-links">
+                <li><a href="index-ar.html">الرئيسية</a></li>
+                <li><a href="entertainment-ar.html" class="active">الترفيه الإبداعي</a></li>
+                <li><a href="vision2030-ar.html">مشاريع رؤية 2030</a></li>
+                <li><a href="mind71-ar.html">MIND71 AI</a></li>
+                <li><a href="projects-ar.html">تصفح المشاريع</a></li>
+                <li><a href="how-it-works-ar.html">كيف يعمل</a></li>
+                <li><a href="about-ar.html">من نحن</a></li>
+                <li><a href="contact-ar.html">اتصل بنا</a></li>
+            </ul>
+            <div class="language-switcher">
+                <button class="language-btn active" onclick="switchLanguage('ar')">English</button>
+                <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
+            </div>
+            <div class="auth-buttons">
+                <a href="create-project-ar.html" class="btn btn-primary">ابدأ مشروعك</a>
+                <a href="login-ar.html" class="btn btn-link">تسجيل الدخول</a>
+            </div>
+            <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+        </nav>
+        <div class="mobile-menu">
+            <div class="mobile-menu-header">
+                <div class="mobile-header-left">
+                    <div class="language-switcher">
+                        <button class="language-btn active" onclick="switchLanguage('ar')">English</button>
+                        <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
+                    </div>
+                    <div class="auth-buttons">
+                        <a href="create-project-ar.html" class="btn btn-primary">ابدأ مشروعك</a>
+                        <a href="login-ar.html" class="btn btn-link">تسجيل الدخول</a>
+                    </div>
+                </div>
+                <button class="mobile-close-btn"><i class="fas fa-times"></i></button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index-ar.html">الرئيسية</a></li>
+                <li><a href="entertainment-ar.html" class="active">الترفيه الإبداعي</a></li>
+                <li><a href="vision2030-ar.html">مشاريع رؤية 2030</a></li>
+                <li><a href="mind71-ar.html">MIND71 AI</a></li>
+                <li><a href="projects-ar.html">تصفح المشاريع</a></li>
+                <li><a href="how-it-works-ar.html">كيف يعمل</a></li>
+                <li><a href="about-ar.html">من نحن</a></li>
+                <li><a href="contact-ar.html">اتصل بنا</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="dance-hero">
+        <div class="container">
+            <div class="dance-hero-content">
+                <h1 class="dance-hero-title">Dance Projects</h1>
+                <p class="dance-hero-subtitle">Discover and support dance projects from Saudi Arabia's creative community. From traditional folk dance to contemporary choreography, explore the Kingdom's rhythmic artistry.</p>
+                <div class="dance-slogan">
+                    <span class="slogan-text">Saudi Youth are Partners in Dance</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="dance-categories">
+        <div class="container">
+            <h2 class="section-title">Dance Categories</h2>
+            <p class="section-subtitle">Explore creative projects in these exciting dance areas</p>
+            <div class="dance-grid">
+                <div class="dance-card">
+                    <div class="dance-icon"><i class="fas fa-music"></i></div>
+                    <h3 class="dance-title">Traditional Dance</h3>
+                    <p class="dance-description">Support traditional Saudi dance forms and cultural preservation projects.</p>
+                    <a href="#" class="btn btn-outline">Explore Traditional</a>
+                </div>
+                <div class="dance-card">
+                    <div class="dance-icon"><i class="fas fa-star"></i></div>
+                    <h3 class="dance-title">Contemporary Dance</h3>
+                    <p class="dance-description">Discover modern dance choreography and contemporary movement projects.</p>
+                    <a href="#" class="btn btn-outline">Explore Contemporary</a>
+                </div>
+                <div class="dance-card">
+                    <div class="dance-icon"><i class="fas fa-users"></i></div>
+                    <h3 class="dance-title">Dance Groups</h3>
+                    <p class="dance-description">Support dance groups and collaborative performance projects.</p>
+                    <a href="#" class="btn btn-outline">Explore Groups</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="back-to-home">
+        <div class="container">
+            <a href="entertainment-ar.html"><i class="fas fa-arrow-left"></i> Back to Entertainment Projects</a>
+        </div>
+    </div>
+
+    <script>
+        function switchLanguage(lang) {
+            if (lang === 'en') { window.location.href = 'entertainment-dance.html'; }
+            else if (lang === 'ar') { window.location.href = 'entertainment-ar.html'; }
+        }
+    </script>
+    <script src="mobile-menu.js"></script>
+
+    <script>
+        function switchLanguage(lang) {
+            if (lang === 'en') {
+                window.location.href = 'entertainment-dance.html';
+            } else if (lang === 'ar') {
+                window.location.href = 'entertainment-dance-ar.html';
+            }
+        }
+    </script>
+        </body>
+</html>

@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Art Gallery: Showcasing Saudi Digital Artists - YallaStarter</title>
+    <meta name="description" content="Support the Digital Art Gallery, an innovative online platform connecting Saudi digital artists with global audiences through interactive exhibitions and virtual reality experiences.">
+    <meta name="keywords" content="digital art, gallery, Saudi artists, virtual reality, online exhibitions, art platform, creativity">
+    <meta name="author" content="YallaStarter">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Digital Art Gallery: Showcasing Saudi Digital Artists - YallaStarter">
+    <meta property="og:description" content="Support the Digital Art Gallery, an innovative online platform connecting Saudi digital artists with global audiences through interactive exhibitions and virtual reality experiences.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+    <meta property="og:url" content="https://yallastarter.com/project-digital-art-gallery.html">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Digital Art Gallery: Showcasing Saudi Digital Artists - YallaStarter">
+    <meta name="twitter:description" content="Support the Digital Art Gallery, an innovative online platform connecting Saudi digital artists with global audiences through interactive exhibitions and virtual reality experiences.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://yallastarter.com/project-digital-art-gallery.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #00d4aa;
+            --secondary-color: #1a1a1a;
+            --accent-color: #ff6b35;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --border-color: #e9ecef;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #fff;
+        }
+
+        /* Header Styles */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color) !important;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--text-color) !important;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        /* Project Hero Section */
+        .project-hero {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') center/cover;
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        .project-hero .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .project-hero .lead {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .project-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Project Content */
+        .project-content {
+            padding: 4rem 0;
+        }
+
+        .project-image {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .project-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--secondary-color);
+        }
+
+        .project-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: #666;
+        }
+
+        /* Funding Section */
+        .funding-section {
+            background: var(--light-bg);
+            padding: 4rem 0;
+        }
+
+        .funding-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .funding-progress {
+            background: #e9ecef;
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .funding-progress-bar {
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            height: 100%;
+            width: 70%;
+            transition: width 0.3s ease;
+        }
+
+        .funding-amount {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .funding-goal {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .backers-count {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .btn-support {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border: none;
+            color: white;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-support:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 212, 170, 0.3);
+            color: white;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+
+        .feature-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Artist Showcase */
+        .artist-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .artist-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .artist-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .artist-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .artist-info {
+            padding: 1.5rem;
+        }
+
+        .artist-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        .artist-specialty {
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .artist-description {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Timeline Section */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary-color);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            width: 50%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            padding-right: 3rem;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-left: 3rem;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 0;
+            height: 0;
+            border: 10px solid transparent;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -20px;
+            border-left-color: white;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -20px;
+            border-right-color: white;
+        }
+
+        .timeline-date {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--secondary-color);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer h5 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .footer a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-links a {
+            display: inline-block;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .project-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .project-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                padding-left: 3rem !important;
+                padding-right: 0 !important;
+                text-align: left !important;
+            }
+
+            .timeline-item .timeline-content::before {
+                left: -20px !important;
+                border-right-color: white !important;
+                border-left-color: transparent !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">YallaStarter</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="projects.html">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Project Hero Section -->
+    <section class="project-hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1>Digital Art Gallery: Showcasing Saudi Digital Artists</h1>
+                    <p class="lead">An innovative online platform connecting Saudi digital artists with global audiences, featuring interactive exhibitions, virtual reality experiences, and a marketplace for digital art.</p>
+                    <div class="project-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">70%</div>
+                            <div class="stat-label">Funded</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">2,156</div>
+                            <div class="stat-label">Backers</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">41</div>
+                            <div class="stat-label">Days Left</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Digital Art Gallery" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Content -->
+    <section class="project-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h2 class="section-title">About the Digital Art Gallery</h2>
+                    <p class="project-description">
+                        The Digital Art Gallery is a revolutionary platform that celebrates and showcases the incredible talent of Saudi digital artists. This innovative space combines cutting-edge technology with artistic expression to create immersive experiences that connect artists with audiences worldwide.
+                    </p>
+                    <p class="project-description">
+                        From digital paintings and 3D sculptures to interactive installations and virtual reality experiences, our platform provides a comprehensive showcase for the diverse range of digital art being created in Saudi Arabia. The gallery serves as both an exhibition space and a marketplace, enabling artists to monetize their work while building a global community of digital art enthusiasts.
+                    </p>
+
+                    <!-- Project Images -->
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="project-image">
+                                <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Digital Art Exhibition" class="img-fluid">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="project-image">
+                                <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Virtual Reality Art Experience" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Features Section -->
+                    <h2 class="section-title mt-5">Platform Features</h2>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-vr-cardboard"></i>
+                            </div>
+                            <h3 class="feature-title">Virtual Reality Exhibitions</h3>
+                            <p class="feature-description">Immersive VR experiences that allow visitors to explore digital art in three-dimensional virtual spaces.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <h3 class="feature-title">Digital Marketplace</h3>
+                            <p class="feature-description">Secure marketplace for buying and selling digital art with blockchain-based ownership verification.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3 class="feature-title">Artist Community</h3>
+                            <p class="feature-description">Connect with fellow artists, share techniques, and collaborate on projects in our vibrant community.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h3 class="feature-title">Mobile App</h3>
+                            <p class="feature-description">Access the gallery anywhere with our mobile app featuring AR viewing capabilities.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <h3 class="feature-title">Educational Resources</h3>
+                            <p class="feature-description">Tutorials, workshops, and masterclasses to help artists develop their digital art skills.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3 class="feature-title">Analytics Dashboard</h3>
+                            <p class="feature-description">Comprehensive analytics for artists to track their work's performance and audience engagement.</p>
+                        </div>
+                    </div>
+
+                    <!-- Featured Artists -->
+                    <h2 class="section-title mt-5">Featured Artists</h2>
+                    <div class="artist-showcase">
+                        <div class="artist-card">
+                            <div class="artist-image" style="background-image: url('https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80')"></div>
+                            <div class="artist-info">
+                                <h4 class="artist-name">Noura Al-Rashid</h4>
+                                <p class="artist-specialty">Digital Painting & Illustration</p>
+                                <p class="artist-description">Award-winning digital artist known for her vibrant cultural representations and modern interpretations of Saudi heritage.</p>
+                            </div>
+                        </div>
+                        <div class="artist-card">
+                            <div class="artist-image" style="background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80')"></div>
+                            <div class="artist-info">
+                                <h4 class="artist-name">Ahmed Al-Mansouri</h4>
+                                <p class="artist-specialty">3D Sculpture & Animation</p>
+                                <p class="artist-description">Pioneer in 3D digital art, creating stunning sculptures that blend traditional Saudi motifs with futuristic elements.</p>
+                            </div>
+                        </div>
+                        <div class="artist-card">
+                            <div class="artist-image" style="background-image: url('https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80')"></div>
+                            <div class="artist-info">
+                                <h4 class="artist-name">Layla Al-Zahra</h4>
+                                <p class="artist-specialty">Interactive Art & VR</p>
+                                <p class="artist-description">Innovative artist creating immersive interactive experiences that challenge the boundaries of digital art.</p>
+                            </div>
+                        </div>
+                        <div class="artist-card">
+                            <div class="artist-image" style="background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80')"></div>
+                            <div class="artist-info">
+                                <h4 class="artist-name">Mohammed Al-Hijazi</h4>
+                                <p class="artist-specialty">Generative Art & AI</p>
+                                <p class="artist-description">Cutting-edge artist using artificial intelligence and generative algorithms to create unique digital masterpieces.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Section -->
+                    <h2 class="section-title mt-5">Development Timeline</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <div class="timeline-date">Q1 2024</div>
+                                <h4 class="timeline-title">Platform Development</h4>
+                                <p>Build the core platform infrastructure, user interface, and basic exhibition features.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <div class="timeline-date">Q2 2024</div>
+                                <h4 class="timeline-title">VR Integration</h4>
+                                <p>Implement virtual reality capabilities and create immersive exhibition spaces.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <div class="timeline-date">Q3 2024</div>
+                                <h4 class="timeline-title">Marketplace Launch</h4>
+                                <p>Launch the digital marketplace with blockchain integration and secure payment systems.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <div class="timeline-date">Q4 2024</div>
+                                <h4 class="timeline-title">Public Launch</h4>
+                                <p>Official launch with inaugural exhibitions and artist onboarding programs.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Funding Sidebar -->
+                <div class="col-lg-4">
+                    <div class="funding-card">
+                        <h3>Support Digital Art</h3>
+                        <div class="funding-amount">$700,000</div>
+                        <div class="funding-goal">raised of $1,000,000 goal</div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar"></div>
+                        </div>
+                        <div class="backers-count">2,156 backers</div>
+                        <div class="backers-count">41 days left</div>
+                        
+                        <a href="#" class="btn-support">Support This Project</a>
+                        
+                        <div class="mt-4">
+                            <h5>Reward Tiers</h5>
+                            <div class="reward-tier">
+                                <h6>$50 - Digital Art Collection</h6>
+                                <p>Curated collection of digital artworks from featured Saudi artists</p>
+                            </div>
+                            <div class="reward-tier">
+                                <h6>$200 - VR Experience Access</h6>
+                                <p>Exclusive access to VR exhibitions and immersive art experiences</p>
+                            </div>
+                            <div class="reward-tier">
+                                <h6>$500 - Artist Workshop</h6>
+                                <p>Online workshop with featured artists and digital art techniques</p>
+                            </div>
+                            <div class="reward-tier">
+                                <h6>$1,000 - Gallery Patron</h6>
+                                <p>Lifetime access, exclusive events, and recognition as a gallery patron</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <h5>YallaStarter</h5>
+                    <p>Empowering Saudi creators to bring their innovative ideas to life through crowdfunding.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <h5>Platform</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="projects.html">Browse Projects</a></li>
+                        <li><a href="create-project.html">Start a Project</a></li>
+                        <li><a href="how-it-works.html">How It Works</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h5>Support</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Community Guidelines</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h5>Company</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h5>Legal</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; 2024 YallaStarter. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p>Made with ❤️ in Saudi Arabia</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add animation to funding progress bar
+        window.addEventListener('load', function() {
+            const progressBar = document.querySelector('.funding-progress-bar');
+            if (progressBar) {
+                setTimeout(() => {
+                    progressBar.style.width = '70%';
+                }, 500);
+            }
+        });
+
+        // Add hover effects to feature cards
+        document.querySelectorAll('.feature-card, .artist-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+    <!-- Password Protection Script -->\n    <script src="assets/js/password-clear.js"></script>\n</body>
+</html>

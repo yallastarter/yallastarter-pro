@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MIND71 - منصة الابتكار الرائدة في المملكة العربية السعودية. نربط المبدعين بالداعمين لتحقيق أحلامهم الإبداعية في جميع المجالات.">
+    <meta name="keywords" content="MIND71 AI, منصة الابتكار, مشاريع إبداعية, تمويل جماعي, مشاريع مبتكرة, ريادة أعمال, مشاريع تقنية, مشاريع ثقافية">
+    <meta name="author" content="يلا ستارتر">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="MIND71 - منصة الابتكار الرائدة في المملكة">
+    <meta property="og:description" content="MIND71 AI - نربط المبدعين بالداعمين لتحقيق أحلامهم الإبداعية.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yallastarter.com/mind71-ar">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700&display=swap" as="style">
+    
+    <title>MIND71 - منصة الابتكار الرائدة | يلا ستارتر</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile-menu.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --ai-primary: #6366f1;
+            --ai-primary-dark: #4f46e5;
+            --ai-secondary: #8b5cf6;
+            --ai-accent: #06b6d4;
+            --ai-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #06b6d4 100%);
+            --ai-glow: 0 0 20px rgba(99, 102, 241, 0.3);
+            --ai-text: #1e293b;
+            --ai-text-light: #64748b;
+            --ai-bg: #f8fafc;
+            --ai-card: #ffffff;
+            --ai-border: #e2e8f0;
+        }
+        
+        body {
+            font-family: 'Tajawal', 'Poppins', sans-serif;
+            background: var(--ai-bg);
+            color: var(--ai-text);
+            line-height: 1.6;
+            direction: rtl;
+            text-align: right;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--ai-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 0.5rem 1rem;
+        }
+        
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 1rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            flex-shrink: 0;
+            transition: transform 0.2s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.02);
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--ai-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--ai-text);
+            font-weight: 500;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-size: 1rem;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .nav-links a:hover {
+            color: var(--ai-primary);
+            background-color: rgba(99, 102, 241, 0.05);
+        }
+        
+        .nav-links a.active {
+            color: var(--ai-primary);
+            font-weight: 600;
+            background-color: rgba(99, 102, 241, 0.1);
+            padding: 0.5rem 1rem;
+            border-bottom: 2px solid var(--ai-primary);
+        }
+        
+        .language-switcher {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: auto;
+        }
+        
+        .language-btn {
+            background: transparent;
+            border: 2px solid var(--ai-primary);
+            color: var(--ai-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .language-btn:hover {
+            background: var(--ai-primary);
+            color: white;
+            transform: translateY(-1px);
+        }
+        
+        .language-btn.active {
+            background: var(--ai-primary);
+            color: white;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            color: var(--ai-text);
+            cursor: pointer;
+            padding: 0.6rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu-btn:hover {
+            background-color: rgba(99, 102, 241, 0.05);
+            color: var(--ai-primary);
+        }
+        
+        .mobile-menu {
+            width: 100%;
+            background-color: white;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-top: 1px solid var(--ai-border);
+            display: none;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .mobile-menu .nav-links {
+            list-style: none;
+            margin: 1rem 0;
+        }
+        
+        .mobile-menu .nav-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .mobile-menu .nav-links a {
+            color: var(--ai-text);
+            font-weight: 500;
+            display: block;
+            padding: 0.8rem 0;
+            font-size: 1rem;
+        }
+        
+        .mobile-menu .auth-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--ai-border);
+        }
+        
+        .mobile-menu .auth-buttons a {
+            width: 100%;
+            text-align: center;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+        
+        .mobile-menu .auth-buttons .language-switcher {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 0.5rem;
+        }
+        
+        .mobile-menu .auth-buttons .language-switcher .language-btn {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+        
+        /* Main Auth Buttons Styling */
+        .auth-buttons {
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
+        }
+        
+        .auth-buttons .btn {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .auth-buttons .btn-primary {
+            background: var(--ai-gradient);
+            color: white;
+            border: 2px solid var(--ai-primary);
+            box-shadow: var(--ai-glow);
+        }
+        
+        .auth-buttons .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+        
+        .auth-buttons .btn-secondary {
+            background: transparent;
+            color: var(--ai-primary);
+            border: 2px solid var(--ai-primary);
+            font-weight: 600;
+        }
+        
+        .auth-buttons .btn-secondary:hover {
+            background: var(--ai-primary);
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+        
+        .auth-buttons .btn-link {
+            background: transparent;
+            color: var(--ai-text-light);
+            border: none;
+            padding: 0.6rem 1rem;
+        }
+        
+        .auth-buttons .btn-link:hover {
+            color: var(--ai-primary);
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 0.3rem 0.8rem;
+            }
+            
+            .navbar {
+                gap: 0.5rem;
+            }
+            
+            .logo-text {
+                font-size: 1.3rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .auth-buttons {
+                display: none;
+            }
+            
+            .language-switcher {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .mobile-menu {
+                padding: 0.8rem;
+            }
+            
+            .mobile-menu .nav-links a {
+                padding: 0.6rem 0;
+                font-size: 0.95rem;
+            }
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: var(--ai-gradient);
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background: white;
+            color: var(--ai-primary);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: var(--ai-primary);
+            transform: translateY(-2px);
+        }
+        
+        /* Sections */
+        .section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--ai-text);
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            text-align: center;
+            color: var(--ai-text-light);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .feature-card {
+            background: var(--ai-card);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid var(--ai-border);
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border-color: var(--ai-primary);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: var(--ai-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--ai-text);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-description {
+            color: var(--ai-text-light);
+            line-height: 1.6;
+        }
+        
+        /* AI Demo Section */
+        .ai-demo-section {
+            background: var(--ai-bg);
+            padding: 4rem 0;
+            margin: 2rem 0;
+        }
+        
+        .ai-demo-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .ai-demo-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: var(--ai-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: pulse 2s infinite;
+        }
+        
+        .ai-demo-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--ai-text);
+            margin-bottom: 0.5rem;
+        }
+        
+        .ai-demo-subtitle {
+            font-size: 1.2rem;
+            color: var(--ai-text-light);
+            font-weight: 500;
+        }
+        
+        .ai-demo-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            background: var(--ai-card);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ai-demo-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--ai-gradient);
+            animation: shimmer 3s infinite;
+        }
+        
+        .ai-demo-text h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--ai-text);
+            margin-bottom: 1rem;
+        }
+        
+        .ai-demo-text p {
+            color: var(--ai-text-light);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .ai-demo-visual {
+            text-align: center;
+            padding: 2rem;
+            background: var(--ai-bg);
+            border-radius: 16px;
+            border: 2px dashed var(--ai-primary);
+        }
+        
+        .ai-demo-visual i {
+            font-size: 4rem;
+            color: var(--ai-primary);
+            margin-bottom: 1rem;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        
+        @keyframes shimmer {
+            0% {
+                background-position: -200px 0;
+            }
+            100% {
+                background-position: 200px 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .ai-demo-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .ai-demo-title {
+                font-size: 2rem;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--ai-text);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            color: var(--ai-primary);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--ai-primary);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #475569;
+            padding-top: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .footer-copyright {
+            color: #94a3b8;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-icon {
+            color: #94a3b8;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            color: var(--ai-primary);
+        }
+        
+        @media (max-width: 768px) {
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="index-ar.html" class="logo">
+                <span class="logo-text">يلا ستارتر</span>
+            </a>
+        
+            <ul class="nav-links">
+                <li><a href="index-ar.html">الرئيسية</a></li>
+                <li><a href="entertainment-ar.html">الترفيه الإبداعي</a></li>
+                <li><a href="vision2030-ar.html">مشاريع ابداعية من رؤية 2030</a></li>
+                <li><a href="mind71-ar.html" class="active">MIND71 AI</a></li>
+                <li><a href="projects-ar.html">المشاريع</a></li>
+                <li><a href="how-it-works-ar.html">كيف يعمل</a></li>
+                <li><a href="contact-ar.html">اتصل بنا</a></li>
+            </ul>
+            
+            <div class="language-switcher">
+                <button class="language-btn active" onclick="switchLanguage('ar')">العربية</button>
+                <button class="language-btn" onclick="switchLanguage('en')">English</button>
+            </div>
+            
+            <div class="auth-buttons">
+                <a href="create-project-ar.html" class="btn btn-primary">ابدأ مشروعك</a>
+                <a href="login-ar.html" class="btn btn-link">تسجيل الدخول</a>
+            </div>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+        
+        <div class="mobile-menu">
+            <div class="mobile-menu-header">
+                <button class="mobile-close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index-ar.html">الرئيسية</a></li>
+                <li><a href="entertainment-ar.html">الترفيه الإبداعي</a></li>
+                <li><a href="vision2030-ar.html">مشاريع ابداعية من رؤية 2030</a></li>
+                <li><a href="mind71-ar.html" class="active">MIND71 AI</a></li>
+                <li><a href="projects-ar.html">المشاريع</a></li>
+                <li><a href="how-it-works-ar.html">كيف يعمل</a></li>
+                <li><a href="contact-ar.html">اتصل بنا</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <a href="create-project-ar.html" class="btn btn-primary">ابدأ مشروعك</a>
+                <a href="login-ar.html" class="btn btn-link">تسجيل الدخول</a>
+                <div class="language-switcher">
+                    <button class="language-btn active" onclick="switchLanguage('ar')">العربية</button>
+                    <button class="language-btn" onclick="switchLanguage('en')">English</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">MIND71</h1>
+            <p class="hero-subtitle">منصة الابتكار الرائدة التي تجمع بين الذكاء الاصطناعي والإبداع البشري. اكتشف كيف يمكنك تحويل أفكارك إلى واقع ملموس.</p>
+            <div class="hero-buttons">
+                <a href="#features" class="btn btn-primary">اكتشف المميزات</a>
+                <a href="#demo" class="btn btn-secondary">شاهد العرض</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section">
+        <div class="container">
+            <h2 class="section-title">مميزات MIND71</h2>
+            <p class="section-subtitle">اكتشف كيف يمكنك استخدام الذكاء الاصطناعي لتحويل أفكارك إلى مشاريع ناجحة</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">💡</div>
+                    <h3 class="feature-title">توليد الأفكار الإبداعية</h3>
+                    <p class="feature-description">استخدم الذكاء الاصطناعي لتوليد أفكار إبداعية ومبتكرة في جميع المجالات.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3 class="feature-title">تطوير المشاريع</h3>
+                    <p class="feature-description">احصل على مساعدة في تطوير مشروعك من الفكرة إلى التنفيذ.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">تحليل السوق</h3>
+                    <p class="feature-description">احصل على تحليل شامل للسوق وفرص النجاح لمشروعك.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🤝</div>
+                    <h3 class="feature-title">الشبكات المهنية</h3>
+                    <p class="feature-description">تواصل مع المبدعين والمستثمرين في مجالك.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="feature-title">التقارير الذكية</h3>
+                    <p class="feature-description">احصل على تقارير مفصلة عن أداء مشروعك وتوصيات للتحسين.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3 class="feature-title">التصميم الإبداعي</h3>
+                    <p class="feature-description">استخدم الذكاء الاصطناعي لإنشاء تصميمات إبداعية ومبتكرة.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Demo Section -->
+    <section id="demo" class="ai-demo-section">
+        <div class="container">
+            <div class="ai-demo-header">
+                <div class="ai-demo-icon">🤖</div>
+                <h2 class="ai-demo-title">عرض الذكاء الاصطناعي</h2>
+                <p class="ai-demo-subtitle">اكتشف كيف يعمل MIND71 في تحويل أفكارك إلى مشاريع ناجحة</p>
+            </div>
+            
+            <div class="ai-demo-content">
+                <div class="ai-demo-text">
+                    <h3>ما هو MIND71؟</h3>
+                    <p>MIND71 هو منصة ذكية تجمع بين الذكاء الاصطناعي والإبداع البشري لتحويل الأفكار إلى مشاريع ناجحة:</p>
+                    <ul>
+                        <li>توليد الأفكار الإبداعية</li>
+                        <li>تحليل السوق والفرص</li>
+                        <li>تطوير خطة العمل</li>
+                        <li>إنشاء التصميمات</li>
+                        <li>إدارة المشروع</li>
+                    </ul>
+                    <p>ابدأ رحلتك الإبداعية اليوم!</p>
+                </div>
+                <div class="ai-demo-visual">
+                    <i class="fas fa-brain"></i>
+                    <h4>ابدأ الآن</h4>
+                    <p>انضم إلى مجتمع المبدعين</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>يلا ستارتر</h3>
+                    <ul class="footer-links">
+                        <li><a href="index-ar.html">الرئيسية</a></li>
+                        <li><a href="projects-ar.html">المشاريع</a></li>
+                        <li><a href="how-it-works-ar.html">كيف يعمل</a></li>
+                        <li><a href="contact-ar.html">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>للمبدعين</h3>
+                    <ul class="footer-links">
+                        <li><a href="create-project-ar.html">ابدأ مشروعك</a></li>
+                        <li><a href="capstone-projects-ar.html">مشاريع التخرج</a></li>
+                        <li><a href="#">دليل المبدع</a></li>
+                        <li><a href="#">موارد المبدع</a></li>
+                        <li><a href="#">الأسئلة الشائعة للمبدعين</a></li>
+                        <li><a href="#">قصص النجاح</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>للمبدعين</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">الأسئلة الشائعة للداعمين</a></li>
+                        <li><a href="#">الثقة والأمان</a></li>
+                        <li><a href="#">موارد الداعمين</a></li>
+                        <li><a href="#">طرق الدفع</a></li>
+                        <li><a href="#">حماية الداعمين</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>معلومات إضافية</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">النشرة الإخبارية</a></li>
+                        <li><a href="#">المدونة</a></li>
+                        <li><a href="#">الفعاليات</a></li>
+                        <li><a href="#">الدعم</a></li>
+                        <li><a href="#">إرشادات المجتمع</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; 2025 يلا ستارتر. جميع الحقوق محفوظة.
+                </div>
+                
+                <div class="footer-social">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Universal Mobile Menu Script -->
+    <script src="mobile-menu.js"></script>
+    
+    <script>
+        // Language Switcher
+        function switchLanguage(lang) {
+            if (lang === 'en') {
+                window.location.href = 'mind71.html';
+            } else if (lang === 'ar') {
+                window.location.href = 'mind71-ar.html';
+            }
+        }
+    </script>
+    <!-- Password Protection Script -->\n    <script src="assets/js/password-clear.js"></script>\n</body>
+</html>
+
+
+

@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="تعرف على منصة يلا ستارتر - منصة التمويل الجماعي الرائدة في المملكة العربية السعودية. ندعم المشاريع الإبداعية والمبتكرة في جميع المجالات.">
+    <meta name="keywords" content="من نحن يلا ستارتر, منصة التمويل الجماعي, منصة المشاريع الإبداعية المبتكرة, ريادة الأعمال السعودية, يلا ستارتر, عقل71, رؤية 2030">
+    <meta name="author" content="من نحن يلا ستارتر">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="من نحن - منصة يلا ستارتر منصة التمويل الجماعي الرائدة">
+    <meta property="og:description" content="تعرف على منصة يلا ستارتر - منصة التمويل الجماعي الرائدة في المملكة العربية السعودية. ندعم المشاريع الإبداعية والمبتكرة في جميع المجالات.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yallastarter.com/about-ar">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" as="style">
+    
+    <title>من نحن - منصة يلا ستارتر منصة التمويل الجماعي الرائدة</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile-menu.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            direction: rtl;
+            text-align: right;
+            font-family: 'Tajawal', 'Poppins', sans-serif;
+        }
+        
+        /* Header Styles - Same as Homepage */
+        .header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 0.5rem 1rem;
+        }
+        
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 1rem;
+            width: 100%;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            flex-shrink: 0;
+            margin-left: 0.8rem;
+            transition: transform 0.2s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.02);
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+            letter-spacing: -0.02em;
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            flex: 0 1 auto;
+            justify-content: flex-start;
+        }
+        
+        .nav-links li {
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--neutral-800);
+            font-weight: 500;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-size: 1rem;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+            background-color: rgba(0, 108, 53, 0.05);
+            border-bottom-color: var(--primary);
+        }
+        
+        .nav-links a.active {
+            color: var(--primary);
+            font-weight: 600;
+            background-color: rgba(0, 108, 53, 0.1);
+            border-bottom-color: var(--primary);
+        }
+        
+        .language-switcher {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: auto;
+        }
+        
+        .language-btn {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .language-btn:hover, .language-btn.active {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-1px);
+        }
+        
+        .auth-buttons {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-left: 1rem;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            border-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 108, 53, 0.3);
+        }
+        
+        .btn-link {
+            color: var(--primary);
+            border: 2px solid transparent;
+        }
+        
+        .btn-link:hover {
+            background: rgba(0, 108, 53, 0.05);
+            border-color: var(--primary);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--neutral-800);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu-btn:hover {
+            background: rgba(0, 108, 53, 0.05);
+            color: var(--primary);
+        }
+        
+        /* Mobile Menu Styles */
+        .mobile-menu {
+            display: none;
+            background: white;
+            border-top: 1px solid #e5e7eb;
+            padding: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .mobile-menu-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .mobile-menu-title {
+            font-weight: 600;
+            color: var(--neutral-800);
+            font-size: 1.1rem;
+        }
+        
+        .mobile-close-btn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--neutral-600);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-close-btn:hover {
+            background: rgba(0, 108, 53, 0.05);
+            color: var(--primary);
+        }
+        
+        .mobile-menu .nav-links {
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .mobile-menu .nav-links a {
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            display: block;
+        }
+        
+        .mobile-menu .language-switcher {
+            margin: 1rem 0;
+            justify-content: center;
+        }
+        
+        .mobile-menu .auth-buttons {
+            margin: 1rem 0;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .mobile-menu .auth-buttons .btn {
+            width: 100%;
+            justify-content: center;
+        }
+        
+        .mobile-menu .auth-buttons .language-switcher {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 0.5rem;
+        }
+        
+        .mobile-menu .auth-buttons .language-switcher .language-btn {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links, .auth-buttons, .language-switcher {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+        }
+        
+        /* About Page Specific Styles */
+        .about-hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .about-hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-hero-subtitle {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+        
+        .about-content {
+            padding: 4rem 0;
+            background: #f8fafc;
+        }
+        
+        .about-section {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .about-section h2 {
+            color: var(--primary);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .about-section p {
+            color: var(--neutral-700);
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .value-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+        
+        .value-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .value-title {
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .value-description {
+            color: var(--neutral-600);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .about-hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .about-hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .about-section {
+                padding: 2rem 1.5rem;
+            }
+            
+            .values-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="index-ar.html" class="logo">
+                <span class="logo-text">يلا ستارتر</span>
+            </a>
+        
+            <ul class="nav-links">
+                <li><a href="index-ar.html">الرئيسية</a></li>
+                <li><a href="entertainment-ar.html">الترفيه الإبداعي</a></li>
+                <li><a href="vision2030-ar.html">مشاريع ابداعية من رؤية 2030</a></li>
+                <li><a href="mind71-ar.html">MIND71 AI</a></li>
+                <li><a href="projects-ar.html">المشاريع</a></li>
+                <li><a href="how-it-works-ar.html">كيف يعمل</a></li>
+                <li><a href="contact-ar.html">اتصل بنا</a></li>
+            </ul>
+            
+            <div class="language-switcher">
+                <button class="language-btn active" onclick="switchLanguage('ar')">العربية</button>
+                <button class="language-btn" onclick="switchLanguage('en')">English</button>
+            </div>
+            
+            <div class="auth-buttons">
+                <a href="create-project-ar.html" class="btn btn-primary">ابدأ مشروعك</a>
+                <a href="login-ar.html" class="btn btn-link">تسجيل الدخول</a>
+            </div>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+        
+        <div class="mobile-menu">
+            <div class="mobile-menu-header">
+                <div class="mobile-header-left">
+                    <div class="auth-buttons">
+                        <a href="create-project-ar.html" class="btn btn-primary">المشاريع</a>
+                        <a href="login-ar.html" class="btn btn-link">تسجيل الدخول</a>
+                        <div class="language-switcher">
+                            <button class="language-btn active" onclick="switchLanguage('ar')">العربية</button>
+                            <button class="language-btn" onclick="switchLanguage('en')">English</button>
+                        </div>
+                    </div>
+                </div>
+                <button class="mobile-close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index-ar.html">الرئيسية</a></li>
+                <li><a href="entertainment-ar.html">الترفيه الإبداعي</a></li>
+                <li><a href="vision2030-ar.html">مشاريع ابداعية من رؤية 2030</a></li>
+                <li><a href="mind71-ar.html">MIND71 AI</a></li>
+                <li><a href="projects-ar.html">المشاريع</a></li>
+                <li><a href="how-it-works-ar.html">كيف يعمل</a></li>
+                <li><a href="contact-ar.html">اتصل بنا</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- About Hero Section -->
+    <section class="about-hero">
+        <div class="container">
+            <h1 class="about-hero-title">من نحن</h1>
+            <p class="about-hero-subtitle">منصة يلا ستارتر - منصة التمويل الجماعي الرائدة في المملكة العربية السعودية</p>
+        </div>
+    </section>
+
+    <!-- About Content -->
+    <section class="about-content">
+        <div class="container">
+            <div class="about-section">
+                <h2>من نحن</h2>
+                <p>منصة يلا ستارتر هي منصة تمويل جماعي رائدة في المملكة العربية السعودية. ندعم المشاريع الإبداعية والمبتكرة في جميع المجالات ونوفر بيئة مناسبة لتحقيق أحلام المبدعين. نحن نؤمن بقوة الإبداع وقدرته على تغيير العالم.</p>
+                <p>نحن نعمل على ربط المبدعين بالداعمين من خلال منصة آمنة وموثوقة. نحن نهدف إلى دعم رؤية المملكة 2030 في تطوير الاقتصاد الإبداعي والابتكار.</p>
+                <p>نحن نتعاون مع MIND71 AI ونؤمن بقوة الشراكات في تحقيق الأهداف الطموحة لرؤية السعودية 2030.</p>
+            </div>
+            
+            <div class="about-section">
+                <h2>رؤيتنا ورسالتنا</h2>
+                <p><strong>الرسالة:</strong> تمكين المبدعين من تحقيق أحلامهم من خلال منصة تمويل جماعي آمنة وموثوقة.</p>
+                <p><strong>الرؤية:</strong> أن نكون المنصة الرائدة في التمويل الجماعي في المملكة العربية السعودية.</p>
+                <p>نحن نؤمن بقوة الإبداع وقدرته على تغيير العالم. نحن نعمل على بناء مجتمع من المبدعين والداعمين الذين يؤمنون بقوة الأفكار الجديدة والابتكار.</p>
+            </div>
+            
+            <div class="about-section">
+                <h2>قيمنا</h2>
+                <p>نؤمن بقوة الإبداع والابتكار في دفع عجلة التقدم. نحن ملتزمون ببناء مجتمع يدعم المبدعين ويساعدهم على تحقيق أحلامهم. من خلال منصتنا، نسعى لخلق بيئة إيجابية تشجع على الإبداع والتميز في جميع المجالات.</p>
+                
+                <div class="values-grid">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3 class="value-title">الابتكار</h3>
+                        <p class="value-description">نشجع الأفكار الجديدة والمبتكرة التي تساهم في تطوير المجتمع ودفع عجلة التقدم في جميع المجالات.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3 class="value-title">عقل71</h3>
+                        <p class="value-description">نؤمن بقوة العقل البشري وقدرته على الإبداع والابتكار في جميع المجالات العلمية والتقنية.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="about-section">
+                <h2>إحصائياتنا</h2>
+                <p>منذ إطلاق منصتنا، حققنا إنجازات مذهلة في دعم المشاريع الإبداعية. نجحنا في تمويل أكثر من 1,250 مشروع إبداعي، مع دعم أكثر من 25,000 مبدع، ووصلنا إلى أكثر من 15,000 داعم نشط في 13 مدينة سعودية.</p>
+                <p>نفتخر بكوننا المنصة الرائدة في التمويل الجماعي في المملكة العربية السعودية. نسعى دائماً لتطوير خدماتنا وتوسيع نطاق دعمنا للمبدعين في جميع أنحاء المملكة.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>يلا ستارتر</h3>
+                    <ul class="footer-links">
+                        <li><a href="index-ar.html">الرئيسية</a></li>
+                        <li><a href="about-ar.html">من نحن</a></li>
+                        <li><a href="projects-ar.html">المشاريع</a></li>
+                        <li><a href="how-it-works-ar.html">كيف يعمل</a></li>
+                        <li><a href="contact-ar.html">اتصل بنا</a></li>
+                        <li><a href="careers-ar.html">الوظائف</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>للمبدعين</h3>
+                    <ul class="footer-links">
+                        <li><a href="create-project-ar.html">ابدأ مشروعك</a></li>
+                        <li><a href="capstone-projects-ar.html">مشاريع التخرج</a></li>
+                        <li><a href="creator-handbook-ar.html">دليل المبدع</a></li>
+                        <li><a href="creator-resources-ar.html">موارد المبدع</a></li>
+                        <li><a href="creator-faqs-ar.html">الأسئلة الشائعة للمبدعين</a></li>
+                        <li><a href="success-stories-ar.html">قصص النجاح</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>للداعمين</h3>
+                    <ul class="footer-links">
+                        <li><a href="backer-faqs-ar.html">الأسئلة الشائعة للداعمين</a></li>
+                        <li><a href="trust-safety-ar.html">الثقة والأمان</a></li>
+                        <li><a href="backer-resources-ar.html">موارد الداعمين</a></li>
+                        <li><a href="payment-methods-ar.html">طرق الدفع</a></li>
+                        <li><a href="backer-protection-ar.html">حماية الداعمين</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>معلومات إضافية</h3>
+                    <ul class="footer-links">
+                        <li><a href="newsletter-ar.html">النشرة الإخبارية</a></li>
+                        <li><a href="blog-ar.html">المدونة</a></li>
+                        <li><a href="events-ar.html">الفعاليات</a></li>
+                        <li><a href="support-ar.html">الدعم</a></li>
+                        <li><a href="community-guidelines-ar.html">إرشادات المجتمع</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; 2025 يلا ستارتر. جميع الحقوق محفوظة.
+                </div>
+                
+                <div class="footer-social">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function switchLanguage(lang) {
+            if (lang === 'en') {
+                window.location.href = 'about.html';
+            } else if (lang === 'ar') {
+                window.location.href = 'about-ar.html';
+            }
+        }
+    </script>
+    
+    <!-- Universal Mobile Menu Script -->
+    <script src="mobile-menu.js"></script>
+    <!-- Password Protection Script -->\n    <script src="assets/js/password-clear.js"></script>\n</body>
+</html>
+

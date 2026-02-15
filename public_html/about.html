@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn about NovaMind Inc., a U.S. Corporation building globally scalable, AI-driven digital platforms and innovation ecosystems tailored to local markets.">
+    <meta name="keywords" content="NovaMind Inc, innovation ecosystems, AI-driven platforms, Saudi Arabia, YallaStarter, Mind71, Vision 2030">
+    <meta name="author" content="NovaMind Inc.">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="About NovaMind Inc. - Building Innovation Ecosystems">
+    <meta property="og:description" content="Learn about NovaMind Inc., a U.S. Corporation building globally scalable, AI-driven digital platforms and innovation ecosystems tailored to local markets.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yallastarter.com/about">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" as="style">
+    
+    <title>About NovaMind Inc. - Building Innovation Ecosystems</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile-menu.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Header Styles - Same as Homepage */
+        .header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 0.5rem 1rem;
+        }
+        
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 1rem;
+            width: 100%;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            flex-shrink: 0;
+            margin-right: 0.8rem;
+            transition: transform 0.2s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.02);
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+            letter-spacing: -0.02em;
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            flex: 0 1 auto;
+            justify-content: flex-start;
+        }
+        
+        .nav-links li {
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--neutral-800);
+            font-weight: 500;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-size: 1rem;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+            background-color: rgba(0, 108, 53, 0.05);
+        }
+        
+        .nav-links a.active {
+            color: var(--primary);
+            font-weight: 600;
+            background-color: rgba(0, 108, 53, 0.1);
+            padding: 0.5rem 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        
+
+        
+        /* Main Auth Buttons Styling */
+        .auth-buttons {
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
+        }
+        
+        .auth-buttons .btn {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .auth-buttons .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: 2px solid var(--primary);
+            box-shadow: 0 2px 8px rgba(0, 108, 53, 0.2);
+        }
+        
+        .auth-buttons .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 108, 53, 0.3);
+        }
+        
+        .auth-buttons .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            font-weight: 600;
+        }
+        
+        .auth-buttons .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 108, 53, 0.3);
+        }
+        
+        .auth-buttons .btn-link {
+            background: transparent;
+            color: var(--neutral-600);
+            border: none;
+            padding: 0.6rem 1rem;
+        }
+        
+        .auth-buttons .btn-link:hover {
+            color: var(--primary);
+        }
+        
+
+        
+        /* Tablet Responsive */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .navbar {
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                gap: 0.8rem;
+            }
+            
+            .nav-links a {
+                font-size: 0.95rem;
+                padding: 0.5rem 1rem;
+            }
+            
+            .auth-buttons .btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        .about-hero {
+            background-color: var(--primary);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .about-hero-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .about-hero-subtitle {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .mission-section {
+            padding: 5rem 0;
+        }
+        
+        .mission-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .mission-image {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .mission-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .mission-content h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--neutral-900);
+        }
+        
+        .mission-content p {
+            margin-bottom: 1.5rem;
+            color: var(--neutral-700);
+            line-height: 1.7;
+        }
+        
+        .values-section {
+            background-color: var(--neutral-200);
+            padding: 5rem 0;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .value-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+        }
+        
+        .value-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary-light);
+            color: white;
+            border-radius: 50%;
+            font-size: 1.8rem;
+        }
+        
+        .value-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--neutral-900);
+        }
+        
+        .value-description {
+            color: var(--neutral-700);
+        }
+        
+        .vision-section {
+            padding: 5rem 0;
+        }
+        
+        .vision-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .vision-content h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--neutral-900);
+        }
+        
+        .vision-content p {
+            margin-bottom: 1.5rem;
+            color: var(--neutral-700);
+            line-height: 1.7;
+        }
+        
+        .vision-image {
+            max-width: 800px;
+            margin: 3rem auto 0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .vision-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .team-section {
+            background-color: var(--neutral-200);
+            padding: 5rem 0;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .team-member {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+        }
+        
+        .member-image {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .member-info {
+            padding: 1.5rem;
+        }
+        
+        .member-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--neutral-900);
+        }
+        
+        .member-position {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        
+        .member-bio {
+            color: var(--neutral-700);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .member-social {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .member-social a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--neutral-200);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--neutral-700);
+            transition: var(--transition);
+        }
+        
+        .member-social a:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .stats-section {
+            padding: 5rem 0;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+        
+        .stat-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: var(--neutral-700);
+            font-weight: 500;
+        }
+        
+        @media (max-width: 992px) {
+            .mission-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Logo Text Fallback Styling */
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <span class="logo-text">YallaStarter</span>
+            </a>
+        
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="entertainment.html">Entertainment Projects</a></li>
+                <li><a href="vision2030.html">Vision 2030 Projects</a></li>
+                <li><a href="mind71.html">MIND71 AI</a></li>
+                <li><a href="projects.html">Browse Projects</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            
+            <div class="language-switcher">
+                <button class="language-btn active" onclick="switchLanguage('en')">English</button>
+                <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
+            </div>
+            
+            <div class="auth-buttons">
+                <a href="create-project.html" class="btn btn-primary">Start a Project</a>
+                <a href="login.html" class="btn btn-link">Log In</a>
+            </div>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+        
+        <div class="mobile-menu">
+            <div class="mobile-menu-header">
+                <div class="mobile-header-left">
+                    <div class="language-switcher">
+                        <button class="language-btn active" onclick="switchLanguage('en')">English</button>
+                        <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
+                    </div>
+                    <div class="auth-buttons">
+                        <a href="create-project.html" class="btn btn-primary">Start a Project</a>
+                        <a href="login.html" class="btn btn-link">Log In</a>
+                    </div>
+                </div>
+                <button class="mobile-close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="entertainment.html">Entertainment Projects</a></li>
+                <li><a href="vision2030.html">Vision 2030 Projects</a></li>
+                <li><a href="mind71.html">MIND71 AI</a></li>
+                <li><a href="projects.html">Browse Projects</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <div class="container">
+            <h1 class="about-hero-title">About NovaMind Inc.</h1>
+            <p class="about-hero-subtitle">Building globally scalable, AI-driven digital platforms and innovation ecosystems tailored to local markets</p>
+        </div>
+    </section>
+
+    <!-- Who We Are Section -->
+    <section class="mission-section">
+        <div class="container">
+            <div class="mission-grid">
+                <div class="mission-image">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="NovaMind Innovation Ecosystem">
+                </div>
+                
+                <div class="mission-content">
+                    <h2>Who We Are</h2>
+                    <p>NovaMind Inc. is a U.S. Corporation specializing in building globally scalable, AI-driven digital platforms that create innovation ecosystems tailored to local markets. We develop comprehensive solutions that empower entrepreneurs, foster creativity, and drive sustainable economic growth.</p>
+                    <p>Our focus on Saudi Arabia represents our commitment to supporting emerging markets with cutting-edge technology and localized approaches. We understand that true innovation requires more than just technology—it requires understanding local culture, values, and aspirations.</p>
+                    <p>Through our flagship platforms, YallaStarter and Mind71, we're building not just applications, but a national innovation infrastructure that aligns with Saudi Arabia's Vision 2030 goals and creates lasting impact for generations to come.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision Section -->
+    <section class="values-section">
+        <div class="container">
+            <h2 class="section-title">Our Mission & Vision</h2>
+            <p class="section-subtitle">The driving force behind everything we do</p>
+            
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3 class="value-title">Our Mission</h3>
+                    <p class="value-description">To democratize innovation by giving creators equal access to funding, mentorship, and digital tools, regardless of their background or connections.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3 class="value-title">Our Vision</h3>
+                    <p class="value-description">To be the leading global enabler of entrepreneurship and sustainable growth, starting with Saudi Arabia's Vision 2030 goals.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="value-title">Empowerment</h3>
+                    <p class="value-description">We empower Saudi youth, women entrepreneurs, and SMEs by providing them with the tools and opportunities they need to succeed.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3 class="value-title">ESG Commitment</h3>
+                    <p class="value-description">We are committed to social inclusion, cultural continuity, environmental sustainability, and governance transparency in all our operations.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3 class="value-title">Innovation Infrastructure</h3>
+                    <p class="value-description">We build not just platforms, but comprehensive national innovation infrastructure that supports long-term economic growth.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3 class="value-title">Global Scalability</h3>
+                    <p class="value-description">Our AI-driven platforms are designed to scale globally while maintaining deep local market understanding and cultural sensitivity.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Innovations Section -->
+    <section class="vision-section">
+        <div class="container">
+            <div class="vision-content">
+                <h2>Our Innovations</h2>
+                <p>NovaMind Inc. has developed two flagship platforms that are revolutionizing how innovation happens in Saudi Arabia and beyond. These platforms work together to create a comprehensive ecosystem for entrepreneurs and creators.</p>
+                
+                <div class="vision-image">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Innovation Ecosystem">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Details Section -->
+    <section class="team-section">
+        <div class="container">
+            <h2 class="section-title">Our Flagship Platforms</h2>
+            <p class="section-subtitle">Revolutionary tools that are transforming innovation in Saudi Arabia</p>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="YallaStarter Platform">
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">YallaStarter</h3>
+                        <p class="member-position">Saudi Arabia's First Reward-Based Crowdfunding Platform</p>
+                        <p class="member-bio">Fully localized, Shariah-compliant, and aligned with Vision 2030, YallaStarter democratizes access to funding for Saudi creators and entrepreneurs. Our platform connects innovative projects with supportive backers, creating a vibrant ecosystem of creativity and innovation.</p>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Mind71 AI Platform">
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">Mind71</h3>
+                        <p class="member-position">Embedded Arabic-First AI Advisor</p>
+                        <p class="member-bio">Our advanced AI system provides feasibility assessments, grant-matching, and Vision 2030 KPI mapping. Mind71 serves as an intelligent advisor that helps entrepreneurs make informed decisions and align their projects with national development goals.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Impact Section -->
+    <section class="stats-section">
+        <div class="container">
+            <h2 class="section-title">Our Impact</h2>
+            <p class="section-subtitle">Building a national innovation infrastructure that empowers Saudi entrepreneurs</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">1,250+</div>
+                    <div class="stat-label">Projects Supported</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number">SAR 25M+</div>
+                    <div class="stat-label">Funds Mobilized</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number">15,000+</div>
+                    <div class="stat-label">Entrepreneurs Empowered</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number">13</div>
+                    <div class="stat-label">Saudi Regions Reached</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2 class="cta-title">Join the Innovation Revolution</h2>
+            <p class="cta-subtitle">Be part of Saudi Arabia's transformation through NovaMind's innovation ecosystem</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+                <a href="create-project.html" class="cta-button">Start a Project</a>
+                <a href="projects.html" class="btn btn-outline" style="background-color: transparent; border: 2px solid white; color: white; padding: 0.8rem 2rem; font-size: 1.1rem; font-weight: 600;">Explore Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>NovaMind Inc.</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="how-it-works.html">How It Works</a></li>
+                        <li><a href="projects.html">Browse Projects</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>For Creators</h3>
+                    <ul class="footer-links">
+                        <li><a href="create-project.html">Start a Project</a></li>
+                        <li><a href="#">Creator Handbook</a></li>
+                        <li><a href="#">Creator Resources</a></li>
+                        <li><a href="#">Creator FAQs</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>For Backers</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Backer FAQs</a></li>
+                        <li><a href="#">Trust & Safety</a></li>
+                        <li><a href="#">Backer Resources</a></li>
+                        <li><a href="#">Payment Methods</a></li>
+                        <li><a href="#">Backer Protection</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Connect With Us</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Newsletter</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Events</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Community Guidelines</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; 2025 NovaMind Inc. All rights reserved.
+                </div>
+                
+                <div class="footer-social">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Universal Mobile Menu Script -->
+    <script src="mobile-menu.js"></script>
+    
+    <!-- Password Protection Script -->
+    <script src="assets/js/password-mobile.js"></script>
+</body>
+</html>

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="انضم إلى فريق يلاستارتر وساعد في بناء مستقبل التمويل الجماعي في المملكة العربية السعودية. استكشف الفرص الوظيفية وكن جزءاً من مهمتنا.">
+    <meta name="keywords" content="وظائف, يلاستارتر, السعودية, تمويل جماعي, تكنولوجيا">
+    <meta name="author" content="يلاستارتر">
+    <meta name="robots" content="index, follow">
+    
+    <title>الوظائف - يلاستارتر</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile-menu.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* RTL Support */
+        body {
+            direction: rtl;
+            text-align: right;
+            font-family: 'Tajawal', 'Poppins', sans-serif;
+        }
+        
+        /* Page-specific styles */
+        .careers-hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .careers-hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .careers-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .careers-content {
+            padding: 4rem 0;
+        }
+        
+        .job-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--neutral-200);
+            transition: var(--transition);
+        }
+        
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .job-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--neutral-900);
+            margin-bottom: 0.5rem;
+        }
+        
+        .job-department {
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .job-description {
+            color: var(--neutral-700);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .job-requirements {
+            margin-bottom: 1.5rem;
+        }
+        
+        .job-requirements h4 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--neutral-800);
+        }
+        
+        .job-requirements ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .job-requirements li {
+            padding: 0.25rem 0;
+            color: var(--neutral-700);
+        }
+        
+        .job-requirements li:before {
+            content: "✓";
+            color: var(--primary);
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+        
+        .apply-btn {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-block;
+        }
+        
+        .apply-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 166, 81, 0.3);
+        }
+        
+        .benefits-section {
+            background: var(--neutral-100);
+            padding: 4rem 0;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .benefit-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        
+        .benefit-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--neutral-900);
+        }
+        
+        .benefit-description {
+            color: var(--neutral-700);
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .careers-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .careers-hero p {
+                font-size: 1rem;
+            }
+            
+            .job-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="index-ar.html" class="logo">
+                <span class="logo-text">يلاستارتر</span>
+            </a>
+        
+            <ul class="nav-links">
+                <li><a href="index-ar.html">الرئيسية</a></li>
+                <li><a href="entertainment-ar.html">مشاريع الترفيه</a></li>
+                <li><a href="vision2030-ar.html">مشروعات سباركس لرؤية 2030</a></li>
+                <li><a href="mind71-ar.html">مايند71 للذكاء الاصطناعي</a></li>
+                <li><a href="projects-ar.html">تصفح المشاريع</a></li>
+                <li><a href="how-it-works-ar.html">كيفية العمل</a></li>
+                <li><a href="about-ar.html">من نحن</a></li>
+                <li><a href="contact-ar.html">اتصل بنا</a></li>
+            </ul>
+            
+            <div class="language-switcher">
+                <button class="language-btn active" onclick="switchLanguage('ar')">العربية</button>
+                <button class="language-btn" onclick="switchLanguage('en')">English</button>
+            </div>
+            
+            <div class="auth-buttons">
+                <a href="create-project-ar.html" class="btn btn-primary">ابدأ مشروعاً</a>
+                <a href="login-ar.html" class="btn btn-link">تسجيل الدخول</a>
+            </div>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+        
+        <div class="mobile-menu">
+            <div class="mobile-menu-header">
+                <div class="mobile-header-left">
+                    <div class="auth-buttons">
+                        <a href="create-project-ar.html" class="btn btn-primary">ابدأ مشروعاً</a>
+                        <a href="login-ar.html" class="btn btn-link">تسجيل الدخول</a>
+                        <div class="language-switcher">
+                            <button class="language-btn active" onclick="switchLanguage('ar')">العربية</button>
+                            <button class="language-btn" onclick="switchLanguage('en')">English</button>
+                        </div>
+                    </div>
+                </div>
+                <button class="mobile-close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index-ar.html">الرئيسية</a></li>
+                <li><a href="entertainment-ar.html">مشاريع الترفيه</a></li>
+                <li><a href="vision2030-ar.html">مشروعات سباركس لرؤية 2030</a></li>
+                <li><a href="mind71-ar.html">مايند71 للذكاء الاصطناعي</a></li>
+                <li><a href="projects-ar.html">تصفح المشاريع</a></li>
+                <li><a href="how-it-works-ar.html">كيفية العمل</a></li>
+                <li><a href="about-ar.html">من نحن</a></li>
+                <li><a href="contact-ar.html">اتصل بنا</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Careers Hero Section -->
+    <section class="careers-hero">
+        <div class="container">
+            <h1>انضم إلى فريقنا</h1>
+            <p>كن جزءاً من مستقبل التمويل الجماعي في المملكة العربية السعودية. ساعدنا في بناء منصة تمكن المبدعين وتوصل المجتمعات.</p>
+        </div>
+    </section>
+
+    <!-- Open Positions -->
+    <section class="careers-content">
+        <div class="container">
+            <h2 class="section-title">الوظائف المتاحة</h2>
+            <p class="section-subtitle">استكشف الفرص الحالية للانضمام إلى فريقنا المتنامي</p>
+            
+            <div class="job-card">
+                <h3 class="job-title">مطور واجهة أمامية أول</h3>
+                <div class="job-department">الهندسة</div>
+                <p class="job-description">نبحث عن مطور واجهة أمامية ذي خبرة لمساعدتنا في بناء وصيانة منصة التمويل الجماعي الخاصة بنا. ستعمل مع التقنيات الحديثة وتساهم في منتج يحدث فرقاً حقيقياً في المجتمع الإبداعي السعودي.</p>
+                
+                <div class="job-requirements">
+                    <h4>المتطلبات:</h4>
+                    <ul>
+                        <li>5+ سنوات من الخبرة في تطوير الواجهة الأمامية</li>
+                        <li>إتقان React أو Vue.js أو Angular</li>
+                        <li>خبرة في التصميم المتجاوب والتطوير المحمول أولاً</li>
+                        <li>فهم قوي لـ JavaScript ES6+ و CSS الحديث</li>
+                        <li>خبرة في التحكم في الإصدارات (Git)</li>
+                        <li>مهارات تواصل ممتازة باللغتين الإنجليزية والعربية</li>
+                    </ul>
+                </div>
+                
+                <a href="mailto:careers@yallastarter.com?subject=Senior Frontend Developer Application" class="apply-btn">قدم الآن</a>
+            </div>
+            
+            <div class="job-card">
+                <h3 class="job-title">مدير المنتج</h3>
+                <div class="job-department">المنتج</div>
+                <p class="job-description">قاد استراتيجية المنتج وتطوير منصة التمويل الجماعي الخاصة بنا. اعمل بشكل وثيق مع فرق الهندسة والتصميم والأعمال لتقديم ميزات تسعد مستخدمينا وتدفع النمو.</p>
+                
+                <div class="job-requirements">
+                    <h4>المتطلبات:</h4>
+                    <ul>
+                        <li>3+ سنوات من الخبرة في إدارة المنتجات</li>
+                        <li>خبرة في منصات B2C وتصميم تجربة المستخدم</li>
+                        <li>مهارات تحليلية وحل المشاكل قوية</li>
+                        <li>خبرة في منهجيات التطوير الرشيق</li>
+                        <li>مهارات تواصل وقيادة ممتازة</li>
+                        <li>فهم السوق والثقافة السعودية</li>
+                    </ul>
+                </div>
+                
+                <a href="mailto:careers@yallastarter.com?subject=Product Manager Application" class="apply-btn">قدم الآن</a>
+            </div>
+            
+            <div class="job-card">
+                <h3 class="job-title">أخصائي تسويق</h3>
+                <div class="job-department">التسويق</div>
+                <p class="job-description">ساعدنا في نمو مجتمع المبدعين والداعمين من خلال حملات تسويقية إبداعية واستراتيجية المحتوى. ستعمل على مبادرات التسويق الرقمي والتقليدي عبر المملكة العربية السعودية.</p>
+                
+                <div class="job-requirements">
+                    <h4>المتطلبات:</h4>
+                    <ul>
+                        <li>2+ سنوات من الخبرة في التسويق</li>
+                        <li>خبرة في التسويق عبر وسائل التواصل الاجتماعي وإنشاء المحتوى</li>
+                        <li>معرفة بأدوات التسويق الرقمي والتحليلات</li>
+                        <li>تفكير إبداعي ومهارات كتابة قوية</li>
+                        <li>فهم الثقافة السعودية واتجاهات السوق</li>
+                        <li>ثنائي اللغة (الإنجليزية والعربية) مفضل</li>
+                    </ul>
+                </div>
+                
+                <a href="mailto:careers@yallastarter.com?subject=Marketing Specialist Application" class="apply-btn">قدم الآن</a>
+            </div>
+            
+            <div class="job-card">
+                <h3 class="job-title">مدير نجاح العملاء</h3>
+                <div class="job-department">نجاح العملاء</div>
+                <p class="job-description">ساعد مبدعينا وداعمينا على النجاح في منصتنا. ستقدم الدعم وتجمع الملاحظات وتعمل على تحسين تجربة المستخدم الشاملة لمجتمعنا.</p>
+                
+                <div class="job-requirements">
+                    <h4>المتطلبات:</h4>
+                    <ul>
+                        <li>2+ سنوات من الخبرة في نجاح العملاء أو الدعم</li>
+                        <li>مهارات تواصل وعلاقات شخصية ممتازة</li>
+                        <li>خبرة في أنظمة إدارة علاقات العملاء وأدوات الدعم</li>
+                        <li>حل المشاكل والتفكير التحليلي</li>
+                        <li>الصبر والتعاطف مع تحديات المستخدمين</li>
+                        <li>طلاقة في الإنجليزية والعربية</li>
+                    </ul>
+                </div>
+                
+                <a href="mailto:careers@yallastarter.com?subject=Customer Success Manager Application" class="apply-btn">قدم الآن</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section">
+        <div class="container">
+            <h2 class="section-title">لماذا تعمل معنا؟</h2>
+            <p class="section-subtitle">نقدم مزايا تنافسية وبيئة عمل رائعة</p>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3 class="benefit-title">عمل ذو معنى</h3>
+                    <p class="benefit-description">كن جزءاً من مهمة تمكن المبدعين السعوديين وتبني اقتصاداً إبداعياً أقوى.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="benefit-title">فريق رائع</h3>
+                    <p class="benefit-description">اعمل مع أشخاص موهوبين ومتحمسين ملتزمين بإحداث فرق.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="benefit-title">التعلم والنمو</h3>
+                    <p class="benefit-description">فرص التعلم المستمر ودعم التطوير المهني.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3 class="benefit-title">توازن العمل والحياة</h3>
+                    <p class="benefit-description">ساعات عمل مرنة وخيارات العمل عن بُعد لدعم نمط حياتك.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <h3 class="benefit-title">مزايا تنافسية</h3>
+                    <p class="benefit-description">راتب تنافسي وتأمين صحي ومزايا شاملة أخرى.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="benefit-title">بيئة سريعة الوتيرة</h3>
+                    <p class="benefit-description">كن جزءاً من بيئة شركة ناشئة ديناميكية مع فرص لإحداث تأثير حقيقي.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>يلاستارتر</h3>
+                    <ul class="footer-links">
+                        <li><a href="index-ar.html">الرئيسية</a></li>
+                        <li><a href="projects-ar.html">تصفح المشاريع</a></li>
+                        <li><a href="how-it-works-ar.html">كيفية العمل</a></li>
+                        <li><a href="about-ar.html">من نحن</a></li>
+                        <li><a href="contact-ar.html">اتصل بنا</a></li>
+                        <li><a href="careers-ar.html">الوظائف</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>للمبدعين</h3>
+                    <ul class="footer-links">
+                        <li><a href="create-project-ar.html">ابدأ مشروعاً</a></li>
+                        <li><a href="capstone-projects-ar.html">مشاريع التخرج</a></li>
+                        <li><a href="creator-handbook-ar.html">دليل المبدع</a></li>
+                        <li><a href="creator-resources-ar.html">موارد المبدع</a></li>
+                        <li><a href="creator-faqs-ar.html">الأسئلة الشائعة للمبدع</a></li>
+                        <li><a href="success-stories-ar.html">قصص النجاح</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>للداعمين</h3>
+                    <ul class="footer-links">
+                        <li><a href="backer-faqs-ar.html">الأسئلة الشائعة للداعم</a></li>
+                        <li><a href="trust-safety-ar.html">الثقة والأمان</a></li>
+                        <li><a href="backer-resources-ar.html">موارد الداعم</a></li>
+                        <li><a href="payment-methods-ar.html">طرق الدفع</a></li>
+                        <li><a href="backer-protection-ar.html">حماية الداعم</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>تواصل معنا</h3>
+                    <ul class="footer-links">
+                        <li><a href="newsletter-ar.html">النشرة الإخبارية</a></li>
+                        <li><a href="blog-ar.html">المدونة</a></li>
+                        <li><a href="events-ar.html">الفعاليات</a></li>
+                        <li><a href="support-ar.html">الدعم</a></li>
+                        <li><a href="community-guidelines-ar.html">إرشادات المجتمع</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; 2025 يلاستارتر. جميع الحقوق محفوظة.
+                </div>
+                
+                <div class="footer-social">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Universal Mobile Menu Script -->
+    <script src="mobile-menu.js"></script>
+    
+    <script>
+        // Language Switcher
+        function switchLanguage(lang) {
+            if (lang === 'en') {
+                window.location.href = 'careers.html';
+            } else if (lang === 'ar') {
+                window.location.href = 'careers-ar.html';
+            }
+        }
+    </script>
+    <!-- Password Protection Script -->\n    <script src="assets/js/password-clear.js"></script>\n</body>
+</html>

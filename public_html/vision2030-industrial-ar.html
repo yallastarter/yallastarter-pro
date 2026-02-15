@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Industrial Development - Vision 2030 Projects | YallaStarter</title>
+    <meta name="description" content="Discover innovative industrial development projects driving Saudi Arabia's Vision 2030 transformation. Support manufacturing, logistics, and industrial innovation initiatives.">
+    <meta name="keywords" content="industrial development, manufacturing, logistics, automation, Industry 4.0, Saudi Arabia, Vision 2030">
+    <meta name="author" content="YallaStarter">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Industrial Development - Vision 2030 Projects | YallaStarter">
+    <meta property="og:description" content="Discover innovative industrial development projects driving Saudi Arabia's Vision 2030 transformation.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yallastarter.com/vision2030-industrial">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" as="style">
+    
+    <title>Industrial Development - Vision 2030 Projects | YallaStarter</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile-menu.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --industrial-primary: #f59e0b;
+            --industrial-primary-dark: #d97706;
+            --industrial-secondary: #fbbf24;
+            --industrial-accent: #fcd34d;
+            --industrial-gradient: linear-gradient(135deg, #f59e0b 0%, #fbbf24 50%, #fcd34d 100%);
+            --industrial-glow: 0 0 30px rgba(245, 158, 11, 0.3);
+            --industrial-text: #1e293b;
+            --industrial-text-light: #64748b;
+            --industrial-bg: #fffbeb;
+            --industrial-card: #ffffff;
+            --industrial-border: #fed7aa;
+        }
+
+        body {
+            font-family: 'Poppins', 'Tajawal', sans-serif;
+            background: var(--industrial-bg);
+            color: var(--industrial-text);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--industrial-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: var(--industrial-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--industrial-primary);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--industrial-gradient);
+            border-radius: 1px;
+        }
+
+        .language-switcher {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .language-btn {
+            background: none;
+            border: 1px solid var(--industrial-border);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .language-btn.active,
+        .language-btn:hover {
+            background: var(--industrial-primary);
+            color: white;
+            border-color: var(--industrial-primary);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--industrial-gradient);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--industrial-glow);
+        }
+
+        .btn-link {
+            color: var(--industrial-text);
+            background: none;
+            border: 1px solid var(--industrial-border);
+        }
+
+        .btn-link:hover {
+            background: var(--industrial-primary);
+            color: white;
+            border-color: var(--industrial-primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--industrial-text);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .industrial-hero {
+            background: linear-gradient(135deg, #92400e 0%, #b45309 50%, #d97706 100%);
+            color: white;
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .industrial-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="industry" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M5 5 L15 5 L15 15 L5 15 Z" fill="none" stroke="%23f59e0b" stroke-width="0.5" opacity="0.3"/></pattern></defs><rect width="100" height="100" fill="url(%23industry)"/></svg>');
+            opacity: 0.1;
+        }
+
+        .industrial-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .industrial-hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: var(--industrial-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: industrial-pulse 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes industrial-pulse {
+            from { filter: drop-shadow(0 0 20px rgba(245, 158, 11, 0.5)); }
+            to { filter: drop-shadow(0 0 30px rgba(245, 158, 11, 0.8)); }
+        }
+
+        .industrial-hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        .industrial-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .industrial-stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .industrial-stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--industrial-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .industrial-stat-label {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* Industrial Categories */
+        .industrial-categories {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--industrial-text);
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            text-align: center;
+            color: var(--industrial-text-light);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .industrial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .industrial-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--industrial-border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .industrial-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--industrial-gradient);
+        }
+
+        .industrial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(245, 158, 11, 0.15);
+        }
+
+        .industrial-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--industrial-gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .industrial-card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--industrial-text);
+        }
+
+        .industrial-card-description {
+            color: var(--industrial-text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .industrial-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .industrial-features li {
+            padding: 0.5rem 0;
+            color: var(--industrial-text-light);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .industrial-features li::before {
+            content: '⚙️';
+            position: absolute;
+            left: 0;
+            color: var(--industrial-primary);
+            font-weight: bold;
+        }
+
+        /* Featured Projects */
+        .featured-projects {
+            padding: 6rem 0;
+            background: var(--industrial-bg);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(245, 158, 11, 0.15);
+        }
+
+        .project-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-category {
+            color: var(--industrial-primary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--industrial-text);
+        }
+
+        .project-description {
+            color: var(--industrial-text-light);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--industrial-text-light);
+        }
+
+        .funding-progress {
+            width: 100%;
+            height: 6px;
+            background: #fed7aa;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .funding-progress-bar {
+            height: 100%;
+            background: var(--industrial-gradient);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 0;
+            background: var(--industrial-gradient);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .cta-description {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--industrial-primary);
+            border: none;
+        }
+
+        .btn-white:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-white {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline-white:hover {
+            background: white;
+            color: var(--industrial-primary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links,
+            .auth-buttons {
+                display: none;
+            }
+
+            .industrial-hero-title {
+                font-size: 2.5rem;
+            }
+
+            .industrial-hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .industrial-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-buttons .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+
+    <style>
+        body { direction: rtl; text-align: right; font-family: 'Tajawal', 'Poppins', sans-serif; }
+        .navbar .nav-links { margin-left: 0; margin-right: auto; }
+        .navbar .logo { margin-left: 1rem; margin-right: 0; }
+        .footer-links { padding-right: 0; }
+        .footer-column h3 { text-align: right; }
+        /* Add more RTL fixes as needed */
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="index-ar.html" class="logo">
+                <span class="logo-text">YallaStarter</span>
+            </a>
+        
+            <ul class="nav-links">
+                <li><a href="index-ar.html">الرئيسية</a></li>
+                <li><a href="entertainment-ar.html">الترفيه الإبداعي</a></li>
+                <li><a href="vision2030-ar.html" class="active">مشاريع رؤية 2030</a></li>
+                <li><a href="mind71-ar.html">MIND71 AI</a></li>
+                <li><a href="projects-ar.html">تصفح المشاريع</a></li>
+                <li><a href="how-it-works-ar.html">كيف يعمل</a></li>
+                <li><a href="about-ar.html">من نحن</a></li>
+                <li><a href="contact-ar.html">اتصل بنا</a></li>
+            </ul>
+            
+            <div class="language-switcher">
+                <button class="language-btn active" onclick="switchLanguage('ar')">English</button>
+                <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
+            </div>
+            
+            <div class="auth-buttons">
+                <a href="create-project-ar.html" class="btn btn-primary">ابدأ مشروعك</a>
+                <a href="login-ar.html" class="btn btn-link">تسجيل الدخول</a>
+            </div>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+        
+        <div class="mobile-menu">
+            <div class="mobile-menu-header">
+                <button class="mobile-close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index-ar.html">الرئيسية</a></li>
+                <li><a href="entertainment-ar.html">الترفيه الإبداعي</a></li>
+                <li><a href="vision2030-ar.html" class="active">مشاريع رؤية 2030</a></li>
+                <li><a href="mind71-ar.html">MIND71 AI</a></li>
+                <li><a href="projects-ar.html">تصفح المشاريع</a></li>
+                <li><a href="how-it-works-ar.html">كيف يعمل</a></li>
+                <li><a href="about-ar.html">من نحن</a></li>
+                <li><a href="contact-ar.html">اتصل بنا</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <a href="create-project-ar.html" class="btn btn-primary">ابدأ مشروعك</a>
+                <a href="login-ar.html" class="btn btn-link">تسجيل الدخول</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Industrial Hero -->
+    <section class="industrial-hero">
+        <div class="container">
+            <div class="industrial-hero-content">
+                <h1 class="industrial-hero-title">Industrial Development</h1>
+                <p class="industrial-hero-subtitle">Transforming Saudi Arabia's industrial landscape through advanced manufacturing, smart logistics, and Industry 4.0 technologies that drive economic diversification and create high-value jobs.</p>
+                
+                <div class="industrial-stats">
+                    <div class="industrial-stat">
+                        <div class="industrial-stat-number">150+</div>
+                        <div class="industrial-stat-label">Industrial Projects</div>
+                    </div>
+                    <div class="industrial-stat">
+                        <div class="industrial-stat-number">SAR 3.2B</div>
+                        <div class="industrial-stat-label">Industrial Investment</div>
+                    </div>
+                    <div class="industrial-stat">
+                        <div class="industrial-stat-number">88%</div>
+                        <div class="industrial-stat-label">Success Rate</div>
+                    </div>
+                    <div class="industrial-stat">
+                        <div class="industrial-stat-number">75K+</div>
+                        <div class="industrial-stat-label">Jobs Created</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industrial Categories -->
+    <section class="industrial-categories">
+        <div class="container">
+            <h2 class="section-title">Revolutionary Industrial Solutions</h2>
+            <p class="section-subtitle">Explore cutting-edge manufacturing, logistics, and industrial technologies transforming Saudi Arabia's economy</p>
+            
+            <div class="industrial-grid">
+                <div class="industrial-card">
+                    <div class="industrial-icon">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <h3 class="industrial-card-title">Smart Manufacturing</h3>
+                    <p class="industrial-card-description">Advanced manufacturing systems with IoT integration, AI-powered quality control, and automated production lines.</p>
+                    <ul class="industrial-features">
+                        <li>Automated Production Lines</li>
+                        <li>Quality Control Systems</li>
+                        <li>Predictive Maintenance</li>
+                        <li>Digital Twin Technology</li>
+                        <li>Smart Factory Integration</li>
+                    </ul>
+                </div>
+
+                <div class="industrial-card">
+                    <div class="industrial-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="industrial-card-title">Industrial Automation</h3>
+                    <p class="industrial-card-description">Robotic systems and automation solutions that enhance productivity, safety, and efficiency in industrial operations.</p>
+                    <ul class="industrial-features">
+                        <li>Industrial Robotics</li>
+                        <li>Process Automation</li>
+                        <li>Human-Robot Collaboration</li>
+                        <li>Automated Material Handling</li>
+                        <li>Smart Assembly Systems</li>
+                    </ul>
+                </div>
+
+                <div class="industrial-card">
+                    <div class="industrial-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3 class="industrial-card-title">Smart Logistics</h3>
+                    <p class="industrial-card-description">Intelligent logistics and supply chain management systems optimizing transportation and distribution networks.</p>
+                    <ul class="industrial-features">
+                        <li>Fleet Management Systems</li>
+                        <li>Warehouse Automation</li>
+                        <li>Route Optimization</li>
+                        <li>Inventory Management</li>
+                        <li>Last-Mile Delivery</li>
+                    </ul>
+                </div>
+
+                <div class="industrial-card">
+                    <div class="industrial-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3 class="industrial-card-title">Advanced Materials</h3>
+                    <p class="industrial-card-description">Innovative materials science and engineering solutions for next-generation industrial applications.</p>
+                    <ul class="industrial-features">
+                        <li>Composite Materials</li>
+                        <li>Nanotechnology Applications</li>
+                        <li>3D Printing Materials</li>
+                        <li>Smart Materials</li>
+                        <li>Biodegradable Solutions</li>
+                    </ul>
+                </div>
+
+                <div class="industrial-card">
+                    <div class="industrial-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="industrial-card-title">Energy & Utilities</h3>
+                    <p class="industrial-card-description">Industrial energy management systems and utility optimization solutions for sustainable operations.</p>
+                    <ul class="industrial-features">
+                        <li>Energy Management Systems</li>
+                        <li>Renewable Energy Integration</li>
+                        <li>Waste-to-Energy Solutions</li>
+                        <li>Water Treatment Systems</li>
+                        <li>Smart Grid Technology</li>
+                    </ul>
+                </div>
+
+                <div class="industrial-card">
+                    <div class="industrial-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="industrial-card-title">Industrial Analytics</h3>
+                    <p class="industrial-card-description">Data-driven insights and analytics platforms optimizing industrial operations and decision-making processes.</p>
+                    <ul class="industrial-features">
+                        <li>Real-time Monitoring</li>
+                        <li>Predictive Analytics</li>
+                        <li>Performance Optimization</li>
+                        <li>Cost Analysis Tools</li>
+                        <li>Market Intelligence</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section class="featured-projects">
+        <div class="container">
+            <h2 class="section-title">Featured Industrial Projects</h2>
+            <p class="section-subtitle">Discover groundbreaking industrial projects that are transforming manufacturing and logistics in Saudi Arabia</p>
+            
+            <div class="projects-grid">
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Smart Manufacturing Plant" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Smart Manufacturing</div>
+                        <h3 class="project-title">Saudi Smart Manufacturing Hub</h3>
+                        <p class="project-description">State-of-the-art smart manufacturing facility featuring fully automated production lines, AI quality control, and IoT integration for optimal efficiency.</p>
+                        <div class="project-meta">
+                            <div>SAR 2,500,000 raised</div>
+                            <div>72% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 72%;"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Automated Warehouse" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Logistics & Automation</div>
+                        <h3 class="project-title">Automated Distribution Center</h3>
+                        <p class="project-description">Fully automated warehouse and distribution center with robotic picking systems, autonomous vehicles, and AI-powered inventory management.</p>
+                        <div class="project-meta">
+                            <div>SAR 1,800,000 raised</div>
+                            <div>85% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="3D Printing Facility" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Advanced Manufacturing</div>
+                        <h3 class="project-title">Industrial 3D Printing Center</h3>
+                        <p class="project-description">Advanced additive manufacturing facility producing complex components and prototypes using cutting-edge 3D printing technologies.</p>
+                        <div class="project-meta">
+                            <div>SAR 950,000 raised</div>
+                            <div>68% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 68%;"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Renewable Energy Plant" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Energy & Utilities</div>
+                        <h3 class="project-title">Industrial Solar Power Plant</h3>
+                        <p class="project-description">Large-scale solar power facility providing clean energy for industrial operations while reducing carbon footprint and operational costs.</p>
+                        <div class="project-meta">
+                            <div>SAR 3,200,000 raised</div>
+                            <div>55% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 55%;"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Materials Research Lab" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Advanced Materials</div>
+                        <h3 class="project-title">Materials Innovation Laboratory</h3>
+                        <p class="project-description">Cutting-edge materials research facility developing next-generation composites, smart materials, and sustainable industrial solutions.</p>
+                        <div class="project-meta">
+                            <div>SAR 1,200,000 raised</div>
+                            <div>78% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 78%;"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Industrial Analytics Platform" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Industrial Analytics</div>
+                        <h3 class="project-title">Smart Industrial Analytics Platform</h3>
+                        <p class="project-description">Comprehensive analytics platform providing real-time insights, predictive maintenance, and optimization recommendations for industrial operations.</p>
+                        <div class="project-meta">
+                            <div>SAR 650,000 raised</div>
+                            <div>82% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 82%;"></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title">Ready to Build the Future?</h2>
+            <p class="cta-description">Join the industrial revolution and help build a stronger Saudi Arabia through innovative manufacturing, logistics, and industrial projects that create jobs and drive economic growth.</p>
+            <div class="cta-buttons">
+                <a href="create-project-ar.html" class="btn btn-white">Start Your Industrial Project</a>
+                <a href="projects-ar.html?category=industrial" class="btn btn-outline-white">Explore All Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mobile Menu Script -->
+    <script src="mobile-menu.js"></script>
+    
+    <!-- Language Switcher Script -->
+    <script>
+        function switchLanguage(lang) {
+            if (lang === 'ar') {
+                window.location.href = 'vision2030-industrial-ar.html';
+            } else {
+                window.location.href = 'vision2030-industrial.html';
+            }
+        }
+    </script>
+
+    <script>
+        function switchLanguage(lang) {
+            if (lang === 'en') {
+                window.location.href = 'vision2030-industrial.html';
+            } else if (lang === 'ar') {
+                window.location.href = 'vision2030-industrial-ar.html';
+            }
+        }
+    </script>
+        </body>
+</html>

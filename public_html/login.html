@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Log In to your YallaStarter account to manage projects, track funding, and support innovative ideas.">
+    <meta name="keywords" content="login, YallaStarter, crowdfunding, Saudi Arabia">
+    <meta name="author" content="YallaStarter">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Log In - YallaStarter">
+    <meta property="og:description" content="Log In to your YallaStarter account to manage projects, track funding, and support innovative ideas.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yallastarter.com/login">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" as="style">
+    
+    <title>Log In - YallaStarter</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile-menu.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #f8f9fa 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Header Styles */
+        .header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 0.5rem 1rem;
+        }
+        
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 1rem;
+            width: 100%;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            flex-shrink: 0;
+            margin-right: 0.8rem;
+            transition: transform 0.2s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.02);
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+            letter-spacing: -0.02em;
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            flex: 0 1 auto;
+            justify-content: flex-start;
+        }
+        
+        .nav-links li {
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--neutral-800);
+            font-weight: 500;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-size: 1rem;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+            background-color: rgba(0, 108, 53, 0.05);
+        }
+        
+        .nav-links a.active {
+            color: var(--primary);
+            font-weight: 600;
+            background-color: rgba(0, 108, 53, 0.1);
+            padding: 0.5rem 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        .language-switcher {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: auto;
+        }
+        
+        .language-btn {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .language-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-1px);
+        }
+        
+        .language-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
+        }
+        
+        .auth-buttons .btn {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .auth-buttons .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: 2px solid var(--primary);
+            box-shadow: 0 2px 8px rgba(0, 108, 53, 0.2);
+        }
+        
+        .auth-buttons .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 108, 53, 0.3);
+        }
+        
+        .auth-buttons .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            font-weight: 600;
+        }
+        
+        .auth-buttons .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 108, 53, 0.3);
+        }
+        
+        .auth-buttons .btn-link {
+            background: transparent;
+            color: var(--neutral-600);
+            border: none;
+            padding: 0.6rem 1rem;
+        }
+        
+        .auth-buttons .btn-link:hover {
+            color: var(--primary);
+        }
+        
+        /* Login Section */
+        .auth-section {
+            padding: 4rem 0;
+            min-height: calc(100vh - 80px);
+            display: flex;
+            align-items: center;
+        }
+        
+        .auth-container {
+            max-width: 400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .auth-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .auth-header {
+            margin-bottom: 2rem;
+        }
+        
+        .auth-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--neutral-900);
+            margin-bottom: 0.5rem;
+        }
+        
+        .auth-subtitle {
+            color: var(--neutral-600);
+            font-size: 1rem;
+        }
+        
+        .auth-form {
+            text-align: left;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            font-weight: 500;
+            color: var(--neutral-700);
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid var(--neutral-200);
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background-color: var(--neutral-50);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            background-color: white;
+            box-shadow: 0 0 0 4px rgba(0, 108, 53, 0.1);
+        }
+        
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+        }
+        
+        .checkbox-group label {
+            font-size: 0.9rem;
+            color: var(--neutral-600);
+            margin: 0;
+            cursor: pointer;
+        }
+        
+        .forgot-password {
+            font-size: 0.9rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+        
+        .btn-login {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 108, 53, 0.3);
+        }
+        
+        .auth-divider {
+            position: relative;
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        
+        .auth-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background-color: var(--neutral-200);
+        }
+        
+        .auth-divider span {
+            background-color: white;
+            padding: 0 1rem;
+            color: var(--neutral-500);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .social-login {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn-social {
+            flex: 1;
+            padding: 0.875rem;
+            border: 2px solid var(--neutral-200);
+            border-radius: 12px;
+            background: white;
+            color: var(--neutral-700);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-social:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-1px);
+        }
+        
+        .auth-footer {
+            text-align: center;
+            color: var(--neutral-600);
+            font-size: 0.9rem;
+        }
+        
+        .auth-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 0.3rem 0.8rem;
+            }
+            
+            .navbar {
+                gap: 0.5rem;
+            }
+            
+            .logo-text {
+                font-size: 1.3rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .auth-buttons {
+                display: none;
+            }
+            
+            .language-switcher {
+                display: none;
+            }
+            
+            .auth-section {
+                padding: 2rem 1rem;
+            }
+            
+            .auth-card {
+                padding: 2rem;
+            }
+            
+            .auth-title {
+                font-size: 1.75rem;
+            }
+            
+            .social-login {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <span class="logo-text">YallaStarter</span>
+            </a>
+        
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="entertainment.html">Entertainment Projects</a></li>
+                <li><a href="vision2030.html">Vision 2030 Projects</a></li>
+                <li><a href="mind71.html">MIND71 AI</a></li>
+                <li><a href="projects.html">Browse Projects</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            
+            <div class="language-switcher">
+                <button class="language-btn active" onclick="switchLanguage('en')">English</button>
+                <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
+            </div>
+            
+            <div class="auth-buttons">
+                <a href="login.html" class="btn btn-link active">Log In</a>
+                <a href="signup.html" class="btn btn-primary">Sign Up</a>
+            </div>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+        
+        <div class="mobile-menu">
+            <div class="mobile-menu-header">
+                <div class="mobile-header-left">
+                    <div class="language-switcher">
+                        <button class="language-btn active" onclick="switchLanguage('en')">English</button>
+                        <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
+                    </div>
+                    <div class="auth-buttons">
+                        <a href="create-project.html" class="btn btn-primary">Start a Project</a>
+                        <a href="login.html" class="btn btn-link active">Log In</a>
+                    </div>
+                </div>
+                <button class="mobile-close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="entertainment.html">Entertainment Projects</a></li>
+                <li><a href="vision2030.html">Vision 2030 Projects</a></li>
+                <li><a href="mind71.html">MIND71 AI</a></li>
+                <li><a href="projects.html">Browse Projects</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Login Section -->
+    <section class="auth-section">
+        <div class="container">
+            <div class="auth-container">
+                <div class="auth-card">
+                    <div class="auth-header">
+                        <h1 class="auth-title">Welcome Back</h1>
+                        <p class="auth-subtitle">Log In to your YallaStarter account</p>
+                    </div>
+                    
+                    <form class="auth-form">
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+                        </div>
+                        
+                        <div class="form-options">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="remember">
+                                <label for="remember">Remember me</label>
+                            </div>
+                            
+                            <a href="#" class="forgot-password">Forgot password?</a>
+                        </div>
+                        
+                        <button type="submit" class="btn-login">Log In</button>
+                    </form>
+                    
+                    <div class="auth-divider">
+                        <span>OR</span>
+                    </div>
+                    
+                    <div class="social-login">
+                        <button type="button" class="btn-social">
+                            <i class="fab fa-google"></i>
+                            Google
+                        </button>
+                        <button type="button" class="btn-social">
+                            <i class="fab fa-facebook-f"></i>
+                            Facebook
+                        </button>
+                    </div>
+                    
+                    <div class="auth-footer">
+                        Don't have an account? <a href="signup.html">Sign up</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function switchLanguage(lang) {
+            if (lang === 'en') {
+                window.location.href = 'login.html';
+            } else if (lang === 'ar') {
+                window.location.href = 'login-ar.html';
+            }
+        }
+    </script>    <!-- Universal Mobile Menu Script --><script src="mobile-menu.js"></script>    <!-- Password Protection Script -->\n    <script src="assets/js/password-clear.js"></script>\n</body></html>
+

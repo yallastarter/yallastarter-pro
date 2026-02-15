@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة المدن الذكية وإنترنت الأشياء: التنمية الحضرية المستدامة - يلاستارتر</title>
+    <meta name="description" content="ادعم مشروع منصة المدن الذكية وإنترنت الأشياء، الذي يحدث ثورة في التنمية الحضرية في المملكة العربية السعودية بتقنية إنترنت الأشياء المتطورة للمدن المستدامة.">
+    <meta name="keywords" content="مدن ذكية, إنترنت الأشياء, التنمية الحضرية, الاستدامة, المملكة العربية السعودية, التكنولوجيا">
+    <meta name="author" content="يلاستارتر">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="منصة المدن الذكية وإنترنت الأشياء: التنمية الحضرية المستدامة - يلاستارتر">
+    <meta property="og:description" content="ادعم مشروع منصة المدن الذكية وإنترنت الأشياء، الذي يحدث ثورة في التنمية الحضرية في المملكة العربية السعودية بتقنية إنترنت الأشياء المتطورة للمدن المستدامة.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+    <meta property="og:url" content="https://yallastarter.com/project-smart-city-iot-ar.html">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="منصة المدن الذكية وإنترنت الأشياء: التنمية الحضرية المستدامة - يلاستارتر">
+    <meta name="twitter:description" content="ادعم مشروع منصة المدن الذكية وإنترنت الأشياء، الذي يحدث ثورة في التنمية الحضرية في المملكة العربية السعودية بتقنية إنترنت الأشياء المتطورة للمدن المستدامة.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://yallastarter.com/project-smart-city-iot-ar.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #00d4aa;
+            --secondary-color: #1a1a1a;
+            --accent-color: #ff6b35;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --border-color: #e9ecef;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tajawal', 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #fff;
+            direction: rtl;
+            text-align: right;
+        }
+
+        /* Header Styles */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color) !important;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--text-color) !important;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        /* Project Hero Section */
+        .project-hero {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') center/cover;
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        .project-hero .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .project-hero .lead {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .project-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Project Content */
+        .project-content {
+            padding: 4rem 0;
+        }
+
+        .project-image {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .project-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--secondary-color);
+        }
+
+        .project-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: #666;
+        }
+
+        /* Funding Section */
+        .funding-section {
+            background: var(--light-bg);
+            padding: 4rem 0;
+        }
+
+        .funding-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .funding-progress {
+            background: #e9ecef;
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .funding-progress-bar {
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            height: 100%;
+            width: 85%;
+            transition: width 0.3s ease;
+        }
+
+        .funding-amount {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .funding-goal {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .backers-count {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .btn-support {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border: none;
+            color: white;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-support:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 212, 170, 0.3);
+            color: white;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+
+        .feature-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Technology Stack */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tech-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .tech-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .tech-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        .tech-description {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Timeline Section */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            right: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary-color);
+            transform: translateX(50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            width: 50%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            right: 0;
+            padding-left: 3rem;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            right: 50%;
+            padding-right: 3rem;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 0;
+            height: 0;
+            border: 10px solid transparent;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            left: -20px;
+            border-right-color: white;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            right: -20px;
+            border-left-color: white;
+        }
+
+        .timeline-date {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--secondary-color);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer h5 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .footer a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-links a {
+            display: inline-block;
+            margin-left: 1rem;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .project-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .project-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .timeline::before {
+                right: 20px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                right: 0 !important;
+                padding-right: 3rem !important;
+                padding-left: 0 !important;
+                text-align: right !important;
+            }
+
+            .timeline-item .timeline-content::before {
+                right: -20px !important;
+                border-left-color: white !important;
+                border-right-color: transparent !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="index-ar.html" class="logo">
+                <span class="logo-text">يلا ستارتر</span>
+            </a>
+        
+            <ul class="nav-links">
+                <li><a href="index-ar.html">الرئيسية</a></li>
+                <li><a href="entertainment-ar.html">الترفيه الإبداعي</a></li>
+                <li><a href="vision2030-ar.html">مشاريع ابداعية من رؤية 2030</a></li>
+                <li><a href="mind71-ar.html">MIND71 AI</a></li>
+                <li><a href="projects-ar.html">المشاريع</a></li>
+                <li><a href="how-it-works-ar.html">كيف يعمل</a></li>
+                <li><a href="contact-ar.html">اتصل بنا</a></li>
+            </ul>
+            
+            <div class="language-switcher">
+                <button class="language-btn active" onclick="switchLanguage('ar')">العربية</button>
+                <button class="language-btn" onclick="switchLanguage('en')">English</button>
+            </div>
+            
+            <div class="auth-buttons">
+                <a href="create-project-ar.html" class="btn btn-primary">ابدأ مشروعك</a>
+                <a href="login-ar.html" class="btn btn-link">تسجيل الدخول</a>
+            </div>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+        
+        <div class="mobile-menu">
+            <div class="mobile-menu-header">
+                <button class="mobile-close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index-ar.html">الرئيسية</a></li>
+                <li><a href="entertainment-ar.html">الترفيه الإبداعي</a></li>
+                <li><a href="vision2030-ar.html">مشاريع ابداعية من رؤية 2030</a></li>
+                <li><a href="mind71-ar.html">MIND71 AI</a></li>
+                <li><a href="projects-ar.html">المشاريع</a></li>
+                <li><a href="how-it-works-ar.html">كيف يعمل</a></li>
+                <li><a href="contact-ar.html">اتصل بنا</a></li>
+            </ul>
+            <div class="language-switcher">
+                <button class="language-btn active" onclick="switchLanguage('ar')">العربية</button>
+                <button class="language-btn" onclick="switchLanguage('en')">English</button>
+            </div>
+            <div class="auth-buttons">
+                <a href="create-project-ar.html" class="btn btn-primary">ابدأ مشروعك</a>
+                <a href="login-ar.html" class="btn btn-link">تسجيل الدخول</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Project Hero Section -->
+    <section class="project-hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1>منصة المدن الذكية وإنترنت الأشياء: التنمية الحضرية المستدامة</h1>
+                    <p class="lead">أحدث ثورة في الحياة الحضرية مع منصة إنترنت الأشياء الشاملة التي تربط البنية التحتية الذكية وتحسن استخدام الموارد وتخلق مدناً مستدامة لمستقبل المملكة العربية السعودية.</p>
+                    <div class="project-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">85%</div>
+                            <div class="stat-label">تم التمويل</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">3,456</div>
+                            <div class="stat-label">داعم</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">28</div>
+                            <div class="stat-label">يوم متبقي</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="منصة المدن الذكية وإنترنت الأشياء" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Content -->
+    <section class="project-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h2 class="section-title">حول المنصة</h2>
+                    <p class="project-description">
+                        تمثل منصة المدن الذكية وإنترنت الأشياء مستقبل التنمية الحضرية في المملكة العربية السعودية. يدمج هذا النظام الشامل أحدث تقنيات إنترنت الأشياء لإنشاء مدن ذكية ومستدامة وفعالة تعزز جودة الحياة لجميع السكان مع دعم أهداف رؤية المملكة 2030.
+                    </p>
+                    <p class="project-description">
+                        تربط المنصة آلاف المستشعرات والأجهزة والأنظمة عبر البنية التحتية الحضرية لتوفير المراقبة في الوقت الفعلي والتحليلات التنبؤية والاستجابات التلقائية. من إدارة المرور الذكية وتحسين الطاقة إلى مراقبة البيئة والسلامة العامة، تخلق منصة إنترنت الأشياء نظاماً بيئياً متصلاً يجعل المدن أكثر قابلية للعيش واستدامة واستجابة لاحتياجات المواطنين.
+                    </p>
+
+                    <!-- Project Images -->
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="project-image">
+                                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="البنية التحتية للمدينة الذكية" class="img-fluid">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="project-image">
+                                <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="شبكة مستشعرات إنترنت الأشياء" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Features Section -->
+                    <h2 class="section-title mt-5">مميزات المنصة</h2>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-traffic-light"></i>
+                            </div>
+                            <h3 class="feature-title">إدارة المرور الذكية</h3>
+                            <p class="feature-description">تحسين المرور المدعوم بالذكاء الاصطناعي يقلل الازدحام ويحسن التدفق من خلال التحكم الذكي في الإشارات وتخطيط المسارات.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <h3 class="feature-title">تحسين الطاقة</h3>
+                            <p class="feature-description">تقنية الشبكة الذكية تحسن توزيع الطاقة والاستهلاك، مما يقلل التكاليف والأثر البيئي.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <h3 class="feature-title">المراقبة البيئية</h3>
+                            <p class="feature-description">مراقبة جودة الهواء والضوضاء والتلوث في الوقت الفعلي مع أنظمة التنبيه والاستجابة التلقائية.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3 class="feature-title">السلامة العامة</h3>
+                            <p class="feature-description">أنظمة الأمان المتكاملة مع الكاميرات الذكية والاستجابة للطوارئ والوقاية التنبؤية من الجرائم.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-water"></i>
+                            </div>
+                            <h3 class="feature-title">إدارة المياه</h3>
+                            <p class="feature-description">أنظمة المياه الذكية تراقب الاستخدام وتكتشف التسريبات وتحسن التوزيع لأقصى كفاءة.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-waste-basket"></i>
+                            </div>
+                            <h3 class="feature-title">إدارة النفايات</h3>
+                            <p class="feature-description">جمع النفايات الذكي مع حاويات مجهزة بمستشعرات ومسارات جمع محسنة.</p>
+                        </div>
+                    </div>
+
+                    <!-- Technology Stack -->
+                    <h2 class="section-title mt-5">المجموعة التقنية</h2>
+                    <div class="tech-grid">
+                        <div class="tech-card">
+                            <div class="tech-icon">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <h4 class="tech-name">مستشعرات إنترنت الأشياء</h4>
+                            <p class="tech-description">شبكات مستشعرات متقدمة لجمع البيانات</p>
+                        </div>
+                        <div class="tech-card">
+                            <div class="tech-icon">
+                                <i class="fas fa-cloud"></i>
+                            </div>
+                            <h4 class="tech-name">الحوسبة السحابية</h4>
+                            <p class="tech-description">بنية تحتية سحابية قابلة للتوسع لمعالجة البيانات</p>
+                        </div>
+                        <div class="tech-card">
+                            <div class="tech-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <h4 class="tech-name">الذكاء الاصطناعي والتعلم الآلي</h4>
+                            <p class="tech-description">التحليلات التنبؤية والأتمتة الذكية</p>
+                        </div>
+                        <div class="tech-card">
+                            <div class="tech-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h4 class="tech-name">التطبيقات المحمولة</h4>
+                            <p class="tech-description">مشاركة المواطنين والوصول إلى الخدمات</p>
+                        </div>
+                        <div class="tech-card">
+                            <div class="tech-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <h4 class="tech-name">تحليلات البيانات الضخمة</h4>
+                            <p class="tech-description">معالجة البيانات في الوقت الفعلي والرؤى</p>
+                        </div>
+                        <div class="tech-card">
+                            <div class="tech-icon">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <h4 class="tech-name">الأمن السيبراني</h4>
+                            <p class="tech-description">بروتوكولات أمان متقدمة والتشفير</p>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Section -->
+                    <h2 class="section-title mt-5">جدول التنفيذ</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <div class="timeline-date">الربع الأول 2024</div>
+                                <h4 class="timeline-title">تخطيط البنية التحتية</h4>
+                                <p>إكمال تصميم معمارية النظام وتخطيط شبكة المستشعرات لنشر المدينة التجريبية.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <div class="timeline-date">الربع الثاني 2024</div>
+                                <h4 class="timeline-title">النشر التجريبي</h4>
+                                <p>نشر مستشعرات إنترنت الأشياء والمنصة الأساسية في المناطق المختارة للاختبار والتحسين.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <div class="timeline-date">الربع الثالث 2024</div>
+                                <h4 class="timeline-title">تكامل النظام</h4>
+                                <p>دمج جميع وحدات المدينة الذكية وإطلاق تطبيق المواطن المحمول.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <div class="timeline-date">الربع الرابع 2024</div>
+                                <h4 class="timeline-title">الإطلاق الكامل</h4>
+                                <p>النشر على مستوى المدينة بالكامل مع تشغيل جميع الميزات وبرامج تدريب المواطنين.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Funding Sidebar -->
+                <div class="col-lg-4">
+                    <div class="funding-card">
+                        <h3>ادعم المدن الذكية</h3>
+                        <div class="funding-amount">4,250,000 ريال</div>
+                        <div class="funding-goal">تم جمعها من هدف 5,000,000 ريال</div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar"></div>
+                        </div>
+                        <div class="backers-count">3,456 داعم</div>
+                        <div class="backers-count">28 يوم متبقي</div>
+                        
+                        <a href="#" class="btn-support">ادعم هذا المشروع</a>
+                        
+                        <div class="mt-4">
+                            <h5>مستويات المكافآت</h5>
+                            <div class="reward-tier">
+                                <h6>100 ريال - تقرير المدينة الذكية</h6>
+                                <p>تقرير مفصل عن فوائد المدينة الذكية وتقدم التنفيذ</p>
+                            </div>
+                            <div class="reward-tier">
+                                <h6>500 ريال - الوصول التجريبي</h6>
+                                <p>الوصول المبكر لتطبيق المواطن المحمول وخدمات المدينة الذكية</p>
+                            </div>
+                            <div class="reward-tier">
+                                <h6>1,500 ريال - جولة المدينة</h6>
+                                <p>جولة إرشادية للبنية التحتية للمدينة الذكية ومركز التحكم</p>
+                            </div>
+                            <div class="reward-tier">
+                                <h6>5,000 ريال - حقوق التسمية</h6>
+                                <p>اسم منطقة ذكية وتلقي خدمات مدى الحياة المميزة</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <h5>يلاستارتر</h5>
+                    <p>تمكين المبدعين السعوديين لإحياء أفكارهم المبتكرة من خلال التمويل الجماعي.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <h5>المنصة</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="projects-ar.html">تصفح المشاريع</a></li>
+                        <li><a href="create-project-ar.html">ابدأ مشروعاً</a></li>
+                        <li><a href="how-it-works-ar.html">كيفية العمل</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h5>الدعم</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="contact-ar.html">اتصل بنا</a></li>
+                        <li><a href="#">مركز المساعدة</a></li>
+                        <li><a href="#">إرشادات المجتمع</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h5>الشركة</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="about-ar.html">من نحن</a></li>
+                        <li><a href="#">الوظائف</a></li>
+                        <li><a href="#">الصحافة</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h5>قانوني</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">شروط الخدمة</a></li>
+                        <li><a href="#">سياسة الخصوصية</a></li>
+                        <li><a href="#">سياسة ملفات تعريف الارتباط</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; 2024 يلاستارتر. جميع الحقوق محفوظة.</p>
+                </div>
+                <div class="col-md-6 text-start">
+                    <p>صُنع بـ ❤️ في المملكة العربية السعودية</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add animation to funding progress bar
+        window.addEventListener('load', function() {
+            const progressBar = document.querySelector('.funding-progress-bar');
+            if (progressBar) {
+                setTimeout(() => {
+                    progressBar.style.width = '85%';
+                }, 500);
+            }
+        });
+
+        // Add hover effects to feature cards
+        document.querySelectorAll('.feature-card, .tech-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+    <!-- Password Protection Script -->\n    <script src="assets/js/password-clear.js"></script>\n</body>
+</html>

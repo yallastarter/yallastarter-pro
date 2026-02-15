@@ -1,0 +1,2241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="YallaStarter - Support creative projects in Saudi Arabia. Discover and fund innovative entertainment, arts, and technology projects.">
+    <meta name="keywords" content="crowdfunding, Saudi Arabia, creative projects, entertainment, arts, technology">
+    <meta name="author" content="YallaStarter">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="YallaStarter - Support Creative Projects in Saudi Arabia">
+    <meta property="og:description" content="Discover and fund innovative projects in Saudi Arabia">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Tajawal:wght@400;500;700&display=swap" as="style">
+    
+    <!-- DNS Prefetch for External Domains -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="//images.unsplash.com">
+    
+    <!-- Critical CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile-menu.css">
+    
+    <!-- Optimized Font Loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome with SRI -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    
+    <title>YallaStarter - Support Creative Projects in Saudi Arabia</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* Mobile menu styles are now handled by mobile-menu.css */
+        
+        :root {
+            /* Primary Colors - Saudi Green */
+            --primary: #00a651; /* Vibrant Saudi Green */
+            --primary-light: rgba(0, 166, 81, 0.15);
+            --primary-dark: #008f44;
+            
+            /* Accent Colors - AI Purple */
+            --accent: #8b5cf6; /* Vibrant Purple */
+            --accent-light: rgba(139, 92, 246, 0.15);
+            --accent-dark: #7c3aed;
+            
+            /* Secondary Colors - Modern AI Palette */
+            --secondary: #06b6d4; /* Cyan Blue */
+            --secondary-light: rgba(6, 182, 212, 0.15);
+            --secondary-dark: #0891b2;
+            
+            /* Tertiary Colors - Energy Colors */
+            --tertiary: #f59e0b; /* Amber */
+            --tertiary-light: rgba(245, 158, 11, 0.15);
+            --tertiary-dark: #d97706;
+            
+            /* Neutral Colors - Futuristic Grays */
+            --neutral-100: #f8fafc;
+            --neutral-200: #e2e8f0;
+            --neutral-300: #cbd5e1;
+            --neutral-400: #94a3b8;
+            --neutral-500: #64748b;
+            --neutral-600: #475569;
+            --neutral-700: #334155;
+            --neutral-800: #1e293b;
+            --neutral-900: #0f172a;
+            
+            /* Status Colors - Modern Palette */
+            --success: #10b981; /* Emerald */
+            --success-light: rgba(16, 185, 129, 0.15);
+            --danger: #ef4444; /* Red */
+            --danger-light: rgba(239, 68, 68, 0.15);
+            --warning: #f59e0b; /* Amber */
+            --warning-light: rgba(245, 158, 11, 0.15);
+            --info: #06b6d4; /* Cyan */
+            --info-light: rgba(6, 182, 212, 0.15);
+            
+            /* UI Elements */
+            --border-radius: 12px;
+            --box-shadow: 0 8px 32px rgba(139, 92, 246, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            /* Futuristic Gradients */
+            --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            --gradient-accent: linear-gradient(135deg, var(--accent) 0%, var(--tertiary) 100%);
+            --gradient-hero: linear-gradient(135deg, var(--neutral-900) 0%, var(--primary-dark) 50%, var(--accent-dark) 100%);
+            --gradient-card: linear-gradient(145deg, rgba(255, 255, 255, 0.9) 0%, rgba(139, 92, 246, 0.05) 100%);
+        }
+        
+        body {
+            font-family: 'Poppins', 'Tajawal', sans-serif;
+            color: var(--neutral-800);
+            line-height: 1.6;
+            background: linear-gradient(135deg, var(--neutral-100) 0%, var(--neutral-200) 50%, var(--neutral-100) 100%);
+            min-height: 100vh;
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        a:hover {
+            color: var(--primary-dark);
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 1rem;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0, 166, 81, 0.3);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Header Styles */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1001; /* Higher than mobile menu */
+            padding: 0.5rem 1rem;
+        }
+        
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 1rem;
+            width: 100%;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            flex-shrink: 0;
+            margin-right: 0.8rem;
+            transition: transform 0.2s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.02);
+        }
+        
+        .logo-image {
+            height: 40px;
+            width: auto;
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            flex: 0 1 auto;
+            justify-content: flex-start;
+        }
+        
+        .nav-links li {
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--neutral-800);
+            font-weight: 500;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-size: 1rem;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+            background-color: rgba(0, 108, 53, 0.05);
+        }
+        
+        .nav-links a.active {
+            color: var(--primary);
+            font-weight: 600;
+            background-color: rgba(0, 108, 53, 0.1);
+            padding: 0.5rem 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        
+
+        
+        /* Mobile menu styles are now handled by mobile-menu.css */
+        
+        /* Main Auth Buttons Styling */
+        .auth-buttons {
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
+        }
+        
+        .auth-buttons .btn {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .auth-buttons .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: 2px solid var(--primary);
+            box-shadow: 0 2px 8px rgba(0, 108, 53, 0.2);
+        }
+        
+        .auth-buttons .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 108, 53, 0.3);
+        }
+        
+        .auth-buttons .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            font-weight: 600;
+        }
+        
+        .auth-buttons .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 108, 53, 0.3);
+        }
+        
+        .auth-buttons .btn-link {
+            background: transparent;
+            color: var(--neutral-600);
+            border: none;
+            padding: 0.6rem 1rem;
+        }
+        
+        .auth-buttons .btn-link:hover {
+            color: var(--primary);
+        }
+        
+        .language-switcher {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: auto;
+        }
+        
+        .language-btn {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .language-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-1px);
+        }
+        
+        .language-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Category Navigation */
+        .category-nav {
+            display: flex;
+            overflow-x: auto;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--neutral-200);
+            background-color: white;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* Firefox */
+        }
+        
+        .category-nav::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Edge */
+        }
+        
+        .category-link {
+            white-space: nowrap;
+            padding: 0.5rem 0.8rem;
+            color: var(--neutral-800);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .category-link:hover {
+            color: var(--primary);
+        }
+        
+        /* Hero Section - Clean Rebuild */
+        .hero-section {
+            position: relative;
+            height: 70vh;
+            min-height: 500px;
+            max-height: 700px;
+            background-image: url('images/Gemini_Generated_Image_qbc2hhqbc2hhqbc2.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            filter: brightness(1.5);
+        }
+        
+        /* Dark overlay for better text readability */
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+        
+        .hero-section * {
+            color: #ffffff !important;
+        }
+        
+
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 108, 53, 0.2) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 108, 53, 0.1) 100%);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            width: 90%;
+            max-width: 800px;
+            padding: 0 1rem;
+            margin: 0 auto;
+        }
+        
+        .hero-content h1,
+        .hero-content p {
+            color: white;
+            text-shadow: none;
+            font-weight: 700;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            color: white;
+            text-shadow: none;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            color: white;
+            text-shadow: none;
+        }
+        
+
+        
+        .category-selection {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        
+        .category-selection-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .category-buttons {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .category-btn {
+            display: block;
+            background: var(--gradient-primary);
+            border: 2px solid var(--primary);
+            border-radius: 16px;
+            padding: 2rem;
+            text-decoration: none;
+            color: white;
+            transition: var(--transition);
+            text-align: center;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .category-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 166, 81, 0.4);
+        }
+        
+        /* Category Selection Section Styling */
+        .category-selection-section {
+            background: var(--gradient-card);
+            padding: 4rem 0;
+            margin-top: -2rem;
+            position: relative;
+            z-index: 2;
+            box-shadow: var(--box-shadow);
+            border-radius: var(--border-radius);
+        }
+        
+        .category-selection-subtitle {
+            font-size: 1.1rem;
+            color: var(--neutral-700);
+            margin-bottom: 2.5rem;
+            text-align: center;
+            font-weight: 400;
+        }
+        
+        /* Project Cards Modern Styling */
+        .project-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            border: 1px solid var(--neutral-200);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.15);
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .project-card:visited {
+            color: inherit;
+        }
+        
+        .project-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+        }
+        
+        .project-category {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--neutral-900);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+        
+        .project-description {
+            color: var(--neutral-700);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--neutral-600);
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: var(--neutral-200);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-primary);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        
+        /* Typography Improvements */
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+            color: white;
+            text-shadow: none;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            font-weight: 700;
+            line-height: 1.4;
+            color: white;
+            margin-bottom: 0;
+            text-shadow: none;
+        }
+        
+        .category-selection-title {
+            font-size: clamp(1.8rem, 3vw, 2.2rem);
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            color: var(--neutral-900);
+            text-shadow: none;
+        }
+        
+        .section-title {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .section-subtitle {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            font-weight: 400;
+            line-height: 1.5;
+            color: var(--neutral-600);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .project-title {
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 0.75rem;
+            color: var(--neutral-900);
+        }
+        
+        .project-description {
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            line-height: 1.6;
+            color: var(--neutral-700);
+            margin-bottom: 1rem;
+        }
+        
+        .project-category {
+            font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+        }
+        
+        .category-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white !important;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .category-icon i {
+            color: white !important;
+        }
+        
+        .category-btn h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        
+        .category-btn p {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 1.5;
+            margin: 0;
+        }
+        
+
+        
+        .hero-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .hero-subtitle {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+        
+        /* Stats Bar */
+        .stats-bar {
+            position: relative;
+            z-index: 2;
+            background: var(--gradient-primary);
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 1.5rem;
+            margin-top: -2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            max-width: 800px;
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            color: white;
+        }
+        
+        .stat-item {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding: 0 1rem;
+        }
+        
+        .stat-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.3rem;
+        }
+        
+        .stat-label {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+        }
+        
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 3rem 0 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--neutral-800);
+        }
+        
+        .section-link {
+            color: var(--primary);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        /* Project Cards */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .project-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .project-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .project-image {
+            height: 180px;
+            overflow: hidden;
+        }
+        
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+        
+        .project-content {
+            padding: 1.2rem;
+        }
+        
+        .project-category {
+            display: inline-block;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            font-size: 0.8rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            margin-bottom: 0.8rem;
+        }
+        
+        .project-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: var(--neutral-900);
+        }
+        
+        .project-description {
+            color: var(--neutral-700);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--neutral-600);
+            font-size: 0.85rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: var(--neutral-200);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 0.8rem;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: var(--primary);
+            border-radius: 4px;
+        }
+        
+        /* Categories Section */
+        .categories {
+            padding: 3rem 0;
+            background-color: var(--neutral-200);
+            margin-top: 3rem;
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .category-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            text-align: center;
+            padding: 1.5rem;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .category-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto 1.2rem;
+        }
+        
+        .category-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: var(--neutral-900);
+        }
+        
+        .category-description {
+            color: var(--neutral-700);
+            margin-bottom: 1.2rem;
+            font-size: 0.9rem;
+        }
+        
+        /* CTA Section */
+        .cta {
+            background-color: var(--primary);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .cta-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-subtitle {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 1rem;
+            line-height: 1.6;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--neutral-900);
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .cta-button:hover {
+            background-color: var(--accent-dark);
+            color: var(--neutral-900);
+        }
+        
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--neutral-900) 0%, var(--neutral-800) 100%);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            color: var(--primary);
+        }
+        
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: var(--neutral-300);
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+        
+        .footer-bottom {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--neutral-700);
+        }
+        
+        .footer-copyright {
+            color: var(--neutral-400);
+            font-size: 0.85rem;
+            text-align: center;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: var(--transition);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 166, 81, 0.4);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+        
+        @keyframes shimmer {
+            0% {
+                background-position: -200px 0;
+            }
+            100% {
+                background-position: 200px 0;
+            }
+        }
+        
+        /* Apply animations to elements */
+        .project-card {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        .category-btn {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .stats-bar {
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        /* Media Queries */
+        @media (min-width: 576px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .category-buttons {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 800px;
+            }
+            
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .stats-bar {
+                flex-direction: row;
+                justify-content: space-around;
+                padding: 2rem;
+            }
+            
+            .stat-item {
+                margin-bottom: 0;
+            }
+            
+            .stat-value {
+                font-size: 2rem;
+            }
+            
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-bottom {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+        
+        @media (min-width: 992px) {
+            .hero-section {
+                height: 80vh;
+                min-height: 600px;
+                background-position: center bottom;
+            }
+            
+            .main-nav-links {
+                display: flex;
+                gap: 0.5rem;
+            }
+            
+            .search-container {
+                display: block;
+            }
+            
+            .auth-links {
+                display: flex;
+                gap: 1rem;
+            }
+            
+            /* Mobile menu button hidden on larger screens */
+            
+            .projects-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .categories-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        /* Additional Typography and Responsive Improvements */
+        .stats-bar {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+        }
+        
+        .stat-value {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .stat-label {
+            font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+            font-weight: 500;
+            line-height: 1.3;
+        }
+        
+        .section-link {
+            font-size: clamp(0.9rem, 1.5vw, 1rem);
+            font-weight: 500;
+            line-height: 1.4;
+        }
+        
+        .btn {
+            font-size: clamp(0.9rem, 1.5vw, 1rem);
+            font-weight: 600;
+            line-height: 1.4;
+            letter-spacing: 0.02em;
+        }
+        
+        .btn-outline {
+            font-size: clamp(0.85rem, 1.5vw, 0.95rem);
+            font-weight: 500;
+            line-height: 1.4;
+        }
+        
+        /* Mobile Typography Optimizations */
+        @media (max-width: 768px) {
+            .hero-section {
+                height: 60vh;
+                min-height: 400px;
+                background-position: center;
+                filter: brightness(1.5);
+            }
+            
+            .header {
+                padding: 0.5rem 1rem;
+            }
+            
+            .navbar {
+                gap: 0.8rem;
+            }
+            
+            .logo-text {
+                font-size: 1.4rem;
+            }
+            
+            .category-selection-section {
+                padding: 3rem 0;
+                margin-top: -1rem;
+            }
+            
+            .category-buttons {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .projects-grid {
+                max-width: 800px;
+                margin: 0 auto;
+            }
+            
+            .section-header {
+                max-width: 800px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .footer-content {
+                max-width: 800px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .category-btn {
+                padding: 1.5rem;
+            }
+            
+            .category-btn h3 {
+                font-size: 1.2rem;
+            }
+            
+            .category-btn p {
+                font-size: 0.95rem;
+            }
+            
+            /* Improve category button touch experience */
+            .category-btn {
+                transition: all 0.3s ease;
+                cursor: pointer;
+            }
+            
+            .category-btn:active {
+                transform: scale(0.98);
+            }
+            
+            /* Better spacing for mobile */
+            .category-selection-section {
+                padding: 2rem 0;
+            }
+            
+            .category-selection-title {
+                margin-bottom: 0.8rem;
+            }
+            
+            .category-selection-subtitle {
+                margin-bottom: 2rem;
+            }
+        }
+        
+        /* Logo Text Styling */
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+            letter-spacing: -0.02em;
+        }
+        
+        /* Tablet Responsive */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .navbar {
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                gap: 0.8rem;
+            }
+            
+            .nav-links a {
+                font-size: 0.95rem;
+                padding: 0.5rem 1rem;
+            }
+            
+            .auth-buttons .btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            
+            .hero-section {
+                height: 65vh;
+                min-height: 450px;
+            }
+            
+            .category-selection-section {
+                padding: 3rem 0;
+            }
+        }
+        
+        /* Small Mobile Devices */
+        @media (max-width: 480px) {
+            .header {
+                padding: 0.4rem 0.8rem;
+            }
+            
+            .logo-text {
+                font-size: 1.2rem;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .golden-buzzer-title {
+                font-size: 2rem;
+            }
+            
+            .category-selection-title {
+                font-size: 2rem;
+            }
+            
+            /* Improve golden buzzer layout on small screens */
+            .golden-buzzer-project {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 1.5rem;
+            }
+            
+            .golden-buzzer-project .project-image img {
+                height: 250px;
+            }
+            
+            .golden-buzzer-project .project-content h3 {
+                font-size: 1.5rem;
+            }
+            
+            .golden-buzzer-project .project-description {
+                font-size: 0.95rem;
+            }
+        }
+        
+        /* Large Screen Responsive */
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1400px;
+            }
+            
+            .hero-section {
+                height: 75vh;
+                min-height: 600px;
+            }
+            
+            .projects-grid {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                max-width: 1200px;
+            }
+            
+            .category-buttons {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 900px;
+            }
+        }
+        
+        /* Extra Large Screen Responsive */
+        @media (min-width: 1600px) {
+            .container {
+                max-width: 1600px;
+            }
+            
+            .hero-section {
+                height: 80vh;
+                min-height: 700px;
+            }
+            
+            .projects-grid {
+                grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+                max-width: 1400px;
+            }
+        }
+        
+        /* Landscape Mobile Optimization */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .hero-section {
+                height: 100vh;
+                min-height: 300px;
+            }
+            
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* High DPI Display Optimization */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .hero-section {
+                background-image: url('images/Gemini_Generated_Image_qbc2hhqbc2hhqbc2.png');
+                background-size: cover;
+            }
+        }
+        
+        /* Enhanced Visual Effects */
+        .project-image {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Golden Buzzer Project Styling */
+        .golden-buzzer-project {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            border: 1px solid var(--neutral-200);
+        }
+        
+        .golden-buzzer-project:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.15);
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .golden-buzzer-project:visited {
+            color: inherit;
+        }
+        
+        /* Touch-friendly improvements for mobile */
+        @media (max-width: 768px) {
+            /* Ensure touch targets are at least 44px */
+            .btn, .category-btn, .nav-links a {
+                min-height: 44px;
+                min-width: 44px;
+            }
+            
+            /* Better touch feedback */
+            .btn:active, .category-btn:active, .nav-links a:active {
+                transform: scale(0.98);
+                transition: transform 0.1s ease;
+            }
+            
+            /* Prevent text selection on buttons */
+            .btn, .category-btn {
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+        }
+        
+        .project-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 0%, rgba(0, 108, 53, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .project-card:hover .project-image::after {
+            opacity: 1;
+        }
+        
+        .project-image img {
+            transition: transform 0.3s ease;
+        }
+        
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+        
+        /* Smooth Loading States */
+        .project-card {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .project-card:nth-child(1) { animation-delay: 0.1s; }
+        .project-card:nth-child(2) { animation-delay: 0.2s; }
+        .project-card:nth-child(3) { animation-delay: 0.3s; }
+        .project-card:nth-child(4) { animation-delay: 0.4s; }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Enhanced Button Hover Effects */
+        .btn {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        /* Mobile menu styles are now handled by mobile-menu.css */
+
+    </style>
+</head>
+<body>
+    <!-- Main Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <span class="logo-text">YallaStarter</span>
+            </a>
+        
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="entertainment.html">Entertainment Projects</a></li>
+                <li><a href="vision2030.html">Vision 2030 Projects</a></li>
+                <li><a href="mind71.html">MIND71 AI</a></li>
+                <li><a href="projects.html">Browse Projects</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            
+            <div class="language-switcher">
+                <button class="language-btn active" onclick="switchLanguage('en')">English</button>
+                <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
+            </div>
+            
+            <div class="auth-buttons">
+                <a href="create-project.html" class="btn btn-primary">Start a Project</a>
+                <a href="login.html" class="btn btn-link">Log In</a>
+            </div>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+        
+        <div class="mobile-menu">
+            <div class="mobile-menu-header">
+                <div class="mobile-header-left">
+                    <div class="language-switcher">
+                        <button class="language-btn active" onclick="switchLanguage('en')">English</button>
+                        <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
+                    </div>
+                    <div class="auth-buttons">
+                        <a href="create-project.html" class="btn btn-primary">Start a Project</a>
+                        <a href="login.html" class="btn btn-link">Log In</a>
+                    </div>
+                </div>
+                <button class="mobile-close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="entertainment.html">Entertainment Projects</a></li>
+                <li><a href="vision2030.html">Vision 2030 Projects</a></li>
+                <li><a href="mind71.html">MIND71 AI</a></li>
+                <li><a href="projects.html">Browse Projects</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+    
+
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Welcome to YallaStarter</h1>
+            <p class="hero-subtitle">Choose Your Path to Innovation</p>
+        </div>
+    </section>
+
+    <!-- Category Selection Section -->
+    <section class="category-selection-section">
+        <div class="container">
+            <div class="category-selection">
+                <h2 class="category-selection-title">Select Your Main Category</h2>
+                <p class="category-selection-subtitle">Choose the path that best fits your interests and goals</p>
+                <div class="category-buttons">
+                    <a href="entertainment.html" class="category-btn entertainment-btn">
+                        <div class="category-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h3>YallaStarter Entertainment</h3>
+                        <p>Discover creative projects in arts, music, film, and cultural expression</p>
+                    </a>
+                    
+                    <a href="vision2030.html" class="category-btn vision-btn">
+                        <div class="category-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3>YallaStarter Vision 2030 Projects</h3>
+                        <p>Support innovative projects aligned with Saudi Arabia's transformation goals</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Golden Buzzer Feature -->
+    <section class="golden-buzzer-section">
+        <div class="container">
+            <div class="golden-buzzer-header">
+                <div class="golden-buzzer-icon">🏆</div>
+                <h2 class="golden-buzzer-title">Golden Buzzer Winner!</h2>
+                <p class="golden-buzzer-subtitle">Sponsored by General Entertainment Authority (GEA)</p>
+            </div>
+            
+            <a href="project-abyss.html" class="golden-buzzer-project">
+                <div class="project-image">
+                    <img src="https://i.ibb.co/TqDRP0Rc/Gemini-Generated-Image-g23nx9g23nx9g23n.png" alt="The Abyss: World's Biggest Underground Rollercoaster" loading="lazy" decoding="async">
+                    <div class="golden-buzzer-badge">
+                        <span>🏆 GOLDEN BUZZER</span>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">The Abyss: World's Biggest Underground Rollercoaster</h3>
+                    <p class="project-description">Experience the ultimate thrill with the world's biggest underground rollercoaster, featuring massive underground chambers, thrilling drops, and spectacular underground landscapes. This engineering marvel combines cutting-edge technology with breathtaking subterranean adventures. This prestigious entertainment project received the Golden Buzzer from GEA, ensuring full funding and support!</p>
+                    <div class="gea-sponsor">
+                        <span class="sponsor-label">Sponsored by:</span>
+                        <span class="gea-name">General Entertainment Authority (GEA)</span>
+                    </div>
+                    <div class="funding-status">
+                        <div class="status-badge fully-funded">🎉 FULLY FUNDED!</div>
+                        <div class="funding-amount">SAR 2,500,000</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+    
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="stat-item">
+            <div class="stat-value">Coming Soon</div>
+            <div class="stat-label">projects funded</div>
+        </div>
+        
+        <div class="stat-item">
+            <div class="stat-value">SAR Coming Soon</div>
+            <div class="stat-label">towards creative work</div>
+        </div>
+        
+        <div class="stat-item">
+            <div class="stat-value">Coming Soon</div>
+            <div class="stat-label">pledges</div>
+        </div>
+    </div>
+
+    <!-- Featured Entertainment Projects -->
+    <section class="featured-projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Entertainment Projects</h2>
+                <p class="section-subtitle">Discover creative projects from Saudi Arabia's vibrant entertainment scene</p>
+                <a href="entertainment.html" class="section-link">View all entertainment</a>
+            </div>
+            
+            <div class="projects-grid">
+                <a href="project-abyss.html" class="project-card">
+                    <div class="project-image">
+                        <img src="https://i.ibb.co/TqDRP0Rc/Gemini-Generated-Image-g23nx9g23nx9g23n.png" alt="The Abyss: World's Biggest Underground Rollercoaster" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Entertainment & Thrills</div>
+                        <h3 class="project-title">The Abyss: World's Biggest Underground Rollercoaster</h3>
+                        <p class="project-description">Experience the ultimate thrill with the world's biggest underground rollercoaster, featuring massive underground chambers, thrilling drops, and spectacular underground landscapes. This engineering marvel combines cutting-edge technology with breathtaking subterranean adventures.</p>
+                        <div class="project-meta">
+                            <div>SAR 2,500,000 raised</div>
+                            <div>45% funded</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 45%;"></div>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="project-riyadh-music-festival.html" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Riyadh Music Festival" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Music & Arts</div>
+                        <h3 class="project-title">Riyadh Music Festival: Celebrating Saudi Musical Heritage</h3>
+                        <p class="project-description">A three-day music festival showcasing traditional and contemporary Saudi musical talent, fostering cultural appreciation and artistic expression.</p>
+                        <div class="project-meta">
+                            <div>SAR 180,000 raised</div>
+                            <div>75% funded</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 75%;"></div>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="project-saudi-stories.html" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Saudi Film Production" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Film & Video</div>
+                        <h3 class="project-title">Saudi Stories: Documentary Series on Local Traditions</h3>
+                        <p class="project-description">A compelling documentary series exploring Saudi Arabia's rich cultural heritage, from ancient traditions to modern innovations.</p>
+                        <div class="project-meta">
+                            <div>SAR 95,000 raised</div>
+                            <div>63% funded</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 63%;"></div>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="project-digital-art-gallery.html" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Digital Art Gallery" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Visual Arts</div>
+                        <h3 class="project-title">Digital Art Gallery: Showcasing Saudi Digital Artists</h3>
+                        <p class="project-description">An innovative online platform connecting Saudi digital artists with global audiences, featuring interactive exhibitions and virtual reality experiences.</p>
+                        <div class="project-meta">
+                            <div>SAR 65,000 raised</div>
+                            <div>82% funded</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 82%;"></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Capstone Projects Section -->
+    <section class="capstone-projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">🎓 Capstone Projects</h2>
+                <p class="section-subtitle">Support innovative graduation projects from Saudi universities and help students turn their academic ideas into reality</p>
+                <a href="capstone-projects.html" class="section-link">View all capstone projects</a>
+            </div>
+            
+            <div class="projects-grid">
+                <a href="project-smart-city-iot.html" class="project-card capstone-card">
+                    <div class="capstone-badge">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Capstone Project</span>
+                    </div>
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Smart City IoT Platform" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Technology & Innovation</div>
+                        <h3 class="project-title">Smart City IoT Platform: Sustainable Urban Development</h3>
+                        <p class="project-description">A comprehensive IoT platform for smart city management, featuring real-time monitoring of energy consumption, traffic flow, and environmental data to create sustainable urban environments.</p>
+                        <div class="capstone-info">
+                            <div class="university">King Fahd University of Petroleum & Minerals</div>
+                            <div class="student">Ahmed Al-Rashid - Computer Engineering</div>
+                        </div>
+                        <div class="project-meta">
+                            <div>SAR 45,000 raised</div>
+                            <div>60% funded</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 60%;"></div>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="project-solar-energy.html" class="project-card capstone-card">
+                    <div class="capstone-badge">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Capstone Project</span>
+                    </div>
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Renewable Energy System" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Environmental Engineering</div>
+                        <h3 class="project-title">Solar-Powered Desalination System for Remote Communities</h3>
+                        <p class="project-description">An innovative solar-powered desalination system designed to provide clean drinking water to remote Saudi communities, combining renewable energy with advanced water purification technology.</p>
+                        <div class="capstone-info">
+                            <div class="university">King Abdullah University of Science & Technology</div>
+                            <div class="student">Fatima Al-Zahra - Environmental Engineering</div>
+                        </div>
+                        <div class="project-meta">
+                            <div>SAR 32,000 raised</div>
+                            <div>75% funded</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 75%;"></div>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="project-saudi-heritage.html" class="project-card capstone-card">
+                    <div class="capstone-badge">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Capstone Project</span>
+                    </div>
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Digital Art Platform" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Digital Arts & Media</div>
+                        <h3 class="project-title">Saudi Heritage Digital Art Platform</h3>
+                        <p class="project-description">An interactive digital platform showcasing Saudi cultural heritage through immersive 3D experiences, virtual reality tours, and digital storytelling, preserving traditions for future generations.</p>
+                        <div class="capstone-info">
+                            <div class="university">Princess Nourah bint Abdulrahman University</div>
+                            <div class="student">Layla Al-Mansouri - Digital Media Arts</div>
+                        </div>
+                        <div class="project-meta">
+                            <div>SAR 28,000 raised</div>
+                            <div>45% funded</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 45%;"></div>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="project-ai-disease-detection.html" class="project-card capstone-card">
+                    <div class="capstone-badge">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Capstone Project</span>
+                    </div>
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="AI Healthcare System" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">AI & Healthcare</div>
+                        <h3 class="project-title">AI-Powered Early Disease Detection System</h3>
+                        <p class="project-description">An advanced AI system that analyzes medical imaging data to detect early signs of diseases, improving diagnostic accuracy and patient outcomes in Saudi healthcare facilities.</p>
+                        <div class="capstone-info">
+                            <div class="university">King Saud University</div>
+                            <div class="student">Omar Al-Shehri - Biomedical Engineering</div>
+                        </div>
+                        <div class="project-meta">
+                            <div>SAR 38,000 raised</div>
+                            <div>55% funded</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 55%;"></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Recommended Projects -->
+    <section class="recommended-projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Recommended For You</h2>
+                <a href="projects.html" class="section-link">View all</a>
+            </div>
+            
+            <div class="projects-grid">
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1576153192621-7a3be10b356e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Eco-Friendly Water Bottles" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Environment</div>
+                        <h3 class="project-title">Eco-Friendly Water Bottles Made from Date Palm Waste</h3>
+                        <p class="project-description">Innovative biodegradable water bottles created from date palm waste, reducing plastic pollution while utilizing a local resource.</p>
+                        <div class="project-meta">
+                            <div>SAR 85,000 raised</div>
+                            <div>85% funded</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1606836591695-4d58a73eba1e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Saudi Coffee Table Book" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Publishing</div>
+                        <h3 class="project-title">Saudi Coffee: A Photographic Journey Through the Kingdom's Coffee Culture</h3>
+                        <p class="project-description">A beautiful coffee table book documenting the rich history and traditions of coffee culture in Saudi Arabia.</p>
+                        <div class="project-meta">
+                            <div>SAR 35,000 raised</div>
+                            <div>70% funded</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 70%;"></div>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="project-riyadh-music-festival.html" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Music Festival" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Music</div>
+                        <h3 class="project-title">Riyadh Music Festival: Celebrating Saudi Musical Heritage</h3>
+                        <p class="project-description">A three-day music festival showcasing traditional and contemporary Saudi musical talent, fostering cultural appreciation and artistic expression.</p>
+                        <div class="project-meta">
+                            <div>SAR 120,000 raised</div>
+                            <div>95% funded</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 95%;"></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Categories Section -->
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title" style="text-align: center; margin-bottom: 2rem;">Explore by Category</h2>
+            
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="category-title">Technology</h3>
+                    <p class="category-description">Innovative tech solutions addressing local challenges and global opportunities.</p>
+                    <a href="#" class="btn btn-outline">Explore</a>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3 class="category-title">Environment</h3>
+                    <p class="category-description">Sustainable initiatives promoting environmental conservation and green solutions.</p>
+                    <a href="#" class="btn btn-outline">Explore</a>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3 class="category-title">Entertainment Centers</h3>
+                    <p class="category-description">Modern entertainment venues and cultural centers promoting Saudi arts and entertainment.</p>
+                    <a href="entertainment.html" class="btn btn-outline">Explore</a>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-theater-masks"></i>
+                    </div>
+                    <h3 class="category-title">Live Shows</h3>
+                    <p class="category-description">Live performances, concerts, and theatrical productions showcasing Saudi talent.</p>
+                    <a href="entertainment.html" class="btn btn-outline">Explore</a>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3 class="category-title">Entertainment Events</h3>
+                    <p class="category-description">Festivals, exhibitions, and special events celebrating Saudi culture and creativity.</p>
+                    <a href="entertainment.html" class="btn btn-outline">Explore</a>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="category-title">Capstone Projects</h3>
+                    <p class="category-description">Innovative graduation projects from Saudi universities seeking funding to become reality.</p>
+                    <a href="capstone-projects.html" class="btn btn-outline">Explore</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2 class="cta-title">Ready to bring your idea to life?</h2>
+            <p class="cta-subtitle">Join thousands of creators who have successfully funded their projects on YallaStarter.</p>
+            <a href="create-project.html" class="cta-button">Start Your Project</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>YallaStarter</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="projects.html">Browse Projects</a></li>
+                        <li><a href="how-it-works.html">How It Works</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>For Creators</h3>
+                    <ul class="footer-links">
+                        <li><a href="create-project.html">Start a Project</a></li>
+                        <li><a href="capstone-projects.html">Capstone Projects</a></li>
+                        <li><a href="creator-handbook.html">Creator Handbook</a></li>
+                        <li><a href="creator-resources.html">Creator Resources</a></li>
+                        <li><a href="creator-faqs.html">Creator FAQs</a></li>
+                        <li><a href="success-stories.html">Success Stories</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>For Backers</h3>
+                    <ul class="footer-links">
+                        <li><a href="backer-faqs.html">Backer FAQs</a></li>
+                        <li><a href="trust-safety.html">Trust & Safety</a></li>
+                        <li><a href="backer-resources.html">Backer Resources</a></li>
+                        <li><a href="payment-methods.html">Payment Methods</a></li>
+                        <li><a href="backer-protection.html">Backer Protection</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Connect With Us</h3>
+                    <ul class="footer-links">
+                        <li><a href="newsletter.html">Newsletter</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="support.html">Support</a></li>
+                        <li><a href="community-guidelines.html">Community Guidelines</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; 2025 YallaStarter. All rights reserved.
+                </div>
+                
+                <div class="footer-social">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Universal Mobile Menu Script -->
+    <script src="mobile-menu.js"></script>
+    
+    <!-- Password Protection Script -->
+    <script src="assets/js/password-mobile.js"></script>
+    
+    <!-- Optimized JavaScript -->
+    <script>
+        // Language Switcher
+        function switchLanguage(lang) {
+            if (lang === 'en') {
+                window.location.href = 'index.html';
+            } else if (lang === 'ar') {
+                window.location.href = 'index-ar.html';
+            }
+        }
+        
+        // REMOVED DUPLICATE MOBILE MENU JAVASCRIPT - Now handled by mobile-menu.js
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Lazy load images that are not in viewport
+            if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.src = img.dataset.src || img.src;
+                            img.classList.remove('lazy');
+                            observer.unobserve(img);
+                        }
+                    });
+                });
+                
+                document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+                    imageObserver.observe(img);
+                });
+            }
+            
+            // Add fade-in animation to project cards
+            const projectCards = document.querySelectorAll('.project-card');
+            const cardObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in-up');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            projectCards.forEach(card => cardObserver.observe(card));
+        });
+        
+        // Service Worker Registration for PWA capabilities
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(function(registration) {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(function(registrationError) {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+        
+        // Preload critical resources
+        function preloadCriticalResources() {
+            const criticalImages = [
+                'images/Gemini_Generated_Image_qbc2hhqbc2hhqbc2.png'
+            ];
+            
+            criticalImages.forEach(src => {
+                const link = document.createElement('link');
+                link.rel = 'preload';
+                link.as = 'image';
+                link.href = src;
+                document.head.appendChild(link);
+            });
+        }
+        
+        // Run preload when page is idle
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(preloadCriticalResources);
+        } else {
+            setTimeout(preloadCriticalResources, 1000);
+        }
+    </script>
+</body>
+</html>

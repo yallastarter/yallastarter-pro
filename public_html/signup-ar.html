@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="انضم إلى يلا ستارتر وابدأ رحلتك الإبداعية. سجل الآن وكن جزءاً من مجتمع المبدعين.">
+    <meta name="keywords" content="تسجيل جديد, انضمام, يلا ستارتر, حساب جديد, مجتمع المبدعين">
+    <meta name="author" content="يلا ستارتر">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="انضم إلى يلا ستارتر - ابدأ رحلتك الإبداعية">
+    <meta property="og:description"
+        content="انضم إلى يلا ستارتر وابدأ رحلتك الإبداعية. سجل الآن وكن جزءاً من مجتمع المبدعين.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yallastarter.com/signup-ar">
+
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap"
+        as="style">
+
+    <title>انضم إلى يلا ستارتر - ابدأ رحلتك الإبداعية</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile-menu.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --signup-primary: #1e40af;
+            --signup-primary-dark: #1e3a8a;
+            --signup-secondary: #3b82f6;
+            --signup-accent: #06b6d4;
+            --signup-gradient: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #06b6d4 100%);
+            --signup-glow: 0 0 20px rgba(30, 64, 175, 0.3);
+            --signup-text: #1e293b;
+            --signup-text-light: #64748b;
+            --signup-bg: #f8fafc;
+            --signup-card: #ffffff;
+            --signup-border: #e2e8f0;
+            --signup-error: #ef4444;
+            --signup-success: #10b981;
+        }
+
+        body {
+            font-family: 'Tajawal', 'Poppins', sans-serif;
+            background: var(--signup-bg);
+            color: var(--signup-text);
+            line-height: 1.6;
+            direction: rtl;
+            text-align: right;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--signup-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 0.5rem 1rem;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 1rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            flex-shrink: 0;
+            transition: transform 0.2s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--signup-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .nav-links li {
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--signup-text);
+            font-weight: 500;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-size: 1rem;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-links a:hover {
+            color: var(--signup-primary);
+            background-color: rgba(30, 64, 175, 0.05);
+        }
+
+        .nav-links a.active {
+            color: var(--signup-primary);
+            font-weight: 600;
+            background-color: rgba(30, 64, 175, 0.1);
+            padding: 0.5rem 1rem;
+            border-bottom: 2px solid var(--signup-primary);
+        }
+
+        .language-switcher {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: auto;
+        }
+
+        .language-btn {
+            background: transparent;
+            border: 2px solid var(--signup-primary);
+            color: var(--signup-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .language-btn:hover {
+            background: var(--signup-primary);
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        .language-btn.active {
+            background: var(--signup-primary);
+            color: white;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            color: var(--signup-text);
+            cursor: pointer;
+            padding: 0.6rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            background-color: rgba(30, 64, 175, 0.05);
+            color: var(--signup-primary);
+        }
+
+        .mobile-menu {
+            width: 100%;
+            background-color: white;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-top: 1px solid var(--signup-border);
+            display: none;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .mobile-menu .nav-links {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .mobile-menu .nav-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .mobile-menu .nav-links a {
+            color: var(--signup-text);
+            font-weight: 500;
+            display: block;
+            padding: 0.8rem 0;
+            font-size: 1rem;
+        }
+
+        .mobile-menu .auth-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--signup-border);
+        }
+
+        .mobile-menu .auth-buttons a {
+            width: 100%;
+            text-align: center;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        /* Main Auth Buttons Styling */
+        .auth-buttons {
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
+        }
+
+        .auth-buttons .btn {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .auth-buttons .btn-primary {
+            background: var(--signup-gradient);
+            color: white;
+            border: 2px solid var(--signup-primary);
+            box-shadow: var(--signup-glow);
+        }
+
+        .auth-buttons .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+        }
+
+        .auth-buttons .btn-secondary {
+            background: transparent;
+            color: var(--signup-primary);
+            border: 2px solid var(--signup-primary);
+            font-weight: 600;
+        }
+
+        .auth-buttons .btn-secondary:hover {
+            background: var(--signup-primary);
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+        }
+
+        .auth-buttons .btn-link {
+            background: transparent;
+            color: var(--signup-text-light);
+            border: none;
+            padding: 0.6rem 1rem;
+        }
+
+        .auth-buttons .btn-link:hover {
+            color: var(--signup-primary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 0.3rem 0.8rem;
+            }
+
+            .navbar {
+                gap: 0.5rem;
+            }
+
+            .logo-text {
+                font-size: 1.3rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .auth-buttons {
+                display: none;
+            }
+
+            .language-switcher {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .mobile-menu {
+                padding: 0.8rem;
+            }
+
+            .mobile-menu .nav-links a {
+                padding: 0.6rem 0;
+                font-size: 0.95rem;
+            }
+        }
+
+        /* Signup Form Styles */
+        .signup-container {
+            min-height: calc(100vh - 80px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .signup-card {
+            background: var(--signup-card);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 3rem;
+            width: 100%;
+            max-width: 500px;
+            border: 1px solid var(--signup-border);
+        }
+
+        .signup-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .signup-logo {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--signup-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .signup-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--signup-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .signup-subtitle {
+            color: var(--signup-text-light);
+            font-size: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--signup-text);
+            font-size: 0.95rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--signup-border);
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+            color: var(--signup-text);
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--signup-primary);
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+        }
+
+        .form-input.error {
+            border-color: var(--signup-error);
+        }
+
+        .form-input.success {
+            border-color: var(--signup-success);
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--signup-text-light);
+            font-size: 1.1rem;
+        }
+
+        .input-icon+.form-input {
+            padding-left: 3rem;
+        }
+
+        .error-message {
+            color: var(--signup-error);
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .success-message {
+            color: var(--signup-success);
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .checkbox-input {
+            width: 18px;
+            height: 18px;
+            margin-top: 0.25rem;
+            accent-color: var(--signup-primary);
+        }
+
+        .checkbox-label {
+            font-size: 0.9rem;
+            color: var(--signup-text-light);
+            line-height: 1.4;
+        }
+
+        .checkbox-label a {
+            color: var(--signup-primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .checkbox-label a:hover {
+            text-decoration: underline;
+        }
+
+        .signup-btn {
+            width: 100%;
+            background: var(--signup-gradient);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Tajawal', sans-serif;
+            margin-bottom: 1.5rem;
+        }
+
+        .signup-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(30, 64, 175, 0.3);
+        }
+
+        .signup-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--signup-border);
+        }
+
+        .divider-text {
+            background: var(--signup-card);
+            padding: 0 1rem;
+            color: var(--signup-text-light);
+            font-size: 0.9rem;
+        }
+
+        .social-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.8rem;
+            border: 2px solid var(--signup-border);
+            border-radius: 12px;
+            background: white;
+            color: var(--signup-text);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .social-btn:hover {
+            border-color: var(--signup-primary);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-btn.google:hover {
+            border-color: #ea4335;
+            color: #ea4335;
+        }
+
+        .social-btn.facebook:hover {
+            border-color: #1877f2;
+            color: #1877f2;
+        }
+
+        .login-link {
+            text-align: center;
+            color: var(--signup-text-light);
+            font-size: 0.95rem;
+        }
+
+        .login-link a {
+            color: var(--signup-primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .signup-container {
+                padding: 1rem;
+            }
+
+            .signup-card {
+                padding: 2rem 1.5rem;
+                margin: 1rem;
+            }
+
+            .signup-title {
+                font-size: 1.5rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .social-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .signup-card {
+                padding: 1.5rem 1rem;
+            }
+
+            .signup-logo {
+                font-size: 2rem;
+            }
+
+            .signup-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="index-ar.html" class="logo">
+                <span class="logo-text">يلا ستارتر</span>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="index-ar.html">الرئيسية</a></li>
+                <li><a href="entertainment-ar.html">الترفيه الإبداعي</a></li>
+                <li><a href="vision2030-ar.html">مشاريع ابداعية من رؤية 2030</a></li>
+                <li><a href="mind71-ar.html">MIND71 AI</a></li>
+                <li><a href="projects-ar.html">المشاريع</a></li>
+                <li><a href="how-it-works-ar.html">كيف يعمل</a></li>
+                <li><a href="contact-ar.html">اتصل بنا</a></li>
+            </ul>
+
+            <div class="language-switcher">
+                <button class="language-btn active" onclick="switchLanguage('ar')">العربية</button>
+                <button class="language-btn" onclick="switchLanguage('en')">English</button>
+            </div>
+
+            <div class="auth-buttons">
+                <a href="create-project-ar.html" class="btn btn-primary">ابدأ مشروعك</a>
+                <a href="login-ar.html" class="btn btn-link">تسجيل الدخول</a>
+            </div>
+
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+
+        <div class="mobile-menu">
+            <div class="mobile-menu-header">
+                <button class="mobile-close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index-ar.html">الرئيسية</a></li>
+                <li><a href="entertainment-ar.html">الترفيه الإبداعي</a></li>
+                <li><a href="vision2030-ar.html">مشاريع ابداعية من رؤية 2030</a></li>
+                <li><a href="mind71-ar.html">MIND71 AI</a></li>
+                <li><a href="projects-ar.html">المشاريع</a></li>
+                <li><a href="how-it-works-ar.html">كيف يعمل</a></li>
+                <li><a href="contact-ar.html">اتصل بنا</a></li>
+            </ul>
+            <div class="language-switcher">
+                <button class="language-btn active" onclick="switchLanguage('ar')">العربية</button>
+                <button class="language-btn" onclick="switchLanguage('en')">English</button>
+            </div>
+            <div class="auth-buttons">
+                <a href="create-project-ar.html" class="btn btn-primary">ابدأ مشروعك</a>
+                <a href="login-ar.html" class="btn btn-link">تسجيل الدخول</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Signup Form -->
+    <main class="signup-container">
+        <div class="signup-card">
+            <div class="signup-header">
+                <div class="signup-logo">يلا ستارتر</div>
+                <h1 class="signup-title">انضم إلى يلا ستارتر</h1>
+                <p class="signup-subtitle">ابدأ رحلتك الإبداعية وانضم إلى مجتمع المبدعين</p>
+            </div>
+
+            <form id="signupForm" novalidate>
+                <div class="form-group">
+                    <label for="fullName" class="form-label">الاسم الكامل</label>
+                    <div class="input-group">
+                        <i class="fas fa-user input-icon"></i>
+                        <input type="text" id="fullName" name="fullName" class="form-input" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="form-label">البريد الإلكتروني</label>
+                    <div class="input-group">
+                        <i class="fas fa-envelope input-icon"></i>
+                        <input type="email" id="email" name="email" class="form-input" required>
+                    </div>
+                    <div class="error-message" id="emailError">البريد الإلكتروني غير صحيح</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone" class="form-label">رقم الهاتف</label>
+                    <div class="input-group">
+                        <i class="fas fa-phone input-icon"></i>
+                        <input type="tel" id="phone" name="phone" class="form-input" required>
+                    </div>
+                    <div class="error-message" id="phoneError">رقم الهاتف غير صحيح</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="form-label">كلمة المرور</label>
+                    <div class="input-group">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" id="password" name="password" class="form-input" required>
+                    </div>
+                    <div class="error-message" id="passwordError">كلمة المرور يجب أن تكون 8 أحرف على الأقل</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword" class="form-label">تأكيد كلمة المرور</label>
+                    <div class="input-group">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" id="confirmPassword" name="confirmPassword" class="form-input" required>
+                    </div>
+                    <div class="error-message" id="confirmPasswordError">كلمة المرور غير متطابقة</div>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="terms" name="terms" class="checkbox-input" required>
+                    <label for="terms" class="checkbox-label">
+                        أوافق على <a href="#" target="_blank">شروط الاستخدام</a> و <a href="#" target="_blank">سياسة
+                            الخصوصية</a>
+                    </label>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="newsletter" name="newsletter" class="checkbox-input">
+                    <label for="newsletter" class="checkbox-label">
+                        أريد تلقي النشرة الإخبارية والتحديثات
+                    </label>
+                </div>
+
+                <button type="submit" class="signup-btn" id="signupBtn">
+                    <span class="btn-text">إنشاء حساب</span>
+                    <span class="btn-loading" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i> جاري الإنشاء...
+                    </span>
+                </button>
+
+                <div class="success-message" id="successMessage">
+                    تم إنشاء الحساب بنجاح! يمكنك الآن تسجيل الدخول.
+                </div>
+            </form>
+
+            <div class="divider">
+                <span class="divider-text">أو</span>
+            </div>
+
+            <div class="social-buttons">
+                <a href="#" class="social-btn google">
+                    <i class="fab fa-google"></i>
+                    جوجل
+                </a>
+                <a href="#" class="social-btn facebook">
+                    <i class="fab fa-facebook-f"></i>
+                    فيسبوك
+                </a>
+            </div>
+
+            <div class="login-link">
+                لديك حساب بالفعل؟ <a href="login-ar.html">تسجيل الدخول</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Universal Mobile Menu Script -->
+    <script src="mobile-menu.js"></script>
+
+    <script>
+        // Language Switcher
+        function switchLanguage(lang) {
+            if (lang === 'en') {
+                window.location.href = 'signup.html';
+            } else if (lang === 'ar') {
+                window.location.href = 'signup-ar.html';
+            }
+        }
+
+        // Form Validation and Submission
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('signupForm');
+            const inputs = form.querySelectorAll('.form-input');
+            const submitBtn = document.getElementById('signupBtn');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const btnLoading = submitBtn.querySelector('.btn-loading');
+
+            // Real-time validation
+            inputs.forEach(input => {
+                input.addEventListener('blur', function () {
+                    validateField(this);
+                });
+
+                input.addEventListener('input', function () {
+                    if (this.classList.contains('error')) {
+                        validateField(this);
+                    }
+                });
+            });
+
+            // Form submission
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                if (validateForm()) {
+                    submitForm();
+                }
+            });
+
+            function validateField(input) {
+                const errorElement = document.getElementById(input.id + 'Error');
+                let isValid = true;
+                let errorMessage = '';
+
+                // Remove previous states
+                input.classList.remove('error', 'success');
+
+                // Validation rules
+                switch (input.name) {
+                    case 'firstName':
+                    case 'lastName':
+                        if (input.value.trim().length < 2) {
+                            isValid = false;
+                            errorMessage = 'الاسم الأول مطلوب';
+                        }
+                        break;
+
+                    case 'email':
+                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        if (!emailRegex.test(input.value)) {
+                            isValid = false;
+                            errorMessage = 'البريد الإلكتروني غير صحيح';
+                        }
+                        break;
+
+                    case 'phone':
+                        const phoneRegex = /^[\+]?[0-9\s\-\(\)]{8,}$/;
+                        if (!phoneRegex.test(input.value)) {
+                            isValid = false;
+                            errorMessage = 'رقم الهاتف غير صحيح';
+                        }
+                        break;
+
+                    case 'password':
+                        if (input.value.length < 8) {
+                            isValid = false;
+                            errorMessage = 'كلمة المرور يجب أن تكون 8 أحرف على الأقل';
+                        }
+                        break;
+
+                    case 'confirmPassword':
+                        const password = document.getElementById('password').value;
+                        if (input.value !== password) {
+                            isValid = false;
+                            errorMessage = 'كلمات المرور غير متطابقة';
+                        }
+                        break;
+                }
+
+                // Apply validation result
+                if (isValid) {
+                    input.classList.add('success');
+                    errorElement.classList.remove('show');
+                } else {
+                    input.classList.add('error');
+                    errorElement.textContent = errorMessage;
+                    errorElement.classList.add('show');
+                }
+
+                return isValid;
+            }
+
+            function validateForm() {
+                let isValid = true;
+
+                // Validate all fields
+                inputs.forEach(input => {
+                    if (!validateField(input)) {
+                        isValid = false;
+                    }
+                });
+
+                // Check terms checkbox
+                const termsCheckbox = document.getElementById('terms');
+                if (!termsCheckbox.checked) {
+                    isValid = false;
+                    // You can add error handling for checkbox if needed
+                }
+
+                return isValid;
+            }
+
+            function submitForm() {
+                // Show loading state
+                btnText.style.display = 'none';
+                btnLoading.style.display = 'inline-block';
+                submitBtn.disabled = true;
+
+                // Simulate API call
+                setTimeout(() => {
+                    // Show success message
+                    document.getElementById('successMessage').classList.add('show');
+
+                    // Reset form
+                    form.reset();
+                    inputs.forEach(input => {
+                        input.classList.remove('error', 'success');
+                    });
+
+                    // Reset button
+                    btnText.style.display = 'inline-block';
+                    btnLoading.style.display = 'none';
+                    submitBtn.disabled = false;
+
+                    // Redirect after 2 seconds
+                    setTimeout(() => {
+                        window.location.href = 'dashboard-ar.html';
+                    }, 2000);
+                }, 2000);
+            }
+        });
+    </script>
+    <!-- Password Protection Script -->\n
+    <script src="assets/js/password-clear.js"></script>\n
+</body>
+
+</html>

@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="احصل على المساعدة والدعم ليلاستارتر. اعثر على إجابات للأسئلة الشائعة، اتصل بفريق الدعم، واستخدم الموارد المفيدة.">
+    <meta name="keywords" content="دعم, مساعدة, يلاستارتر, أسئلة شائعة, اتصل">
+    <meta name="author" content="يلاستارتر">
+    <meta name="robots" content="index, follow">
+    
+    <title>الدعم - يلاستارتر</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile-menu.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* RTL Support */
+        body {
+            direction: rtl;
+            text-align: right;
+            font-family: 'Tajawal', 'Poppins', sans-serif;
+        }
+        
+        .support-hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .support-hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .support-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .support-content {
+            padding: 4rem 0;
+        }
+        
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .support-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--neutral-200);
+            transition: var(--transition);
+        }
+        
+        .support-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .support-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        
+        .support-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--neutral-900);
+        }
+        
+        .support-description {
+            color: var(--neutral-700);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .support-btn {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-block;
+        }
+        
+        .support-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 166, 81, 0.3);
+        }
+        
+        .faq-section {
+            background: var(--neutral-100);
+            padding: 4rem 0;
+        }
+        
+        .faq-item {
+            background: white;
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 1.5rem;
+            background: white;
+            border: none;
+            width: 100%;
+            text-align: right;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--neutral-900);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-question:hover {
+            background: var(--neutral-50);
+        }
+        
+        .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            color: var(--neutral-700);
+            line-height: 1.6;
+            display: none;
+        }
+        
+        .faq-answer.active {
+            display: block;
+        }
+        
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-icon.rotated {
+            transform: rotate(180deg);
+        }
+        
+        @media (max-width: 768px) {
+            .support-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .support-hero p {
+                font-size: 1rem;
+            }
+            
+            .support-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="index-ar.html" class="logo">
+                <span class="logo-text">يلاستارتر</span>
+            </a>
+        
+            <ul class="nav-links">
+                <li><a href="index-ar.html">الرئيسية</a></li>
+                <li><a href="entertainment-ar.html">الترفيه الإبداعي</a></li>
+                <li><a href="vision2030-ar.html">مشاريع ابداعية من رؤية 2030</a></li>
+                <li><a href="mind71-ar.html">MIND71 AI</a></li>
+                <li><a href="projects-ar.html">المشاريع</a></li>
+                <li><a href="how-it-works-ar.html">كيف يعمل</a></li>
+                <li><a href="contact-ar.html">اتصل بنا</a></li>
+            </ul>
+            
+            <div class="language-switcher">
+                <button class="language-btn active" onclick="switchLanguage('ar')">العربية</button>
+                <button class="language-btn" onclick="switchLanguage('en')">English</button>
+            </div>
+            
+            <div class="auth-buttons">
+                <a href="create-project-ar.html" class="btn btn-primary">ابدأ مشروعاً</a>
+                <a href="login-ar.html" class="btn btn-link">تسجيل الدخول</a>
+            </div>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+        
+        <div class="mobile-menu">
+            <div class="mobile-menu-header">
+                <div class="mobile-header-left">
+                    <div class="auth-buttons">
+                        <a href="create-project-ar.html" class="btn btn-primary">ابدأ مشروعاً</a>
+                        <a href="login-ar.html" class="btn btn-link">تسجيل الدخول</a>
+                        <div class="language-switcher">
+                            <button class="language-btn active" onclick="switchLanguage('ar')">العربية</button>
+                            <button class="language-btn" onclick="switchLanguage('en')">English</button>
+                        </div>
+                    </div>
+                </div>
+                <button class="mobile-close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index-ar.html">الرئيسية</a></li>
+                <li><a href="entertainment-ar.html">الترفيه الإبداعي</a></li>
+                <li><a href="vision2030-ar.html">مشاريع ابداعية من رؤية 2030</a></li>
+                <li><a href="mind71-ar.html">MIND71 AI</a></li>
+                <li><a href="projects-ar.html">المشاريع</a></li>
+                <li><a href="how-it-works-ar.html">كيف يعمل</a></li>
+                <li><a href="contact-ar.html">اتصل بنا</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Support Hero Section -->
+    <section class="support-hero">
+        <div class="container">
+            <h1>كيف يمكننا مساعدتك؟</h1>
+            <p>اعثر على إجابات لأسئلتك، احصل على مساعدة في مشاريعك، أو اتصل بفريق الدعم</p>
+        </div>
+    </section>
+
+    <!-- Support Options -->
+    <section class="support-content">
+        <div class="container">
+            <div class="support-grid">
+                <div class="support-card">
+                    <div class="support-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3 class="support-title">الأسئلة الشائعة</h3>
+                    <p class="support-description">اعثر على إجابات سريعة للأسئلة الأكثر شيوعاً حول استخدام يلاستارتر</p>
+                    <a href="#faq" class="support-btn">عرض الأسئلة الشائعة</a>
+                </div>
+                
+                <div class="support-card">
+                    <div class="support-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3 class="support-title">دعم البريد الإلكتروني</h3>
+                    <p class="support-description">أرسل لنا بريداً إلكترونياً وسنرد عليك خلال 24 ساعة</p>
+                    <a href="mailto:support@yallastarter.com" class="support-btn">راسلنا</a>
+                </div>
+                
+                <div class="support-card">
+                    <div class="support-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3 class="support-title">دعم الهاتف</h3>
+                    <p class="support-description">اتصل بنا للحصول على مساعدة فورية مع القضايا العاجلة</p>
+                    <a href="tel:+966112345678" class="support-btn">اتصل بنا</a>
+                </div>
+                
+                <div class="support-card">
+                    <div class="support-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3 class="support-title">الدردشة المباشرة</h3>
+                    <p class="support-description">تحدث مع فريق الدعم في الوقت الفعلي خلال ساعات العمل</p>
+                    <a href="#" class="support-btn" onclick="openLiveChat()">ابدأ المحادثة</a>
+                </div>
+                
+                <div class="support-card">
+                    <div class="support-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3 class="support-title">مركز المساعدة</h3>
+                    <p class="support-description">تصفح مقالات المساعدة الشاملة والأدلة</p>
+                    <a href="creator-handbook-ar.html" class="support-btn">مركز المساعدة</a>
+                </div>
+                
+                <div class="support-card">
+                    <div class="support-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="support-title">المجتمع</h3>
+                    <p class="support-description">تواصل مع المبدعين الآخرين واحصل على مساعدة من المجتمع</p>
+                    <a href="#" class="support-btn">انضم للمجتمع</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <h2 class="section-title">الأسئلة الشائعة</h2>
+            <p class="section-subtitle">إجابات سريعة للأسئلة الشائعة</p>
+            
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)">
+                    كيف أنشئ مشروعاً على يلاستارتر؟
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>إنشاء مشروع سهل! انقر على "ابدأ مشروعاً" في التنقل العلوي، املأ تفاصيل مشروعك، أضف الصور ومقاطع الفيديو، حدد هدف التمويل والجدول الزمني، وأطلق حملتك. تأكد من قراءة دليل المبدع للحصول على إرشادات مفصلة.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)">
+                    ما هي الرسوم التي تفرضها يلاستارتر؟
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>تفرض يلاستارتر رسوم منصة 5% على المشاريع الممولة بنجاح. رسوم معالجة الدفع إضافية (عادة 3-4%). إذا لم يصل مشروعك إلى هدف التمويل، فلن يتم فرض أي رسوم.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)">
+                    كيف أدعم مشروعاً؟
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>لدعم مشروع، ببساطة زر صفحة المشروع، اختر مستوى مكافأة يهمك، انقر على "ادعم هذا المشروع"، وأكمل عملية الدفع. ستتلقى تحديثات من المبدع طوال الحملة.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)">
+                    ماذا يحدث إذا لم يصل المشروع إلى هدفه؟
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>إذا لم يصل المشروع إلى هدف التمويل بحلول الموعد النهائي، يتم استرداد جميع الداعمين تلقائياً ولا يتم جمع أي أموال. هذا يسمى التمويل "الكل أو لا شيء"، مما يحمي المبدعين والداعمين.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)">
+                    كيف أحصل على مكافآتي؟
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>بمجرد تمويل المشروع بنجاح، سيبدأ المبدعون في الإنتاج والوفاء. ستتلقى تحديثات حول التقدم والتواريخ المقدرة للتسليم. عادة ما يتم تسليم المكافآت الرقمية فوراً، بينما قد تستغرق المكافآت المادية أسابيع أو أشهر حسب المشروع.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)">
+                    هل يمكنني إلغاء تعهدي؟
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>نعم، يمكنك إلغاء تعهدك في أي وقت قبل الموعد النهائي لتمويل المشروع. ببساطة اذهب إلى إعدادات حسابك وألغ تعهدك. لن يتم تحصيل رسوم منك إذا ألغيت قبل انتهاء المشروع.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)">
+                    ما هي طرق الدفع المقبولة؟
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>نقبل جميع بطاقات الائتمان الرئيسية (فيزا، ماستركارد، أمريكان إكسبريس)، وبطاقات الخصم، وطرق الدفع المحلية الشائعة في المملكة العربية السعودية. تتم معالجة جميع المدفوعات بأمان من خلال شركاء الدفع.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)">
+                    كيف أتواصل مع مبدع المشروع؟
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>يمكنك التواصل مع مبدعي المشاريع من خلال صفحة المشروع بالنقر على "اطرح سؤالاً" أو بالتعليق على تحديثات المشروع. عادة ما يرد المبدعون خلال 24-48 ساعة.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>يلاستارتر</h3>
+                    <ul class="footer-links">
+                        <li><a href="index-ar.html">الرئيسية</a></li>
+                        <li><a href="projects-ar.html">تصفح المشاريع</a></li>
+                        <li><a href="how-it-works-ar.html">كيفية العمل</a></li>
+                        <li><a href="about-ar.html">من نحن</a></li>
+                        <li><a href="contact-ar.html">اتصل بنا</a></li>
+                        <li><a href="careers-ar.html">الوظائف</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>للمبدعين</h3>
+                    <ul class="footer-links">
+                        <li><a href="create-project-ar.html">ابدأ مشروعاً</a></li>
+                        <li><a href="capstone-projects-ar.html">مشاريع التخرج</a></li>
+                        <li><a href="creator-handbook-ar.html">دليل المبدع</a></li>
+                        <li><a href="creator-resources-ar.html">موارد المبدع</a></li>
+                        <li><a href="creator-faqs-ar.html">الأسئلة الشائعة للمبدع</a></li>
+                        <li><a href="success-stories-ar.html">قصص النجاح</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>للداعمين</h3>
+                    <ul class="footer-links">
+                        <li><a href="backer-faqs-ar.html">الأسئلة الشائعة للداعم</a></li>
+                        <li><a href="trust-safety-ar.html">الثقة والأمان</a></li>
+                        <li><a href="backer-resources-ar.html">موارد الداعم</a></li>
+                        <li><a href="payment-methods-ar.html">طرق الدفع</a></li>
+                        <li><a href="backer-protection-ar.html">حماية الداعم</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>تواصل معنا</h3>
+                    <ul class="footer-links">
+                        <li><a href="newsletter-ar.html">النشرة الإخبارية</a></li>
+                        <li><a href="blog-ar.html">المدونة</a></li>
+                        <li><a href="events-ar.html">الفعاليات</a></li>
+                        <li><a href="support-ar.html">الدعم</a></li>
+                        <li><a href="community-guidelines-ar.html">إرشادات المجتمع</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; 2025 يلاستارتر. جميع الحقوق محفوظة.
+                </div>
+                
+                <div class="footer-social">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Universal Mobile Menu Script -->
+    <script src="mobile-menu.js"></script>
+    
+    <script>
+        // Language Switcher
+        function switchLanguage(lang) {
+            if (lang === 'en') {
+                window.location.href = 'support.html';
+            } else if (lang === 'ar') {
+                window.location.href = 'support-ar.html';
+            }
+        }
+        
+        // FAQ Toggle
+        function toggleFAQ(button) {
+            const answer = button.nextElementSibling;
+            const icon = button.querySelector('.faq-icon');
+            
+            if (answer.classList.contains('active')) {
+                answer.classList.remove('active');
+                icon.classList.remove('rotated');
+            } else {
+                // Close all other FAQs
+                document.querySelectorAll('.faq-answer.active').forEach(item => {
+                    item.classList.remove('active');
+                });
+                document.querySelectorAll('.faq-icon.rotated').forEach(item => {
+                    item.classList.remove('rotated');
+                });
+                
+                // Open this FAQ
+                answer.classList.add('active');
+                icon.classList.add('rotated');
+            }
+        }
+        
+        // Live Chat (placeholder)
+        function openLiveChat() {
+            alert('ميزة الدردشة المباشرة قادمة قريباً! يرجى استخدام دعم البريد الإلكتروني أو الهاتف الآن.');
+        }
+    </script>
+    <!-- Password Protection Script -->\n    <script src="assets/js/password-clear.js"></script>\n</body>
+</html>

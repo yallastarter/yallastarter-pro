@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover film projects on YallaStarter. Support Saudi filmmakers, directors, producers, and video creators telling local stories.">
+    <meta name="keywords" content="film projects, Saudi filmmakers, video production, cinema, creative funding">
+    <meta name="author" content="YallaStarter">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Film Projects - YallaStarter Entertainment">
+    <meta property="og:description" content="Discover film projects on YallaStarter. Support Saudi filmmakers, directors, producers, and video creators.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yallastarter.com/entertainment-film">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" as="style">
+    
+    <title>Film Projects - YallaStarter Entertainment</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile-menu.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Header Styles - Same as Entertainment Page */
+        .header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 0.5rem 1rem;
+        }
+        
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 1rem;
+            width: 100%;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            flex-shrink: 0;
+            margin-right: 0.8rem;
+            transition: transform 0.2s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.02);
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+            letter-spacing: -0.02em;
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            flex: 0 1 auto;
+            justify-content: flex-start;
+        }
+        
+        .nav-links li {
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--neutral-800);
+            font-weight: 500;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-size: 1rem;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+            background-color: rgba(0, 108, 53, 0.05);
+        }
+        
+        .nav-links a.active {
+            color: var(--primary);
+            font-weight: 600;
+            background-color: rgba(0, 108, 53, 0.1);
+            padding: 0.5rem 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            color: var(--neutral-700);
+            cursor: pointer;
+            padding: 0.6rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu-btn:hover {
+            background-color: rgba(0, 108, 53, 0.05);
+            color: var(--primary);
+        }
+        
+        .mobile-menu {
+            width: 100%;
+            background-color: white;
+            padding: 1rem;
+            margin-top: 1rem;
+            display: none;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .mobile-menu .nav-links {
+            list-style: none;
+            margin: 1rem 0;
+        }
+        
+        .mobile-menu .nav-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .mobile-menu .nav-links a {
+            color: var(--neutral-800);
+            font-weight: 500;
+            display: block;
+            padding: 0.8rem 0;
+            font-size: 1rem;
+        }
+        
+        .mobile-menu .auth-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--neutral-200);
+        }
+        
+        .mobile-menu .auth-buttons a {
+            width: 100%;
+            text-align: center;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+        
+        /* Main Auth Buttons Styling */
+        .auth-buttons {
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
+        }
+        
+        .auth-buttons .btn {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .auth-buttons .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: 2px solid var(--primary);
+            box-shadow: 0 2px 8px rgba(0, 108, 53, 0.2);
+        }
+        
+        .auth-buttons .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 108, 53, 0.3);
+        }
+        
+        .auth-buttons .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            font-weight: 600;
+        }
+        
+        .auth-buttons .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 108, 53, 0.3);
+        }
+        
+        .auth-buttons .btn-link {
+            background: transparent;
+            color: var(--neutral-600);
+            border: none;
+            padding: 0.6rem 1rem;
+        }
+        
+        .auth-buttons .btn-link:hover {
+            color: var(--primary);
+        }
+        
+        .language-switcher {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: auto;
+        }
+        
+        .language-btn {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .language-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-1px);
+        }
+        
+        .language-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 0.3rem 0.8rem;
+            }
+            
+            .navbar {
+                gap: 0.5rem;
+            }
+            
+            .logo-text {
+                font-size: 1.3rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .auth-buttons {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .mobile-menu {
+                padding: 0.8rem;
+            }
+            
+            .mobile-menu .nav-links a {
+                padding: 0.6rem 0;
+                font-size: 0.95rem;
+            }
+        }
+        
+        /* Tablet Responsive */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .navbar {
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                gap: 0.8rem;
+            }
+            
+            .nav-links a {
+                font-size: 0.95rem;
+                padding: 0.5rem 1rem;
+            }
+            
+            .auth-buttons .btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Film Hero Section */
+        .film-hero {
+            background: linear-gradient(135deg, #A855F7 0%, #9333EA 50%, #7C3AED 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .film-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="film-pattern" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M10 0 L20 10 L10 20 L0 10 Z" fill="none" stroke="%23A855F7" stroke-width="0.5" opacity="0.3"/></pattern></defs><rect width="100" height="100" fill="url(%23film-pattern)"/></svg>');
+            opacity: 0.1;
+        }
+        
+        .film-hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .film-hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffffff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: film-glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes film-glow {
+            from { filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.5)); }
+            to { filter: drop-shadow(0 0 30px rgba(168, 85, 247, 0.8)); }
+        }
+        
+        .film-hero-subtitle {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+        
+        .film-slogan {
+            margin-top: 2rem;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            display: inline-block;
+        }
+        
+        .slogan-text {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: white;
+            text-align: center;
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Film Categories */
+        .film-categories {
+            padding: 4rem 0;
+            background-color: var(--neutral-100);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--neutral-900);
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            text-align: center;
+            color: var(--neutral-600);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+        
+        .film-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .film-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .film-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .film-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #A855F7 0%, #9333EA 50%, #7C3AED 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 2rem auto 1.5rem;
+        }
+        
+        .film-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--neutral-900);
+        }
+        
+        .film-description {
+            color: var(--neutral-700);
+            margin-bottom: 1.5rem;
+            padding: 0 1.5rem;
+        }
+        
+        /* Featured Film Projects */
+        .featured-film-projects {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f8f9fa 100%);
+        }
+        
+        .featured-film-projects .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .featured-film-projects .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--neutral-900);
+            margin-bottom: 1rem;
+        }
+        
+        .featured-film-projects .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--neutral-600);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .featured-film-projects .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .featured-film-projects .project-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .featured-film-projects .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .featured-film-projects .project-card:visited {
+            color: inherit;
+        }
+        
+        .featured-film-projects .project-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .featured-film-projects .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .featured-film-projects .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+        
+        .featured-film-projects .project-content {
+            padding: 1.5rem;
+        }
+        
+        .featured-film-projects .project-category {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .featured-film-projects .project-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--neutral-900);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+        
+        .featured-film-projects .project-description {
+            color: var(--neutral-700);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .featured-film-projects .project-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--neutral-600);
+        }
+        
+        .featured-film-projects .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: var(--neutral-200);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .featured-film-projects .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        
+        /* Film Subcategory Navigation */
+        .film-category-nav {
+            background-color: white;
+            border-bottom: 1px solid var(--neutral-200);
+            padding: 1rem 0;
+        }
+        
+        .subcategory-links {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            padding: 0.5rem 0;
+            scrollbar-width: thin;
+            scrollbar-color: #A855F7 var(--neutral-100);
+        }
+        
+        .subcategory-links::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        .subcategory-links::-webkit-scrollbar-track {
+            background: var(--neutral-100);
+            border-radius: 3px;
+        }
+        
+        .subcategory-links::-webkit-scrollbar-thumb {
+            background: #A855F7;
+            border-radius: 3px;
+        }
+        
+        .subcategory-link {
+            color: var(--neutral-600);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            border: 2px solid transparent;
+        }
+        
+        .subcategory-link:hover {
+            color: var(--neutral-900);
+            background-color: rgba(168, 85, 247, 0.1);
+            border-color: #A855F7;
+        }
+        
+        .subcategory-link.active {
+            color: var(--primary);
+            background-color: rgba(168, 85, 247, 0.1);
+            border-color: #A855F7;
+        }
+        
+        /* Responsive adjustments for subcategory navigation */
+        @media (max-width: 768px) {
+            .subcategory-links {
+                gap: 1rem;
+                padding: 0.25rem 0;
+            }
+            
+            .subcategory-link {
+                font-size: 0.85rem;
+                padding: 0.4rem 0.8rem;
+            }
+        }
+        
+        /* Back to Home */
+        .back-to-home {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .back-to-home a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .back-to-home a:hover {
+            color: var(--primary-dark);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <span class="logo-text">YallaStarter</span>
+            </a>
+        
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="entertainment.html" class="active">Entertainment Projects</a></li>
+                <li><a href="vision2030.html">Vision 2030 Projects</a></li>
+                <li><a href="mind71.html">MIND71 AI</a></li>
+                <li><a href="projects.html">Browse Projects</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            
+            <div class="language-switcher">
+                <button class="language-btn active" onclick="switchLanguage('en')">English</button>
+                <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
+            </div>
+            
+            <div class="auth-buttons">
+                <a href="create-project.html" class="btn btn-primary">Start a Project</a>
+                <a href="login.html" class="btn btn-link">Log In</a>
+            </div>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+        
+        <div class="mobile-menu">
+            <div class="mobile-menu-header">
+                <div class="mobile-header-left">
+                    <div class="language-switcher">
+                        <button class="language-btn active" onclick="switchLanguage('en')">English</button>
+                        <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
+                    </div>
+                    <div class="auth-buttons">
+                        <a href="create-project.html" class="btn btn-primary">Start a Project</a>
+                        <a href="login.html" class="btn btn-link">Log In</a>
+                    </div>
+                </div>
+                <button class="mobile-close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="entertainment.html" class="active">Entertainment Projects</a></li>
+                <li><a href="vision2030.html">Vision 2030 Projects</a></li>
+                <li><a href="mind71.html">MIND71 AI</a></li>
+                <li><a href="projects.html">Browse Projects</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Film Hero -->
+    <section class="film-hero">
+        <div class="container">
+            <div class="film-hero-content">
+                <h1 class="film-hero-title">Film Projects</h1>
+                <p class="film-hero-subtitle">Discover and support film projects from Saudi Arabia's growing cinema industry. From short films to feature-length productions, explore the Kingdom's storytelling through film.</p>
+                <div class="film-slogan">
+                    <span class="slogan-text">Saudi Youth are Partners in Film</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Film Subcategory Navigation -->
+    <div class="film-category-nav">
+        <div class="container">
+            <div class="subcategory-links">
+                <a href="entertainment-film.html" class="subcategory-link active">All Film</a>
+                <a href="projects.html?category=short-films" class="subcategory-link">Short Films</a>
+                <a href="projects.html?category=feature-films" class="subcategory-link">Feature Films</a>
+                <a href="projects.html?category=documentaries" class="subcategory-link">Documentaries</a>
+                <a href="projects.html?category=animation" class="subcategory-link">Animation</a>
+                <a href="projects.html?category=web-series" class="subcategory-link">Web Series</a>
+                <a href="projects.html?category=music-videos" class="subcategory-link">Music Videos</a>
+                <a href="projects.html?category=commercials" class="subcategory-link">Commercials</a>
+                <a href="projects.html?category=experimental" class="subcategory-link">Experimental</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Film Categories -->
+    <section class="film-categories">
+        <div class="container">
+            <h2 class="section-title">Film Categories</h2>
+            <p class="section-subtitle">Explore creative projects in these exciting filmmaking areas</p>
+            
+            <div class="film-grid">
+                <div class="film-card">
+                    <div class="film-icon">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <h3 class="film-title">Feature Films</h3>
+                    <p class="film-description">Support full-length Saudi feature films telling compelling stories and showcasing local talent.</p>
+                    <a href="projects.html?category=feature-films" class="btn btn-outline">Explore Features</a>
+                </div>
+                
+                <div class="film-card">
+                    <div class="film-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3 class="film-title">Short Films</h3>
+                    <p class="film-description">Discover creative short films and experimental works from emerging Saudi filmmakers.</p>
+                    <a href="projects.html?category=short-films" class="btn btn-outline">Explore Shorts</a>
+                </div>
+                
+                <div class="film-card">
+                    <div class="film-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3 class="film-title">Documentaries</h3>
+                    <p class="film-description">Support documentary filmmakers exploring Saudi culture, history, and contemporary issues.</p>
+                    <a href="projects.html?category=documentaries" class="btn btn-outline">Explore Docs</a>
+                </div>
+                
+                <div class="film-card">
+                    <div class="film-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3 class="film-title">Animation</h3>
+                    <p class="film-description">Discover animated films and series showcasing Saudi creativity and storytelling.</p>
+                    <a href="projects.html?category=animation" class="btn btn-outline">Explore Animation</a>
+                </div>
+                
+                <div class="film-card">
+                    <div class="film-icon">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <h3 class="film-title">Web Series</h3>
+                    <p class="film-description">Support digital content creators producing engaging web series and online content.</p>
+                    <a href="projects.html?category=web-series" class="btn btn-outline">Explore Web Series</a>
+                </div>
+                
+                <div class="film-card">
+                    <div class="film-icon">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h3 class="film-title">Music Videos</h3>
+                    <p class="film-description">Discover creative music videos and visual content supporting Saudi musicians.</p>
+                    <a href="projects.html?category=music-videos" class="btn btn-outline">Explore Music Videos</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Film Projects -->
+    <section class="featured-film-projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Film Projects</h2>
+                <p class="section-subtitle">Discover creative film projects from Saudi Arabia's growing cinema industry</p>
+            </div>
+            
+            <div class="projects-grid">
+                <a href="project-saudi-stories.html" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Saudi Film Production" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Documentary</div>
+                        <h3 class="project-title">Saudi Stories: Documentary Series on Local Traditions</h3>
+                        <p class="project-description">A compelling documentary series exploring Saudi Arabia's rich cultural heritage, from ancient traditions to modern innovations.</p>
+                        <div class="project-meta">
+                            <div>SAR 95,000 raised</div>
+                            <div>63% funded</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 63%;"></div>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Saudi Feature Film" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Feature Film</div>
+                        <h3 class="project-title">Desert Dreams: A Saudi Coming-of-Age Story</h3>
+                        <p class="project-description">A heartfelt feature film following a young Saudi's journey of self-discovery in the modern Kingdom.</p>
+                        <div class="project-meta">
+                            <div>SAR 250,000 raised</div>
+                            <div>45% funded</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 45%;"></div>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Saudi Animation" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Animation</div>
+                        <h3 class="project-title">Saudi Folktales: Animated Series</h3>
+                        <p class="project-description">A beautiful animated series bringing traditional Saudi folktales to life for modern audiences.</p>
+                        <div class="project-meta">
+                            <div>SAR 180,000 raised</div>
+                            <div>72% funded</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 72%;"></div>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Saudi Web Series" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Web Series</div>
+                        <h3 class="project-title">Riyadh Nights: Urban Comedy Series</h3>
+                        <p class="project-description">A hilarious web series exploring the lives of young Saudis navigating modern city life and relationships.</p>
+                        <div class="project-meta">
+                            <div>SAR 75,000 raised</div>
+                            <div>85% funded</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Saudi Short Film" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Short Film</div>
+                        <h3 class="project-title">The Last Call: Experimental Short</h3>
+                        <p class="project-description">An experimental short film exploring themes of connection and isolation in the digital age.</p>
+                        <div class="project-meta">
+                            <div>SAR 35,000 raised</div>
+                            <div>90% funded</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 90%;"></div>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Saudi Music Video" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Music Video</div>
+                        <h3 class="project-title">Saudi Sound: Music Video Collection</h3>
+                        <p class="project-description">A collection of innovative music videos showcasing Saudi musicians and visual artists.</p>
+                        <div class="project-meta">
+                            <div>SAR 50,000 raised</div>
+                            <div>78% funded</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 78%;"></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Back to Home -->
+    <div class="back-to-home">
+        <div class="container">
+            <a href="entertainment.html">
+                <i class="fas fa-arrow-left"></i>
+                Back to Entertainment Projects
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>YallaStarter</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="projects.html">Browse Projects</a></li>
+                        <li><a href="how-it-works.html">How It Works</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>For Creators</h3>
+                    <ul class="footer-links">
+                        <li><a href="create-project.html">Start a Project</a></li>
+                        <li><a href="capstone-projects.html">Capstone Projects</a></li>
+                        <li><a href="#">Creator Handbook</a></li>
+                        <li><a href="#">Creator Resources</a></li>
+                        <li><a href="#">Creator FAQs</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>For Backers</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Backer FAQs</a></li>
+                        <li><a href="#">Trust & Safety</a></li>
+                        <li><a href="#">Backer Resources</a></li>
+                        <li><a href="#">Payment Methods</a></li>
+                        <li><a href="#">Backer Protection</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Connect With Us</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Newsletter</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Events</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Community Guidelines</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; 2025 YallaStarter. All rights reserved.
+                </div>
+                
+                <div class="footer-social">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Language Switcher
+        function switchLanguage(lang) {
+            if (lang === 'en') {
+                window.location.href = 'entertainment-film.html';
+            } else if (lang === 'ar') {
+                window.location.href = 'entertainment-film-ar.html';
+            }
+        }
+    </script>
+    
+    <!-- Universal Mobile Menu Script -->
+    <script src="mobile-menu.js"></script>
+</body>
+</html>

@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logistics & Transport - Vision 2030 Projects | YallaStarter</title>
+    <meta name="description" content="Discover innovative logistics and transportation projects driving Saudi Arabia's Vision 2030 transformation. Support smart mobility, logistics solutions, and transportation innovation.">
+    <meta name="keywords" content="logistics, transport, smart mobility, transportation innovation, supply chain, Saudi Arabia, Vision 2030">
+    <meta name="author" content="YallaStarter">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Logistics & Transport - Vision 2030 Projects | YallaStarter">
+    <meta property="og:description" content="Discover innovative logistics and transportation projects driving Saudi Arabia's Vision 2030 transformation.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yallastarter.com/vision2030-logistics">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" as="style">
+    
+    <title>Logistics & Transport - Vision 2030 Projects | YallaStarter</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile-menu.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --logistics-primary: #1e40af;
+            --logistics-primary-dark: #1e3a8a;
+            --logistics-secondary: #3b82f6;
+            --logistics-accent: #60a5fa;
+            --logistics-gradient: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
+            --logistics-glow: 0 0 30px rgba(30, 64, 175, 0.3);
+            --logistics-text: #1e293b;
+            --logistics-text-light: #64748b;
+            --logistics-bg: #eff6ff;
+            --logistics-card: #ffffff;
+            --logistics-border: #bfdbfe;
+        }
+
+        body {
+            font-family: 'Poppins', 'Tajawal', sans-serif;
+            background: var(--logistics-bg);
+            color: var(--logistics-text);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--logistics-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: var(--logistics-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--logistics-primary);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--logistics-gradient);
+            border-radius: 1px;
+        }
+
+        .language-switcher {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .language-btn {
+            background: none;
+            border: 1px solid var(--logistics-border);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .language-btn.active,
+        .language-btn:hover {
+            background: var(--logistics-primary);
+            color: white;
+            border-color: var(--logistics-primary);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--logistics-gradient);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--logistics-glow);
+        }
+
+        .btn-link {
+            color: var(--logistics-text);
+            background: none;
+            border: 1px solid var(--logistics-border);
+        }
+
+        .btn-link:hover {
+            background: var(--logistics-primary);
+            color: white;
+            border-color: var(--logistics-primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--logistics-text);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .logistics-hero {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #3b82f6 100%);
+            color: white;
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logistics-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="logistics" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M5 5 L15 5 L15 15 L5 15 Z" fill="none" stroke="%231e40af" stroke-width="0.5" opacity="0.3"/></pattern></defs><rect width="100" height="100" fill="url(%23logistics)"/></svg>');
+            opacity: 0.1;
+        }
+
+        .logistics-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logistics-hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: var(--logistics-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: logistics-flow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes logistics-flow {
+            from { filter: drop-shadow(0 0 20px rgba(30, 64, 175, 0.5)); }
+            to { filter: drop-shadow(0 0 30px rgba(30, 64, 175, 0.8)); }
+        }
+
+        .logistics-hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        .logistics-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .logistics-stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .logistics-stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--logistics-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .logistics-stat-label {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* Logistics Categories */
+        .logistics-categories {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--logistics-text);
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            text-align: center;
+            color: var(--logistics-text-light);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .logistics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .logistics-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--logistics-border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logistics-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--logistics-gradient);
+        }
+
+        .logistics-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(30, 64, 175, 0.15);
+        }
+
+        .logistics-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--logistics-gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .logistics-card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--logistics-text);
+        }
+
+        .logistics-card-description {
+            color: var(--logistics-text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .logistics-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .logistics-features li {
+            padding: 0.5rem 0;
+            color: var(--logistics-text-light);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .logistics-features li::before {
+            content: '🚚';
+            position: absolute;
+            left: 0;
+            color: var(--logistics-primary);
+            font-weight: bold;
+        }
+
+        /* Featured Projects */
+        .featured-projects {
+            padding: 6rem 0;
+            background: var(--logistics-bg);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(30, 64, 175, 0.15);
+        }
+
+        .project-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-category {
+            color: var(--logistics-primary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--logistics-text);
+        }
+
+        .project-description {
+            color: var(--logistics-text-light);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--logistics-text-light);
+        }
+
+        .funding-progress {
+            width: 100%;
+            height: 6px;
+            background: #bfdbfe;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .funding-progress-bar {
+            height: 100%;
+            background: var(--logistics-gradient);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 0;
+            background: var(--logistics-gradient);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .cta-description {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--logistics-primary);
+            border: none;
+        }
+
+        .btn-white:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-white {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline-white:hover {
+            background: white;
+            color: var(--logistics-primary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links,
+            .auth-buttons {
+                display: none;
+            }
+
+            .logistics-hero-title {
+                font-size: 2.5rem;
+            }
+
+            .logistics-hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .logistics-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-buttons .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <span class="logo-text">YallaStarter</span>
+            </a>
+        
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="entertainment.html">Entertainment Projects</a></li>
+                <li><a href="vision2030.html" class="active">Vision 2030 Projects</a></li>
+                <li><a href="mind71.html">MIND71 AI</a></li>
+                <li><a href="projects.html">Browse Projects</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            
+            <div class="language-switcher">
+                <button class="language-btn active" onclick="switchLanguage('en')">English</button>
+                <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
+            </div>
+            
+            <div class="auth-buttons">
+                <a href="create-project.html" class="btn btn-primary">Start a Project</a>
+                <a href="login.html" class="btn btn-link">Log In</a>
+            </div>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+        
+        <div class="mobile-menu">
+            <div class="mobile-menu-header">
+                <button class="mobile-close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="entertainment.html">Entertainment Projects</a></li>
+                <li><a href="vision2030.html" class="active">Vision 2030 Projects</a></li>
+                <li><a href="mind71.html">MIND71 AI</a></li>
+                <li><a href="projects.html">Browse Projects</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <a href="create-project.html" class="btn btn-primary">Start a Project</a>
+                <a href="login.html" class="btn btn-link">Log In</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Logistics Hero -->
+    <section class="logistics-hero">
+        <div class="container">
+            <div class="logistics-hero-content">
+                <h1 class="logistics-hero-title">Logistics & Transport</h1>
+                <p class="logistics-hero-subtitle">Revolutionizing Saudi Arabia's transportation and logistics infrastructure through smart mobility solutions, autonomous vehicles, and advanced supply chain technologies that connect the Kingdom to the world.</p>
+                
+                <div class="logistics-stats">
+                    <div class="logistics-stat">
+                        <div class="logistics-stat-number">90+</div>
+                        <div class="logistics-stat-label">Transport Projects</div>
+                    </div>
+                    <div class="logistics-stat">
+                        <div class="logistics-stat-number">SAR 2.1B</div>
+                        <div class="logistics-stat-label">Transport Investment</div>
+                    </div>
+                    <div class="logistics-stat">
+                        <div class="logistics-stat-number">87%</div>
+                        <div class="logistics-stat-label">Success Rate</div>
+                    </div>
+                    <div class="logistics-stat">
+                        <div class="logistics-stat-number">40K+</div>
+                        <div class="logistics-stat-label">Jobs Created</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Logistics Categories -->
+    <section class="logistics-categories">
+        <div class="container">
+            <h2 class="section-title">Revolutionary Transport Solutions</h2>
+            <p class="section-subtitle">Explore cutting-edge logistics and transportation technologies transforming Saudi Arabia's mobility infrastructure</p>
+            
+            <div class="logistics-grid">
+                <div class="logistics-card">
+                    <div class="logistics-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3 class="logistics-card-title">Smart Mobility & Autonomous Vehicles</h3>
+                    <p class="logistics-card-description">Advanced autonomous vehicle systems and smart mobility solutions revolutionizing urban transportation and reducing traffic congestion.</p>
+                    <ul class="logistics-features">
+                        <li>Autonomous Vehicle Fleet</li>
+                        <li>Smart Traffic Management</li>
+                        <li>Connected Vehicle Technology</li>
+                        <li>Mobility-as-a-Service</li>
+                        <li>Electric Vehicle Infrastructure</li>
+                    </ul>
+                </div>
+
+                <div class="logistics-card">
+                    <div class="logistics-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <h3 class="logistics-card-title">Smart Supply Chain</h3>
+                    <p class="logistics-card-description">Intelligent supply chain management systems optimizing logistics operations, inventory management, and delivery efficiency.</p>
+                    <ul class="logistics-features">
+                        <li>AI-Powered Logistics</li>
+                        <li>Real-time Tracking</li>
+                        <li>Predictive Analytics</li>
+                        <li>Automated Warehousing</li>
+                        <li>Last-Mile Delivery</li>
+                    </ul>
+                </div>
+
+                <div class="logistics-card">
+                    <div class="logistics-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <h3 class="logistics-card-title">Aviation & Aerospace</h3>
+                    <p class="logistics-card-description">Advanced aviation infrastructure and aerospace technologies supporting Saudi Arabia's position as a regional transportation hub.</p>
+                    <ul class="logistics-features">
+                        <li>Smart Airport Systems</li>
+                        <li>Drone Delivery Networks</li>
+                        <li>Aerospace Manufacturing</li>
+                        <li>Air Traffic Management</li>
+                        <li>Aviation Maintenance</li>
+                    </ul>
+                </div>
+
+                <div class="logistics-card">
+                    <div class="logistics-icon">
+                        <i class="fas fa-train"></i>
+                    </div>
+                    <h3 class="logistics-card-title">Rail & Public Transport</h3>
+                    <p class="logistics-card-description">Modern rail systems and public transportation infrastructure connecting cities and regions across Saudi Arabia.</p>
+                    <ul class="logistics-features">
+                        <li>High-Speed Rail Networks</li>
+                        <li>Metro Systems</li>
+                        <li>Bus Rapid Transit</li>
+                        <li>Smart Ticketing</li>
+                        <li>Integrated Transport</li>
+                    </ul>
+                </div>
+
+                <div class="logistics-card">
+                    <div class="logistics-icon">
+                        <i class="fas fa-ship"></i>
+                    </div>
+                    <h3 class="logistics-card-title">Maritime & Ports</h3>
+                    <p class="logistics-card-description">Advanced port infrastructure and maritime logistics systems supporting international trade and commerce.</p>
+                    <ul class="logistics-features">
+                        <li>Smart Port Operations</li>
+                        <li>Container Automation</li>
+                        <li>Maritime Logistics</li>
+                        <li>Port Security Systems</li>
+                        <li>Shipping Optimization</li>
+                    </ul>
+                </div>
+
+                <div class="logistics-card">
+                    <div class="logistics-icon">
+                        <i class="fas fa-route"></i>
+                    </div>
+                    <h3 class="logistics-card-title">Smart Infrastructure</h3>
+                    <p class="logistics-card-description">Intelligent transportation infrastructure with IoT sensors, data analytics, and real-time monitoring systems.</p>
+                    <ul class="logistics-features">
+                        <li>Smart Highways</li>
+                        <li>Traffic Monitoring</li>
+                        <li>Infrastructure Analytics</li>
+                        <li>Predictive Maintenance</li>
+                        <li>Environmental Monitoring</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section class="featured-projects">
+        <div class="container">
+            <h2 class="section-title">Featured Logistics Projects</h2>
+            <p class="section-subtitle">Discover groundbreaking transportation and logistics projects that are transforming mobility in Saudi Arabia</p>
+            
+            <div class="projects-grid">
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Autonomous Vehicle Network" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Smart Mobility</div>
+                        <h3 class="project-title">Saudi Autonomous Vehicle Network</h3>
+                        <p class="project-description">Comprehensive autonomous vehicle network featuring self-driving cars, smart traffic management, and integrated mobility services across major Saudi cities.</p>
+                        <div class="project-meta">
+                            <div>SAR 3,500,000 raised</div>
+                            <div>78% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 78%;"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Smart Port System" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Maritime & Ports</div>
+                        <h3 class="project-title">Smart Port Automation System</h3>
+                        <p class="project-description">Advanced port automation system using AI and robotics to optimize container handling, reduce wait times, and increase port efficiency.</p>
+                        <div class="project-meta">
+                            <div>SAR 2,800,000 raised</div>
+                            <div>85% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="High-Speed Rail" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Rail & Public Transport</div>
+                        <h3 class="project-title">Saudi High-Speed Rail Network</h3>
+                        <p class="project-description">Modern high-speed rail system connecting major Saudi cities with cutting-edge train technology and smart station management.</p>
+                        <div class="project-meta">
+                            <div>SAR 12,000,000 raised</div>
+                            <div>65% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 65%;"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Drone Delivery Network" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Aviation & Aerospace</div>
+                        <h3 class="project-title">Saudi Drone Delivery Network</h3>
+                        <p class="project-description">Comprehensive drone delivery network providing fast, efficient last-mile delivery services across urban and remote areas.</p>
+                        <div class="project-meta">
+                            <div>SAR 1,200,000 raised</div>
+                            <div>72% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 72%;"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Smart Supply Chain" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Smart Supply Chain</div>
+                        <h3 class="project-title">AI-Powered Supply Chain Platform</h3>
+                        <p class="project-description">Intelligent supply chain management platform using AI and machine learning to optimize logistics operations and reduce costs.</p>
+                        <div class="project-meta">
+                            <div>SAR 950,000 raised</div>
+                            <div>88% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 88%;"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Smart Highway System" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Smart Infrastructure</div>
+                        <h3 class="project-title">Smart Highway Management System</h3>
+                        <p class="project-description">Advanced highway management system with IoT sensors, real-time monitoring, and automated traffic control for safer, more efficient roads.</p>
+                        <div class="project-meta">
+                            <div>SAR 1,800,000 raised</div>
+                            <div>82% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 82%;"></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title">Ready to Move the Future?</h2>
+            <p class="cta-description">Join the transportation revolution and help build a more connected, efficient, and sustainable Saudi Arabia through innovative logistics and mobility solutions that transform how people and goods move.</p>
+            <div class="cta-buttons">
+                <a href="create-project.html" class="btn btn-white">Start Your Transport Project</a>
+                <a href="projects.html?category=logistics" class="btn btn-outline-white">Explore All Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mobile Menu Script -->
+    <script src="mobile-menu.js"></script>
+    
+    <!-- Language Switcher Script -->
+    <script>
+        function switchLanguage(lang) {
+            if (lang === 'ar') {
+                window.location.href = 'vision2030-logistics-ar.html';
+            } else {
+                window.location.href = 'vision2030-logistics.html';
+            }
+        }
+    </script>
+</body>
+</html>

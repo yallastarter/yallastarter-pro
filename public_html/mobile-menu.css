@@ -1,0 +1,879 @@
+/* Universal Mobile Menu CSS for YallaStarter - ENHANCED VERSION */
+/* This CSS ensures mobile menu works on ALL pages and ALL screen sizes */
+
+/* CSS Variables for consistent styling */
+:root {
+    --primary: #006c35;
+    --primary-dark: #005a2b;
+    --neutral-200: #e5e7eb;
+    --neutral-300: #d1d5db;
+    --neutral-700: #374151;
+    --neutral-800: #1f2937;
+    --white: #ffffff;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile Menu Button - Hidden by default, shown on mobile */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--neutral-700);
+    cursor: pointer;
+    padding: 0.8rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1002;
+    flex-shrink: 0;
+}
+
+/* Mobile Menu Button Hover/Active States */
+.mobile-menu-btn:hover,
+.mobile-menu-btn:active {
+    background-color: rgba(0, 108, 53, 0.05);
+    color: var(--primary);
+}
+
+.mobile-menu-btn.active {
+    background-color: var(--primary);
+    color: white;
+    transform: rotate(90deg);
+}
+
+.mobile-menu-btn.active:hover {
+    background-color: var(--primary-dark);
+}
+
+/* Mobile Menu Container */
+.mobile-menu {
+    position: static;
+    background-color: var(--white);
+    z-index: 999;
+    padding: 0 1rem;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 300ms ease-in-out, opacity 300ms ease-in-out;
+    box-shadow: 0 4px 20px var(--shadow);
+    border-top: 1px solid var(--neutral-200);
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    display: block !important; /* Ensure block display */
+    width: 100% !important; /* Full width */
+    box-sizing: border-box;
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Mobile Menu Show State */
+.header.nav-open .mobile-menu {
+    max-height: 600px;
+    padding: 2rem 1rem;
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Mobile Menu Header */
+.mobile-menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--neutral-200);
+    gap: 1rem;
+}
+
+/* Mobile Header Left Section */
+.mobile-header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    flex: 1;
+}
+
+/* Language Switcher in Mobile Header */
+.mobile-header-left .language-switcher {
+    display: flex;
+    gap: 0.4rem;
+    margin: 0;
+}
+
+.mobile-header-left .language-switcher .language-btn {
+    background: none;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+    min-height: 30px;
+    font-weight: 500;
+}
+
+.mobile-header-left .language-switcher .language-btn:hover {
+    background-color: var(--primary);
+    color: white;
+}
+
+.mobile-header-left .language-switcher .language-btn.active {
+    background-color: var(--primary);
+    color: white;
+}
+
+/* Auth Buttons in Mobile Header */
+.mobile-header-left .auth-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin: 0;
+    flex-wrap: wrap;
+}
+
+.mobile-header-left .auth-buttons a {
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-align: center;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    white-space: nowrap;
+    flex: 1;
+    min-width: 0;
+}
+
+.mobile-header-left .auth-buttons .btn-primary {
+    background-color: var(--primary);
+    color: white;
+}
+
+.mobile-header-left .auth-buttons .btn-primary:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+.mobile-header-left .auth-buttons .btn-link {
+    background: transparent;
+    color: var(--neutral-700);
+    border: 1px solid var(--neutral-300);
+}
+
+.mobile-header-left .auth-buttons .btn-link:hover {
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.mobile-menu-header .logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+.mobile-menu-header .logo-text {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-right: 0.5rem;
+}
+
+.mobile-menu-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--neutral-800);
+    flex: 1;
+    text-align: center;
+}
+
+.mobile-close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--neutral-700);
+    cursor: pointer;
+    padding: 0.8rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.mobile-close-btn:hover,
+.mobile-close-btn:active {
+    background-color: rgba(0, 108, 53, 0.05);
+    color: var(--primary);
+}
+
+/* Mobile Menu Navigation Links */
+.mobile-menu .nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: block !important; /* Override flexbox from main CSS */
+    flex-direction: column !important; /* Ensure vertical layout */
+}
+
+.mobile-menu .nav-links li {
+    margin-bottom: 0;
+    display: block !important; /* Override any flexbox inheritance */
+    width: 100%;
+}
+
+.mobile-menu .nav-links a {
+    color: var(--neutral-700);
+    font-weight: 500;
+    text-decoration: none;
+    display: block !important; /* Override flexbox from main CSS */
+    padding: 1rem 1rem;
+    font-size: 1.1rem;
+    border-bottom: 1px solid var(--neutral-200);
+    border-radius: 8px;
+    margin: 0.2rem 0;
+    min-height: 48px;
+    align-items: center;
+    transition: all 0.3s ease;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    width: 100% !important; /* Ensure full width */
+    box-sizing: border-box;
+    text-align: left; /* Ensure text alignment */
+    line-height: 1.4; /* Proper line height for vertical layout */
+}
+
+/* Additional mobile menu layout fixes */
+.mobile-menu .nav-links {
+    flex-wrap: nowrap !important; /* Prevent wrapping */
+    justify-content: flex-start !important; /* Left align */
+    align-items: stretch !important; /* Stretch items to full width */
+}
+
+.mobile-menu .nav-links li {
+    flex: none !important; /* Prevent flexbox behavior */
+    flex-shrink: 0 !important; /* Prevent shrinking */
+    flex-grow: 0 !important; /* Prevent growing */
+}
+
+.mobile-menu .nav-links a {
+    flex: none !important; /* Prevent flexbox behavior */
+    flex-shrink: 0 !important; /* Prevent shrinking */
+    flex-grow: 0 !important; /* Prevent growing */
+}
+
+.mobile-menu .nav-links a:hover,
+.mobile-menu .nav-links a:active {
+    background-color: rgba(0, 108, 53, 0.05);
+    color: var(--primary);
+    padding-left: 1.5rem;
+    transform: translateX(5px);
+}
+
+/* Mobile Menu Language Switcher */
+.mobile-menu .language-switcher {
+    display: flex;
+    gap: 0.5rem;
+    margin: 1.5rem 0;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--neutral-200);
+}
+
+.mobile-menu .language-switcher .language-btn {
+    background: transparent;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mobile-menu .language-switcher .language-btn:hover,
+.mobile-menu .language-switcher .language-btn:active {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-1px);
+}
+
+.mobile-menu .language-switcher .language-btn.active {
+    background: var(--primary);
+    color: white;
+}
+
+/* Language switcher styles for mobile menu */
+.language-switcher {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+}
+
+.language-btn {
+    border: 1px solid var(--neutral-300);
+    background: #fff;
+    padding: 0.4rem 0.6rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.language-btn.active {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+}
+
+/* RTL support for language switcher */
+html[dir="rtl"] .language-switcher {
+    justify-content: flex-start;
+}
+
+/* Mobile menu header - remove logo and title */
+.mobile-menu-header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--neutral-200);
+}
+
+.mobile-menu-header .logo {
+    display: none; /* Remove duplicate logo */
+}
+
+.mobile-menu-title {
+    display: none; /* Remove "Menu" text */
+}
+
+.mobile-close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--neutral-700);
+    cursor: pointer;
+    padding: 0.8rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.mobile-close-btn:hover,
+.mobile-close-btn:active {
+    background-color: rgba(0, 108, 53, 0.05);
+    color: var(--primary);
+}
+
+/* RTL support for mobile menu header */
+html[dir="rtl"] .mobile-menu-header {
+    justify-content: flex-start;
+}
+
+/* Mobile Menu Auth Buttons */
+.mobile-menu .auth-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid var(--neutral-200);
+}
+
+.mobile-menu .auth-buttons a {
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: center;
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-menu .auth-buttons a:hover,
+.mobile-menu .auth-buttons a:active {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Mobile Menu Animations */
+@keyframes slideInFromTop {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.mobile-menu.show {
+    animation: slideInFromTop 0.3s ease-out;
+}
+
+/* Touch Device Optimizations */
+.mobile-menu .nav-links a {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+.mobile-menu-btn {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+.mobile-close-btn {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+/* CRITICAL: Responsive Breakpoints - This is what makes it work on mobile */
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: relative !important;
+        z-index: 1002 !important;
+    }
+    
+    .mobile-menu {
+        padding: 1rem;
+    }
+    
+    .mobile-menu .nav-links a {
+        padding: 1rem 0;
+        font-size: 1.1rem;
+    }
+    
+    .mobile-menu .auth-buttons a {
+        padding: 1rem 1.5rem;
+        font-size: 1.1rem;
+    }
+    
+    /* Hide regular navigation on mobile */
+    .nav-links:not(.mobile-menu .nav-links),
+    .auth-buttons:not(.mobile-menu .auth-buttons):not(.mobile-header-left .auth-buttons) {
+        display: none !important;
+    }
+    
+    /* Hide language switcher on mobile (except in mobile menu header) */
+    .language-switcher:not(.mobile-header-left .language-switcher) {
+        display: none !important;
+    }
+    
+    /* Ensure proper spacing on mobile */
+    .navbar {
+        gap: 0.8rem;
+    }
+    
+    /* Optimize header padding for mobile */
+    .header {
+        padding: 0.5rem 1rem;
+    }
+}
+
+/* iPhone Specific Optimizations (6-7 inch screens) */
+@media (max-width: 428px) and (min-width: 375px) {
+    .mobile-menu {
+        padding: 1.5rem 1rem;
+    }
+    
+    .mobile-menu .nav-links a {
+        padding: 1.2rem 0;
+        font-size: 1.2rem;
+        min-height: 52px;
+    }
+    
+    .mobile-menu .auth-buttons a {
+        padding: 1.2rem 1.5rem;
+        font-size: 1.2rem;
+        min-height: 56px;
+    }
+    
+    .mobile-menu .language-switcher .language-btn {
+        padding: 0.8rem 1.2rem;
+        font-size: 1rem;
+        min-height: 48px;
+    }
+    
+    .mobile-menu-title {
+        font-size: 1.4rem;
+    }
+    
+    .mobile-close-btn {
+        padding: 0.8rem;
+        font-size: 1.4rem;
+    }
+}
+
+/* Small iPhone (iPhone SE, mini) */
+@media (max-width: 374px) {
+    .mobile-menu {
+        padding: 1rem 0.8rem;
+    }
+    
+    .mobile-menu .nav-links a {
+        padding: 1rem 0;
+        font-size: 1.1rem;
+        min-height: 48px;
+    }
+    
+    .mobile-menu .auth-buttons a {
+        padding: 1rem 1.2rem;
+        font-size: 1.1rem;
+        min-height: 52px;
+    }
+    
+    .mobile-menu .language-switcher .language-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+        min-height: 44px;
+    }
+    
+    .mobile-menu-title {
+        font-size: 1.2rem;
+    }
+    
+    .mobile-close-btn {
+        padding: 0.6rem;
+        font-size: 1.3rem;
+    }
+}
+
+/* iPhone Landscape and Large iPhone (Max, Pro Max) */
+@media (max-width: 926px) and (min-width: 429px) {
+    .mobile-menu {
+        padding: 2rem 1.5rem;
+    }
+    
+    .mobile-menu .nav-links a {
+        padding: 1.1rem 0;
+        font-size: 1.15rem;
+        min-height: 50px;
+    }
+    
+    .mobile-menu .auth-buttons a {
+        padding: 1.1rem 1.5rem;
+        font-size: 1.15rem;
+        min-height: 54px;
+    }
+    
+    .mobile-menu .language-switcher .language-btn {
+        padding: 0.7rem 1.1rem;
+        font-size: 0.95rem;
+        min-height: 46px;
+    }
+}
+
+@media (max-width: 480px) {
+    .mobile-menu-btn {
+        padding: 0.6rem;
+        font-size: 1.3rem;
+    }
+    
+    .mobile-menu {
+        padding: 0.8rem;
+    }
+    
+    .mobile-menu .nav-links a {
+        padding: 0.8rem 0;
+        font-size: 1rem;
+    }
+    
+    .mobile-menu .auth-buttons a {
+        padding: 0.8rem 1.2rem;
+        font-size: 1rem;
+    }
+    
+    .mobile-menu-title {
+        font-size: 1.1rem;
+    }
+    
+    /* Optimize header padding for small mobile */
+    .header {
+        padding: 0.4rem 0.8rem;
+    }
+    
+    /* Ensure logo text is readable on small screens */
+    .logo-text {
+        font-size: 1.2rem;
+    }
+}
+
+/* Large Screen - Hide Mobile Menu */
+@media (min-width: 992px) {
+    .mobile-menu-btn {
+        display: none !important;
+    }
+    
+    .mobile-menu {
+        display: none !important;
+    }
+}
+
+/* Ensure Header Stays Above Mobile Menu */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 1001 !important;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Ensure Mobile Menu is Above Other Elements */
+.mobile-menu {
+    z-index: 999 !important;
+}
+
+/* Prevent Body Scroll When Menu is Open */
+html.no-scroll, body.no-scroll {
+    overflow: hidden;
+}
+
+/* Fallback for Older Browsers */
+@supports not (backdrop-filter: blur(10px)) {
+    .header {
+        background-color: rgba(255, 255, 255, 0.95);
+    }
+}
+
+/* Enhanced Mobile Menu Button States */
+.mobile-menu-btn:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+.mobile-menu-btn:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Improved Mobile Menu Accessibility */
+.mobile-menu .nav-links a:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+.mobile-menu .nav-links a:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Mobile Menu Loading State */
+.mobile-menu.loading {
+    pointer-events: none;
+}
+
+.mobile-menu.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid var(--neutral-300);
+    border-top: 2px solid var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Mobile Menu Entrance Animation */
+@keyframes slideInFromTop {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.header.nav-open .mobile-menu {
+    animation: slideInFromTop 0.3s ease-out;
+}
+
+/* Mobile Menu Exit Animation */
+@keyframes slideOutToTop {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+}
+
+.mobile-menu.closing {
+    animation: slideOutToTop 0.3s ease-in;
+}
+
+/* Enhanced Touch Feedback */
+@media (max-width: 768px) {
+    .mobile-menu-btn:active {
+        transform: scale(0.95);
+        transition: transform 0.1s ease;
+    }
+    
+    .mobile-close-btn:active {
+        transform: scale(0.95);
+        transition: transform 0.1s ease;
+    }
+    
+    .mobile-menu .nav-links a:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
+    }
+    
+    .mobile-menu .auth-buttons a:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
+    }
+    
+    /* Mobile header layout adjustments */
+    .mobile-header-left {
+        gap: 0.6rem;
+    }
+    
+    .mobile-header-left .auth-buttons {
+        gap: 0.4rem;
+    }
+    
+    .mobile-header-left .auth-buttons a {
+        padding: 0.35rem 0.7rem;
+        font-size: 0.8rem;
+        min-height: 30px;
+    }
+    
+    .mobile-header-left .language-switcher {
+        gap: 0.3rem;
+    }
+    
+    .mobile-header-left .language-switcher .language-btn {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+        min-height: 28px;
+    }
+}
+
+/* Landscape Mobile Optimization */
+@media (max-height: 500px) and (orientation: landscape) {
+    .header.nav-open .mobile-menu {
+        padding: 1rem;
+    }
+    
+    .mobile-menu .nav-links a {
+        padding: 0.6rem 0;
+        min-height: 40px;
+    }
+    
+    .mobile-menu .auth-buttons a {
+        padding: 0.6rem 1rem;
+        min-height: 44px;
+    }
+}
+
+/* High DPI Display Optimization */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .mobile-menu-btn,
+    .mobile-close-btn {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    .mobile-menu,
+    .mobile-menu-btn,
+    .mobile-close-btn {
+        transition: none;
+        animation: none;
+    }
+    
+    .header.nav-open .mobile-menu {
+        animation: none;
+    }
+    
+    .mobile-menu.closing {
+        animation: none;
+    }
+}
+
+/* iPhone Safe Area Support */
+@supports (padding: max(0px)) {
+    .mobile-menu {
+        padding-left: max(1rem, env(safe-area-inset-left));
+        padding-right: max(1rem, env(safe-area-inset-right));
+        padding-bottom: max(2rem, env(safe-area-inset-bottom));
+    }
+    
+    .mobile-menu-btn {
+        padding-left: max(0.8rem, env(safe-area-inset-left));
+        padding-right: max(0.8rem, env(safe-area-inset-right));
+    }
+}
+
+/* iOS Safari Specific Fixes */
+@supports (-webkit-touch-callout: none) {
+    .mobile-menu {
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .mobile-menu-btn,
+    .mobile-close-btn,
+    .mobile-menu .nav-links a,
+    .mobile-menu .auth-buttons a {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+}
+
+/* Arabic Homepage Hero Brightness */
+html[lang="ar"] .hero {
+    filter: brightness(1.3) contrast(1.1);
+}

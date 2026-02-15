@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Early Disease Detection System: Revolutionizing Healthcare - YallaStarter</title>
+    <meta name="description" content="Support the AI-Powered Early Disease Detection System, an advanced system using machine learning algorithms for early detection of chronic diseases and improved treatment outcomes.">
+    <meta name="keywords" content="artificial intelligence, early detection, healthcare, machine learning, medical diagnosis, Saudi Arabia">
+    <meta name="author" content="YallaStarter">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="AI-Powered Early Disease Detection System: Revolutionizing Healthcare - YallaStarter">
+    <meta property="og:description" content="Support the AI-Powered Early Disease Detection System, an advanced system using machine learning algorithms for early detection of chronic diseases and improved treatment outcomes.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+    <meta property="og:url" content="https://yallastarter.com/project-ai-disease-detection.html">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI-Powered Early Disease Detection System: Revolutionizing Healthcare - YallaStarter">
+    <meta name="twitter:description" content="Support the AI-Powered Early Disease Detection System, an advanced system using machine learning algorithms for early detection of chronic diseases and improved treatment outcomes.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://yallastarter.com/project-ai-disease-detection.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Site styles for unified header -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile-menu.css">
+    
+    <style>
+        :root {
+            --primary-color: #00d4aa;
+            --secondary-color: #1a1a1a;
+            --accent-color: #ff6b35;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --border-color: #e9ecef;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #fff;
+        }
+
+        /* Header Styles */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color) !important;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--text-color) !important;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        /* Project Hero Section */
+        .project-hero {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') center/cover;
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        .project-hero .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .project-hero .lead {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .project-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Project Content */
+        .project-content {
+            padding: 4rem 0;
+        }
+
+        .project-image {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease;
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+        }
+        
+        .project-image {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .project-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--secondary-color);
+        }
+
+        .project-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: #666;
+        }
+
+        /* Funding Section */
+        .funding-section {
+            background: var(--light-bg);
+            padding: 4rem 0;
+        }
+
+        .funding-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .funding-progress {
+            background: #e9ecef;
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .funding-progress-bar {
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            height: 100%;
+            width: 38%;
+            transition: width 0.3s ease;
+        }
+
+        .funding-amount {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .funding-goal {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .backers-count {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .btn-support {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border: none;
+            color: white;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-support:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 212, 170, 0.3);
+            color: white;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+
+        .feature-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Technology Stack */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tech-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .tech-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .tech-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        .tech-description {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Timeline Section */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary-color);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            width: 50%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            padding-right: 3rem;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-left: 3rem;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 0;
+            height: 0;
+            border: 10px solid transparent;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -20px;
+            border-left-color: white;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -20px;
+            border-right-color: white;
+        }
+
+        .timeline-date {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--secondary-color);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer h5 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .footer a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-links a {
+            display: inline-block;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .project-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .project-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                padding-left: 3rem !important;
+                padding-right: 0 !important;
+                text-align: left !important;
+            }
+
+            .timeline-item .timeline-content::before {
+                left: -20px !important;
+                border-right-color: white !important;
+                border-left-color: transparent !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Unified Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <span class="logo-text">YallaStarter</span>
+            </a>
+        
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="entertainment.html">Entertainment Projects</a></li>
+                <li><a href="vision2030.html">Vision 2030 Projects</a></li>
+                <li><a href="mind71.html">MIND71 AI</a></li>
+                <li><a href="projects.html">Browse Projects</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            
+            <div class="language-switcher">
+                <button class="language-btn active" onclick="window.location.href='project-ai-disease-detection.html'">English</button>
+                <button class="language-btn" onclick="window.location.href='project-ai-disease-detection-ar.html'">العربية</button>
+            </div>
+            
+            <div class="auth-buttons">
+                <a href="create-project.html" class="btn btn-primary">Start a Project</a>
+                <a href="login.html" class="btn btn-link">Log In</a>
+            </div>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+        
+        <div class="mobile-menu">
+            <div class="mobile-menu-header">
+                <div class="mobile-header-left">
+                    <div class="language-switcher">
+                        <button class="language-btn active" onclick="window.location.href='project-ai-disease-detection.html'">English</button>
+                        <button class="language-btn" onclick="window.location.href='project-ai-disease-detection-ar.html'">العربية</button>
+                    </div>
+                    <div class="auth-buttons">
+                        <a href="create-project.html" class="btn btn-primary">Start a Project</a>
+                        <a href="login.html" class="btn btn-link">Log In</a>
+                    </div>
+                </div>
+                <button class="mobile-close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="entertainment.html">Entertainment Projects</a></li>
+                <li><a href="vision2030.html">Vision 2030 Projects</a></li>
+                <li><a href="mind71.html">MIND71 AI</a></li>
+                <li><a href="projects.html">Browse Projects</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Project Hero Section -->
+    <section class="project-hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1>AI-Powered Early Disease Detection System: Revolutionizing Healthcare</h1>
+                    <p class="lead">An advanced system using machine learning algorithms for early detection of chronic diseases and improved treatment outcomes, helping save lives and reduce medical costs.</p>
+                    <div class="project-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">38%</div>
+                            <div class="stat-label">Funded</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">1,247</div>
+                            <div class="stat-label">Backers</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">67</div>
+                            <div class="stat-label">Days Left</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=800&q=80" alt="AI-Powered Early Disease Detection System" class="img-fluid" style="min-height: 400px; object-fit: cover;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Content -->
+    <section class="project-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h2 class="section-title">About the System</h2>
+                    <p class="project-description">
+                        The AI-Powered Early Disease Detection System is a pioneering project in the field of digital healthcare, aimed at using the latest artificial intelligence and machine learning technologies for early detection of chronic diseases such as diabetes, heart disease, and cancer. This system can save thousands of lives through early diagnosis and effective treatment.
+                    </p>
+                    <p class="project-description">
+                        The system works by analyzing patient medical data using advanced algorithms, allowing doctors to identify at-risk patients before symptoms appear. This preventive approach not only improves treatment outcomes but also reduces medical costs and improves patients' quality of life.
+                    </p>
+
+                    <!-- Project Images -->
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="project-image">
+                                <img src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=800&q=80" alt="AI in Medicine" class="img-fluid" loading="lazy" decoding="async" style="min-height: 300px; object-fit: cover;">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="project-image">
+                                <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80" alt="Medical Data Analysis" class="img-fluid" loading="lazy" decoding="async" style="min-height: 300px; object-fit: cover;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Features Section -->
+                    <h2 class="section-title mt-5">System Features</h2>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <h3 class="feature-title">Advanced Algorithms</h3>
+                            <p class="feature-description">Use of cutting-edge machine learning algorithms and neural networks for precise medical data analysis.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3 class="feature-title">Predictive Analysis</h3>
+                            <p class="feature-description">Ability to predict diseases long before symptoms appear through pattern analysis.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3 class="feature-title">Data Security</h3>
+                            <p class="feature-description">Complete protection of patient data with advanced encryption and compliance with medical privacy standards.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h3 class="feature-title">Mobile Application</h3>
+                            <p class="feature-description">Easy-to-use app for patients and doctors with instant notifications and detailed reports.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-user-md"></i>
+                            </div>
+                            <h3 class="feature-title">Doctor Support</h3>
+                            <p class="feature-description">Advanced tools for doctors to make informed decisions based on data analysis.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <h3 class="feature-title">Scalability</h3>
+                            <p class="feature-description">Scalable system that can be implemented in hospitals and clinics throughout the Kingdom.</p>
+                        </div>
+                    </div>
+
+                    <!-- Technology Stack -->
+                    <h2 class="section-title mt-5">Technologies Used</h2>
+                    <div class="tech-grid">
+                        <div class="tech-card">
+                            <div class="tech-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <h4 class="tech-name">Machine Learning</h4>
+                            <p class="tech-description">Advanced algorithms for analysis and prediction</p>
+                        </div>
+                        <div class="tech-card">
+                            <div class="tech-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <h4 class="tech-name">Databases</h4>
+                            <p class="tech-description">Secure storage of medical data</p>
+                        </div>
+                        <div class="tech-card">
+                            <div class="tech-icon">
+                                <i class="fas fa-cloud"></i>
+                            </div>
+                            <h4 class="tech-name">Cloud Computing</h4>
+                            <p class="tech-description">Scalable cloud infrastructure</p>
+                        </div>
+                        <div class="tech-card">
+                            <div class="tech-icon">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <h4 class="tech-name">Encryption</h4>
+                            <p class="tech-description">Advanced protection for sensitive data</p>
+                        </div>
+                        <div class="tech-card">
+                            <div class="tech-icon">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <h4 class="tech-name">Data Analysis</h4>
+                            <p class="tech-description">Advanced tools for medical data analysis</p>
+                        </div>
+                        <div class="tech-card">
+                            <div class="tech-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h4 class="tech-name">Mobile Apps</h4>
+                            <p class="tech-description">Easy-to-use interfaces for patients and doctors</p>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Section -->
+                    <h2 class="section-title mt-5">Implementation Timeline</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <div class="timeline-date">Q1 2024</div>
+                                <h4 class="timeline-title">Algorithm Development</h4>
+                                <p>Develop and train machine learning algorithms on available medical data.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <div class="timeline-date">Q2 2024</div>
+                                <h4 class="timeline-title">System Testing</h4>
+                                <p>Test the system in a simulation environment with real medical data.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <div class="timeline-date">Q3 2024</div>
+                                <h4 class="timeline-title">Clinical Trial</h4>
+                                <p>Begin clinical trial in selected hospitals with volunteer patients.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <div class="timeline-date">Q4 2024</div>
+                                <h4 class="timeline-title">Commercial Launch</h4>
+                                <p>Launch the system for commercial use in hospitals and clinics.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Funding Sidebar -->
+                <div class="col-lg-4">
+                    <div class="funding-card">
+                        <h3>Support Healthcare Revolution</h3>
+                        <div class="funding-amount">47,500 SAR</div>
+                        <div class="funding-goal">Raised of 125,000 SAR goal</div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar"></div>
+                        </div>
+                        <div class="backers-count">1,247 backers</div>
+                        <div class="backers-count">67 days left</div>
+                        
+                        <a href="#" class="btn-support">Support This Project</a>
+                        
+                        <div class="mt-4">
+                            <h5>Reward Tiers</h5>
+                            <div class="reward-tier">
+                                <h6>100 SAR - Health Supporter</h6>
+                                <p>Regular progress reports on the project</p>
+                            </div>
+                            <div class="reward-tier">
+                                <h6>250 SAR - Medical Partner</h6>
+                                <p>Early access to the system with basic training</p>
+                            </div>
+                            <div class="reward-tier">
+                                <h6>500 SAR - Health Sponsor</h6>
+                                <p>Workshop on artificial intelligence in medicine</p>
+                            </div>
+                            <div class="reward-tier">
+                                <h6>1,000 SAR - Founding Partner</h6>
+                                <p>Recognition as a founding partner in all marketing materials</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <h5>YallaStarter</h5>
+                    <p>Empowering Saudi creators to bring their innovative ideas to life through crowdfunding.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <h5>Platform</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="projects.html">Browse Projects</a></li>
+                        <li><a href="create-project.html">Start a Project</a></li>
+                        <li><a href="how-it-works.html">How It Works</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h5>Support</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Community Guidelines</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h5>Company</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h5>Legal</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; 2024 YallaStarter. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p>Made with ❤️ in Saudi Arabia</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add animation to funding progress bar
+        window.addEventListener('load', function() {
+            const progressBar = document.querySelector('.funding-progress-bar');
+            if (progressBar) {
+                setTimeout(() => {
+                    progressBar.style.width = '38%';
+                }, 500);
+            }
+        });
+
+        // Add hover effects to feature cards
+        document.querySelectorAll('.feature-card, .tech-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+    <!-- Password Protection Script -->\n    <script src="assets/js/password-clear.js"></script>\n</body>
+</html>

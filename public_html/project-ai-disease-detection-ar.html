@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام الكشف المبكر عن الأمراض بالذكاء الاصطناعي: ثورة في الرعاية الصحية - يلاستارتر</title>
+    <meta name="description" content="ادعم نظام الكشف المبكر عن الأمراض بالذكاء الاصطناعي، نظام متطور يستخدم خوارزميات التعلم الآلي للكشف المبكر عن الأمراض المزمنة وتحسين نتائج العلاج.">
+    <meta name="keywords" content="الذكاء الاصطناعي, الكشف المبكر, الرعاية الصحية, التعلم الآلي, التشخيص الطبي, السعودية">
+    <meta name="author" content="يلاستارتر">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="نظام الكشف المبكر عن الأمراض بالذكاء الاصطناعي: ثورة في الرعاية الصحية - يلاستارتر">
+    <meta property="og:description" content="ادعم نظام الكشف المبكر عن الأمراض بالذكاء الاصطناعي، نظام متطور يستخدم خوارزميات التعلم الآلي للكشف المبكر عن الأمراض المزمنة وتحسين نتائج العلاج.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+    <meta property="og:url" content="https://yallastarter.com/project-ai-disease-detection-ar.html">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="نظام الكشف المبكر عن الأمراض بالذكاء الاصطناعي: ثورة في الرعاية الصحية - يلاستارتر">
+    <meta name="twitter:description" content="ادعم نظام الكشف المبكر عن الأمراض بالذكاء الاصطناعي، نظام متطور يستخدم خوارزميات التعلم الآلي للكشف المبكر عن الأمراض المزمنة وتحسين نتائج العلاج.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://yallastarter.com/project-ai-disease-detection-ar.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #00d4aa;
+            --secondary-color: #1a1a1a;
+            --accent-color: #ff6b35;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --border-color: #e9ecef;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tajawal', 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #fff;
+            direction: rtl;
+            text-align: right;
+        }
+
+        /* Header Styles */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color) !important;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--text-color) !important;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        /* Project Hero Section */
+        .project-hero {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') center/cover;
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        .project-hero .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .project-hero .lead {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .project-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Project Content */
+        .project-content {
+            padding: 4rem 0;
+        }
+
+        .project-image {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease;
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+        }
+        
+        .project-image {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .project-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--secondary-color);
+        }
+
+        .project-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: #666;
+        }
+
+        /* Funding Section */
+        .funding-section {
+            background: var(--light-bg);
+            padding: 4rem 0;
+        }
+
+        .funding-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .funding-progress {
+            background: #e9ecef;
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .funding-progress-bar {
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            height: 100%;
+            width: 38%;
+            transition: width 0.3s ease;
+        }
+
+        .funding-amount {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .funding-goal {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .backers-count {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .btn-support {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border: none;
+            color: white;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-support:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 212, 170, 0.3);
+            color: white;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+
+        .feature-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Technology Stack */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tech-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .tech-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .tech-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        .tech-description {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Timeline Section */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            right: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary-color);
+            transform: translateX(50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            width: 50%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            right: 0;
+            padding-left: 3rem;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            right: 50%;
+            padding-right: 3rem;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 0;
+            height: 0;
+            border: 10px solid transparent;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            left: -20px;
+            border-right-color: white;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            right: -20px;
+            border-left-color: white;
+        }
+
+        .timeline-date {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--secondary-color);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer h5 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .footer a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-links a {
+            display: inline-block;
+            margin-left: 1rem;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .project-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .project-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .timeline::before {
+                right: 20px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                right: 0 !important;
+                padding-right: 3rem !important;
+                padding-left: 0 !important;
+                text-align: right !important;
+            }
+
+            .timeline-item .timeline-content::before {
+                right: -20px !important;
+                border-left-color: white !important;
+                border-right-color: transparent !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index-ar.html">يلاستارتر</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index-ar.html">الرئيسية</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="projects-ar.html">المشاريع</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about-ar.html">من نحن</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact-ar.html">اتصل بنا</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login-ar.html">تسجيل الدخول</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Project Hero Section -->
+    <section class="project-hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1>نظام الكشف المبكر عن الأمراض بالذكاء الاصطناعي: ثورة في الرعاية الصحية</h1>
+                    <p class="lead">نظام متطور يستخدم خوارزميات التعلم الآلي للكشف المبكر عن الأمراض المزمنة وتحسين نتائج العلاج، مما يساهم في إنقاذ الأرواح وتقليل التكاليف الطبية.</p>
+                    <div class="project-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">38%</div>
+                            <div class="stat-label">تم التمويل</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">1,247</div>
+                            <div class="stat-label">داعم</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">67</div>
+                            <div class="stat-label">يوم متبقي</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=800&q=80" alt="نظام الكشف المبكر عن الأمراض بالذكاء الاصطناعي" class="img-fluid" style="min-height: 400px; object-fit: cover;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Content -->
+    <section class="project-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h2 class="section-title">حول النظام</h2>
+                    <p class="project-description">
+                        نظام الكشف المبكر عن الأمراض بالذكاء الاصطناعي هو مشروع رائد في مجال الرعاية الصحية الرقمية، يهدف إلى استخدام أحدث تقنيات الذكاء الاصطناعي والتعلم الآلي للكشف المبكر عن الأمراض المزمنة مثل السكري وأمراض القلب والسرطان. هذا النظام يمكن أن ينقذ آلاف الأرواح من خلال التشخيص المبكر والعلاج الفعال.
+                    </p>
+                    <p class="project-description">
+                        يعمل النظام من خلال تحليل البيانات الطبية للمرضى باستخدام خوارزميات متطورة، مما يسمح للأطباء بتحديد المرضى المعرضين للخطر قبل ظهور الأعراض. هذا النهج الوقائي لا يحسن فقط من نتائج العلاج، بل يقلل أيضاً من التكاليف الطبية ويحسن جودة الحياة للمرضى.
+                    </p>
+
+                    <!-- Project Images -->
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="project-image">
+                                <img src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=800&q=80" alt="الذكاء الاصطناعي في الطب" class="img-fluid" loading="lazy" decoding="async" style="min-height: 300px; object-fit: cover;">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="project-image">
+                                <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80" alt="تحليل البيانات الطبية" class="img-fluid" loading="lazy" decoding="async" style="min-height: 300px; object-fit: cover;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Features Section -->
+                    <h2 class="section-title mt-5">مميزات النظام</h2>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <h3 class="feature-title">خوارزميات متطورة</h3>
+                            <p class="feature-description">استخدام أحدث خوارزميات التعلم الآلي والشبكات العصبية للتحليل الدقيق للبيانات الطبية.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3 class="feature-title">تحليل تنبؤي</h3>
+                            <p class="feature-description">القدرة على التنبؤ بالأمراض قبل ظهور الأعراض بفترة طويلة من خلال تحليل الأنماط.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3 class="feature-title">أمان البيانات</h3>
+                            <p class="feature-description">حماية كاملة لبيانات المرضى مع تشفير متقدم وامتثال لمعايير الخصوصية الطبية.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h3 class="feature-title">تطبيق محمول</h3>
+                            <p class="feature-description">تطبيق سهل الاستخدام للمرضى والأطباء مع إشعارات فورية وتقارير مفصلة.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-user-md"></i>
+                            </div>
+                            <h3 class="feature-title">دعم الأطباء</h3>
+                            <p class="feature-description">أدوات متقدمة للأطباء لاتخاذ قرارات مدروسة بناءً على تحليل البيانات.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <h3 class="feature-title">قابلية التوسع</h3>
+                            <p class="feature-description">نظام قابل للتوسع يمكن تطبيقه في المستشفيات والعيادات في جميع أنحاء المملكة.</p>
+                        </div>
+                    </div>
+
+                    <!-- Technology Stack -->
+                    <h2 class="section-title mt-5">التقنيات المستخدمة</h2>
+                    <div class="tech-grid">
+                        <div class="tech-card">
+                            <div class="tech-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <h4 class="tech-name">التعلم الآلي</h4>
+                            <p class="tech-description">خوارزميات متطورة للتحليل والتنبؤ</p>
+                        </div>
+                        <div class="tech-card">
+                            <div class="tech-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <h4 class="tech-name">قواعد البيانات</h4>
+                            <p class="tech-description">تخزين آمن للبيانات الطبية</p>
+                        </div>
+                        <div class="tech-card">
+                            <div class="tech-icon">
+                                <i class="fas fa-cloud"></i>
+                            </div>
+                            <h4 class="tech-name">الحوسبة السحابية</h4>
+                            <p class="tech-description">بنية تحتية سحابية قابلة للتوسع</p>
+                        </div>
+                        <div class="tech-card">
+                            <div class="tech-icon">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <h4 class="tech-name">التشفير</h4>
+                            <p class="tech-description">حماية متقدمة للبيانات الحساسة</p>
+                        </div>
+                        <div class="tech-card">
+                            <div class="tech-icon">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <h4 class="tech-name">تحليل البيانات</h4>
+                            <p class="tech-description">أدوات متقدمة لتحليل البيانات الطبية</p>
+                        </div>
+                        <div class="tech-card">
+                            <div class="tech-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h4 class="tech-name">التطبيقات المحمولة</h4>
+                            <p class="tech-description">واجهات سهلة الاستخدام للمرضى والأطباء</p>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Section -->
+                    <h2 class="section-title mt-5">جدول التنفيذ</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <div class="timeline-date">الربع الأول 2024</div>
+                                <h4 class="timeline-title">تطوير الخوارزميات</h4>
+                                <p>تطوير وتدريب خوارزميات التعلم الآلي على البيانات الطبية المتاحة.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <div class="timeline-date">الربع الثاني 2024</div>
+                                <h4 class="timeline-title">اختبار النظام</h4>
+                                <p>اختبار النظام في بيئة محاكاة مع بيانات طبية حقيقية.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <div class="timeline-date">الربع الثالث 2024</div>
+                                <h4 class="timeline-title">التجربة السريرية</h4>
+                                <p>بدء التجربة السريرية في مستشفيات مختارة مع مرضى متطوعين.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <div class="timeline-date">الربع الرابع 2024</div>
+                                <h4 class="timeline-title">الإطلاق التجاري</h4>
+                                <p>إطلاق النظام للاستخدام التجاري في المستشفيات والعيادات.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Funding Sidebar -->
+                <div class="col-lg-4">
+                    <div class="funding-card">
+                        <h3>ادعم ثورة الرعاية الصحية</h3>
+                        <div class="funding-amount">47,500 ريال</div>
+                        <div class="funding-goal">تم جمعها من هدف 125,000 ريال</div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar"></div>
+                        </div>
+                        <div class="backers-count">1,247 داعم</div>
+                        <div class="backers-count">67 يوم متبقي</div>
+                        
+                        <a href="#" class="btn-support">ادعم هذا المشروع</a>
+                        
+                        <div class="mt-4">
+                            <h5>مستويات المكافآت</h5>
+                            <div class="reward-tier">
+                                <h6>100 ريال - داعم صحي</h6>
+                                <p>تقرير دوري عن تقدم المشروع</p>
+                            </div>
+                            <div class="reward-tier">
+                                <h6>250 ريال - شريك طبي</h6>
+                                <p>وصول مبكر للنظام مع تدريب أساسي</p>
+                            </div>
+                            <div class="reward-tier">
+                                <h6>500 ريال - راعي صحي</h6>
+                                <p>ورشة عمل حول الذكاء الاصطناعي في الطب</p>
+                            </div>
+                            <div class="reward-tier">
+                                <h6>1,000 ريال - شريك مؤسسي</h6>
+                                <p>ذكر كشريك مؤسسي في جميع المواد التسويقية</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <h5>يلاستارتر</h5>
+                    <p>تمكين المبدعين السعوديين لإحياء أفكارهم المبتكرة من خلال التمويل الجماعي.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <h5>المنصة</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="projects-ar.html">تصفح المشاريع</a></li>
+                        <li><a href="create-project-ar.html">ابدأ مشروعاً</a></li>
+                        <li><a href="how-it-works-ar.html">كيفية العمل</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h5>الدعم</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="contact-ar.html">اتصل بنا</a></li>
+                        <li><a href="#">مركز المساعدة</a></li>
+                        <li><a href="#">إرشادات المجتمع</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h5>الشركة</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="about-ar.html">من نحن</a></li>
+                        <li><a href="#">الوظائف</a></li>
+                        <li><a href="#">الصحافة</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h5>قانوني</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">شروط الخدمة</a></li>
+                        <li><a href="#">سياسة الخصوصية</a></li>
+                        <li><a href="#">سياسة ملفات تعريف الارتباط</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; 2024 يلاستارتر. جميع الحقوق محفوظة.</p>
+                </div>
+                <div class="col-md-6 text-start">
+                    <p>صُنع بـ ❤️ في المملكة العربية السعودية</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add animation to funding progress bar
+        window.addEventListener('load', function() {
+            const progressBar = document.querySelector('.funding-progress-bar');
+            if (progressBar) {
+                setTimeout(() => {
+                    progressBar.style.width = '38%';
+                }, 500);
+            }
+        });
+
+        // Add hover effects to feature cards
+        document.querySelectorAll('.feature-card, .tech-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+    <!-- Password Protection Script -->\n    <script src="assets/js/password-clear.js"></script>\n</body>
+</html>

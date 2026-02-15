@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education & Skills - Vision 2030 Projects | YallaStarter</title>
+    <meta name="description" content="Discover innovative education and skills development projects driving Saudi Arabia's Vision 2030 transformation. Support educational initiatives, skill development, and knowledge sharing projects.">
+    <meta name="keywords" content="education, skills, learning, edtech, training, knowledge sharing, Saudi Arabia, Vision 2030">
+    <meta name="author" content="YallaStarter">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Education & Skills - Vision 2030 Projects | YallaStarter">
+    <meta property="og:description" content="Discover innovative education and skills development projects driving Saudi Arabia's Vision 2030 transformation.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yallastarter.com/vision2030-education">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" as="style">
+    
+    <title>Education & Skills - Vision 2030 Projects | YallaStarter</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile-menu.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --edu-primary: #8b5cf6;
+            --edu-primary-dark: #7c3aed;
+            --edu-secondary: #a78bfa;
+            --edu-accent: #c4b5fd;
+            --edu-gradient: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 50%, #c4b5fd 100%);
+            --edu-glow: 0 0 30px rgba(139, 92, 246, 0.3);
+            --edu-text: #1e293b;
+            --edu-text-light: #64748b;
+            --edu-bg: #faf5ff;
+            --edu-card: #ffffff;
+            --edu-border: #e9d5ff;
+        }
+
+        body {
+            font-family: 'Poppins', 'Tajawal', sans-serif;
+            background: var(--edu-bg);
+            color: var(--edu-text);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--edu-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: var(--edu-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--edu-primary);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--edu-gradient);
+            border-radius: 1px;
+        }
+
+        .language-switcher {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .language-btn {
+            background: none;
+            border: 1px solid var(--edu-border);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .language-btn.active,
+        .language-btn:hover {
+            background: var(--edu-primary);
+            color: white;
+            border-color: var(--edu-primary);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--edu-gradient);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--edu-glow);
+        }
+
+        .btn-link {
+            color: var(--edu-text);
+            background: none;
+            border: 1px solid var(--edu-border);
+        }
+
+        .btn-link:hover {
+            background: var(--edu-primary);
+            color: white;
+            border-color: var(--edu-primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--edu-text);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .education-hero {
+            background: linear-gradient(135deg, #581c87 0%, #7c3aed 50%, #8b5cf6 100%);
+            color: white;
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .education-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="books" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M5 0 L15 0 L15 20 L5 20 Z" fill="none" stroke="%238b5cf6" stroke-width="0.5" opacity="0.3"/></pattern></defs><rect width="100" height="100" fill="url(%23books)"/></svg>');
+            opacity: 0.1;
+        }
+
+        .education-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .education-hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: var(--edu-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: sparkle 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes sparkle {
+            from { filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.5)); }
+            to { filter: drop-shadow(0 0 30px rgba(139, 92, 246, 0.8)); }
+        }
+
+        .education-hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        .education-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .education-stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .education-stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--edu-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .education-stat-label {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* Education Categories */
+        .education-categories {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--edu-text);
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            text-align: center;
+            color: var(--edu-text-light);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .education-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--edu-border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .education-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--edu-gradient);
+        }
+
+        .education-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(139, 92, 246, 0.15);
+        }
+
+        .education-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--edu-gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .education-card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--edu-text);
+        }
+
+        .education-card-description {
+            color: var(--edu-text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .education-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .education-features li {
+            padding: 0.5rem 0;
+            color: var(--edu-text-light);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .education-features li::before {
+            content: '📚';
+            position: absolute;
+            left: 0;
+            color: var(--edu-primary);
+            font-weight: bold;
+        }
+
+        /* Featured Projects */
+        .featured-projects {
+            padding: 6rem 0;
+            background: var(--edu-bg);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(139, 92, 246, 0.15);
+        }
+
+        .project-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-category {
+            color: var(--edu-primary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--edu-text);
+        }
+
+        .project-description {
+            color: var(--edu-text-light);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--edu-text-light);
+        }
+
+        .funding-progress {
+            width: 100%;
+            height: 6px;
+            background: #e9d5ff;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .funding-progress-bar {
+            height: 100%;
+            background: var(--edu-gradient);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 0;
+            background: var(--edu-gradient);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .cta-description {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--edu-primary);
+            border: none;
+        }
+
+        .btn-white:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-white {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline-white:hover {
+            background: white;
+            color: var(--edu-primary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links,
+            .auth-buttons {
+                display: none;
+            }
+
+            .education-hero-title {
+                font-size: 2.5rem;
+            }
+
+            .education-hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .education-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-buttons .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <span class="logo-text">YallaStarter</span>
+            </a>
+        
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="entertainment.html">Entertainment Projects</a></li>
+                <li><a href="vision2030.html" class="active">Vision 2030 Projects</a></li>
+                <li><a href="mind71.html">MIND71 AI</a></li>
+                <li><a href="projects.html">Browse Projects</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            
+            <div class="language-switcher">
+                <button class="language-btn active" onclick="switchLanguage('en')">English</button>
+                <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
+            </div>
+            
+            <div class="auth-buttons">
+                <a href="create-project.html" class="btn btn-primary">Start a Project</a>
+                <a href="login.html" class="btn btn-link">Log In</a>
+            </div>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+        
+        <div class="mobile-menu">
+            <div class="mobile-menu-header">
+                <button class="mobile-close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="entertainment.html">Entertainment Projects</a></li>
+                <li><a href="vision2030.html" class="active">Vision 2030 Projects</a></li>
+                <li><a href="mind71.html">MIND71 AI</a></li>
+                <li><a href="projects.html">Browse Projects</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <a href="create-project.html" class="btn btn-primary">Start a Project</a>
+                <a href="login.html" class="btn btn-link">Log In</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Education Hero -->
+    <section class="education-hero">
+        <div class="container">
+            <div class="education-hero-content">
+                <h1 class="education-hero-title">Education & Skills</h1>
+                <p class="education-hero-subtitle">Empowering Saudi Arabia's future through innovative education technology, skill development programs, and knowledge sharing initiatives that prepare citizens for the digital economy.</p>
+                
+                <div class="education-stats">
+                    <div class="education-stat">
+                        <div class="education-stat-number">400+</div>
+                        <div class="education-stat-label">Education Projects</div>
+                    </div>
+                    <div class="education-stat">
+                        <div class="education-stat-number">SAR 1.5B</div>
+                        <div class="education-stat-label">Education Investment</div>
+                    </div>
+                    <div class="education-stat">
+                        <div class="education-stat-number">90%</div>
+                        <div class="education-stat-label">Success Rate</div>
+                    </div>
+                    <div class="education-stat">
+                        <div class="education-stat-number">100K+</div>
+                        <div class="education-stat-label">Students Reached</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Categories -->
+    <section class="education-categories">
+        <div class="container">
+            <h2 class="section-title">Revolutionary Learning Solutions</h2>
+            <p class="section-subtitle">Explore cutting-edge educational technologies and skill development programs transforming learning in Saudi Arabia</p>
+            
+            <div class="education-grid">
+                <div class="education-card">
+                    <div class="education-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="education-card-title">EdTech & Digital Learning</h3>
+                    <p class="education-card-description">Advanced educational technology platforms, online learning systems, and digital tools revolutionizing how students learn.</p>
+                    <ul class="education-features">
+                        <li>Interactive Learning Platforms</li>
+                        <li>Virtual Reality Classrooms</li>
+                        <li>AI-Powered Tutoring</li>
+                        <li>Gamified Learning</li>
+                        <li>Mobile Learning Apps</li>
+                    </ul>
+                </div>
+
+                <div class="education-card">
+                    <div class="education-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="education-card-title">Higher Education Innovation</h3>
+                    <p class="education-card-description">Revolutionary university programs, research initiatives, and academic partnerships advancing higher education.</p>
+                    <ul class="education-features">
+                        <li>Online Degree Programs</li>
+                        <li>Research Collaboration Platforms</li>
+                        <li>International Partnerships</li>
+                        <li>Innovation Labs</li>
+                        <li>Scholarship Programs</li>
+                    </ul>
+                </div>
+
+                <div class="education-card">
+                    <div class="education-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="education-card-title">Vocational Training & Skills</h3>
+                    <p class="education-card-description">Comprehensive vocational training programs and skill development initiatives preparing workers for the future economy.</p>
+                    <ul class="education-features">
+                        <li>Technical Skills Training</li>
+                        <li>Apprenticeship Programs</li>
+                        <li>Industry Certifications</li>
+                        <li>Soft Skills Development</li>
+                        <li>Career Guidance</li>
+                    </ul>
+                </div>
+
+                <div class="education-card">
+                    <div class="education-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3 class="education-card-title">Teacher Development</h3>
+                    <p class="education-card-description">Professional development programs and training initiatives empowering educators with modern teaching methods.</p>
+                    <ul class="education-features">
+                        <li>Digital Teaching Tools</li>
+                        <li>Pedagogy Training</li>
+                        <li>Technology Integration</li>
+                        <li>Assessment Methods</li>
+                        <li>Continuous Learning</li>
+                    </ul>
+                </div>
+
+                <div class="education-card">
+                    <div class="education-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3 class="education-card-title">Language Learning</h3>
+                    <p class="education-card-description">Advanced language learning platforms and programs promoting multilingualism and global communication skills.</p>
+                    <ul class="education-features">
+                        <li>AI Language Tutors</li>
+                        <li>Immersive Learning</li>
+                        <li>Cultural Exchange</li>
+                        <li>Professional Language</li>
+                        <li>Certification Programs</li>
+                    </ul>
+                </div>
+
+                <div class="education-card">
+                    <div class="education-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="education-card-title">STEM Education</h3>
+                    <p class="education-card-description">Science, Technology, Engineering, and Mathematics programs fostering innovation and critical thinking skills.</p>
+                    <ul class="education-features">
+                        <li>Hands-on Science Labs</li>
+                        <li>Robotics Programs</li>
+                        <li>Coding Bootcamps</li>
+                        <li>Math Olympiads</li>
+                        <li>Innovation Competitions</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section class="featured-projects">
+        <div class="container">
+            <h2 class="section-title">Featured Education Projects</h2>
+            <p class="section-subtitle">Discover groundbreaking education projects that are transforming learning in Saudi Arabia</p>
+            
+            <div class="projects-grid">
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Virtual Reality Learning Platform" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">EdTech & VR</div>
+                        <h3 class="project-title">Saudi VR Learning Platform</h3>
+                        <p class="project-description">Immersive virtual reality learning platform that brings history, science, and culture to life for Saudi students through interactive 3D experiences.</p>
+                        <div class="project-meta">
+                            <div>SAR 280,000 raised</div>
+                            <div>85% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="AI Tutoring System" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">AI & Learning</div>
+                        <h3 class="project-title">AI-Powered Tutoring System</h3>
+                        <p class="project-description">Intelligent tutoring system that provides personalized learning experiences and adaptive feedback to help students master subjects at their own pace.</p>
+                        <div class="project-meta">
+                            <div>SAR 350,000 raised</div>
+                            <div>78% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 78%;"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Coding Bootcamp" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">STEM Education</div>
+                        <h3 class="project-title">Saudi Coding Bootcamp Network</h3>
+                        <p class="project-description">Comprehensive coding bootcamp program teaching programming skills, software development, and digital literacy to prepare students for tech careers.</p>
+                        <div class="project-meta">
+                            <div>SAR 180,000 raised</div>
+                            <div>92% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 92%;"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1523240798030-3269da6c5b9e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Language Learning App" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Language Learning</div>
+                        <h3 class="project-title">Multilingual Learning Platform</h3>
+                        <p class="project-description">Advanced language learning platform supporting Arabic, English, and other languages with AI-powered pronunciation and conversation practice.</p>
+                        <div class="project-meta">
+                            <div>SAR 120,000 raised</div>
+                            <div>88% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 88%;"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Teacher Training Program" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Teacher Development</div>
+                        <h3 class="project-title">Digital Teacher Training Initiative</h3>
+                        <p class="project-description">Comprehensive teacher training program focusing on digital tools, modern pedagogy, and technology integration in Saudi classrooms.</p>
+                        <div class="project-meta">
+                            <div>SAR 200,000 raised</div>
+                            <div>75% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 75%;"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Vocational Training Center" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Vocational Training</div>
+                        <h3 class="project-title">Advanced Vocational Training Centers</h3>
+                        <p class="project-description">State-of-the-art vocational training facilities providing hands-on experience in technical skills, manufacturing, and service industries.</p>
+                        <div class="project-meta">
+                            <div>SAR 500,000 raised</div>
+                            <div>68% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 68%;"></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title">Ready to Educate the Future?</h2>
+            <p class="cta-description">Join the education revolution and help build a smarter Saudi Arabia through innovative learning projects and skill development initiatives that empower the next generation.</p>
+            <div class="cta-buttons">
+                <a href="create-project.html" class="btn btn-white">Start Your Education Project</a>
+                <a href="projects.html?category=education" class="btn btn-outline-white">Explore All Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mobile Menu Script -->
+    <script src="mobile-menu.js"></script>
+    
+    <!-- Language Switcher Script -->
+    <script>
+        function switchLanguage(lang) {
+            if (lang === 'ar') {
+                window.location.href = 'vision2030-education-ar.html';
+            } else {
+                window.location.href = 'vision2030-education.html';
+            }
+        }
+    </script>
+</body>
+</html>

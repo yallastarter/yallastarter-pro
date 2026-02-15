@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Abyss: World's Biggest Underground Rollercoaster - YallaStarter</title>
+    <meta name="description" content="Support The Abyss, the world's biggest underground rollercoaster project in Saudi Arabia. Experience the thrill of a lifetime with this revolutionary entertainment project.">
+    <meta name="keywords" content="rollercoaster, underground, entertainment, Saudi Arabia, theme park, adventure">
+    <meta name="author" content="YallaStarter">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="The Abyss: World's Biggest Underground Rollercoaster - YallaStarter">
+    <meta property="og:description" content="Support The Abyss, the world's biggest underground rollercoaster project in Saudi Arabia. Experience the thrill of a lifetime with this revolutionary entertainment project.">
+    <meta property="og:image" content="https://i.ibb.co/TqDRP0Rc/Gemini-Generated-Image-g23nx9g23nx9g23n.png">
+    <meta property="og:url" content="https://yallastarter.com/project-abyss.html">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The Abyss: World's Biggest Underground Rollercoaster - YallaStarter">
+    <meta name="twitter:description" content="Support The Abyss, the world's biggest underground rollercoaster project in Saudi Arabia. Experience the thrill of a lifetime with this revolutionary entertainment project.">
+    <meta name="twitter:image" content="https://i.ibb.co/TqDRP0Rc/Gemini-Generated-Image-g23nx9g23nx9g23n.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://yallastarter.com/project-abyss.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Mobile Menu CSS -->
+    <link rel="stylesheet" href="mobile-menu.css">
+    
+    <style>
+        :root {
+            --primary-color: #00d4aa;
+            --secondary-color: #1a1a1a;
+            --accent-color: #ff6b35;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --border-color: #e9ecef;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #fff;
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1001;
+            padding: 0.5rem 1rem;
+        }
+        
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 1rem;
+            width: 100%;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            flex-shrink: 0;
+            margin-right: 0.8rem;
+            transition: transform 0.2s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.02);
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: block;
+            letter-spacing: -0.02em;
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            flex: 0 1 auto;
+            justify-content: flex-start;
+        }
+        
+        .nav-links li {
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--text-color);
+            font-weight: 500;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-size: 1rem;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+            background-color: rgba(0, 212, 170, 0.05);
+        }
+        
+        .nav-links a.active {
+            color: var(--primary-color);
+            font-weight: 600;
+            background-color: rgba(0, 212, 170, 0.1);
+            padding: 0.5rem 1rem;
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
+        }
+        
+        .auth-buttons .btn {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .auth-buttons .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), #008f44);
+            color: white;
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 2px 8px rgba(0, 212, 170, 0.2);
+        }
+        
+        .auth-buttons .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 212, 170, 0.3);
+        }
+        
+        .auth-buttons .btn-link {
+            background: transparent;
+            color: var(--text-color);
+            border: none;
+            padding: 0.6rem 1rem;
+        }
+        
+        .auth-buttons .btn-link:hover {
+            color: var(--primary-color);
+        }
+        
+        .language-switcher {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: auto;
+        }
+        
+        .language-btn {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .language-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-1px);
+        }
+        
+        .language-btn.active {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: white;
+            z-index: 1000;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+        
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .mobile-header-left {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .mobile-close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links:not(.mobile-menu .nav-links),
+            .auth-buttons:not(.mobile-menu .auth-buttons):not(.mobile-header-left .auth-buttons),
+            .language-switcher:not(.mobile-menu .language-switcher) {
+                display: none;
+            }
+            
+            .mobile-menu.active {
+                display: block;
+            }
+        }
+
+        /* Project Hero Section */
+        .project-hero {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://i.ibb.co/TqDRP0Rc/Gemini-Generated-Image-g23nx9g23nx9g23n.png') center/cover;
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        .project-hero .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .project-hero .lead {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .project-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Project Content */
+        .project-content {
+            padding: 4rem 0;
+        }
+
+        .project-image {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .project-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--secondary-color);
+        }
+
+        .project-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: #666;
+        }
+
+        /* Funding Section */
+        .funding-section {
+            background: var(--light-bg);
+            padding: 4rem 0;
+        }
+
+        .funding-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .funding-progress {
+            background: #e9ecef;
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .funding-progress-bar {
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            height: 100%;
+            width: 75%;
+            transition: width 0.3s ease;
+        }
+
+        .funding-amount {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .funding-goal {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .backers-count {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .btn-support {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border: none;
+            color: white;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-support:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 212, 170, 0.3);
+            color: white;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+
+        .feature-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Timeline Section */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary-color);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            width: 50%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            padding-right: 3rem;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-left: 3rem;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 0;
+            height: 0;
+            border: 10px solid transparent;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -20px;
+            border-left-color: white;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -20px;
+            border-right-color: white;
+        }
+
+        .timeline-date {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--secondary-color);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer h5 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .footer a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-links a {
+            display: inline-block;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .project-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .project-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                padding-left: 3rem !important;
+                padding-right: 0 !important;
+                text-align: left !important;
+            }
+
+            .timeline-item .timeline-content::before {
+                left: -20px !important;
+                border-right-color: white !important;
+                border-left-color: transparent !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <span class="logo-text">YallaStarter</span>
+            </a>
+        
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="entertainment.html">Entertainment Projects</a></li>
+                <li><a href="vision2030.html">Vision 2030 Projects</a></li>
+                <li><a href="mind71.html">MIND71 AI</a></li>
+                <li><a href="projects.html">Browse Projects</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            
+            <div class="language-switcher">
+                <button class="language-btn active" onclick="switchLanguage('en')">English</button>
+                <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
+            </div>
+            
+            <div class="auth-buttons">
+                <a href="create-project.html" class="btn btn-primary">Start a Project</a>
+                <a href="login.html" class="btn btn-link">Log In</a>
+            </div>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+        
+        <div class="mobile-menu">
+            <div class="mobile-menu-header">
+                <div class="mobile-header-left">
+                    <div class="language-switcher">
+                        <button class="language-btn active" onclick="switchLanguage('en')">English</button>
+                        <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
+                    </div>
+                    <div class="auth-buttons">
+                        <a href="create-project.html" class="btn btn-primary">Start a Project</a>
+                        <a href="login.html" class="btn btn-link">Log In</a>
+                    </div>
+                </div>
+                <button class="mobile-close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="entertainment.html">Entertainment Projects</a></li>
+                <li><a href="vision2030.html">Vision 2030 Projects</a></li>
+                <li><a href="mind71.html">MIND71 AI</a></li>
+                <li><a href="projects.html">Browse Projects</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Project Hero Section -->
+    <section class="project-hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1>The Abyss: World's Biggest Underground Rollercoaster</h1>
+                    <p class="lead">Experience the ultimate thrill with the world's first and largest underground rollercoaster, featuring cutting-edge technology and breathtaking underground landscapes.</p>
+                    <div class="project-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">75%</div>
+                            <div class="stat-label">Funded</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">2,847</div>
+                            <div class="stat-label">Backers</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">45</div>
+                            <div class="stat-label">Days Left</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="project-image">
+                        <img src="https://i.ibb.co/TqDRP0Rc/Gemini-Generated-Image-g23nx9g23nx9g23n.png" alt="The Abyss Underground Rollercoaster" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Content -->
+    <section class="project-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h2 class="section-title">About The Abyss</h2>
+                    <p class="project-description">
+                        The Abyss represents a revolutionary leap in entertainment technology, combining the thrill of high-speed rollercoasters with the mystique of underground exploration. This groundbreaking project will create the world's largest underground rollercoaster, featuring state-of-the-art engineering and immersive storytelling that takes riders on an unforgettable journey through ancient caverns and modern marvels.
+                    </p>
+                    <p class="project-description">
+                        Located in the heart of Saudi Arabia's entertainment district, The Abyss will feature a 2.5-kilometer track that descends 150 meters below ground level, passing through natural rock formations and specially designed underground chambers. The experience includes cutting-edge lighting, sound systems, and special effects that create an otherworldly atmosphere.
+                    </p>
+
+                    <!-- Project Images -->
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="project-image">
+                                <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Underground Rollercoaster Track" class="img-fluid">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="project-image">
+                                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Underground Cavern Design" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Features Section -->
+                    <h2 class="section-title mt-5">Project Features</h2>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-mountain"></i>
+                            </div>
+                            <h3 class="feature-title">Underground Experience</h3>
+                            <p class="feature-description">Descend 150 meters below ground through natural rock formations and specially designed chambers.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <h3 class="feature-title">High-Speed Thrills</h3>
+                            <p class="feature-description">Experience speeds up to 120 km/h with advanced magnetic propulsion technology.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <h3 class="feature-title">Immersive Lighting</h3>
+                            <p class="feature-description">State-of-the-art LED lighting system creates dynamic visual experiences throughout the ride.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-volume-up"></i>
+                            </div>
+                            <h3 class="feature-title">3D Audio System</h3>
+                            <p class="feature-description">Surround sound technology provides immersive audio that enhances the underground experience.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3 class="feature-title">Safety First</h3>
+                            <p class="feature-description">Advanced safety systems and emergency protocols ensure a secure experience for all riders.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <h3 class="feature-title">Eco-Friendly</h3>
+                            <p class="feature-description">Sustainable construction methods and energy-efficient systems minimize environmental impact.</p>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Section -->
+                    <h2 class="section-title mt-5">Project Timeline</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <div class="timeline-date">Q1 2024</div>
+                                <h4 class="timeline-title">Design & Planning</h4>
+                                <p>Finalize engineering designs, obtain permits, and begin site preparation.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <div class="timeline-date">Q2 2024</div>
+                                <h4 class="timeline-title">Excavation Begins</h4>
+                                <p>Start underground excavation and begin construction of the main track structure.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <div class="timeline-date">Q3 2024</div>
+                                <h4 class="timeline-title">Track Installation</h4>
+                                <p>Install the rollercoaster track and begin work on lighting and sound systems.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <div class="timeline-date">Q4 2024</div>
+                                <h4 class="timeline-title">Testing & Safety</h4>
+                                <p>Comprehensive testing phase and safety certification process.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <div class="timeline-date">Q1 2025</div>
+                                <h4 class="timeline-title">Grand Opening</h4>
+                                <p>Official opening to the public with special launch events and celebrations.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Funding Sidebar -->
+                <div class="col-lg-4">
+                    <div class="funding-card">
+                        <h3>Support The Abyss</h3>
+                        <div class="funding-amount">$3,750,000</div>
+                        <div class="funding-goal">raised of $5,000,000 goal</div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar"></div>
+                        </div>
+                        <div class="backers-count">2,847 backers</div>
+                        <div class="backers-count">45 days left</div>
+                        
+                        <a href="#" class="btn-support">Support This Project</a>
+                        
+                        <div class="mt-4">
+                            <h5>Reward Tiers</h5>
+                            <div class="reward-tier">
+                                <h6>$25 - Digital Thank You</h6>
+                                <p>Personal thank you message and digital certificate</p>
+                            </div>
+                            <div class="reward-tier">
+                                <h6>$100 - Early Access Pass</h6>
+                                <p>VIP early access to The Abyss before public opening</p>
+                            </div>
+                            <div class="reward-tier">
+                                <h6>$500 - Behind the Scenes Tour</h6>
+                                <p>Exclusive behind-the-scenes construction tour</p>
+                            </div>
+                            <div class="reward-tier">
+                                <h6>$1,000 - Naming Rights</h6>
+                                <p>Name a section of the track and receive lifetime passes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <h5>YallaStarter</h5>
+                    <p>Empowering Saudi creators to bring their innovative ideas to life through crowdfunding.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <h5>Platform</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="projects.html">Browse Projects</a></li>
+                        <li><a href="create-project.html">Start a Project</a></li>
+                        <li><a href="how-it-works.html">How It Works</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h5>Support</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Community Guidelines</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h5>Company</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h5>Legal</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; 2024 YallaStarter. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p>Made with ❤️ in Saudi Arabia</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Mobile Menu Script -->
+    <script src="mobile-menu.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Language Switcher
+        function switchLanguage(lang) {
+            if (lang === 'en') {
+                window.location.href = 'project-abyss.html';
+            } else if (lang === 'ar') {
+                window.location.href = 'project-abyss-ar.html';
+            }
+        }
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add animation to funding progress bar
+        window.addEventListener('load', function() {
+            const progressBar = document.querySelector('.funding-progress-bar');
+            if (progressBar) {
+                setTimeout(() => {
+                    progressBar.style.width = '75%';
+                }, 500);
+            }
+        });
+
+        // Add hover effects to feature cards
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+    <!-- Password Protection Script -->\n    <script src="assets/js/password-clear.js"></script>\n</body>
+</html>

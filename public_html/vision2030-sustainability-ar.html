@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sustainability & Environment - Vision 2030 Projects | YallaStarter</title>
+    <meta name="description" content="Discover sustainable and environmental projects driving Saudi Arabia's Vision 2030 transformation. Support green energy, waste management, and environmental protection initiatives.">
+    <meta name="keywords" content="sustainability, environment, green energy, renewable energy, waste management, environmental protection, Saudi Arabia, Vision 2030">
+    <meta name="author" content="YallaStarter">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Sustainability & Environment - Vision 2030 Projects | YallaStarter">
+    <meta property="og:description" content="Discover sustainable and environmental projects driving Saudi Arabia's Vision 2030 transformation.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yallastarter.com/vision2030-sustainability">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" as="style">
+    
+    <title>Sustainability & Environment - Vision 2030 Projects | YallaStarter</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile-menu.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --green-primary: #10b981;
+            --green-primary-dark: #059669;
+            --green-secondary: #34d399;
+            --green-accent: #6ee7b7;
+            --green-gradient: linear-gradient(135deg, #10b981 0%, #34d399 50%, #6ee7b7 100%);
+            --green-glow: 0 0 30px rgba(16, 185, 129, 0.3);
+            --green-text: #1e293b;
+            --green-text-light: #64748b;
+            --green-bg: #f0fdf4;
+            --green-card: #ffffff;
+            --green-border: #d1fae5;
+        }
+
+        body {
+            font-family: 'Poppins', 'Tajawal', sans-serif;
+            background: var(--green-bg);
+            color: var(--green-text);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--green-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: var(--green-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--green-primary);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--green-gradient);
+            border-radius: 1px;
+        }
+
+        .language-switcher {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .language-btn {
+            background: none;
+            border: 1px solid var(--green-border);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .language-btn.active,
+        .language-btn:hover {
+            background: var(--green-primary);
+            color: white;
+            border-color: var(--green-primary);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--green-gradient);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--green-glow);
+        }
+
+        .btn-link {
+            color: var(--green-text);
+            background: none;
+            border: 1px solid var(--green-border);
+        }
+
+        .btn-link:hover {
+            background: var(--green-primary);
+            color: white;
+            border-color: var(--green-primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--green-text);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .sustainability-hero {
+            background: linear-gradient(135deg, #064e3b 0%, #065f46 50%, #047857 100%);
+            color: white;
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sustainability-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="leaves" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M10 0 L15 10 L10 20 L5 10 Z" fill="none" stroke="%2310b981" stroke-width="0.5" opacity="0.3"/></pattern></defs><rect width="100" height="100" fill="url(%23leaves)"/></svg>');
+            opacity: 0.1;
+        }
+
+        .sustainability-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .sustainability-hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: var(--green-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: pulse 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse {
+            from { filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.5)); }
+            to { filter: drop-shadow(0 0 30px rgba(16, 185, 129, 0.8)); }
+        }
+
+        .sustainability-hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        .sustainability-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .sustainability-stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .sustainability-stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--green-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .sustainability-stat-label {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* Sustainability Categories */
+        .sustainability-categories {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--green-text);
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            text-align: center;
+            color: var(--green-text-light);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .sustainability-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .sustainability-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--green-border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sustainability-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--green-gradient);
+        }
+
+        .sustainability-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(16, 185, 129, 0.15);
+        }
+
+        .sustainability-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--green-gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .sustainability-card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--green-text);
+        }
+
+        .sustainability-card-description {
+            color: var(--green-text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .sustainability-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sustainability-features li {
+            padding: 0.5rem 0;
+            color: var(--green-text-light);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .sustainability-features li::before {
+            content: '🌱';
+            position: absolute;
+            left: 0;
+            color: var(--green-primary);
+            font-weight: bold;
+        }
+
+        /* Featured Projects */
+        .featured-projects {
+            padding: 6rem 0;
+            background: var(--green-bg);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(16, 185, 129, 0.15);
+        }
+
+        .project-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-category {
+            color: var(--green-primary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--green-text);
+        }
+
+        .project-description {
+            color: var(--green-text-light);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--green-text-light);
+        }
+
+        .funding-progress {
+            width: 100%;
+            height: 6px;
+            background: #d1fae5;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .funding-progress-bar {
+            height: 100%;
+            background: var(--green-gradient);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 0;
+            background: var(--green-gradient);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .cta-description {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--green-primary);
+            border: none;
+        }
+
+        .btn-white:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-white {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline-white:hover {
+            background: white;
+            color: var(--green-primary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links,
+            .auth-buttons {
+                display: none;
+            }
+
+            .sustainability-hero-title {
+                font-size: 2.5rem;
+            }
+
+            .sustainability-hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .sustainability-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-buttons .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+
+    <style>
+        body { direction: rtl; text-align: right; font-family: 'Tajawal', 'Poppins', sans-serif; }
+        .navbar .nav-links { margin-left: 0; margin-right: auto; }
+        .navbar .logo { margin-left: 1rem; margin-right: 0; }
+        .footer-links { padding-right: 0; }
+        .footer-column h3 { text-align: right; }
+        /* Add more RTL fixes as needed */
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="index-ar.html" class="logo">
+                <span class="logo-text">YallaStarter</span>
+            </a>
+        
+            <ul class="nav-links">
+                <li><a href="index-ar.html">الرئيسية</a></li>
+                <li><a href="entertainment-ar.html">الترفيه الإبداعي</a></li>
+                <li><a href="vision2030-ar.html" class="active">مشاريع رؤية 2030</a></li>
+                <li><a href="mind71-ar.html">MIND71 AI</a></li>
+                <li><a href="projects-ar.html">تصفح المشاريع</a></li>
+                <li><a href="how-it-works-ar.html">كيف يعمل</a></li>
+                <li><a href="about-ar.html">من نحن</a></li>
+                <li><a href="contact-ar.html">اتصل بنا</a></li>
+            </ul>
+            
+            <div class="language-switcher">
+                <button class="language-btn active" onclick="switchLanguage('ar')">English</button>
+                <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
+            </div>
+            
+            <div class="auth-buttons">
+                <a href="create-project-ar.html" class="btn btn-primary">ابدأ مشروعك</a>
+                <a href="login-ar.html" class="btn btn-link">تسجيل الدخول</a>
+            </div>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+        
+        <div class="mobile-menu">
+            <div class="mobile-menu-header">
+                <button class="mobile-close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index-ar.html">الرئيسية</a></li>
+                <li><a href="entertainment-ar.html">الترفيه الإبداعي</a></li>
+                <li><a href="vision2030-ar.html" class="active">مشاريع رؤية 2030</a></li>
+                <li><a href="mind71-ar.html">MIND71 AI</a></li>
+                <li><a href="projects-ar.html">تصفح المشاريع</a></li>
+                <li><a href="how-it-works-ar.html">كيف يعمل</a></li>
+                <li><a href="about-ar.html">من نحن</a></li>
+                <li><a href="contact-ar.html">اتصل بنا</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <a href="create-project-ar.html" class="btn btn-primary">ابدأ مشروعك</a>
+                <a href="login-ar.html" class="btn btn-link">تسجيل الدخول</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sustainability Hero -->
+    <section class="sustainability-hero">
+        <div class="container">
+            <div class="sustainability-hero-content">
+                <h1 class="sustainability-hero-title">Sustainability & Environment</h1>
+                <p class="sustainability-hero-subtitle">Building a greener future for Saudi Arabia through innovative environmental solutions, renewable energy, and sustainable practices that protect our planet while driving economic growth.</p>
+                
+                <div class="sustainability-stats">
+                    <div class="sustainability-stat">
+                        <div class="sustainability-stat-number">300+</div>
+                        <div class="sustainability-stat-label">Green Projects</div>
+                    </div>
+                    <div class="sustainability-stat">
+                        <div class="sustainability-stat-number">SAR 1.8B</div>
+                        <div class="sustainability-stat-label">Green Investment</div>
+                    </div>
+                    <div class="sustainability-stat">
+                        <div class="sustainability-stat-number">40%</div>
+                        <div class="sustainability-stat-label">Carbon Reduction</div>
+                    </div>
+                    <div class="sustainability-stat">
+                        <div class="sustainability-stat-number">25K+</div>
+                        <div class="sustainability-stat-label">Green Jobs</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sustainability Categories -->
+    <section class="sustainability-categories">
+        <div class="container">
+            <h2 class="section-title">Revolutionary Environmental Solutions</h2>
+            <p class="section-subtitle">Explore cutting-edge sustainability technologies and environmental innovations driving Saudi Arabia's green transformation</p>
+            
+            <div class="sustainability-grid">
+                <div class="sustainability-card">
+                    <div class="sustainability-icon">
+                        <i class="fas fa-solar-panel"></i>
+                    </div>
+                    <h3 class="sustainability-card-title">Renewable Energy Systems</h3>
+                    <p class="sustainability-card-description">Advanced solar, wind, and hydroelectric power systems providing clean, sustainable energy for Saudi Arabia's future.</p>
+                    <ul class="sustainability-features">
+                        <li>Solar Power Plants & Rooftop Systems</li>
+                        <li>Wind Energy Farms</li>
+                        <li>Hydroelectric Power</li>
+                        <li>Energy Storage Solutions</li>
+                        <li>Smart Grid Technology</li>
+                    </ul>
+                </div>
+
+                <div class="sustainability-card">
+                    <div class="sustainability-icon">
+                        <i class="fas fa-recycle"></i>
+                    </div>
+                    <h3 class="sustainability-card-title">Waste Management & Circular Economy</h3>
+                    <p class="sustainability-card-description">Innovative waste reduction, recycling, and circular economy solutions minimizing environmental impact.</p>
+                    <ul class="sustainability-features">
+                        <li>Smart Waste Collection Systems</li>
+                        <li>Plastic Recycling Technologies</li>
+                        <li>Organic Waste Composting</li>
+                        <li>E-waste Processing</li>
+                        <li>Circular Design Principles</li>
+                    </ul>
+                </div>
+
+                <div class="sustainability-card">
+                    <div class="sustainability-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3 class="sustainability-card-title">Green Agriculture & Food Security</h3>
+                    <p class="sustainability-card-description">Sustainable farming practices, vertical agriculture, and food security solutions for a growing population.</p>
+                    <ul class="sustainability-features">
+                        <li>Vertical Farming Systems</li>
+                        <li>Hydroponic & Aquaponic Solutions</li>
+                        <li>Drought-Resistant Crops</li>
+                        <li>Precision Agriculture</li>
+                        <li>Food Waste Reduction</li>
+                    </ul>
+                </div>
+
+                <div class="sustainability-card">
+                    <div class="sustainability-icon">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <h3 class="sustainability-card-title">Water Conservation & Management</h3>
+                    <p class="sustainability-card-description">Advanced water treatment, desalination, and conservation technologies ensuring sustainable water resources.</p>
+                    <ul class="sustainability-features">
+                        <li>Desalination Technologies</li>
+                        <li>Water Recycling Systems</li>
+                        <li>Smart Irrigation</li>
+                        <li>Rainwater Harvesting</li>
+                        <li>Water Quality Monitoring</li>
+                    </ul>
+                </div>
+
+                <div class="sustainability-card">
+                    <div class="sustainability-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3 class="sustainability-card-title">Carbon Capture & Climate Solutions</h3>
+                    <p class="sustainability-card-description">Cutting-edge carbon capture, storage, and climate mitigation technologies reducing greenhouse gas emissions.</p>
+                    <ul class="sustainability-features">
+                        <li>Direct Air Capture (DAC)</li>
+                        <li>Carbon Storage Solutions</li>
+                        <li>Climate Monitoring Systems</li>
+                        <li>Emission Reduction Technologies</li>
+                        <li>Green Building Materials</li>
+                    </ul>
+                </div>
+
+                <div class="sustainability-card">
+                    <div class="sustainability-icon">
+                        <i class="fas fa-tree"></i>
+                    </div>
+                    <h3 class="sustainability-card-title">Biodiversity & Conservation</h3>
+                    <p class="sustainability-card-description">Wildlife protection, habitat restoration, and biodiversity conservation initiatives preserving Saudi Arabia's natural heritage.</p>
+                    <ul class="sustainability-features">
+                        <li>Wildlife Protection Programs</li>
+                        <li>Habitat Restoration</li>
+                        <li>Marine Conservation</li>
+                        <li>Endangered Species Protection</li>
+                        <li>Ecosystem Monitoring</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section class="featured-projects">
+        <div class="container">
+            <h2 class="section-title">Featured Sustainability Projects</h2>
+            <p class="section-subtitle">Discover groundbreaking environmental projects that are shaping Saudi Arabia's sustainable future</p>
+            
+            <div class="projects-grid">
+                <a href="project-solar-energy.html" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Advanced Solar Energy Storage System" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Renewable Energy</div>
+                        <h3 class="project-title">Advanced Solar Energy Storage System</h3>
+                        <p class="project-description">Revolutionary solar energy storage technology using advanced battery systems and smart grid integration to provide reliable, clean energy for Saudi cities.</p>
+                        <div class="project-meta">
+                            <div>SAR 380,000 raised</div>
+                            <div>76% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 76%;"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Smart Waste Management System" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Waste Management</div>
+                        <h3 class="project-title">Smart Waste Management System</h3>
+                        <p class="project-description">AI-powered waste collection and sorting system that optimizes routes, reduces emissions, and maximizes recycling efficiency across Saudi cities.</p>
+                        <div class="project-meta">
+                            <div>SAR 250,000 raised</div>
+                            <div>83% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 83%;"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Vertical Farming Initiative" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Green Agriculture</div>
+                        <h3 class="project-title">Saudi Vertical Farming Initiative</h3>
+                        <p class="project-description">Large-scale vertical farming facilities using hydroponic and LED technology to grow fresh produce year-round with minimal water usage.</p>
+                        <div class="project-meta">
+                            <div>SAR 420,000 raised</div>
+                            <div>68% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 68%;"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Carbon Capture Facility" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Carbon Capture</div>
+                        <h3 class="project-title">Direct Air Capture Facility</h3>
+                        <p class="project-description">Advanced carbon capture technology that removes CO2 directly from the atmosphere, contributing to Saudi Arabia's net-zero emissions goals.</p>
+                        <div class="project-meta">
+                            <div>SAR 1,200,000 raised</div>
+                            <div>45% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 45%;"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Ocean Cleanup Project" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Marine Conservation</div>
+                        <h3 class="project-title">Red Sea Marine Conservation</h3>
+                        <p class="project-description">Comprehensive marine conservation program protecting Red Sea ecosystems, coral reefs, and marine biodiversity through advanced monitoring and restoration.</p>
+                        <div class="project-meta">
+                            <div>SAR 600,000 raised</div>
+                            <div>72% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 72%;"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Green Hydrogen Production" loading="lazy" decoding="async">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Clean Energy</div>
+                        <h3 class="project-title">Green Hydrogen Production Plant</h3>
+                        <p class="project-description">Large-scale green hydrogen production facility using renewable energy to produce clean fuel for transportation and industry applications.</p>
+                        <div class="project-meta">
+                            <div>SAR 2,500,000 raised</div>
+                            <div>38% funded</div>
+                        </div>
+                        <div class="funding-progress">
+                            <div class="funding-progress-bar" style="width: 38%;"></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title">Ready to Go Green?</h2>
+            <p class="cta-description">Join the green revolution and help build a sustainable future for Saudi Arabia through innovative environmental projects and clean technology solutions.</p>
+            <div class="cta-buttons">
+                <a href="create-project-ar.html" class="btn btn-white">Start Your Green Project</a>
+                <a href="projects-ar.html?category=sustainability" class="btn btn-outline-white">Explore All Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mobile Menu Script -->
+    <script src="mobile-menu.js"></script>
+    
+    <!-- Language Switcher Script -->
+    <script>
+        function switchLanguage(lang) {
+            if (lang === 'ar') {
+                window.location.href = 'vision2030-sustainability-ar.html';
+            } else {
+                window.location.href = 'vision2030-sustainability.html';
+            }
+        }
+    </script>
+
+    <script>
+        function switchLanguage(lang) {
+            if (lang === 'en') {
+                window.location.href = 'vision2030-sustainability.html';
+            } else if (lang === 'ar') {
+                window.location.href = 'vision2030-sustainability-ar.html';
+            }
+        }
+    </script>
+        </body>
+</html>
