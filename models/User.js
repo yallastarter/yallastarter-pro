@@ -31,6 +31,24 @@ const UserSchema = new mongoose.Schema({
         type: String,
         default: null
     },
+    coinBalance: {
+        type: Number,
+        default: 0,
+        min: 0
+    },
+    totalEarned: {
+        type: Number,
+        default: 0
+    },
+    totalSpent: {
+        type: Number,
+        default: 0
+    },
+    bankAccount: {
+        accountName: { type: String, default: '' },
+        iban: { type: String, default: '' },
+        bankName: { type: String, default: '' }
+    },
     createdAt: {
         type: Date,
         default: Date.now
@@ -50,5 +68,9 @@ UserSchema.pre('save', async function (next) {
 UserSchema.methods.matchPassword = async function (enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password);
 };
+
+// Indexes
+UserSchema.index({ username: 1 });
+UserSchema.index({ email: 1 });
 
 module.exports = mongoose.model('User', UserSchema);

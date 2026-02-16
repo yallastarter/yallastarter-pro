@@ -4,6 +4,8 @@ const jwt = require('jsonwebtoken');
 const multer = require('multer');
 const path = require('path');
 const User = require('../models/User');
+const passport = require('passport');
+
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({
@@ -53,21 +55,34 @@ router.post('/signup', async (req, res) => {
     try {
         const { username, email, password } = req.body;
 
+        // Input validation
+        if (!username || !email || !password) {
+            return res.status(400).json({ success: false, message: 'Username, email, and password are required' });
+        }
+
+        if (typeof username !== 'string' || username.trim().length < 3) {
+            return res.status(400).json({ success: false, message: 'Username must be at least 3 characters' });
+        }
+
+        if (typeof password !== 'string' || password.length < 6) {
+            return res.status(400).json({ success: false, message: 'Password must be at least 6 characters' });
+        }
+
         // Check if user exists
-        let user = await User.findOne({ email });
+        let user = await User.findOne({ email: email.toLowerCase().trim() });
         if (user) {
             return res.status(400).json({ success: false, message: 'User already exists' });
         }
 
         // Create user
         user = await User.create({
-            username,
-            email,
+            username: username.trim(),
+            email: email.toLowerCase().trim(),
             password
         });
 
         // Create token
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
             expiresIn: '30d'
         });
 
@@ -82,8 +97,11 @@ router.post('/signup', async (req, res) => {
             }
         });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ success: false, message: 'Server Error', error: error.message });
+        console.error('Signup error:', error.message);
+        if (error.name === 'ValidationError') {
+            return res.status(400).json({ success: false, message: error.message });
+        }
+        res.status(500).json({ success: false, message: 'Server Error' });
     }
 });
 
@@ -112,7 +130,7 @@ router.post('/login', async (req, res) => {
         }
 
         // Create token
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
             expiresIn: '30d'
         });
 
@@ -132,39 +150,35 @@ router.post('/login', async (req, res) => {
     }
 });
 
-// @desc    Get current user
-// @route   GET /api/auth/me
-// @access  Private
-router.get('/me', async (req, res) => {
-    try {
-        // Get token from header
-        const authHeader = req.headers.authorization;
-        if (!authHeader || !authHeader.startsWith('Bearer ')) {
-            return res.status(401).json({ success: false, message: 'Not authorized' });
-        }
+// @desc    Google OAuth
+// @route   GET /api/auth/google
+// @access  Public
+router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
-        const token = authHeader.split(' ')[1];
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        const user = await User.findById(decoded.id).select('-password');
-
-        if (!user) {
-            return res.status(404).json({ success: false, message: 'User not found' });
-        }
-
-        res.status(200).json({
-            success: true,
-            user: {
-                id: user._id,
-                username: user.username,
-                email: user.email,
-                role: user.role
-            }
+// @desc    Google OAuth Callback
+// @route   GET /api/auth/google/callback
+// @access  Public
+router.get('/google/callback',
+    passport.authenticate('google', { failureRedirect: '/login.html', session: false }),
+    (req, res) => {
+        // Successful authentication, redirect home.
+        const token = jwt.sign({ userId: req.user._id }, process.env.JWT_SECRET, {
+            expiresIn: '30d'
         });
-    } catch (error) {
-        console.error(error);
-        res.status(401).json({ success: false, message: 'Token is not valid' });
+
+        // Redirect to frontend with token
+        // Encode user object safely
+        const userStr = encodeURIComponent(JSON.stringify({
+            id: req.user._id,
+            username: req.user.username,
+            email: req.user.email,
+            role: req.user.role,
+            photoUrl: req.user.photoUrl
+        }));
+
+        res.redirect(`/dashboard.html?token=${token}&user=${userStr}`);
     }
-});
+);
 
 // @desc    Get current user
 // @route   GET /api/auth/me
@@ -245,6 +259,39 @@ router.post('/upload-photo', authMiddleware, upload.single('photo'), async (req,
     } catch (error) {
         console.error('Upload photo error:', error);
         res.status(500).json({ success: false, message: 'Server error' });
+    }
+});
+
+// @desc    Update password
+// @route   PUT /api/auth/updatepassword
+// @access  Private
+router.put('/updatepassword', authMiddleware, async (req, res) => {
+    try {
+        const { currentPassword, newPassword } = req.body;
+
+        if (!currentPassword || !newPassword) {
+            return res.status(400).json({ success: false, message: 'Please provide current and new password' });
+        }
+
+        const user = await User.findById(req.userId).select('+password');
+
+        // Check current password
+        const isMatch = await user.matchPassword(currentPassword);
+        if (!isMatch) {
+            return res.status(401).json({ success: false, message: 'Incorrect current password' });
+        }
+
+        user.password = newPassword;
+        await user.save();
+
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+            expiresIn: '30d'
+        });
+
+        res.status(200).json({ success: true, token });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Server Error' });
     }
 });
 

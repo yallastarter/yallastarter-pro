@@ -6,28 +6,42 @@ if (!cached) {
     cached = global.mongoose = { conn: null, promise: null };
 }
 
-async function connectDB() {
+const MAX_RETRIES = 3;
+const RETRY_DELAY = 5000; // 5 seconds
+
+async function connectDB(retries = MAX_RETRIES) {
     if (cached.conn) {
         return cached.conn;
     }
 
     if (!cached.promise) {
+        // Mongoose 7+ defaults strictQuery to false; be explicit
+        mongoose.set('strictQuery', false);
+
         const opts = {
-            // Recommended for Atlas connections
-            serverSelectionTimeoutMS: 5000,
+            serverSelectionTimeoutMS: 10000,
             socketTimeoutMS: 45000,
         };
 
-        console.log('Connecting to MongoDB Atlas...');
+        const maskedUri = (process.env.MONGO_URI || '').replace(/:([^@]+)@/, ':****@');
+        console.log(`Connecting to MongoDB (${maskedUri.substring(0, 60)}...)`);
 
         cached.promise = mongoose.connect(process.env.MONGO_URI, opts)
             .then((mongoose) => {
-                console.log('MongoDB Atlas connected successfully');
+                console.log('✅ MongoDB connected successfully');
                 return mongoose;
             })
-            .catch((err) => {
-                console.error('MongoDB Atlas connection failed:', err.message);
+            .catch(async (err) => {
+                console.error(`❌ MongoDB connection failed: ${err.message}`);
                 cached.promise = null; // Reset so retry is possible
+
+                if (retries > 0) {
+                    console.log(`   Retrying in ${RETRY_DELAY / 1000}s... (${retries} attempts remaining)`);
+                    await new Promise(resolve => setTimeout(resolve, RETRY_DELAY));
+                    return connectDB(retries - 1);
+                }
+
+                console.error('FATAL: All MongoDB connection attempts failed. Exiting.');
                 process.exit(1); // Render will auto-restart the service
             });
     }
@@ -37,3 +51,4 @@ async function connectDB() {
 }
 
 module.exports = connectDB;
+

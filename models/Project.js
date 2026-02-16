@@ -57,4 +57,9 @@ const ProjectSchema = new mongoose.Schema({
     }
 });
 
+// Indexes for performance
+ProjectSchema.index({ category: 1 });
+ProjectSchema.index({ status: 1 });
+ProjectSchema.index({ creator: 1 });
+
 module.exports = mongoose.model('Project', ProjectSchema);

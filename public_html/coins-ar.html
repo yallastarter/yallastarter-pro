@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="أدر عملات يلا ستارتر الخاصة بك. اشترِ، أرسل، وتتبع عملتك الافتراضية.">
+    <title>محفظتي - عملات يلا ستارتر</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile-menu.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Tajawal', 'Poppins', sans-serif;
+            text-align: right;
+        }
+
+        .wallet-container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        /* Coin Balance Hero */
+        .wallet-hero {
+            background: linear-gradient(135deg, #006c35 0%, #00a651 40%, #8b5cf6 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+            /* RTL specific */
+            flex-direction: row-reverse;
+        }
+
+        .wallet-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -20%;
+            right: auto;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .coin-icon-large {
+            width: 140px;
+            height: 140px;
+            background: radial-gradient(ellipse at center, #fcd34d 0%, #f59e0b 40%, #d97706 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #78350f;
+            box-shadow:
+                inset 0 0 20px rgba(255, 255, 255, 0.5),
+                inset 0 -10px 20px rgba(0, 0, 0, 0.2),
+                0 10px 20px rgba(0, 0, 0, 0.3),
+                0 0 0 8px rgba(245, 158, 11, 0.3);
+            animation: coinFloat 3s ease-in-out infinite;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+            border: 4px solid #f59e0b;
+        }
+
+        .coin-icon-large::after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 2px dashed rgba(120, 53, 15, 0.3);
+            border-radius: 50%;
+        }
+
+        .coin-icon-large::before {
+            content: 'Y';
+            font-weight: 900;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(180deg, #92400e 0%, #fcd34d 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes coinFloat {
+
+            0%,
+            100% {
+                transform: translateY(0) rotateY(0deg);
+            }
+
+            50% {
+                transform: translateY(-10px) rotateY(10deg);
+            }
+        }
+
+        .wallet-info {
+            position: relative;
+            z-index: 1;
+            text-align: right;
+            width: 100%;
+        }
+
+        .wallet-label {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .wallet-balance {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+        }
+
+        .wallet-balance-sar {
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        .wallet-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .wallet-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Action Cards Grid */
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .action-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .action-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .action-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .action-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .action-icon.buy {
+            background: linear-gradient(135deg, #10B981, #34D399);
+            color: white;
+        }
+
+        .action-icon.send {
+            background: linear-gradient(135deg, #8B5CF6, #A78BFA);
+            color: white;
+        }
+
+        .action-icon.cashout {
+            background: linear-gradient(135deg, #F59E0B, #FBBF24);
+            color: white;
+        }
+
+        .action-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--neutral-900);
+        }
+
+        .action-desc {
+            color: var(--neutral-600);
+            font-size: 0.85rem;
+        }
+
+        /* Forms */
+        .coin-form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .coin-form-label {
+            display: block;
+            font-weight: 500;
+            color: var(--neutral-700);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .coin-form-input,
+        .coin-form-select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--neutral-200);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+            text-align: right;
+        }
+
+        .coin-form-input:focus,
+        .coin-form-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 166, 81, 0.1);
+        }
+
+        .coin-btn {
+            width: 100%;
+            padding: 0.85rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .coin-btn.buy {
+            background: linear-gradient(135deg, #10B981, #059669);
+            color: white;
+        }
+
+        .coin-btn.send {
+            background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+            color: white;
+        }
+
+        .coin-btn.cashout {
+            background: linear-gradient(135deg, #F59E0B, #D97706);
+            color: white;
+        }
+
+        .coin-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .coin-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Fee breakdown */
+        .fee-breakdown {
+            background: var(--neutral-100);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .fee-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.3rem 0;
+            color: var(--neutral-600);
+        }
+
+        .fee-row.total {
+            border-top: 2px solid var(--neutral-300);
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            font-weight: 700;
+            color: var(--neutral-900);
+        }
+
+        /* Quick buy amounts */
+        .quick-amounts {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .quick-amount-btn {
+            padding: 0.6rem;
+            border: 2px solid var(--neutral-200);
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+            color: var(--neutral-700);
+        }
+
+        .quick-amount-btn:hover,
+        .quick-amount-btn.active {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        /* Transaction History */
+        .history-section {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .history-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--neutral-900);
+            display: flex;
+            align-items: center;
+        }
+
+        .history-title i {
+            margin-left: 0.5rem;
+            margin-right: 0;
+        }
+
+        .tx-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .tx-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--neutral-100);
+        }
+
+        .tx-item:last-child {
+            border-bottom: none;
+        }
+
+        .tx-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .tx-icon.purchase {
+            background: #ECFDF5;
+            color: #059669;
+        }
+
+        .tx-icon.send {
+            background: #EDE9FE;
+            color: #7C3AED;
+        }
+
+        .tx-icon.cashout {
+            background: #FEF3C7;
+            color: #D97706;
+        }
+
+        .tx-info {
+            flex: 1;
+        }
+
+        .tx-desc {
+            font-weight: 500;
+            color: var(--neutral-900);
+            font-size: 0.95rem;
+        }
+
+        .tx-date {
+            font-size: 0.8rem;
+            color: var(--neutral-500);
+            margin-top: 2px;
+        }
+
+        .tx-amount {
+            font-weight: 700;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 3px;
+        }
+
+        .tx-amount.positive {
+            color: #059669;
+        }
+
+        .tx-amount.negative {
+            color: #DC2626;
+        }
+
+        .tx-status {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            float: left;
+        }
+
+        .tx-status.completed {
+            background: #ECFDF5;
+            color: #059669;
+        }
+
+        .tx-status.pending {
+            background: #FEF3C7;
+            color: #D97706;
+        }
+
+        .empty-history {
+            text-align: center;
+            padding: 3rem;
+            color: var(--neutral-500);
+        }
+
+        .empty-history i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--neutral-300);
+        }
+
+        /* Mini coin icon */
+        .coin-mini {
+            display: inline-flex;
+            width: 18px;
+            height: 18px;
+            background: linear-gradient(145deg, #FFD700, #FFA500);
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.55rem;
+            color: #8B4513;
+            font-weight: 700;
+            vertical-align: middle;
+            margin-right: 2px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .wallet-hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 2rem;
+            }
+
+            .wallet-balance {
+                font-size: 2.5rem;
+            }
+
+            .wallet-info {
+                text-align: center;
+            }
+
+            .wallet-stats {
+                justify-content: center;
+            }
+
+            .coin-icon-large {
+                width: 80px;
+                height: 80px;
+                font-size: 2rem;
+            }
+
+            .quick-amounts {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .actions-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* RTL Overrides for Navbar */
+        .navbar {
+            justify-content: flex-start;
+        }
+
+        .logo {
+            margin-left: 0.8rem;
+            margin-right: 0;
+        }
+
+        .language-switcher {
+            margin-right: auto;
+            margin-left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index-ar.html" class="logo">
+                    <span class="logo-text">يلا ستارتر</span>
+                </a>
+
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <ul class="nav-links">
+                    <li><a href="index-ar.html">الرئيسية</a></li>
+                    <li><a href="projects-ar.html">تصفح المشاريع</a></li>
+                    <li><a href="dashboard-ar.html">لوحة التحكم</a></li>
+                    <li><a href="coins-ar.html" class="active" style="color: var(--primary); font-weight: 600;">
+                            <span class="coin-mini">Y</span> العملات
+                        </a></li>
+                </ul>
+
+                <div class="auth-buttons">
+                    <a href="dashboard-ar.html" class="btn btn-outline" style="font-size: 0.9rem;">
+                        <i class="fas fa-tachometer-alt"></i> لوحة التحكم
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Wallet Content -->
+    <div class="wallet-container">
+        <!-- Balance Hero -->
+        <div class="wallet-hero">
+            <div class="coin-icon-large">
+                <span style="font-weight: 900;">Y</span>
+            </div>
+            <div class="wallet-info">
+                <div class="wallet-label">رصيد العملات الحالي</div>
+                <div class="wallet-balance" id="balanceDisplay">0</div>
+                <div class="wallet-balance-sar">≈ <span id="sarDisplay">0</span> ريال سعودي</div>
+                <div class="wallet-stats">
+                    <div class="wallet-stat">
+                        <i class="fas fa-arrow-down"></i>
+                        <span>المكتسبة: <strong id="earnedDisplay">0</strong></span>
+                    </div>
+                    <div class="wallet-stat">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>المنفقة: <strong id="spentDisplay">0</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Cards -->
+        <div class="actions-grid">
+            <!-- Buy Coins -->
+            <div class="action-card">
+                <div class="action-header">
+                    <div class="action-icon buy">
+                        <i class="fas fa-plus-circle"></i>
+                    </div>
+                    <div>
+                        <div class="action-title">شراء عملات</div>
+                        <div class="action-desc">1 عملة = 1 ريال • بدون رسوم للداعمين</div>
+                    </div>
+                </div>
+
+                <div class="quick-amounts">
+                    <button class="quick-amount-btn" data-amount="10">10</button>
+                    <button class="quick-amount-btn" data-amount="50">50</button>
+                    <button class="quick-amount-btn" data-amount="100">100</button>
+                    <button class="quick-amount-btn" data-amount="500">500</button>
+                </div>
+
+                <div class="coin-form-group">
+                    <label class="coin-form-label">مبلغ مخصص</label>
+                    <input type="number" id="buyAmount" class="coin-form-input" placeholder="أدخل المبلغ" min="1"
+                        max="100000">
+                </div>
+
+                <button class="coin-btn buy" id="buyBtn" onclick="buyCoins()">
+                    <i class="fas fa-credit-card"></i> الشراء عبر Stripe
+                </button>
+            </div>
+
+            <!-- Send Coins -->
+            <div class="action-card">
+                <div class="action-header">
+                    <div class="action-icon send">
+                        <i class="fas fa-paper-plane"></i>
+                    </div>
+                    <div>
+                        <div class="action-title">إرسال عملات</div>
+                        <div class="action-desc">ادعم مشروعاً تحبه</div>
+                    </div>
+                </div>
+
+                <div class="coin-form-group">
+                    <label class="coin-form-label">اختر المشروع</label>
+                    <select id="projectSelect" class="coin-form-select">
+                        <option value="">جاري تحميل المشاريع...</option>
+                    </select>
+                </div>
+
+                <div class="coin-form-group">
+                    <label class="coin-form-label">المبلغ</label>
+                    <input type="number" id="sendAmount" class="coin-form-input" placeholder="أدخل عدد العملات" min="1">
+                </div>
+
+                <button class="coin-btn send" onclick="sendCoins()">
+                    <i class="fas fa-paper-plane"></i> إرسال العملات
+                </button>
+            </div>
+
+            <!-- Cash Out -->
+            <div class="action-card">
+                <div class="action-header">
+                    <div class="action-icon cashout">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <div>
+                        <div class="action-title">سحب الرصيد</div>
+                        <div class="action-desc">تحويل للبنك (الحد الأدنى 100 عملة)</div>
+                    </div>
+                </div>
+
+                <div class="coin-form-group">
+                    <label class="coin-form-label">المبلغ المراد سحبه</label>
+                    <input type="number" id="cashoutAmount" class="coin-form-input" placeholder="الحد الأدنى 100 عملة"
+                        min="100" oninput="updateFeeBreakdown()">
+                </div>
+
+                <div class="fee-breakdown" id="feeBreakdown" style="display:none;">
+                    <div class="fee-row">
+                        <span>المبلغ الإجمالي</span>
+                        <span id="feeGross">0 ريال</span>
+                    </div>
+                    <div class="fee-row">
+                        <span>رسوم المعالجة (8%)</span>
+                        <span id="feeProcessing" style="color:#DC2626;">-0 ريال</span>
+                    </div>
+                    <div class="fee-row">
+                        <span>رسوم التحويل البنكي (6%)</span>
+                        <span id="feeBank" style="color:#DC2626;">-0 ريال</span>
+                    </div>
+                    <div class="fee-row total">
+                        <span>صافي المبلغ المستلم</span>
+                        <span id="feeNet" style="color:#059669;">0 ريال</span>
+                    </div>
+                </div>
+
+                <button class="coin-btn cashout" onclick="cashOut()" style="margin-top: 1rem;">
+                    <i class="fas fa-money-bill-wave"></i> طلب سحب الرصيد
+                </button>
+            </div>
+        </div>
+
+        <!-- Transaction History -->
+        <div class="history-section">
+            <div class="history-header">
+                <h2 class="history-title"><i class="fas fa-history"
+                        style="color: var(--primary); margin-left: 0.5rem;"></i>سجل المعاملات</h2>
+            </div>
+
+            <ul class="tx-list" id="txList">
+                <li class="empty-history" id="emptyHistory">
+                    <i class="fas fa-receipt"></i>
+                    <p>لا توجد معاملات حتى الآن. قم بشراء بعض العملات للبدء!</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/auth-handler.js"></script>
+    <script src="scripts.js"></script>
+    <script src="mobile-menu.js"></script>
+    <script>
+        const API = window.location.origin;
+        const token = localStorage.getItem('authToken');
+
+        // Protect page
+        if (window.auth) window.auth.protectPage();
+
+        // Load data on page load
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadBalance();
+            await loadProjects();
+            await loadHistory();
+            checkPurchaseReturn();
+
+            // Quick amount buttons
+            document.querySelectorAll('.quick-amount-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.quick-amount-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    document.getElementById('buyAmount').value = btn.dataset.amount;
+                });
+            });
+        });
+
+        async function loadBalance() {
+            try {
+                const res = await fetch(`${API}/api/coins/balance`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await res.json();
+                if (data.success) {
+                    document.getElementById('balanceDisplay').textContent = data.balance.toLocaleString();
+                    document.getElementById('sarDisplay').textContent = data.balance.toLocaleString();
+                    document.getElementById('earnedDisplay').textContent = data.totalEarned.toLocaleString();
+                    document.getElementById('spentDisplay').textContent = data.totalSpent.toLocaleString();
+                }
+            } catch (err) {
+                console.error('Balance load error:', err);
+            }
+        }
+
+        async function loadProjects() {
+            try {
+                const res = await fetch(`${API}/api/projects`);
+                const data = await res.json();
+                const select = document.getElementById('projectSelect');
+                select.innerHTML = '<option value="">— اختر المشروع —</option>';
+                if (data.success && data.data) {
+                    data.data.filter(p => p.status === 'active').forEach(p => {
+                        select.innerHTML += `<option value="${p._id}">${p.title} (${Math.round((p.currentAmount / p.goalAmount) * 100)}% تمويل)</option>`;
+                    });
+                }
+            } catch (err) {
+                console.error('Projects load error:', err);
+            }
+        }
+
+        async function loadHistory() {
+            try {
+                const res = await fetch(`${API}/api/coins/history`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await res.json();
+                const list = document.getElementById('txList');
+
+                if (data.success && data.data.length > 0) {
+                    list.innerHTML = data.data.map(tx => {
+                        const userId = JSON.parse(localStorage.getItem('user'))?.id;
+                        const isOutgoing = tx.from?._id === userId || tx.from?.id === userId;
+                        let icon, desc, amountClass;
+
+                        if (tx.type === 'purchase') {
+                            icon = '<div class="tx-icon purchase"><i class="fas fa-plus"></i></div>';
+                            desc = 'شراء عملات';
+                            amountClass = 'positive';
+                        } else if (tx.type === 'send') {
+                            icon = '<div class="tx-icon send"><i class="fas fa-paper-plane"></i></div>';
+                            desc = `إرسال إلى ${tx.project?.title || 'مشروع'}`;
+                            amountClass = isOutgoing ? 'negative' : 'positive';
+                        } else {
+                            icon = '<div class="tx-icon cashout"><i class="fas fa-university"></i></div>';
+                            desc = `سحب رصيد ${tx.amount} عملة`;
+                            amountClass = 'negative';
+                        }
+
+                        const prefix = amountClass === 'positive' ? '+' : '-';
+                        const date = new Date(tx.createdAt).toLocaleDateString('ar-SA', {
+                            month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit'
+                        });
+
+                        return `
+                            <li class="tx-item">
+                                ${icon}
+                                <div class="tx-info">
+                                    <div class="tx-desc">${desc}</div>
+                                    <div class="tx-date">${date}</div>
+                                </div>
+                                <div>
+                                    <div class="tx-amount ${amountClass}">${prefix}${tx.amount} <span class="coin-mini">Y</span></div>
+                                    <span class="tx-status ${tx.status === 'completed' ? 'completed' : 'pending'}">${tx.status === 'completed' ? 'مكتمل' : 'قيد الانتظار'}</span>
+                                </div>
+                            </li>
+                        `;
+                    }).join('');
+                }
+            } catch (err) {
+                console.error('History load error:', err);
+            }
+        }
+
+        async function buyCoins() {
+            const amount = document.getElementById('buyAmount').value;
+            if (!amount || amount < 1) {
+                showToast('الرجاء إدخال مبلغ صحيح', 'error');
+                return;
+            }
+
+            const btn = document.getElementById('buyBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري المعالجة...';
+
+            try {
+                const res = await fetch(`${API}/api/coins/buy`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ amount: parseInt(amount) })
+                });
+                const data = await res.json();
+
+                if (data.success && data.url) {
+                    window.location.href = data.url;
+                } else {
+                    showToast(data.message || 'فشلت عملية الشراء', 'error');
+                }
+            } catch (err) {
+                showToast('خطأ في الاتصال بالشبكة', 'error');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-credit-card"></i> الشراء عبر Stripe';
+            }
+        }
+
+        async function sendCoins() {
+            const projectId = document.getElementById('projectSelect').value;
+            const amount = document.getElementById('sendAmount').value;
+
+            if (!projectId) {
+                showToast('الرجاء اختيار مشروع', 'error');
+                return;
+            }
+            if (!amount || amount < 1) {
+                showToast('الرجاء إدخال مبلغ صحيح', 'error');
+                return;
+            }
+
+            try {
+                const res = await fetch(`${API}/api/coins/send`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ projectId, amount: parseInt(amount) })
+                });
+                const data = await res.json();
+
+                if (data.success) {
+                    showToast('تم إرسال العملات بنجاح', 'success');
+                    document.getElementById('sendAmount').value = '';
+                    await loadBalance();
+                    await loadHistory();
+                } else {
+                    showToast(data.message || 'فشل التحويل', 'error');
+                }
+            } catch (err) {
+                showToast('خطأ في الاتصال بالشبكة', 'error');
+            }
+        }
+
+        function updateFeeBreakdown() {
+            const amount = parseInt(document.getElementById('cashoutAmount').value) || 0;
+            const breakdown = document.getElementById('feeBreakdown');
+
+            if (amount >= 100) {
+                const processing = Math.ceil(amount * 0.08);
+                const bank = Math.ceil(amount * 0.06);
+                const net = amount - processing - bank;
+
+                document.getElementById('feeGross').textContent = `${amount} ريال`;
+                document.getElementById('feeProcessing').textContent = `-${processing} ريال`;
+                document.getElementById('feeBank').textContent = `-${bank} ريال`;
+                document.getElementById('feeNet').textContent = `${net} ريال`;
+                breakdown.style.display = 'block';
+            } else {
+                breakdown.style.display = 'none';
+            }
+        }
+
+        async function cashOut() {
+            const amount = document.getElementById('cashoutAmount').value;
+            if (!amount || amount < 100) {
+                showToast('الحد الأدنى للسحب هو 100 عملة', 'error');
+                return;
+            }
+
+            if (!confirm(`هل أنت متأكد من سحب ${amount} عملة؟ سيتم خصم رسوم 14% (8% معالجة + 6% بنك). لا يمكن استرداد المبلغ.`)) {
+                return;
+            }
+
+            try {
+                const res = await fetch(`${API}/api/coins/cashout`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ amount: parseInt(amount) })
+                });
+                const data = await res.json();
+
+                if (data.success) {
+                    showToast('تم تقديم طلب السحب بنجاح', 'success');
+                    document.getElementById('cashoutAmount').value = '';
+                    document.getElementById('feeBreakdown').style.display = 'none';
+                    await loadBalance();
+                    await loadHistory();
+                } else {
+                    showToast(data.message || 'فشل طلب السحب', 'error');
+                }
+            } catch (err) {
+                showToast('خطأ في الاتصال بالشبكة', 'error');
+            }
+        }
+
+        function checkPurchaseReturn() {
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('purchase') === 'success') {
+                const sessionId = params.get('session_id');
+                if (sessionId) {
+                    confirmPurchase(sessionId);
+                }
+                window.history.replaceState({}, '', '/coins-ar.html');
+            } else if (params.get('purchase') === 'cancelled') {
+                showToast('تم إلغاء عملية الشراء', 'error');
+                window.history.replaceState({}, '', '/coins-ar.html');
+            }
+        }
+
+        async function confirmPurchase(sessionId) {
+            try {
+                const res = await fetch(`${API}/api/coins/confirm-purchase`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ sessionId })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showToast('تمت عملية الشراء بنجاح', 'success');
+                    await loadBalance();
+                    await loadHistory();
+                }
+            } catch (err) {
+                console.error('Confirm purchase error:', err);
+            }
+        }
+    </script>
+</body>
+
+</html>

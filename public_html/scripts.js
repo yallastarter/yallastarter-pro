@@ -461,3 +461,31 @@ document.addEventListener('DOMContentLoaded', function () {
 
     }
 });
+
+// ==========================================
+// Google OAuth Login Handler
+// ==========================================
+// Google OAuth Login Handler
+document.addEventListener('DOMContentLoaded', function () {
+    const googleLoginBtn = document.getElementById('googleLoginBtn');
+    if (googleLoginBtn) {
+        googleLoginBtn.addEventListener('click', function (e) {
+            e.preventDefault(); // Prevent default link behavior if it's an anchor
+
+            // Use window.auth handler if available, otherwise direct redirect
+            if (window.auth) {
+                window.auth.loginWithGoogle();
+            } else {
+                window.location.href = '/api/auth/google';
+            }
+        });
+    }
+
+    // Check for Google OAuth callback params handled by auth-handler.js
+    if (window.auth && window.location.search.includes('token=') && window.location.search.includes('user=')) {
+        if (window.auth.handleOAuthCallback()) {
+            // Callback handled successfully
+            console.log('Google login successful');
+        }
+    }
+});

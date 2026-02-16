@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - YallaStarter</title>
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --admin-bg: #0F172A;
+            --admin-surface: #1E293B;
+            --admin-border: #334155;
+            --admin-text: #F1F5F9;
+            --admin-muted: #94A3B8;
+            --accent-green: #10B981;
+            --accent-blue: #3B82F6;
+            --accent-purple: #8B5CF6;
+            --accent-amber: #F59E0B;
+            --accent-red: #EF4444;
+            --accent-pink: #EC4899;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--admin-bg);
+            color: var(--admin-text);
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .admin-sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 260px;
+            height: 100vh;
+            background: var(--admin-surface);
+            border-right: 1px solid var(--admin-border);
+            padding: 1.5rem 0;
+            overflow-y: auto;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-logo {
+            padding: 0 1.5rem 1.5rem;
+            border-bottom: 1px solid var(--admin-border);
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-logo h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sidebar-logo h2 .shield {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #00A651, #006C35);
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        .sidebar-logo p {
+            color: var(--admin-muted);
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
+        }
+
+        .sidebar-nav {
+            list-style: none;
+            padding: 0.5rem 0.75rem;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 2px;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.7rem 0.75rem;
+            color: var(--admin-muted);
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .sidebar-nav a:hover,
+        .sidebar-nav a.active {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+
+        .sidebar-nav a.active {
+            background: rgba(0, 166, 81, 0.15);
+            color: #10B981;
+        }
+
+        .sidebar-nav a i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar-section {
+            padding: 0.5rem 1.5rem;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--admin-muted);
+            margin-top: 0.5rem;
+        }
+
+        /* Main Content */
+        .admin-main {
+            margin-left: 260px;
+            min-height: 100vh;
+        }
+
+        /* Top Bar */
+        .admin-topbar {
+            padding: 1rem 2rem;
+            background: var(--admin-surface);
+            border-bottom: 1px solid var(--admin-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .topbar-left h1 {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .topbar-left p {
+            color: var(--admin-muted);
+            font-size: 0.8rem;
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .topbar-btn {
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--admin-border);
+            border-radius: 8px;
+            color: var(--admin-text);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .topbar-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .topbar-btn.danger {
+            border-color: var(--accent-red);
+            color: var(--accent-red);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.3rem;
+            cursor: pointer;
+        }
+
+        /* Content */
+        .admin-content {
+            padding: 2rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--admin-surface);
+            border: 1px solid var(--admin-border);
+            border-radius: 12px;
+            padding: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .stat-icon.green {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--accent-green);
+        }
+
+        .stat-icon.blue {
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--accent-blue);
+        }
+
+        .stat-icon.purple {
+            background: rgba(139, 92, 246, 0.15);
+            color: var(--accent-purple);
+        }
+
+        .stat-icon.amber {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--accent-amber);
+        }
+
+        .stat-icon.pink {
+            background: rgba(236, 72, 153, 0.15);
+            color: var(--accent-pink);
+        }
+
+        .stat-icon.red {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--accent-red);
+        }
+
+        .stat-value {
+            font-size: 1.6rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--admin-muted);
+        }
+
+        /* Charts */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .chart-card {
+            background: var(--admin-surface);
+            border: 1px solid var(--admin-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .chart-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Tables */
+        .panel-card {
+            background: var(--admin-surface);
+            border: 1px solid var(--admin-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .panel-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .panel-search {
+            padding: 0.5rem 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--admin-border);
+            border-radius: 8px;
+            color: white;
+            font-size: 0.85rem;
+            width: 200px;
+            font-family: inherit;
+        }
+
+        .panel-search::placeholder {
+            color: var(--admin-muted);
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        .admin-table th {
+            text-align: left;
+            padding: 0.75rem;
+            color: var(--admin-muted);
+            font-weight: 500;
+            border-bottom: 1px solid var(--admin-border);
+            font-size: 0.8rem;
+        }
+
+        .admin-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            vertical-align: middle;
+        }
+
+        .admin-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .badge {
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .badge.active {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10B981;
+        }
+
+        .badge.completed {
+            background: rgba(59, 130, 246, 0.15);
+            color: #3B82F6;
+        }
+
+        .badge.draft {
+            background: rgba(245, 158, 11, 0.15);
+            color: #F59E0B;
+        }
+
+        .badge.pending {
+            background: rgba(245, 158, 11, 0.15);
+            color: #F59E0B;
+        }
+
+        .badge.failed {
+            background: rgba(239, 68, 68, 0.15);
+            color: #EF4444;
+        }
+
+        .badge.purchase {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10B981;
+        }
+
+        .badge.send {
+            background: rgba(139, 92, 246, 0.15);
+            color: #8B5CF6;
+        }
+
+        .badge.cashout {
+            background: rgba(245, 158, 11, 0.15);
+            color: #F59E0B;
+        }
+
+        .action-btn {
+            padding: 4px 10px;
+            border: 1px solid var(--admin-border);
+            border-radius: 6px;
+            background: transparent;
+            color: var(--admin-text);
+            cursor: pointer;
+            font-size: 0.75rem;
+            font-family: inherit;
+            margin-right: 4px;
+            transition: all 0.2s;
+        }
+
+        .action-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .action-btn.approve {
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+        }
+
+        .action-btn.reject {
+            border-color: var(--accent-red);
+            color: var(--accent-red);
+        }
+
+        /* Tabs */
+        .tab-bar {
+            display: flex;
+            gap: 0;
+            border-bottom: 1px solid var(--admin-border);
+            margin-bottom: 1.5rem;
+        }
+
+        .tab-btn {
+            padding: 0.75rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            color: var(--admin-muted);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            color: var(--accent-green);
+            border-bottom-color: var(--accent-green);
+        }
+
+        .tab-btn:hover {
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: var(--admin-muted);
+        }
+
+        .loading i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .admin-sidebar {
+                transform: translateX(-100%);
+            }
+
+            .admin-sidebar.open {
+                transform: translateX(0);
+            }
+
+            .admin-main {
+                margin-left: 0;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .admin-content {
+                padding: 1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .panel-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .panel-search {
+                width: 100%;
+            }
+
+            .admin-table {
+                font-size: 0.75rem;
+            }
+
+            .admin-table th,
+            .admin-table td {
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="sidebar">
+        <div class="sidebar-logo">
+            <h2><span class="shield"><i class="fas fa-shield-alt"></i></span> YallaStarter</h2>
+            <p>Admin Control Center</p>
+        </div>
+
+        <div class="sidebar-section">Overview</div>
+        <ul class="sidebar-nav">
+            <li><a href="coming-soon.html" class="active" data-tab="overview"><i class="fas fa-chart-line"></i>
+                    Dashboard</a></li>
+        </ul>
+
+        <div class="sidebar-section">Management</div>
+        <ul class="sidebar-nav">
+            <li><a href="coming-soon.html" data-tab="users"><i class="fas fa-users"></i> Users</a></li>
+            <li><a href="coming-soon.html" data-tab="projects"><i class="fas fa-project-diagram"></i> Projects</a></li>
+            <li><a href="coming-soon.html" data-tab="transactions"><i class="fas fa-exchange-alt"></i> Transactions</a>
+            </li>
+            <li><a href="coming-soon.html" data-tab="cashouts"><i class="fas fa-money-bill-wave"></i> Cash Outs</a></li>
+        </ul>
+
+        <div class="sidebar-section">System</div>
+        <ul class="sidebar-nav">
+            <li><a href="coming-soon.html" data-tab="platform"><i class="fas fa-cog"></i> Platform</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main -->
+    <main class="admin-main">
+        <!-- Top Bar -->
+        <div class="admin-topbar">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <button class="mobile-menu-toggle"
+                    onclick="document.getElementById('sidebar').classList.toggle('open')">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="topbar-left">
+                    <h1 id="pageTitle">Dashboard</h1>
+                    <p id="pageSubtitle">Platform overview & analytics</p>
+                </div>
+            </div>
+            <div class="topbar-right">
+                <a href="index.html" class="topbar-btn"><i class="fas fa-external-link-alt"></i> View Site</a>
+                <button class="topbar-btn danger" onclick="adminLogout()"><i class="fas fa-sign-out-alt"></i>
+                    Logout</button>
+            </div>
+        </div>
+
+        <div class="admin-content">
+            <!-- Overview Tab -->
+            <div class="tab-content active" id="tab-overview">
+                <div class="stats-grid" id="statsGrid">
+                    <div class="loading"><i class="fas fa-spinner fa-spin"></i>
+                        <p>Loading stats...</p>
+                    </div>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <div class="chart-title"><i class="fas fa-chart-area" style="color: var(--accent-green);"></i>
+                            Revenue (Last 30 Days)</div>
+                        <canvas id="revenueChart" height="120"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-title"><i class="fas fa-user-plus" style="color: var(--accent-blue);"></i>
+                            User Growth</div>
+                        <canvas id="userGrowthChart" height="120"></canvas>
+                    </div>
+                </div>
+
+                <!-- Top Projects -->
+                <div class="panel-card">
+                    <div class="panel-header">
+                        <div class="panel-title"><i class="fas fa-trophy"
+                                style="color: var(--accent-amber); margin-right: 0.5rem;"></i>Top Funded Projects</div>
+                    </div>
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Project</th>
+                                <th>Creator</th>
+                                <th>Funded</th>
+                                <th>Goal</th>
+                                <th>Progress</th>
+                            </tr>
+                        </thead>
+                        <tbody id="topProjectsTable">
+                            <tr>
+                                <td colspan="5" class="loading"><i class="fas fa-spinner fa-spin"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Recent Transactions -->
+                <div class="panel-card">
+                    <div class="panel-header">
+                        <div class="panel-title"><i class="fas fa-clock"
+                                style="color: var(--accent-purple); margin-right: 0.5rem;"></i>Recent Transactions</div>
+                    </div>
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Type</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recentTxTable">
+                            <tr>
+                                <td colspan="5" class="loading"><i class="fas fa-spinner fa-spin"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Users Tab -->
+            <div class="tab-content" id="tab-users">
+                <div class="panel-card">
+                    <div class="panel-header">
+                        <div class="panel-title">All Users</div>
+                        <input type="text" class="panel-search" placeholder="Search users..." id="userSearch"
+                            oninput="searchUsers()">
+                    </div>
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Balance</th>
+                                <th>Earned</th>
+                                <th>Joined</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTable">
+                            <tr>
+                                <td colspan="6" class="loading"><i class="fas fa-spinner fa-spin"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Projects Tab -->
+            <div class="tab-content" id="tab-projects">
+                <div class="panel-card">
+                    <div class="panel-header">
+                        <div class="panel-title">All Projects</div>
+                        <select class="panel-search" id="projectStatusFilter" onchange="loadAdminProjects()"
+                            style="width: auto;">
+                            <option value="">All Statuses</option>
+                            <option value="active">Active</option>
+                            <option value="draft">Draft</option>
+                            <option value="completed">Completed</option>
+                        </select>
+                    </div>
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Creator</th>
+                                <th>Category</th>
+                                <th>Funded</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="projectsTable">
+                            <tr>
+                                <td colspan="6" class="loading"><i class="fas fa-spinner fa-spin"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Transactions Tab -->
+            <div class="tab-content" id="tab-transactions">
+                <div class="panel-card">
+                    <div class="panel-header">
+                        <div class="panel-title">All Transactions</div>
+                        <select class="panel-search" id="txTypeFilter" onchange="loadAdminTransactions()"
+                            style="width: auto;">
+                            <option value="">All Types</option>
+                            <option value="purchase">Purchases</option>
+                            <option value="send">Sends</option>
+                            <option value="cashout">Cash Outs</option>
+                        </select>
+                    </div>
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>From</th>
+                                <th>To</th>
+                                <th>Type</th>
+                                <th>Amount</th>
+                                <th>Fee</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="txTable">
+                            <tr>
+                                <td colspan="7" class="loading"><i class="fas fa-spinner fa-spin"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Cashouts Tab -->
+            <div class="tab-content" id="tab-cashouts">
+                <div class="panel-card">
+                    <div class="panel-header">
+                        <div class="panel-title">Pending Cash Out Requests</div>
+                    </div>
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Amount</th>
+                                <th>Fee</th>
+                                <th>Net</th>
+                                <th>Bank</th>
+                                <th>IBAN</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cashoutsTable">
+                            <tr>
+                                <td colspan="7" class="loading"><i class="fas fa-spinner fa-spin"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Platform Tab -->
+            <div class="tab-content" id="tab-platform">
+                <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                    <div class="panel-card">
+                        <div class="panel-title" style="margin-bottom: 1rem;"><i class="fas fa-info-circle"
+                                style="color: var(--accent-blue);"></i> Platform Info</div>
+                        <table class="admin-table">
+                            <tbody>
+                                <tr>
+                                    <td style="color: var(--admin-muted);">Platform</td>
+                                    <td>YallaStarter</td>
+                                </tr>
+                                <tr>
+                                    <td style="color: var(--admin-muted);">Version</td>
+                                    <td>1.0.0</td>
+                                </tr>
+                                <tr>
+                                    <td style="color: var(--admin-muted);">Environment</td>
+                                    <td id="envDisplay">-</td>
+                                </tr>
+                                <tr>
+                                    <td style="color: var(--admin-muted);">Coin Rate</td>
+                                    <td>1 Coin = 1 SAR</td>
+                                </tr>
+                                <tr>
+                                    <td style="color: var(--admin-muted);">Processing Fee</td>
+                                    <td>8%</td>
+                                </tr>
+                                <tr>
+                                    <td style="color: var(--admin-muted);">Bank Fee</td>
+                                    <td>6%</td>
+                                </tr>
+                                <tr>
+                                    <td style="color: var(--admin-muted);">Total Cashout Fee</td>
+                                    <td>14%</td>
+                                </tr>
+                                <tr>
+                                    <td style="color: var(--admin-muted);">Min Cashout</td>
+                                    <td>100 Coins</td>
+                                </tr>
+                                <tr>
+                                    <td style="color: var(--admin-muted);">Refunds</td>
+                                    <td style="color: var(--accent-red);">Not Available</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="panel-card">
+                        <div class="panel-title" style="margin-bottom: 1rem;"><i class="fas fa-server"
+                                style="color: var(--accent-green);"></i> Server Health</div>
+                        <div id="healthStatus" class="loading"><i class="fas fa-spinner fa-spin"></i>
+                            <p>Checking...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const API = window.location.origin;
+        const token = localStorage.getItem('authToken');
+        const user = JSON.parse(localStorage.getItem('user') || 'null');
+
+        // Auth check
+        if (!user || user.role !== 'admin') {
+            window.location.href = '/admin-login.html';
+        }
+
+        // Tab navigation
+        document.querySelectorAll('.sidebar-nav a[data-tab]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const tab = link.dataset.tab;
+                document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
+                link.classList.add('active');
+                document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+                document.getElementById('tab-' + tab).classList.add('active');
+                document.getElementById('sidebar').classList.remove('open');
+
+                const titles = {
+                    overview: ['Dashboard', 'Platform overview & analytics'],
+                    users: ['User Management', 'View and manage all users'],
+                    projects: ['Project Management', 'Approve, feature, and manage projects'],
+                    transactions: ['Transactions', 'Monitor all coin transactions'],
+                    cashouts: ['Cash Out Requests', 'Approve or reject cash out requests'],
+                    platform: ['Platform Settings', 'System configuration and health']
+                };
+                document.getElementById('pageTitle').textContent = titles[tab][0];
+                document.getElementById('pageSubtitle').textContent = titles[tab][1];
+
+                // Load tab data
+                if (tab === 'users') loadAdminUsers();
+                if (tab === 'projects') loadAdminProjects();
+                if (tab === 'transactions') loadAdminTransactions();
+                if (tab === 'cashouts') loadAdminCashouts();
+                if (tab === 'platform') loadHealth();
+            });
+        });
+
+        // Load overview on start
+        loadDashboard();
+
+        async function adminFetch(url) {
+            const res = await fetch(url, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            return res.json();
+        }
+
+        async function adminPut(url, body) {
+            const res = await fetch(url, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(body)
+            });
+            return res.json();
+        }
+
+        async function loadDashboard() {
+            try {
+                const data = await adminFetch(`${API}/api/admin/dashboard`);
+                if (!data.success) return;
+                const d = data.data;
+
+                // Stats cards
+                document.getElementById('statsGrid').innerHTML = `
+                    <div class="stat-card">
+                        <div class="stat-icon green"><i class="fas fa-users"></i></div>
+                        <div><div class="stat-value">${d.overview.totalUsers}</div><div class="stat-label">Total Users</div></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon blue"><i class="fas fa-project-diagram"></i></div>
+                        <div><div class="stat-value">${d.overview.totalProjects}</div><div class="stat-label">Total Projects</div></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon purple"><i class="fas fa-coins"></i></div>
+                        <div><div class="stat-value">${d.overview.totalCoinsBought.toLocaleString()}</div><div class="stat-label">Coins Sold</div></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon amber"><i class="fas fa-paper-plane"></i></div>
+                        <div><div class="stat-value">${d.overview.totalCoinsSent.toLocaleString()}</div><div class="stat-label">Coins Sent</div></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon pink"><i class="fas fa-hand-holding-usd"></i></div>
+                        <div><div class="stat-value">${d.overview.totalCashouts.toLocaleString()}</div><div class="stat-label">Cashed Out</div></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon red"><i class="fas fa-chart-bar"></i></div>
+                        <div><div class="stat-value">${d.overview.platformRevenue.toLocaleString()} SAR</div><div class="stat-label">Fee Revenue</div></div>
+                    </div>
+                `;
+
+                // Revenue chart
+                const revCtx = document.getElementById('revenueChart').getContext('2d');
+                new Chart(revCtx, {
+                    type: 'line',
+                    data: {
+                        labels: d.charts.dailyRevenue.map(r => r._id.slice(5)),
+                        datasets: [{
+                            label: 'Coins Sold (SAR)',
+                            data: d.charts.dailyRevenue.map(r => r.amount),
+                            borderColor: '#10B981',
+                            backgroundColor: 'rgba(16,185,129,0.1)',
+                            fill: true,
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { labels: { color: '#94A3B8' } } },
+                        scales: {
+                            x: { ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,255,255,0.05)' } },
+                            y: { ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,255,255,0.05)' } }
+                        }
+                    }
+                });
+
+                // User growth chart
+                const ugCtx = document.getElementById('userGrowthChart').getContext('2d');
+                new Chart(ugCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: d.charts.userGrowth.map(r => r._id.slice(5)),
+                        datasets: [{
+                            label: 'New Users',
+                            data: d.charts.userGrowth.map(r => r.count),
+                            backgroundColor: 'rgba(59,130,246,0.5)',
+                            borderColor: '#3B82F6',
+                            borderWidth: 1,
+                            borderRadius: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { labels: { color: '#94A3B8' } } },
+                        scales: {
+                            x: { ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,255,255,0.05)' } },
+                            y: { ticks: { color: '#94A3B8', stepSize: 1 }, grid: { color: 'rgba(255,255,255,0.05)' } }
+                        }
+                    }
+                });
+
+                // Top projects
+                document.getElementById('topProjectsTable').innerHTML = d.topProjects.map(p => `
+                    <tr>
+                        <td>${p.title}</td>
+                        <td>${p.creator?.username || '-'}</td>
+                        <td>${p.currentAmount.toLocaleString()} coins</td>
+                        <td>${p.goalAmount.toLocaleString()} coins</td>
+                        <td><div style="background: rgba(255,255,255,0.05); border-radius: 20px; overflow: hidden;"><div style="width: ${Math.min(100, Math.round(p.currentAmount / p.goalAmount * 100))}%; height: 6px; background: linear-gradient(90deg, #10B981, #3B82F6); border-radius: 20px;"></div></div></td>
+                    </tr>
+                `).join('') || '<tr><td colspan="5" style="text-align: center; color: var(--admin-muted);">No projects yet</td></tr>';
+
+                // Recent transactions
+                document.getElementById('recentTxTable').innerHTML = d.recentTransactions.map(tx => `
+                    <tr>
+                        <td>${tx.from?.username || '-'}</td>
+                        <td><span class="badge ${tx.type}">${tx.type}</span></td>
+                        <td>${tx.amount.toLocaleString()}</td>
+                        <td><span class="badge ${tx.status}">${tx.status}</span></td>
+                        <td>${new Date(tx.createdAt).toLocaleDateString()}</td>
+                    </tr>
+                `).join('') || '<tr><td colspan="5" style="text-align: center; color: var(--admin-muted);">No transactions yet</td></tr>';
+
+            } catch (err) {
+                console.error('Dashboard load error:', err);
+            }
+        }
+
+        async function loadAdminUsers() {
+            const search = document.getElementById('userSearch')?.value || '';
+            try {
+                const data = await adminFetch(`${API}/api/admin/users?search=${encodeURIComponent(search)}&limit=50`);
+                if (!data.success) return;
+                document.getElementById('usersTable').innerHTML = data.data.map(u => `
+                    <tr>
+                        <td><strong>${u.username}</strong></td>
+                        <td>${u.email}</td>
+                        <td>${(u.coinBalance || 0).toLocaleString()}</td>
+                        <td>${(u.totalEarned || 0).toLocaleString()}</td>
+                        <td>${new Date(u.createdAt).toLocaleDateString()}</td>
+                        <td>
+                            <button class="action-btn" onclick="adjustCoins('${u._id}', '${u.username}')"><i class="fas fa-coins"></i> Adjust</button>
+                        </td>
+                    </tr>
+                `).join('') || '<tr><td colspan="6" style="text-align:center; color: var(--admin-muted);">No users found</td></tr>';
+            } catch (err) {
+                console.error('Users load error:', err);
+            }
+        }
+
+        let searchTimeout;
+        function searchUsers() {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(loadAdminUsers, 300);
+        }
+
+        async function adjustCoins(userId, username) {
+            const amount = prompt(`Adjust coin balance for ${username}.\nEnter new balance:`);
+            if (amount === null) return;
+            const newBalance = parseInt(amount);
+            if (isNaN(newBalance) || newBalance < 0) { alert('Invalid amount'); return; }
+            try {
+                await adminPut(`${API}/api/admin/users/${userId}`, { coinBalance: newBalance });
+                loadAdminUsers();
+            } catch (err) {
+                alert('Error updating balance');
+            }
+        }
+
+        async function loadAdminProjects() {
+            const status = document.getElementById('projectStatusFilter')?.value || '';
+            try {
+                const data = await adminFetch(`${API}/api/admin/projects?status=${status}&limit=50`);
+                if (!data.success) return;
+                document.getElementById('projectsTable').innerHTML = data.data.map(p => `
+                    <tr>
+                        <td><strong>${p.title}</strong></td>
+                        <td>${p.creator?.username || '-'}</td>
+                        <td>${p.category}</td>
+                        <td>${p.currentAmount.toLocaleString()} / ${p.goalAmount.toLocaleString()}</td>
+                        <td><span class="badge ${p.status}">${p.status}</span></td>
+                        <td>
+                            ${p.status === 'draft' ? `<button class="action-btn approve" onclick="updateProject('${p._id}','active')">Activate</button>` : ''}
+                            ${p.status === 'active' ? `<button class="action-btn" onclick="updateProject('${p._id}','completed')">Complete</button>` : ''}
+                            ${p.status !== 'draft' ? `<button class="action-btn reject" onclick="updateProject('${p._id}','draft')">Deactivate</button>` : ''}
+                        </td>
+                    </tr>
+                `).join('') || '<tr><td colspan="6" style="text-align:center; color: var(--admin-muted);">No projects found</td></tr>';
+            } catch (err) {
+                console.error('Projects load error:', err);
+            }
+        }
+
+        async function updateProject(id, status) {
+            if (!confirm(`Set project status to "${status}"?`)) return;
+            await adminPut(`${API}/api/admin/projects/${id}`, { status });
+            loadAdminProjects();
+        }
+
+        async function loadAdminTransactions() {
+            const type = document.getElementById('txTypeFilter')?.value || '';
+            try {
+                const data = await adminFetch(`${API}/api/admin/transactions?type=${type}&limit=50`);
+                if (!data.success) return;
+                document.getElementById('txTable').innerHTML = data.data.map(tx => `
+                    <tr>
+                        <td>${tx.from?.username || '-'}</td>
+                        <td>${tx.to?.username || '-'}</td>
+                        <td><span class="badge ${tx.type}">${tx.type}</span></td>
+                        <td>${tx.amount.toLocaleString()}</td>
+                        <td>${(tx.fee || 0).toLocaleString()}</td>
+                        <td><span class="badge ${tx.status}">${tx.status}</span></td>
+                        <td>${new Date(tx.createdAt).toLocaleDateString()}</td>
+                    </tr>
+                `).join('') || '<tr><td colspan="7" style="text-align:center; color: var(--admin-muted);">No transactions found</td></tr>';
+            } catch (err) {
+                console.error('Transactions load error:', err);
+            }
+        }
+
+        async function loadAdminCashouts() {
+            try {
+                const data = await adminFetch(`${API}/api/admin/cashouts?status=pending`);
+                if (!data.success) return;
+                document.getElementById('cashoutsTable').innerHTML = data.data.map(tx => `
+                    <tr>
+                        <td><strong>${tx.from?.username || '-'}</strong><br><small style="color: var(--admin-muted);">${tx.from?.email || ''}</small></td>
+                        <td>${tx.amount.toLocaleString()} coins</td>
+                        <td style="color: var(--accent-red);">${(tx.fee || 0).toLocaleString()} SAR</td>
+                        <td style="color: var(--accent-green); font-weight: 600;">${(tx.netAmount || 0).toLocaleString()} SAR</td>
+                        <td>${tx.from?.bankAccount?.bankName || '-'}</td>
+                        <td style="font-family: monospace; font-size: 0.75rem;">${tx.from?.bankAccount?.iban || '-'}</td>
+                        <td>
+                            <button class="action-btn approve" onclick="processCashout('${tx._id}', 'completed')"><i class="fas fa-check"></i> Approve</button>
+                            <button class="action-btn reject" onclick="processCashout('${tx._id}', 'failed')"><i class="fas fa-times"></i> Reject</button>
+                        </td>
+                    </tr>
+                `).join('') || '<tr><td colspan="7" style="text-align:center; color: var(--admin-muted); padding: 2rem;"><i class="fas fa-check-circle" style="font-size: 1.5rem; display: block; margin-bottom: 0.5rem;"></i>No pending cash out requests</td></tr>';
+            } catch (err) {
+                console.error('Cashouts load error:', err);
+            }
+        }
+
+        async function processCashout(id, status) {
+            const action = status === 'completed' ? 'approve' : 'reject';
+            if (!confirm(`Are you sure you want to ${action} this cashout request?`)) return;
+            await adminPut(`${API}/api/admin/cashouts/${id}`, { status });
+            loadAdminCashouts();
+        }
+
+        async function loadHealth() {
+            try {
+                const res = await fetch(`${API}/api/health`);
+                const data = await res.json();
+                document.getElementById('healthStatus').innerHTML = `
+                    <div style="text-align: left;">
+                        <p style="margin-bottom: 0.5rem;"><span style="color: var(--admin-muted);">Status:</span> <span style="color: var(--accent-green); font-weight: 600;">● Online</span></p>
+                        <p style="margin-bottom: 0.5rem;"><span style="color: var(--admin-muted);">Uptime:</span> ${Math.round(data.uptime / 60)} minutes</p>
+                        <p><span style="color: var(--admin-muted);">Last Check:</span> ${new Date(data.timestamp).toLocaleString()}</p>
+                    </div>
+                `;
+                document.getElementById('envDisplay').textContent = window.location.hostname.includes('localhost') ? 'Development' : 'Production';
+            } catch (err) {
+                document.getElementById('healthStatus').innerHTML = '<p style="color: var(--accent-red);"><i class="fas fa-exclamation-triangle"></i> Server unreachable</p>';
+            }
+        }
+
+        function adminLogout() {
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('user');
+            window.location.href = '/admin-login.html';
+        }
+    </script>
+</body>
+
+</html>
