@@ -27,6 +27,10 @@ const UserSchema = new mongoose.Schema({
         enum: ['user', 'admin'],
         default: 'user'
     },
+    photoUrl: {
+        type: String,
+        default: null
+    },
     createdAt: {
         type: Date,
         default: Date.now

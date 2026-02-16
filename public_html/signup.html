@@ -676,14 +676,14 @@
                     </div>
 
                     <div class="social-auth">
-                        <button type="button" class="social-auth-btn" onclick="socialSignup('google')">
+                        <button type="button" class="social-auth-btn" id="googleSignupBtn">
                             <i class="fab fa-google"></i>
                             <span>Continue with Google</span>
                         </button>
 
-                        <button type="button" class="social-auth-btn" onclick="socialSignup('facebook')">
-                            <i class="fab fa-facebook-f"></i>
-                            <span>Continue with Facebook</span>
+                        <button type="button" class="social-auth-btn" onclick="window.location.href='login.html'">
+                            <i class="fas fa-envelope"></i>
+                            <span>Login with Email</span>
                         </button>
                     </div>
 
@@ -762,6 +762,9 @@
     <!-- Mobile Menu Script -->
     <script src="mobile-menu.js"></script>
 
+    <!-- Authentication Handler -->
+    <script src="assets/js/auth-handler.js"></script>
+
     <!-- Signup Page Scripts -->
     <script>
         // Language Switcher
@@ -770,6 +773,14 @@
                 window.location.href = 'signup.html';
             } else if (lang === 'ar') {
                 window.location.href = 'signup-ar.html';
+            }
+        }
+
+        // Show success modal
+        function showSuccessModal() {
+            const modal = document.getElementById('successModal');
+            if (modal) {
+                modal.style.display = 'flex';
             }
         }
 
@@ -910,25 +921,18 @@
                 submitBtn.disabled = true;
 
                 try {
-                    const res = await fetch('/api/auth/signup', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            username: document.getElementById('fullName').value,
-                            email: document.getElementById('email').value,
-                            password: document.getElementById('password').value
-                        })
+                    const result = await window.auth.signup({
+                        username: document.getElementById('fullName').value,
+                        email: document.getElementById('email').value,
+                        password: document.getElementById('password').value
                     });
 
-                    const data = await res.json();
-
-                    if (data.success) {
-                        localStorage.setItem('token', data.token);
-                        localStorage.setItem('user', JSON.stringify(data.user));
-                        showToast('Account created successfully!', 'success');
-                        setTimeout(() => { window.location.href = 'dashboard.html'; }, 1200);
+                    if (result.success) {
+                        // Show success modal
+                        showSuccessModal();
+                        setTimeout(() => { window.location.href = 'dashboard.html'; }, 2000);
                     } else {
-                        showToast(data.message || 'Signup failed');
+                        showToast(result.message || 'Signup failed');
                     }
                 } catch (err) {
                     console.error(err);
@@ -950,10 +954,14 @@
             }
         });
 
-        // Social Signup
-        function socialSignup(provider) {
-            showToast(`${provider} sign-up is coming soon!`);
-        }
+        // Google Signup
+        document.getElementById('googleSignupBtn')?.addEventListener('click', function () {
+            if (window.auth) {
+                window.auth.loginWithGoogle();
+            } else {
+                showToast('Authentication system not loaded. Please refresh the page.');
+            }
+        });
 
         // Enhanced form interactions
         document.querySelectorAll('.form-control').forEach(control => {

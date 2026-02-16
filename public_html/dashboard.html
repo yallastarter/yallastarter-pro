@@ -1,30 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Manage your YallaStarter projects and campaigns from your personalized dashboard. Track funding progress and engage with backers.">
+    <meta name="description"
+        content="Manage your YallaStarter projects and campaigns from your personalized dashboard. Track funding progress and engage with backers.">
     <meta name="keywords" content="dashboard, project management, crowdfunding, Saudi Arabia">
     <meta name="author" content="YallaStarter">
     <meta name="robots" content="index, follow">
-    
+
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Dashboard - YallaStarter">
-    <meta property="og:description" content="Manage your YallaStarter projects and campaigns from your personalized dashboard. Track funding progress and engage with backers.">
+    <meta property="og:description"
+        content="Manage your YallaStarter projects and campaigns from your personalized dashboard. Track funding progress and engage with backers.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://yallastarter.com/dashboard">
-    
+
     <!-- Preload Critical Resources -->
     <link rel="preload" href="styles.css" as="style">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" as="style">
-    
+    <link rel="preload"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap"
+        as="style">
+
     <title>Dashboard - YallaStarter</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="mobile-menu.css">
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         .dashboard-container {
@@ -32,20 +39,20 @@
             grid-template-columns: 250px 1fr;
             min-height: calc(100vh - 70px);
         }
-        
+
         .dashboard-sidebar {
             background-color: var(--neutral-100);
             border-right: 1px solid var(--neutral-300);
             padding: 2rem 0;
         }
-        
+
         .user-profile {
             display: flex;
             align-items: center;
             padding: 0 1.5rem;
             margin-bottom: 2rem;
         }
-        
+
         .user-avatar {
             width: 50px;
             height: 50px;
@@ -53,38 +60,38 @@
             overflow: hidden;
             margin-right: 1rem;
         }
-        
+
         .user-avatar img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        
+
         .user-info {
             flex: 1;
         }
-        
+
         .user-name {
             font-weight: 600;
             color: var(--neutral-900);
             margin-bottom: 0.2rem;
         }
-        
+
         .user-email {
             font-size: 0.9rem;
             color: var(--neutral-600);
         }
-        
+
         .sidebar-menu {
             list-style: none;
             padding: 0;
             margin: 0;
         }
-        
+
         .sidebar-menu-item {
             margin-bottom: 0.5rem;
         }
-        
+
         .sidebar-menu-link {
             display: flex;
             align-items: center;
@@ -93,101 +100,101 @@
             text-decoration: none;
             transition: var(--transition);
         }
-        
+
         .sidebar-menu-link:hover {
             background-color: var(--neutral-200);
             color: var(--primary);
         }
-        
+
         .sidebar-menu-link.active {
             background-color: var(--primary-light);
             color: var(--primary);
             font-weight: 500;
             border-right: 3px solid var(--primary);
         }
-        
+
         .sidebar-menu-icon {
             margin-right: 1rem;
             width: 20px;
             text-align: center;
         }
-        
+
         .dashboard-content {
             padding: 2rem;
         }
-        
+
         .dashboard-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 2rem;
         }
-        
+
         .dashboard-title {
             font-size: 1.8rem;
             font-weight: 700;
             color: var(--neutral-900);
         }
-        
+
         .dashboard-actions {
             display: flex;
             gap: 1rem;
         }
-        
+
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1.5rem;
             margin-bottom: 2rem;
         }
-        
+
         .stat-card {
             background-color: white;
             border-radius: var(--border-radius);
             padding: 1.5rem;
             box-shadow: var(--box-shadow);
         }
-        
+
         .stat-value {
             font-size: 2rem;
             font-weight: 700;
             color: var(--primary);
             margin-bottom: 0.5rem;
         }
-        
+
         .stat-label {
             color: var(--neutral-600);
             font-size: 0.9rem;
         }
-        
+
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 1.5rem;
         }
-        
+
         .project-card {
             background-color: white;
             border-radius: var(--border-radius);
             overflow: hidden;
             box-shadow: var(--box-shadow);
         }
-        
+
         .project-image {
             height: 160px;
             overflow: hidden;
         }
-        
+
         .project-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        
+
         .project-content {
             padding: 1.5rem;
         }
-        
+
         .project-category {
             display: inline-block;
             background-color: var(--primary-light);
@@ -197,20 +204,20 @@
             border-radius: 20px;
             margin-bottom: 0.8rem;
         }
-        
+
         .project-title {
             font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 0.8rem;
             color: var(--neutral-900);
         }
-        
+
         .project-status {
             display: flex;
             align-items: center;
             margin-bottom: 1rem;
         }
-        
+
         .status-badge {
             display: inline-block;
             padding: 0.3rem 0.8rem;
@@ -219,22 +226,22 @@
             font-weight: 500;
             margin-right: 0.5rem;
         }
-        
+
         .status-badge.draft {
             background-color: var(--neutral-200);
             color: var(--neutral-700);
         }
-        
+
         .status-badge.active {
             background-color: var(--success-light);
             color: var(--success);
         }
-        
+
         .status-badge.completed {
             background-color: var(--info-light);
             color: var(--info);
         }
-        
+
         .project-meta {
             display: flex;
             justify-content: space-between;
@@ -242,22 +249,22 @@
             font-size: 0.9rem;
             margin-bottom: 1rem;
         }
-        
+
         .project-actions {
             display: flex;
             gap: 0.5rem;
         }
-        
+
         .tab-container {
             margin-bottom: 2rem;
         }
-        
+
         .tabs-nav {
             display: flex;
             border-bottom: 1px solid var(--neutral-300);
             margin-bottom: 1.5rem;
         }
-        
+
         .tab-item {
             padding: 0.8rem 1.5rem;
             cursor: pointer;
@@ -266,65 +273,65 @@
             border-bottom: 2px solid transparent;
             transition: var(--transition);
         }
-        
+
         .tab-item:hover {
             color: var(--primary);
         }
-        
+
         .tab-item.active {
             color: var(--primary);
             border-bottom-color: var(--primary);
         }
-        
+
         .tab-content {
             display: none;
         }
-        
+
         .tab-content.active {
             display: block;
         }
-        
+
         .backed-projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 1.5rem;
         }
-        
+
         .backed-project-card {
             background-color: white;
             border-radius: var(--border-radius);
             overflow: hidden;
             box-shadow: var(--box-shadow);
         }
-        
+
         .backed-project-image {
             height: 160px;
             overflow: hidden;
         }
-        
+
         .backed-project-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        
+
         .backed-project-content {
             padding: 1.5rem;
         }
-        
+
         .backed-project-title {
             font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 0.8rem;
             color: var(--neutral-900);
         }
-        
+
         .backed-project-creator {
             display: flex;
             align-items: center;
             margin-bottom: 1rem;
         }
-        
+
         .creator-avatar {
             width: 30px;
             height: 30px;
@@ -332,18 +339,18 @@
             overflow: hidden;
             margin-right: 0.8rem;
         }
-        
+
         .creator-avatar img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        
+
         .creator-name {
             color: var(--neutral-700);
             font-size: 0.9rem;
         }
-        
+
         .backed-project-meta {
             display: flex;
             justify-content: space-between;
@@ -351,57 +358,57 @@
             font-size: 0.9rem;
             margin-bottom: 1rem;
         }
-        
+
         .backed-amount {
             font-weight: 600;
             color: var(--primary);
         }
-        
+
         .backed-date {
             color: var(--neutral-600);
         }
-        
+
         .backed-project-status {
             display: flex;
             align-items: center;
             margin-bottom: 1rem;
         }
-        
+
         .empty-state {
             text-align: center;
             padding: 3rem;
             background-color: var(--neutral-100);
             border-radius: var(--border-radius);
         }
-        
+
         .empty-state-icon {
             font-size: 3rem;
             color: var(--neutral-400);
             margin-bottom: 1rem;
         }
-        
+
         .empty-state-title {
             font-size: 1.2rem;
             font-weight: 600;
             color: var(--neutral-700);
             margin-bottom: 0.5rem;
         }
-        
+
         .empty-state-description {
             color: var(--neutral-600);
             margin-bottom: 1.5rem;
         }
-        
+
         @media (max-width: 992px) {
             .dashboard-container {
                 grid-template-columns: 1fr;
             }
-            
+
             .dashboard-sidebar {
                 display: none;
             }
         }
-        
+
         /* Logo Text Fallback Styling */
         .logo-text {
             font-size: 1.5rem;
@@ -411,6 +418,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Header -->
     <header class="header">
@@ -419,11 +427,11 @@
                 <a href="index.html" class="logo">
                     <span class="logo-text">YallaStarter</span>
                 </a>
-                
+
                 <button class="mobile-menu-btn">
                     <i class="fas fa-bars"></i>
                 </button>
-                
+
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="projects.html">Browse Projects</a></li>
@@ -431,11 +439,60 @@
                     <li><a href="about.html">About</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
-                
+
                 <div class="auth-buttons">
                     <div class="user-dropdown">
                         <button class="user-dropdown-btn">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User Avatar" class="user-avatar-small">
+                            <div class="user-avatar-small" id="headerAvatar"
+                                style="width: 35px; height: 35px; border-radius: 50%; background: linear-gradient(135deg, #006c35 0%, #00a651 100%); display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-user" style="font-size: 1rem; color: white;"></i>
+                            </div>
+                            <span id="headerUserName">User</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="user-dropdown-menu">
+                            <a href="dashboard.html" class="dropdown-item active">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a>
+                            <a href="user-profile.html" class="dropdown-item">
+                                <i class="fas fa-user"></i> Profile
+                            </a>
+                            <a href="settings.html" class="dropdown-item">
+                                <i class="fas fa-cog"></i> Settings
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item" onclick="window.auth.logout(); return false;">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </nav>
+
+            <div class="mobile-menu">
+                <div class="mobile-menu-header">
+
+                    <button class="mobile-close-btn">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="projects.html">Browse Projects</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="language-switcher">
+                    <button class="language-btn active" onclick="switchLanguage('en')">English</button>
+                    <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
+                </div>
+                <div class="auth-buttons">
+                    <div class="user-dropdown">
+                        <button class="user-dropdown-btn">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User Avatar"
+                                class="user-avatar-small">
                             <span>Mohammed</span>
                             <i class="fas fa-chevron-down"></i>
                         </button>
@@ -456,52 +513,7 @@
                         </div>
                     </div>
                 </div>
-                
-        </nav>
-        
-        <div class="mobile-menu">
-            <div class="mobile-menu-header">
-                
-                <button class="mobile-close-btn">
-                    <i class="fas fa-times"></i>
-                </button>
             </div>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="projects.html">Browse Projects</a></li>
-                <li><a href="how-it-works.html">How It Works</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-            <div class="language-switcher">
-                <button class="language-btn active" onclick="switchLanguage('en')">English</button>
-                <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
-            </div>
-            <div class="auth-buttons">
-                <div class="user-dropdown">
-                    <button class="user-dropdown-btn">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User Avatar" class="user-avatar-small">
-                        <span>Mohammed</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="user-dropdown-menu">
-                        <a href="dashboard.html" class="dropdown-item active">
-                            <i class="fas fa-tachometer-alt"></i> Dashboard
-                        </a>
-                        <a href="user-profile.html" class="dropdown-item">
-                            <i class="fas fa-user"></i> Profile
-                        </a>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-cog"></i> Settings
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="index.html" class="dropdown-item">
-                            <i class="fas fa-sign-out-alt"></i> Logout
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
     </header>
 
     <!-- Dashboard -->
@@ -509,15 +521,17 @@
         <!-- Sidebar -->
         <div class="dashboard-sidebar">
             <div class="user-profile">
-                <div class="user-avatar">
-                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User Avatar">
+                <div class="user-avatar" id="sidebarAvatar"
+                    style="background: linear-gradient(135deg, #006c35 0%, #00a651 100%); display: flex; align-items: center; justify-content: center; cursor: pointer;"
+                    onclick="uploadHandler.triggerUpload('profilePhotoInput')">
+                    <i class="fas fa-user" style="font-size: 2rem; color: white;"></i>
                 </div>
                 <div class="user-info">
-                    <div class="user-name">Mohammed Al-Saud</div>
-                    <div class="user-email">mohammed@example.com</div>
+                    <div class="user-name" id="userName">User</div>
+                    <div class="user-email" id="userEmail">user@example.com</div>
                 </div>
             </div>
-            
+
             <ul class="sidebar-menu">
                 <li class="sidebar-menu-item">
                     <a href="#" class="sidebar-menu-link active">
@@ -550,13 +564,13 @@
                     </a>
                 </li>
                 <li class="sidebar-menu-item">
-                    <a href="#" class="sidebar-menu-link">
+                    <a href="user-profile.html" class="sidebar-menu-link">
                         <i class="fas fa-user sidebar-menu-icon"></i>
                         Profile
                     </a>
                 </li>
                 <li class="sidebar-menu-item">
-                    <a href="#" class="sidebar-menu-link">
+                    <a href="settings.html" class="sidebar-menu-link">
                         <i class="fas fa-cog sidebar-menu-icon"></i>
                         Settings
                     </a>
@@ -568,62 +582,63 @@
                     </a>
                 </li>
                 <li class="sidebar-menu-item">
-                    <a href="index.html" class="sidebar-menu-link">
+                    <a href="#" class="sidebar-menu-link" onclick="window.auth.logout(); return false;">
                         <i class="fas fa-sign-out-alt sidebar-menu-icon"></i>
                         Logout
                     </a>
                 </li>
             </ul>
         </div>
-        
+
         <!-- Content -->
         <div class="dashboard-content">
             <div class="dashboard-header">
                 <h1 class="dashboard-title">Dashboard</h1>
-                
+
                 <div class="dashboard-actions">
                     <a href="create-project.html" class="btn btn-primary">
                         <i class="fas fa-plus"></i> Create Project
                     </a>
                 </div>
             </div>
-            
+
             <!-- Stats -->
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-value">3</div>
                     <div class="stat-label">Active Projects</div>
                 </div>
-                
+
                 <div class="stat-card">
                     <div class="stat-value">12</div>
                     <div class="stat-label">Backed Projects</div>
                 </div>
-                
+
                 <div class="stat-card">
                     <div class="stat-value">SAR 15,200</div>
                     <div class="stat-label">Total Raised</div>
                 </div>
-                
+
                 <div class="stat-card">
                     <div class="stat-value">SAR 8,500</div>
                     <div class="stat-label">Total Backed</div>
                 </div>
             </div>
-            
+
             <!-- Tabs -->
             <div class="tab-container">
                 <div class="tabs-nav">
                     <div class="tab-item active">My Projects</div>
                     <div class="tab-item">Backed Projects</div>
                 </div>
-                
+
                 <!-- My Projects Tab -->
                 <div class="tab-content active">
                     <div class="projects-grid">
                         <div class="project-card">
                             <div class="project-image">
-                                <img src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Smart Solar Panels">
+                                <img src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                                    alt="Smart Solar Panels">
                             </div>
                             <div class="project-content">
                                 <div class="project-category">Technology</div>
@@ -645,10 +660,11 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="project-card">
                             <div class="project-image">
-                                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Traditional Crafts Marketplace">
+                                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                                    alt="Traditional Crafts Marketplace">
                             </div>
                             <div class="project-content">
                                 <div class="project-category">Arts & Culture</div>
@@ -670,10 +686,11 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="project-card">
                             <div class="project-image">
-                                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Coding Academy">
+                                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                                    alt="Coding Academy">
                             </div>
                             <div class="project-content">
                                 <div class="project-category">Education</div>
@@ -696,16 +713,18 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Backed Projects Tab -->
                 <div class="tab-content">
                     <div class="backed-projects-grid">
                         <div class="backed-project-card">
                             <div class="backed-project-image">
-                                <img src="https://images.unsplash.com/photo-1576153192621-7a3be10b356e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Eco-Friendly Water Bottles">
+                                <img src="https://images.unsplash.com/photo-1576153192621-7a3be10b356e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                                    alt="Eco-Friendly Water Bottles">
                             </div>
                             <div class="backed-project-content">
-                                <h3 class="backed-project-title">Eco-Friendly Water Bottles Made from Date Palm Waste</h3>
+                                <h3 class="backed-project-title">Eco-Friendly Water Bottles Made from Date Palm Waste
+                                </h3>
                                 <div class="backed-project-creator">
                                     <div class="creator-avatar">
                                         <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Creator">
@@ -727,13 +746,15 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="backed-project-card">
                             <div class="backed-project-image">
-                                <img src="https://images.unsplash.com/photo-1606836591695-4d58a73eba1e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Saudi Coffee Table Book">
+                                <img src="https://images.unsplash.com/photo-1606836591695-4d58a73eba1e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                                    alt="Saudi Coffee Table Book">
                             </div>
                             <div class="backed-project-content">
-                                <h3 class="backed-project-title">Saudi Coffee: A Photographic Journey Through the Kingdom's Coffee Culture</h3>
+                                <h3 class="backed-project-title">Saudi Coffee: A Photographic Journey Through the
+                                    Kingdom's Coffee Culture</h3>
                                 <div class="backed-project-creator">
                                     <div class="creator-avatar">
                                         <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Creator">
@@ -755,13 +776,15 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="backed-project-card">
                             <div class="backed-project-image">
-                                <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Music Festival">
+                                <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                                    alt="Music Festival">
                             </div>
                             <div class="backed-project-content">
-                                <h3 class="backed-project-title">Riyadh Music Festival: Celebrating Saudi Musical Heritage</h3>
+                                <h3 class="backed-project-title">Riyadh Music Festival: Celebrating Saudi Musical
+                                    Heritage</h3>
                                 <div class="backed-project-creator">
                                     <div class="creator-avatar">
                                         <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Creator">
@@ -787,43 +810,92 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <script>
-        // User Dropdown Toggle
-        const userDropdownBtn = document.querySelector('.user-dropdown-btn');
-        const userDropdownMenu = document.querySelector('.user-dropdown-menu');
-        
-        userDropdownBtn.addEventListener('click', () => {
-            userDropdownMenu.classList.toggle('show');
-        });
-        
-        // Close dropdown when clicking outside
-        window.addEventListener('click', (event) => {
-            if (!event.target.matches('.user-dropdown-btn') && !event.target.closest('.user-dropdown-btn')) {
-                if (userDropdownMenu.classList.contains('show')) {
-                    userDropdownMenu.classList.remove('show');
+        <!-- Hidden file input for photo upload -->
+        <input type="file" id="profilePhotoInput" accept="image/*" style="display: none;">
+
+        <!-- Authentication and Upload Handlers -->
+        <script src="assets/js/auth-handler.js"></script>
+        <script src="assets/js/upload-handler.js"></script>
+
+        <script>
+            // Protect page - redirect to login if not authenticated
+            if (window.auth) {
+                window.auth.protectPage();
+
+                // Load user data
+                const user = window.auth.getUser();
+                if (user) {
+                    document.getElementById('userName').textContent = user.username || 'User';
+                    document.getElementById('userEmail').textContent = user.email || 'user@example.com';
+                    document.getElementById('headerUserName').textContent = user.username || 'User';
+
+                    // Load profile photo if exists
+                    if (user.photoUrl) {
+                        const sidebarAvatar = document.getElementById('sidebarAvatar');
+                        const headerAvatar = document.getElementById('headerAvatar');
+
+                        sidebarAvatar.style.backgroundImage = `url(${user.photoUrl})`;
+                        sidebarAvatar.style.backgroundSize = 'cover';
+                        sidebarAvatar.innerHTML = '';
+
+                        headerAvatar.style.backgroundImage = `url(${user.photoUrl})`;
+                        headerAvatar.style.backgroundSize = 'cover';
+                        headerAvatar.innerHTML = '';
+                    }
                 }
             }
-        });
-        
-        // Tabs
-        const tabItems = document.querySelectorAll('.tab-item');
-        const tabContents = document.querySelectorAll('.tab-content');
-        
-        tabItems.forEach((tab, index) => {
-            tab.addEventListener('click', () => {
-                tabItems.forEach(t => t.classList.remove('active'));
-                tabContents.forEach(c => c.classList.remove('active'));
-                
-                tab.classList.add('active');
-                tabContents[index].classList.add('active');
-            });
-        });
-    </script>
-    
-    <!-- Universal Mobile Menu Script -->
-    <script src="mobile-menu.js"></script>
-</body>
-</html>
 
+            // Setup photo upload
+            if (window.uploadHandler) {
+                uploadHandler.setupFileInput('profilePhotoInput', 'sidebarAvatar', {
+                    autoUpload: true,
+                    onSuccess: (result) => {
+                        // Update header avatar too
+                        const headerAvatar = document.getElementById('headerAvatar');
+                        headerAvatar.style.backgroundImage = `url(${result.photoUrl})`;
+                        headerAvatar.style.backgroundSize = 'cover';
+                        headerAvatar.innerHTML = '';
+
+                        alert('Profile photo updated successfully!');
+                    }
+                });
+            }
+
+            // User Dropdown Toggle
+            const userDropdownBtn = document.querySelector('.user-dropdown-btn');
+            const userDropdownMenu = document.querySelector('.user-dropdown-menu');
+
+            userDropdownBtn.addEventListener('click', () => {
+                userDropdownMenu.classList.toggle('show');
+            });
+
+            // Close dropdown when clicking outside
+            window.addEventListener('click', (event) => {
+                if (!event.target.matches('.user-dropdown-btn') && !event.target.closest('.user-dropdown-btn')) {
+                    if (userDropdownMenu.classList.contains('show')) {
+                        userDropdownMenu.classList.remove('show');
+                    }
+                }
+            });
+
+            // Tabs
+            const tabItems = document.querySelectorAll('.tab-item');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabItems.forEach((tab, index) => {
+                tab.addEventListener('click', () => {
+                    tabItems.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+
+                    tab.classList.add('active');
+                    tabContents[index].classList.add('active');
+                });
+            });
+        </script>
+
+        <!-- Universal Mobile Menu Script -->
+        <script src="mobile-menu.js"></script>
+</body>
+
+</html>

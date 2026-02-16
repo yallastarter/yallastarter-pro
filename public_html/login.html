@@ -543,13 +543,13 @@
                     </div>
 
                     <div class="social-login">
-                        <button type="button" class="btn-social">
+                        <button type="button" class="btn-social" id="googleLoginBtn">
                             <i class="fab fa-google"></i>
                             Google
                         </button>
-                        <button type="button" class="btn-social">
-                            <i class="fab fa-facebook-f"></i>
-                            Facebook
+                        <button type="button" class="btn-social" onclick="window.location.href='signup.html'">
+                            <i class="fas fa-envelope"></i>
+                            Sign Up
                         </button>
                     </div>
 
@@ -561,6 +561,9 @@
         </div>
     </section>
 
+    <!-- Authentication Handler -->
+    <script src="assets/js/auth-handler.js"></script>
+
     <script>
         function switchLanguage(lang) {
             if (lang === 'en') {
@@ -569,6 +572,53 @@
                 window.location.href = 'login-ar.html';
             }
         }
+
+        // Redirect if already authenticated
+        if (window.auth && window.auth.isAuthenticated()) {
+            window.location.href = 'dashboard.html';
+        }
+
+        // Handle login form submission
+        document.querySelector('.auth-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const loginBtn = document.querySelector('.btn-login');
+
+            if (!email || !password) {
+                alert('Please enter both email and password');
+                return;
+            }
+
+            loginBtn.disabled = true;
+            loginBtn.textContent = 'Logging in...';
+
+            try {
+                const result = await window.auth.login({ email, password });
+
+                if (result.success) {
+                    window.location.href = 'dashboard.html';
+                } else {
+                    alert(result.message || 'Login failed');
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                alert('An error occurred. Please try again.');
+            } finally {
+                loginBtn.disabled = false;
+                loginBtn.textContent = 'Log In';
+            }
+        });
+
+        // Google login
+        document.getElementById('googleLoginBtn')?.addEventListener('click', function () {
+            if (window.auth) {
+                window.auth.loginWithGoogle();
+            } else {
+                alert('Authentication system not loaded. Please refresh the page.');
+            }
+        });
     </script>
 
     <!-- Universal Mobile Menu Script -->

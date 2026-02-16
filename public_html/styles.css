@@ -1013,6 +1013,7 @@ p {
     }
 }
 
+/* Enhanced Mobile Responsiveness - 480px and below */
 @media (max-width: 480px) {
     .hero-title {
         font-size: 2rem;
@@ -1035,6 +1036,84 @@ p {
         flex-direction: column;
         gap: 1rem;
         text-align: center;
+    }
+    
+    /* Ensure touch-friendly buttons */
+    .btn {
+        min-height: 44px;
+        min-width: 44px;
+        padding: 0.75rem 1.5rem;
+    }
+    
+    /* Better form controls on mobile */
+    input, select, textarea {
+        font-size: 16px !important; /* Prevents zoom on iOS */
+    }
+}
+
+/* Tablet Landscape - 1024px */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 1.5rem;
+    }
+    
+    .projects-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+}
+
+/* Small Mobile - 320px */
+@media (max-width: 320px) {
+    .hero-title {
+        font-size: 1.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+    
+    .btn {
+        font-size: 0.9rem;
+        padding: 0.6rem 1.2rem;
+    }
+}
+
+/* Large Desktop - 1440px and above */
+@media (min-width: 1440px) {
+    .container {
+        max-width: 1400px;
+    }
+    
+    .projects-grid {
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    }
+}
+
+/* Landscape orientation handling */
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero-section {
+        min-height: 400px;
+        height: auto;
+        padding: 2rem 0;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+        margin-bottom: 1rem;
     }
 }
 

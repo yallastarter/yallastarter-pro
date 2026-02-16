@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Manage your YallaStarter account settings, preferences, and security options.">
+    <title>Settings - YallaStarter</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile-menu.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .settings-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .settings-header {
+            margin-bottom: 2rem;
+        }
+
+        .settings-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--neutral-900);
+            margin-bottom: 0.5rem;
+        }
+
+        .settings-subtitle {
+            color: var(--neutral-600);
+        }
+
+        .settings-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--box-shadow);
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--neutral-900);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--neutral-200);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 500;
+            color: var(--neutral-700);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--neutral-200);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 166, 81, 0.1);
+        }
+
+        .btn-save {
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-save:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--neutral-300);
+            transition: 0.4s;
+            border-radius: 24px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.toggle-slider {
+            background-color: var(--primary);
+        }
+
+        input:checked+.toggle-slider:before {
+            transform: translateX(26px);
+        }
+
+        .preference-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--neutral-200);
+        }
+
+        .preference-item:last-child {
+            border-bottom: none;
+        }
+
+        .preference-info h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--neutral-900);
+            margin-bottom: 0.25rem;
+        }
+
+        .preference-info p {
+            font-size: 0.9rem;
+            color: var(--neutral-600);
+            margin: 0;
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .alert.show {
+            display: block;
+        }
+
+        .alert-success {
+            background: var(--success-light);
+            color: var(--success);
+            border: 1px solid var(--success);
+        }
+
+        .alert-error {
+            background: var(--danger-light);
+            color: var(--danger);
+            border: 1px solid var(--danger);
+        }
+
+        @media (max-width: 768px) {
+            .settings-section {
+                padding: 1.5rem;
+            }
+
+            .preference-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <span class="logo-text">YallaStarter</span>
+                </a>
+
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="projects.html">Browse Projects</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                </ul>
+
+                <div class="auth-buttons">
+                    <div class="user-dropdown">
+                        <button class="user-dropdown-btn">
+                            <div class="user-avatar-small" id="headerAvatar"
+                                style="width: 35px; height: 35px; border-radius: 50%; background: linear-gradient(135deg, #006c35 0%, #00a651 100%); display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-user" style="font-size: 1rem; color: white;"></i>
+                            </div>
+                            <span id="headerUserName">User</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="user-dropdown-menu">
+                            <a href="dashboard.html" class="dropdown-item">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a>
+                            <a href="user-profile.html" class="dropdown-item">
+                                <i class="fas fa-user"></i> Profile
+                            </a>
+                            <a href="settings.html" class="dropdown-item active">
+                                <i class="fas fa-cog"></i> Settings
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item" onclick="window.auth.logout(); return false;">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Settings Content -->
+    <div class="settings-container">
+        <div class="settings-header">
+            <h1 class="settings-title">Settings</h1>
+            <p class="settings-subtitle">Manage your account preferences and settings</p>
+        </div>
+
+        <div id="alertContainer"></div>
+
+        <!-- Account Settings -->
+        <div class="settings-section">
+            <h2 class="section-title">Account Information</h2>
+            <form id="accountForm">
+                <div class="form-group">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" id="username" class="form-control" placeholder="Enter your username">
+                </div>
+                <div class="form-group">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" id="email" class="form-control" placeholder="Enter your email">
+                </div>
+                <button type="submit" class="btn-save">Save Changes</button>
+            </form>
+        </div>
+
+        <!-- Password Settings -->
+        <div class="settings-section">
+            <h2 class="section-title">Change Password</h2>
+            <form id="passwordForm">
+                <div class="form-group">
+                    <label for="currentPassword" class="form-label">Current Password</label>
+                    <input type="password" id="currentPassword" class="form-control"
+                        placeholder="Enter current password">
+                </div>
+                <div class="form-group">
+                    <label for="newPassword" class="form-label">New Password</label>
+                    <input type="password" id="newPassword" class="form-control" placeholder="Enter new password">
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword" class="form-label">Confirm New Password</label>
+                    <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm new password">
+                </div>
+                <button type="submit" class="btn-save">Update Password</button>
+            </form>
+        </div>
+
+        <!-- Notification Preferences -->
+        <div class="settings-section">
+            <h2 class="section-title">Notification Preferences</h2>
+            <div class="preference-item">
+                <div class="preference-info">
+                    <h4>Email Notifications</h4>
+                    <p>Receive email updates about your projects and backed campaigns</p>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="emailNotifications" checked>
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+            <div class="preference-item">
+                <div class="preference-info">
+                    <h4>Project Updates</h4>
+                    <p>Get notified when projects you backed post updates</p>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="projectUpdates" checked>
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+            <div class="preference-item">
+                <div class="preference-info">
+                    <h4>Newsletter</h4>
+                    <p>Receive our weekly newsletter with featured projects</p>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="newsletter">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Authentication Handler -->
+    <script src="assets/js/auth-handler.js"></script>
+    <script src="mobile-menu.js"></script>
+
+    <script>
+        // Protect page
+        if (window.auth) {
+            window.auth.protectPage();
+
+            // Load user data
+            const user = window.auth.getUser();
+            if (user) {
+                document.getElementById('username').value = user.username || '';
+                document.getElementById('email').value = user.email || '';
+                document.getElementById('headerUserName').textContent = user.username || 'User';
+
+                if (user.photoUrl) {
+                    const headerAvatar = document.getElementById('headerAvatar');
+                    headerAvatar.style.backgroundImage = `url(${user.photoUrl})`;
+                    headerAvatar.style.backgroundSize = 'cover';
+                    headerAvatar.innerHTML = '';
+                }
+            }
+        }
+
+        // Show alert
+        function showAlert(message, type = 'success') {
+            const container = document.getElementById('alertContainer');
+            container.innerHTML = `<div class="alert alert-${type} show">${message}</div>`;
+            setTimeout(() => {
+                container.innerHTML = '';
+            }, 5000);
+        }
+
+        // Account form submission
+        document.getElementById('accountForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+
+            if (window.auth) {
+                const result = await window.auth.updateProfile({ username, email });
+                if (result.success) {
+                    showAlert('Account information updated successfully!');
+                } else {
+                    showAlert(result.message || 'Update failed', 'error');
+                }
+            }
+        });
+
+        // Password form submission
+        document.getElementById('passwordForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (newPassword !== confirmPassword) {
+                showAlert('New passwords do not match', 'error');
+                return;
+            }
+
+            if (newPassword.length < 8) {
+                showAlert('Password must be at least 8 characters long', 'error');
+                return;
+            }
+
+            // TODO: Implement password change endpoint
+            showAlert('Password change functionality coming soon!', 'error');
+        });
+
+        // User dropdown toggle
+        const userDropdownBtn = document.querySelector('.user-dropdown-btn');
+        const userDropdownMenu = document.querySelector('.user-dropdown-menu');
+
+        userDropdownBtn?.addEventListener('click', () => {
+            userDropdownMenu.classList.toggle('show');
+        });
+
+        window.addEventListener('click', (event) => {
+            if (!event.target.matches('.user-dropdown-btn') && !event.target.closest('.user-dropdown-btn')) {
+                if (userDropdownMenu?.classList.contains('show')) {
+                    userDropdownMenu.classList.remove('show');
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
