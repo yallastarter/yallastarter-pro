@@ -9,6 +9,16 @@ const path = require('path');
 // Load environment variables
 dotenv.config();
 
+// Validate required env vars early
+if (!process.env.MONGO_URI) {
+    console.error('FATAL: MONGO_URI environment variable is not set.');
+    process.exit(1);
+}
+if (!process.env.JWT_SECRET) {
+    console.error('FATAL: JWT_SECRET environment variable is not set.');
+    process.exit(1);
+}
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -21,27 +31,34 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(helmet({
-    contentSecurityPolicy: false, // Disabled for simplicity during development with inline scripts/styles
+    contentSecurityPolicy: false,
 }));
-app.use(morgan('dev'));
+app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 
 // Static Files
 app.use(express.static(path.join(__dirname, 'public_html')));
 
-// Routes (Placeholders for now)
+// API Routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/projects', require('./routes/projects'));
 
-// Fallback to index.html for SPA-like behavior or 404
-// app.get('/*', (req, res) => {
-//     res.sendFile(path.join(__dirname, 'public_html', 'index.html'));
-// });
-
-// Start Server (Only if not in Vercel)
-if (require.main === module) {
-    app.listen(PORT, () => {
-        console.log(`Server running on port ${PORT}`);
+// Health Check — Render uses this to monitor the service
+app.get('/api/health', (req, res) => {
+    res.status(200).json({
+        status: 'ok',
+        timestamp: new Date().toISOString(),
+        uptime: process.uptime()
     });
-}
+});
+
+// SPA Fallback — serve index.html for any non-API, non-file route
+app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public_html', 'index.html'));
+});
+
+// Start Server
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT} (${process.env.NODE_ENV || 'development'})`);
+});
 
 module.exports = app;

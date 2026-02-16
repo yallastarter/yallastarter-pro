@@ -920,38 +920,46 @@
                 return isValid;
             }
 
-            function submitForm() {
+            async function submitForm() {
                 // Show loading state
                 btnText.style.display = 'none';
                 btnLoading.style.display = 'inline-block';
                 submitBtn.disabled = true;
 
-                // Simulate API call
-                setTimeout(() => {
-                    // Show success message
-                    document.getElementById('successMessage').classList.add('show');
-
-                    // Reset form
-                    form.reset();
-                    inputs.forEach(input => {
-                        input.classList.remove('error', 'success');
+                try {
+                    const res = await fetch('/api/auth/signup', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            username: document.getElementById('firstName').value + ' ' + document.getElementById('lastName').value,
+                            email: document.getElementById('email').value,
+                            password: document.getElementById('password').value
+                        })
                     });
 
-                    // Reset button
+                    const data = await res.json();
+
+                    if (data.success) {
+                        localStorage.setItem('token', data.token);
+                        localStorage.setItem('user', JSON.stringify(data.user));
+                        showToast('تم إنشاء الحساب بنجاح!', 'success');
+                        setTimeout(() => { window.location.href = 'dashboard-ar.html'; }, 1200);
+                    } else {
+                        showToast(data.message || 'فشل في إنشاء الحساب');
+                    }
+                } catch (err) {
+                    console.error(err);
+                    showToast('حدث خطأ. يرجى المحاولة مرة أخرى.');
+                } finally {
                     btnText.style.display = 'inline-block';
                     btnLoading.style.display = 'none';
                     submitBtn.disabled = false;
-
-                    // Redirect after 2 seconds
-                    setTimeout(() => {
-                        window.location.href = 'dashboard-ar.html';
-                    }, 2000);
-                }, 2000);
+                }
             }
         });
     </script>
-    <!-- Password Protection Script -->\n
-    <script src="assets/js/password-clear.js"></script>\n
+    <script src="scripts.js"></script>
+
 </body>
 
 </html>

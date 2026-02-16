@@ -1,3 +1,41 @@
+// ==========================================
+// YallaStarter - Main JavaScript
+// ==========================================
+
+// Toast Notification Helper
+function showToast(message, type = 'error') {
+    const existing = document.querySelector('.ys-toast');
+    if (existing) existing.remove();
+
+    const toast = document.createElement('div');
+    toast.className = `ys-toast ys-toast--${type}`;
+    toast.innerHTML = `
+        <span class="ys-toast__icon">${type === 'success' ? '\u2713' : '\u26a0'}</span>
+        <span class="ys-toast__msg">${message}</span>
+    `;
+
+    if (!document.getElementById('ys-toast-styles')) {
+        const style = document.createElement('style');
+        style.id = 'ys-toast-styles';
+        style.textContent = `
+            .ys-toast { position: fixed; top: 24px; right: 24px; z-index: 10000;
+                padding: 14px 22px; border-radius: 10px; display: flex; align-items: center; gap: 10px;
+                font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 500;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.15); animation: ysToastIn 0.3s ease; max-width: 420px; }
+            .ys-toast--error { background: #fff0f0; color: #c0392b; border-left: 4px solid #e74c3c; }
+            .ys-toast--success { background: #f0fff4; color: #006c35; border-left: 4px solid #006c35; }
+            .ys-toast__icon { font-size: 1.2rem; flex-shrink: 0; }
+            .ys-toast--fade-out { animation: ysToastOut 0.3s ease forwards; }
+            @keyframes ysToastIn { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
+            @keyframes ysToastOut { from { opacity: 1; } to { opacity: 0; transform: translateY(-12px); } }
+        `;
+        document.head.appendChild(style);
+    }
+
+    document.body.appendChild(toast);
+    setTimeout(() => { toast.classList.add('ys-toast--fade-out'); setTimeout(() => toast.remove(), 300); }, 4000);
+}
+
 // Mobile Menu Toggle
 document.addEventListener('DOMContentLoaded', function () {
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
@@ -99,11 +137,11 @@ document.addEventListener('DOMContentLoaded', function () {
                         window.location.href = 'dashboard.html';
                     }
                 } else {
-                    alert(data.message || 'Login failed');
+                    showToast(data.message || 'Login failed');
                 }
             } catch (err) {
                 console.error(err);
-                alert('An error occurred. Please try again.');
+                showToast('An error occurred. Please try again.');
             } finally {
                 btn.textContent = 'Log In';
                 btn.disabled = false;
@@ -153,8 +191,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('user', JSON.stringify(data.user));
 
-                    alert('Account created successfully!');
-                    alert('Account created successfully!');
+                    showToast('Account created successfully!', 'success');
                     // Redirect based on language
                     if (window.location.pathname.includes('-ar') || document.documentElement.lang === 'ar') {
                         window.location.href = 'dashboard-ar.html';
@@ -162,11 +199,11 @@ document.addEventListener('DOMContentLoaded', function () {
                         window.location.href = 'dashboard.html';
                     }
                 } else {
-                    alert(data.message || 'Signup failed');
+                    showToast(data.message || 'Signup failed');
                 }
             } catch (err) {
                 console.error(err);
-                alert('An error occurred. Please try again.');
+                showToast('An error occurred. Please try again.');
             } finally {
                 btn.classList.remove('loading');
                 btn.disabled = false;

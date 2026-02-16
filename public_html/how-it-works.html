@@ -1,30 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Learn how YallaStarter works. Discover the simple process of creating projects, backing innovations, and making ideas reality.">
+    <meta name="description"
+        content="Learn how YallaStarter works. Discover the simple process of creating projects, backing innovations, and making ideas reality.">
     <meta name="keywords" content="how crowdfunding works, project creation, backing projects, Saudi Arabia">
     <meta name="author" content="YallaStarter">
     <meta name="robots" content="index, follow">
-    
+
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="How It Works - YallaStarter">
-    <meta property="og:description" content="Learn how YallaStarter works. Discover the simple process of creating projects, backing innovations, and making ideas reality.">
+    <meta property="og:description"
+        content="Learn how YallaStarter works. Discover the simple process of creating projects, backing innovations, and making ideas reality.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://yallastarter.com/how-it-works">
-    
+
     <!-- Preload Critical Resources -->
     <link rel="preload" href="styles.css" as="style">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" as="style">
-    
+    <link rel="preload"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap"
+        as="style">
+
     <title>How It Works - YallaStarter</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="mobile-menu.css">
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Header Styles */
@@ -36,7 +43,7 @@
             z-index: 100;
             padding: 0.5rem 1rem;
         }
-        
+
         .navbar {
             display: flex;
             align-items: center;
@@ -44,7 +51,7 @@
             gap: 1rem;
             width: 100%;
         }
-        
+
         .logo {
             display: flex;
             align-items: center;
@@ -53,11 +60,11 @@
             margin-right: 0.8rem;
             transition: transform 0.2s ease;
         }
-        
+
         .logo:hover {
             transform: scale(1.02);
         }
-        
+
         .logo-text {
             font-size: 1.5rem;
             font-weight: 700;
@@ -65,7 +72,7 @@
             display: block;
             letter-spacing: -0.02em;
         }
-        
+
         .nav-links {
             display: flex;
             align-items: center;
@@ -76,11 +83,11 @@
             flex: 0 1 auto;
             justify-content: flex-start;
         }
-        
+
         .nav-links li {
             list-style: none;
         }
-        
+
         .nav-links a {
             color: var(--neutral-800);
             font-weight: 500;
@@ -92,12 +99,12 @@
             font-size: 1rem;
             border-bottom: 2px solid transparent;
         }
-        
+
         .nav-links a:hover {
             color: var(--primary);
             background-color: rgba(0, 108, 53, 0.05);
         }
-        
+
         .nav-links a.active {
             color: var(--primary);
             font-weight: 600;
@@ -105,14 +112,14 @@
             padding: 0.5rem 1rem;
             border-bottom: 2px solid var(--primary);
         }
-        
+
         .language-switcher {
             display: flex;
             align-items: center;
             gap: 0.5rem;
             margin-left: auto;
         }
-        
+
         .language-btn {
             background: transparent;
             border: 2px solid var(--primary);
@@ -124,24 +131,24 @@
             transition: all 0.3s ease;
             font-size: 0.9rem;
         }
-        
+
         .language-btn:hover {
             background: var(--primary);
             color: white;
             transform: translateY(-1px);
         }
-        
+
         .language-btn.active {
             background: var(--primary);
             color: white;
         }
-        
+
         .auth-buttons {
             display: flex;
             gap: 0.6rem;
             align-items: center;
         }
-        
+
         .auth-buttons .btn {
             padding: 0.6rem 1.2rem;
             font-size: 0.95rem;
@@ -150,44 +157,44 @@
             transition: all 0.3s ease;
             text-decoration: none;
         }
-        
+
         .auth-buttons .btn-primary {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
             border: 2px solid var(--primary);
             box-shadow: 0 2px 8px rgba(0, 108, 53, 0.2);
         }
-        
+
         .auth-buttons .btn-primary:hover {
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(0, 108, 53, 0.3);
         }
-        
+
         .auth-buttons .btn-secondary {
             background: transparent;
             color: var(--primary);
             border: 2px solid var(--primary);
             font-weight: 600;
         }
-        
+
         .auth-buttons .btn-secondary:hover {
             background: var(--primary);
             color: white;
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(0, 108, 53, 0.3);
         }
-        
+
         .auth-buttons .btn-link {
             background: transparent;
             color: var(--neutral-600);
             border: none;
             padding: 0.6rem 1rem;
         }
-        
+
         .auth-buttons .btn-link:hover {
             color: var(--primary);
         }
-        
+
         /* Hero Section */
         .how-it-works-hero {
             background-color: var(--primary);
@@ -195,31 +202,31 @@
             padding: 4rem 0;
             text-align: center;
         }
-        
+
         .how-it-works-hero-title {
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 1rem;
         }
-        
+
         .how-it-works-hero-subtitle {
             font-size: 1.1rem;
             max-width: 700px;
             margin: 0 auto;
         }
-        
+
         /* Process Section */
         .process-section {
             padding: 5rem 0;
         }
-        
+
         .process-timeline {
             position: relative;
             max-width: 800px;
             margin: 0 auto;
             padding: 2rem 0;
         }
-        
+
         .process-timeline::before {
             content: '';
             position: absolute;
@@ -230,16 +237,16 @@
             background-color: var(--primary-light);
             transform: translateX(-50%);
         }
-        
+
         .timeline-item {
             position: relative;
             margin-bottom: 4rem;
         }
-        
+
         .timeline-item:last-child {
             margin-bottom: 0;
         }
-        
+
         .timeline-content {
             position: relative;
             width: calc(50% - 2rem);
@@ -248,15 +255,15 @@
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
         }
-        
+
         .timeline-item:nth-child(odd) .timeline-content {
             margin-left: auto;
         }
-        
+
         .timeline-item:nth-child(even) .timeline-content {
             margin-right: auto;
         }
-        
+
         .timeline-item:nth-child(odd) .timeline-content::before {
             content: '';
             position: absolute;
@@ -268,7 +275,7 @@
             border-bottom: 10px solid transparent;
             border-right: 10px solid white;
         }
-        
+
         .timeline-item:nth-child(even) .timeline-content::before {
             content: '';
             position: absolute;
@@ -280,7 +287,7 @@
             border-bottom: 10px solid transparent;
             border-left: 10px solid white;
         }
-        
+
         .timeline-number {
             position: absolute;
             top: -20px;
@@ -297,63 +304,63 @@
             font-weight: 600;
             font-size: 1.1rem;
         }
-        
+
         .timeline-title {
             font-size: 1.3rem;
             font-weight: 600;
             color: var(--neutral-900);
             margin-bottom: 1rem;
         }
-        
+
         .timeline-description {
             color: var(--neutral-700);
             line-height: 1.6;
         }
-        
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .header {
                 padding: 0.3rem 0.8rem;
             }
-            
+
             .navbar {
                 gap: 0.5rem;
             }
-            
+
             .logo-text {
                 font-size: 1.3rem;
             }
-            
+
             .nav-links {
                 display: none;
             }
-            
+
             .auth-buttons {
                 display: none;
             }
-            
+
             .language-switcher {
                 display: none;
             }
-            
+
             .how-it-works-hero-title {
                 font-size: 2rem;
             }
-            
+
             .how-it-works-hero-subtitle {
                 font-size: 1rem;
             }
-            
+
             .process-timeline::before {
                 left: 2rem;
             }
-            
+
             .timeline-content {
                 width: calc(100% - 4rem);
                 margin-left: 4rem !important;
                 margin-right: 0 !important;
             }
-            
+
             .timeline-item:nth-child(odd) .timeline-content::before,
             .timeline-item:nth-child(even) .timeline-content::before {
                 left: -10px;
@@ -361,7 +368,7 @@
                 border-right: 10px solid white;
                 border-left: none;
             }
-            
+
             .timeline-number {
                 left: 0;
                 transform: translateX(-50%);
@@ -369,6 +376,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Header -->
     <header class="header">
@@ -376,7 +384,7 @@
             <a href="index.html" class="logo">
                 <span class="logo-text">YallaStarter</span>
             </a>
-        
+
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="entertainment.html">Entertainment Projects</a></li>
@@ -387,23 +395,23 @@
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
-            
+
             <div class="language-switcher">
                 <button class="language-btn active" onclick="switchLanguage('en')">English</button>
                 <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
             </div>
-            
+
             <div class="auth-buttons">
                 <a href="create-project.html" class="btn btn-primary">Start a Project</a>
                 <a href="login.html" class="btn btn-link">Log In</a>
-            </div>            <button class="mobile-menu-btn">
+            </div> <button class="mobile-menu-btn">
                 <i class="fas fa-bars"></i>
             </button>
         </nav>
-        
-                <div class="mobile-menu">
+
+        <div class="mobile-menu">
             <div class="mobile-menu-header">
-                
+
                 <button class="mobile-close-btn">
                     <i class="fas fa-times"></i>
                 </button>
@@ -433,7 +441,8 @@
     <section class="how-it-works-hero">
         <div class="container">
             <h1 class="how-it-works-hero-title">How It Works</h1>
-            <p class="how-it-works-hero-subtitle">Learn how YallaStarter works. Discover the simple process of creating projects, backing innovations, and making ideas reality.</p>
+            <p class="how-it-works-hero-subtitle">Learn how YallaStarter works. Discover the simple process of creating
+                projects, backing innovations, and making ideas reality.</p>
         </div>
     </section>
 
@@ -445,31 +454,39 @@
                     <div class="timeline-number">1</div>
                     <div class="timeline-content">
                         <h3 class="timeline-title">Create Your Project</h3>
-                        <p class="timeline-description">Start by creating a compelling project page. Share your vision, set funding goals, and create rewards for your backers. Our platform makes it easy to showcase your idea with images, videos, and detailed descriptions.</p>
+                        <p class="timeline-description">Start by creating a compelling project page. Share your vision,
+                            set funding goals, and create rewards for your backers. Our platform makes it easy to
+                            showcase your idea with images, videos, and detailed descriptions.</p>
                     </div>
                 </div>
-                
+
                 <div class="timeline-item">
                     <div class="timeline-number">2</div>
                     <div class="timeline-content">
                         <h3 class="timeline-title">Launch & Promote</h3>
-                        <p class="timeline-description">Once your project is live, spread the word! Share it on social media, reach out to your network, and engage with potential backers. The more people who see your project, the better your chances of success.</p>
+                        <p class="timeline-description">Once your project is live, spread the word! Share it on social
+                            media, reach out to your network, and engage with potential backers. The more people who see
+                            your project, the better your chances of success.</p>
                     </div>
                 </div>
-                
+
                 <div class="timeline-item">
                     <div class="timeline-number">3</div>
                     <div class="timeline-content">
                         <h3 class="timeline-title">Receive Funding</h3>
-                        <p class="timeline-description">As people discover and believe in your project, they'll pledge their support. You'll see your funding progress in real-time, and you can continue to engage with your community throughout the campaign.</p>
+                        <p class="timeline-description">As people discover and believe in your project, they'll pledge
+                            their support. You'll see your funding progress in real-time, and you can continue to engage
+                            with your community throughout the campaign.</p>
                     </div>
                 </div>
-                
+
                 <div class="timeline-item">
                     <div class="timeline-number">4</div>
                     <div class="timeline-content">
                         <h3 class="timeline-title">Bring Your Idea to Life</h3>
-                        <p class="timeline-description">When your campaign ends successfully, you'll receive the funds to turn your vision into reality. Keep your backers updated on your progress and deliver on your promises to build trust for future projects.</p>
+                        <p class="timeline-description">When your campaign ends successfully, you'll receive the funds
+                            to turn your vision into reality. Keep your backers updated on your progress and deliver on
+                            your promises to build trust for future projects.</p>
                     </div>
                 </div>
             </div>
@@ -484,5 +501,11 @@
                 window.location.href = 'how-it-works-ar.html';
             }
         }
-    </script>    <!-- Universal Mobile Menu Script --><script src="mobile-menu.js"></script>    <!-- Password Protection Script -->\n    <script src="assets/js/password-clear.js"></script>\n</body></html>
+    </script>
 
+    <!-- Universal Mobile Menu Script -->
+    <script src="mobile-menu.js"></script>
+
+</body>
+
+</html>

@@ -92,10 +92,35 @@ router.post('/login', async (req, res) => {
 // @desc    Get current user
 // @route   GET /api/auth/me
 // @access  Private
-// TODO: Add auth middleware
 router.get('/me', async (req, res) => {
-    // Placeholder
-    res.status(200).json({ success: true, message: 'Me route' });
+    try {
+        // Get token from header
+        const authHeader = req.headers.authorization;
+        if (!authHeader || !authHeader.startsWith('Bearer ')) {
+            return res.status(401).json({ success: false, message: 'Not authorized' });
+        }
+
+        const token = authHeader.split(' ')[1];
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const user = await User.findById(decoded.id).select('-password');
+
+        if (!user) {
+            return res.status(404).json({ success: false, message: 'User not found' });
+        }
+
+        res.status(200).json({
+            success: true,
+            user: {
+                id: user._id,
+                username: user.username,
+                email: user.email,
+                role: user.role
+            }
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(401).json({ success: false, message: 'Token is not valid' });
+    }
 });
 
 module.exports = router;

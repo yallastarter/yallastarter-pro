@@ -1,30 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Log In to your YallaStarter account to manage projects, track funding, and support innovative ideas.">
+    <meta name="description"
+        content="Log In to your YallaStarter account to manage projects, track funding, and support innovative ideas.">
     <meta name="keywords" content="login, YallaStarter, crowdfunding, Saudi Arabia">
     <meta name="author" content="YallaStarter">
     <meta name="robots" content="index, follow">
-    
+
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Log In - YallaStarter">
-    <meta property="og:description" content="Log In to your YallaStarter account to manage projects, track funding, and support innovative ideas.">
+    <meta property="og:description"
+        content="Log In to your YallaStarter account to manage projects, track funding, and support innovative ideas.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://yallastarter.com/login">
-    
+
     <!-- Preload Critical Resources -->
     <link rel="preload" href="styles.css" as="style">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" as="style">
-    
+    <link rel="preload"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap"
+        as="style">
+
     <title>Log In - YallaStarter</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="mobile-menu.css">
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
@@ -33,7 +40,7 @@
             margin: 0;
             padding: 0;
         }
-        
+
         /* Header Styles */
         .header {
             background-color: white;
@@ -43,7 +50,7 @@
             z-index: 100;
             padding: 0.5rem 1rem;
         }
-        
+
         .navbar {
             display: flex;
             align-items: center;
@@ -51,7 +58,7 @@
             gap: 1rem;
             width: 100%;
         }
-        
+
         .logo {
             display: flex;
             align-items: center;
@@ -60,11 +67,11 @@
             margin-right: 0.8rem;
             transition: transform 0.2s ease;
         }
-        
+
         .logo:hover {
             transform: scale(1.02);
         }
-        
+
         .logo-text {
             font-size: 1.5rem;
             font-weight: 700;
@@ -72,7 +79,7 @@
             display: block;
             letter-spacing: -0.02em;
         }
-        
+
         .nav-links {
             display: flex;
             align-items: center;
@@ -83,11 +90,11 @@
             flex: 0 1 auto;
             justify-content: flex-start;
         }
-        
+
         .nav-links li {
             list-style: none;
         }
-        
+
         .nav-links a {
             color: var(--neutral-800);
             font-weight: 500;
@@ -99,12 +106,12 @@
             font-size: 1rem;
             border-bottom: 2px solid transparent;
         }
-        
+
         .nav-links a:hover {
             color: var(--primary);
             background-color: rgba(0, 108, 53, 0.05);
         }
-        
+
         .nav-links a.active {
             color: var(--primary);
             font-weight: 600;
@@ -112,14 +119,14 @@
             padding: 0.5rem 1rem;
             border-bottom: 2px solid var(--primary);
         }
-        
+
         .language-switcher {
             display: flex;
             align-items: center;
             gap: 0.5rem;
             margin-left: auto;
         }
-        
+
         .language-btn {
             background: transparent;
             border: 2px solid var(--primary);
@@ -131,24 +138,24 @@
             transition: all 0.3s ease;
             font-size: 0.9rem;
         }
-        
+
         .language-btn:hover {
             background: var(--primary);
             color: white;
             transform: translateY(-1px);
         }
-        
+
         .language-btn.active {
             background: var(--primary);
             color: white;
         }
-        
+
         .auth-buttons {
             display: flex;
             gap: 0.6rem;
             align-items: center;
         }
-        
+
         .auth-buttons .btn {
             padding: 0.6rem 1.2rem;
             font-size: 0.95rem;
@@ -157,44 +164,44 @@
             transition: all 0.3s ease;
             text-decoration: none;
         }
-        
+
         .auth-buttons .btn-primary {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
             border: 2px solid var(--primary);
             box-shadow: 0 2px 8px rgba(0, 108, 53, 0.2);
         }
-        
+
         .auth-buttons .btn-primary:hover {
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(0, 108, 53, 0.3);
         }
-        
+
         .auth-buttons .btn-secondary {
             background: transparent;
             color: var(--primary);
             border: 2px solid var(--primary);
             font-weight: 600;
         }
-        
+
         .auth-buttons .btn-secondary:hover {
             background: var(--primary);
             color: white;
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(0, 108, 53, 0.3);
         }
-        
+
         .auth-buttons .btn-link {
             background: transparent;
             color: var(--neutral-600);
             border: none;
             padding: 0.6rem 1rem;
         }
-        
+
         .auth-buttons .btn-link:hover {
             color: var(--primary);
         }
-        
+
         /* Login Section */
         .auth-section {
             padding: 4rem 0;
@@ -202,13 +209,13 @@
             display: flex;
             align-items: center;
         }
-        
+
         .auth-container {
             max-width: 400px;
             margin: 0 auto;
             width: 100%;
         }
-        
+
         .auth-card {
             background: white;
             border-radius: 16px;
@@ -216,38 +223,38 @@
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
-        
+
         .auth-header {
             margin-bottom: 2rem;
         }
-        
+
         .auth-title {
             font-size: 2rem;
             font-weight: 700;
             color: var(--neutral-900);
             margin-bottom: 0.5rem;
         }
-        
+
         .auth-subtitle {
             color: var(--neutral-600);
             font-size: 1rem;
         }
-        
+
         .auth-form {
             text-align: left;
         }
-        
+
         .form-group {
             margin-bottom: 1.5rem;
         }
-        
+
         .form-label {
             display: block;
             font-weight: 500;
             color: var(--neutral-700);
             margin-bottom: 0.5rem;
         }
-        
+
         .form-control {
             width: 100%;
             padding: 0.875rem 1rem;
@@ -257,51 +264,51 @@
             transition: all 0.3s ease;
             background-color: var(--neutral-50);
         }
-        
+
         .form-control:focus {
             outline: none;
             border-color: var(--primary);
             background-color: white;
             box-shadow: 0 0 0 4px rgba(0, 108, 53, 0.1);
         }
-        
+
         .form-options {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 1.5rem;
         }
-        
+
         .checkbox-group {
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
-        
+
         .checkbox-group input[type="checkbox"] {
             width: 18px;
             height: 18px;
             accent-color: var(--primary);
         }
-        
+
         .checkbox-group label {
             font-size: 0.9rem;
             color: var(--neutral-600);
             margin: 0;
             cursor: pointer;
         }
-        
+
         .forgot-password {
             font-size: 0.9rem;
             color: var(--primary);
             text-decoration: none;
             font-weight: 500;
         }
-        
+
         .forgot-password:hover {
             text-decoration: underline;
         }
-        
+
         .btn-login {
             width: 100%;
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
@@ -315,18 +322,18 @@
             transition: all 0.3s ease;
             margin-bottom: 1.5rem;
         }
-        
+
         .btn-login:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(0, 108, 53, 0.3);
         }
-        
+
         .auth-divider {
             position: relative;
             text-align: center;
             margin: 1.5rem 0;
         }
-        
+
         .auth-divider::before {
             content: '';
             position: absolute;
@@ -336,7 +343,7 @@
             height: 1px;
             background-color: var(--neutral-200);
         }
-        
+
         .auth-divider span {
             background-color: white;
             padding: 0 1rem;
@@ -344,13 +351,13 @@
             font-size: 0.9rem;
             font-weight: 500;
         }
-        
+
         .social-login {
             display: flex;
             gap: 1rem;
             margin-bottom: 1.5rem;
         }
-        
+
         .btn-social {
             flex: 1;
             padding: 0.875rem;
@@ -366,73 +373,74 @@
             justify-content: center;
             gap: 0.5rem;
         }
-        
+
         .btn-social:hover {
             border-color: var(--primary);
             color: var(--primary);
             transform: translateY(-1px);
         }
-        
+
         .auth-footer {
             text-align: center;
             color: var(--neutral-600);
             font-size: 0.9rem;
         }
-        
+
         .auth-footer a {
             color: var(--primary);
             text-decoration: none;
             font-weight: 500;
         }
-        
+
         .auth-footer a:hover {
             text-decoration: underline;
         }
-        
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .header {
                 padding: 0.3rem 0.8rem;
             }
-            
+
             .navbar {
                 gap: 0.5rem;
             }
-            
+
             .logo-text {
                 font-size: 1.3rem;
             }
-            
+
             .nav-links {
                 display: none;
             }
-            
+
             .auth-buttons {
                 display: none;
             }
-            
+
             .language-switcher {
                 display: none;
             }
-            
+
             .auth-section {
                 padding: 2rem 1rem;
             }
-            
+
             .auth-card {
                 padding: 2rem;
             }
-            
+
             .auth-title {
                 font-size: 1.75rem;
             }
-            
+
             .social-login {
                 flex-direction: column;
             }
         }
     </style>
 </head>
+
 <body>
     <!-- Header -->
     <header class="header">
@@ -440,7 +448,7 @@
             <a href="index.html" class="logo">
                 <span class="logo-text">YallaStarter</span>
             </a>
-        
+
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="entertainment.html">Entertainment Projects</a></li>
@@ -451,22 +459,22 @@
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
-            
+
             <div class="language-switcher">
                 <button class="language-btn active" onclick="switchLanguage('en')">English</button>
                 <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
             </div>
-            
+
             <div class="auth-buttons">
                 <a href="login.html" class="btn btn-link active">Log In</a>
                 <a href="signup.html" class="btn btn-primary">Sign Up</a>
             </div>
-            
+
             <button class="mobile-menu-btn">
                 <i class="fas fa-bars"></i>
             </button>
         </nav>
-        
+
         <div class="mobile-menu">
             <div class="mobile-menu-header">
                 <div class="mobile-header-left">
@@ -505,34 +513,35 @@
                         <h1 class="auth-title">Welcome Back</h1>
                         <p class="auth-subtitle">Log In to your YallaStarter account</p>
                     </div>
-                    
+
                     <form class="auth-form">
                         <div class="form-group">
                             <label for="email" class="form-label">Email</label>
                             <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+                            <input type="password" id="password" class="form-control" placeholder="Enter your password"
+                                required>
                         </div>
-                        
+
                         <div class="form-options">
                             <div class="checkbox-group">
                                 <input type="checkbox" id="remember">
                                 <label for="remember">Remember me</label>
                             </div>
-                            
+
                             <a href="#" class="forgot-password">Forgot password?</a>
                         </div>
-                        
+
                         <button type="submit" class="btn-login">Log In</button>
                     </form>
-                    
+
                     <div class="auth-divider">
                         <span>OR</span>
                     </div>
-                    
+
                     <div class="social-login">
                         <button type="button" class="btn-social">
                             <i class="fab fa-google"></i>
@@ -543,7 +552,7 @@
                             Facebook
                         </button>
                     </div>
-                    
+
                     <div class="auth-footer">
                         Don't have an account? <a href="signup.html">Sign up</a>
                     </div>
@@ -560,5 +569,12 @@
                 window.location.href = 'login-ar.html';
             }
         }
-    </script>    <!-- Universal Mobile Menu Script --><script src="mobile-menu.js"></script>    <!-- Password Protection Script -->\n    <script src="assets/js/password-clear.js"></script>\n</body></html>
+    </script>
 
+    <!-- Universal Mobile Menu Script -->
+    <script src="mobile-menu.js"></script>
+    <script src="scripts.js"></script>
+
+</body>
+
+</html>
