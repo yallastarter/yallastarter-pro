@@ -460,8 +460,8 @@ html[dir="rtl"] .mobile-menu-header {
     touch-action: manipulation;
 }
 
-/* CRITICAL: Responsive Breakpoints - This is what makes it work on mobile */
-@media (max-width: 768px) {
+/* CRITICAL: Responsive Breakpoints — hamburger below 1024px to prevent nav overflow */
+@media (max-width: 1023px) {
     .mobile-menu-btn {
         display: flex !important;
         visibility: visible !important;
@@ -475,7 +475,7 @@ html[dir="rtl"] .mobile-menu-header {
     }
     
     .mobile-menu .nav-links a {
-        padding: 1rem 0;
+        padding: 1rem;
         font-size: 1.1rem;
     }
     
@@ -484,25 +484,28 @@ html[dir="rtl"] .mobile-menu-header {
         font-size: 1.1rem;
     }
     
-    /* Hide regular navigation on mobile */
-    .nav-links:not(.mobile-menu .nav-links),
-    .auth-buttons:not(.mobile-menu .auth-buttons):not(.mobile-header-left .auth-buttons) {
+    /* Hide desktop nav to prevent overflow; use hamburger menu only */
+    .navbar .nav-links:not(.mobile-menu .nav-links),
+    .navbar .auth-buttons:not(.mobile-menu .auth-buttons):not(.mobile-header-left .auth-buttons),
+    .navbar > .language-switcher {
         display: none !important;
     }
     
-    /* Hide language switcher on mobile (except in mobile menu header) */
     .language-switcher:not(.mobile-header-left .language-switcher) {
         display: none !important;
     }
     
-    /* Ensure proper spacing on mobile */
     .navbar {
-        gap: 0.8rem;
+        gap: 0.5rem;
+        justify-content: space-between;
     }
     
-    /* Optimize header padding for mobile */
+    .navbar .logo {
+        margin-right: auto;
+    }
+    
     .header {
-        padding: 0.5rem 1rem;
+        padding: 0.25rem 0.75rem;
     }
 }
 
@@ -634,9 +637,13 @@ html[dir="rtl"] .mobile-menu-header {
     }
 }
 
-/* Large Screen - Hide Mobile Menu */
-@media (min-width: 992px) {
+/* Desktop: hide mobile menu, show full nav */
+@media (min-width: 1024px) {
     .mobile-menu-btn {
+        display: none !important;
+    }
+    
+    .header.nav-open .mobile-menu {
         display: none !important;
     }
     

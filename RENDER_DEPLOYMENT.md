@@ -61,6 +61,16 @@ Set these under **Environment** for the Web Service:
 
 ---
 
+## File storage (uploads)
+
+- **Profile photos** are stored under **public_html/uploads/profiles/**.
+- **Project images** (cover + gallery) are stored under **public_html/uploads/projects/**.
+- Uploads are served by Express static middleware from **public_html**, so URLs are like `/uploads/profiles/...` and `/uploads/projects/...`.
+- **Render disk:** Render’s filesystem is **ephemeral**. Uploaded files will be lost on deploy or restart. For production with persistent uploads, use cloud storage (e.g. S3, Cloudinary) and set the appropriate env vars; the app would need to be extended to use that storage instead of disk.
+- No extra env vars are required for the current disk-based uploads; ensure the app has write access to the **public_html/uploads** directory (created at startup by server.js).
+
+---
+
 ## Build and start (local)
 
 ```bash
@@ -69,9 +79,11 @@ npm install
 npm start
 ```
 
-## Scans (optional)
+## Scans and audits (optional)
 
 ```bash
 npm run static-scan   # Link/asset crawl → reports/static-scan.md
-npm run e2e-scan     # Starts server, runs Playwright → reports/e2e-scan.md (needs MongoDB for full run)
+npm run e2e-scan      # Starts server, runs Playwright → reports/e2e-scan.md (needs MongoDB)
+npm run audit         # Full audit crawler → reports/audit.json, reports/audit.md
+npm run flows-audit   # Creator/backer/admin flows → reports/flows-audit.json, reports/flows-audit.md
 ```

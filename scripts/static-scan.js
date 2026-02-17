@@ -70,7 +70,8 @@ function main() {
     }
     if (!fs.existsSync(REPORTS_DIR)) fs.mkdirSync(REPORTS_DIR, { recursive: true });
 
-    const htmlFiles = getAllHtmlFiles(PUBLIC_DIR);
+    let htmlFiles = getAllHtmlFiles(PUBLIC_DIR);
+    htmlFiles = htmlFiles.filter(f => !f.startsWith('partials/'));
     report.pagesScanned = htmlFiles.length;
     const allCheckedPaths = new Set();
 

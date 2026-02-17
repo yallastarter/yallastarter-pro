@@ -132,7 +132,7 @@
                 clearTimeout(resizeTimer);
                 resizeTimer = setTimeout(() => {
                     this.ensureMobileMenuVisibility();
-                    if (window.innerWidth >= 992 && this.isOpen) {
+                    if (window.innerWidth >= 1024 && this.isOpen) {
                         this.closeMenu();
                     }
                 }, 250);
@@ -140,7 +140,7 @@
         }
 
         ensureMobileMenuVisibility() {
-            const isMobile = window.innerWidth <= 768;
+            const isMobile = window.innerWidth <= 1023;
 
             if (this.menuBtn) {
                 if (isMobile) {
@@ -281,7 +281,7 @@
         // Additional debugging
         setTimeout(() => {
             const screenWidth = window.innerWidth;
-            const isMobile = screenWidth <= 768;
+            const isMobile = screenWidth <= 1023;
             console.log(`Screen width: ${screenWidth}px, Is mobile: ${isMobile}`);
 
             if (isMobile) {
@@ -388,16 +388,5 @@
             });
         });
     }
-
-    // Initialize mobile menu when DOM is ready
-    ready(function () {
-        // Initialize mobile menu
-        const mobileMenu = new MobileMenu();
-
-        // Initialize language switchers
-        initializeLanguageSwitcher();
-
-        console.log('Mobile menu initialized successfully');
-    });
 
 })();

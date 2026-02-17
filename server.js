@@ -47,9 +47,11 @@ const isProduction = process.env.NODE_ENV === 'production';
 const connectDB = require('./config/db');
 connectDB();
 
-// Ensure uploads directory exists
-const uploadsDir = path.join(__dirname, 'public_html', 'uploads', 'profiles');
-fs.mkdirSync(uploadsDir, { recursive: true });
+// Ensure uploads directories exist
+const uploadsProfiles = path.join(__dirname, 'public_html', 'uploads', 'profiles');
+const uploadsProjects = path.join(__dirname, 'public_html', 'uploads', 'projects');
+fs.mkdirSync(uploadsProfiles, { recursive: true });
+fs.mkdirSync(uploadsProjects, { recursive: true });
 
 // Middleware — Stripe webhook needs raw body, must be BEFORE json parser
 app.use('/api/coins/webhook', express.raw({ type: 'application/json' }));

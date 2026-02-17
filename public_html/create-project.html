@@ -620,9 +620,14 @@
                     <h2 class="form-title">Review & Submit</h2>
                     
                     <div class="form-group">
-                        <label for="project-images" class="form-label">Project Images</label>
-                        <input type="file" id="project-images" class="form-control" accept="image/*" multiple disabled>
-                        <small class="form-text text-warning" style="color: #856404;">* File uploads are currently disabled in this demo version.</small>
+                        <label for="project-cover" class="form-label">Cover Image</label>
+                        <input type="file" id="project-cover" class="form-control" accept="image/jpeg,image/jpg,image/png,image/gif,image/webp">
+                        <small class="form-text">Max 8MB. JPEG, PNG, GIF, WebP.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="project-images" class="form-label">Gallery Images (optional)</label>
+                        <input type="file" id="project-images" class="form-control" accept="image/jpeg,image/jpg,image/png,image/gif,image/webp" multiple>
+                        <small class="form-text">Up to 10 images, 8MB each.</small>
                     </div>
                     
                     <div class="form-group">
@@ -644,11 +649,16 @@
                     <button type="button" class="btn-next" id="btn-next">Next</button>
                     <button type="submit" class="btn-submit" id="btn-submit" style="display: none;">Submit Project</button>
                 </div>
+                <div id="form-message" class="form-message" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 8px;"></div>
             </form>
         </div>
     </section>
 
+    <script src="assets/js/auth-handler.js"></script>
+    <script src="scripts.js"></script>
     <script>
+        if (window.auth) window.auth.protectPage();
+
         let currentStep = 1;
         const totalSteps = 4;
 
@@ -717,6 +727,133 @@
         // Event listeners
         document.getElementById('btn-next').addEventListener('click', nextStep);
         document.getElementById('btn-prev').addEventListener('click', prevStep);
+
+        const form = document.querySelector('.project-form');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const msgEl = document.getElementById('form-message');
+            msgEl.style.display = 'none';
+            const btn = document.getElementById('btn-submit');
+            const origText = btn.textContent;
+            btn.disabled = true;
+            btn.textContent = 'Creating...';
+
+            const token = window.auth ? window.auth.getToken() : localStorage.getItem('token');
+            if (!token) {
+                showMsg('Please log in to create a project.', 'error', msgEl);
+                btn.disabled = false;
+                btn.textContent = origText;
+                return;
+            }
+
+            const title = document.getElementById('project-title').value.trim();
+            const category = document.getElementById('project-category').value;
+            const location = document.getElementById('project-location').value.trim();
+            const duration = document.getElementById('project-duration').value;
+            const description = document.getElementById('project-description').value.trim();
+            const story = (document.getElementById('project-story') && document.getElementById('project-story').value) || '';
+            const goalAmount = document.getElementById('funding-goal').value;
+            const fundingDeadline = document.getElementById('funding-deadline').value;
+            const rewards = (document.getElementById('project-rewards') && document.getElementById('project-rewards').value) || '';
+            const videoUrl = (document.getElementById('project-video') && document.getElementById('project-video').value.trim()) || '';
+
+            if (!title || !category || !location || !description || !goalAmount) {
+                showMsg('Please fill required fields: title, category, location, description, funding goal.', 'error', msgEl);
+                btn.disabled = false;
+                btn.textContent = origText;
+                return;
+            }
+
+            let deadline = fundingDeadline;
+            if (!deadline && duration) {
+                const d = new Date();
+                d.setDate(d.getDate() + parseInt(duration, 10));
+                deadline = d.toISOString().slice(0, 10);
+            }
+            if (!deadline || new Date(deadline) <= new Date()) {
+                showMsg('Please set a valid future funding deadline.', 'error', msgEl);
+                btn.disabled = false;
+                btn.textContent = origText;
+                return;
+            }
+
+            const API = window.location.origin;
+            let coverImage = null;
+            let gallery = [];
+
+            try {
+                const coverInput = document.getElementById('project-cover');
+                if (coverInput && coverInput.files && coverInput.files[0]) {
+                    const fd = new FormData();
+                    fd.append('cover', coverInput.files[0]);
+                    const r = await fetch(API + '/api/projects/upload-cover', {
+                        method: 'POST',
+                        headers: { 'Authorization': 'Bearer ' + token },
+                        body: fd
+                    });
+                    const j = await r.json();
+                    if (j.success) coverImage = j.url;
+                    else { showMsg(j.message || 'Cover upload failed', 'error', msgEl); btn.disabled = false; btn.textContent = origText; return; }
+                }
+
+                const galleryInput = document.getElementById('project-images');
+                if (galleryInput && galleryInput.files && galleryInput.files.length > 0) {
+                    const fd = new FormData();
+                    for (let i = 0; i < Math.min(galleryInput.files.length, 10); i++) fd.append('gallery', galleryInput.files[i]);
+                    const r = await fetch(API + '/api/projects/upload-gallery', {
+                        method: 'POST',
+                        headers: { 'Authorization': 'Bearer ' + token },
+                        body: fd
+                    });
+                    const j = await r.json();
+                    if (j.success) gallery = j.urls;
+                    else { showMsg(j.message || 'Gallery upload failed', 'error', msgEl); btn.disabled = false; btn.textContent = origText; return; }
+                }
+
+                const res = await fetch(API + '/api/projects', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token
+                    },
+                    body: JSON.stringify({
+                        title,
+                        description,
+                        category,
+                        location,
+                        goalAmount: Number(goalAmount),
+                        deadline,
+                        coverImage,
+                        gallery,
+                        videoUrl: videoUrl || undefined,
+                        story,
+                        rewards,
+                        status: 'draft'
+                    })
+                });
+                const data = await res.json();
+
+                if (data.success && data.data) {
+                    if (typeof showToast === 'function') showToast('Project created successfully!', 'success');
+                    else showMsg('Project created successfully! Redirecting...', 'success', msgEl);
+                    setTimeout(() => { window.location.href = 'dashboard.html'; }, 1500);
+                    return;
+                }
+                showMsg(data.message || 'Failed to create project', 'error', msgEl);
+            } catch (err) {
+                showMsg(err.message || 'Network error', 'error', msgEl);
+            }
+            btn.disabled = false;
+            btn.textContent = origText;
+        });
+
+        function showMsg(text, type, el) {
+            if (!el) el = document.getElementById('form-message');
+            el.textContent = text;
+            el.style.display = 'block';
+            el.style.background = type === 'error' ? '#fee' : '#efe';
+            el.style.color = type === 'error' ? '#c00' : '#060';
+        }
 
         function switchLanguage(lang) {
             if (lang === 'en') {

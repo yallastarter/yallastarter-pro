@@ -1,0 +1,8 @@
+{
+  "timestamp": "",
+  "baseUrl": "http://localhost:3999",
+  "passed": 0,
+  "failed": 0,
+  "failedTests": [],
+  "note": "Run npm run responsive-scan with server running to populate"
+}

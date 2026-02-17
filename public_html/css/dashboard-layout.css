@@ -1,0 +1,87 @@
+/* Shared dashboard layout: sidebar + content. Use on dashboard, coins, settings, profile. */
+.dashboard-container {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    min-height: calc(100vh - 70px);
+}
+.dashboard-sidebar {
+    background-color: var(--neutral-100);
+    border-right: 1px solid var(--neutral-300);
+    padding: 2rem 0;
+}
+.dashboard-sidebar .user-profile {
+    display: flex;
+    align-items: center;
+    padding: 0 1.5rem;
+    margin-bottom: 2rem;
+}
+.dashboard-sidebar .user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 1rem;
+    flex-shrink: 0;
+}
+.dashboard-sidebar .user-avatar img,
+.dashboard-sidebar .user-avatar i {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.dashboard-sidebar .user-info {
+    flex: 1;
+    min-width: 0;
+}
+.dashboard-sidebar .user-name {
+    font-weight: 600;
+    color: var(--neutral-900);
+    margin-bottom: 0.2rem;
+}
+.dashboard-sidebar .user-email {
+    font-size: 0.9rem;
+    color: var(--neutral-600);
+}
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.sidebar-menu-item {
+    margin-bottom: 0.5rem;
+}
+.sidebar-menu-link {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1.5rem;
+    color: var(--neutral-700);
+    text-decoration: none;
+    transition: var(--transition, all 0.2s ease);
+}
+.sidebar-menu-link:hover {
+    background-color: var(--neutral-200);
+    color: var(--primary);
+}
+.sidebar-menu-link.active {
+    background-color: var(--primary-light);
+    color: var(--primary);
+    font-weight: 500;
+    border-right: 3px solid var(--primary);
+}
+.sidebar-menu-icon {
+    margin-right: 1rem;
+    width: 20px;
+    text-align: center;
+}
+.dashboard-content {
+    padding: 2rem;
+    min-width: 0;
+}
+@media (max-width: 992px) {
+    .dashboard-container {
+        grid-template-columns: 1fr;
+    }
+    .dashboard-sidebar {
+        display: none;
+    }
+}

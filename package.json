@@ -2,7 +2,7 @@
   "name": "yallastarter-html-website-v12",
   "version": "1.0.0",
   "engines": {
-    "node": "18.x"
+    "node": ">=20.x"
   },
   "main": "server.js",
   "scripts": {
@@ -11,7 +11,10 @@
     "test": "node tests/integration_test.js",
     "static-scan": "node scripts/static-scan.js",
     "e2e-scan": "node scripts/run-e2e-scan.js",
-    "test:e2e": "npx playwright test"
+    "test:e2e": "npx playwright test",
+    "responsive-scan": "node scripts/run-responsive-scan.js",
+    "audit": "node scripts/run-audit-crawler.js",
+    "flows-audit": "node scripts/run-flows-audit.js"
   },
   "keywords": [],
   "author": "",

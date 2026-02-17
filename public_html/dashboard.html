@@ -614,22 +614,19 @@
             <!-- Stats -->
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="stat-value">3</div>
+                    <div class="stat-value" id="stat-active-projects">—</div>
                     <div class="stat-label">Active Projects</div>
                 </div>
-
                 <div class="stat-card">
-                    <div class="stat-value">12</div>
+                    <div class="stat-value" id="stat-backed-count">—</div>
                     <div class="stat-label">Backed Projects</div>
                 </div>
-
                 <div class="stat-card">
-                    <div class="stat-value">SAR 15,200</div>
+                    <div class="stat-value" id="stat-total-raised">—</div>
                     <div class="stat-label">Total Raised</div>
                 </div>
-
                 <div class="stat-card">
-                    <div class="stat-value">SAR 8,500</div>
+                    <div class="stat-value" id="stat-total-backed">—</div>
                     <div class="stat-label">Total Backed</div>
                 </div>
             </div>
@@ -643,8 +640,8 @@
 
                 <!-- My Projects Tab -->
                 <div class="tab-content active">
-                    <div class="projects-grid">
-                        <div class="project-card">
+                    <div class="projects-grid" id="my-projects-grid">
+                        <div class="project-card" id="my-projects-placeholder">
                             <div class="project-image">
                                 <img src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
                                     alt="Smart Solar Panels">
@@ -665,58 +662,7 @@
                                 </div>
                                 <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
                                     <a href="project-details.html" class="btn btn-sm btn-outline">View</a>
-                                    <a href="coming-soon.html" class="btn btn-sm btn-primary">Edit</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="project-card">
-                            <div class="project-image">
-                                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
-                                    alt="Traditional Crafts Marketplace">
-                            </div>
-                            <div class="project-content">
-                                <div class="project-category">Arts & Culture</div>
-                                <h3 class="project-title">Traditional Saudi Crafts Marketplace</h3>
-                                <div class="project-status">
-                                    <span class="status-badge active">Active</span>
-                                    <span>24 days left</span>
-                                </div>
-                                <div class="project-meta">
-                                    <div>SAR 45,000 raised</div>
-                                    <div>30% funded</div>
-                                </div>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: 30%;"></div>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
-                                    <a href="coming-soon.html" class="btn btn-sm btn-outline">View</a>
-                                    <a href="coming-soon.html" class="btn btn-sm btn-primary">Edit</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="project-card">
-                            <div class="project-image">
-                                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
-                                    alt="Coding Academy">
-                            </div>
-                            <div class="project-content">
-                                <div class="project-category">Education</div>
-                                <h3 class="project-title">Coding Academy for Saudi Youth</h3>
-                                <div class="project-status">
-                                    <span class="status-badge draft">Draft</span>
-                                </div>
-                                <div class="project-meta">
-                                    <div>Not launched yet</div>
-                                    <div>0% funded</div>
-                                </div>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: 0%;"></div>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
-                                    <a href="coming-soon.html" class="btn btn-sm btn-outline">Preview</a>
-                                    <a href="coming-soon.html" class="btn btn-sm btn-primary">Edit</a>
+                                    <a href="create-project.html" class="btn btn-sm btn-primary">Edit</a>
                                 </div>
                             </div>
                         </div>
@@ -725,8 +671,8 @@
 
                 <!-- Backed Projects Tab -->
                 <div class="tab-content">
-                    <div class="backed-projects-grid">
-                        <div class="backed-project-card">
+                    <div class="backed-projects-grid" id="backed-projects-grid">
+                        <div class="backed-project-card" id="backed-placeholder">
                             <div class="backed-project-image">
                                 <img src="https://images.unsplash.com/photo-1576153192621-7a3be10b356e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
                                     alt="Eco-Friendly Water Bottles">
@@ -751,67 +697,7 @@
                                     <span style="color: var(--success); font-size: 0.9rem;">
                                         <i class="fas fa-check-circle"></i> Successfully funded
                                     </span>
-                                    <a href="coming-soon.html" class="btn btn-sm btn-outline">View</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="backed-project-card">
-                            <div class="backed-project-image">
-                                <img src="https://images.unsplash.com/photo-1606836591695-4d58a73eba1e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
-                                    alt="Saudi Coffee Table Book">
-                            </div>
-                            <div class="backed-project-content">
-                                <h3 class="backed-project-title">Saudi Coffee: A Photographic Journey Through the
-                                    Kingdom's Coffee Culture</h3>
-                                <div class="backed-project-creator">
-                                    <div class="creator-avatar">
-                                        <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Creator">
-                                    </div>
-                                    <div class="creator-name">By Khalid Al-Otaibi</div>
-                                </div>
-                                <div class="backed-project-meta">
-                                    <div class="backed-amount">SAR 350 backed</div>
-                                    <div class="backed-date">June 2, 2025</div>
-                                </div>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: 72%;"></div>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
-                                    <span style="color: var(--primary); font-size: 0.9rem;">
-                                        <i class="fas fa-clock"></i> 12 days left
-                                    </span>
-                                    <a href="coming-soon.html" class="btn btn-sm btn-outline">View</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="backed-project-card">
-                            <div class="backed-project-image">
-                                <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
-                                    alt="Music Festival">
-                            </div>
-                            <div class="backed-project-content">
-                                <h3 class="backed-project-title">Riyadh Music Festival: Celebrating Saudi Musical
-                                    Heritage</h3>
-                                <div class="backed-project-creator">
-                                    <div class="creator-avatar">
-                                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Creator">
-                                    </div>
-                                    <div class="creator-name">By Nora Al-Qahtani</div>
-                                </div>
-                                <div class="backed-project-meta">
-                                    <div class="backed-amount">SAR 1,000 backed</div>
-                                    <div class="backed-date">April 10, 2025</div>
-                                </div>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: 95%;"></div>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
-                                    <span style="color: var(--success); font-size: 0.9rem;">
-                                        <i class="fas fa-check-circle"></i> Successfully funded
-                                    </span>
-                                    <a href="coming-soon.html" class="btn btn-sm btn-outline">View</a>
+                                    <a href="project-details.html" class="btn btn-sm btn-outline">View</a>
                                 </div>
                             </div>
                         </div>
@@ -907,6 +793,103 @@
                     tabContents[index].classList.add('active');
                 });
             });
+
+            const token = window.auth ? window.auth.getToken() : localStorage.getItem('token');
+            const API = window.location.origin;
+
+            async function loadMyProjects() {
+                const grid = document.getElementById('my-projects-grid');
+                if (!grid) return;
+                try {
+                    const res = await fetch(API + '/api/projects/user/me', { headers: { 'Authorization': 'Bearer ' + token } });
+                    const data = await res.json();
+                    const placeholder = document.getElementById('my-projects-placeholder');
+                    if (placeholder) placeholder.remove();
+                    const projects = data.data || [];
+                    const activeCount = projects.filter(p => p.status === 'active').length;
+                    const totalRaised = projects.reduce((sum, p) => sum + (p.currentAmount || 0), 0);
+                    const statActive = document.getElementById('stat-active-projects');
+                    const statRaised = document.getElementById('stat-total-raised');
+                    if (statActive) statActive.textContent = activeCount;
+                    if (statRaised) statRaised.textContent = 'SAR ' + totalRaised.toLocaleString();
+                    if (projects.length === 0) {
+                        grid.innerHTML = '<p style="grid-column: 1/-1; color: var(--neutral-600);">No projects yet. <a href="create-project.html">Create your first project</a>.</p>';
+                        return;
+                    }
+                    grid.innerHTML = projects.map(p => {
+                        const percent = p.goalAmount ? Math.min(100, Math.round((p.currentAmount / p.goalAmount) * 100)) : 0;
+                        const daysLeft = p.deadline ? Math.max(0, Math.ceil((new Date(p.deadline) - new Date()) / (24*60*60*1000))) : 0;
+                        const imgSrc = p.coverImage || 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=600&q=80';
+                        const statusClass = p.status === 'active' ? 'active' : (p.status === 'completed' ? 'completed' : 'draft');
+                        return `<div class="project-card">
+                            <div class="project-image"><img src="${imgSrc}" alt="${(p.title || '').replace(/"/g, '&quot;')}"></div>
+                            <div class="project-content">
+                                <div class="project-category">${(p.category || '').charAt(0).toUpperCase() + (p.category || '').slice(1)}</div>
+                                <h3 class="project-title">${(p.title || '').replace(/</g, '&lt;')}</h3>
+                                <div class="project-status"><span class="status-badge ${statusClass}">${p.status || 'draft'}</span>${daysLeft > 0 ? '<span>' + daysLeft + ' days left</span>' : ''}</div>
+                                <div class="project-meta"><div>SAR ${(p.currentAmount || 0).toLocaleString()} raised</div><div>${percent}% funded</div></div>
+                                <div class="progress-bar"><div class="progress-fill" style="width: ${percent}%;"></div></div>
+                                <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
+                                    <a href="project-details.html?id=${p._id}" class="btn btn-sm btn-outline">View</a>
+                                    <a href="create-project.html?edit=${p._id}" class="btn btn-sm btn-primary">Edit</a>
+                                </div>
+                            </div>
+                        </div>`;
+                    }).join('');
+                } catch (e) {
+                    if (document.getElementById('my-projects-placeholder')) document.getElementById('my-projects-placeholder').remove();
+                    grid.innerHTML = '<p style="grid-column: 1/-1; color: var(--neutral-600);">Could not load projects.</p>';
+                }
+            }
+
+            async function loadBackedProjects() {
+                const grid = document.getElementById('backed-projects-grid');
+                if (!grid) return;
+                try {
+                    const res = await fetch(API + '/api/coins/backed', { headers: { 'Authorization': 'Bearer ' + token } });
+                    const data = await res.json();
+                    const placeholder = document.getElementById('backed-placeholder');
+                    if (placeholder) placeholder.remove();
+                    const backed = data.data || [];
+                    const statBackedCount = document.getElementById('stat-backed-count');
+                    const statTotalBacked = document.getElementById('stat-total-backed');
+                    if (statBackedCount) statBackedCount.textContent = backed.length;
+                    const totalBackedCoins = backed.reduce((sum, b) => sum + (b.totalBacked || 0), 0);
+                    if (statTotalBacked) statTotalBacked.textContent = totalBackedCoins + ' coins';
+                    if (backed.length === 0) {
+                        grid.innerHTML = '<p style="grid-column: 1/-1; color: var(--neutral-600);">You haven\'t backed any projects yet. <a href="projects.html">Browse projects</a>.</p>';
+                        return;
+                    }
+                    grid.innerHTML = backed.map(({ project, totalBacked, lastBackedAt }) => {
+                        if (!project) return '';
+                        const p = project;
+                        const percent = p.goalAmount ? Math.min(100, Math.round((p.currentAmount / p.goalAmount) * 100)) : 0;
+                        const daysLeft = p.deadline ? Math.max(0, Math.ceil((new Date(p.deadline) - new Date()) / (24*60*60*1000))) : 0;
+                        const imgSrc = p.coverImage || 'https://images.unsplash.com/photo-1576153192621-7a3be10b356e?w=600&q=80';
+                        const creatorName = p.creator && (p.creator.username || p.creator.email) ? p.creator.username || p.creator.email : 'Creator';
+                        const dateStr = lastBackedAt ? new Date(lastBackedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
+                        return `<div class="backed-project-card">
+                            <div class="backed-project-image"><img src="${imgSrc}" alt="${(p.title || '').replace(/"/g, '&quot;')}"></div>
+                            <div class="backed-project-content">
+                                <h3 class="backed-project-title">${(p.title || '').replace(/</g, '&lt;')}</h3>
+                                <div class="backed-project-creator"><div class="creator-avatar"><i class="fas fa-user" style="font-size: 1.5rem; color: var(--neutral-500);"></i></div><div class="creator-name">By ${(creatorName || '').replace(/</g, '&lt;')}</div></div>
+                                <div class="backed-project-meta"><div class="backed-amount">${totalBacked || 0} coins backed</div><div class="backed-date">${dateStr}</div></div>
+                                <div class="progress-bar"><div class="progress-fill" style="width: ${percent}%;"></div></div>
+                                <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
+                                    ${percent >= 100 ? '<span style="color: var(--success); font-size: 0.9rem;"><i class="fas fa-check-circle"></i> Successfully funded</span>' : '<span style="color: var(--primary); font-size: 0.9rem;"><i class="fas fa-clock"></i> ' + daysLeft + ' days left</span>'}
+                                    <a href="project-details.html?id=${p._id}" class="btn btn-sm btn-outline">View</a>
+                                </div>
+                            </div>
+                        </div>`;
+                    }).join('');
+                } catch (e) {
+                    if (document.getElementById('backed-placeholder')) document.getElementById('backed-placeholder').remove();
+                    grid.innerHTML = '<p style="grid-column: 1/-1; color: var(--neutral-600);">Could not load backed projects.</p>';
+                }
+            }
+
+            loadMyProjects();
+            loadBackedProjects();
         </script>
 
         <!-- Universal Mobile Menu Script -->

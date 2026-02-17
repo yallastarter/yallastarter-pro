@@ -8,6 +8,7 @@
     <title>محفظتي - عملات يلا ستارتر</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="mobile-menu.css">
+    <link rel="stylesheet" href="css/dashboard-layout.css">
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap"
@@ -549,40 +550,119 @@
             margin-right: auto;
             margin-left: 0;
         }
+        /* Coin image: no white box */
+        .coin-icon-large { background: transparent !important; }
+        .coin-icon-large .coin-icon-img { background: transparent !important; }
     </style>
 </head>
 
 <body>
-    <!-- Header -->
+    <!-- Header (same as dashboard) -->
     <header class="header">
         <div class="container">
             <nav class="navbar">
                 <a href="index-ar.html" class="logo">
                     <span class="logo-text">يلا ستارتر</span>
                 </a>
-
                 <button class="mobile-menu-btn">
                     <i class="fas fa-bars"></i>
                 </button>
-
                 <ul class="nav-links">
                     <li><a href="index-ar.html">الرئيسية</a></li>
                     <li><a href="projects-ar.html">تصفح المشاريع</a></li>
                     <li><a href="dashboard-ar.html">لوحة التحكم</a></li>
                     <li><a href="coins-ar.html" class="active" style="color: var(--primary); font-weight: 600;">
-                            <span class="coin-mini">Y</span> العملات
-                        </a></li>
+                        <span class="coin-mini">Y</span> العملات
+                    </a></li>
                 </ul>
-
                 <div class="auth-buttons">
-                    <a href="dashboard-ar.html" class="btn btn-outline" style="font-size: 0.9rem;">
-                        <i class="fas fa-tachometer-alt"></i> لوحة التحكم
-                    </a>
+                    <div class="user-dropdown">
+                        <button class="user-dropdown-btn">
+                            <div class="user-avatar-small" id="headerAvatar"
+                                style="width: 35px; height: 35px; border-radius: 50%; background: linear-gradient(135deg, #006c35 0%, #00a651 100%); display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-user" style="font-size: 1rem; color: white;"></i>
+                            </div>
+                            <span id="headerUserName">User</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="user-dropdown-menu">
+                            <a href="dashboard-ar.html" class="dropdown-item">
+                                <i class="fas fa-tachometer-alt"></i> لوحة التحكم
+                            </a>
+                            <a href="user-profile.html" class="dropdown-item">
+                                <i class="fas fa-user"></i> الملف الشخصي
+                            </a>
+                            <a href="settings.html" class="dropdown-item">
+                                <i class="fas fa-cog"></i> الإعدادات
+                            </a>
+                            <a href="coins-ar.html" class="dropdown-item active">
+                                <i class="fas fa-coins"></i> محفظتي
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="javascript:void(0)" class="dropdown-item" onclick="window.auth && window.auth.logout(); return false;">
+                                <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </nav>
+            <div class="mobile-menu">
+                <div class="mobile-menu-header">
+                    <button class="mobile-close-btn">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index-ar.html">الرئيسية</a></li>
+                    <li><a href="projects-ar.html">تصفح المشاريع</a></li>
+                    <li><a href="dashboard-ar.html">لوحة التحكم</a></li>
+                    <li><a href="coins-ar.html">العملات</a></li>
+                </ul>
+                <div class="auth-buttons">
+                    <div class="user-dropdown">
+                        <button class="user-dropdown-btn">
+                            <div class="user-avatar-small" style="width: 35px; height: 35px; border-radius: 50%; background: linear-gradient(135deg, #006c35 0%, #00a651 100%); display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-user" style="font-size: 1rem; color: white;"></i>
+                            </div>
+                            <span id="mobileUserName">User</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="user-dropdown-menu">
+                            <a href="dashboard-ar.html" class="dropdown-item">لوحة التحكم</a>
+                            <a href="coins-ar.html" class="dropdown-item active">محفظتي</a>
+                            <a href="javascript:void(0)" class="dropdown-item" onclick="window.auth && window.auth.logout(); return false;">تسجيل الخروج</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
+    <div class="dashboard-container">
+        <div class="dashboard-sidebar">
+            <div class="user-profile">
+                <div class="user-avatar" style="background: linear-gradient(135deg, #006c35 0%, #00a651 100%); display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-user" style="font-size: 2rem; color: white;"></i>
+                </div>
+                <div class="user-info">
+                    <div class="user-name" id="sidebarUserName">User</div>
+                    <div class="user-email" id="sidebarUserEmail">user@example.com</div>
+                </div>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="sidebar-menu-item"><a href="dashboard-ar.html" class="sidebar-menu-link"><i class="fas fa-tachometer-alt sidebar-menu-icon"></i> لوحة التحكم</a></li>
+                <li class="sidebar-menu-item"><a href="dashboard-ar.html#my-projects" class="sidebar-menu-link"><i class="fas fa-rocket sidebar-menu-icon"></i> مشاريعي</a></li>
+                <li class="sidebar-menu-item"><a href="dashboard-ar.html#backed" class="sidebar-menu-link"><i class="fas fa-hand-holding-heart sidebar-menu-icon"></i> المشاريع المدعومة</a></li>
+                <li class="sidebar-menu-item"><a href="coins-ar.html" class="sidebar-menu-link"><i class="fas fa-money-bill-wave sidebar-menu-icon"></i> المدفوعات</a></li>
+                <li class="sidebar-menu-item"><a href="coins-ar.html" class="sidebar-menu-link active"><i class="fas fa-coins sidebar-menu-icon"></i> محفظتي</a></li>
+                <li class="sidebar-menu-item"><a href="support.html" class="sidebar-menu-link"><i class="fas fa-bell sidebar-menu-icon"></i> الإشعارات</a></li>
+                <li class="sidebar-menu-item"><a href="user-profile.html" class="sidebar-menu-link"><i class="fas fa-user sidebar-menu-icon"></i> الملف الشخصي</a></li>
+                <li class="sidebar-menu-item"><a href="settings.html" class="sidebar-menu-link"><i class="fas fa-cog sidebar-menu-icon"></i> الإعدادات</a></li>
+                <li class="sidebar-menu-item"><a href="support.html" class="sidebar-menu-link"><i class="fas fa-question-circle sidebar-menu-icon"></i> المساعدة والدعم</a></li>
+                <li class="sidebar-menu-item"><a href="javascript:void(0)" class="sidebar-menu-link" onclick="window.auth && window.auth.logout(); return false;"><i class="fas fa-sign-out-alt sidebar-menu-icon"></i> تسجيل الخروج</a></li>
+            </ul>
+        </div>
+        <div class="dashboard-content">
     <!-- Wallet Content -->
     <div class="wallet-container">
         <!-- Balance Hero -->
@@ -729,6 +809,8 @@
             </ul>
         </div>
     </div>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script src="assets/js/auth-handler.js"></script>
@@ -736,12 +818,22 @@
     <script src="mobile-menu.js"></script>
     <script>
         const API = window.location.origin;
-        const token = localStorage.getItem('authToken');
+        const token = window.auth ? window.auth.getToken() : localStorage.getItem('token');
 
-        // Protect page
-        if (window.auth) window.auth.protectPage();
+        if (window.auth) {
+            window.auth.protectPage();
+            const u = window.auth.getUser();
+            if (u) {
+                const name = u.name || u.username || u.email || 'User';
+                const email = u.email || '';
+                const set = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text; };
+                set('sidebarUserName', name);
+                set('sidebarUserEmail', email);
+                set('headerUserName', name);
+                set('mobileUserName', name);
+            }
+        }
 
-        // Load data on page load
         document.addEventListener('DOMContentLoaded', async () => {
             await loadBalance();
             await loadProjects();

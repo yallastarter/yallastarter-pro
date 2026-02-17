@@ -363,6 +363,39 @@ router.post('/cashout', protect, async (req, res) => {
     }
 });
 
+// @desc    Get projects the user has backed (with amount backed per project)
+// @route   GET /api/coins/backed
+// @access  Private
+router.get('/backed', protect, async (req, res) => {
+    try {
+        const sends = await Transaction.find({
+            from: req.user._id,
+            type: 'send',
+            status: 'completed',
+            project: { $exists: true, $ne: null }
+        })
+            .populate('project')
+            .sort({ createdAt: -1 });
+
+        const byProject = new Map();
+        sends.forEach(t => {
+            if (!t.project) return;
+            const id = t.project._id.toString();
+            if (!byProject.has(id)) {
+                byProject.set(id, { project: t.project, totalBacked: 0, lastBackedAt: t.createdAt });
+            }
+            const entry = byProject.get(id);
+            entry.totalBacked += t.amount;
+            if (t.createdAt > entry.lastBackedAt) entry.lastBackedAt = t.createdAt;
+        });
+        const data = Array.from(byProject.values());
+        res.json({ success: true, data });
+    } catch (error) {
+        console.error('Backed projects error:', error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+});
+
 // @desc    Get transaction history
 // @route   GET /api/coins/history
 // @access  Private

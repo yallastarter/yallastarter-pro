@@ -49,8 +49,13 @@ const ProjectSchema = new mongoose.Schema({
     status: {
         type: String,
         enum: ['draft', 'active', 'completed'],
-        default: 'active'
+        default: 'draft'
     },
+    coverImage: { type: String, default: null },
+    gallery: [{ type: String }],
+    videoUrl: { type: String, default: null },
+    story: { type: String, default: '' },
+    rewards: { type: String, default: '' },
     createdAt: {
         type: Date,
         default: Date.now

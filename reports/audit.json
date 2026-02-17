@@ -1,0 +1,121 @@
+{
+  "timestamp": "2026-02-17T04:27:53.781Z",
+  "baseUrl": "http://localhost:3999",
+  "summary": {
+    "totalPages": 10,
+    "ok": 10,
+    "errors": 0,
+    "critical": 0
+  },
+  "pages": [
+    {
+      "url": "/",
+      "status": 200,
+      "hasHeader": true,
+      "hasSidebar": null,
+      "consoleErrors": 0,
+      "failedRequests": 0
+    },
+    {
+      "url": "/index.html",
+      "status": 200,
+      "hasHeader": true,
+      "hasSidebar": null,
+      "consoleErrors": 0,
+      "failedRequests": 0
+    },
+    {
+      "url": "/login.html",
+      "status": 200,
+      "hasHeader": true,
+      "hasSidebar": null,
+      "consoleErrors": 0,
+      "failedRequests": 0
+    },
+    {
+      "url": "/signup.html",
+      "status": 200,
+      "hasHeader": true,
+      "hasSidebar": null,
+      "consoleErrors": 0,
+      "failedRequests": 0
+    },
+    {
+      "url": "/projects.html",
+      "status": 200,
+      "hasHeader": true,
+      "hasSidebar": null,
+      "consoleErrors": 1,
+      "failedRequests": 0
+    },
+    {
+      "url": "/dashboard.html",
+      "status": 200,
+      "hasHeader": true,
+      "hasSidebar": null,
+      "consoleErrors": 0,
+      "failedRequests": 0
+    },
+    {
+      "url": "/coins.html",
+      "status": 200,
+      "hasHeader": true,
+      "hasSidebar": null,
+      "consoleErrors": 0,
+      "failedRequests": 0
+    },
+    {
+      "url": "/how-it-works.html",
+      "status": 200,
+      "hasHeader": true,
+      "hasSidebar": null,
+      "consoleErrors": 0,
+      "failedRequests": 0
+    },
+    {
+      "url": "/about.html",
+      "status": 200,
+      "hasHeader": true,
+      "hasSidebar": null,
+      "consoleErrors": 0,
+      "failedRequests": 0
+    },
+    {
+      "url": "/contact.html",
+      "status": 200,
+      "hasHeader": true,
+      "hasSidebar": null,
+      "consoleErrors": 0,
+      "failedRequests": 0
+    }
+  ],
+  "buttonChecks": [
+    {
+      "page": "/coins.html",
+      "check": "sidebar_and_balance",
+      "hasSidebar": null,
+      "hasBalance": null,
+      "status": 200,
+      "onCoinsPage": false
+    },
+    {
+      "page": "/coins.html",
+      "check": "preset_and_buy_btn",
+      "onCoinsPage": false,
+      "presetButtonsExist": false,
+      "buyButtonExists": false,
+      "presetClickSetsAmount": false
+    },
+    {
+      "page": "viewport",
+      "check": "mobile_no_horizontal_scroll",
+      "viewport": "390x844",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "horizontalOverflow": false
+    }
+  ],
+  "consoleErrorCount": 1,
+  "failedRequestCount": 0,
+  "problems": []
+}

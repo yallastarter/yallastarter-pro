@@ -8,6 +8,7 @@
     <title>My Wallet - YallaStarter Coins</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="mobile-menu.css">
+    <link rel="stylesheet" href="css/dashboard-layout.css">
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
@@ -499,40 +500,119 @@
                 grid-template-columns: 1fr;
             }
         }
+        /* Coin image: no white box; use transparent background */
+        .coin-icon-large { background: transparent !important; }
+        .coin-icon-large .coin-icon-img { background: transparent !important; }
     </style>
 </head>
 
 <body>
-    <!-- Header -->
+    <!-- Header (same as dashboard) -->
     <header class="header">
         <div class="container">
             <nav class="navbar">
                 <a href="index.html" class="logo">
                     <span class="logo-text">YallaStarter</span>
                 </a>
-
                 <button class="mobile-menu-btn">
                     <i class="fas fa-bars"></i>
                 </button>
-
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="projects.html">Browse Projects</a></li>
                     <li><a href="dashboard.html">Dashboard</a></li>
                     <li><a href="coins.html" class="active" style="color: var(--primary); font-weight: 600;">
-                            <span class="coin-mini">Y</span> Coins
-                        </a></li>
+                        <span class="coin-mini">Y</span> Coins
+                    </a></li>
                 </ul>
-
                 <div class="auth-buttons">
-                    <a href="dashboard.html" class="btn btn-outline" style="font-size: 0.9rem;">
-                        <i class="fas fa-tachometer-alt"></i> Dashboard
-                    </a>
+                    <div class="user-dropdown">
+                        <button class="user-dropdown-btn">
+                            <div class="user-avatar-small" id="headerAvatar"
+                                style="width: 35px; height: 35px; border-radius: 50%; background: linear-gradient(135deg, #006c35 0%, #00a651 100%); display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-user" style="font-size: 1rem; color: white;"></i>
+                            </div>
+                            <span id="headerUserName">User</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="user-dropdown-menu">
+                            <a href="dashboard.html" class="dropdown-item">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a>
+                            <a href="user-profile.html" class="dropdown-item">
+                                <i class="fas fa-user"></i> Profile
+                            </a>
+                            <a href="settings.html" class="dropdown-item">
+                                <i class="fas fa-cog"></i> Settings
+                            </a>
+                            <a href="coins.html" class="dropdown-item active">
+                                <i class="fas fa-coins"></i> My Wallet
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="javascript:void(0)" class="dropdown-item" onclick="window.auth && window.auth.logout(); return false;">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </nav>
+            <div class="mobile-menu">
+                <div class="mobile-menu-header">
+                    <button class="mobile-close-btn">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="projects.html">Browse Projects</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="coins.html">Coins</a></li>
+                </ul>
+                <div class="auth-buttons">
+                    <div class="user-dropdown">
+                        <button class="user-dropdown-btn">
+                            <div class="user-avatar-small" style="width: 35px; height: 35px; border-radius: 50%; background: linear-gradient(135deg, #006c35 0%, #00a651 100%); display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-user" style="font-size: 1rem; color: white;"></i>
+                            </div>
+                            <span id="mobileUserName">User</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="user-dropdown-menu">
+                            <a href="dashboard.html" class="dropdown-item">Dashboard</a>
+                            <a href="coins.html" class="dropdown-item active">My Wallet</a>
+                            <a href="javascript:void(0)" class="dropdown-item" onclick="window.auth && window.auth.logout(); return false;">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
+    <div class="dashboard-container">
+        <div class="dashboard-sidebar">
+            <div class="user-profile">
+                <div class="user-avatar" style="background: linear-gradient(135deg, #006c35 0%, #00a651 100%); display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-user" style="font-size: 2rem; color: white;"></i>
+                </div>
+                <div class="user-info">
+                    <div class="user-name" id="sidebarUserName">User</div>
+                    <div class="user-email" id="sidebarUserEmail">user@example.com</div>
+                </div>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="sidebar-menu-item"><a href="dashboard.html" class="sidebar-menu-link"><i class="fas fa-tachometer-alt sidebar-menu-icon"></i> Dashboard</a></li>
+                <li class="sidebar-menu-item"><a href="dashboard.html#my-projects" class="sidebar-menu-link"><i class="fas fa-rocket sidebar-menu-icon"></i> My Projects</a></li>
+                <li class="sidebar-menu-item"><a href="dashboard.html#backed" class="sidebar-menu-link"><i class="fas fa-hand-holding-heart sidebar-menu-icon"></i> Backed Projects</a></li>
+                <li class="sidebar-menu-item"><a href="coins.html" class="sidebar-menu-link"><i class="fas fa-money-bill-wave sidebar-menu-icon"></i> Payments</a></li>
+                <li class="sidebar-menu-item"><a href="coins.html" class="sidebar-menu-link active"><i class="fas fa-coins sidebar-menu-icon"></i> My Wallet</a></li>
+                <li class="sidebar-menu-item"><a href="support.html" class="sidebar-menu-link"><i class="fas fa-bell sidebar-menu-icon"></i> Notifications</a></li>
+                <li class="sidebar-menu-item"><a href="user-profile.html" class="sidebar-menu-link"><i class="fas fa-user sidebar-menu-icon"></i> Profile</a></li>
+                <li class="sidebar-menu-item"><a href="settings.html" class="sidebar-menu-link"><i class="fas fa-cog sidebar-menu-icon"></i> Settings</a></li>
+                <li class="sidebar-menu-item"><a href="support.html" class="sidebar-menu-link"><i class="fas fa-question-circle sidebar-menu-icon"></i> Help & Support</a></li>
+                <li class="sidebar-menu-item"><a href="javascript:void(0)" class="sidebar-menu-link" onclick="window.auth && window.auth.logout(); return false;"><i class="fas fa-sign-out-alt sidebar-menu-icon"></i> Logout</a></li>
+            </ul>
+        </div>
+        <div class="dashboard-content">
     <!-- Wallet Content -->
     <div class="wallet-container">
         <!-- Balance Hero -->
@@ -680,6 +760,8 @@
             </ul>
         </div>
     </div>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script src="assets/js/auth-handler.js"></script>
@@ -687,10 +769,22 @@
     <script src="mobile-menu.js"></script>
     <script>
         const API = window.location.origin;
-        const token = localStorage.getItem('authToken');
+        const token = window.auth ? window.auth.getToken() : localStorage.getItem('token');
 
-        // Protect page
-        if (window.auth) window.auth.protectPage();
+        // Protect page and show user in sidebar/header
+        if (window.auth) {
+            window.auth.protectPage();
+            const u = window.auth.getUser();
+            if (u) {
+                const name = u.name || u.username || u.email || 'User';
+                const email = u.email || '';
+                const set = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text; };
+                set('sidebarUserName', name);
+                set('sidebarUserEmail', email);
+                set('headerUserName', name);
+                set('mobileUserName', name);
+            }
+        }
 
         // Load data on page load
         document.addEventListener('DOMContentLoaded', async () => {
@@ -698,6 +792,15 @@
             await loadProjects();
             await loadHistory();
             checkPurchaseReturn();
+
+            const params = new URLSearchParams(window.location.search);
+            const projectId = params.get('projectId');
+            if (projectId) {
+                const select = document.getElementById('projectSelect');
+                if (select && select.querySelector('option[value="' + projectId + '"]')) {
+                    select.value = projectId;
+                }
+            }
 
             // Quick amount buttons
             document.querySelectorAll('.quick-amount-btn').forEach(btn => {
