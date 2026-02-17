@@ -97,11 +97,15 @@ router.post('/signup', async (req, res) => {
             }
         });
     } catch (error) {
-        console.error('Signup error:', error.message);
+        console.error('Signup error details:', error);
         if (error.name === 'ValidationError') {
             return res.status(400).json({ success: false, message: error.message });
         }
-        res.status(500).json({ success: false, message: 'Server Error' });
+        if (error.code === 11000) {
+            return res.status(400).json({ success: false, message: 'Duplicate field value entered' });
+        }
+        // Temporary: expose error message for debugging
+        res.status(500).json({ success: false, message: `Server Error: ${error.message}` });
     }
 });
 
