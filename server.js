@@ -14,7 +14,12 @@ dotenv.config();
 // ==========================================
 // Environment Variable Validation
 // ==========================================
-const requiredEnvVars = ['MONGO_URI', 'JWT_SECRET'];
+const requiredEnvVars = ['JWT_SECRET'];
+// MongoDB: support MONGODB_URI (Atlas) or MONGO_URI
+if (!process.env.MONGODB_URI && !process.env.MONGO_URI) {
+    console.error('FATAL: Set MONGODB_URI or MONGO_URI for MongoDB Atlas.');
+    process.exit(1);
+}
 const optionalEnvVars = ['STRIPE_SECRET_KEY', 'STRIPE_WEBHOOK_SECRET', 'GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET'];
 
 const missing = requiredEnvVars.filter(v => !process.env[v]);
@@ -87,12 +92,15 @@ app.use(helmet({
     crossOriginEmbedderPolicy: false
 }));
 
-// CORS — restrict in production
+// CORS — allow app origin (Render sets BASE_URL/CLIENT_URL in production)
 const allowedOrigins = [
-    process.env.CLIENT_URL || 'http://localhost:3000',
+    process.env.CLIENT_URL,
+    process.env.BASE_URL,
+    'https://yallastarter-pro.onrender.com',
     'http://localhost:3000',
     'http://localhost:3001'
 ].filter(Boolean);
+if (allowedOrigins.length === 0) allowedOrigins.push('http://localhost:3000');
 
 app.use(cors({
     origin: function (origin, callback) {
@@ -161,17 +169,23 @@ app.use((err, req, res, next) => {
     });
 });
 
-// Seed admin user on startup
+// Seed admin user on startup (production requires ADMIN_PASSWORD to be set)
 async function seedAdmin() {
     try {
         const User = require('./models/User');
         const existing = await User.findOne({ username: 'admin' });
         if (!existing) {
-            const adminPassword = process.env.ADMIN_PASSWORD || 'YallaAdmin2025!';
+            const adminPassword = process.env.ADMIN_PASSWORD;
+            if (isProduction && !adminPassword) {
+                console.warn('⚠️ ADMIN_PASSWORD not set in production. Admin user not seeded. Set ADMIN_PASSWORD to create admin.');
+                return;
+            }
+            const password = adminPassword || (process.env.NODE_ENV !== 'production' ? 'YallaAdmin2025!' : null);
+            if (!password) return;
             await User.create({
                 username: 'admin',
                 email: 'admin@yallastarter.com',
-                password: adminPassword,
+                password,
                 role: 'admin'
             });
             console.log('✅ Admin user seeded');

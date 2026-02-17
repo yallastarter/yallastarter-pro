@@ -8,7 +8,7 @@ const http = require('http');
 // Load environment variables
 dotenv.config({ path: path.join(__dirname, '../.env') });
 
-const PORT = 3001; // Use a different port for testing to avoid conflicts
+const PORT = process.env.TEST_PORT || 3099; // Avoid conflict with dev server (3000) or other tests
 process.env.PORT = PORT;
 
 // Import the app
@@ -28,7 +28,8 @@ const TEST_USER = {
 const TEST_PROJECT = {
     title: 'Test Integration Project',
     description: 'A project created during automated integration testing.',
-    category: 'Technology',
+    category: 'technology',
+    location: 'Riyadh',
     goalAmount: 1000,
     currentAmount: 0,
     deadline: new Date(Date.now() + 86400000) // Tomorrow

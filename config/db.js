@@ -23,10 +23,16 @@ async function connectDB(retries = MAX_RETRIES) {
             socketTimeoutMS: 45000,
         };
 
-        const maskedUri = (process.env.MONGO_URI || '').replace(/:([^@]+)@/, ':****@');
+        // Support both MONGO_URI and MONGODB_URI (Atlas / Render convention)
+        const mongoUri = process.env.MONGODB_URI || process.env.MONGO_URI;
+        if (!mongoUri) {
+            console.error('FATAL: No MongoDB URI. Set MONGODB_URI or MONGO_URI.');
+            process.exit(1);
+        }
+        const maskedUri = mongoUri.replace(/:([^@]+)@/, ':****@');
         console.log(`Connecting to MongoDB (${maskedUri.substring(0, 60)}...)`);
 
-        cached.promise = mongoose.connect(process.env.MONGO_URI, opts)
+        cached.promise = mongoose.connect(mongoUri, opts)
             .then((mongoose) => {
                 console.log('✅ MongoDB connected successfully');
                 return mongoose;

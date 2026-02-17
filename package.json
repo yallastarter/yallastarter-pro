@@ -8,7 +8,10 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
-    "test": "node tests/integration_test.js"
+    "test": "node tests/integration_test.js",
+    "static-scan": "node scripts/static-scan.js",
+    "e2e-scan": "node scripts/run-e2e-scan.js",
+    "test:e2e": "npx playwright test"
   },
   "keywords": [],
   "author": "",
@@ -30,5 +33,8 @@
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
     "stripe": "^17.5.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2"
   }
 }

@@ -503,11 +503,14 @@
                             <a href="user-profile.html" class="dropdown-item">
                                 <i class="fas fa-user"></i> Profile
                             </a>
-                            <a href="coming-soon.html" class="dropdown-item">
+                            <a href="settings.html" class="dropdown-item">
                                 <i class="fas fa-cog"></i> Settings
                             </a>
+                            <a href="coins.html" class="dropdown-item">
+                                <i class="fas fa-coins"></i> My Wallet
+                            </a>
                             <div class="dropdown-divider"></div>
-                            <a href="index.html" class="dropdown-item">
+                            <a href="javascript:void(0)" class="dropdown-item" onclick="window.auth.logout(); return false;">
                                 <i class="fas fa-sign-out-alt"></i> Logout
                             </a>
                         </div>
@@ -534,25 +537,25 @@
 
             <ul class="sidebar-menu">
                 <li class="sidebar-menu-item">
-                    <a href="coming-soon.html" class="sidebar-menu-link active">
+                    <a href="dashboard.html" class="sidebar-menu-link active">
                         <i class="fas fa-tachometer-alt sidebar-menu-icon"></i>
                         Dashboard
                     </a>
                 </li>
                 <li class="sidebar-menu-item">
-                    <a href="coming-soon.html" class="sidebar-menu-link">
+                    <a href="dashboard.html#my-projects" class="sidebar-menu-link">
                         <i class="fas fa-rocket sidebar-menu-icon"></i>
                         My Projects
                     </a>
                 </li>
                 <li class="sidebar-menu-item">
-                    <a href="coming-soon.html" class="sidebar-menu-link">
+                    <a href="dashboard.html#backed" class="sidebar-menu-link">
                         <i class="fas fa-hand-holding-heart sidebar-menu-icon"></i>
                         Backed Projects
                     </a>
                 </li>
                 <li class="sidebar-menu-item">
-                    <a href="coming-soon.html" class="sidebar-menu-link">
+                    <a href="coins.html" class="sidebar-menu-link">
                         <i class="fas fa-money-bill-wave sidebar-menu-icon"></i>
                         Payments
                     </a>
@@ -564,7 +567,7 @@
                     </a>
                 </li>
                 <li class="sidebar-menu-item">
-                    <a href="coming-soon.html" class="sidebar-menu-link">
+                    <a href="support.html" class="sidebar-menu-link">
                         <i class="fas fa-bell sidebar-menu-icon"></i>
                         Notifications
                     </a>
@@ -582,7 +585,7 @@
                     </a>
                 </li>
                 <li class="sidebar-menu-item">
-                    <a href="coming-soon.html" class="sidebar-menu-link">
+                    <a href="support.html" class="sidebar-menu-link">
                         <i class="fas fa-question-circle sidebar-menu-icon"></i>
                         Help & Support
                     </a>
@@ -825,6 +828,12 @@
         <script src="assets/js/upload-handler.js"></script>
 
         <script>
+            // Handle Google OAuth callback first (token & user in URL)
+            if (window.auth && window.location.search.includes('token=') && window.location.search.includes('user=')) {
+                if (window.auth.handleOAuthCallback()) {
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                }
+            }
             // Protect page - redirect to login if not authenticated
             if (window.auth) {
                 window.auth.protectPage();

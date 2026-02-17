@@ -70,6 +70,8 @@ UserSchema.methods.matchPassword = async function (enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password);
 };
 
-// Indexes
+// Additional indexes (email/username already unique via schema)
+UserSchema.index({ createdAt: -1 });
+UserSchema.index({ role: 1 });
 
 module.exports = mongoose.model('User', UserSchema);

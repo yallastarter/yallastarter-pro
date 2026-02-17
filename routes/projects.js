@@ -5,18 +5,31 @@ const User = require('../models/User');
 const mongoose = require('mongoose');
 const { protect } = require('../middleware/auth');
 
-// @desc    Get all projects
+// @desc    Get all projects (paginated)
 // @route   GET /api/projects
 // @access  Public
 router.get('/', async (req, res) => {
     try {
-        const { category, status } = req.query;
+        const { category, status, page = '1', limit = '20' } = req.query;
         const query = {};
-        if (category) query.category = category;
+        if (category) query.category = category.toLowerCase();
         if (status) query.status = status;
 
-        const projects = await Project.find(query).populate('creator', 'username email');
-        res.status(200).json({ success: true, count: projects.length, data: projects });
+        const pageNum = Math.max(1, parseInt(page, 10) || 1);
+        const limitNum = Math.min(50, Math.max(1, parseInt(limit, 10) || 20));
+        const skip = (pageNum - 1) * limitNum;
+
+        const [projects, total] = await Promise.all([
+            Project.find(query).populate('creator', 'username email').sort({ createdAt: -1 }).skip(skip).limit(limitNum).lean(),
+            Project.countDocuments(query)
+        ]);
+
+        res.status(200).json({
+            success: true,
+            count: projects.length,
+            data: projects,
+            pagination: { page: pageNum, limit: limitNum, total, pages: Math.ceil(total / limitNum) }
+        });
     } catch (err) {
         res.status(500).json({ success: false, message: 'Server error' });
     }

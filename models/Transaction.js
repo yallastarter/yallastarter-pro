@@ -62,5 +62,6 @@ TransactionSchema.index({ from: 1, createdAt: -1 });
 TransactionSchema.index({ to: 1, createdAt: -1 });
 TransactionSchema.index({ status: 1 });
 TransactionSchema.index({ type: 1, createdAt: -1 });
+TransactionSchema.index({ stripeSessionId: 1 }, { sparse: true });
 
 module.exports = mongoose.model('Transaction', TransactionSchema);

@@ -77,14 +77,28 @@
             border-radius: 50%;
         }
 
-        .coin-icon-large::before {
-            content: 'Y';
+        .coin-icon-large .coin-icon-img {
+            width: 85%;
+            height: 85%;
+            object-fit: contain;
+            position: relative;
+            z-index: 1;
+        }
+        .coin-icon-large .coin-icon-fallback {
+            display: none;
             font-weight: 900;
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(180deg, #92400e 0%, #fcd34d 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            font-size: 4rem;
+            color: #78350f;
+            position: relative;
+            z-index: 1;
+            align-items: center;
+            justify-content: center;
+        }
+        .coin-icon-large:not(.coin-img-loaded) .coin-icon-fallback {
+            display: flex;
+        }
+        .coin-icon-large.coin-img-loaded .coin-icon-fallback {
+            display: none !important;
         }
 
         @keyframes coinFloat {
@@ -523,8 +537,11 @@
     <div class="wallet-container">
         <!-- Balance Hero -->
         <div class="wallet-hero">
-            <div class="coin-icon-large">
-                <span style="font-weight: 900;">Y</span>
+            <div class="coin-icon-large" id="coinIconLarge">
+                <img src="images/coin.png" alt="YallaStarter Coin" class="coin-icon-img" loading="eager"
+                    onload="this.parentElement.classList.add('coin-img-loaded');"
+                    onerror="this.style.display='none'; this.parentElement.classList.remove('coin-img-loaded');">
+                <span class="coin-icon-fallback">Y</span>
             </div>
             <div class="wallet-info">
                 <div class="wallet-label">Your Coin Balance</div>

@@ -121,8 +121,9 @@ router.post('/login', async (req, res) => {
             return res.status(400).json({ success: false, message: 'Please provide an email and password' });
         }
 
-        // Check for user
-        const user = await User.findOne({ email }).select('+password');
+        // Check for user (normalize email for consistency)
+        const emailNorm = (typeof email === 'string') ? email.toLowerCase().trim() : '';
+        const user = await User.findOne({ email: emailNorm }).select('+password');
         if (!user) {
             return res.status(401).json({ success: false, message: 'Invalid credentials' });
         }
@@ -165,21 +166,17 @@ router.get('/google', passport.authenticate('google', { scope: ['profile', 'emai
 router.get('/google/callback',
     passport.authenticate('google', { failureRedirect: '/login.html', session: false }),
     (req, res) => {
-        // Successful authentication, redirect home.
         const token = jwt.sign({ userId: req.user._id }, process.env.JWT_SECRET, {
             expiresIn: '30d'
         });
-
-        // Redirect to frontend with token
-        // Encode user object safely
         const userStr = encodeURIComponent(JSON.stringify({
             id: req.user._id,
             username: req.user.username,
             email: req.user.email,
             role: req.user.role,
-            photoUrl: req.user.photoUrl
+            photoUrl: req.user.photoUrl || null
         }));
-
+        // Redirect to dashboard so frontend can read token & user from query and persist
         res.redirect(`/dashboard.html?token=${token}&user=${userStr}`);
     }
 );
@@ -213,15 +210,16 @@ router.put('/update-profile', authMiddleware, async (req, res) => {
         }
 
         // Check if email is already taken by another user
-        if (email && email !== user.email) {
-            const existingUser = await User.findOne({ email });
+        const emailNorm = email ? String(email).toLowerCase().trim() : '';
+        if (emailNorm && emailNorm !== user.email) {
+            const existingUser = await User.findOne({ email: emailNorm });
             if (existingUser) {
                 return res.status(400).json({ success: false, message: 'Email already in use' });
             }
-            user.email = email;
+            user.email = emailNorm;
         }
 
-        if (username) user.username = username;
+        if (username && typeof username === 'string') user.username = username.trim();
 
         await user.save();
 

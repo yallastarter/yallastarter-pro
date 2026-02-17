@@ -109,7 +109,8 @@ class AuthHandler {
         this.user = null;
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        window.location.href = '/index.html';
+        const isAr = window.location.pathname.includes('-ar.');
+        window.location.href = isAr ? '/index-ar.html' : '/index.html';
     }
 
     // Get user profile
@@ -209,14 +210,16 @@ class AuthHandler {
     // Protect page (redirect to login if not authenticated)
     protectPage() {
         if (!this.isAuthenticated()) {
-            window.location.href = '/login.html';
+            const isAr = window.location.pathname.includes('-ar.');
+            window.location.href = isAr ? '/login-ar.html' : '/login.html';
         }
     }
 
     // Redirect if authenticated (for login/signup pages)
     redirectIfAuthenticated() {
         if (this.isAuthenticated()) {
-            window.location.href = '/dashboard.html';
+            const isAr = window.location.pathname.includes('-ar.');
+            window.location.href = isAr ? '/dashboard-ar.html' : '/dashboard.html';
         }
     }
 }
