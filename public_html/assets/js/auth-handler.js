@@ -2,7 +2,7 @@
 class AuthHandler {
     constructor() {
         this.apiBase = window.location.origin;
-        this.token = localStorage.getItem('authToken');
+        this.token = localStorage.getItem('token');
         this.user = JSON.parse(localStorage.getItem('user') || 'null');
     }
 
@@ -37,7 +37,7 @@ class AuthHandler {
             if (data.success) {
                 this.token = data.token;
                 this.user = data.user;
-                localStorage.setItem('authToken', data.token);
+                localStorage.setItem('token', data.token);
                 localStorage.setItem('user', JSON.stringify(data.user));
                 return { success: true, message: 'Account created successfully!' };
             } else {
@@ -65,7 +65,7 @@ class AuthHandler {
             if (data.success) {
                 this.token = data.token;
                 this.user = data.user;
-                localStorage.setItem('authToken', data.token);
+                localStorage.setItem('token', data.token);
                 localStorage.setItem('user', JSON.stringify(data.user));
                 return { success: true, user: data.user };
             } else {
@@ -92,7 +92,7 @@ class AuthHandler {
         if (token && userStr) {
             this.token = token;
             this.user = JSON.parse(decodeURIComponent(userStr));
-            localStorage.setItem('authToken', token);
+            localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(this.user));
 
             // Clean up URL
@@ -107,7 +107,7 @@ class AuthHandler {
     logout() {
         this.token = null;
         this.user = null;
-        localStorage.removeItem('authToken');
+        localStorage.removeItem('token');
         localStorage.removeItem('user');
         window.location.href = '/index.html';
     }
