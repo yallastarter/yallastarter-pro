@@ -1155,168 +1155,71 @@
         }
     </script>
     <script src="scripts.js"></script>
-    <!-- Development Notice Popup -->
-
-    <div id="dev-popup" class="dev-popup-overlay">
-        <div class="dev-popup-content">
-            <button id="dev-popup-close" class="dev-popup-close" aria-label="Close">
-                <i class="fas fa-times"></i>
+    <!-- Development Notice Popup (Final) -->
+    <div id="dev-popup-final"
+        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.85); z-index: 2147483647; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: opacity 0.3s ease;">
+        <div
+            style="background-color: #ffffff; padding: 40px; border-radius: 12px; max-width: 500px; width: 90%; text-align: center; position: relative; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); z-index: 2147483647; display: block !important; visibility: visible !important; opacity: 1 !important; transform: none !important;">
+            <button id="dev-popup-close-final"
+                style="position: absolute; top: 15px; right: 15px; background: #f3f4f6; border: none; font-size: 24px; line-height: 1; cursor: pointer; color: #4b5563; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; padding: 0;">
+                &times;
             </button>
-            <div class="dev-popup-icon">
-                <i class="fas fa-hard-hat"></i>
+            <div style="font-size: 48px; color: #f59e0b; margin-bottom: 20px; line-height: 1;">
+                &#9888;
             </div>
-            <h2 class="dev-popup-title">Under Development</h2>
-            <p class="dev-popup-message">
+            <h2
+                style="font-size: 24px; font-weight: 700; margin: 0 0 16px 0; color: #111827; font-family: sans-serif; line-height: 1.3;">
+                Under Development</h2>
+            <p style="font-size: 16px; color: #4b5563; line-height: 1.6; margin: 0 0 24px 0; font-family: sans-serif;">
                 This website is under development by Novamind INC.<br>
                 No projects or transactions shall be fulfilled.
             </p>
-            <button id="dev-popup-ack" class="dev-popup-btn">I Understand</button>
+            <button id="dev-popup-ack-final"
+                style="background-color: #000000; color: #ffffff; padding: 12px 24px; border-radius: 8px; font-weight: 600; border: none; cursor: pointer; font-size: 16px; font-family: sans-serif; transition: background-color 0.2s;">I
+                Understand</button>
         </div>
     </div>
 
-    <style>
-        /* Development Notice Popup Inline Styles */
-        .dev-popup-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            z-index: 2147483647;
-            /* Max Z-Index */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(5px);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .dev-popup-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .dev-popup-content {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 16px;
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-            position: relative;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            transform: scale(0.9) translateY(20px);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            color: #111827;
-            /* Force text color */
-        }
-
-        .dev-popup-overlay.active .dev-popup-content {
-            transform: scale(1) translateY(0);
-        }
-
-        .dev-popup-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: #f3f4f6;
-            border: none;
-            font-size: 1.25rem;
-            cursor: pointer;
-            color: #4b5563;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-        }
-
-        .dev-popup-close:hover {
-            background: #e5e7eb;
-            color: #111827;
-            transform: rotate(90deg);
-        }
-
-        .dev-popup-icon {
-            font-size: 3rem;
-            color: #f59e0b;
-            margin-bottom: 1rem;
-        }
-
-        .dev-popup-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: #111827;
-        }
-
-        .dev-popup-message {
-            font-size: 1.1rem;
-            color: #4b5563;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-
-        .dev-popup-btn {
-            background: #000;
-            color: white;
-            padding: 0.75rem 2rem;
-            border-radius: 8px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        .dev-popup-btn:hover {
-            transform: translateY(-2px);
-            background: #222;
-        }
-    </style>
-
     <script>
         (function () {
-            // Force Show Popup
-            window.addEventListener('load', function () {
-                const devPopup = document.getElementById('dev-popup');
-                const devPopupClose = document.getElementById('dev-popup-close');
-                const devPopupAck = document.getElementById('dev-popup-ack');
+            setTimeout(function () {
+                var popup = document.getElementById('dev-popup-final');
+                var closeBtn = document.getElementById('dev-popup-close-final');
+                var ackBtn = document.getElementById('dev-popup-ack-final');
 
-                function showPopup() {
-                    if (devPopup) {
-                        devPopup.classList.add('active');
+                function openPopup() {
+                    if (popup) {
+                        popup.style.opacity = '1';
+                        popup.style.visibility = 'visible';
                         document.body.style.overflow = 'hidden';
-                        console.log('Dev Popup Shown');
                     }
                 }
 
                 function closePopup() {
-                    if (devPopup) {
-                        devPopup.classList.remove('active');
+                    if (popup) {
+                        popup.style.opacity = '0';
+                        popup.style.visibility = 'hidden';
                         document.body.style.overflow = '';
-                        sessionStorage.setItem('devPopupAck', 'true');
+                        sessionStorage.setItem('devPopupAckFinal', 'true');
                     }
                 }
 
                 // Check session storage
-                if (!sessionStorage.getItem('devPopupAck')) {
-                    setTimeout(showPopup, 1000);
-                }
-
-                if (devPopupClose) devPopupClose.addEventListener('click', closePopup);
-                if (devPopupAck) devPopupAck.addEventListener('click', closePopup);
-                if (devPopup) {
-                    devPopup.addEventListener('click', (e) => {
-                        if (e.target === devPopup) closePopup();
+                if (!sessionStorage.getItem('devPopupAckFinal')) {
+                    // Slight delay to ensure DOM is ready and transitions work
+                    requestAnimationFrame(function () {
+                        openPopup();
                     });
                 }
-            });
+
+                if (closeBtn) closeBtn.onclick = closePopup;
+                if (ackBtn) ackBtn.onclick = closePopup;
+                if (popup) {
+                    popup.onclick = function (e) {
+                        if (e.target === popup) closePopup();
+                    };
+                }
+            }, 500);
         })();
     </script>
 </body>
