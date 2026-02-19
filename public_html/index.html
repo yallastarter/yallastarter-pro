@@ -2348,71 +2348,85 @@
 
     <div id="dev-popup" class="dev-popup-overlay">
         <!-- Development Notice Popup (Final) -->
-        <div id="dev-popup-final"
-            style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.85); z-index: 2147483647; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: opacity 0.3s ease;">
-            <div
-                style="background-color: #ffffff; padding: 40px; border-radius: 12px; max-width: 500px; width: 90%; text-align: center; position: relative; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); z-index: 2147483647; display: block !important; visibility: visible !important; opacity: 1 !important; transform: none !important;">
-                <button id="dev-popup-close-final"
-                    style="position: absolute; top: 15px; right: 15px; background: #f3f4f6; border: none; font-size: 24px; line-height: 1; cursor: pointer; color: #4b5563; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; padding: 0;">
-                    &times;
-                </button>
-                <div style="font-size: 48px; color: #f59e0b; margin-bottom: 20px; line-height: 1;">
-                    &#9888;
-                </div>
-                <h2
-                    style="font-size: 24px; font-weight: 700; margin: 0 0 16px 0; color: #111827; font-family: sans-serif; line-height: 1.3;">
-                    Under Development</h2>
-                <p
-                    style="font-size: 16px; color: #4b5563; line-height: 1.6; margin: 0 0 24px 0; font-family: sans-serif;">
-                    This website is under development by Novamind INC.<br>
-                    No projects or transactions shall be fulfilled.
-                </p>
-                <button id="dev-popup-ack-final"
-                    style="background-color: #000000; color: #ffffff; padding: 12px 24px; border-radius: 8px; font-weight: 600; border: none; cursor: pointer; font-size: 16px; font-family: sans-serif; transition: background-color 0.2s;">I
-                    Understand</button>
-            </div>
-        </div>
-
         <script>
             (function () {
-                setTimeout(function () {
-                    var popup = document.getElementById('dev-popup-final');
-                    var closeBtn = document.getElementById('dev-popup-close-final');
-                    var ackBtn = document.getElementById('dev-popup-ack-final');
+                // Wait for DOM to be ready
+                window.addEventListener('load', function () {
+                    // Check session storage first
+                    if (sessionStorage.getItem('devPopupAckv4')) return;
 
-                    function openPopup() {
-                        if (popup) {
-                            popup.style.opacity = '1';
-                            popup.style.visibility = 'visible';
-                            document.body.style.overflow = 'hidden';
-                        }
-                    }
+                    // Create Overlay
+                    var overlay = document.createElement('div');
+                    overlay.id = 'dev-popup-overlay-v4';
+                    overlay.style.cssText = 'position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.85); z-index: 2147483647; display: flex; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;';
 
+                    // Create Content Container
+                    var content = document.createElement('div');
+                    content.id = 'dev-popup-content-v4';
+                    content.style.cssText = 'background-color: #ffffff; padding: 40px; border-radius: 12px; max-width: 500px; width: 90%; text-align: center; box-shadow: 0 0 50px rgba(0,0,0,0.5); pointer-events: auto; transform: scale(0.95); transition: transform 0.3s ease;';
+
+                    // Close Button
+                    var closeBtn = document.createElement('button');
+                    closeBtn.innerHTML = '&times;';
+                    closeBtn.style.cssText = 'position: absolute; top: 15px; right: 15px; background: #f3f4f6; border: none; font-size: 28px; line-height: 1; cursor: pointer; color: #4b5563; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; padding: 0; padding-bottom: 4px;';
+                    closeBtn.onclick = closePopup;
+
+                    // Icon
+                    var icon = document.createElement('div');
+                    icon.innerHTML = '&#9888;'; // Warning Unicode
+                    icon.style.cssText = 'font-size: 56px; color: #f59e0b; margin-bottom: 20px; line-height: 1;';
+
+                    // Title
+                    var title = document.createElement('h2');
+                    title.innerText = 'Under Development';
+                    title.style.cssText = 'font-size: 28px; font-weight: 800; margin: 0 0 16px 0; color: #1f2937; font-family: system-ui, -apple-system, sans-serif; line-height: 1.2;';
+
+                    // Message
+                    var message = document.createElement('p');
+                    message.innerHTML = 'This website is under development by Novamind INC.<br>No projects or transactions shall be fulfilled.';
+                    message.style.cssText = 'font-size: 18px; color: #4b5563; line-height: 1.6; margin: 0 0 32px 0; font-family: system-ui, -apple-system, sans-serif;';
+
+                    // Ack Button
+                    var ackBtn = document.createElement('button');
+                    ackBtn.innerText = 'I Understand';
+                    ackBtn.style.cssText = 'background-color: #000000; color: #ffffff; padding: 14px 28px; border-radius: 8px; font-weight: 600; border: none; cursor: pointer; font-size: 16px; font-family: system-ui, -apple-system, sans-serif; transition: opacity 0.2s;';
+                    ackBtn.onmouseover = function () { ackBtn.style.opacity = '0.8'; };
+                    ackBtn.onmouseout = function () { ackBtn.style.opacity = '1'; };
+                    ackBtn.onclick = closePopup;
+
+                    // Assemble
+                    content.appendChild(closeBtn);
+                    content.appendChild(icon);
+                    content.appendChild(title);
+                    content.appendChild(message);
+                    content.appendChild(ackBtn);
+                    overlay.appendChild(content);
+                    document.body.appendChild(overlay);
+
+                    // Show Event
+                    requestAnimationFrame(function () {
+                        overlay.style.opacity = '1';
+                        overlay.style.pointerEvents = 'auto'; // Re-enable pointer events
+                        content.style.transform = 'scale(1)';
+                        document.body.style.overflow = 'hidden';
+                    });
+
+                    // Close Function
                     function closePopup() {
-                        if (popup) {
-                            popup.style.opacity = '0';
-                            popup.style.visibility = 'hidden';
-                            document.body.style.overflow = '';
-                            sessionStorage.setItem('devPopupAckFinal', 'true');
-                        }
+                        overlay.style.opacity = '0';
+                        content.style.transform = 'scale(0.95)';
+                        document.body.style.overflow = '';
+                        setTimeout(function () {
+                            if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+                        }, 300);
+                        sessionStorage.setItem('devPopupAckv4', 'true');
                     }
 
-                    // Check session storage
-                    if (!sessionStorage.getItem('devPopupAckFinal')) {
-                        // Slight delay to ensure DOM is ready and transitions work
-                        requestAnimationFrame(function () {
-                            openPopup();
-                        });
-                    }
-
-                    if (closeBtn) closeBtn.onclick = closePopup;
-                    if (ackBtn) ackBtn.onclick = closePopup;
-                    if (popup) {
-                        popup.onclick = function (e) {
-                            if (e.target === popup) closePopup();
-                        };
-                    }
-                }, 500);
+                    // Close on overlay click
+                    overlay.onclick = function (e) {
+                        if (e.target === overlay) closePopup();
+                    };
+                });
             })();
         </script>
 
