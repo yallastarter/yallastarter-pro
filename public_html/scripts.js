@@ -377,4 +377,40 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log('Google login successful');
         }
     }
+
+    // Development Notice Popup Logic
+    const devPopup = document.getElementById('dev-popup');
+    const devPopupClose = document.getElementById('dev-popup-close');
+    const devPopupAck = document.getElementById('dev-popup-ack');
+
+    if (devPopup) {
+        // Show popup after a short delay if not already acknowledged in this session
+        if (!sessionStorage.getItem('devPopupAck')) {
+            setTimeout(() => {
+                devPopup.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            }, 1000);
+        }
+
+        function closePopup() {
+            devPopup.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+            sessionStorage.setItem('devPopupAck', 'true');
+        }
+
+        if (devPopupClose) {
+            devPopupClose.addEventListener('click', closePopup);
+        }
+
+        if (devPopupAck) {
+            devPopupAck.addEventListener('click', closePopup);
+        }
+
+        // Close on click outside content
+        devPopup.addEventListener('click', (e) => {
+            if (e.target === devPopup) {
+                closePopup();
+            }
+        });
+    }
 });
