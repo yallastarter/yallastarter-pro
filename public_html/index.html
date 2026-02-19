@@ -2372,15 +2372,14 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.85);
-            z-index: 2147483647;
-            /* Max Z-Index */
+            z-index: 9999999;
+            /* High Z-Index */
             display: flex;
             justify-content: center;
             align-items: center;
-            backdrop-filter: blur(5px);
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s ease;
+            transition: opacity 0.3s ease;
         }
 
         .dev-popup-overlay.active {
@@ -2389,47 +2388,42 @@
         }
 
         .dev-popup-content {
-            background: white;
+            background: #ffffff;
             padding: 2.5rem;
-            border-radius: 16px;
+            border-radius: 12px;
             max-width: 500px;
             width: 90%;
             text-align: center;
             position: relative;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            transform: scale(0.9) translateY(20px);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            color: #111827;
-            /* Force text color */
-        }
-
-        .dev-popup-overlay.active .dev-popup-content {
-            transform: scale(1) translateY(0);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            color: #1f2937;
+            /* Ensure content is visible */
+            transform: none !important;
+            opacity: 1 !important;
+            visibility: visible !important;
         }
 
         .dev-popup-close {
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 1rem;
+            right: 1rem;
             background: #f3f4f6;
             border: none;
             font-size: 1.25rem;
             cursor: pointer;
             color: #4b5563;
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s ease;
+            transition: background-color 0.2s;
         }
 
         .dev-popup-close:hover {
             background: #e5e7eb;
             color: #111827;
-            transform: rotate(90deg);
         }
 
         .dev-popup-icon {
@@ -2441,33 +2435,33 @@
         .dev-popup-title {
             font-size: 1.5rem;
             font-weight: 700;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             color: #111827;
         }
 
         .dev-popup-message {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #4b5563;
-            line-height: 1.6;
+            line-height: 1.5;
             margin-bottom: 1.5rem;
         }
 
         .dev-popup-btn {
             background: #000;
             color: white;
-            padding: 0.75rem 2rem;
-            border-radius: 8px;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
             font-weight: 600;
             border: none;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: background-color 0.2s;
         }
 
         .dev-popup-btn:hover {
-            transform: translateY(-2px);
-            background: #222;
+            background: #333;
         }
     </style>
+
 
     <script>
         (function () {
