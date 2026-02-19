@@ -2363,6 +2363,152 @@
         </div>
     </div>
 
+    <style>
+        /* Development Notice Popup Inline Styles */
+        .dev-popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 2147483647;
+            /* Max Z-Index */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .dev-popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .dev-popup-content {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            transform: scale(0.9) translateY(20px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: #111827;
+            /* Force text color */
+        }
+
+        .dev-popup-overlay.active .dev-popup-content {
+            transform: scale(1) translateY(0);
+        }
+
+        .dev-popup-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #f3f4f6;
+            border: none;
+            font-size: 1.25rem;
+            cursor: pointer;
+            color: #4b5563;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .dev-popup-close:hover {
+            background: #e5e7eb;
+            color: #111827;
+            transform: rotate(90deg);
+        }
+
+        .dev-popup-icon {
+            font-size: 3rem;
+            color: #f59e0b;
+            margin-bottom: 1rem;
+        }
+
+        .dev-popup-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #111827;
+        }
+
+        .dev-popup-message {
+            font-size: 1.1rem;
+            color: #4b5563;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .dev-popup-btn {
+            background: #000;
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .dev-popup-btn:hover {
+            transform: translateY(-2px);
+            background: #222;
+        }
+    </style>
+
+    <script>
+        (function () {
+            // Force Show Popup
+            window.addEventListener('load', function () {
+                const devPopup = document.getElementById('dev-popup');
+                const devPopupClose = document.getElementById('dev-popup-close');
+                const devPopupAck = document.getElementById('dev-popup-ack');
+
+                function showPopup() {
+                    if (devPopup) {
+                        devPopup.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                        console.log('Dev Popup Shown');
+                    }
+                }
+
+                function closePopup() {
+                    if (devPopup) {
+                        devPopup.classList.remove('active');
+                        document.body.style.overflow = '';
+                        sessionStorage.setItem('devPopupAck', 'true');
+                    }
+                }
+
+                // Check session storage
+                if (!sessionStorage.getItem('devPopupAck')) {
+                    setTimeout(showPopup, 1000);
+                }
+
+                if (devPopupClose) devPopupClose.addEventListener('click', closePopup);
+                if (devPopupAck) devPopupAck.addEventListener('click', closePopup);
+                if (devPopup) {
+                    devPopup.addEventListener('click', (e) => {
+                        if (e.target === devPopup) closePopup();
+                    });
+                }
+            });
+        })();
+    </script>
 </body>
+
 
 </html>
