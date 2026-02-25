@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View projects you have backed on YallaStarter.">
+    <title>Backed Projects - YallaStarter</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile-menu.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            min-height: calc(100vh - 70px);
+        }
+
+        .dashboard-sidebar {
+            background-color: white;
+            border-right: 1px solid var(--neutral-200);
+            padding: 2rem 0;
+        }
+
+        .user-profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 1.5rem 1.5rem;
+            border-bottom: 1px solid var(--neutral-200);
+            margin-bottom: 1rem;
+        }
+
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .user-name {
+            font-weight: 600;
+            color: var(--neutral-900);
+        }
+
+        .user-email {
+            font-size: 0.85rem;
+            color: var(--neutral-600);
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-menu-item {
+            margin-bottom: 0.25rem;
+        }
+
+        .sidebar-menu-link {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            color: var(--neutral-700);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .sidebar-menu-link:hover {
+            background-color: var(--neutral-200);
+            color: var(--primary);
+        }
+
+        .sidebar-menu-link.active {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            font-weight: 500;
+            border-right: 3px solid var(--primary);
+        }
+
+        .sidebar-menu-icon {
+            margin-right: 1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .dashboard-content {
+            padding: 2rem;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--neutral-900);
+        }
+
+        .backed-projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .backed-project-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .backed-project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .backed-project-image {
+            height: 180px;
+            overflow: hidden;
+        }
+
+        .backed-project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .backed-project-content {
+            padding: 1.5rem;
+        }
+
+        .backed-project-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: var(--neutral-900);
+        }
+
+        .backed-project-creator {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .creator-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--neutral-200);
+        }
+
+        .creator-name {
+            color: var(--neutral-700);
+            font-size: 0.9rem;
+        }
+
+        .backed-project-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--neutral-600);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .backed-amount {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .backed-date {
+            color: var(--neutral-600);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            background-color: var(--neutral-100);
+            border-radius: var(--border-radius);
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            color: var(--neutral-400);
+            margin-bottom: 1rem;
+        }
+
+        .empty-state-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--neutral-700);
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-state-description {
+            color: var(--neutral-600);
+            margin-bottom: 1.5rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: none;
+        }
+
+        @media (max-width: 992px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-sidebar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo"><span class="logo-text">YallaStarter</span></a>
+                <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="projects.html">Browse Projects</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="auth-buttons">
+                    <div class="user-dropdown">
+                        <button class="user-dropdown-btn">
+                            <div class="user-avatar-small" id="headerAvatar"
+                                style="width: 35px; height: 35px; border-radius: 50%; background: linear-gradient(135deg, #006c35 0%, #00a651 100%); display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-user" style="font-size: 1rem; color: white;"></i>
+                            </div>
+                            <span id="headerUserName">User</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="user-dropdown-menu">
+                            <a href="dashboard.html" class="dropdown-item"><i class="fas fa-tachometer-alt"></i>
+                                Dashboard</a>
+                            <a href="user-profile.html" class="dropdown-item"><i class="fas fa-user"></i> Profile</a>
+                            <a href="settings.html" class="dropdown-item"><i class="fas fa-cog"></i> Settings</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="javascript:void(0)" class="dropdown-item"
+                                onclick="window.auth.logout(); return false;"><i class="fas fa-sign-out-alt"></i>
+                                Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Dashboard -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="dashboard-sidebar">
+            <div class="user-profile">
+                <div class="user-avatar" id="sidebarAvatar"
+                    style="background: linear-gradient(135deg, #006c35 0%, #00a651 100%); display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-user" style="font-size: 2rem; color: white;"></i>
+                </div>
+                <div class="user-info">
+                    <div class="user-name" id="userName">User</div>
+                    <div class="user-email" id="userEmail">user@example.com</div>
+                </div>
+            </div>
+
+            <ul class="sidebar-menu">
+                <li class="sidebar-menu-item"><a href="dashboard.html" class="sidebar-menu-link"><i
+                            class="fas fa-tachometer-alt sidebar-menu-icon"></i> Dashboard</a></li>
+                <li class="sidebar-menu-item"><a href="my-projects.html" class="sidebar-menu-link"><i
+                            class="fas fa-rocket sidebar-menu-icon"></i> My Projects</a></li>
+                <li class="sidebar-menu-item"><a href="backed-projects.html" class="sidebar-menu-link active"><i
+                            class="fas fa-hand-holding-heart sidebar-menu-icon"></i> Backed Projects</a></li>
+                <li class="sidebar-menu-item"><a href="payments.html" class="sidebar-menu-link"><i
+                            class="fas fa-money-bill-wave sidebar-menu-icon"></i> Payments</a></li>
+                <li class="sidebar-menu-item"><a href="coins.html" class="sidebar-menu-link"><i
+                            class="fas fa-coins sidebar-menu-icon"></i> My Wallet</a></li>
+                <li class="sidebar-menu-item"><a href="notifications.html" class="sidebar-menu-link"><i
+                            class="fas fa-bell sidebar-menu-icon"></i> Notifications</a></li>
+                <li class="sidebar-menu-item"><a href="user-profile.html" class="sidebar-menu-link"><i
+                            class="fas fa-user sidebar-menu-icon"></i> Profile</a></li>
+                <li class="sidebar-menu-item"><a href="settings.html" class="sidebar-menu-link"><i
+                            class="fas fa-cog sidebar-menu-icon"></i> Settings</a></li>
+                <li class="sidebar-menu-item"><a href="support.html" class="sidebar-menu-link"><i
+                            class="fas fa-question-circle sidebar-menu-icon"></i> Help & Support</a></li>
+                <li class="sidebar-menu-item"><a href="javascript:void(0)" class="sidebar-menu-link"
+                        onclick="window.auth.logout(); return false;"><i
+                            class="fas fa-sign-out-alt sidebar-menu-icon"></i> Logout</a></li>
+            </ul>
+        </div>
+
+        <!-- Content -->
+        <div class="dashboard-content">
+            <div class="dashboard-header">
+                <h1 class="dashboard-title">Backed Projects</h1>
+                <div class="dashboard-actions">
+                    <a href="projects.html" class="btn btn-primary"><i class="fas fa-search"></i> Browse Projects</a>
+                </div>
+            </div>
+
+            <div class="backed-projects-grid" id="backed-projects-grid">
+                <div class="empty-state" id="loading-state" style="grid-column: 1/-1;">
+                    <div class="empty-state-icon"><i class="fas fa-spinner fa-spin"></i></div>
+                    <div class="empty-state-title">Loading backed projects…</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/auth-handler.js"></script>
+    <script>
+        // Protect page
+        if (window.auth) {
+            window.auth.protectPage();
+            const user = window.auth.getUser();
+            if (user) {
+                document.getElementById('userName').textContent = user.username || 'User';
+                document.getElementById('userEmail').textContent = user.email || '';
+                document.getElementById('headerUserName').textContent = user.username || 'User';
+                if (user.photoUrl) {
+                    ['sidebarAvatar', 'headerAvatar'].forEach(id => {
+                        const el = document.getElementById(id);
+                        el.style.backgroundImage = `url(${user.photoUrl})`;
+                        el.style.backgroundSize = 'cover';
+                        el.innerHTML = '';
+                    });
+                }
+            }
+        }
+
+        // Dropdown
+        const userDropdownBtn = document.querySelector('.user-dropdown-btn');
+        const userDropdownMenu = document.querySelector('.user-dropdown-menu');
+        userDropdownBtn?.addEventListener('click', () => userDropdownMenu.classList.toggle('show'));
+        window.addEventListener('click', e => {
+            if (!e.target.matches('.user-dropdown-btn') && !e.target.closest('.user-dropdown-btn'))
+                userDropdownMenu?.classList.remove('show');
+        });
+
+        // Load backed projects
+        const token = window.auth ? window.auth.getToken() : localStorage.getItem('token');
+        const API = window.location.origin;
+
+        async function loadBackedProjects() {
+            const grid = document.getElementById('backed-projects-grid');
+            try {
+                const res = await fetch(API + '/api/coins/backed', { headers: { 'Authorization': 'Bearer ' + token } });
+                const data = await res.json();
+                const backed = data.data || [];
+                if (backed.length === 0) {
+                    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1;">
+                        <div class="empty-state-icon"><i class="fas fa-hand-holding-heart"></i></div>
+                        <div class="empty-state-title">No backed projects yet</div>
+                        <div class="empty-state-description">You haven't backed any projects. Discover amazing projects to support!</div>
+                        <a href="projects.html" class="btn btn-primary">Browse Projects</a>
+                    </div>`;
+                    return;
+                }
+                grid.innerHTML = backed.map(({ project, totalBacked, lastBackedAt }) => {
+                    if (!project) return '';
+                    const p = project;
+                    const percent = p.goalAmount ? Math.min(100, Math.round((p.currentAmount / p.goalAmount) * 100)) : 0;
+                    const daysLeft = p.deadline ? Math.max(0, Math.ceil((new Date(p.deadline) - new Date()) / 86400000)) : 0;
+                    const imgSrc = p.coverImage || 'https://images.unsplash.com/photo-1576153192621-7a3be10b356e?w=600&q=80';
+                    const creatorName = p.creator && (p.creator.username || p.creator.email) ? p.creator.username || p.creator.email : 'Creator';
+                    const dateStr = lastBackedAt ? new Date(lastBackedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
+                    return `<div class="backed-project-card">
+                        <div class="backed-project-image"><img src="${imgSrc}" alt="${(p.title || '').replace(/"/g, '&quot;')}"></div>
+                        <div class="backed-project-content">
+                            <h3 class="backed-project-title">${(p.title || '').replace(/</g, '&lt;')}</h3>
+                            <div class="backed-project-creator">
+                                <div class="creator-avatar"><i class="fas fa-user" style="font-size:0.8rem;color:var(--neutral-500);"></i></div>
+                                <div class="creator-name">By ${(creatorName || '').replace(/</g, '&lt;')}</div>
+                            </div>
+                            <div class="backed-project-meta">
+                                <div class="backed-amount">${totalBacked || 0} coins backed</div>
+                                <div class="backed-date">${dateStr}</div>
+                            </div>
+                            <div class="progress-bar"><div class="progress-fill" style="width:${percent}%"></div></div>
+                            <div style="display:flex;justify-content:space-between;margin-top:1rem;">
+                                ${percent >= 100 ? '<span style="color:var(--success);font-size:0.9rem;"><i class="fas fa-check-circle"></i> Funded</span>' : '<span style="color:var(--primary);font-size:0.9rem;"><i class="fas fa-clock"></i> ' + daysLeft + ' days left</span>'}
+                                <a href="project-details.html?id=${p._id}" class="btn btn-sm btn-outline">View</a>
+                            </div>
+                        </div>
+                    </div>`;
+                }).join('');
+            } catch (e) {
+                grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><div class="empty-state-icon"><i class="fas fa-exclamation-triangle"></i></div><div class="empty-state-title">Could not load backed projects</div><div class="empty-state-description">Please try refreshing the page.</div></div>';
+            }
+        }
+        loadBackedProjects();
+    </script>
+    <script src="mobile-menu.js"></script>
+</body>
+
+</html>

@@ -1,44 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart City IoT Platform: Sustainable Urban Development - YallaStarter</title>
-    <meta name="description" content="Support the Smart City IoT Platform project, revolutionizing urban development in Saudi Arabia with cutting-edge Internet of Things technology for sustainable cities.">
-    <meta name="keywords" content="smart city, IoT, internet of things, urban development, sustainability, Saudi Arabia, technology">
+    <meta name="description"
+        content="Support the Smart City IoT Platform project, revolutionizing urban development in Saudi Arabia with cutting-edge Internet of Things technology for sustainable cities.">
+    <meta name="keywords"
+        content="smart city, IoT, internet of things, urban development, sustainability, Saudi Arabia, technology">
     <meta name="author" content="YallaStarter">
-    
+
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Smart City IoT Platform: Sustainable Urban Development - YallaStarter">
-    <meta property="og:description" content="Support the Smart City IoT Platform project, revolutionizing urban development in Saudi Arabia with cutting-edge Internet of Things technology for sustainable cities.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+    <meta property="og:description"
+        content="Support the Smart City IoT Platform project, revolutionizing urban development in Saudi Arabia with cutting-edge Internet of Things technology for sustainable cities.">
+    <meta property="og:image"
+        content="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
     <meta property="og:url" content="https://yallastarter.com/project-smart-city-iot.html">
     <meta property="og:type" content="website">
-    
+
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Smart City IoT Platform: Sustainable Urban Development - YallaStarter">
-    <meta name="twitter:description" content="Support the Smart City IoT Platform project, revolutionizing urban development in Saudi Arabia with cutting-edge Internet of Things technology for sustainable cities.">
-    <meta name="twitter:image" content="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
-    
+    <meta name="twitter:description"
+        content="Support the Smart City IoT Platform project, revolutionizing urban development in Saudi Arabia with cutting-edge Internet of Things technology for sustainable cities.">
+    <meta name="twitter:image"
+        content="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+
     <!-- Canonical URL -->
     <link rel="canonical" href="https://yallastarter.com/project-smart-city-iot.html">
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-    
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- Mobile Menu CSS -->
     <link rel="stylesheet" href="mobile-menu.css">
-    
+
     <style>
         :root {
             --primary-color: #00d4aa;
@@ -73,7 +80,7 @@
             z-index: 1001;
             padding: 0.5rem 1rem;
         }
-        
+
         .navbar {
             display: flex;
             align-items: center;
@@ -81,7 +88,7 @@
             gap: 1rem;
             width: 100%;
         }
-        
+
         .logo {
             display: flex;
             align-items: center;
@@ -90,11 +97,11 @@
             margin-right: 0.8rem;
             transition: transform 0.2s ease;
         }
-        
+
         .logo:hover {
             transform: scale(1.02);
         }
-        
+
         .logo-text {
             font-size: 1.5rem;
             font-weight: 700;
@@ -102,7 +109,7 @@
             display: block;
             letter-spacing: -0.02em;
         }
-        
+
         .nav-links {
             display: flex;
             align-items: center;
@@ -113,11 +120,11 @@
             flex: 0 1 auto;
             justify-content: flex-start;
         }
-        
+
         .nav-links li {
             list-style: none;
         }
-        
+
         .nav-links a {
             color: var(--text-color);
             font-weight: 500;
@@ -129,12 +136,12 @@
             font-size: 1rem;
             border-bottom: 2px solid transparent;
         }
-        
+
         .nav-links a:hover {
             color: var(--primary-color);
             background-color: rgba(0, 212, 170, 0.05);
         }
-        
+
         .nav-links a.active {
             color: var(--primary-color);
             font-weight: 600;
@@ -142,13 +149,13 @@
             padding: 0.5rem 1rem;
             border-bottom: 2px solid var(--primary-color);
         }
-        
+
         .auth-buttons {
             display: flex;
             gap: 0.6rem;
             align-items: center;
         }
-        
+
         .auth-buttons .btn {
             padding: 0.6rem 1.2rem;
             font-size: 0.95rem;
@@ -157,37 +164,37 @@
             transition: all 0.3s ease;
             text-decoration: none;
         }
-        
+
         .auth-buttons .btn-primary {
             background: linear-gradient(135deg, var(--primary-color), #008f44);
             color: white;
             border: 2px solid var(--primary-color);
             box-shadow: 0 2px 8px rgba(0, 212, 170, 0.2);
         }
-        
+
         .auth-buttons .btn-primary:hover {
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(0, 212, 170, 0.3);
         }
-        
+
         .auth-buttons .btn-link {
             background: transparent;
             color: var(--text-color);
             border: none;
             padding: 0.6rem 1rem;
         }
-        
+
         .auth-buttons .btn-link:hover {
             color: var(--primary-color);
         }
-        
+
         .language-switcher {
             display: flex;
             align-items: center;
             gap: 0.5rem;
             margin-left: auto;
         }
-        
+
         .language-btn {
             background: transparent;
             border: 2px solid var(--primary-color);
@@ -199,18 +206,18 @@
             transition: all 0.3s ease;
             font-size: 0.9rem;
         }
-        
+
         .language-btn:hover {
             background: var(--primary-color);
             color: white;
             transform: translateY(-1px);
         }
-        
+
         .language-btn.active {
             background: var(--primary-color);
             color: white;
         }
-        
+
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -220,7 +227,7 @@
             cursor: pointer;
             padding: 0.5rem;
         }
-        
+
         .mobile-menu {
             display: none;
             position: fixed;
@@ -233,7 +240,7 @@
             padding: 1rem;
             overflow-y: auto;
         }
-        
+
         .mobile-menu-header {
             display: flex;
             justify-content: space-between;
@@ -242,13 +249,13 @@
             padding-bottom: 1rem;
             border-bottom: 1px solid var(--border-color);
         }
-        
+
         .mobile-header-left {
             display: flex;
             flex-direction: column;
             gap: 1rem;
         }
-        
+
         .mobile-close-btn {
             background: none;
             border: none;
@@ -257,18 +264,18 @@
             cursor: pointer;
             padding: 0.5rem;
         }
-        
+
         @media (max-width: 768px) {
             .mobile-menu-btn {
                 display: block;
             }
-            
+
             .nav-links:not(.mobile-menu .nav-links),
             .auth-buttons:not(.mobile-menu .auth-buttons):not(.mobile-header-left .auth-buttons),
             .language-switcher:not(.mobile-menu .language-switcher) {
                 display: none;
             }
-            
+
             .mobile-menu.active {
                 display: block;
             }
@@ -304,7 +311,7 @@
             font-size: 3.5rem;
             font-weight: 700;
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .project-hero .lead {
@@ -342,7 +349,7 @@
         .project-image {
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             margin-bottom: 2rem;
         }
 
@@ -380,7 +387,7 @@
             background: white;
             border-radius: 15px;
             padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
 
@@ -446,7 +453,7 @@
             background: white;
             padding: 2rem;
             border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             text-align: center;
             transition: transform 0.3s ease;
         }
@@ -485,7 +492,7 @@
             background: white;
             padding: 1.5rem;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             text-align: center;
             transition: transform 0.3s ease;
         }
@@ -549,7 +556,7 @@
             background: white;
             padding: 1.5rem;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             position: relative;
         }
 
@@ -648,6 +655,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Main Header -->
     <header class="header">
@@ -655,7 +663,7 @@
             <a href="index.html" class="logo">
                 <span class="logo-text">YallaStarter</span>
             </a>
-        
+
             <ul class="nav-links">
                 <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="entertainment.html">Entertainment Projects</a></li>
@@ -666,22 +674,22 @@
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
-            
+
             <div class="language-switcher">
                 <button class="language-btn active" onclick="switchLanguage('en')">English</button>
                 <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
             </div>
-            
+
             <div class="auth-buttons">
                 <a href="create-project.html" class="btn btn-primary">Start a Project</a>
                 <a href="login.html" class="btn btn-link">Log In</a>
             </div>
-            
+
             <button class="mobile-menu-btn">
                 <i class="fas fa-bars"></i>
             </button>
         </nav>
-        
+
         <div class="mobile-menu">
             <div class="mobile-menu-header">
                 <div class="mobile-header-left">
@@ -717,7 +725,9 @@
             <div class="row align-items-center">
                 <div class="col-lg-8">
                     <h1>Smart City IoT Platform: Sustainable Urban Development</h1>
-                    <p class="lead">Revolutionize urban living with our comprehensive IoT platform that connects smart infrastructure, optimizes resource usage, and creates sustainable cities for the future of Saudi Arabia.</p>
+                    <p class="lead">Revolutionize urban living with our comprehensive IoT platform that connects smart
+                        infrastructure, optimizes resource usage, and creates sustainable cities for the future of Saudi
+                        Arabia.</p>
                     <div class="project-stats">
                         <div class="stat-item">
                             <div class="stat-number">85%</div>
@@ -735,7 +745,8 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Smart City IoT Platform" class="img-fluid">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Smart City IoT Platform" class="img-fluid">
                     </div>
                 </div>
             </div>
@@ -749,22 +760,31 @@
                 <div class="col-lg-8">
                     <h2 class="section-title">About the Platform</h2>
                     <p class="project-description">
-                        Our Smart City IoT Platform represents the future of urban development in Saudi Arabia. This comprehensive system integrates cutting-edge Internet of Things technology to create intelligent, sustainable, and efficient cities that enhance the quality of life for all residents while supporting the Kingdom's Vision 2030 goals.
+                        Our Smart City IoT Platform represents the future of urban development in Saudi Arabia. This
+                        comprehensive system integrates cutting-edge Internet of Things technology to create
+                        intelligent, sustainable, and efficient cities that enhance the quality of life for all
+                        residents while supporting the Kingdom's Vision 2030 goals.
                     </p>
                     <p class="project-description">
-                        The platform connects thousands of sensors, devices, and systems across urban infrastructure to provide real-time monitoring, predictive analytics, and automated responses. From smart traffic management and energy optimization to environmental monitoring and public safety, our IoT platform creates a connected ecosystem that makes cities more livable, sustainable, and responsive to citizen needs.
+                        The platform connects thousands of sensors, devices, and systems across urban infrastructure to
+                        provide real-time monitoring, predictive analytics, and automated responses. From smart traffic
+                        management and energy optimization to environmental monitoring and public safety, our IoT
+                        platform creates a connected ecosystem that makes cities more livable, sustainable, and
+                        responsive to citizen needs.
                     </p>
 
                     <!-- Project Images -->
                     <div class="row mt-4">
                         <div class="col-md-6">
                             <div class="project-image">
-                                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Smart City Infrastructure" class="img-fluid">
+                                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                    alt="Smart City Infrastructure" class="img-fluid">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="project-image">
-                                <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="IoT Sensors Network" class="img-fluid">
+                                <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                    alt="IoT Sensors Network" class="img-fluid">
                             </div>
                         </div>
                     </div>
@@ -777,42 +797,48 @@
                                 <i class="fas fa-traffic-light"></i>
                             </div>
                             <h3 class="feature-title">Smart Traffic Management</h3>
-                            <p class="feature-description">AI-powered traffic optimization reduces congestion and improves flow through intelligent signal control and route planning.</p>
+                            <p class="feature-description">AI-powered traffic optimization reduces congestion and
+                                improves flow through intelligent signal control and route planning.</p>
                         </div>
                         <div class="feature-card">
                             <div class="feature-icon">
                                 <i class="fas fa-bolt"></i>
                             </div>
                             <h3 class="feature-title">Energy Optimization</h3>
-                            <p class="feature-description">Smart grid technology optimizes energy distribution and consumption, reducing costs and environmental impact.</p>
+                            <p class="feature-description">Smart grid technology optimizes energy distribution and
+                                consumption, reducing costs and environmental impact.</p>
                         </div>
                         <div class="feature-card">
                             <div class="feature-icon">
                                 <i class="fas fa-leaf"></i>
                             </div>
                             <h3 class="feature-title">Environmental Monitoring</h3>
-                            <p class="feature-description">Real-time air quality, noise, and pollution monitoring with automated alerts and response systems.</p>
+                            <p class="feature-description">Real-time air quality, noise, and pollution monitoring with
+                                automated alerts and response systems.</p>
                         </div>
                         <div class="feature-card">
                             <div class="feature-icon">
                                 <i class="fas fa-shield-alt"></i>
                             </div>
                             <h3 class="feature-title">Public Safety</h3>
-                            <p class="feature-description">Integrated security systems with smart cameras, emergency response, and predictive crime prevention.</p>
+                            <p class="feature-description">Integrated security systems with smart cameras, emergency
+                                response, and predictive crime prevention.</p>
                         </div>
                         <div class="feature-card">
                             <div class="feature-icon">
                                 <i class="fas fa-water"></i>
                             </div>
                             <h3 class="feature-title">Water Management</h3>
-                            <p class="feature-description">Smart water systems monitor usage, detect leaks, and optimize distribution for maximum efficiency.</p>
+                            <p class="feature-description">Smart water systems monitor usage, detect leaks, and optimize
+                                distribution for maximum efficiency.</p>
                         </div>
                         <div class="feature-card">
                             <div class="feature-icon">
                                 <i class="fas fa-waste-basket"></i>
                             </div>
                             <h3 class="feature-title">Waste Management</h3>
-                            <p class="feature-description">Intelligent waste collection with sensor-equipped bins and optimized pickup routes.</p>
+                            <p class="feature-description">Intelligent waste collection with sensor-equipped bins and
+                                optimized pickup routes.</p>
                         </div>
                     </div>
 
@@ -870,14 +896,16 @@
                             <div class="timeline-content">
                                 <div class="timeline-date">Q1 2024</div>
                                 <h4 class="timeline-title">Infrastructure Planning</h4>
-                                <p>Complete system architecture design and sensor network planning for pilot city deployment.</p>
+                                <p>Complete system architecture design and sensor network planning for pilot city
+                                    deployment.</p>
                             </div>
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-content">
                                 <div class="timeline-date">Q2 2024</div>
                                 <h4 class="timeline-title">Pilot Deployment</h4>
-                                <p>Deploy IoT sensors and core platform in selected districts for testing and optimization.</p>
+                                <p>Deploy IoT sensors and core platform in selected districts for testing and
+                                    optimization.</p>
                             </div>
                         </div>
                         <div class="timeline-item">
@@ -891,7 +919,8 @@
                             <div class="timeline-content">
                                 <div class="timeline-date">Q4 2024</div>
                                 <h4 class="timeline-title">Full Launch</h4>
-                                <p>Complete city-wide deployment with all features operational and citizen training programs.</p>
+                                <p>Complete city-wide deployment with all features operational and citizen training
+                                    programs.</p>
                             </div>
                         </div>
                     </div>
@@ -908,9 +937,10 @@
                         </div>
                         <div class="backers-count">3,456 backers</div>
                         <div class="backers-count">28 days left</div>
-                        
-                        <a href="coins.html" class="btn-support">Support This Project</a>
-                        
+
+                        <a href="guest-checkout.html" class="btn-support"
+                            onclick="if(localStorage.getItem('token')){this.href='coins.html'}">Support This Project</a>
+
                         <div class="mt-4">
                             <h5>Reward Tiers</h5>
                             <div class="reward-tier">
@@ -997,10 +1027,10 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <!-- Mobile Menu Script -->
     <script src="mobile-menu.js"></script>
-    
+
     <!-- Custom JavaScript -->
     <script>
         // Language Switcher
@@ -1011,7 +1041,7 @@
                 window.location.href = 'project-smart-city-iot-ar.html';
             }
         }
-        
+
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -1023,7 +1053,7 @@
         });
 
         // Add animation to funding progress bar
-        window.addEventListener('load', function() {
+        window.addEventListener('load', function () {
             const progressBar = document.querySelector('.funding-progress-bar');
             if (progressBar) {
                 setTimeout(() => {
@@ -1034,15 +1064,15 @@
 
         // Add hover effects to feature cards
         document.querySelectorAll('.feature-card, .tech-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
+            card.addEventListener('mouseenter', function () {
                 this.style.transform = 'translateY(-10px)';
             });
-            
-            card.addEventListener('mouseleave', function() {
+
+            card.addEventListener('mouseleave', function () {
                 this.style.transform = 'translateY(0)';
             });
         });
     </script>
 </body>
-</html>
 
+</html>
