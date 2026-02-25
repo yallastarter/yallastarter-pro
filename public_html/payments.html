@@ -611,27 +611,19 @@
                             style="color:var(--primary);margin-right:0.5rem;"></i>Payment Methods</h2>
                 </div>
                 <div class="methods-grid">
-                    <div class="method-card default">
+                    <div class="method-card default" id="defaultMethodCard" style="display:none;">
                         <div class="method-icon">💳</div>
                         <div class="method-details">
-                            <div class="method-name">Mada Card</div>
-                            <div class="method-info">•••• •••• •••• 4532</div>
+                            <div class="method-name" id="defaultMethodName">Bank Card</div>
+                            <div class="method-info" id="defaultMethodInfo">No card saved</div>
                         </div>
                         <span class="method-default-badge">Default</span>
                     </div>
-                    <div class="method-card">
-                        <div class="method-icon">🏦</div>
-                        <div class="method-details">
-                            <div class="method-name">Bank Transfer</div>
-                            <div class="method-info">Al Rajhi Bank – IBAN ••••7890</div>
-                        </div>
-                    </div>
-                    <div class="method-card">
-                        <div class="method-icon">📱</div>
-                        <div class="method-details">
-                            <div class="method-name">Apple Pay</div>
-                            <div class="method-info">Linked to iPhone</div>
-                        </div>
+                    <div id="noMethodMsg"
+                        style="padding:1.5rem; color:var(--neutral-500); font-size:0.95rem; text-align:center; width:100%;">
+                        <i class="fas fa-credit-card"
+                            style="font-size:2rem; margin-bottom:0.75rem; display:block; color:var(--neutral-300);"></i>
+                        No payment methods saved yet.
                     </div>
                     <button class="btn-add-method" onclick="showAddMethodModal()">
                         <i class="fas fa-plus-circle"></i> Add Payment Method
@@ -673,18 +665,24 @@
             if (!e.target.closest('.user-dropdown-btn')) dropMenu?.classList.remove('show');
         });
 
-        // Sample transaction data (in a real app this would come from the API)
-        const sampleTransactions = [
-            { date: 'Feb 20, 2026', desc: 'Backed: Smart Cities IoT Platform', type: 'Backing', amount: -500, status: 'completed' },
-            { date: 'Feb 15, 2026', desc: 'Backed: Riyadh Music Festival', type: 'Backing', amount: -200, status: 'completed' },
-            { date: 'Feb 10, 2026', desc: 'Project Funding Received: Solar Energy Project', type: 'Received', amount: 12500, status: 'completed' },
-            { date: 'Jan 30, 2026', desc: 'Backed: Digital Art Gallery', type: 'Backing', amount: -150, status: 'completed' },
-            { date: 'Jan 22, 2026', desc: 'Project Funding Received: Solar Energy Project', type: 'Received', amount: 8000, status: 'completed' },
-            { date: 'Jan 10, 2026', desc: 'Backed: AI Disease Detection', type: 'Backing', amount: -300, status: 'pending' },
-            { date: 'Dec 28, 2025', desc: 'Refund: Saudi Heritage Platform', type: 'Refund', amount: 100, status: 'refunded' },
-        ];
+        // Track loaded transactions for CSV export
+        let loadedTransactions = [];
+
+        function downloadCSV() {
+            const rows = [['Date', 'Description', 'Type', 'Amount', 'Status']];
+            loadedTransactions.forEach(tx => {
+                rows.push([tx.date, tx.desc, tx.type, (tx.amount < 0 ? '-' : '+') + 'SAR ' + Math.abs(tx.amount), tx.status]);
+            });
+            if (!rows.length) { alert('No transactions to export.'); return; }
+            const csv = rows.map(r => r.map(c => `"${c}"`).join(',')).join('\n');
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url; a.download = 'yallastarter-payments.csv'; a.click();
+        }
 
         function renderTransactions(txs) {
+            loadedTransactions = txs;
             const tbody = document.getElementById('transactionTable');
             if (!txs.length) {
                 tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:3rem;color:var(--neutral-500);">No transactions found.</td></tr>';
@@ -708,29 +706,37 @@
                     <td><span class="badge ${statusClass}">${tx.status.charAt(0).toUpperCase() + tx.status.slice(1)}</span></td>
                 </tr>`;
             }).join('');
-
-            // Try to load from API first, fall back to sample
             document.getElementById('totalBacked').textContent = 'SAR ' + backed.toLocaleString();
             document.getElementById('totalReceived').textContent = 'SAR ' + received.toLocaleString();
             document.getElementById('pendingCount').textContent = pending;
             document.getElementById('txCount').textContent = txs.length;
         }
 
-        // Try to load from API
+        // Load from API — NO fallback to fake data
         async function loadTransactions() {
             const token = window.auth ? window.auth.getToken() : localStorage.getItem('token');
+            const tbody = document.getElementById('transactionTable');
             if (token) {
                 try {
-                    const res = await fetch('/api/payments', { headers: { 'Authorization': `Bearer ${token}` } });
+                    const res = await fetch('/api/coins/history', { headers: { 'Authorization': `Bearer ${token}` } });
                     const data = await res.json();
-                    if (data.success && data.transactions && data.transactions.length) {
-                        renderTransactions(data.transactions);
+                    if (data.success && data.data && data.data.length) {
+                        renderTransactions(data.data.map(tx => ({
+                            date: new Date(tx.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+                            desc: tx.description || (tx.type === 'send' ? 'Backed project' : tx.type === 'purchase' ? 'Coin purchase' : 'Cash out'),
+                            type: tx.type === 'purchase' ? 'Purchase' : tx.type === 'send' ? 'Backing' : 'Cash Out',
+                            amount: tx.type === 'send' || tx.type === 'cashout' ? -tx.amount : tx.amount,
+                            status: tx.status || 'completed'
+                        })));
                         return;
                     }
-                } catch (e) { }
+                } catch (e) { console.error('Payment load error', e); }
             }
-            // Fallback to sample data
-            renderTransactions(sampleTransactions);
+            // Empty state
+            tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;padding:3rem;color:var(--neutral-500);">
+                <i class="fas fa-receipt" style="font-size:2.5rem;display:block;margin-bottom:1rem;color:var(--neutral-300);"></i>
+                No transactions yet.
+            </td></tr>`;
         }
 
         loadTransactions();

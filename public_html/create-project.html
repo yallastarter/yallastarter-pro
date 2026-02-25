@@ -385,8 +385,10 @@
         }
 
         .btn-submit:hover {
-            background-color: var(--success-dark);
+            background-color: #047a2e;
             transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(4, 122, 46, 0.35);
+            opacity: 1;
         }
 
         /* Mobile Responsive */
@@ -673,9 +675,48 @@
                     <button type="submit" class="btn-submit" id="btn-submit" style="display: none;">Submit
                         Project</button>
                 </div>
-                <div id="form-message" class="form-message"
-                    style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 8px;"></div>
+                <div id="form-message" style="display:none;"></div>
             </form>
+
+            <!-- SUCCESS MODAL -->
+            <div id="successModal"
+                style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:9999; align-items:center; justify-content:center;">
+                <div
+                    style="background:white; border-radius:20px; padding:3rem; max-width:480px; width:90%; text-align:center; box-shadow:0 30px 60px rgba(0,0,0,0.2); animation:popIn .4s ease;">
+                    <div
+                        style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#10B981,#059669);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:2.5rem;color:white;">
+                        🎉</div>
+                    <h2 style="font-size:1.6rem;font-weight:700;margin-bottom:0.75rem;color:#111;">Project Submitted!
+                    </h2>
+                    <p style="color:#555;margin-bottom:0.5rem;">Your project has been created and is currently in
+                        <strong>Draft</strong> status.
+                    </p>
+                    <p style="color:#555;margin-bottom:2rem;">Go to your dashboard to publish it and start receiving
+                        backers.</p>
+                    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+                        <a href="dashboard.html" class="btn btn-primary"
+                            style="padding:0.8rem 2rem;border-radius:12px;text-decoration:none;">Go to Dashboard</a>
+                        <a href="my-projects.html" class="btn btn-outline"
+                            style="padding:0.8rem 2rem;border-radius:12px;text-decoration:none;">View My Projects</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ERROR BANNER -->
+            <div id="errorBanner"
+                style="display:none; position:fixed; bottom:2rem; left:50%; transform:translateX(-50%); background:#fff; border:2px solid #dc2626; border-radius:16px; padding:1.5rem 2rem; max-width:560px; width:90%; box-shadow:0 10px 40px rgba(220,38,38,0.15); z-index:9999;">
+                <div style="display:flex;align-items:flex-start;gap:1rem;">
+                    <div style="font-size:2rem;flex-shrink:0;">❌</div>
+                    <div style="flex:1;">
+                        <div style="font-weight:700;font-size:1.05rem;color:#dc2626;margin-bottom:0.4rem;">Submission
+                            Failed</div>
+                        <div id="errorBannerMsg" style="color:#555;font-size:0.95rem;margin-bottom:0.75rem;"></div>
+                        <div id="errorBannerFix" style="color:#047a2e;font-size:0.9rem;font-weight:500;"></div>
+                    </div>
+                    <button onclick="document.getElementById('errorBanner').style.display='none'"
+                        style="background:none;border:none;cursor:pointer;font-size:1.2rem;color:#999;flex-shrink:0;">✕</button>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -765,7 +806,7 @@
 
             const token = window.auth ? window.auth.getToken() : localStorage.getItem('token');
             if (!token) {
-                showMsg('Please log in to create a project.', 'error', msgEl);
+                showError('You are not logged in.', 'Please log in to your account, then come back to create your project.');
                 btn.disabled = false;
                 btn.textContent = origText;
                 return;
@@ -783,7 +824,16 @@
             const videoUrl = (document.getElementById('project-video') && document.getElementById('project-video').value.trim()) || '';
 
             if (!title || !category || !location || !description || !goalAmount) {
-                showMsg('Please fill required fields: title, category, location, description, funding goal.', 'error', msgEl);
+                const missing = [];
+                if (!title) missing.push('Project Title');
+                if (!category) missing.push('Category');
+                if (!location) missing.push('Location');
+                if (!description) missing.push('Project Description');
+                if (!goalAmount) missing.push('Funding Goal');
+                showError(
+                    'Some required fields are missing: ' + missing.join(', ') + '.',
+                    'Please go back to the relevant steps and fill in all required fields before submitting.'
+                );
                 btn.disabled = false;
                 btn.textContent = origText;
                 return;
@@ -796,7 +846,10 @@
                 deadline = d.toISOString().slice(0, 10);
             }
             if (!deadline || new Date(deadline) <= new Date()) {
-                showMsg('Please set a valid future funding deadline.', 'error', msgEl);
+                showError(
+                    'The funding deadline is missing or in the past.',
+                    'Go to Step 3 (Funding & Rewards) and set a future date for your funding deadline, or choose a campaign duration in Step 1.'
+                );
                 btn.disabled = false;
                 btn.textContent = origText;
                 return;
@@ -818,7 +871,7 @@
                     });
                     const j = await r.json();
                     if (j.success) coverImage = j.url;
-                    else { showMsg(j.message || 'Cover upload failed', 'error', msgEl); btn.disabled = false; btn.textContent = origText; return; }
+                    else { showError(j.message || 'Cover image upload failed.', 'Make sure your image is under 8MB and in JPEG, PNG, GIF, or WebP format. Try uploading a different image.'); btn.disabled = false; btn.textContent = origText; return; }
                 }
 
                 const galleryInput = document.getElementById('project-images');
@@ -832,7 +885,7 @@
                     });
                     const j = await r.json();
                     if (j.success) gallery = j.urls;
-                    else { showMsg(j.message || 'Gallery upload failed', 'error', msgEl); btn.disabled = false; btn.textContent = origText; return; }
+                    else { showError(j.message || 'Gallery upload failed.', 'Make sure each image is under 8MB and in JPEG, PNG, GIF, or WebP format. You can upload up to 10 images.'); btn.disabled = false; btn.textContent = origText; return; }
                 }
 
                 const res = await fetch(API + '/api/projects', {
@@ -859,25 +912,35 @@
                 const data = await res.json();
 
                 if (data.success && data.data) {
-                    if (typeof showToast === 'function') showToast('Project created successfully!', 'success');
-                    else showMsg('Project created successfully! Redirecting...', 'success', msgEl);
-                    setTimeout(() => { window.location.href = 'dashboard.html'; }, 1500);
+                    document.getElementById('successModal').style.display = 'flex';
                     return;
                 }
-                showMsg(data.message || 'Failed to create project', 'error', msgEl);
+                // Parse error message and give fix advice
+                const errMsg = data.message || 'Failed to create project.';
+                let fixMsg = 'Please review your project details and try again.';
+                if (errMsg.toLowerCase().includes('title')) fixMsg = 'Go to Step 1 and check your project title is filled in correctly.';
+                else if (errMsg.toLowerCase().includes('category')) fixMsg = 'Go to Step 1 and select a valid category.';
+                else if (errMsg.toLowerCase().includes('deadline') || errMsg.toLowerCase().includes('date')) fixMsg = 'Go to Step 3 and set a valid future funding deadline.';
+                else if (errMsg.toLowerCase().includes('goal') || errMsg.toLowerCase().includes('amount')) fixMsg = 'Go to Step 3 and enter a valid funding goal (minimum 1,000 SAR).';
+                else if (errMsg.toLowerCase().includes('auth') || errMsg.toLowerCase().includes('token') || errMsg.toLowerCase().includes('login')) fixMsg = 'Your session may have expired. Please log out and log back in, then try again.';
+                showError(errMsg, fixMsg);
             } catch (err) {
-                showMsg(err.message || 'Network error', 'error', msgEl);
+                showError(err.message || 'A network error occurred.', 'Check your internet connection and try again. If the problem persists, try refreshing the page.');
             }
             btn.disabled = false;
             btn.textContent = origText;
         });
 
         function showMsg(text, type, el) {
-            if (!el) el = document.getElementById('form-message');
-            el.textContent = text;
-            el.style.display = 'block';
-            el.style.background = type === 'error' ? '#fee' : '#efe';
-            el.style.color = type === 'error' ? '#c00' : '#060';
+            // Legacy inline fallback (unused by main flow now)
+        }
+
+        function showError(msg, fix) {
+            document.getElementById('errorBannerMsg').textContent = msg;
+            document.getElementById('errorBannerFix').textContent = fix ? '✅ How to fix: ' + fix : '';
+            const b = document.getElementById('errorBanner');
+            b.style.display = 'block';
+            b.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
 
         function switchLanguage(lang) {
