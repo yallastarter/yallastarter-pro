@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 
 const ProjectSchema = new mongoose.Schema({
+    serialNumber: {
+        type: String,
+        unique: true,
+        index: true
+    },
     title: {
         type: String,
         required: [true, 'Please add a project title'],
@@ -60,6 +65,16 @@ const ProjectSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     }
+});
+
+// Auto-generate unique serial number before saving (YS-XXXXXXXX)
+ProjectSchema.pre('save', async function (next) {
+    if (!this.serialNumber) {
+        const timestamp = Date.now().toString(36).toUpperCase();
+        const random = Math.random().toString(36).substring(2, 6).toUpperCase();
+        this.serialNumber = `YS-${timestamp}${random}`;
+    }
+    next();
 });
 
 // Indexes for performance

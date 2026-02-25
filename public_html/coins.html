@@ -55,10 +55,10 @@
             justify-content: center;
             font-size: 4rem;
             color: #78350f;
-            box-shadow: 
-                inset 0 0 20px rgba(255,255,255,0.5),
-                inset 0 -10px 20px rgba(0,0,0,0.2),
-                0 10px 20px rgba(0,0,0,0.3),
+            box-shadow:
+                inset 0 0 20px rgba(255, 255, 255, 0.5),
+                inset 0 -10px 20px rgba(0, 0, 0, 0.2),
+                0 10px 20px rgba(0, 0, 0, 0.3),
                 0 0 0 8px rgba(245, 158, 11, 0.3);
             animation: coinFloat 3s ease-in-out infinite;
             flex-shrink: 0;
@@ -85,6 +85,7 @@
             position: relative;
             z-index: 1;
         }
+
         .coin-icon-large .coin-icon-fallback {
             display: none;
             font-weight: 900;
@@ -95,16 +96,25 @@
             align-items: center;
             justify-content: center;
         }
+
         .coin-icon-large:not(.coin-img-loaded) .coin-icon-fallback {
             display: flex;
         }
+
         .coin-icon-large.coin-img-loaded .coin-icon-fallback {
             display: none !important;
         }
 
         @keyframes coinFloat {
-            0%, 100% { transform: translateY(0) rotateY(0deg); }
-            50% { transform: translateY(-10px) rotateY(10deg); }
+
+            0%,
+            100% {
+                transform: translateY(0) rotateY(0deg);
+            }
+
+            50% {
+                transform: translateY(-10px) rotateY(10deg);
+            }
         }
 
         .wallet-info {
@@ -500,9 +510,15 @@
                 grid-template-columns: 1fr;
             }
         }
+
         /* Coin image: no white box; use transparent background */
-        .coin-icon-large { background: transparent !important; }
-        .coin-icon-large .coin-icon-img { background: transparent !important; }
+        .coin-icon-large {
+            background: transparent !important;
+        }
+
+        .coin-icon-large .coin-icon-img {
+            background: transparent !important;
+        }
     </style>
 </head>
 
@@ -522,8 +538,8 @@
                     <li><a href="projects.html">Browse Projects</a></li>
                     <li><a href="dashboard.html">Dashboard</a></li>
                     <li><a href="coins.html" class="active" style="color: var(--primary); font-weight: 600;">
-                        <span class="coin-mini">Y</span> Coins
-                    </a></li>
+                            <span class="coin-mini">Y</span> Coins
+                        </a></li>
                 </ul>
                 <div class="auth-buttons">
                     <div class="user-dropdown">
@@ -549,7 +565,8 @@
                                 <i class="fas fa-coins"></i> My Wallet
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a href="javascript:void(0)" class="dropdown-item" onclick="window.auth && window.auth.logout(); return false;">
+                            <a href="javascript:void(0)" class="dropdown-item"
+                                onclick="window.auth && window.auth.logout(); return false;">
                                 <i class="fas fa-sign-out-alt"></i> Logout
                             </a>
                         </div>
@@ -571,7 +588,8 @@
                 <div class="auth-buttons">
                     <div class="user-dropdown">
                         <button class="user-dropdown-btn">
-                            <div class="user-avatar-small" style="width: 35px; height: 35px; border-radius: 50%; background: linear-gradient(135deg, #006c35 0%, #00a651 100%); display: flex; align-items: center; justify-content: center;">
+                            <div class="user-avatar-small"
+                                style="width: 35px; height: 35px; border-radius: 50%; background: linear-gradient(135deg, #006c35 0%, #00a651 100%); display: flex; align-items: center; justify-content: center;">
                                 <i class="fas fa-user" style="font-size: 1rem; color: white;"></i>
                             </div>
                             <span id="mobileUserName">User</span>
@@ -580,7 +598,8 @@
                         <div class="user-dropdown-menu">
                             <a href="dashboard.html" class="dropdown-item">Dashboard</a>
                             <a href="coins.html" class="dropdown-item active">My Wallet</a>
-                            <a href="javascript:void(0)" class="dropdown-item" onclick="window.auth && window.auth.logout(); return false;">Logout</a>
+                            <a href="javascript:void(0)" class="dropdown-item"
+                                onclick="window.auth && window.auth.logout(); return false;">Logout</a>
                         </div>
                     </div>
                 </div>
@@ -591,7 +610,8 @@
     <div class="dashboard-container">
         <div class="dashboard-sidebar">
             <div class="user-profile">
-                <div class="user-avatar" style="background: linear-gradient(135deg, #006c35 0%, #00a651 100%); display: flex; align-items: center; justify-content: center;">
+                <div class="user-avatar"
+                    style="background: linear-gradient(135deg, #006c35 0%, #00a651 100%); display: flex; align-items: center; justify-content: center;">
                     <i class="fas fa-user" style="font-size: 2rem; color: white;"></i>
                 </div>
                 <div class="user-info">
@@ -600,166 +620,177 @@
                 </div>
             </div>
             <ul class="sidebar-menu">
-                <li class="sidebar-menu-item"><a href="dashboard.html" class="sidebar-menu-link"><i class="fas fa-tachometer-alt sidebar-menu-icon"></i> Dashboard</a></li>
-                <li class="sidebar-menu-item"><a href="dashboard.html#my-projects" class="sidebar-menu-link"><i class="fas fa-rocket sidebar-menu-icon"></i> My Projects</a></li>
-                <li class="sidebar-menu-item"><a href="dashboard.html#backed" class="sidebar-menu-link"><i class="fas fa-hand-holding-heart sidebar-menu-icon"></i> Backed Projects</a></li>
-                <li class="sidebar-menu-item"><a href="coins.html" class="sidebar-menu-link"><i class="fas fa-money-bill-wave sidebar-menu-icon"></i> Payments</a></li>
-                <li class="sidebar-menu-item"><a href="coins.html" class="sidebar-menu-link active"><i class="fas fa-coins sidebar-menu-icon"></i> My Wallet</a></li>
-                <li class="sidebar-menu-item"><a href="support.html" class="sidebar-menu-link"><i class="fas fa-bell sidebar-menu-icon"></i> Notifications</a></li>
-                <li class="sidebar-menu-item"><a href="user-profile.html" class="sidebar-menu-link"><i class="fas fa-user sidebar-menu-icon"></i> Profile</a></li>
-                <li class="sidebar-menu-item"><a href="settings.html" class="sidebar-menu-link"><i class="fas fa-cog sidebar-menu-icon"></i> Settings</a></li>
-                <li class="sidebar-menu-item"><a href="support.html" class="sidebar-menu-link"><i class="fas fa-question-circle sidebar-menu-icon"></i> Help & Support</a></li>
-                <li class="sidebar-menu-item"><a href="javascript:void(0)" class="sidebar-menu-link" onclick="window.auth && window.auth.logout(); return false;"><i class="fas fa-sign-out-alt sidebar-menu-icon"></i> Logout</a></li>
+                <li class="sidebar-menu-item"><a href="dashboard.html" class="sidebar-menu-link"><i
+                            class="fas fa-tachometer-alt sidebar-menu-icon"></i> Dashboard</a></li>
+                <li class="sidebar-menu-item"><a href="my-projects.html" class="sidebar-menu-link"><i
+                            class="fas fa-rocket sidebar-menu-icon"></i> My Projects</a></li>
+                <li class="sidebar-menu-item"><a href="backed-projects.html" class="sidebar-menu-link"><i
+                            class="fas fa-hand-holding-heart sidebar-menu-icon"></i> Backed Projects</a></li>
+                <li class="sidebar-menu-item"><a href="payments.html" class="sidebar-menu-link"><i
+                            class="fas fa-money-bill-wave sidebar-menu-icon"></i> Payments</a></li>
+                <li class="sidebar-menu-item"><a href="coins.html" class="sidebar-menu-link active"><i
+                            class="fas fa-coins sidebar-menu-icon"></i> My Wallet</a></li>
+                <li class="sidebar-menu-item"><a href="notifications.html" class="sidebar-menu-link"><i
+                            class="fas fa-bell sidebar-menu-icon"></i> Notifications</a></li>
+                <li class="sidebar-menu-item"><a href="user-profile.html" class="sidebar-menu-link"><i
+                            class="fas fa-user sidebar-menu-icon"></i> Profile</a></li>
+                <li class="sidebar-menu-item"><a href="settings.html" class="sidebar-menu-link"><i
+                            class="fas fa-cog sidebar-menu-icon"></i> Settings</a></li>
+                <li class="sidebar-menu-item"><a href="support.html" class="sidebar-menu-link"><i
+                            class="fas fa-question-circle sidebar-menu-icon"></i> Help & Support</a></li>
+                <li class="sidebar-menu-item"><a href="javascript:void(0)" class="sidebar-menu-link"
+                        onclick="window.auth && window.auth.logout(); return false;"><i
+                            class="fas fa-sign-out-alt sidebar-menu-icon"></i> Logout</a></li>
             </ul>
         </div>
         <div class="dashboard-content">
-    <!-- Wallet Content -->
-    <div class="wallet-container">
-        <!-- Balance Hero -->
-        <div class="wallet-hero">
-            <div class="coin-icon-large" id="coinIconLarge">
-                <img src="images/coin.png" alt="YallaStarter Coin" class="coin-icon-img" loading="eager"
-                    onload="this.parentElement.classList.add('coin-img-loaded');"
-                    onerror="this.style.display='none'; this.parentElement.classList.remove('coin-img-loaded');">
-                <span class="coin-icon-fallback">Y</span>
-            </div>
-            <div class="wallet-info">
-                <div class="wallet-label">Your Coin Balance</div>
-                <div class="wallet-balance" id="balanceDisplay">0</div>
-                <div class="wallet-balance-sar">≈ <span id="sarDisplay">0</span> SAR</div>
-                <div class="wallet-stats">
-                    <div class="wallet-stat">
-                        <i class="fas fa-arrow-down"></i>
-                        <span>Earned: <strong id="earnedDisplay">0</strong></span>
+            <!-- Wallet Content -->
+            <div class="wallet-container">
+                <!-- Balance Hero -->
+                <div class="wallet-hero">
+                    <div class="coin-icon-large" id="coinIconLarge">
+                        <img src="images/coin.png" alt="YallaStarter Coin" class="coin-icon-img" loading="eager"
+                            onload="this.parentElement.classList.add('coin-img-loaded');"
+                            onerror="this.style.display='none'; this.parentElement.classList.remove('coin-img-loaded');">
+                        <span class="coin-icon-fallback">Y</span>
                     </div>
-                    <div class="wallet-stat">
-                        <i class="fas fa-arrow-up"></i>
-                        <span>Spent: <strong id="spentDisplay">0</strong></span>
+                    <div class="wallet-info">
+                        <div class="wallet-label">Your Coin Balance</div>
+                        <div class="wallet-balance" id="balanceDisplay">0</div>
+                        <div class="wallet-balance-sar">≈ <span id="sarDisplay">0</span> SAR</div>
+                        <div class="wallet-stats">
+                            <div class="wallet-stat">
+                                <i class="fas fa-arrow-down"></i>
+                                <span>Earned: <strong id="earnedDisplay">0</strong></span>
+                            </div>
+                            <div class="wallet-stat">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>Spent: <strong id="spentDisplay">0</strong></span>
+                            </div>
+                        </div>
                     </div>
+                </div>
+
+                <!-- Action Cards -->
+                <div class="actions-grid">
+                    <!-- Buy Coins -->
+                    <div class="action-card">
+                        <div class="action-header">
+                            <div class="action-icon buy">
+                                <i class="fas fa-plus-circle"></i>
+                            </div>
+                            <div>
+                                <div class="action-title">Buy Coins</div>
+                                <div class="action-desc">1 Coin = 1 SAR • No fees for backers</div>
+                            </div>
+                        </div>
+
+                        <div class="quick-amounts">
+                            <button class="quick-amount-btn" data-amount="10">10</button>
+                            <button class="quick-amount-btn" data-amount="50">50</button>
+                            <button class="quick-amount-btn" data-amount="100">100</button>
+                            <button class="quick-amount-btn" data-amount="500">500</button>
+                        </div>
+
+                        <div class="coin-form-group">
+                            <label class="coin-form-label">Custom Amount</label>
+                            <input type="number" id="buyAmount" class="coin-form-input" placeholder="Enter amount"
+                                min="1" max="100000">
+                        </div>
+
+                        <button class="coin-btn buy" id="buyBtn" onclick="buyCoins()">
+                            <i class="fas fa-credit-card"></i> Buy with Bank Card
+                        </button>
+                    </div>
+
+                    <!-- Send Coins -->
+                    <div class="action-card">
+                        <div class="action-header">
+                            <div class="action-icon send">
+                                <i class="fas fa-paper-plane"></i>
+                            </div>
+                            <div>
+                                <div class="action-title">Send Coins</div>
+                                <div class="action-desc">Back a project you love</div>
+                            </div>
+                        </div>
+
+                        <div class="coin-form-group">
+                            <label class="coin-form-label">Select Project</label>
+                            <select id="projectSelect" class="coin-form-select">
+                                <option value="">Loading projects...</option>
+                            </select>
+                        </div>
+
+                        <div class="coin-form-group">
+                            <label class="coin-form-label">Amount</label>
+                            <input type="number" id="sendAmount" class="coin-form-input"
+                                placeholder="Enter coins to send" min="1">
+                        </div>
+
+                        <button class="coin-btn send" onclick="sendCoins()">
+                            <i class="fas fa-paper-plane"></i> Send Coins
+                        </button>
+                    </div>
+
+                    <!-- Cash Out -->
+                    <div class="action-card">
+                        <div class="action-header">
+                            <div class="action-icon cashout">
+                                <i class="fas fa-university"></i>
+                            </div>
+                            <div>
+                                <div class="action-title">Cash Out</div>
+                                <div class="action-desc">Transfer to bank (min 100 coins)</div>
+                            </div>
+                        </div>
+
+                        <div class="coin-form-group">
+                            <label class="coin-form-label">Amount to Cash Out</label>
+                            <input type="number" id="cashoutAmount" class="coin-form-input" placeholder="Min 100 coins"
+                                min="100" oninput="updateFeeBreakdown()">
+                        </div>
+
+                        <div class="fee-breakdown" id="feeBreakdown" style="display:none;">
+                            <div class="fee-row">
+                                <span>Gross Amount</span>
+                                <span id="feeGross">0 SAR</span>
+                            </div>
+                            <div class="fee-row">
+                                <span>Processing Fee (8%)</span>
+                                <span id="feeProcessing" style="color:#DC2626;">-0 SAR</span>
+                            </div>
+                            <div class="fee-row">
+                                <span>Bank Transfer Fee (6%)</span>
+                                <span id="feeBank" style="color:#DC2626;">-0 SAR</span>
+                            </div>
+                            <div class="fee-row total">
+                                <span>You Receive</span>
+                                <span id="feeNet" style="color:#059669;">0 SAR</span>
+                            </div>
+                        </div>
+
+                        <button class="coin-btn cashout" onclick="cashOut()" style="margin-top: 1rem;">
+                            <i class="fas fa-money-bill-wave"></i> Request Cash Out
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Transaction History -->
+                <div class="history-section">
+                    <div class="history-header">
+                        <h2 class="history-title"><i class="fas fa-history"
+                                style="color: var(--primary); margin-right: 0.5rem;"></i>Transaction History</h2>
+                    </div>
+
+                    <ul class="tx-list" id="txList">
+                        <li class="empty-history" id="emptyHistory">
+                            <i class="fas fa-receipt"></i>
+                            <p>No transactions yet. Buy some coins to get started!</p>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </div>
-
-        <!-- Action Cards -->
-        <div class="actions-grid">
-            <!-- Buy Coins -->
-            <div class="action-card">
-                <div class="action-header">
-                    <div class="action-icon buy">
-                        <i class="fas fa-plus-circle"></i>
-                    </div>
-                    <div>
-                        <div class="action-title">Buy Coins</div>
-                        <div class="action-desc">1 Coin = 1 SAR • No fees for backers</div>
-                    </div>
-                </div>
-
-                <div class="quick-amounts">
-                    <button class="quick-amount-btn" data-amount="10">10</button>
-                    <button class="quick-amount-btn" data-amount="50">50</button>
-                    <button class="quick-amount-btn" data-amount="100">100</button>
-                    <button class="quick-amount-btn" data-amount="500">500</button>
-                </div>
-
-                <div class="coin-form-group">
-                    <label class="coin-form-label">Custom Amount</label>
-                    <input type="number" id="buyAmount" class="coin-form-input" placeholder="Enter amount" min="1"
-                        max="100000">
-                </div>
-
-                <button class="coin-btn buy" id="buyBtn" onclick="buyCoins()">
-                    <i class="fas fa-credit-card"></i> Buy with Stripe
-                </button>
-            </div>
-
-            <!-- Send Coins -->
-            <div class="action-card">
-                <div class="action-header">
-                    <div class="action-icon send">
-                        <i class="fas fa-paper-plane"></i>
-                    </div>
-                    <div>
-                        <div class="action-title">Send Coins</div>
-                        <div class="action-desc">Back a project you love</div>
-                    </div>
-                </div>
-
-                <div class="coin-form-group">
-                    <label class="coin-form-label">Select Project</label>
-                    <select id="projectSelect" class="coin-form-select">
-                        <option value="">Loading projects...</option>
-                    </select>
-                </div>
-
-                <div class="coin-form-group">
-                    <label class="coin-form-label">Amount</label>
-                    <input type="number" id="sendAmount" class="coin-form-input" placeholder="Enter coins to send"
-                        min="1">
-                </div>
-
-                <button class="coin-btn send" onclick="sendCoins()">
-                    <i class="fas fa-paper-plane"></i> Send Coins
-                </button>
-            </div>
-
-            <!-- Cash Out -->
-            <div class="action-card">
-                <div class="action-header">
-                    <div class="action-icon cashout">
-                        <i class="fas fa-university"></i>
-                    </div>
-                    <div>
-                        <div class="action-title">Cash Out</div>
-                        <div class="action-desc">Transfer to bank (min 100 coins)</div>
-                    </div>
-                </div>
-
-                <div class="coin-form-group">
-                    <label class="coin-form-label">Amount to Cash Out</label>
-                    <input type="number" id="cashoutAmount" class="coin-form-input" placeholder="Min 100 coins"
-                        min="100" oninput="updateFeeBreakdown()">
-                </div>
-
-                <div class="fee-breakdown" id="feeBreakdown" style="display:none;">
-                    <div class="fee-row">
-                        <span>Gross Amount</span>
-                        <span id="feeGross">0 SAR</span>
-                    </div>
-                    <div class="fee-row">
-                        <span>Processing Fee (8%)</span>
-                        <span id="feeProcessing" style="color:#DC2626;">-0 SAR</span>
-                    </div>
-                    <div class="fee-row">
-                        <span>Bank Transfer Fee (6%)</span>
-                        <span id="feeBank" style="color:#DC2626;">-0 SAR</span>
-                    </div>
-                    <div class="fee-row total">
-                        <span>You Receive</span>
-                        <span id="feeNet" style="color:#059669;">0 SAR</span>
-                    </div>
-                </div>
-
-                <button class="coin-btn cashout" onclick="cashOut()" style="margin-top: 1rem;">
-                    <i class="fas fa-money-bill-wave"></i> Request Cash Out
-                </button>
-            </div>
-        </div>
-
-        <!-- Transaction History -->
-        <div class="history-section">
-            <div class="history-header">
-                <h2 class="history-title"><i class="fas fa-history"
-                        style="color: var(--primary); margin-right: 0.5rem;"></i>Transaction History</h2>
-            </div>
-
-            <ul class="tx-list" id="txList">
-                <li class="empty-history" id="emptyHistory">
-                    <i class="fas fa-receipt"></i>
-                    <p>No transactions yet. Buy some coins to get started!</p>
-                </li>
-            </ul>
-        </div>
-    </div>
         </div>
     </div>
 
@@ -929,7 +960,7 @@
                 showToast('Network error', 'error');
             } finally {
                 btn.disabled = false;
-                btn.innerHTML = '<i class="fas fa-credit-card"></i> Buy with Stripe';
+                btn.innerHTML = '<i class="fas fa-credit-card"></i> Buy with Bank Card';
             }
         }
 

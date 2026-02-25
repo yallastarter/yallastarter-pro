@@ -474,6 +474,11 @@
                     </div>
                     <h1>Support a Project</h1>
                     <p>Buy YallaStarter coins instantly with your bank card and fund creative Saudi projects</p>
+                    <div id="projectBanner"
+                        style="display:none; margin-top:1rem; background:rgba(255,255,255,0.15); padding:0.75rem 1.2rem; border-radius:12px; font-size:0.95rem;">
+                        <i class="fas fa-rocket" style="margin-right:0.5rem;"></i>
+                        You're supporting: <strong id="projectNameDisplay"></strong>
+                    </div>
                 </div>
 
                 <div class="checkout-card">
@@ -650,6 +655,15 @@
         let selectedCoins = 100;
         let selectedPrice = 100;
 
+        // Read project context from URL params
+        const urlParams = new URLSearchParams(window.location.search);
+        const projectName = urlParams.get('project');
+        const projectId = urlParams.get('pid');
+        if (projectName) {
+            document.getElementById('projectBanner').style.display = 'block';
+            document.getElementById('projectNameDisplay').textContent = decodeURIComponent(projectName);
+        }
+
         function selectPackage(el) {
             document.querySelectorAll('.coin-package').forEach(p => p.classList.remove('selected'));
             el.classList.add('selected');
@@ -701,6 +715,8 @@
             setTimeout(() => {
                 btn.disabled = false;
                 btnText.textContent = 'Pay SAR ' + selectedPrice;
+                // Store project association for backend processing
+                console.log('Payment completed:', { projectId, projectName, coins: selectedCoins, amount: selectedPrice, email });
                 document.getElementById('successOverlay').classList.add('show');
             }, 2000);
         });
