@@ -126,6 +126,12 @@ class AuthHandler {
                 }
             });
 
+            // Only log out if the server explicitly rejects the token (401/403)
+            if (response.status === 401 || response.status === 403) {
+                this.logout();
+                return { success: false, message: 'Session expired. Please log in again.' };
+            }
+
             const data = await response.json();
 
             if (data.success) {
@@ -133,12 +139,12 @@ class AuthHandler {
                 localStorage.setItem('user', JSON.stringify(data.user));
                 return { success: true, user: data.user };
             } else {
-                // Token might be invalid
-                this.logout();
+                // API returned an error but not a 401/403 — keep session alive
                 return { success: false, message: data.message };
             }
         } catch (error) {
-            console.error('Profile fetch error:', error);
+            // Network error — do NOT log out, user may just be offline
+            console.warn('Profile fetch failed (network error), keeping session:', error);
             return { success: false, message: 'Network error' };
         }
     }

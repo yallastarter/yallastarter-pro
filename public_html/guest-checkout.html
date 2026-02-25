@@ -504,12 +504,24 @@
                             <div class="coin-package" data-coins="250" data-price="250" onclick="selectPackage(this)">
                                 <div class="package-coins">250 <span>coins</span></div>
                                 <div class="package-price">SAR 250</div>
-                                <div class="package-bonus">+10 bonus coins</div>
                             </div>
                             <div class="coin-package" data-coins="500" data-price="500" onclick="selectPackage(this)">
                                 <div class="package-coins">500 <span>coins</span></div>
                                 <div class="package-price">SAR 500</div>
-                                <div class="package-bonus">+30 bonus coins</div>
+                            </div>
+                        </div>
+
+                        <!-- Custom Amount -->
+                        <div id="customAmountWrap" style="margin-top:1rem;">
+                            <label class="packages-label" for="customAmount" style="margin-bottom:0.5rem;">Or enter a
+                                custom amount</label>
+                            <div style="display:flex;gap:0.75rem;align-items:center;">
+                                <span style="font-weight:600;color:var(--neutral-700);white-space:nowrap;">SAR</span>
+                                <input type="number" id="customAmount" min="1" max="100000" placeholder="e.g. 75"
+                                    style="flex:1;padding:0.75rem 1rem;border:2px solid var(--neutral-200);border-radius:10px;font-size:1rem;outline:none;transition:border-color .2s;"
+                                    oninput="applyCustomAmount(this.value)"
+                                    onfocus="this.style.borderColor='var(--primary)'"
+                                    onblur="this.style.borderColor='var(--neutral-200)'" />
                             </div>
                         </div>
 
@@ -669,6 +681,21 @@
             el.classList.add('selected');
             selectedCoins = parseInt(el.dataset.coins);
             selectedPrice = parseInt(el.dataset.price);
+            document.getElementById('customAmount').value = '';
+            updateSummary();
+        }
+
+        function applyCustomAmount(val) {
+            const amount = parseInt(val);
+            if (amount >= 1) {
+                document.querySelectorAll('.coin-package').forEach(p => p.classList.remove('selected'));
+                selectedCoins = amount;
+                selectedPrice = amount;
+                updateSummary();
+            }
+        }
+
+        function updateSummary() {
             document.getElementById('summaryCoins').textContent = selectedCoins + ' coins';
             document.getElementById('summaryTotal').textContent = 'SAR ' + selectedPrice;
             document.getElementById('payBtnText').textContent = 'Pay SAR ' + selectedPrice;
