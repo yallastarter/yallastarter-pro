@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Stay updated with your project activity and backed campaign notifications on YallaStarter.">
+    <title>Notifications - YallaStarter</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile-menu.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Dashboard Layout */
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: calc(100vh - 70px);
+        }
+
+        .dashboard-sidebar {
+            background-color: var(--neutral-100);
+            border-right: 1px solid var(--neutral-300);
+            padding: 2rem 0;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            padding: 0 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 1rem;
+            background: linear-gradient(135deg, #006c35 0%, #00a651 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .user-info {
+            flex: 1;
+        }
+
+        .user-name {
+            font-weight: 600;
+            color: var(--neutral-900);
+            margin-bottom: 0.2rem;
+        }
+
+        .user-email {
+            font-size: 0.85rem;
+            color: var(--neutral-600);
+            word-break: break-all;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-menu-item {
+            margin-bottom: 0.3rem;
+        }
+
+        .sidebar-menu-link {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            color: var(--neutral-700);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .sidebar-menu-link:hover {
+            background-color: var(--neutral-200);
+            color: var(--primary);
+        }
+
+        .sidebar-menu-link.active {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            font-weight: 500;
+            border-right: 3px solid var(--primary);
+        }
+
+        .sidebar-menu-icon {
+            margin-right: 1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Notifications Content */
+        .notifications-content {
+            padding: 2rem;
+            max-width: 800px;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .page-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--neutral-900);
+        }
+
+        .page-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        /* Filter Tabs */
+        .filter-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: 0.5rem 1.25rem;
+            border-radius: 20px;
+            border: 2px solid var(--neutral-300);
+            background: white;
+            color: var(--neutral-600);
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-tab:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .filter-tab.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .filter-tab .count {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            padding: 0 0.4rem;
+            font-size: 0.75rem;
+            margin-left: 0.3rem;
+        }
+
+        .filter-tab:not(.active) .count {
+            background: var(--neutral-200);
+            color: var(--neutral-600);
+        }
+
+        /* Notification Items */
+        .notifications-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .notification-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.25rem 1.25rem;
+            background: white;
+            border-bottom: 1px solid var(--neutral-200);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .notification-item:first-child {
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+        }
+
+        .notification-item:last-child {
+            border-bottom: none;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+        }
+
+        .notification-item:only-child {
+            border-radius: var(--border-radius);
+        }
+
+        .notification-item:hover {
+            background: var(--neutral-100);
+        }
+
+        .notification-item.unread {
+            background: rgba(0, 166, 81, 0.03);
+        }
+
+        .notification-item.unread::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--primary);
+            border-radius: 4px 0 0 4px;
+        }
+
+        .notif-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .notif-icon.green {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .notif-icon.blue {
+            background: var(--info-light);
+            color: var(--info);
+        }
+
+        .notif-icon.amber {
+            background: var(--warning-light);
+            color: var(--warning);
+        }
+
+        .notif-icon.purple {
+            background: var(--accent-light);
+            color: var(--accent);
+        }
+
+        .notif-icon.red {
+            background: var(--danger-light);
+            color: var(--danger);
+        }
+
+        .notif-body {
+            flex: 1;
+        }
+
+        .notif-title {
+            font-weight: 600;
+            color: var(--neutral-900);
+            margin-bottom: 0.25rem;
+            font-size: 0.95rem;
+        }
+
+        .notif-desc {
+            color: var(--neutral-600);
+            font-size: 0.88rem;
+            line-height: 1.5;
+        }
+
+        .notif-time {
+            font-size: 0.78rem;
+            color: var(--neutral-500);
+            margin-top: 0.35rem;
+        }
+
+        .notif-meta {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .unread-dot {
+            width: 10px;
+            height: 10px;
+            width: 10px;
+            height: 10px;
+            background: var(--primary);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .notif-action {
+            font-size: 0.8rem;
+            color: var(--primary);
+            font-weight: 500;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .notif-action:hover {
+            text-decoration: underline;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--neutral-500);
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .empty-state p {
+            font-size: 1.1rem;
+        }
+
+        /* Notifications wrapper card */
+        .notif-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+
+        /* Logo + Dropdown */
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .user-dropdown {
+            position: relative;
+        }
+
+        .user-dropdown-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0.3rem 0.5rem;
+            border-radius: 8px;
+            color: var(--neutral-800);
+            font-weight: 500;
+        }
+
+        .user-dropdown-btn:hover {
+            background: var(--neutral-100);
+        }
+
+        .user-dropdown-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+            min-width: 200px;
+            display: none;
+            z-index: 1000;
+        }
+
+        .user-dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: var(--neutral-700);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .dropdown-item:hover {
+            background: var(--neutral-100);
+            color: var(--primary);
+        }
+
+        .dropdown-item.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .dropdown-divider {
+            border-top: 1px solid var(--neutral-200);
+            margin: 0.25rem 0;
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
+
+        @media (max-width: 992px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-sidebar {
+                display: none;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .notifications-content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <span class="logo-text">YallaStarter</span>
+                </a>
+                <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="projects.html">Browse Projects</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                </ul>
+                <div class="auth-buttons">
+                    <div class="user-dropdown">
+                        <button class="user-dropdown-btn">
+                            <div id="headerAvatar"
+                                style="width:35px;height:35px;border-radius:50%;background:linear-gradient(135deg,#006c35 0%,#00a651 100%);display:flex;align-items:center;justify-content:center;">
+                                <i class="fas fa-user" style="font-size:1rem;color:white;"></i>
+                            </div>
+                            <span id="headerUserName">User</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="user-dropdown-menu">
+                            <a href="dashboard.html" class="dropdown-item"><i class="fas fa-tachometer-alt"></i>
+                                Dashboard</a>
+                            <a href="user-profile.html" class="dropdown-item"><i class="fas fa-user"></i> Profile</a>
+                            <a href="notifications.html" class="dropdown-item active"><i class="fas fa-bell"></i>
+                                Notifications</a>
+                            <a href="settings.html" class="dropdown-item"><i class="fas fa-cog"></i> Settings</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="javascript:void(0)" class="dropdown-item"
+                                onclick="window.auth && window.auth.logout(); return false;">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="dashboard-sidebar">
+            <div class="user-profile">
+                <div class="user-avatar" id="sidebarAvatar">
+                    <i class="fas fa-user" style="font-size:1.5rem;color:white;"></i>
+                </div>
+                <div class="user-info">
+                    <div class="user-name" id="sidebarName">User</div>
+                    <div class="user-email" id="sidebarEmail">user@example.com</div>
+                </div>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="sidebar-menu-item"><a href="dashboard.html" class="sidebar-menu-link"><i
+                            class="fas fa-tachometer-alt sidebar-menu-icon"></i> Dashboard</a></li>
+                <li class="sidebar-menu-item"><a href="dashboard.html#my-projects" class="sidebar-menu-link"><i
+                            class="fas fa-rocket sidebar-menu-icon"></i> My Projects</a></li>
+                <li class="sidebar-menu-item"><a href="dashboard.html#backed" class="sidebar-menu-link"><i
+                            class="fas fa-hand-holding-heart sidebar-menu-icon"></i> Backed Projects</a></li>
+                <li class="sidebar-menu-item"><a href="payments.html" class="sidebar-menu-link"><i
+                            class="fas fa-money-bill-wave sidebar-menu-icon"></i> Payments</a></li>
+                <li class="sidebar-menu-item"><a href="coins.html" class="sidebar-menu-link"><i
+                            class="fas fa-coins sidebar-menu-icon"></i> My Wallet</a></li>
+                <li class="sidebar-menu-item"><a href="notifications.html" class="sidebar-menu-link active"><i
+                            class="fas fa-bell sidebar-menu-icon"></i> Notifications</a></li>
+                <li class="sidebar-menu-item"><a href="user-profile.html" class="sidebar-menu-link"><i
+                            class="fas fa-user sidebar-menu-icon"></i> Profile</a></li>
+                <li class="sidebar-menu-item"><a href="settings.html" class="sidebar-menu-link"><i
+                            class="fas fa-cog"></i> Settings</a></li>
+                <li class="sidebar-menu-item"><a href="support.html" class="sidebar-menu-link"><i
+                            class="fas fa-question-circle sidebar-menu-icon"></i> Help & Support</a></li>
+                <li class="sidebar-menu-item"><a href="javascript:void(0)" class="sidebar-menu-link"
+                        onclick="window.auth && window.auth.logout(); return false;"><i
+                            class="fas fa-sign-out-alt sidebar-menu-icon"></i> Logout</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="notifications-content">
+            <div class="page-header">
+                <h1 class="page-title">Notifications <span id="unreadBadge"
+                        style="font-size:1rem;background:var(--primary);color:white;padding:0.15rem 0.6rem;border-radius:20px;vertical-align:middle;display:none;"></span>
+                </h1>
+                <div class="page-actions">
+                    <button class="btn btn-sm btn-outline" id="markAllReadBtn" onclick="markAllRead()">
+                        <i class="fas fa-check-double"></i> Mark All Read
+                    </button>
+                </div>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="filter-tabs">
+                <button class="filter-tab active" onclick="filterNotifications('all', this)">All <span class="count"
+                        id="countAll">0</span></button>
+                <button class="filter-tab" onclick="filterNotifications('unread', this)">Unread <span class="count"
+                        id="countUnread">0</span></button>
+                <button class="filter-tab" onclick="filterNotifications('project', this)">Projects <span class="count"
+                        id="countProject">0</span></button>
+                <button class="filter-tab" onclick="filterNotifications('funding', this)">Funding <span class="count"
+                        id="countFunding">0</span></button>
+                <button class="filter-tab" onclick="filterNotifications('system', this)">System <span class="count"
+                        id="countSystem">0</span></button>
+            </div>
+
+            <!-- Notifications List -->
+            <div class="notif-card">
+                <div class="notifications-list" id="notifList">
+                    <div class="notification-item">
+                        <div class="notif-icon green"><i class="fas fa-spinner fa-spin"></i></div>
+                        <div class="notif-body">
+                            <div class="notif-title">Loading notifications...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/auth-handler.js"></script>
+    <script src="mobile-menu.js"></script>
+    <script>
+        // Protect page
+        if (window.auth) {
+            window.auth.protectPage();
+            const user = window.auth.getUser();
+            if (user) {
+                document.getElementById('sidebarName').textContent = user.username || 'User';
+                document.getElementById('sidebarEmail').textContent = user.email || '';
+                document.getElementById('headerUserName').textContent = user.username || 'User';
+                if (user.photoUrl) {
+                    const av = document.getElementById('sidebarAvatar');
+                    av.style.backgroundImage = `url(${user.photoUrl})`;
+                    av.style.backgroundSize = 'cover';
+                    av.innerHTML = '';
+                    document.getElementById('headerAvatar').style.backgroundImage = `url(${user.photoUrl})`;
+                    document.getElementById('headerAvatar').style.backgroundSize = 'cover';
+                    document.getElementById('headerAvatar').innerHTML = '';
+                }
+            }
+        }
+
+        // Header dropdown
+        const dropBtn = document.querySelector('.user-dropdown-btn');
+        const dropMenu = document.querySelector('.user-dropdown-menu');
+        dropBtn?.addEventListener('click', () => dropMenu.classList.toggle('show'));
+        window.addEventListener('click', e => {
+            if (!e.target.closest('.user-dropdown-btn')) dropMenu?.classList.remove('show');
+        });
+
+        // Sample notifications data
+        const allNotifications = [
+            { id: 1, type: 'funding', icon: 'green', iconClass: 'fas fa-chart-line', title: 'Funding Milestone Reached!', desc: 'Your project "Smart Solar Panels" has reached 75% of its funding goal. Keep up the momentum!', time: '2 hours ago', unread: true, link: 'project-solar-energy.html', linkText: 'View Project' },
+            { id: 2, type: 'project', icon: 'blue', iconClass: 'fas fa-bell', title: 'Project Update: Riyadh Music Festival', desc: 'The creator posted a new update about venue selection and artist lineup.', time: '5 hours ago', unread: true, link: 'project-riyadh-music-festival.html', linkText: 'Read Update' },
+            { id: 3, type: 'funding', icon: 'green', iconClass: 'fas fa-hand-holding-usd', title: 'New Backer on Your Project', desc: 'Abdullah Al-Thani backed your "Smart Solar Panels" project with SAR 500.', time: '1 day ago', unread: true, link: 'dashboard.html', linkText: 'See Dashboard' },
+            { id: 4, type: 'system', icon: 'purple', iconClass: 'fas fa-shield-alt', title: 'Security Alert', desc: 'A new sign-in was detected from Chrome on Windows. If this wasn\'t you, please change your password immediately.', time: '2 days ago', unread: false, link: 'settings.html', linkText: 'Review Settings' },
+            { id: 5, type: 'project', icon: 'amber', iconClass: 'fas fa-clock', title: 'Campaign Ending Soon', desc: '"Smart Cities IoT Platform" that you backed is ending in 3 days. Share it to help it reach its goal!', time: '2 days ago', unread: false, link: 'project-smart-city-iot.html', linkText: 'View Project' },
+            { id: 6, type: 'funding', icon: 'green', iconClass: 'fas fa-check-circle', title: 'Backing Confirmed', desc: 'Your SAR 200 backing to "Riyadh Music Festival" has been confirmed and processed successfully.', time: '5 days ago', unread: false, link: 'payments.html', linkText: 'View Payments' },
+            { id: 7, type: 'system', icon: 'blue', iconClass: 'fas fa-gift', title: 'Welcome to YallaStarter!', desc: 'Your account is set up and ready! Explore hundreds of innovative Saudi projects waiting for support.', time: '1 week ago', unread: false, link: 'projects.html', linkText: 'Explore Projects' },
+            { id: 8, type: 'project', icon: 'red', iconClass: 'fas fa-exclamation-circle', title: 'Project Review Required', desc: 'Your project "Solar Panels for Saudi Homes" requires a small update before it can go live. Check the rejection note.', time: '2 weeks ago', unread: false, link: 'dashboard.html', linkText: 'View Details' },
+        ];
+
+        let currentFilter = 'all';
+        let readIds = JSON.parse(localStorage.getItem('readNotifIds') || '[]');
+
+        function markRead(id) {
+            if (!readIds.includes(id)) { readIds.push(id); localStorage.setItem('readNotifIds', JSON.stringify(readIds)); }
+        }
+        function isUnread(n) { return n.unread && !readIds.includes(n.id); }
+
+        function filterNotifications(type, btn) {
+            currentFilter = type;
+            document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+            btn.classList.add('active');
+            renderNotifications();
+        }
+
+        function markAllRead() {
+            readIds = allNotifications.map(n => n.id);
+            localStorage.setItem('readNotifIds', JSON.stringify(readIds));
+            renderNotifications();
+        }
+
+        function renderNotifications() {
+            const list = document.getElementById('notifList');
+            let filtered = allNotifications;
+            if (currentFilter === 'unread') filtered = allNotifications.filter(isUnread);
+            else if (currentFilter !== 'all') filtered = allNotifications.filter(n => n.type === currentFilter);
+
+            // Update counts
+            document.getElementById('countAll').textContent = allNotifications.length;
+            const unreadCount = allNotifications.filter(isUnread).length;
+            document.getElementById('countUnread').textContent = unreadCount;
+            document.getElementById('countProject').textContent = allNotifications.filter(n => n.type === 'project').length;
+            document.getElementById('countFunding').textContent = allNotifications.filter(n => n.type === 'funding').length;
+            document.getElementById('countSystem').textContent = allNotifications.filter(n => n.type === 'system').length;
+            const badge = document.getElementById('unreadBadge');
+            if (unreadCount > 0) { badge.textContent = unreadCount; badge.style.display = 'inline-block'; } else { badge.style.display = 'none'; }
+
+            if (!filtered.length) {
+                list.innerHTML = '<div class="empty-state"><i class="fas fa-bell-slash"></i><p>No notifications in this category.</p></div>';
+                return;
+            }
+
+            list.innerHTML = filtered.map(n => {
+                const unread = isUnread(n);
+                return `<div class="notification-item ${unread ? 'unread' : ''}" onclick="markRead(${n.id}); renderNotifications();">
+                    <div class="notif-icon ${n.icon}"><i class="${n.iconClass}"></i></div>
+                    <div class="notif-body">
+                        <div class="notif-title">${n.title}</div>
+                        <div class="notif-desc">${n.desc}</div>
+                        <div class="notif-time"><i class="fas fa-clock" style="margin-right:0.3rem;"></i>${n.time}</div>
+                    </div>
+                    <div class="notif-meta">
+                        ${unread ? '<div class="unread-dot"></div>' : ''}
+                        <a href="${n.link}" class="notif-action" onclick="event.stopPropagation();">${n.linkText} →</a>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        renderNotifications();
+    </script>
+</body>
+
+</html>

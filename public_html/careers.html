@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Join the YallaStarter team and help build the future of crowdfunding in Saudi Arabia. Explore career opportunities and be part of our mission.">
+    <meta name="description"
+        content="Join the YallaStarter team and help build the future of crowdfunding in Saudi Arabia. Explore career opportunities and be part of our mission.">
     <meta name="keywords" content="careers, jobs, YallaStarter, Saudi Arabia, crowdfunding, technology">
     <meta name="author" content="YallaStarter">
     <meta name="robots" content="index, follow">
-    
+
     <title>Careers - YallaStarter</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="mobile-menu.css">
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Page-specific styles */
@@ -24,24 +28,24 @@
             padding: 4rem 0;
             text-align: center;
         }
-        
+
         .careers-hero h1 {
             font-size: 3rem;
             font-weight: 700;
             margin-bottom: 1rem;
         }
-        
+
         .careers-hero p {
             font-size: 1.2rem;
             opacity: 0.9;
             max-width: 600px;
             margin: 0 auto;
         }
-        
+
         .careers-content {
             padding: 4rem 0;
         }
-        
+
         .job-card {
             background: white;
             border-radius: var(--border-radius);
@@ -51,58 +55,58 @@
             border: 1px solid var(--neutral-200);
             transition: var(--transition);
         }
-        
+
         .job-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
-        
+
         .job-title {
             font-size: 1.5rem;
             font-weight: 600;
             color: var(--neutral-900);
             margin-bottom: 0.5rem;
         }
-        
+
         .job-department {
             color: var(--primary);
             font-weight: 500;
             margin-bottom: 1rem;
         }
-        
+
         .job-description {
             color: var(--neutral-700);
             line-height: 1.6;
             margin-bottom: 1.5rem;
         }
-        
+
         .job-requirements {
             margin-bottom: 1.5rem;
         }
-        
+
         .job-requirements h4 {
             font-weight: 600;
             margin-bottom: 0.5rem;
             color: var(--neutral-800);
         }
-        
+
         .job-requirements ul {
             list-style: none;
             padding: 0;
         }
-        
+
         .job-requirements li {
             padding: 0.25rem 0;
             color: var(--neutral-700);
         }
-        
+
         .job-requirements li:before {
             content: "✓";
             color: var(--primary);
             font-weight: bold;
             margin-right: 0.5rem;
         }
-        
+
         .apply-btn {
             background: var(--gradient-primary);
             color: white;
@@ -113,24 +117,24 @@
             transition: var(--transition);
             display: inline-block;
         }
-        
+
         .apply-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(0, 166, 81, 0.3);
         }
-        
+
         .benefits-section {
             background: var(--neutral-100);
             padding: 4rem 0;
         }
-        
+
         .benefits-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
         }
-        
+
         .benefit-card {
             background: white;
             padding: 2rem;
@@ -138,7 +142,7 @@
             text-align: center;
             box-shadow: var(--box-shadow);
         }
-        
+
         .benefit-icon {
             width: 60px;
             height: 60px;
@@ -151,34 +155,35 @@
             color: var(--primary);
             font-size: 1.5rem;
         }
-        
+
         .benefit-title {
             font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 1rem;
             color: var(--neutral-900);
         }
-        
+
         .benefit-description {
             color: var(--neutral-700);
             line-height: 1.6;
         }
-        
+
         @media (max-width: 768px) {
             .careers-hero h1 {
                 font-size: 2rem;
             }
-            
+
             .careers-hero p {
                 font-size: 1rem;
             }
-            
+
             .job-card {
                 padding: 1.5rem;
             }
         }
     </style>
 </head>
+
 <body>
     <!-- Header -->
     <header class="header">
@@ -186,7 +191,7 @@
             <a href="index.html" class="logo">
                 <span class="logo-text">YallaStarter</span>
             </a>
-        
+
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="entertainment.html">Entertainment Projects</a></li>
@@ -197,22 +202,22 @@
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
-            
+
             <div class="language-switcher">
                 <button class="language-btn active" onclick="switchLanguage('en')">English</button>
                 <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
             </div>
-            
+
             <div class="auth-buttons">
                 <a href="create-project.html" class="btn btn-primary">Start a Project</a>
                 <a href="login.html" class="btn btn-link">Log In</a>
             </div>
-            
+
             <button class="mobile-menu-btn">
                 <i class="fas fa-bars"></i>
             </button>
         </nav>
-        
+
         <div class="mobile-menu">
             <div class="mobile-menu-header">
                 <div class="mobile-header-left">
@@ -246,7 +251,8 @@
     <section class="careers-hero">
         <div class="container">
             <h1>Join Our Team</h1>
-            <p>Be part of the future of crowdfunding in Saudi Arabia. Help us build a platform that empowers creators and connects communities.</p>
+            <p>Be part of the future of crowdfunding in Saudi Arabia. Help us build a platform that empowers creators
+                and connects communities.</p>
         </div>
     </section>
 
@@ -255,12 +261,14 @@
         <div class="container">
             <h2 class="section-title">Open Positions</h2>
             <p class="section-subtitle">Explore current opportunities to join our growing team</p>
-            
+
             <div class="job-card">
                 <h3 class="job-title">Senior Frontend Developer</h3>
                 <div class="job-department">Engineering</div>
-                <p class="job-description">We're looking for an experienced frontend developer to help build and maintain our crowdfunding platform. You'll work with modern technologies and contribute to a product that makes a real difference in the Saudi creative community.</p>
-                
+                <p class="job-description">We're looking for an experienced frontend developer to help build and
+                    maintain our crowdfunding platform. You'll work with modern technologies and contribute to a product
+                    that makes a real difference in the Saudi creative community.</p>
+
                 <div class="job-requirements">
                     <h4>Requirements:</h4>
                     <ul>
@@ -272,15 +280,18 @@
                         <li>Excellent communication skills in English and Arabic</li>
                     </ul>
                 </div>
-                
-                <a href="mailto:careers@yallastarter.com?subject=Senior Frontend Developer Application" class="apply-btn">Apply Now</a>
+
+                <a href="mailto:careers@yallastarter.com?subject=Senior Frontend Developer Application"
+                    class="apply-btn">Apply Now</a>
             </div>
-            
+
             <div class="job-card">
                 <h3 class="job-title">Product Manager</h3>
                 <div class="job-department">Product</div>
-                <p class="job-description">Lead the product strategy and development of our crowdfunding platform. Work closely with engineering, design, and business teams to deliver features that delight our users and drive growth.</p>
-                
+                <p class="job-description">Lead the product strategy and development of our crowdfunding platform. Work
+                    closely with engineering, design, and business teams to deliver features that delight our users and
+                    drive growth.</p>
+
                 <div class="job-requirements">
                     <h4>Requirements:</h4>
                     <ul>
@@ -292,15 +303,18 @@
                         <li>Understanding of the Saudi market and culture</li>
                     </ul>
                 </div>
-                
-                <a href="mailto:careers@yallastarter.com?subject=Product Manager Application" class="apply-btn">Apply Now</a>
+
+                <a href="mailto:careers@yallastarter.com?subject=Product Manager Application" class="apply-btn">Apply
+                    Now</a>
             </div>
-            
+
             <div class="job-card">
                 <h3 class="job-title">Marketing Specialist</h3>
                 <div class="job-department">Marketing</div>
-                <p class="job-description">Help us grow our community of creators and backers through creative marketing campaigns and content strategy. You'll work on both digital and traditional marketing initiatives across Saudi Arabia.</p>
-                
+                <p class="job-description">Help us grow our community of creators and backers through creative marketing
+                    campaigns and content strategy. You'll work on both digital and traditional marketing initiatives
+                    across Saudi Arabia.</p>
+
                 <div class="job-requirements">
                     <h4>Requirements:</h4>
                     <ul>
@@ -312,15 +326,17 @@
                         <li>Bilingual (English and Arabic) preferred</li>
                     </ul>
                 </div>
-                
-                <a href="mailto:careers@yallastarter.com?subject=Marketing Specialist Application" class="apply-btn">Apply Now</a>
+
+                <a href="mailto:careers@yallastarter.com?subject=Marketing Specialist Application"
+                    class="apply-btn">Apply Now</a>
             </div>
-            
+
             <div class="job-card">
                 <h3 class="job-title">Customer Success Manager</h3>
                 <div class="job-department">Customer Success</div>
-                <p class="job-description">Help our creators and backers succeed on our platform. You'll provide support, gather feedback, and work to improve the overall user experience for our community.</p>
-                
+                <p class="job-description">Help our creators and backers succeed on our platform. You'll provide
+                    support, gather feedback, and work to improve the overall user experience for our community.</p>
+
                 <div class="job-requirements">
                     <h4>Requirements:</h4>
                     <ul>
@@ -332,8 +348,9 @@
                         <li>Fluent in English and Arabic</li>
                     </ul>
                 </div>
-                
-                <a href="mailto:careers@yallastarter.com?subject=Customer Success Manager Application" class="apply-btn">Apply Now</a>
+
+                <a href="mailto:careers@yallastarter.com?subject=Customer Success Manager Application"
+                    class="apply-btn">Apply Now</a>
             </div>
         </div>
     </section>
@@ -343,54 +360,60 @@
         <div class="container">
             <h2 class="section-title">Why Work With Us?</h2>
             <p class="section-subtitle">We offer competitive benefits and a great work environment</p>
-            
+
             <div class="benefits-grid">
                 <div class="benefit-card">
                     <div class="benefit-icon">
                         <i class="fas fa-heart"></i>
                     </div>
                     <h3 class="benefit-title">Meaningful Work</h3>
-                    <p class="benefit-description">Be part of a mission that empowers Saudi creators and builds a stronger creative economy.</p>
+                    <p class="benefit-description">Be part of a mission that empowers Saudi creators and builds a
+                        stronger creative economy.</p>
                 </div>
-                
+
                 <div class="benefit-card">
                     <div class="benefit-icon">
                         <i class="fas fa-users"></i>
                     </div>
                     <h3 class="benefit-title">Great Team</h3>
-                    <p class="benefit-description">Work with talented, passionate people who are committed to making a difference.</p>
+                    <p class="benefit-description">Work with talented, passionate people who are committed to making a
+                        difference.</p>
                 </div>
-                
+
                 <div class="benefit-card">
                     <div class="benefit-icon">
                         <i class="fas fa-graduation-cap"></i>
                     </div>
                     <h3 class="benefit-title">Learning & Growth</h3>
-                    <p class="benefit-description">Continuous learning opportunities and professional development support.</p>
+                    <p class="benefit-description">Continuous learning opportunities and professional development
+                        support.</p>
                 </div>
-                
+
                 <div class="benefit-card">
                     <div class="benefit-icon">
                         <i class="fas fa-balance-scale"></i>
                     </div>
                     <h3 class="benefit-title">Work-Life Balance</h3>
-                    <p class="benefit-description">Flexible working hours and remote work options to support your lifestyle.</p>
+                    <p class="benefit-description">Flexible working hours and remote work options to support your
+                        lifestyle.</p>
                 </div>
-                
+
                 <div class="benefit-card">
                     <div class="benefit-icon">
                         <i class="fas fa-medal"></i>
                     </div>
                     <h3 class="benefit-title">Competitive Benefits</h3>
-                    <p class="benefit-description">Competitive salary, health insurance, and other comprehensive benefits.</p>
+                    <p class="benefit-description">Competitive salary, health insurance, and other comprehensive
+                        benefits.</p>
                 </div>
-                
+
                 <div class="benefit-card">
                     <div class="benefit-icon">
                         <i class="fas fa-rocket"></i>
                     </div>
                     <h3 class="benefit-title">Fast-Paced Environment</h3>
-                    <p class="benefit-description">Be part of a dynamic startup environment with opportunities to make a real impact.</p>
+                    <p class="benefit-description">Be part of a dynamic startup environment with opportunities to make a
+                        real impact.</p>
                 </div>
             </div>
         </div>
@@ -411,7 +434,7 @@
                         <li><a href="careers.html">Careers</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-column">
                     <h3>For Creators</h3>
                     <ul class="footer-links">
@@ -423,7 +446,7 @@
                         <li><a href="success-stories.html">Success Stories</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-column">
                     <h3>For Backers</h3>
                     <ul class="footer-links">
@@ -434,7 +457,7 @@
                         <li><a href="backer-protection.html">Backer Protection</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-column">
                     <h3>Connect With Us</h3>
                     <ul class="footer-links">
@@ -446,12 +469,12 @@
                     </ul>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
                 <div class="footer-copyright">
                     &copy; 2025 YallaStarter. All rights reserved.
                 </div>
-                
+
                 <div class="footer-social">
                     <a href="coming-soon.html" class="social-icon"><i class="fab fa-facebook-f"></i></a>
                     <a href="coming-soon.html" class="social-icon"><i class="fab fa-twitter"></i></a>
@@ -464,7 +487,7 @@
 
     <!-- Universal Mobile Menu Script -->
     <script src="mobile-menu.js"></script>
-    
+
     <script>
         // Language Switcher
         function switchLanguage(lang) {
@@ -475,6 +498,8 @@
             }
         }
     </script>
+    <!-- Session persistence: replace auth buttons with user dropdown if logged in -->
+    <script src="assets/js/session-init.js"></script>
 </body>
-</html>
 
+</html>

@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View your payment history and manage payment methods on YallaStarter.">
+    <title>Payments - YallaStarter</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile-menu.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Dashboard Layout */
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: calc(100vh - 70px);
+        }
+        .dashboard-sidebar {
+            background-color: var(--neutral-100);
+            border-right: 1px solid var(--neutral-300);
+            padding: 2rem 0;
+        }
+        .user-profile {
+            display: flex;
+            align-items: center;
+            padding: 0 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 1rem;
+            background: linear-gradient(135deg, #006c35 0%, #00a651 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .user-info { flex: 1; }
+        .user-name { font-weight: 600; color: var(--neutral-900); margin-bottom: 0.2rem; }
+        .user-email { font-size: 0.85rem; color: var(--neutral-600); word-break: break-all; }
+        .sidebar-menu { list-style: none; padding: 0; margin: 0; }
+        .sidebar-menu-item { margin-bottom: 0.3rem; }
+        .sidebar-menu-link {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            color: var(--neutral-700);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .sidebar-menu-link:hover { background-color: var(--neutral-200); color: var(--primary); }
+        .sidebar-menu-link.active {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            font-weight: 500;
+            border-right: 3px solid var(--primary);
+        }
+        .sidebar-menu-icon { margin-right: 1rem; width: 20px; text-align: center; }
+
+        /* Payments Content */
+        .payments-content { padding: 2rem; }
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        .page-title { font-size: 1.8rem; font-weight: 700; color: var(--neutral-900); }
+
+        /* Summary Cards */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+        .summary-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--box-shadow);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .summary-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+        .summary-icon.green { background: var(--primary-light); color: var(--primary); }
+        .summary-icon.blue { background: var(--info-light); color: var(--info); }
+        .summary-icon.amber { background: var(--warning-light); color: var(--warning); }
+        .summary-icon.red { background: var(--danger-light); color: var(--danger); }
+        .summary-value { font-size: 1.5rem; font-weight: 700; color: var(--neutral-900); }
+        .summary-label { font-size: 0.85rem; color: var(--neutral-600); }
+
+        /* Transactions Table */
+        .section-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin-bottom: 2rem;
+        }
+        .section-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 1.5rem 1rem;
+            border-bottom: 1px solid var(--neutral-200);
+        }
+        .section-card-title { font-size: 1.1rem; font-weight: 600; color: var(--neutral-900); }
+        .table-wrap { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; }
+        thead th {
+            padding: 0.9rem 1.5rem;
+            text-align: left;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--neutral-600);
+            background: var(--neutral-100);
+            border-bottom: 1px solid var(--neutral-200);
+        }
+        tbody td {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--neutral-200);
+            color: var(--neutral-800);
+            font-size: 0.95rem;
+        }
+        tbody tr:last-child td { border-bottom: none; }
+        tbody tr:hover { background: var(--neutral-100); }
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+        .badge-success { background: var(--success-light); color: var(--success); }
+        .badge-pending { background: var(--warning-light); color: var(--warning); }
+        .badge-failed { background: var(--danger-light); color: var(--danger); }
+        .badge-refunded { background: var(--info-light); color: var(--info); }
+        .tx-amount-out { color: var(--danger); font-weight: 600; }
+        .tx-amount-in { color: var(--success); font-weight: 600; }
+
+        /* Payment Methods */
+        .methods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+            padding: 1.5rem;
+        }
+        .method-card {
+            border: 2px solid var(--neutral-200);
+            border-radius: var(--border-radius);
+            padding: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .method-card:hover { border-color: var(--primary); }
+        .method-card.default { border-color: var(--primary); background: var(--primary-light); }
+        .method-icon { font-size: 2rem; width: 48px; text-align: center; }
+        .method-details { flex: 1; }
+        .method-name { font-weight: 600; color: var(--neutral-900); }
+        .method-info { font-size: 0.85rem; color: var(--neutral-600); }
+        .method-default-badge {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--primary);
+            background: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            border: 1px solid var(--primary);
+        }
+        .btn-add-method {
+            border: 2px dashed var(--neutral-300);
+            border-radius: var(--border-radius);
+            padding: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            color: var(--neutral-500);
+            cursor: pointer;
+            transition: var(--transition);
+            background: transparent;
+            width: 100%;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .btn-add-method:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
+
+        /* Logo Text */
+        .logo-text { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+
+        /* Dropdown */
+        .user-dropdown { position: relative; }
+        .user-dropdown-btn {
+            display: flex; align-items: center; gap: 0.5rem;
+            background: transparent; border: none; cursor: pointer;
+            padding: 0.3rem 0.5rem; border-radius: 8px; color: var(--neutral-800);
+            font-weight: 500;
+        }
+        .user-dropdown-btn:hover { background: var(--neutral-100); }
+        .user-dropdown-menu {
+            position: absolute; top: calc(100% + 8px); right: 0;
+            background: white; border-radius: var(--border-radius);
+            box-shadow: 0 5px 25px rgba(0,0,0,0.15); min-width: 200px;
+            display: none; z-index: 1000;
+        }
+        .user-dropdown-menu.show { display: block; }
+        .dropdown-item {
+            display: flex; align-items: center; gap: 0.75rem;
+            padding: 0.75rem 1rem; color: var(--neutral-700);
+            text-decoration: none; font-size: 0.9rem; transition: var(--transition);
+        }
+        .dropdown-item:hover { background: var(--neutral-100); color: var(--primary); }
+        .dropdown-item.active { color: var(--primary); font-weight: 600; }
+        .dropdown-divider { border-top: 1px solid var(--neutral-200); margin: 0.25rem 0; }
+
+        @media (max-width: 992px) {
+            .dashboard-container { grid-template-columns: 1fr; }
+            .dashboard-sidebar { display: none; }
+        }
+        @media (max-width: 576px) {
+            .payments-content { padding: 1rem; }
+            .page-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <span class="logo-text">YallaStarter</span>
+                </a>
+                <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="projects.html">Browse Projects</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                </ul>
+                <div class="auth-buttons">
+                    <div class="user-dropdown">
+                        <button class="user-dropdown-btn">
+                            <div id="headerAvatar" style="width:35px;height:35px;border-radius:50%;background:linear-gradient(135deg,#006c35 0%,#00a651 100%);display:flex;align-items:center;justify-content:center;">
+                                <i class="fas fa-user" style="font-size:1rem;color:white;"></i>
+                            </div>
+                            <span id="headerUserName">User</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="user-dropdown-menu">
+                            <a href="dashboard.html" class="dropdown-item"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                            <a href="user-profile.html" class="dropdown-item"><i class="fas fa-user"></i> Profile</a>
+                            <a href="notifications.html" class="dropdown-item"><i class="fas fa-bell"></i> Notifications</a>
+                            <a href="settings.html" class="dropdown-item"><i class="fas fa-cog"></i> Settings</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="javascript:void(0)" class="dropdown-item" onclick="window.auth && window.auth.logout(); return false;">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+
+        <!-- Sidebar -->
+        <div class="dashboard-sidebar">
+            <div class="user-profile">
+                <div class="user-avatar" id="sidebarAvatar">
+                    <i class="fas fa-user" style="font-size:1.5rem;color:white;"></i>
+                </div>
+                <div class="user-info">
+                    <div class="user-name" id="sidebarName">User</div>
+                    <div class="user-email" id="sidebarEmail">user@example.com</div>
+                </div>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="sidebar-menu-item"><a href="dashboard.html" class="sidebar-menu-link"><i class="fas fa-tachometer-alt sidebar-menu-icon"></i> Dashboard</a></li>
+                <li class="sidebar-menu-item"><a href="dashboard.html#my-projects" class="sidebar-menu-link"><i class="fas fa-rocket sidebar-menu-icon"></i> My Projects</a></li>
+                <li class="sidebar-menu-item"><a href="dashboard.html#backed" class="sidebar-menu-link"><i class="fas fa-hand-holding-heart sidebar-menu-icon"></i> Backed Projects</a></li>
+                <li class="sidebar-menu-item"><a href="payments.html" class="sidebar-menu-link active"><i class="fas fa-money-bill-wave sidebar-menu-icon"></i> Payments</a></li>
+                <li class="sidebar-menu-item"><a href="coins.html" class="sidebar-menu-link"><i class="fas fa-coins sidebar-menu-icon"></i> My Wallet</a></li>
+                <li class="sidebar-menu-item"><a href="notifications.html" class="sidebar-menu-link"><i class="fas fa-bell sidebar-menu-icon"></i> Notifications</a></li>
+                <li class="sidebar-menu-item"><a href="user-profile.html" class="sidebar-menu-link"><i class="fas fa-user sidebar-menu-icon"></i> Profile</a></li>
+                <li class="sidebar-menu-item"><a href="settings.html" class="sidebar-menu-link"><i class="fas fa-cog sidebar-menu-icon"></i> Settings</a></li>
+                <li class="sidebar-menu-item"><a href="support.html" class="sidebar-menu-link"><i class="fas fa-question-circle sidebar-menu-icon"></i> Help & Support</a></li>
+                <li class="sidebar-menu-item"><a href="javascript:void(0)" class="sidebar-menu-link" onclick="window.auth && window.auth.logout(); return false;"><i class="fas fa-sign-out-alt sidebar-menu-icon"></i> Logout</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="payments-content">
+            <div class="page-header">
+                <h1 class="page-title">Payments</h1>
+                <a href="coins.html" class="btn btn-primary"><i class="fas fa-wallet"></i> My Wallet</a>
+            </div>
+
+            <!-- Summary Cards -->
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <div class="summary-icon green"><i class="fas fa-arrow-down"></i></div>
+                    <div>
+                        <div class="summary-value" id="totalBacked">SAR 0</div>
+                        <div class="summary-label">Total Backed</div>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon blue"><i class="fas fa-arrow-up"></i></div>
+                    <div>
+                        <div class="summary-value" id="totalReceived">SAR 0</div>
+                        <div class="summary-label">Total Received</div>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon amber"><i class="fas fa-clock"></i></div>
+                    <div>
+                        <div class="summary-value" id="pendingCount">0</div>
+                        <div class="summary-label">Pending Transactions</div>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon red"><i class="fas fa-receipt"></i></div>
+                    <div>
+                        <div class="summary-value" id="txCount">0</div>
+                        <div class="summary-label">Total Transactions</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transaction History -->
+            <div class="section-card">
+                <div class="section-card-header">
+                    <h2 class="section-card-title"><i class="fas fa-history" style="color:var(--primary);margin-right:0.5rem;"></i>Transaction History</h2>
+                    <button class="btn btn-sm btn-outline" onclick="downloadCSV()"><i class="fas fa-download"></i> Export CSV</button>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Type</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactionTable">
+                            <tr>
+                                <td colspan="5" style="text-align:center;padding:3rem;color:var(--neutral-500);">
+                                    <i class="fas fa-spinner fa-spin" style="margin-right:0.5rem;"></i>Loading transactions...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Payment Methods -->
+            <div class="section-card">
+                <div class="section-card-header">
+                    <h2 class="section-card-title"><i class="fas fa-credit-card" style="color:var(--primary);margin-right:0.5rem;"></i>Payment Methods</h2>
+                </div>
+                <div class="methods-grid">
+                    <div class="method-card default">
+                        <div class="method-icon">💳</div>
+                        <div class="method-details">
+                            <div class="method-name">Mada Card</div>
+                            <div class="method-info">•••• •••• •••• 4532</div>
+                        </div>
+                        <span class="method-default-badge">Default</span>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-icon">🏦</div>
+                        <div class="method-details">
+                            <div class="method-name">Bank Transfer</div>
+                            <div class="method-info">Al Rajhi Bank – IBAN ••••7890</div>
+                        </div>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-icon">📱</div>
+                        <div class="method-details">
+                            <div class="method-name">Apple Pay</div>
+                            <div class="method-info">Linked to iPhone</div>
+                        </div>
+                    </div>
+                    <button class="btn-add-method" onclick="showAddMethodModal()">
+                        <i class="fas fa-plus-circle"></i> Add Payment Method
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div><!-- end dashboard-container -->
+
+    <!-- Auth + Mobile Menu Scripts -->
+    <script src="assets/js/auth-handler.js"></script>
+    <script src="mobile-menu.js"></script>
+    <script>
+        // Protect page
+        if (window.auth) {
+            window.auth.protectPage();
+            const user = window.auth.getUser();
+            if (user) {
+                document.getElementById('sidebarName').textContent = user.username || 'User';
+                document.getElementById('sidebarEmail').textContent = user.email || '';
+                document.getElementById('headerUserName').textContent = user.username || 'User';
+                if (user.photoUrl) {
+                    const av = document.getElementById('sidebarAvatar');
+                    av.style.backgroundImage = `url(${user.photoUrl})`;
+                    av.style.backgroundSize = 'cover';
+                    av.innerHTML = '';
+                    document.getElementById('headerAvatar').style.backgroundImage = `url(${user.photoUrl})`;
+                    document.getElementById('headerAvatar').style.backgroundSize = 'cover';
+                    document.getElementById('headerAvatar').innerHTML = '';
+                }
+            }
+        }
+
+        // User Dropdown
+        const dropBtn = document.querySelector('.user-dropdown-btn');
+        const dropMenu = document.querySelector('.user-dropdown-menu');
+        dropBtn?.addEventListener('click', () => dropMenu.classList.toggle('show'));
+        window.addEventListener('click', e => {
+            if (!e.target.closest('.user-dropdown-btn')) dropMenu?.classList.remove('show');
+        });
+
+        // Sample transaction data (in a real app this would come from the API)
+        const sampleTransactions = [
+            { date: 'Feb 20, 2026', desc: 'Backed: Smart Cities IoT Platform', type: 'Backing', amount: -500, status: 'completed' },
+            { date: 'Feb 15, 2026', desc: 'Backed: Riyadh Music Festival', type: 'Backing', amount: -200, status: 'completed' },
+            { date: 'Feb 10, 2026', desc: 'Project Funding Received: Solar Energy Project', type: 'Received', amount: 12500, status: 'completed' },
+            { date: 'Jan 30, 2026', desc: 'Backed: Digital Art Gallery', type: 'Backing', amount: -150, status: 'completed' },
+            { date: 'Jan 22, 2026', desc: 'Project Funding Received: Solar Energy Project', type: 'Received', amount: 8000, status: 'completed' },
+            { date: 'Jan 10, 2026', desc: 'Backed: AI Disease Detection', type: 'Backing', amount: -300, status: 'pending' },
+            { date: 'Dec 28, 2025', desc: 'Refund: Saudi Heritage Platform', type: 'Refund', amount: 100, status: 'refunded' },
+        ];
+
+        function renderTransactions(txs) {
+            const tbody = document.getElementById('transactionTable');
+            if (!txs.length) {
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:3rem;color:var(--neutral-500);">No transactions found.</td></tr>';
+                return;
+            }
+            let backed = 0, received = 0, pending = 0;
+            tbody.innerHTML = txs.map(tx => {
+                const isOut = tx.amount < 0;
+                const absAmt = Math.abs(tx.amount);
+                if (isOut) backed += absAmt;
+                else if (tx.status === 'completed') received += absAmt;
+                if (tx.status === 'pending') pending++;
+                const statusClass = tx.status === 'completed' ? 'badge-success' : tx.status === 'pending' ? 'badge-pending' : tx.status === 'refunded' ? 'badge-refunded' : 'badge-failed';
+                const amtClass = isOut ? 'tx-amount-out' : 'tx-amount-in';
+                const amtSign = isOut ? '-' : '+';
+                return `<tr>
+                    <td style="white-space:nowrap;color:var(--neutral-600);">${tx.date}</td>
+                    <td>${tx.desc}</td>
+                    <td><span class="badge" style="background:var(--neutral-200);color:var(--neutral-700);">${tx.type}</span></td>
+                    <td class="${amtClass}">${amtSign}SAR ${absAmt.toLocaleString()}</td>
+                    <td><span class="badge ${statusClass}">${tx.status.charAt(0).toUpperCase() + tx.status.slice(1)}</span></td>
+                </tr>`;
+            }).join('');
+
+            // Try to load from API first, fall back to sample
+            document.getElementById('totalBacked').textContent = 'SAR ' + backed.toLocaleString();
+            document.getElementById('totalReceived').textContent = 'SAR ' + received.toLocaleString();
+            document.getElementById('pendingCount').textContent = pending;
+            document.getElementById('txCount').textContent = txs.length;
+        }
+
+        // Try to load from API
+        async function loadTransactions() {
+            const token = window.auth ? window.auth.getToken() : localStorage.getItem('token');
+            if (token) {
+                try {
+                    const res = await fetch('/api/payments', { headers: { 'Authorization': `Bearer ${token}` } });
+                    const data = await res.json();
+                    if (data.success && data.transactions && data.transactions.length) {
+                        renderTransactions(data.transactions);
+                        return;
+                    }
+                } catch (e) {}
+            }
+            // Fallback to sample data
+            renderTransactions(sampleTransactions);
+        }
+
+        loadTransactions();
+
+        function downloadCSV() {
+            const rows = [['Date','Description','Type','Amount','Status']];
+            sampleTransactions.forEach(tx => {
+                rows.push([tx.date, tx.desc, tx.type, (tx.amount < 0 ? '-' : '+') + 'SAR ' + Math.abs(tx.amount), tx.status]);
+            });
+            const csv = rows.map(r => r.map(c => `"${c}"`).join(',')).join('\n');
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url; a.download = 'yallastarter-payments.csv'; a.click();
+        }
+
+        function showAddMethodModal() {
+            alert('Add Payment Method feature coming soon!');
+        }
+    </script>
+</body>
+</html>

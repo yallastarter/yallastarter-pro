@@ -1,30 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="MIND71 - The AI super smart system that helps creators design projects, backers find the best investments, and GEA make informed funding decisions. Powered by advanced AI technology.">
-    <meta name="keywords" content="AI system, project design, smart funding, GEA, artificial intelligence, project analysis, creator tools, backer tools">
+    <meta name="description"
+        content="MIND71 - The AI super smart system that helps creators design projects, backers find the best investments, and GEA make informed funding decisions. Powered by advanced AI technology.">
+    <meta name="keywords"
+        content="AI system, project design, smart funding, GEA, artificial intelligence, project analysis, creator tools, backer tools">
     <meta name="author" content="YallaStarter">
     <meta name="robots" content="index, follow">
-    
+
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="MIND71 - AI Super Smart System for Project Innovation">
-    <meta property="og:description" content="Revolutionary AI system that transforms how projects are created, analyzed, and funded. Powered by cutting-edge artificial intelligence.">
+    <meta property="og:description"
+        content="Revolutionary AI system that transforms how projects are created, analyzed, and funded. Powered by cutting-edge artificial intelligence.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://yallastarter.com/mind71">
-    
+
     <!-- Preload Critical Resources -->
     <link rel="preload" href="styles.css" as="style">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" as="style">
-    
+    <link rel="preload"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
+        as="style">
+
     <title>MIND71 - AI Super Smart System | YallaStarter</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="mobile-menu.css">
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -40,14 +48,14 @@
             --ai-card: #ffffff;
             --ai-border: #e2e8f0;
         }
-        
+
         body {
             font-family: 'Inter', 'Poppins', sans-serif;
             background: var(--ai-bg);
             color: var(--ai-text);
             line-height: 1.6;
         }
-        
+
         .header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
@@ -57,7 +65,7 @@
             z-index: 100;
             padding: 0.5rem 1rem;
         }
-        
+
         .navbar {
             display: flex;
             align-items: center;
@@ -66,7 +74,7 @@
             margin: 0 auto;
             gap: 1rem;
         }
-        
+
         .logo {
             display: flex;
             align-items: center;
@@ -74,11 +82,11 @@
             flex-shrink: 0;
             transition: transform 0.2s ease;
         }
-        
+
         .logo:hover {
             transform: scale(1.02);
         }
-        
+
         .logo-text {
             font-size: 1.5rem;
             font-weight: 700;
@@ -87,7 +95,7 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        
+
         .nav-links {
             display: flex;
             align-items: center;
@@ -96,7 +104,7 @@
             padding: 0;
             list-style: none;
         }
-        
+
         .nav-links a {
             color: var(--ai-text);
             font-weight: 500;
@@ -106,23 +114,23 @@
             transition: all 0.3s ease;
             position: relative;
         }
-        
+
         .nav-links a:hover {
             color: var(--ai-primary);
             background: rgba(99, 102, 241, 0.05);
         }
-        
+
         .nav-links a.active {
             color: var(--ai-primary);
             background: rgba(99, 102, 241, 0.1);
         }
-        
+
         .language-switcher {
             display: flex;
             gap: 0.5rem;
             margin: 0 1rem;
         }
-        
+
         .language-btn {
             background: none;
             border: 1px solid var(--ai-primary);
@@ -133,23 +141,23 @@
             font-size: 0.9rem;
             transition: all 0.3s ease;
         }
-        
+
         .language-btn:hover {
             background-color: var(--ai-primary);
             color: white;
         }
-        
+
         .language-btn.active {
             background-color: var(--ai-primary);
             color: white;
         }
-        
+
         .auth-buttons {
             display: flex;
             gap: 0.6rem;
             align-items: center;
         }
-        
+
         .btn {
             display: inline-block;
             padding: 0.6rem 1.2rem;
@@ -161,41 +169,41 @@
             border: none;
             cursor: pointer;
         }
-        
+
         .btn-primary {
             background: var(--ai-gradient);
             color: white;
             box-shadow: var(--ai-glow);
         }
-        
+
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
         }
-        
+
         .btn-secondary {
             background: transparent;
             color: var(--ai-primary);
             border: 2px solid var(--ai-primary);
         }
-        
+
         .btn-secondary:hover {
             background: var(--ai-primary);
             color: white;
             transform: translateY(-2px);
         }
-        
+
         .btn-link {
             background: transparent;
             color: var(--ai-text-light);
             border: none;
             padding: 0.6rem 1rem;
         }
-        
+
         .btn-link:hover {
             color: var(--ai-primary);
         }
-        
+
         /* Mobile Menu Styles */
         .mobile-menu-btn {
             display: none;
@@ -208,12 +216,12 @@
             border-radius: 6px;
             transition: all 0.3s ease;
         }
-        
+
         .mobile-menu-btn:hover {
             background-color: rgba(99, 102, 241, 0.05);
             color: var(--ai-primary);
         }
-        
+
         .mobile-menu {
             width: 100%;
             background-color: white;
@@ -225,21 +233,21 @@
             transform: translateY(-10px);
             transition: all 0.3s ease;
         }
-        
+
         .mobile-menu.show {
             opacity: 1;
             transform: translateY(0);
         }
-        
+
         .mobile-menu .nav-links {
             list-style: none;
             margin: 1rem 0;
         }
-        
+
         .mobile-menu .nav-links li {
             margin-bottom: 0.8rem;
         }
-        
+
         .mobile-menu .nav-links a {
             color: var(--ai-text);
             font-weight: 500;
@@ -247,7 +255,7 @@
             padding: 0.8rem 0;
             font-size: 1rem;
         }
-        
+
         .mobile-menu .auth-buttons {
             display: flex;
             flex-direction: column;
@@ -256,7 +264,7 @@
             padding-top: 1rem;
             border-top: 1px solid var(--ai-border);
         }
-        
+
         .mobile-menu .auth-buttons a {
             width: 100%;
             text-align: center;
@@ -264,7 +272,7 @@
             border-radius: 8px;
             font-weight: 600;
         }
-        
+
         /* Hero Section */
         .mind71-hero {
             background: var(--ai-gradient);
@@ -274,7 +282,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .mind71-hero::before {
             content: '';
             position: absolute;
@@ -285,7 +293,7 @@
             background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
             opacity: 0.3;
         }
-        
+
         .mind71-hero-content {
             position: relative;
             z-index: 2;
@@ -293,7 +301,7 @@
             margin: 0 auto;
             padding: 0 2rem;
         }
-        
+
         .mind71-hero-title {
             font-size: 4rem;
             font-weight: 800;
@@ -304,7 +312,7 @@
             background-clip: text;
             text-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
-        
+
         .mind71-hero-subtitle {
             font-size: 1.4rem;
             margin-bottom: 2rem;
@@ -313,7 +321,7 @@
             margin-left: auto;
             margin-right: auto;
         }
-        
+
         .mind71-hero-description {
             font-size: 1.1rem;
             margin-bottom: 3rem;
@@ -322,14 +330,14 @@
             margin-left: auto;
             margin-right: auto;
         }
-        
+
         .mind71-hero-buttons {
             display: flex;
             gap: 1.5rem;
             justify-content: center;
             flex-wrap: wrap;
         }
-        
+
         .btn-ai {
             background: rgba(255, 255, 255, 0.1);
             color: white;
@@ -341,26 +349,26 @@
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
         }
-        
+
         .btn-ai:hover {
             background: rgba(255, 255, 255, 0.2);
             border-color: rgba(255, 255, 255, 0.5);
             transform: translateY(-3px);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
-        
+
         /* AI Features Section */
         .ai-features {
             padding: 6rem 0;
             background: white;
         }
-        
+
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 2rem;
         }
-        
+
         .section-title {
             font-size: 3rem;
             font-weight: 700;
@@ -371,7 +379,7 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        
+
         .section-subtitle {
             font-size: 1.3rem;
             text-align: center;
@@ -379,14 +387,14 @@
             max-width: 700px;
             margin: 0 auto 4rem;
         }
-        
+
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2.5rem;
             margin-bottom: 4rem;
         }
-        
+
         .feature-card {
             background: white;
             border-radius: 20px;
@@ -397,7 +405,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .feature-card::before {
             content: '';
             position: absolute;
@@ -407,12 +415,12 @@
             height: 4px;
             background: var(--ai-gradient);
         }
-        
+
         .feature-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 60px rgba(99, 102, 241, 0.15);
         }
-        
+
         .feature-icon {
             width: 80px;
             height: 80px;
@@ -426,32 +434,32 @@
             color: white;
             box-shadow: var(--ai-glow);
         }
-        
+
         .feature-title {
             font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 1rem;
             color: var(--ai-text);
         }
-        
+
         .feature-description {
             color: var(--ai-text-light);
             line-height: 1.7;
             margin-bottom: 1.5rem;
         }
-        
+
         .feature-benefits {
             list-style: none;
             padding: 0;
         }
-        
+
         .feature-benefits li {
             padding: 0.5rem 0;
             color: var(--ai-text-light);
             position: relative;
             padding-left: 1.5rem;
         }
-        
+
         .feature-benefits li::before {
             content: '?';
             position: absolute;
@@ -459,19 +467,19 @@
             color: var(--ai-primary);
             font-weight: bold;
         }
-        
+
         /* AI Capabilities Section */
         .ai-capabilities {
             padding: 6rem 0;
             background: var(--ai-bg);
         }
-        
+
         .capabilities-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
-        
+
         .capability-item {
             background: white;
             border-radius: 16px;
@@ -481,12 +489,12 @@
             border: 1px solid var(--ai-border);
             transition: all 0.3s ease;
         }
-        
+
         .capability-item:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 40px rgba(99, 102, 241, 0.1);
         }
-        
+
         .capability-icon {
             width: 60px;
             height: 60px;
@@ -499,19 +507,19 @@
             font-size: 1.5rem;
             color: white;
         }
-        
+
         .capability-title {
             font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
             color: var(--ai-text);
         }
-        
+
         .capability-description {
             color: var(--ai-text-light);
             font-size: 0.95rem;
         }
-        
+
         /* CTA Section */
         .mind71-cta {
             padding: 6rem 0;
@@ -519,13 +527,13 @@
             color: white;
             text-align: center;
         }
-        
+
         .cta-title {
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 1rem;
         }
-        
+
         .cta-description {
             font-size: 1.2rem;
             margin-bottom: 2.5rem;
@@ -534,53 +542,53 @@
             margin-left: auto;
             margin-right: auto;
         }
-        
+
         .cta-buttons {
             display: flex;
             gap: 1.5rem;
             justify-content: center;
             flex-wrap: wrap;
         }
-        
+
         /* Footer */
         .footer {
             background-color: var(--ai-text);
             color: white;
             padding: 3rem 0 1rem;
         }
-        
+
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
             margin-bottom: 2rem;
         }
-        
+
         .footer-column h3 {
             color: var(--ai-primary);
             margin-bottom: 1rem;
             font-size: 1.2rem;
         }
-        
+
         .footer-links {
             list-style: none;
             padding: 0;
         }
-        
+
         .footer-links li {
             margin-bottom: 0.5rem;
         }
-        
+
         .footer-links a {
             color: #cbd5e1;
             text-decoration: none;
             transition: color 0.3s ease;
         }
-        
+
         .footer-links a:hover {
             color: var(--ai-primary);
         }
-        
+
         .footer-bottom {
             border-top: 1px solid #475569;
             padding-top: 1rem;
@@ -590,150 +598,151 @@
             flex-wrap: wrap;
             gap: 1rem;
         }
-        
+
         .footer-copyright {
             color: #94a3b8;
         }
-        
+
         .footer-social {
             display: flex;
             gap: 1rem;
         }
-        
+
         .social-icon {
             color: #94a3b8;
             font-size: 1.2rem;
             transition: color 0.3s ease;
         }
-        
+
         .social-icon:hover {
             color: var(--ai-primary);
         }
-        
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .header {
                 padding: 0.3rem 0.8rem;
             }
-            
+
             .navbar {
                 gap: 0.5rem;
             }
-            
+
             .logo-text {
                 font-size: 1.3rem;
             }
-            
+
             .nav-links {
                 display: none;
             }
-            
+
             .auth-buttons {
                 display: none;
             }
-            
+
             .language-switcher {
                 display: none;
             }
-            
+
             .mobile-menu-btn {
                 display: block;
             }
-            
+
             .mobile-menu {
                 padding: 0.8rem;
             }
-            
+
             .mobile-menu .nav-links a {
                 padding: 0.6rem 0;
                 font-size: 0.95rem;
             }
-            
+
             .mind71-hero-title {
                 font-size: 2.5rem;
             }
-            
+
             .mind71-hero-subtitle {
                 font-size: 1.2rem;
             }
-            
+
             .mind71-hero-description {
                 font-size: 1rem;
             }
-            
+
             .mind71-hero-buttons {
                 flex-direction: column;
                 align-items: center;
             }
-            
+
             .section-title {
                 font-size: 2.5rem;
             }
-            
+
             .section-subtitle {
                 font-size: 1.1rem;
             }
-            
+
             .features-grid {
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
-            
+
             .feature-card {
                 padding: 2rem;
             }
-            
+
             .capabilities-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .cta-title {
                 font-size: 2rem;
             }
-            
+
             .cta-description {
                 font-size: 1.1rem;
             }
-            
+
             .cta-buttons {
                 flex-direction: column;
                 align-items: center;
             }
         }
-        
+
         @media (max-width: 480px) {
             .mind71-hero {
                 padding: 4rem 0;
             }
-            
+
             .mind71-hero-title {
                 font-size: 2rem;
             }
-            
+
             .mind71-hero-subtitle {
                 font-size: 1.1rem;
             }
-            
+
             .ai-features,
             .ai-capabilities,
             .mind71-cta {
                 padding: 4rem 0;
             }
-            
+
             .section-title {
                 font-size: 2rem;
             }
-            
+
             .feature-card {
                 padding: 1.5rem;
             }
-            
+
             .capability-item {
                 padding: 1.5rem;
             }
         }
     </style>
 </head>
+
 <body>
     <!-- Header -->
     <header class="header">
@@ -741,7 +750,7 @@
             <a href="index.html" class="logo">
                 <span class="logo-text">YallaStarter</span>
             </a>
-        
+
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="entertainment.html">Entertainment Projects</a></li>
@@ -752,25 +761,25 @@
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
-            
+
             <div class="language-switcher">
                 <button class="language-btn active" onclick="switchLanguage('en')">English</button>
                 <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
             </div>
-            
+
             <div class="auth-buttons">
                 <a href="create-project.html" class="btn btn-primary">Start a Project</a>
                 <a href="login.html" class="btn btn-link">Log In</a>
             </div>
-            
+
             <button class="mobile-menu-btn">
                 <i class="fas fa-bars"></i>
             </button>
         </nav>
-        
+
         <div class="mobile-menu">
             <div class="mobile-menu-header">
-                
+
                 <button class="mobile-close-btn">
                     <i class="fas fa-times"></i>
                 </button>
@@ -800,8 +809,11 @@
     <section class="mind71-hero">
         <div class="mind71-hero-content">
             <h1 class="mind71-hero-title">MIND71</h1>
-            <p class="mind71-hero-subtitle">Saudi Arabia's Premier AI System Specialized in Saudi Rules, Culture & Investment Intelligence</p>
-            <p class="mind71-hero-description">MIND71 is the first AI system made to understand Saudi Arabian rules, culture, common sense, Arabic culture, laws, market analysis, investment strategies, the Saudi economy, and best practices that follow Vision 2030 and General Entertainment Authority (GEA) guidelines.</p>
+            <p class="mind71-hero-subtitle">Saudi Arabia's Premier AI System Specialized in Saudi Rules, Culture &
+                Investment Intelligence</p>
+            <p class="mind71-hero-description">MIND71 is the first AI system made to understand Saudi Arabian rules,
+                culture, common sense, Arabic culture, laws, market analysis, investment strategies, the Saudi economy,
+                and best practices that follow Vision 2030 and General Entertainment Authority (GEA) guidelines.</p>
             <div class="mind71-hero-buttons">
                 <a href="#features" class="btn-ai">Explore Saudi AI Features</a>
                 <a href="#demo" class="btn-ai">Try Saudi AI Demo</a>
@@ -813,15 +825,18 @@
     <section class="ai-features" id="features">
         <div class="container">
             <h2 class="section-title">Saudi Arabia's AI-Powered Intelligence System</h2>
-            <p class="section-subtitle">Discover how MIND71's advanced AI capabilities, specifically designed for Saudi Arabia, transform project creation, analysis, and funding decisions while respecting local culture and regulations</p>
-            
+            <p class="section-subtitle">Discover how MIND71's advanced AI capabilities, specifically designed for Saudi
+                Arabia, transform project creation, analysis, and funding decisions while respecting local culture and
+                regulations</p>
+
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-brain"></i>
                     </div>
                     <h3 class="feature-title">Saudi Market Intelligence</h3>
-                    <p class="feature-description">MIND71 analyzes your project concept using advanced AI algorithms specifically trained on Saudi Arabian market data, regulations, and cultural context.</p>
+                    <p class="feature-description">MIND71 analyzes your project concept using advanced AI algorithms
+                        specifically trained on Saudi Arabian market data, regulations, and cultural context.</p>
                     <ul class="feature-benefits">
                         <li>Saudi market opportunity assessment</li>
                         <li>Local competitive analysis</li>
@@ -829,13 +844,14 @@
                         <li>Saudi success probability calculation</li>
                     </ul>
                 </div>
-                
+
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-lightbulb"></i>
                     </div>
                     <h3 class="feature-title">Saudi Cultural Intelligence</h3>
-                    <p class="feature-description">MIND71 understands Saudi Arabian culture, common sense, and Arabic cultural values to provide culturally appropriate project enhancement suggestions.</p>
+                    <p class="feature-description">MIND71 understands Saudi Arabian culture, common sense, and Arabic
+                        cultural values to provide culturally appropriate project enhancement suggestions.</p>
                     <ul class="feature-benefits">
                         <li>Saudi cultural compliance</li>
                         <li>Arabic cultural sensitivity</li>
@@ -843,13 +859,14 @@
                         <li>Cultural trend integration</li>
                     </ul>
                 </div>
-                
+
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-chart-line"></i>
                     </div>
                     <h3 class="feature-title">Saudi Investment Intelligence</h3>
-                    <p class="feature-description">MIND71 provides comprehensive Saudi market analysis, investment planning, and economic insights aligned with Vision 2030 goals.</p>
+                    <p class="feature-description">MIND71 provides comprehensive Saudi market analysis, investment
+                        planning, and economic insights aligned with Vision 2030 goals.</p>
                     <ul class="feature-benefits">
                         <li>Saudi market gap identification</li>
                         <li>Investment opportunity analysis</li>
@@ -857,13 +874,14 @@
                         <li>Economic trend forecasting</li>
                     </ul>
                 </div>
-                
+
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-users"></i>
                     </div>
                     <h3 class="feature-title">Saudi Regulatory Compliance</h3>
-                    <p class="feature-description">MIND71 ensures your projects comply with Saudi Arabian laws, GEA regulations, and Vision 2030 requirements for successful funding.</p>
+                    <p class="feature-description">MIND71 ensures your projects comply with Saudi Arabian laws, GEA
+                        regulations, and Vision 2030 requirements for successful funding.</p>
                     <ul class="feature-benefits">
                         <li>Saudi law compliance check</li>
                         <li>GEA regulation validation</li>
@@ -871,13 +889,14 @@
                         <li>Regulatory risk assessment</li>
                     </ul>
                 </div>
-                
+
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-cogs"></i>
                     </div>
                     <h3 class="feature-title">Saudi Workflow Optimization</h3>
-                    <p class="feature-description">Streamlined AI-powered workflows specifically designed for Saudi Arabian project development, GEA submission, and Vision 2030 compliance.</p>
+                    <p class="feature-description">Streamlined AI-powered workflows specifically designed for Saudi
+                        Arabian project development, GEA submission, and Vision 2030 compliance.</p>
                     <ul class="feature-benefits">
                         <li>Saudi-specific step guidance</li>
                         <li>GEA compliance validation</li>
@@ -885,13 +904,14 @@
                         <li>Local quality assurance</li>
                     </ul>
                 </div>
-                
+
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-shield-alt"></i>
                     </div>
                     <h3 class="feature-title">GEA & Vision 2030 Integration</h3>
-                    <p class="feature-description">Seamless integration with GEA's funding processes and Vision 2030 goals, providing AI-powered insights for informed Saudi decision-making.</p>
+                    <p class="feature-description">Seamless integration with GEA's funding processes and Vision 2030
+                        goals, providing AI-powered insights for informed Saudi decision-making.</p>
                     <ul class="feature-benefits">
                         <li>GEA regulation compliance</li>
                         <li>Vision 2030 alignment check</li>
@@ -907,55 +927,62 @@
     <section class="ai-capabilities">
         <div class="container">
             <h2 class="section-title">Saudi Arabia's Advanced AI Capabilities</h2>
-            <p class="section-subtitle">Explore the cutting-edge technologies that power MIND71's intelligent decision-making, specifically designed for Saudi Arabian market and culture</p>
-            
+            <p class="section-subtitle">Explore the cutting-edge technologies that power MIND71's intelligent
+                decision-making, specifically designed for Saudi Arabian market and culture</p>
+
             <div class="capabilities-grid">
                 <div class="capability-item">
                     <div class="capability-icon">
                         <i class="fas fa-robot"></i>
                     </div>
                     <h3 class="capability-title">Machine Learning</h3>
-                    <p class="capability-description">Advanced ML algorithms that learn from project data to provide increasingly accurate insights and recommendations.</p>
+                    <p class="capability-description">Advanced ML algorithms that learn from project data to provide
+                        increasingly accurate insights and recommendations.</p>
                 </div>
-                
+
                 <div class="capability-item">
                     <div class="capability-icon">
                         <i class="fas fa-language"></i>
                     </div>
                     <h3 class="capability-title">Natural Language Processing</h3>
-                    <p class="capability-description">NLP technology that understands and analyzes project descriptions, feedback, and market trends.</p>
+                    <p class="capability-description">NLP technology that understands and analyzes project descriptions,
+                        feedback, and market trends.</p>
                 </div>
-                
+
                 <div class="capability-item">
                     <div class="capability-icon">
                         <i class="fas fa-eye"></i>
                     </div>
                     <h3 class="capability-title">Computer Vision</h3>
-                    <p class="capability-description">AI vision systems that analyze project images, mockups, and visual content for quality assessment.</p>
+                    <p class="capability-description">AI vision systems that analyze project images, mockups, and visual
+                        content for quality assessment.</p>
                 </div>
-                
+
                 <div class="capability-item">
                     <div class="capability-icon">
                         <i class="fas fa-chart-pie"></i>
                     </div>
                     <h3 class="capability-title">Predictive Analytics</h3>
-                    <p class="capability-description">Data-driven predictions about project success, market trends, and funding outcomes.</p>
+                    <p class="capability-description">Data-driven predictions about project success, market trends, and
+                        funding outcomes.</p>
                 </div>
-                
+
                 <div class="capability-item">
                     <div class="capability-icon">
                         <i class="fas fa-network-wired"></i>
                     </div>
                     <h3 class="capability-title">Neural Networks</h3>
-                    <p class="capability-description">Deep learning networks that identify complex patterns and relationships in project data.</p>
+                    <p class="capability-description">Deep learning networks that identify complex patterns and
+                        relationships in project data.</p>
                 </div>
-                
+
                 <div class="capability-item">
                     <div class="capability-icon">
                         <i class="fas fa-database"></i>
                     </div>
                     <h3 class="capability-title">Big Data Analysis</h3>
-                    <p class="capability-description">Processing and analyzing vast amounts of project and market data for comprehensive insights.</p>
+                    <p class="capability-description">Processing and analyzing vast amounts of project and market data
+                        for comprehensive insights.</p>
                 </div>
             </div>
         </div>
@@ -965,7 +992,9 @@
     <section class="mind71-cta" id="demo">
         <div class="container">
             <h2 class="cta-title">Ready to Experience Saudi Arabia's AI Future?</h2>
-            <p class="cta-description">Join the Saudi AI revolution and discover how MIND71 can transform your project creation, funding decisions, and creative process while ensuring compliance with Saudi regulations and cultural values.</p>
+            <p class="cta-description">Join the Saudi AI revolution and discover how MIND71 can transform your project
+                creation, funding decisions, and creative process while ensuring compliance with Saudi regulations and
+                cultural values.</p>
             <div class="cta-buttons">
                 <a href="create-project.html" class="btn-ai">Start Your Saudi AI Journey</a>
                 <a href="contact.html" class="btn-ai">Contact Saudi AI Experts</a>
@@ -987,7 +1016,7 @@
                         <li><a href="coming-soon.html">Careers</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-column">
                     <h3>For Creators</h3>
                     <ul class="footer-links">
@@ -998,7 +1027,7 @@
                         <li><a href="coming-soon.html">Success Stories</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-column">
                     <h3>For Backers</h3>
                     <ul class="footer-links">
@@ -1009,7 +1038,7 @@
                         <li><a href="coming-soon.html">Backer Protection</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-column">
                     <h3>Connect With Us</h3>
                     <ul class="footer-links">
@@ -1021,12 +1050,12 @@
                     </ul>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
                 <div class="footer-copyright">
                     &copy; 2025 YallaStarter. All rights reserved.
                 </div>
-                
+
                 <div class="footer-social">
                     <a href="coming-soon.html" class="social-icon"><i class="fab fa-facebook-f"></i></a>
                     <a href="coming-soon.html" class="social-icon"><i class="fab fa-twitter"></i></a>
@@ -1039,7 +1068,7 @@
 
     <!-- Universal Mobile Menu Script -->
     <script src="mobile-menu.js"></script>
-    
+
     <script>
         // Language Switcher Function
         function switchLanguage(lang) {
@@ -1049,7 +1078,7 @@
                 window.location.href = 'mind71.html';
             }
         }
-        
+
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -1064,7 +1093,8 @@
             });
         });
     </script>
+    <!-- Session persistence: replace auth buttons with user dropdown if logged in -->
+    <script src="assets/js/session-init.js"></script>
 </body>
+
 </html>
-
-

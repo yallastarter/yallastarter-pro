@@ -1,30 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Get in touch with YallaStarter. Contact our team for support, partnerships, or to learn more about our crowdfunding platform.">
+    <meta name="description"
+        content="Get in touch with YallaStarter. Contact our team for support, partnerships, or to learn more about our crowdfunding platform.">
     <meta name="keywords" content="contact YallaStarter, support, crowdfunding help, Saudi Arabia">
     <meta name="author" content="YallaStarter">
     <meta name="robots" content="index, follow">
-    
+
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Contact Us - YallaStarter">
-    <meta property="og:description" content="Get in touch with YallaStarter. Contact our team for support, partnerships, or to learn more about our crowdfunding platform.">
+    <meta property="og:description"
+        content="Get in touch with YallaStarter. Contact our team for support, partnerships, or to learn more about our crowdfunding platform.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://yallastarter.com/contact">
-    
+
     <!-- Preload Critical Resources -->
     <link rel="preload" href="styles.css" as="style">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" as="style">
-    
+    <link rel="preload"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap"
+        as="style">
+
     <title>Contact Us - YallaStarter</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="mobile-menu.css">
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         .contact-hero {
@@ -33,53 +40,53 @@
             padding: 4rem 0;
             text-align: center;
         }
-        
+
         .contact-hero-title {
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 1rem;
         }
-        
+
         .contact-hero-subtitle {
             font-size: 1.1rem;
             max-width: 700px;
             margin: 0 auto;
         }
-        
+
         .contact-section {
             padding: 5rem 0;
         }
-        
+
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 3rem;
         }
-        
+
         .contact-info h2 {
             font-size: 1.8rem;
             font-weight: 700;
             margin-bottom: 1.5rem;
             color: var(--neutral-900);
         }
-        
+
         .contact-info p {
             margin-bottom: 2rem;
             color: var(--neutral-700);
             line-height: 1.7;
         }
-        
+
         .contact-details {
             margin-bottom: 2rem;
         }
-        
+
         .contact-item {
             display: flex;
             align-items: center;
             gap: 1rem;
             margin-bottom: 1.5rem;
         }
-        
+
         .contact-icon {
             width: 50px;
             height: 50px;
@@ -91,106 +98,106 @@
             justify-content: center;
             font-size: 1.2rem;
         }
-        
+
         .contact-text {
             color: var(--neutral-700);
         }
-        
+
         .contact-text strong {
             display: block;
             color: var(--neutral-900);
             margin-bottom: 0.3rem;
         }
-        
+
         .contact-form-container {
             background-color: white;
             border-radius: var(--border-radius);
             padding: 2rem;
             box-shadow: var(--box-shadow);
         }
-        
+
         .contact-form-container h3 {
             font-size: 1.5rem;
             font-weight: 600;
             margin-bottom: 1.5rem;
             color: var(--neutral-900);
         }
-        
+
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1rem;
             margin-bottom: 1.5rem;
         }
-        
+
         .office-section {
             background-color: var(--neutral-200);
             padding: 5rem 0;
         }
-        
+
         .office-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
-        
+
         .office-card {
             background-color: white;
             border-radius: var(--border-radius);
             overflow: hidden;
             box-shadow: var(--box-shadow);
         }
-        
+
         .office-image {
             height: 200px;
         }
-        
+
         .office-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        
+
         .office-info {
             padding: 1.5rem;
         }
-        
+
         .office-name {
             font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
             color: var(--neutral-900);
         }
-        
+
         .office-address {
             color: var(--neutral-700);
             margin-bottom: 1rem;
         }
-        
+
         .office-contact {
             color: var(--neutral-700);
             margin-bottom: 0.5rem;
         }
-        
+
         .faq-section {
             padding: 5rem 0;
         }
-        
+
         .faq-container {
             max-width: 800px;
             margin: 0 auto;
         }
-        
+
         @media (max-width: 992px) {
             .contact-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .form-row {
                 grid-template-columns: 1fr;
             }
         }
-        
+
         /* Logo Text Fallback Styling */
         .logo-text {
             font-size: 1.5rem;
@@ -198,14 +205,14 @@
             color: var(--primary);
             display: none;
         }
-        
+
         /* Language Switcher Styles */
         .language-switcher {
             display: flex;
             gap: 0.5rem;
             margin: 0 1rem;
         }
-        
+
         .language-btn {
             background: none;
             border: 1px solid var(--primary);
@@ -216,17 +223,17 @@
             font-size: 0.9rem;
             transition: all 0.3s ease;
         }
-        
+
         .language-btn:hover {
             background-color: var(--primary);
             color: white;
         }
-        
+
         .language-btn.active {
             background-color: var(--primary);
             color: white;
         }
-        
+
         @media (max-width: 768px) {
             .language-switcher {
                 margin: 1rem 0;
@@ -235,6 +242,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Header -->
     <header class="header">
@@ -242,7 +250,7 @@
             <a href="index.html" class="logo">
                 <span class="logo-text">YallaStarter</span>
             </a>
-        
+
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="entertainment.html">Entertainment Projects</a></li>
@@ -253,22 +261,22 @@
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html" class="active">Contact</a></li>
             </ul>
-            
+
             <div class="language-switcher">
                 <button class="language-btn active" onclick="switchLanguage('en')">English</button>
                 <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
             </div>
-            
+
             <div class="auth-buttons">
                 <a href="create-project.html" class="btn btn-primary">Start a Project</a>
                 <a href="login.html" class="btn btn-link">Log In</a>
             </div>
-            
+
             <button class="mobile-menu-btn">
                 <i class="fas fa-bars"></i>
             </button>
         </nav>
-        
+
         <div class="mobile-menu">
             <div class="mobile-menu-header">
                 <div class="mobile-header-left">
@@ -302,7 +310,8 @@
     <section class="contact-hero">
         <div class="container">
             <h1 class="contact-hero-title">Contact Us</h1>
-            <p class="contact-hero-subtitle">Have questions or need assistance? We're here to help you with anything related to YallaStarter</p>
+            <p class="contact-hero-subtitle">Have questions or need assistance? We're here to help you with anything
+                related to YallaStarter</p>
         </div>
     </section>
 
@@ -312,8 +321,10 @@
             <div class="contact-grid">
                 <div class="contact-info">
                     <h2>Get in Touch</h2>
-                    <p>Whether you're a creator with questions about launching a project, a backer with inquiries about supporting a campaign, or just interested in learning more about YallaStarter, our team is ready to assist you.</p>
-                    
+                    <p>Whether you're a creator with questions about launching a project, a backer with inquiries about
+                        supporting a campaign, or just interested in learning more about YallaStarter, our team is ready
+                        to assist you.</p>
+
                     <div class="contact-details">
                         <div class="contact-item">
                             <div class="contact-icon">
@@ -325,7 +336,7 @@
                                 Riyadh, Saudi Arabia
                             </div>
                         </div>
-                        
+
                         <div class="contact-item">
                             <div class="contact-icon">
                                 <i class="fas fa-envelope"></i>
@@ -333,10 +344,10 @@
                             <div class="contact-text">
                                 <strong>Email Us</strong>
                                 support@yallastarter.com<br>
-                                
+
                             </div>
                         </div>
-                        
+
                         <div class="contact-item">
                             <div class="contact-icon">
                                 <i class="fas fa-phone-alt"></i>
@@ -348,48 +359,55 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="social-links" style="display: flex; gap: 1rem;">
-                        <a href="coming-soon.html" style="width: 40px; height: 40px; background-color: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <a href="coming-soon.html"
+                            style="width: 40px; height: 40px; background-color: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="coming-soon.html" style="width: 40px; height: 40px; background-color: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <a href="coming-soon.html"
+                            style="width: 40px; height: 40px; background-color: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
                             <i class="fab fa-twitter"></i>
                         </a>
-                        <a href="coming-soon.html" style="width: 40px; height: 40px; background-color: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <a href="coming-soon.html"
+                            style="width: 40px; height: 40px; background-color: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="coming-soon.html" style="width: 40px; height: 40px; background-color: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <a href="coming-soon.html"
+                            style="width: 40px; height: 40px; background-color: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
                     </div>
                 </div>
-                
+
                 <div class="contact-form-container">
                     <h3>Send Us a Message</h3>
                     <form class="contact-form">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="name" class="form-label">Your Name</label>
-                                <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
+                                <input type="text" id="name" class="form-control" placeholder="Enter your name"
+                                    required>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="email" class="form-label">Your Email</label>
-                                <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                                <input type="email" id="email" class="form-control" placeholder="Enter your email"
+                                    required>
                             </div>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="subject" class="form-label">Subject</label>
                             <input type="text" id="subject" class="form-control" placeholder="Enter subject" required>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="message" class="form-label">Message</label>
-                            <textarea id="message" class="form-control" placeholder="Enter your message" rows="5" required></textarea>
+                            <textarea id="message" class="form-control" placeholder="Enter your message" rows="5"
+                                required></textarea>
                         </div>
-                        
+
                         <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
                     </form>
                 </div>
@@ -402,11 +420,12 @@
         <div class="container">
             <h2 class="section-title">Our Offices</h2>
             <p class="section-subtitle">Visit us at one of our locations across Saudi Arabia</p>
-            
+
             <div class="office-grid">
                 <div class="office-card">
                     <div class="office-image">
-                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Riyadh Office">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                            alt="Riyadh Office">
                     </div>
                     <div class="office-info">
                         <h3 class="office-name">Riyadh (Headquarters)</h3>
@@ -415,10 +434,11 @@
                         <p class="office-contact">Email: support@yallastarter.com</p>
                     </div>
                 </div>
-                
+
                 <div class="office-card">
                     <div class="office-image">
-                        <img src="https://images.unsplash.com/photo-1577415124269-fc1140a69e91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Jeddah Office">
+                        <img src="https://images.unsplash.com/photo-1577415124269-fc1140a69e91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                            alt="Jeddah Office">
                     </div>
                     <div class="office-info">
                         <h3 class="office-name">Jeddah</h3>
@@ -427,10 +447,11 @@
                         <p class="office-contact">Email: support@yallastarter.com</p>
                     </div>
                 </div>
-                
+
                 <div class="office-card">
                     <div class="office-image">
-                        <img src="https://images.unsplash.com/photo-1568992687947-868a62a9f521?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Dammam Office">
+                        <img src="https://images.unsplash.com/photo-1568992687947-868a62a9f521?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                            alt="Dammam Office">
                     </div>
                     <div class="office-info">
                         <h3 class="office-name">Dammam</h3>
@@ -448,7 +469,7 @@
         <div class="container">
             <h2 class="section-title">Frequently Asked Questions</h2>
             <p class="section-subtitle">Quick answers to common inquiries</p>
-            
+
             <div class="faq-container">
                 <div class="accordion">
                     <div class="accordion-item">
@@ -458,11 +479,13 @@
                         </div>
                         <div class="accordion-content">
                             <div class="accordion-body">
-                                <p>If you're a creator with questions about launching or managing your project, you can email us at creators@yallastarter.com or call our creator support line at +966 11 234 5678. Our team is available Sunday through Thursday, 9am to 6pm.</p>
+                                <p>If you're a creator with questions about launching or managing your project, you can
+                                    email us at creators@yallastarter.com or call our creator support line at +966 11
+                                    234 5678. Our team is available Sunday through Thursday, 9am to 6pm.</p>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="accordion-item">
                         <div class="accordion-header">
                             <span>I'm having issues with my payment. Who should I contact?</span>
@@ -470,11 +493,13 @@
                         </div>
                         <div class="accordion-content">
                             <div class="accordion-body">
-                                <p>For payment-related issues, please email support@yallastarter.com with details of the problem you're experiencing. Include your order number and the project name for faster assistance. Our payments team will respond within 24 hours.</p>
+                                <p>For payment-related issues, please email support@yallastarter.com with details of the
+                                    problem you're experiencing. Include your order number and the project name for
+                                    faster assistance. Our payments team will respond within 24 hours.</p>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="accordion-item">
                         <div class="accordion-header">
                             <span>How can I arrange a meeting with your team?</span>
@@ -482,11 +507,14 @@
                         </div>
                         <div class="accordion-content">
                             <div class="accordion-body">
-                                <p>If you'd like to schedule a meeting with our team, please fill out the contact form on this page with your preferred date and time, or email support@yallastarter.com. We offer both in-person meetings at our offices and virtual meetings via video conference.</p>
+                                <p>If you'd like to schedule a meeting with our team, please fill out the contact form
+                                    on this page with your preferred date and time, or email support@yallastarter.com.
+                                    We offer both in-person meetings at our offices and virtual meetings via video
+                                    conference.</p>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="accordion-item">
                         <div class="accordion-header">
                             <span>Do you offer partnership opportunities?</span>
@@ -494,7 +522,10 @@
                         </div>
                         <div class="accordion-content">
                             <div class="accordion-body">
-                                <p>Yes, we're always open to exploring partnership opportunities with organizations that share our mission of supporting Saudi innovation. Please email support@yallastarter.com with details about your organization and your partnership proposal.</p>
+                                <p>Yes, we're always open to exploring partnership opportunities with organizations that
+                                    share our mission of supporting Saudi innovation. Please email
+                                    support@yallastarter.com with details about your organization and your partnership
+                                    proposal.</p>
                             </div>
                         </div>
                     </div>
@@ -505,7 +536,8 @@
 
     <!-- Map Section -->
     <section style="padding: 0;">
-        <div style="width: 100%; height: 400px; background-color: #e9e9e9; display: flex; align-items: center; justify-content: center;">
+        <div
+            style="width: 100%; height: 400px; background-color: #e9e9e9; display: flex; align-items: center; justify-content: center;">
             <div style="text-align: center; color: var(--neutral-600);">
                 <i class="fas fa-map-marked-alt" style="font-size: 3rem; margin-bottom: 1rem;"></i>
                 <p>Interactive Map Would Be Embedded Here</p>
@@ -524,54 +556,54 @@
                         <li><a href="how-it-works.html">How It Works</a></li>
                         <li><a href="projects.html">Browse Projects</a></li>
                         <li><a href="contact.html">Contact Us</a></li>
-                        <li><a href="coming-soon.html">Careers</a></li>
+                        <li><a href="careers.html">Careers</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-column">
                     <h3>For Creators</h3>
                     <ul class="footer-links">
                         <li><a href="create-project.html">Start a Project</a></li>
-                        <li><a href="coming-soon.html">Creator Handbook</a></li>
-                        <li><a href="coming-soon.html">Creator Resources</a></li>
-                        <li><a href="coming-soon.html">Creator FAQs</a></li>
-                        <li><a href="coming-soon.html">Success Stories</a></li>
+                        <li><a href="how-it-works.html">Creator Handbook</a></li>
+                        <li><a href="how-it-works.html">Creator Resources</a></li>
+                        <li><a href="support.html">Creator FAQs</a></li>
+                        <li><a href="projects.html">Success Stories</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-column">
                     <h3>For Backers</h3>
                     <ul class="footer-links">
-                        <li><a href="coming-soon.html">Backer FAQs</a></li>
-                        <li><a href="coming-soon.html">Trust & Safety</a></li>
-                        <li><a href="coming-soon.html">Backer Resources</a></li>
-                        <li><a href="coming-soon.html">Payment Methods</a></li>
-                        <li><a href="coming-soon.html">Backer Protection</a></li>
+                        <li><a href="support.html">Backer FAQs</a></li>
+                        <li><a href="support.html">Trust &amp; Safety</a></li>
+                        <li><a href="how-it-works.html">Backer Resources</a></li>
+                        <li><a href="payments.html">Payment Methods</a></li>
+                        <li><a href="support.html">Backer Protection</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-column">
                     <h3>Connect With Us</h3>
                     <ul class="footer-links">
-                        <li><a href="coming-soon.html">Newsletter</a></li>
-                        <li><a href="coming-soon.html">Blog</a></li>
-                        <li><a href="coming-soon.html">Events</a></li>
-                        <li><a href="coming-soon.html">Support</a></li>
-                        <li><a href="coming-soon.html">Community Guidelines</a></li>
+                        <li><a href="contact.html">Newsletter</a></li>
+                        <li><a href="contact.html">Blog</a></li>
+                        <li><a href="contact.html">Events</a></li>
+                        <li><a href="support.html">Support</a></li>
+                        <li><a href="support.html">Community Guidelines</a></li>
                     </ul>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
                 <div class="footer-copyright">
                     &copy; 2025 YallaStarter. All rights reserved.
                 </div>
-                
+
                 <div class="footer-social">
-                    <a href="coming-soon.html" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                    <a href="coming-soon.html" class="social-icon"><i class="fab fa-twitter"></i></a>
-                    <a href="coming-soon.html" class="social-icon"><i class="fab fa-instagram"></i></a>
-                    <a href="coming-soon.html" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="contact.html" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="contact.html" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="contact.html" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="contact.html" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
         </div>
@@ -586,17 +618,17 @@
                 window.location.href = 'contact.html';
             }
         }
-        
+
         // Accordion
         const accordionItems = document.querySelectorAll('.accordion-item');
-        
+
         accordionItems.forEach(item => {
             const header = item.querySelector('.accordion-header');
             const content = item.querySelector('.accordion-content');
-            
+
             header.addEventListener('click', () => {
                 item.classList.toggle('active');
-                
+
                 if (item.classList.contains('active')) {
                     content.style.maxHeight = content.scrollHeight + 'px';
                 } else {
@@ -605,9 +637,11 @@
             });
         });
     </script>
-    
+
+    <!-- Session persistence: replace auth buttons with user dropdown if logged in -->
+    <script src="assets/js/session-init.js"></script>
     <!-- Universal Mobile Menu Script -->
     <script src="mobile-menu.js"></script>
 </body>
-</html>
 
+</html>

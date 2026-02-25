@@ -1,30 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Browse and discover innovative crowdfunding projects on YallaStarter. Support Saudi innovators and bring amazing ideas to life.">
+    <meta name="description"
+        content="Browse and discover innovative crowdfunding projects on YallaStarter. Support Saudi innovators and bring amazing ideas to life.">
     <meta name="keywords" content="browse projects, crowdfunding, Saudi innovation, funding projects">
     <meta name="author" content="YallaStarter">
     <meta name="robots" content="index, follow">
-    
+
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Browse Projects - YallaStarter">
-    <meta property="og:description" content="Browse and discover innovative crowdfunding projects on YallaStarter. Support Saudi innovators and bring amazing ideas to life.">
+    <meta property="og:description"
+        content="Browse and discover innovative crowdfunding projects on YallaStarter. Support Saudi innovators and bring amazing ideas to life.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://yallastarter.com/projects">
-    
+
     <!-- Preload Critical Resources -->
     <link rel="preload" href="styles.css" as="style">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" as="style">
-    
+    <link rel="preload"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap"
+        as="style">
+
     <title>Browse Projects - YallaStarter</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="mobile-menu.css">
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Header Styles */
@@ -36,7 +43,7 @@
             z-index: 100;
             padding: 0.5rem 1rem;
         }
-        
+
         .navbar {
             display: flex;
             align-items: center;
@@ -44,7 +51,7 @@
             gap: 1rem;
             width: 100%;
         }
-        
+
         .logo {
             display: flex;
             align-items: center;
@@ -53,11 +60,11 @@
             margin-right: 0.8rem;
             transition: transform 0.2s ease;
         }
-        
+
         .logo:hover {
             transform: scale(1.02);
         }
-        
+
         .logo-text {
             font-size: 1.5rem;
             font-weight: 700;
@@ -65,7 +72,7 @@
             display: block;
             letter-spacing: -0.02em;
         }
-        
+
         .nav-links {
             display: flex;
             align-items: center;
@@ -76,11 +83,11 @@
             flex: 0 1 auto;
             justify-content: flex-start;
         }
-        
+
         .nav-links li {
             list-style: none;
         }
-        
+
         .nav-links a {
             color: var(--neutral-800);
             font-weight: 500;
@@ -92,12 +99,12 @@
             font-size: 1rem;
             border-bottom: 2px solid transparent;
         }
-        
+
         .nav-links a:hover {
             color: var(--primary);
             background-color: rgba(0, 108, 53, 0.05);
         }
-        
+
         .nav-links a.active {
             color: var(--primary);
             font-weight: 600;
@@ -105,14 +112,14 @@
             padding: 0.5rem 1rem;
             border-bottom: 2px solid var(--primary);
         }
-        
+
         .language-switcher {
             display: flex;
             align-items: center;
             gap: 0.5rem;
             margin-left: auto;
         }
-        
+
         .language-btn {
             background: transparent;
             border: 2px solid var(--primary);
@@ -124,24 +131,24 @@
             transition: all 0.3s ease;
             font-size: 0.9rem;
         }
-        
+
         .language-btn:hover {
             background: var(--primary);
             color: white;
             transform: translateY(-1px);
         }
-        
+
         .language-btn.active {
             background: var(--primary);
             color: white;
         }
-        
+
         .auth-buttons {
             display: flex;
             gap: 0.6rem;
             align-items: center;
         }
-        
+
         .auth-buttons .btn {
             padding: 0.6rem 1.2rem;
             font-size: 0.95rem;
@@ -150,44 +157,44 @@
             transition: all 0.3s ease;
             text-decoration: none;
         }
-        
+
         .auth-buttons .btn-primary {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
             border: 2px solid var(--primary);
             box-shadow: 0 2px 8px rgba(0, 108, 53, 0.2);
         }
-        
+
         .auth-buttons .btn-primary:hover {
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(0, 108, 53, 0.3);
         }
-        
+
         .auth-buttons .btn-secondary {
             background: transparent;
             color: var(--primary);
             border: 2px solid var(--primary);
             font-weight: 600;
         }
-        
+
         .auth-buttons .btn-secondary:hover {
             background: var(--primary);
             color: white;
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(0, 108, 53, 0.3);
         }
-        
+
         .auth-buttons .btn-link {
             background: transparent;
             color: var(--neutral-600);
             border: none;
             padding: 0.6rem 1rem;
         }
-        
+
         .auth-buttons .btn-link:hover {
             color: var(--primary);
         }
-        
+
         /* Projects Hero */
         .projects-hero {
             background-color: var(--primary);
@@ -195,30 +202,30 @@
             padding: 4rem 0;
             text-align: center;
         }
-        
+
         .projects-hero-title {
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 1rem;
         }
-        
+
         .projects-hero-subtitle {
             font-size: 1.1rem;
             max-width: 700px;
             margin: 0 auto 2rem;
         }
-        
+
         /* Search and Filters */
         .projects-search {
             max-width: 600px;
             margin: 0 auto;
         }
-        
+
         .search-box.wide {
             width: 100%;
             position: relative;
         }
-        
+
         .search-box.wide input {
             width: 100%;
             padding: 1rem 1rem 1rem 3rem;
@@ -226,7 +233,7 @@
             border: none;
             font-size: 1rem;
         }
-        
+
         .search-box.wide .search-icon {
             position: absolute;
             left: 1rem;
@@ -234,30 +241,30 @@
             transform: translateY(-50%);
             color: var(--neutral-500);
         }
-        
+
         .filters-bar {
             background-color: var(--neutral-200);
             padding: 1rem 0;
             margin-bottom: 2rem;
         }
-        
+
         .filters-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .filter-group {
             display: flex;
             align-items: center;
             gap: 1rem;
         }
-        
+
         .filter-label {
             font-weight: 500;
             color: var(--neutral-700);
         }
-        
+
         .filter-select {
             padding: 0.5rem 1rem;
             border-radius: var(--border-radius);
@@ -265,7 +272,7 @@
             background-color: white;
             color: var(--neutral-700);
         }
-        
+
         /* Projects Grid */
         .projects-grid {
             display: grid;
@@ -273,7 +280,7 @@
             gap: 2rem;
             margin: 3rem 0;
         }
-        
+
         .project-card {
             background: white;
             border-radius: 12px;
@@ -284,38 +291,38 @@
             color: inherit;
             display: block;
         }
-        
+
         .project-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
             text-decoration: none;
             color: inherit;
         }
-        
+
         .project-card:visited {
             color: inherit;
         }
-        
+
         .project-image {
             height: 200px;
             overflow: hidden;
         }
-        
+
         .project-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.3s ease;
         }
-        
+
         .project-card:hover .project-image img {
             transform: scale(1.05);
         }
-        
+
         .project-content {
             padding: 1.5rem;
         }
-        
+
         .project-category {
             color: var(--primary);
             font-weight: 600;
@@ -324,7 +331,7 @@
             letter-spacing: 0.5px;
             margin-bottom: 0.5rem;
         }
-        
+
         .project-title {
             font-size: 1.3rem;
             font-weight: 700;
@@ -332,13 +339,13 @@
             margin-bottom: 1rem;
             line-height: 1.3;
         }
-        
+
         .project-description {
             color: var(--neutral-700);
             line-height: 1.6;
             margin-bottom: 1.5rem;
         }
-        
+
         .project-meta {
             display: flex;
             justify-content: space-between;
@@ -347,7 +354,7 @@
             font-size: 0.9rem;
             color: var(--neutral-600);
         }
-        
+
         .progress-bar {
             width: 100%;
             height: 8px;
@@ -355,14 +362,14 @@
             border-radius: 4px;
             overflow: hidden;
         }
-        
+
         .progress-fill {
             height: 100%;
             background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
             border-radius: 4px;
             transition: width 0.3s ease;
         }
-        
+
         /* Pagination */
         .pagination {
             display: flex;
@@ -371,7 +378,7 @@
             gap: 0.5rem;
             margin: 3rem 0;
         }
-        
+
         .pagination-btn {
             padding: 0.5rem 1rem;
             border: 1px solid var(--neutral-300);
@@ -381,59 +388,60 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        
+
         .pagination-btn:hover,
         .pagination-btn.active {
             background: var(--primary);
             color: white;
             border-color: var(--primary);
         }
-        
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .header {
                 padding: 0.3rem 0.8rem;
             }
-            
+
             .navbar {
                 gap: 0.5rem;
             }
-            
+
             .logo-text {
                 font-size: 1.3rem;
             }
-            
+
             .nav-links {
                 display: none;
             }
-            
+
             .auth-buttons {
                 display: none;
             }
-            
+
             .language-switcher {
                 display: none;
             }
-            
+
             .projects-hero-title {
                 font-size: 2rem;
             }
-            
+
             .projects-hero-subtitle {
                 font-size: 1rem;
             }
-            
+
             .filters-container {
                 flex-direction: column;
                 gap: 1rem;
             }
-            
+
             .projects-grid {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
+
 <body>
     <!-- Header -->
     <header class="header">
@@ -441,7 +449,7 @@
             <a href="index.html" class="logo">
                 <span class="logo-text">YallaStarter</span>
             </a>
-        
+
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="entertainment.html">Entertainment Projects</a></li>
@@ -452,23 +460,23 @@
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
-            
+
             <div class="language-switcher">
                 <button class="language-btn active" onclick="switchLanguage('en')">English</button>
                 <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
             </div>
-            
+
             <div class="auth-buttons">
                 <a href="create-project.html" class="btn btn-primary">Start a Project</a>
                 <a href="login.html" class="btn btn-link">Log In</a>
-            </div>            <button class="mobile-menu-btn">
+            </div> <button class="mobile-menu-btn">
                 <i class="fas fa-bars"></i>
             </button>
         </nav>
-        
-                <div class="mobile-menu">
+
+        <div class="mobile-menu">
             <div class="mobile-menu-header">
-                
+
                 <button class="mobile-close-btn">
                     <i class="fas fa-times"></i>
                 </button>
@@ -498,12 +506,13 @@
     <section class="projects-hero">
         <div class="container">
             <h1 class="projects-hero-title">Browse Projects</h1>
-            <p class="projects-hero-subtitle">Discover innovative projects from Saudi creators and support ideas that matter to you</p>
-            
+            <p class="projects-hero-subtitle">Discover innovative projects from Saudi creators and support ideas that
+                matter to you</p>
+
             <div class="projects-search">
                 <div class="search-box wide">
                     <i class="fas fa-search search-icon"></i>
-                    <input type="text" placeholder="Search for projects..." />
+                    <input type="text" id="projectSearch" placeholder="Search for projects..." autocomplete="off" />
                 </div>
             </div>
         </div>
@@ -515,33 +524,28 @@
             <div class="filters-container">
                 <div class="filter-group">
                     <label class="filter-label">Category:</label>
-                    <select class="filter-select">
+                    <select class="filter-select" id="categoryFilter">
                         <option value="">All Categories</option>
                         <option value="entertainment">Entertainment</option>
                         <option value="technology">Technology</option>
+                        <option value="smart">Smart Cities</option>
                         <option value="arts">Arts</option>
-                        <option value="education">Education</option>
-                        <option value="environment">Environment</option>
+                        <option value="music">Music</option>
+                        <option value="film">Film</option>
+                        <option value="heritage">Heritage</option>
+                        <option value="health">Healthcare</option>
+                        <option value="energy">Clean Energy</option>
                     </select>
                 </div>
-                
-                <div class="filter-group">
-                    <label class="filter-label">Status:</label>
-                    <select class="filter-select">
-                        <option value="">All Status</option>
-                        <option value="active">Active</option>
-                        <option value="funded">Funded</option>
-                        <option value="ending-soon">Ending Soon</option>
-                    </select>
-                </div>
-                
+
                 <div class="filter-group">
                     <label class="filter-label">Sort by:</label>
-                    <select class="filter-select">
-                        <option value="popular">Most Popular</option>
-                        <option value="newest">Newest</option>
-                        <option value="ending-soon">Ending Soon</option>
-                        <option value="funded">Most Funded</option>
+                    <select class="filter-select" id="sortFilter">
+                        <option value="default">Default</option>
+                        <option value="funded-high">Most Funded</option>
+                        <option value="funded-low">Least Funded</option>
+                        <option value="az">A → Z</option>
+                        <option value="za">Z → A</option>
                     </select>
                 </div>
             </div>
@@ -551,16 +555,27 @@
     <!-- Projects Grid -->
     <section class="projects-section">
         <div class="container">
-            <div class="projects-grid">
+            <!-- No results message -->
+            <div id="noResults" style="display:none;text-align:center;padding:4rem 2rem;color:var(--neutral-500);">
+                <i class="fas fa-search" style="font-size:3rem;margin-bottom:1rem;display:block;"></i>
+                <p style="font-size:1.1rem;">No projects match your search. Try different keywords or filters.</p>
+            </div>
+
+            <div class="projects-grid" id="projectsGrid">
                 <!-- Project 1 -->
-                <a href="project-abyss.html" class="project-card">
+                <a href="project-abyss.html" class="project-card"
+                    data-title="The Abyss World's Biggest Underground Rollercoaster" data-category="entertainment"
+                    data-funded="45">
                     <div class="project-image">
-                        <img src="https://i.ibb.co/TqDRP0Rc/Gemini-Generated-Image-g23nx9g23nx9g23n.png" alt="The Abyss: World's Biggest Underground Rollercoaster" loading="lazy" decoding="async">
+                        <img src="https://i.ibb.co/TqDRP0Rc/Gemini-Generated-Image-g23nx9g23nx9g23n.png"
+                            alt="The Abyss: World's Biggest Underground Rollercoaster" loading="lazy" decoding="async">
                     </div>
                     <div class="project-content">
-                        <div class="project-category">Entertainment & Thrills</div>
+                        <div class="project-category">Entertainment &amp; Thrills</div>
                         <h3 class="project-title">The Abyss: World's Biggest Underground Rollercoaster</h3>
-                        <p class="project-description">Experience the ultimate thrill with the world's biggest underground rollercoaster, featuring massive underground chambers, exciting drops, and stunning subterranean views.</p>
+                        <p class="project-description">Experience the ultimate thrill with the world's biggest
+                            underground rollercoaster, featuring massive underground chambers, exciting drops, and
+                            stunning subterranean views.</p>
                         <div class="project-meta">
                             <div>2,500,000 SAR raised</div>
                             <div>45% funded</div>
@@ -570,16 +585,20 @@
                         </div>
                     </div>
                 </a>
-                
+
                 <!-- Project 2 -->
-                <a href="project-smart-city-iot.html" class="project-card">
+                <a href="project-smart-city-iot.html" class="project-card"
+                    data-title="Smart Cities IoT Platform for Saudi Arabia" data-category="smart technology"
+                    data-funded="78">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Smart Cities IoT Platform" loading="lazy" decoding="async">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                            alt="Smart Cities IoT Platform" loading="lazy" decoding="async">
                     </div>
                     <div class="project-content">
-                        <div class="project-category">Smart Cities & IoT</div>
+                        <div class="project-category">Smart Cities &amp; IoT</div>
                         <h3 class="project-title">Smart Cities IoT Platform for Saudi Arabia</h3>
-                        <p class="project-description">Comprehensive IoT platform integrating smart sensors, AI analytics, and real-time monitoring to enhance urban infrastructure.</p>
+                        <p class="project-description">Comprehensive IoT platform integrating smart sensors, AI
+                            analytics, and real-time monitoring to enhance urban infrastructure.</p>
                         <div class="project-meta">
                             <div>450,000 SAR raised</div>
                             <div>78% funded</div>
@@ -589,16 +608,20 @@
                         </div>
                     </div>
                 </a>
-                
+
                 <!-- Project 3 -->
-                <a href="project-riyadh-music-festival.html" class="project-card">
+                <a href="project-riyadh-music-festival.html" class="project-card"
+                    data-title="Riyadh Music Festival Celebrating Saudi Musical Heritage"
+                    data-category="music arts entertainment" data-funded="75">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Riyadh Music Festival" loading="lazy" decoding="async">
+                        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                            alt="Riyadh Music Festival" loading="lazy" decoding="async">
                     </div>
                     <div class="project-content">
-                        <div class="project-category">Music & Arts</div>
+                        <div class="project-category">Music &amp; Arts</div>
                         <h3 class="project-title">Riyadh Music Festival: Celebrating Saudi Musical Heritage</h3>
-                        <p class="project-description">Three-day music festival showcasing traditional and contemporary Saudi musical talents, promoting cultural appreciation and artistic expression.</p>
+                        <p class="project-description">Three-day music festival showcasing traditional and contemporary
+                            Saudi musical talents, promoting cultural appreciation and artistic expression.</p>
                         <div class="project-meta">
                             <div>180,000 SAR raised</div>
                             <div>75% funded</div>
@@ -608,16 +631,20 @@
                         </div>
                     </div>
                 </a>
-                
+
                 <!-- Project 4 -->
-                <a href="project-solar-energy.html" class="project-card">
+                <a href="project-solar-energy.html" class="project-card"
+                    data-title="Advanced Solar Energy Storage System" data-category="energy technology"
+                    data-funded="65">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Solar Energy Storage System" loading="lazy" decoding="async">
+                        <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                            alt="Solar Energy Storage System" loading="lazy" decoding="async">
                     </div>
                     <div class="project-content">
                         <div class="project-category">Clean Energy</div>
                         <h3 class="project-title">Advanced Solar Energy Storage System</h3>
-                        <p class="project-description">Next-generation solar energy storage technology with AI-powered optimization, designed for the Kingdom's unique climate conditions.</p>
+                        <p class="project-description">Next-generation solar energy storage technology with AI-powered
+                            optimization, designed for the Kingdom's unique climate conditions.</p>
                         <div class="project-meta">
                             <div>320,000 SAR raised</div>
                             <div>65% funded</div>
@@ -627,16 +654,20 @@
                         </div>
                     </div>
                 </a>
-                
+
                 <!-- Project 5 -->
-                <a href="project-saudi-stories.html" class="project-card">
+                <a href="project-saudi-stories.html" class="project-card"
+                    data-title="Saudi Stories Documentary Series on Local Traditions"
+                    data-category="film video entertainment" data-funded="63">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Saudi Film Production" loading="lazy" decoding="async">
+                        <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                            alt="Saudi Film Production" loading="lazy" decoding="async">
                     </div>
                     <div class="project-content">
-                        <div class="project-category">Film & Video</div>
+                        <div class="project-category">Film &amp; Video</div>
                         <h3 class="project-title">Saudi Stories: Documentary Series on Local Traditions</h3>
-                        <p class="project-description">Compelling documentary series exploring the rich cultural heritage of Saudi Arabia, from ancient traditions to modern innovations.</p>
+                        <p class="project-description">Compelling documentary series exploring the rich cultural
+                            heritage of Saudi Arabia, from ancient traditions to modern innovations.</p>
                         <div class="project-meta">
                             <div>95,000 SAR raised</div>
                             <div>63% funded</div>
@@ -646,16 +677,20 @@
                         </div>
                     </div>
                 </a>
-                
+
                 <!-- Project 6 -->
-                <a href="project-digital-art-gallery.html" class="project-card">
+                <a href="project-digital-art-gallery.html" class="project-card"
+                    data-title="Digital Art Gallery Showcasing Saudi Digital Artists" data-category="arts visual"
+                    data-funded="82">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Digital Art Gallery" loading="lazy" decoding="async">
+                        <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                            alt="Digital Art Gallery" loading="lazy" decoding="async">
                     </div>
                     <div class="project-content">
                         <div class="project-category">Visual Arts</div>
                         <h3 class="project-title">Digital Art Gallery: Showcasing Saudi Digital Artists</h3>
-                        <p class="project-description">Innovative online platform connecting Saudi digital artists with global audiences, featuring interactive exhibitions and VR experiences.</p>
+                        <p class="project-description">Innovative online platform connecting Saudi digital artists with
+                            global audiences, featuring interactive exhibitions and VR experiences.</p>
                         <div class="project-meta">
                             <div>65,000 SAR raised</div>
                             <div>82% funded</div>
@@ -665,16 +700,20 @@
                         </div>
                     </div>
                 </a>
-                
+
                 <!-- Project 7 -->
-                <a href="project-saudi-heritage.html" class="project-card">
+                <a href="project-saudi-heritage.html" class="project-card"
+                    data-title="Saudi Heritage Digital Art Platform" data-category="heritage arts culture"
+                    data-funded="45">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1571266028243-e68f857f258a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Saudi Heritage Digital Art Platform" loading="lazy" decoding="async">
+                        <img src="https://images.unsplash.com/photo-1571266028243-e68f857f258a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            alt="Saudi Heritage Digital Art Platform" loading="lazy" decoding="async">
                     </div>
                     <div class="project-content">
-                        <div class="project-category">Heritage & Culture</div>
+                        <div class="project-category">Heritage &amp; Culture</div>
                         <h3 class="project-title">Saudi Heritage Digital Art Platform</h3>
-                        <p class="project-description">Interactive digital platform showcasing Saudi cultural heritage through immersive 3D experiences, VR tours, and digital storytelling.</p>
+                        <p class="project-description">Interactive digital platform showcasing Saudi cultural heritage
+                            through immersive 3D experiences, VR tours, and digital storytelling.</p>
                         <div class="project-meta">
                             <div>28,000 SAR raised</div>
                             <div>45% funded</div>
@@ -684,16 +723,20 @@
                         </div>
                     </div>
                 </a>
-                
+
                 <!-- Project 8 -->
-                <a href="project-ai-disease-detection.html" class="project-card">
+                <a href="project-ai-disease-detection.html" class="project-card"
+                    data-title="AI Powered Early Disease Detection System" data-category="health healthcare technology"
+                    data-funded="38">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="AI-Powered Early Disease Detection System" loading="lazy" decoding="async">
+                        <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            alt="AI-Powered Early Disease Detection System" loading="lazy" decoding="async">
                     </div>
                     <div class="project-content">
                         <div class="project-category">Healthcare</div>
                         <h3 class="project-title">AI-Powered Early Disease Detection System</h3>
-                        <p class="project-description">Advanced system using machine learning algorithms for early detection of chronic diseases and improved treatment outcomes.</p>
+                        <p class="project-description">Advanced system using machine learning algorithms for early
+                            detection of chronic diseases and improved treatment outcomes.</p>
                         <div class="project-meta">
                             <div>47,500 SAR raised</div>
                             <div>38% funded</div>
@@ -704,7 +747,7 @@
                     </div>
                 </a>
             </div>
-            
+
             <!-- Pagination -->
             <div class="pagination">
                 <button class="pagination-btn active">1</button>
@@ -715,20 +758,61 @@
         </div>
     </section>
 
+    <script src="assets/js/session-init.js"></script>
     <script>
         function switchLanguage(lang) {
-            if (lang === 'en') {
-                window.location.href = 'projects.html';
-            } else if (lang === 'ar') {
-                window.location.href = 'projects-ar.html';
-            }
+            if (lang === 'en') { window.location.href = 'projects.html'; }
+            else if (lang === 'ar') { window.location.href = 'projects-ar.html'; }
         }
+
+        // ---- Search & Filter ----
+        function filterProjects() {
+            const query = document.getElementById('projectSearch').value.toLowerCase().trim();
+            const category = document.getElementById('categoryFilter').value.toLowerCase();
+            const sort = document.getElementById('sortFilter').value;
+
+            const grid = document.getElementById('projectsGrid');
+            const cards = Array.from(grid.querySelectorAll('.project-card'));
+
+            let visible = [];
+            cards.forEach(card => {
+                const title = (card.dataset.title || '').toLowerCase();
+                const cardCat = (card.dataset.category || '').toLowerCase();
+                const matchSearch = !query || title.includes(query) || cardCat.includes(query);
+                const matchCat = !category || cardCat.includes(category);
+                const show = matchSearch && matchCat;
+                card.style.display = show ? '' : 'none';
+                if (show) visible.push(card);
+            });
+
+            // Sort visible cards
+            if (sort && sort !== 'default') {
+                visible.sort((a, b) => {
+                    const fa = parseFloat(a.dataset.funded || 0);
+                    const fb = parseFloat(b.dataset.funded || 0);
+                    const ta = (a.dataset.title || '').toLowerCase();
+                    const tb = (b.dataset.title || '').toLowerCase();
+                    if (sort === 'funded-high') return fb - fa;
+                    if (sort === 'funded-low') return fa - fb;
+                    if (sort === 'az') return ta.localeCompare(tb);
+                    if (sort === 'za') return tb.localeCompare(ta);
+                    return 0;
+                });
+                visible.forEach(card => grid.appendChild(card));
+            }
+
+            const noResults = document.getElementById('noResults');
+            noResults.style.display = visible.length === 0 ? 'block' : 'none';
+        }
+
+        document.getElementById('projectSearch').addEventListener('input', filterProjects);
+        document.getElementById('categoryFilter').addEventListener('change', filterProjects);
+        document.getElementById('sortFilter').addEventListener('change', filterProjects);
     </script>
-    
+
     <!-- Universal Mobile Menu Script -->
     <script src="mobile-menu.js"></script>
-    
+
 </body>
+
 </html>
-
-

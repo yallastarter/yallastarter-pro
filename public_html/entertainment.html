@@ -1,30 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Discover creative entertainment projects on YallaStarter. Support Saudi artists, filmmakers, musicians, and creative innovators.">
+    <meta name="description"
+        content="Discover creative entertainment projects on YallaStarter. Support Saudi artists, filmmakers, musicians, and creative innovators.">
     <meta name="keywords" content="entertainment projects, creative funding, Saudi artists, film, music, art">
     <meta name="author" content="YallaStarter">
     <meta name="robots" content="index, follow">
-    
+
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="YallaStarter Entertainment - Creative Projects in Saudi Arabia">
-    <meta property="og:description" content="Discover creative entertainment projects on YallaStarter. Support Saudi artists, filmmakers, musicians, and creative innovators.">
+    <meta property="og:description"
+        content="Discover creative entertainment projects on YallaStarter. Support Saudi artists, filmmakers, musicians, and creative innovators.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://yallastarter.com/entertainment">
-    
+
     <!-- Preload Critical Resources -->
     <link rel="preload" href="styles.css" as="style">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" as="style">
-    
+    <link rel="preload"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap"
+        as="style">
+
     <title>YallaStarter Entertainment - Creative Projects in Saudi Arabia</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="mobile-menu.css">
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Header Styles - Same as Homepage */
@@ -36,7 +43,7 @@
             z-index: 100;
             padding: 0.5rem 1rem;
         }
-        
+
         .navbar {
             display: flex;
             align-items: center;
@@ -44,7 +51,7 @@
             gap: 1rem;
             width: 100%;
         }
-        
+
         .logo {
             display: flex;
             align-items: center;
@@ -53,11 +60,11 @@
             margin-right: 0.8rem;
             transition: transform 0.2s ease;
         }
-        
+
         .logo:hover {
             transform: scale(1.02);
         }
-        
+
         .logo-text {
             font-size: 1.5rem;
             font-weight: 700;
@@ -65,7 +72,7 @@
             display: block;
             letter-spacing: -0.02em;
         }
-        
+
         .nav-links {
             display: flex;
             align-items: center;
@@ -76,11 +83,11 @@
             flex: 0 1 auto;
             justify-content: flex-start;
         }
-        
+
         .nav-links li {
             list-style: none;
         }
-        
+
         .nav-links a {
             color: var(--neutral-800);
             font-weight: 500;
@@ -92,12 +99,12 @@
             font-size: 1rem;
             border-bottom: 2px solid transparent;
         }
-        
+
         .nav-links a:hover {
             color: var(--primary);
             background-color: rgba(0, 108, 53, 0.05);
         }
-        
+
         .nav-links a.active {
             color: var(--primary);
             font-weight: 600;
@@ -105,7 +112,7 @@
             padding: 0.5rem 1rem;
             border-bottom: 2px solid var(--primary);
         }
-        
+
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -117,12 +124,12 @@
             border-radius: 6px;
             transition: all 0.3s ease;
         }
-        
+
         .mobile-menu-btn:hover {
             background-color: rgba(0, 108, 53, 0.05);
             color: var(--primary);
         }
-        
+
         .mobile-menu {
             width: 100%;
             background-color: white;
@@ -134,21 +141,21 @@
             transform: translateY(-10px);
             transition: all 0.3s ease;
         }
-        
+
         .mobile-menu.show {
             opacity: 1;
             transform: translateY(0);
         }
-        
+
         .mobile-menu .nav-links {
             list-style: none;
             margin: 1rem 0;
         }
-        
+
         .mobile-menu .nav-links li {
             margin-bottom: 0.8rem;
         }
-        
+
         .mobile-menu .nav-links a {
             color: var(--neutral-800);
             font-weight: 500;
@@ -156,7 +163,7 @@
             padding: 0.8rem 0;
             font-size: 1rem;
         }
-        
+
         .mobile-menu .auth-buttons {
             display: flex;
             flex-direction: column;
@@ -165,7 +172,7 @@
             padding-top: 1rem;
             border-top: 1px solid var(--neutral-200);
         }
-        
+
         .mobile-menu .auth-buttons a {
             width: 100%;
             text-align: center;
@@ -173,14 +180,14 @@
             border-radius: 8px;
             font-weight: 600;
         }
-        
+
         /* Main Auth Buttons Styling */
         .auth-buttons {
             display: flex;
             gap: 0.6rem;
             align-items: center;
         }
-        
+
         .auth-buttons .btn {
             padding: 0.6rem 1.2rem;
             font-size: 0.95rem;
@@ -189,51 +196,51 @@
             transition: all 0.3s ease;
             text-decoration: none;
         }
-        
+
         .auth-buttons .btn-primary {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
             border: 2px solid var(--primary);
             box-shadow: 0 2px 8px rgba(0, 108, 53, 0.2);
         }
-        
+
         .auth-buttons .btn-primary:hover {
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(0, 108, 53, 0.3);
         }
-        
+
         .auth-buttons .btn-secondary {
             background: transparent;
             color: var(--primary);
             border: 2px solid var(--primary);
             font-weight: 600;
         }
-        
+
         .auth-buttons .btn-secondary:hover {
             background: var(--primary);
             color: white;
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(0, 108, 53, 0.3);
         }
-        
+
         .auth-buttons .btn-link {
             background: transparent;
             color: var(--neutral-600);
             border: none;
             padding: 0.6rem 1rem;
         }
-        
+
         .auth-buttons .btn-link:hover {
             color: var(--primary);
         }
-        
+
         .language-switcher {
             display: flex;
             align-items: center;
             gap: 0.5rem;
             margin-left: auto;
         }
-        
+
         .language-btn {
             background: transparent;
             border: 2px solid var(--primary);
@@ -245,94 +252,94 @@
             transition: all 0.3s ease;
             font-size: 0.9rem;
         }
-        
+
         .language-btn:hover {
             background: var(--primary);
             color: white;
             transform: translateY(-1px);
         }
-        
+
         .language-btn.active {
             background: var(--primary);
             color: white;
         }
-        
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .header {
                 padding: 0.3rem 0.8rem;
             }
-            
+
             .navbar {
                 gap: 0.5rem;
             }
-            
+
             .logo-text {
                 font-size: 1.3rem;
             }
-            
+
             .nav-links {
                 display: none;
             }
-            
+
             .auth-buttons {
                 display: none;
             }
-            
+
             .mobile-menu-btn {
                 display: block;
             }
-            
+
             .mobile-menu {
                 padding: 0.8rem;
             }
-            
+
             .mobile-menu .nav-links a {
                 padding: 0.6rem 0;
                 font-size: 0.95rem;
             }
         }
-        
+
         /* Tablet Responsive */
         @media (max-width: 1024px) and (min-width: 769px) {
             .navbar {
                 gap: 1rem;
             }
-            
+
             .nav-links {
                 gap: 0.8rem;
             }
-            
+
             .nav-links a {
                 font-size: 0.95rem;
                 padding: 0.5rem 1rem;
             }
-            
+
             .auth-buttons .btn {
                 padding: 0.6rem 1.2rem;
                 font-size: 0.9rem;
             }
         }
-        
+
         .entertainment-hero {
             background: linear-gradient(135deg, #A855F7 0%, #9333EA 50%, #7C3AED 100%);
             color: white;
             padding: 4rem 0;
             text-align: center;
         }
-        
+
         .entertainment-hero-title {
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 1rem;
         }
-        
+
         .entertainment-hero-subtitle {
             font-size: 1.1rem;
             max-width: 700px;
             margin: 0 auto;
         }
-        
+
         .entertainment-slogan {
             margin-top: 2rem;
             padding: 1rem 2rem;
@@ -342,7 +349,7 @@
             border: 2px solid rgba(255, 255, 255, 0.3);
             display: inline-block;
         }
-        
+
         .slogan-text {
             font-size: 1.3rem;
             font-weight: 600;
@@ -351,18 +358,18 @@
             letter-spacing: 0.5px;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
-        
+
         .entertainment-categories {
             padding: 4rem 0;
             background-color: var(--neutral-100);
         }
-        
+
         .entertainment-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
-        
+
         .entertainment-card {
             background-color: white;
             border-radius: var(--border-radius);
@@ -371,12 +378,12 @@
             transition: var(--transition);
             text-align: center;
         }
-        
+
         .entertainment-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
-        
+
         .entertainment-icon {
             width: 80px;
             height: 80px;
@@ -389,25 +396,25 @@
             font-size: 2rem;
             margin: 2rem auto 1.5rem;
         }
-        
+
         .entertainment-title {
             font-size: 1.3rem;
             font-weight: 600;
             margin-bottom: 1rem;
             color: var(--neutral-900);
         }
-        
+
         .entertainment-description {
             color: var(--neutral-700);
             margin-bottom: 1.5rem;
             padding: 0 1.5rem;
         }
-        
+
         .back-to-home {
             text-align: center;
             margin: 2rem 0;
         }
-        
+
         .back-to-home a {
             display: inline-flex;
             align-items: center;
@@ -416,24 +423,24 @@
             font-weight: 500;
             text-decoration: none;
         }
-        
+
         .back-to-home a:hover {
             color: var(--primary-dark);
         }
-        
+
         /* Entertainment Subcategories Styling */
         .entertainment-subcategories {
             padding: 4rem 0;
             background-color: white;
         }
-        
+
         .subcategories-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 1.5rem;
             margin-top: 2rem;
         }
-        
+
         .subcategory-item {
             display: flex;
             flex-direction: column;
@@ -447,7 +454,7 @@
             transition: all 0.3s ease;
             text-align: center;
         }
-        
+
         .subcategory-item:hover {
             background-color: var(--neutral-100);
             border-color: #A855F7;
@@ -455,45 +462,45 @@
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(168, 85, 247, 0.2);
         }
-        
+
         .subcategory-item i {
             font-size: 2rem;
             color: #A855F7;
             margin-bottom: 0.75rem;
         }
-        
+
         .subcategory-item span {
             font-weight: 500;
             font-size: 0.95rem;
         }
-        
+
         /* Responsive adjustments for subcategories */
         @media (max-width: 768px) {
             .subcategories-grid {
                 grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
                 gap: 1rem;
             }
-            
+
             .subcategory-item {
                 padding: 1rem 0.75rem;
             }
-            
+
             .subcategory-item i {
                 font-size: 1.5rem;
             }
-            
+
             .subcategory-item span {
                 font-size: 0.85rem;
             }
         }
-        
+
         /* Entertainment Subcategory Navigation Styling */
         .entertainment-category-nav {
             background-color: white;
             border-bottom: 1px solid var(--neutral-200);
             padding: 1rem 0;
         }
-        
+
         .subcategory-links {
             display: flex;
             gap: 2rem;
@@ -502,21 +509,21 @@
             scrollbar-width: thin;
             scrollbar-color: #A855F7 var(--neutral-100);
         }
-        
+
         .subcategory-links::-webkit-scrollbar {
             height: 6px;
         }
-        
+
         .subcategory-links::-webkit-scrollbar-track {
             background: var(--neutral-100);
             border-radius: 3px;
         }
-        
+
         .subcategory-links::-webkit-scrollbar-thumb {
             background: #A855F7;
             border-radius: 3px;
         }
-        
+
         .subcategory-link {
             color: var(--neutral-600);
             text-decoration: none;
@@ -528,57 +535,57 @@
             white-space: nowrap;
             border: 2px solid transparent;
         }
-        
+
         .subcategory-link:hover {
             color: var(--neutral-900);
             background-color: rgba(168, 85, 247, 0.1);
             border-color: #A855F7;
         }
-        
+
         /* Responsive adjustments for subcategory navigation */
         @media (max-width: 768px) {
             .subcategory-links {
                 gap: 1rem;
                 padding: 0.25rem 0;
             }
-            
+
             .subcategory-link {
                 font-size: 0.85rem;
                 padding: 0.4rem 0.8rem;
             }
         }
-        
+
         /* Golden Buzzer Styling */
         .golden-buzzer-section {
             background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 50%, #F59E0B 100%);
             padding: 4rem 0;
             margin: 2rem 0;
         }
-        
+
         .golden-buzzer-header {
             text-align: center;
             margin-bottom: 3rem;
         }
-        
+
         .golden-buzzer-icon {
             font-size: 4rem;
             margin-bottom: 1rem;
             animation: bounce 2s infinite;
         }
-        
+
         .golden-buzzer-title {
             font-size: 2.5rem;
             font-weight: 700;
             color: #92400E;
             margin-bottom: 0.5rem;
         }
-        
+
         .golden-buzzer-subtitle {
             font-size: 1.2rem;
             color: #B45309;
             font-weight: 500;
         }
-        
+
         .golden-buzzer-project {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -593,16 +600,16 @@
             text-decoration: none;
             color: inherit;
         }
-        
+
         .golden-buzzer-project:hover {
             text-decoration: none;
             color: inherit;
         }
-        
+
         .golden-buzzer-project:visited {
             color: inherit;
         }
-        
+
         .golden-buzzer-project::before {
             content: '';
             position: absolute;
@@ -613,19 +620,19 @@
             background: linear-gradient(90deg, #F59E0B, #FCD34D, #FEF3C7, #F59E0B);
             animation: shimmer 3s infinite;
         }
-        
+
         .project-image {
             position: relative;
             border-radius: 15px;
             overflow: hidden;
         }
-        
+
         .project-image img {
             width: 100%;
             height: 300px;
             object-fit: cover;
         }
-        
+
         .golden-buzzer-badge {
             position: absolute;
             top: 1rem;
@@ -639,42 +646,42 @@
             box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
             animation: pulse 2s infinite;
         }
-        
+
         .project-content h3 {
             font-size: 1.8rem;
             font-weight: 700;
             color: #1F2937;
             margin-bottom: 1rem;
         }
-        
+
         .project-description {
             color: #6B7280;
             line-height: 1.6;
             margin-bottom: 1.5rem;
         }
-        
+
         .gea-sponsor {
             margin-bottom: 1.5rem;
         }
-        
+
         .sponsor-label {
             color: #9CA3AF;
             font-size: 0.9rem;
             margin-right: 0.5rem;
         }
-        
+
         .gea-name {
             color: #B45309;
             font-weight: 600;
             font-size: 1.1rem;
         }
-        
+
         .funding-status {
             display: flex;
             align-items: center;
             gap: 1rem;
         }
-        
+
         .status-badge.fully-funded {
             background: linear-gradient(135deg, #10B981, #34D399);
             color: white;
@@ -683,79 +690,90 @@
             font-weight: 700;
             font-size: 0.9rem;
         }
-        
+
         .funding-amount {
             color: #059669;
             font-weight: 700;
             font-size: 1.2rem;
         }
-        
+
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
                 transform: translateY(0);
             }
+
             40% {
                 transform: translateY(-10px);
             }
+
             60% {
                 transform: translateY(-5px);
             }
         }
-        
+
         @keyframes pulse {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: scale(1);
             }
+
             50% {
                 transform: scale(1.05);
             }
         }
-        
+
         @keyframes shimmer {
             0% {
                 background-position: -200px 0;
             }
+
             100% {
                 background-position: 200px 0;
             }
         }
-        
+
         @media (max-width: 768px) {
             .golden-buzzer-project {
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
-            
+
             .golden-buzzer-title {
                 font-size: 2rem;
             }
         }
-        
+
         /* Featured Entertainment Projects Styling */
         .featured-entertainment-projects {
             padding: 4rem 0;
             background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f8f9fa 100%);
         }
-        
+
         .featured-entertainment-projects .section-header {
             text-align: center;
             margin-bottom: 3rem;
         }
-        
+
         .featured-entertainment-projects .section-title {
             font-size: 2.5rem;
             font-weight: 700;
             color: var(--neutral-900);
             margin-bottom: 1rem;
         }
-        
+
         .featured-entertainment-projects .section-subtitle {
             font-size: 1.2rem;
             color: var(--neutral-600);
             max-width: 600px;
             margin: 0 auto;
         }
-        
+
         .featured-entertainment-projects .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -763,7 +781,7 @@
             max-width: 1200px;
             margin: 0 auto;
         }
-        
+
         .featured-entertainment-projects .project-card {
             background: white;
             border-radius: 12px;
@@ -774,38 +792,38 @@
             color: inherit;
             display: block;
         }
-        
+
         .featured-entertainment-projects .project-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
             text-decoration: none;
             color: inherit;
         }
-        
+
         .featured-entertainment-projects .project-card:visited {
             color: inherit;
         }
-        
+
         .featured-entertainment-projects .project-image {
             height: 200px;
             overflow: hidden;
         }
-        
+
         .featured-entertainment-projects .project-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.3s ease;
         }
-        
+
         .featured-entertainment-projects .project-card:hover .project-image img {
             transform: scale(1.05);
         }
-        
+
         .featured-entertainment-projects .project-content {
             padding: 1.5rem;
         }
-        
+
         .featured-entertainment-projects .project-category {
             color: var(--primary);
             font-weight: 600;
@@ -814,7 +832,7 @@
             letter-spacing: 0.5px;
             margin-bottom: 0.5rem;
         }
-        
+
         .featured-entertainment-projects .project-title {
             font-size: 1.3rem;
             font-weight: 700;
@@ -822,13 +840,13 @@
             margin-bottom: 1rem;
             line-height: 1.3;
         }
-        
+
         .featured-entertainment-projects .project-description {
             color: var(--neutral-700);
             line-height: 1.6;
             margin-bottom: 1.5rem;
         }
-        
+
         .featured-entertainment-projects .project-meta {
             display: flex;
             justify-content: space-between;
@@ -837,7 +855,7 @@
             font-size: 0.9rem;
             color: var(--neutral-600);
         }
-        
+
         .featured-entertainment-projects .progress-bar {
             width: 100%;
             height: 8px;
@@ -845,17 +863,16 @@
             border-radius: 4px;
             overflow: hidden;
         }
-        
+
         .featured-entertainment-projects .progress-fill {
             height: 100%;
             background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
             border-radius: 4px;
             transition: width 0.3s ease;
         }
-        
-
     </style>
 </head>
+
 <body>
     <!-- Header -->
     <header class="header">
@@ -863,7 +880,7 @@
             <a href="index.html" class="logo">
                 <span class="logo-text">YallaStarter</span>
             </a>
-        
+
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="entertainment.html" class="active">Entertainment Projects</a></li>
@@ -874,22 +891,22 @@
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
-            
+
             <div class="language-switcher">
                 <button class="language-btn active" onclick="switchLanguage('en')">English</button>
                 <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
             </div>
-            
+
             <div class="auth-buttons">
                 <a href="create-project.html" class="btn btn-primary">Start a Project</a>
                 <a href="login.html" class="btn btn-link">Log In</a>
             </div>
-            
+
             <button class="mobile-menu-btn">
                 <i class="fas fa-bars"></i>
             </button>
         </nav>
-        
+
         <div class="mobile-menu">
             <div class="mobile-menu-header">
                 <div class="mobile-header-left">
@@ -923,7 +940,8 @@
     <section class="entertainment-hero">
         <div class="container">
             <h1 class="entertainment-hero-title">YallaStarter Entertainment</h1>
-            <p class="entertainment-hero-subtitle">Discover and support creative projects in arts, music, film, and cultural expression across Saudi Arabia</p>
+            <p class="entertainment-hero-subtitle">Discover and support creative projects in arts, music, film, and
+                cultural expression across Saudi Arabia</p>
             <div class="entertainment-slogan">
                 <span class="slogan-text">Saudi Youth are Partners in Entertainment</span>
             </div>
@@ -961,17 +979,22 @@
                 <h2 class="golden-buzzer-title">Golden Buzzer Winner!</h2>
                 <p class="golden-buzzer-subtitle">Sponsored by General Entertainment Authority (GEA)</p>
             </div>
-            
+
             <a href="project-abyss.html" class="golden-buzzer-project">
                 <div class="project-image">
-                    <img src="https://i.ibb.co/TqDRP0Rc/Gemini-Generated-Image-g23nx9g23nx9g23n.png" alt="The Abyss: World's Biggest Underground Rollercoaster" loading="lazy" decoding="async">
+                    <img src="https://i.ibb.co/TqDRP0Rc/Gemini-Generated-Image-g23nx9g23nx9g23n.png"
+                        alt="The Abyss: World's Biggest Underground Rollercoaster" loading="lazy" decoding="async">
                     <div class="golden-buzzer-badge">
                         <span>🏆 GOLDEN BUZZER</span>
                     </div>
                 </div>
                 <div class="project-content">
                     <h3 class="project-title">The Abyss: World's Biggest Underground Rollercoaster</h3>
-                    <p class="project-description">Experience the ultimate thrill with the world's biggest underground rollercoaster, featuring massive underground chambers, thrilling drops, and spectacular underground landscapes. This engineering marvel combines cutting-edge technology with breathtaking subterranean adventures. This prestigious entertainment project received the Golden Buzzer from GEA, ensuring full funding and support!</p>
+                    <p class="project-description">Experience the ultimate thrill with the world's biggest underground
+                        rollercoaster, featuring massive underground chambers, thrilling drops, and spectacular
+                        underground landscapes. This engineering marvel combines cutting-edge technology with
+                        breathtaking subterranean adventures. This prestigious entertainment project received the Golden
+                        Buzzer from GEA, ensuring full funding and support!</p>
                     <div class="gea-sponsor">
                         <span class="sponsor-label">Sponsored by:</span>
                         <span class="gea-name">General Entertainment Authority (GEA)</span>
@@ -990,53 +1013,58 @@
         <div class="container">
             <h2 class="section-title">Entertainment Categories</h2>
             <p class="section-subtitle">Explore creative projects in these exciting areas</p>
-            
+
             <div class="entertainment-grid">
                 <div class="entertainment-card">
                     <div class="entertainment-icon">
                         <i class="fas fa-music"></i>
                     </div>
                     <h3 class="entertainment-title">Music & Audio</h3>
-                    <p class="entertainment-description">Support Saudi musicians, podcasters, and audio creators bringing new sounds to the Kingdom.</p>
+                    <p class="entertainment-description">Support Saudi musicians, podcasters, and audio creators
+                        bringing new sounds to the Kingdom.</p>
                     <a href="entertainment-music.html" class="btn btn-outline">Explore Music</a>
                 </div>
-                
+
                 <div class="entertainment-card">
                     <div class="entertainment-icon">
                         <i class="fas fa-film"></i>
                     </div>
                     <h3 class="entertainment-title">Film & Video</h3>
-                    <p class="entertainment-description">Discover Saudi filmmakers, content creators, and video projects telling local stories.</p>
+                    <p class="entertainment-description">Discover Saudi filmmakers, content creators, and video projects
+                        telling local stories.</p>
                     <a href="entertainment-film.html" class="btn btn-outline">Explore Film</a>
                 </div>
-                
+
                 <div class="entertainment-card">
                     <div class="entertainment-icon">
                         <i class="fas fa-paint-brush"></i>
                     </div>
                     <h3 class="entertainment-title">Visual Arts</h3>
-                    <p class="entertainment-description">Support Saudi artists, photographers, and designers creating beautiful visual experiences.</p>
+                    <p class="entertainment-description">Support Saudi artists, photographers, and designers creating
+                        beautiful visual experiences.</p>
                     <a href="entertainment-art.html" class="btn btn-outline">Explore Arts</a>
                 </div>
-                
+
                 <div class="entertainment-card">
                     <div class="entertainment-icon">
                         <i class="fas fa-theater-masks"></i>
                     </div>
                     <h3 class="entertainment-title">Performing Arts</h3>
-                    <p class="entertainment-description">Discover theater, dance, and performance projects showcasing Saudi talent.</p>
+                    <p class="entertainment-description">Discover theater, dance, and performance projects showcasing
+                        Saudi talent.</p>
                     <a href="entertainment-theater.html" class="btn btn-outline">Explore Performing</a>
                 </div>
-                
+
                 <div class="entertainment-card">
                     <div class="entertainment-icon">
                         <i class="fas fa-gamepad"></i>
                     </div>
                     <h3 class="entertainment-title">Gaming & Interactive</h3>
-                    <p class="entertainment-description">Support Saudi game developers and interactive media creators.</p>
+                    <p class="entertainment-description">Support Saudi game developers and interactive media creators.
+                    </p>
                     <a href="entertainment-games.html" class="btn btn-outline">Explore Gaming</a>
                 </div>
-                
+
                 <div class="entertainment-card">
                     <div class="entertainment-icon">
                         <i class="fas fa-book-open"></i>
@@ -1054,7 +1082,7 @@
         <div class="container">
             <h2 class="section-title">All Entertainment Subcategories</h2>
             <p class="section-subtitle">Browse projects by specific creative disciplines</p>
-            
+
             <div class="subcategories-grid">
                 <a href="entertainment-art.html" class="subcategory-item">
                     <i class="fas fa-palette"></i>
@@ -1125,18 +1153,23 @@
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Featured Entertainment Projects</h2>
-                <p class="section-subtitle">Discover creative projects from Saudi Arabia's vibrant entertainment scene</p>
+                <p class="section-subtitle">Discover creative projects from Saudi Arabia's vibrant entertainment scene
+                </p>
             </div>
-            
+
             <div class="projects-grid">
                 <a href="project-abyss.html" class="project-card">
                     <div class="project-image">
-                        <img src="https://i.ibb.co/TqDRP0Rc/Gemini-Generated-Image-g23nx9g23nx9g23n.png" alt="The Abyss: World's Biggest Underground Rollercoaster" loading="lazy" decoding="async">
+                        <img src="https://i.ibb.co/TqDRP0Rc/Gemini-Generated-Image-g23nx9g23nx9g23n.png"
+                            alt="The Abyss: World's Biggest Underground Rollercoaster" loading="lazy" decoding="async">
                     </div>
                     <div class="project-content">
                         <div class="project-category">Entertainment & Thrills</div>
                         <h3 class="project-title">The Abyss: World's Biggest Underground Rollercoaster</h3>
-                        <p class="project-description">Experience the ultimate thrill with the world's biggest underground rollercoaster, featuring massive underground chambers, thrilling drops, and spectacular underground landscapes. This engineering marvel combines cutting-edge technology with breathtaking subterranean adventures.</p>
+                        <p class="project-description">Experience the ultimate thrill with the world's biggest
+                            underground rollercoaster, featuring massive underground chambers, thrilling drops, and
+                            spectacular underground landscapes. This engineering marvel combines cutting-edge technology
+                            with breathtaking subterranean adventures.</p>
                         <div class="project-meta">
                             <div>SAR 2,500,000 raised</div>
                             <div>45% funded</div>
@@ -1146,15 +1179,18 @@
                         </div>
                     </div>
                 </a>
-                
+
                 <a href="project-riyadh-music-festival.html" class="project-card">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Riyadh Music Festival" loading="lazy" decoding="async">
+                        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                            alt="Riyadh Music Festival" loading="lazy" decoding="async">
                     </div>
                     <div class="project-content">
                         <div class="project-category">Music & Arts</div>
                         <h3 class="project-title">Riyadh Music Festival: Celebrating Saudi Musical Heritage</h3>
-                        <p class="project-description">A three-day music festival showcasing traditional and contemporary Saudi musical talent, fostering cultural appreciation and artistic expression.</p>
+                        <p class="project-description">A three-day music festival showcasing traditional and
+                            contemporary Saudi musical talent, fostering cultural appreciation and artistic expression.
+                        </p>
                         <div class="project-meta">
                             <div>SAR 180,000 raised</div>
                             <div>75% funded</div>
@@ -1164,15 +1200,17 @@
                         </div>
                     </div>
                 </a>
-                
+
                 <a href="project-saudi-stories.html" class="project-card">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Saudi Film Production" loading="lazy" decoding="async">
+                        <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                            alt="Saudi Film Production" loading="lazy" decoding="async">
                     </div>
                     <div class="project-content">
                         <div class="project-category">Film & Video</div>
                         <h3 class="project-title">Saudi Stories: Documentary Series on Local Traditions</h3>
-                        <p class="project-description">A compelling documentary series exploring Saudi Arabia's rich cultural heritage, from ancient traditions to modern innovations.</p>
+                        <p class="project-description">A compelling documentary series exploring Saudi Arabia's rich
+                            cultural heritage, from ancient traditions to modern innovations.</p>
                         <div class="project-meta">
                             <div>SAR 95,000 raised</div>
                             <div>63% funded</div>
@@ -1182,15 +1220,18 @@
                         </div>
                     </div>
                 </a>
-                
+
                 <a href="project-digital-art-gallery.html" class="project-card">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Digital Art Gallery" loading="lazy" decoding="async">
+                        <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                            alt="Digital Art Gallery" loading="lazy" decoding="async">
                     </div>
                     <div class="project-content">
                         <div class="project-category">Visual Arts</div>
                         <h3 class="project-title">Digital Art Gallery: Showcasing Saudi Digital Artists</h3>
-                        <p class="project-description">An innovative online platform connecting Saudi digital artists with global audiences, featuring interactive exhibitions and virtual reality experiences.</p>
+                        <p class="project-description">An innovative online platform connecting Saudi digital artists
+                            with global audiences, featuring interactive exhibitions and virtual reality experiences.
+                        </p>
                         <div class="project-meta">
                             <div>SAR 65,000 raised</div>
                             <div>82% funded</div>
@@ -1228,7 +1269,7 @@
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-column">
                     <h3>For Creators</h3>
                     <ul class="footer-links">
@@ -1240,7 +1281,7 @@
                         <li><a href="coming-soon.html">Success Stories</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-column">
                     <h3>For Backers</h3>
                     <ul class="footer-links">
@@ -1251,7 +1292,7 @@
                         <li><a href="coming-soon.html">Backer Protection</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-column">
                     <h3>Connect With Us</h3>
                     <ul class="footer-links">
@@ -1263,12 +1304,12 @@
                     </ul>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
                 <div class="footer-copyright">
                     &copy; 2025 YallaStarter. All rights reserved.
                 </div>
-                
+
                 <div class="footer-social">
                     <a href="coming-soon.html" class="social-icon"><i class="fab fa-facebook-f"></i></a>
                     <a href="coming-soon.html" class="social-icon"><i class="fab fa-twitter"></i></a>
@@ -1288,11 +1329,13 @@
                 window.location.href = 'entertainment-ar.html';
             }
         }
-        
+
     </script>
-    
+
+    <!-- Session persistence: replace auth buttons with user dropdown if logged in -->
+    <script src="assets/js/session-init.js"></script>
     <!-- Universal Mobile Menu Script -->
     <script src="mobile-menu.js"></script>
 </body>
-</html>
 
+</html>

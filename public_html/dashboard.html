@@ -461,7 +461,8 @@
                                 <i class="fas fa-cog"></i> Settings
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a href="javascript:void(0)" class="dropdown-item" onclick="window.auth.logout(); return false;">
+                            <a href="javascript:void(0)" class="dropdown-item"
+                                onclick="window.auth.logout(); return false;">
                                 <i class="fas fa-sign-out-alt"></i> Logout
                             </a>
                         </div>
@@ -510,7 +511,8 @@
                                 <i class="fas fa-coins"></i> My Wallet
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a href="javascript:void(0)" class="dropdown-item" onclick="window.auth.logout(); return false;">
+                            <a href="javascript:void(0)" class="dropdown-item"
+                                onclick="window.auth.logout(); return false;">
                                 <i class="fas fa-sign-out-alt"></i> Logout
                             </a>
                         </div>
@@ -555,7 +557,7 @@
                     </a>
                 </li>
                 <li class="sidebar-menu-item">
-                    <a href="coins.html" class="sidebar-menu-link">
+                    <a href="payments.html" class="sidebar-menu-link">
                         <i class="fas fa-money-bill-wave sidebar-menu-icon"></i>
                         Payments
                     </a>
@@ -567,7 +569,7 @@
                     </a>
                 </li>
                 <li class="sidebar-menu-item">
-                    <a href="support.html" class="sidebar-menu-link">
+                    <a href="notifications.html" class="sidebar-menu-link">
                         <i class="fas fa-bell sidebar-menu-icon"></i>
                         Notifications
                     </a>
@@ -591,7 +593,8 @@
                     </a>
                 </li>
                 <li class="sidebar-menu-item">
-                    <a href="javascript:void(0)" class="sidebar-menu-link" onclick="window.auth.logout(); return false;">
+                    <a href="javascript:void(0)" class="sidebar-menu-link"
+                        onclick="window.auth.logout(); return false;">
                         <i class="fas fa-sign-out-alt sidebar-menu-icon"></i>
                         Logout
                     </a>
@@ -818,7 +821,7 @@
                     }
                     grid.innerHTML = projects.map(p => {
                         const percent = p.goalAmount ? Math.min(100, Math.round((p.currentAmount / p.goalAmount) * 100)) : 0;
-                        const daysLeft = p.deadline ? Math.max(0, Math.ceil((new Date(p.deadline) - new Date()) / (24*60*60*1000))) : 0;
+                        const daysLeft = p.deadline ? Math.max(0, Math.ceil((new Date(p.deadline) - new Date()) / (24 * 60 * 60 * 1000))) : 0;
                         const imgSrc = p.coverImage || 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=600&q=80';
                         const statusClass = p.status === 'active' ? 'active' : (p.status === 'completed' ? 'completed' : 'draft');
                         return `<div class="project-card">
@@ -864,7 +867,7 @@
                         if (!project) return '';
                         const p = project;
                         const percent = p.goalAmount ? Math.min(100, Math.round((p.currentAmount / p.goalAmount) * 100)) : 0;
-                        const daysLeft = p.deadline ? Math.max(0, Math.ceil((new Date(p.deadline) - new Date()) / (24*60*60*1000))) : 0;
+                        const daysLeft = p.deadline ? Math.max(0, Math.ceil((new Date(p.deadline) - new Date()) / (24 * 60 * 60 * 1000))) : 0;
                         const imgSrc = p.coverImage || 'https://images.unsplash.com/photo-1576153192621-7a3be10b356e?w=600&q=80';
                         const creatorName = p.creator && (p.creator.username || p.creator.email) ? p.creator.username || p.creator.email : 'Creator';
                         const dateStr = lastBackedAt ? new Date(lastBackedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
