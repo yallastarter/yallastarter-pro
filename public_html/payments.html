@@ -741,20 +741,18 @@
 
         loadTransactions();
 
-        function downloadCSV() {
-            const rows = [['Date', 'Description', 'Type', 'Amount', 'Status']];
-            sampleTransactions.forEach(tx => {
-                rows.push([tx.date, tx.desc, tx.type, (tx.amount < 0 ? '-' : '+') + 'SAR ' + Math.abs(tx.amount), tx.status]);
-            });
-            const csv = rows.map(r => r.map(c => `"${c}"`).join(',')).join('\n');
-            const blob = new Blob([csv], { type: 'text/csv' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url; a.download = 'yallastarter-payments.csv'; a.click();
-        }
-
         function showAddMethodModal() {
-            alert('Add Payment Method feature coming soon!');
+            const toast = document.createElement('div');
+            toast.textContent = '💳 Add Payment Method feature coming soon!';
+            Object.assign(toast.style, {
+                position: 'fixed', bottom: '2rem', right: '2rem',
+                background: '#006c35', color: 'white', padding: '1rem 1.5rem',
+                borderRadius: '10px', boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
+                zIndex: 9999, fontWeight: '500', fontSize: '0.95rem',
+                transition: 'opacity 0.4s ease'
+            });
+            document.body.appendChild(toast);
+            setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 400); }, 3000);
         }
     </script>
 </body>

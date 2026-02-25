@@ -562,6 +562,7 @@
             <li><a href="#transactions" data-tab="transactions"><i class="fas fa-exchange-alt"></i> Transactions</a>
             </li>
             <li><a href="#cashouts" data-tab="cashouts"><i class="fas fa-money-bill-wave"></i> Cash Outs</a></li>
+            <li><a href="#employees" data-tab="employees"><i class="fas fa-user-tie"></i> Employees</a></li>
         </ul>
 
         <div class="sidebar-section">System</div>
@@ -784,6 +785,113 @@
                 </div>
             </div>
 
+            <!-- Employees Tab -->
+            <div class="tab-content" id="tab-employees">
+                <div class="panel-card">
+                    <div class="panel-header">
+                        <div class="panel-title"><i class="fas fa-user-tie"
+                                style="color:var(--accent-purple);margin-right:.5rem;"></i>Staff Management</div>
+                        <button onclick="openAddEmployeeModal()"
+                            style="padding:.5rem 1rem;background:var(--accent-green);color:white;border:none;border-radius:8px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;"><i
+                                class="fas fa-plus"></i> Add Employee</button>
+                    </div>
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Permissions</th>
+                                <th>Added</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="employeesTable">
+                            <tr>
+                                <td colspan="6" class="loading"><i class="fas fa-spinner fa-spin"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Add Employee Modal -->
+            <div id="addEmployeeModal"
+                style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center;backdrop-filter:blur(4px);">
+                <div
+                    style="background:var(--admin-surface);border:1px solid var(--admin-border);border-radius:20px;padding:2rem;max-width:480px;width:95%;max-height:90vh;overflow-y:auto;animation:fadeIn .3s ease;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
+                        <h3 style="font-size:1.1rem;font-weight:700;"><i class="fas fa-user-plus"
+                                style="color:var(--accent-green);margin-right:.5rem;"></i>Add Staff Member</h3>
+                        <button onclick="document.getElementById('addEmployeeModal').style.display='none'"
+                            style="background:none;border:none;color:var(--admin-muted);font-size:1.3rem;cursor:pointer;">✕</button>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:1rem;">
+                        <div>
+                            <label
+                                style="font-size:.8rem;color:var(--admin-muted);display:block;margin-bottom:.35rem;">Full
+                                Name / Username *</label>
+                            <input id="empUsername" type="text" placeholder="e.g. Mohamed Al-Rashidi"
+                                style="width:100%;padding:.65rem .9rem;background:rgba(255,255,255,.05);border:1px solid var(--admin-border);border-radius:8px;color:white;font-family:inherit;font-size:.88rem;outline:none;">
+                        </div>
+                        <div>
+                            <label
+                                style="font-size:.8rem;color:var(--admin-muted);display:block;margin-bottom:.35rem;">Email
+                                Address *</label>
+                            <input id="empEmail" type="email" placeholder="employee@yallastarter.com"
+                                style="width:100%;padding:.65rem .9rem;background:rgba(255,255,255,.05);border:1px solid var(--admin-border);border-radius:8px;color:white;font-family:inherit;font-size:.88rem;outline:none;">
+                        </div>
+                        <div>
+                            <label
+                                style="font-size:.8rem;color:var(--admin-muted);display:block;margin-bottom:.35rem;">Temporary
+                                Password *</label>
+                            <input id="empPassword" type="password" placeholder="Min 6 characters"
+                                style="width:100%;padding:.65rem .9rem;background:rgba(255,255,255,.05);border:1px solid var(--admin-border);border-radius:8px;color:white;font-family:inherit;font-size:.88rem;outline:none;">
+                        </div>
+                        <div>
+                            <label
+                                style="font-size:.8rem;color:var(--admin-muted);display:block;margin-bottom:.35rem;">Role
+                                *</label>
+                            <select id="empRole"
+                                style="width:100%;padding:.65rem .9rem;background:rgba(255,255,255,.05);border:1px solid var(--admin-border);border-radius:8px;color:white;font-family:inherit;font-size:.88rem;outline:none;"
+                                onchange="updateDefaultPermissions()">
+                                <option value="employee">Employee — Basic Access</option>
+                                <option value="manager">Manager — Full Access (except staff management)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label
+                                style="font-size:.8rem;color:var(--admin-muted);display:block;margin-bottom:.5rem;">Permissions</label>
+                            <div style="display:flex;flex-direction:column;gap:.5rem;">
+                                <label
+                                    style="display:flex;align-items:center;gap:.6rem;cursor:pointer;font-size:.85rem;"><input
+                                        type="checkbox" id="permProjects" style="accent-color:var(--accent-green);">
+                                    Manage Projects (approve / reject / publish)</label>
+                                <label
+                                    style="display:flex;align-items:center;gap:.6rem;cursor:pointer;font-size:.85rem;"><input
+                                        type="checkbox" id="permUsers" style="accent-color:var(--accent-green);"> Manage
+                                    Users (view / modify)</label>
+                                <label
+                                    style="display:flex;align-items:center;gap:.6rem;cursor:pointer;font-size:.85rem;"><input
+                                        type="checkbox" id="permTransactions" checked
+                                        style="accent-color:var(--accent-green);"> View Transactions</label>
+                                <label
+                                    style="display:flex;align-items:center;gap:.6rem;cursor:pointer;font-size:.85rem;"><input
+                                        type="checkbox" id="permPayouts" style="accent-color:var(--accent-green);">
+                                    Approve Cash-Out Payouts</label>
+                            </div>
+                        </div>
+                        <div id="empModalError"
+                            style="display:none;padding:.6rem .9rem;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);border-radius:8px;color:#ef4444;font-size:.85rem;">
+                        </div>
+                        <button onclick="submitAddEmployee()"
+                            style="padding:.75rem;background:var(--accent-green);color:white;border:none;border-radius:10px;cursor:pointer;font-family:inherit;font-size:.9rem;font-weight:700;margin-top:.25rem;">
+                            <i class="fas fa-user-plus"></i> Create Staff Account
+                        </button>
+                    </div>
+                </div>
+            </div>
+
             <!-- Platform Tab -->
             <div class="tab-content" id="tab-platform">
                 <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
@@ -871,6 +979,7 @@
                     projects: ['Project Management', 'Approve, feature, and manage projects'],
                     transactions: ['Transactions', 'Monitor all coin transactions'],
                     cashouts: ['Cash Out Requests', 'Approve or reject cash out requests'],
+                    employees: ['Staff Management', 'Manage employees and managers'],
                     platform: ['Platform Settings', 'System configuration and health']
                 };
                 document.getElementById('pageTitle').textContent = titles[tab][0];
@@ -881,6 +990,7 @@
                 if (tab === 'projects') loadAdminProjects();
                 if (tab === 'transactions') loadAdminTransactions();
                 if (tab === 'cashouts') loadAdminCashouts();
+                if (tab === 'employees') loadEmployees();
                 if (tab === 'platform') loadHealth();
             });
         });
@@ -1156,6 +1266,146 @@
                 document.getElementById('healthStatus').innerHTML = '<p style="color: var(--accent-red);"><i class="fas fa-exclamation-triangle"></i> Server unreachable</p>';
             }
         }
+
+        // ========= EMPLOYEE MANAGEMENT =========
+        async function loadEmployees() {
+            try {
+                const data = await adminFetch(`${API}/api/admin/employees`);
+                if (!data.success) return;
+                const tbody = document.getElementById('employeesTable');
+                if (!data.data || data.data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--admin-muted);padding:2rem;"><i class="fas fa-user-tie" style="font-size:1.5rem;display:block;margin-bottom:.5rem;"></i>No staff members yet</td></tr>';
+                    return;
+                }
+                tbody.innerHTML = data.data.map(emp => {
+                    const permBadges = [];
+                    if (emp.permissions?.canManageProjects) permBadges.push('<span class="badge active" style="margin:1px;">Projects</span>');
+                    if (emp.permissions?.canManageUsers) permBadges.push('<span class="badge send" style="margin:1px;">Users</span>');
+                    if (emp.permissions?.canViewTransactions) permBadges.push('<span class="badge completed" style="margin:1px;">Transactions</span>');
+                    if (emp.permissions?.canApprovePayouts) permBadges.push('<span class="badge cashout" style="margin:1px;">Payouts</span>');
+                    const roleBadge = emp.role === 'manager'
+                        ? '<span class="badge" style="background:rgba(139,92,246,.15);color:#8B5CF6;">Manager</span>'
+                        : '<span class="badge" style="background:rgba(59,130,246,.15);color:#3B82F6;">Employee</span>';
+                    return `<tr>
+                        <td><strong>${emp.username}</strong></td>
+                        <td>${emp.email}</td>
+                        <td>${roleBadge}</td>
+                        <td>${permBadges.join(' ') || '<span style="color:var(--admin-muted);">None</span>'}</td>
+                        <td>${new Date(emp.createdAt).toLocaleDateString()}</td>
+                        <td>
+                            <button class="action-btn" onclick="updateEmployeeRole('${emp._id}', '${emp.role === 'manager' ? 'employee' : 'manager'}')" title="Toggle role"><i class="fas fa-exchange-alt"></i> ${emp.role === 'manager' ? 'Demote' : 'Promote'}</button>
+                            <button class="action-btn reject" onclick="removeEmployee('${emp._id}', '${emp.username}')" title="Remove"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>`;
+                }).join('');
+            } catch (err) {
+                console.error('Load employees error:', err);
+            }
+        }
+
+        function openAddEmployeeModal() {
+            document.getElementById('empUsername').value = '';
+            document.getElementById('empEmail').value = '';
+            document.getElementById('empPassword').value = '';
+            document.getElementById('empRole').value = 'employee';
+            document.getElementById('empModalError').style.display = 'none';
+            updateDefaultPermissions();
+            document.getElementById('addEmployeeModal').style.display = 'flex';
+        }
+
+        function updateDefaultPermissions() {
+            const isManager = document.getElementById('empRole').value === 'manager';
+            document.getElementById('permProjects').checked = isManager;
+            document.getElementById('permUsers').checked = isManager;
+            document.getElementById('permTransactions').checked = true;
+            document.getElementById('permPayouts').checked = isManager;
+        }
+
+        async function submitAddEmployee() {
+            const errEl = document.getElementById('empModalError');
+            errEl.style.display = 'none';
+            const username = document.getElementById('empUsername').value.trim();
+            const email = document.getElementById('empEmail').value.trim();
+            const password = document.getElementById('empPassword').value;
+            const role = document.getElementById('empRole').value;
+
+            if (!username || !email || !password) {
+                errEl.textContent = 'All fields are required.';
+                errEl.style.display = 'block';
+                return;
+            }
+            if (password.length < 6) {
+                errEl.textContent = 'Password must be at least 6 characters.';
+                errEl.style.display = 'block';
+                return;
+            }
+
+            const permissions = {
+                canManageProjects: document.getElementById('permProjects').checked,
+                canManageUsers: document.getElementById('permUsers').checked,
+                canViewTransactions: document.getElementById('permTransactions').checked,
+                canApprovePayouts: document.getElementById('permPayouts').checked
+            };
+
+            try {
+                const res = await fetch(`${API}/api/admin/employees`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                    body: JSON.stringify({ username, email, password, role, permissions })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    document.getElementById('addEmployeeModal').style.display = 'none';
+                    loadEmployees();
+                } else {
+                    errEl.textContent = data.message || 'Failed to create staff account.';
+                    errEl.style.display = 'block';
+                }
+            } catch (err) {
+                errEl.textContent = 'Network error. Please try again.';
+                errEl.style.display = 'block';
+            }
+        }
+
+        async function updateEmployeeRole(id, newRole) {
+            if (!confirm(`Change this staff member's role to ${newRole}?`)) return;
+            try {
+                const res = await fetch(`${API}/api/admin/employees/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                    body: JSON.stringify({
+                        role: newRole,
+                        permissions: {
+                            canManageProjects: newRole === 'manager',
+                            canManageUsers: newRole === 'manager',
+                            canViewTransactions: true,
+                            canApprovePayouts: newRole === 'manager'
+                        }
+                    })
+                });
+                const data = await res.json();
+                if (data.success) loadEmployees();
+                else alert(data.message || 'Failed to update role.');
+            } catch (err) {
+                alert('Network error.');
+            }
+        }
+
+        async function removeEmployee(id, name) {
+            if (!confirm(`Are you sure you want to remove ${name} from staff? This cannot be undone.`)) return;
+            try {
+                const res = await fetch(`${API}/api/admin/employees/${id}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await res.json();
+                if (data.success) loadEmployees();
+                else alert(data.message || 'Failed to remove staff member.');
+            } catch (err) {
+                alert('Network error.');
+            }
+        }
+        // ========= END EMPLOYEE MANAGEMENT =========
 
         function adminLogout() {
             localStorage.removeItem('authToken');

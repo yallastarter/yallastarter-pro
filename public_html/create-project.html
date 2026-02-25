@@ -33,6 +33,7 @@
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
     <style>
         /* Header Styles */
         .header {
@@ -391,6 +392,45 @@
             opacity: 1;
         }
 
+        /* Field validation error */
+        .field-error {
+            border-color: #dc2626 !important;
+            animation: shake 0.4s ease;
+        }
+
+        .field-error-msg {
+            color: #dc2626;
+            font-size: 0.82rem;
+            margin-top: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            20% {
+                transform: translateX(-6px);
+            }
+
+            40% {
+                transform: translateX(6px);
+            }
+
+            60% {
+                transform: translateX(-4px);
+            }
+
+            80% {
+                transform: translateX(4px);
+            }
+        }
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .header {
@@ -678,26 +718,113 @@
                 <div id="form-message" style="display:none;"></div>
             </form>
 
-            <!-- SUCCESS MODAL -->
+            <!-- SUCCESS MODAL — Full screen, beautiful -->
             <div id="successModal"
-                style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:9999; align-items:center; justify-content:center;">
+                style="display:none; position:fixed; inset:0; background:rgba(5,20,40,0.75); z-index:9999; align-items:center; justify-content:center; padding:1rem; backdrop-filter:blur(6px);">
                 <div
-                    style="background:white; border-radius:20px; padding:3rem; max-width:480px; width:90%; text-align:center; box-shadow:0 30px 60px rgba(0,0,0,0.2); animation:popIn .4s ease;">
+                    style="background:white; border-radius:28px; padding:0; max-width:600px; width:100%; box-shadow:0 40px 80px rgba(0,0,0,0.35); animation:popIn .45s cubic-bezier(.34,1.56,.64,1); overflow:hidden; max-height:96vh; overflow-y:auto;">
+                    <!-- Header gradient -->
                     <div
-                        style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#10B981,#059669);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:2.5rem;color:white;">
-                        🎉</div>
-                    <h2 style="font-size:1.6rem;font-weight:700;margin-bottom:0.75rem;color:#111;">Project Submitted!
-                    </h2>
-                    <p style="color:#555;margin-bottom:0.5rem;">Your project has been created and is currently in
-                        <strong>Draft</strong> status.
-                    </p>
-                    <p style="color:#555;margin-bottom:2rem;">Go to your dashboard to publish it and start receiving
-                        backers.</p>
-                    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-                        <a href="dashboard.html" class="btn btn-primary"
-                            style="padding:0.8rem 2rem;border-radius:12px;text-decoration:none;">Go to Dashboard</a>
-                        <a href="my-projects.html" class="btn btn-outline"
-                            style="padding:0.8rem 2rem;border-radius:12px;text-decoration:none;">View My Projects</a>
+                        style="background:linear-gradient(135deg,#00a651 0%,#006c35 100%); padding:2.5rem 2rem 1.5rem; text-align:center; position:relative;">
+                        <div style="font-size:4rem; line-height:1; margin-bottom:0.75rem;">🎉</div>
+                        <h2 style="color:white; font-size:1.85rem; font-weight:800; margin:0;">Congratulations!</h2>
+                        <p style="color:rgba(255,255,255,0.85); margin:0.5rem 0 0; font-size:1rem;">Your project has
+                            been submitted successfully</p>
+                    </div>
+                    <!-- Body -->
+                    <div style="padding:2rem;">
+                        <!-- Project title -->
+                        <div style="text-align:center; margin-bottom:1.5rem;">
+                            <div
+                                style="font-size:0.85rem; color:#6b7280; text-transform:uppercase; letter-spacing:.05em; margin-bottom:.25rem;">
+                                Project Name</div>
+                            <div id="smProjectTitle" style="font-size:1.3rem; font-weight:700; color:#111;"></div>
+                        </div>
+
+                        <!-- Project ID + link -->
+                        <div
+                            style="background:#f0fdf4; border:1.5px solid #bbf7d0; border-radius:16px; padding:1.25rem 1.5rem; margin-bottom:1.5rem;">
+                            <div
+                                style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:.75rem;">
+                                <div>
+                                    <div
+                                        style="font-size:0.78rem; color:#059669; font-weight:600; text-transform:uppercase; letter-spacing:.04em;">
+                                        Project ID</div>
+                                    <div id="smProjectId"
+                                        style="font-size:1rem; font-weight:700; color:#065f46; font-family:monospace; margin-top:2px;">
+                                        —</div>
+                                </div>
+                                <div>
+                                    <div
+                                        style="font-size:0.78rem; color:#059669; font-weight:600; text-transform:uppercase; letter-spacing:.04em;">
+                                        Status</div>
+                                    <span
+                                        style="background:#dcfce7; color:#15803d; font-size:0.8rem; font-weight:700; padding:3px 10px; border-radius:20px; display:inline-block; margin-top:2px;">Draft
+                                        — Pending Review</span>
+                                </div>
+                            </div>
+                            <div style="margin-top:1rem;">
+                                <div
+                                    style="font-size:0.78rem; color:#059669; font-weight:600; text-transform:uppercase; letter-spacing:.04em; margin-bottom:.4rem;">
+                                    Shareable Link</div>
+                                <div style="display:flex; gap:.5rem; align-items:center;">
+                                    <input id="smShareLink" type="text" readonly
+                                        style="flex:1; padding:.5rem .8rem; border:1.5px solid #bbf7d0; border-radius:8px; font-size:.82rem; color:#065f46; background:#fff; outline:none; font-family:monospace;" />
+                                    <button onclick="copyShareLink()"
+                                        style="padding:.5rem .9rem; background:#00a651; color:white; border:none; border-radius:8px; cursor:pointer; font-size:.82rem; font-weight:600; white-space:nowrap;"><i
+                                            class="fas fa-copy"></i> Copy</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- QR Code -->
+                        <div style="text-align:center; margin-bottom:1.5rem;">
+                            <div style="font-size:0.85rem; color:#6b7280; font-weight:600; margin-bottom:.75rem;">📱 QR
+                                Code — Share Anywhere</div>
+                            <div id="smQrCode"
+                                style="display:inline-block; padding:.75rem; border:2px solid #e5e7eb; border-radius:16px; background:white;">
+                            </div>
+                        </div>
+
+                        <!-- Social Share -->
+                        <div style="margin-bottom:1.5rem;">
+                            <div
+                                style="font-size:0.85rem; color:#6b7280; font-weight:600; text-align:center; margin-bottom:.9rem;">
+                                Share on Social Media</div>
+                            <div style="display:flex; flex-wrap:wrap; gap:.6rem; justify-content:center;">
+                                <button onclick="shareOn('facebook')"
+                                    style="display:flex;align-items:center;gap:.5rem;padding:.6rem 1.1rem;border:none;border-radius:10px;cursor:pointer;font-weight:600;font-size:.85rem;background:#1877f2;color:white;"><i
+                                        class="fab fa-facebook-f"></i> Facebook</button>
+                                <button onclick="shareOn('instagram')"
+                                    style="display:flex;align-items:center;gap:.5rem;padding:.6rem 1.1rem;border:none;border-radius:10px;cursor:pointer;font-weight:600;font-size:.85rem;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:white;"><i
+                                        class="fab fa-instagram"></i> Instagram</button>
+                                <button onclick="shareOn('tiktok')"
+                                    style="display:flex;align-items:center;gap:.5rem;padding:.6rem 1.1rem;border:none;border-radius:10px;cursor:pointer;font-weight:600;font-size:.85rem;background:#000;color:white;"><i
+                                        class="fab fa-tiktok"></i> TikTok</button>
+                                <button onclick="shareOn('snapchat')"
+                                    style="display:flex;align-items:center;gap:.5rem;padding:.6rem 1.1rem;border:none;border-radius:10px;cursor:pointer;font-weight:600;font-size:.85rem;background:#FFFC00;color:#000;"><i
+                                        class="fab fa-snapchat-ghost"></i> Snapchat</button>
+                                <button onclick="shareOn('twitter')"
+                                    style="display:flex;align-items:center;gap:.5rem;padding:.6rem 1.1rem;border:none;border-radius:10px;cursor:pointer;font-weight:600;font-size:.85rem;background:#1da1f2;color:white;"><i
+                                        class="fab fa-twitter"></i> Twitter/X</button>
+                                <button onclick="shareOn('whatsapp')"
+                                    style="display:flex;align-items:center;gap:.5rem;padding:.6rem 1.1rem;border:none;border-radius:10px;cursor:pointer;font-weight:600;font-size:.85rem;background:#25d366;color:white;"><i
+                                        class="fab fa-whatsapp"></i> WhatsApp</button>
+                                <button onclick="shareOn('email')"
+                                    style="display:flex;align-items:center;gap:.5rem;padding:.6rem 1.1rem;border:none;border-radius:10px;cursor:pointer;font-weight:600;font-size:.85rem;background:#6b7280;color:white;"><i
+                                        class="fas fa-envelope"></i> Email</button>
+                            </div>
+                        </div>
+
+                        <!-- CTAs -->
+                        <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+                            <a href="dashboard.html"
+                                style="padding:.85rem 2rem;border-radius:12px;text-decoration:none;background:#00a651;color:white;font-weight:700;font-size:.95rem;"><i
+                                    class="fas fa-tachometer-alt"></i> Go to Dashboard</a>
+                            <a href="my-projects.html"
+                                style="padding:.85rem 2rem;border-radius:12px;text-decoration:none;border:2px solid #00a651;color:#00a651;font-weight:700;font-size:.95rem;"><i
+                                    class="fas fa-folder-open"></i> My Projects</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -776,7 +903,59 @@
             }
         }
 
+        // Per-step required fields
+        const STEP_REQUIRED = {
+            1: [
+                { id: 'project-title', label: 'Project Title' },
+                { id: 'project-category', label: 'Category' },
+                { id: 'project-location', label: 'Location' },
+                { id: 'project-duration', label: 'Campaign Duration' }
+            ],
+            2: [
+                { id: 'project-description', label: 'Project Description' }
+            ],
+            3: [
+                { id: 'funding-goal', label: 'Funding Goal' },
+                { id: 'funding-deadline', label: 'Funding Deadline' }
+            ]
+        };
+
+        function clearFieldErrors() {
+            document.querySelectorAll('.field-error').forEach(el => el.classList.remove('field-error'));
+            document.querySelectorAll('.field-error-msg').forEach(el => el.remove());
+        }
+
+        function validateStep(step) {
+            clearFieldErrors();
+            const required = STEP_REQUIRED[step];
+            if (!required) return true;
+            let valid = true;
+            required.forEach(({ id, label }) => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                const empty = !el.value || el.value.trim() === '' || el.value === '';
+                if (empty) {
+                    el.classList.add('field-error');
+                    const msg = document.createElement('div');
+                    msg.className = 'field-error-msg';
+                    msg.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${label} is required`;
+                    el.parentNode.appendChild(msg);
+                    valid = false;
+                }
+                el.addEventListener('input', () => {
+                    el.classList.remove('field-error');
+                    el.parentNode.querySelectorAll('.field-error-msg').forEach(m => m.remove());
+                }, { once: true });
+            });
+            if (!valid) {
+                const firstErr = document.querySelector('.field-error');
+                if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            return valid;
+        }
+
         function nextStep() {
+            if (!validateStep(currentStep)) return;
             if (currentStep < totalSteps) {
                 currentStep++;
                 showStep(currentStep);
@@ -912,6 +1091,28 @@
                 const data = await res.json();
 
                 if (data.success && data.data) {
+                    const proj = data.data;
+                    const projId = proj.serialNumber || proj._id;
+                    const projTitle = proj.title || 'Your Project';
+                    const shareUrl = window.location.origin + '/projects.html?id=' + proj._id;
+
+                    document.getElementById('smProjectTitle').textContent = projTitle;
+                    document.getElementById('smProjectId').textContent = projId;
+                    const linkEl = document.getElementById('smShareLink');
+                    linkEl.value = shareUrl;
+
+                    // Generate QR code
+                    const qrEl = document.getElementById('smQrCode');
+                    qrEl.innerHTML = '';
+                    if (typeof QRCode !== 'undefined') {
+                        new QRCode(qrEl, { text: shareUrl, width: 160, height: 160, colorDark: '#006c35', colorLight: '#fff' });
+                    } else {
+                        qrEl.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(shareUrl)}&color=006c35" alt="QR Code" style="border-radius:8px;">`;
+                    }
+
+                    // Store share data globally for share buttons
+                    window._shareData = { url: shareUrl, title: projTitle };
+
                     document.getElementById('successModal').style.display = 'flex';
                     return;
                 }
@@ -941,6 +1142,42 @@
             const b = document.getElementById('errorBanner');
             b.style.display = 'block';
             b.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function copyShareLink() {
+            const el = document.getElementById('smShareLink');
+            if (!el) return;
+            navigator.clipboard.writeText(el.value).then(() => {
+                const btn = el.nextElementSibling;
+                if (btn) { btn.textContent = '✓ Copied!'; setTimeout(() => { btn.innerHTML = '<i class="fas fa-copy"></i> Copy'; }, 2000); }
+            });
+        }
+
+        function shareOn(platform) {
+            const sd = window._shareData || {};
+            const url = encodeURIComponent(sd.url || window.location.href);
+            const title = encodeURIComponent((sd.title || 'My Project') + ' — Support on YallaStarter! ');
+            const links = {
+                facebook: `https://www.facebook.com/sharer/sharer.php?u=${url}`,
+                twitter: `https://twitter.com/intent/tweet?url=${url}&text=${title}`,
+                whatsapp: `https://wa.me/?text=${title}${url}`,
+                snapchat: `https://www.snapchat.com/scan?attachmentUrl=${url}`,
+                instagram: null,  // Instagram has no share-link API; open profile
+                tiktok: null,
+                email: `mailto:?subject=${title}&body=Check%20out%20this%20project:%20${url}`
+            };
+            if (links[platform]) {
+                window.open(links[platform], '_blank', 'width=600,height=450');
+            } else if (platform === 'instagram') {
+                // Instagram: copy link + open instagram.com
+                navigator.clipboard.writeText(decodeURIComponent(url)).catch(() => { });
+                alert('Link copied! Open Instagram and paste it in your Story or Bio.');
+                window.open('https://instagram.com', '_blank');
+            } else if (platform === 'tiktok') {
+                navigator.clipboard.writeText(decodeURIComponent(url)).catch(() => { });
+                alert('Link copied! Open TikTok and paste it in your bio or a comment.');
+                window.open('https://tiktok.com', '_blank');
+            }
         }
 
         function switchLanguage(lang) {

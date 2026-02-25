@@ -9,7 +9,6 @@ const protect = async (req, res, next) => {
         try {
             token = req.headers.authorization.split(' ')[1];
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
-            // Support both 'userId' (new) and 'id' (legacy) payload keys
             const uid = decoded.userId || decoded.id;
             req.user = await User.findById(uid).select('-password');
             if (!req.user) {
@@ -22,17 +21,33 @@ const protect = async (req, res, next) => {
         }
     }
 
-    // No token at all
     return res.status(401).json({ success: false, message: 'Not authorized, no token' });
 };
 
-// Admin only — must be called after protect
+// Admin only (role === 'admin')
 const adminOnly = (req, res, next) => {
-    if (req.user && req.user.role === 'admin') {
-        next();
-    } else {
-        return res.status(403).json({ success: false, message: 'Access denied. Admin only.' });
-    }
+    if (req.user && req.user.role === 'admin') return next();
+    return res.status(403).json({ success: false, message: 'Access denied. Admin only.' });
 };
 
-module.exports = { protect, adminOnly };
+// Manager or Admin (can do most things except manage staff)
+const managerOrAdmin = (req, res, next) => {
+    if (req.user && ['admin', 'manager'].includes(req.user.role)) return next();
+    return res.status(403).json({ success: false, message: 'Access denied. Manager or Admin only.' });
+};
+
+// Any staff member (employee, manager, admin)
+const staffOnly = (req, res, next) => {
+    if (req.user && ['admin', 'manager', 'employee'].includes(req.user.role)) return next();
+    return res.status(403).json({ success: false, message: 'Access denied. Staff only.' });
+};
+
+// Check a specific permission (used for granular employee access)
+const requirePermission = (perm) => (req, res, next) => {
+    if (!req.user) return res.status(401).json({ success: false, message: 'Not authorized' });
+    if (req.user.role === 'admin' || req.user.role === 'manager') return next();
+    if (req.user.permissions && req.user.permissions[perm]) return next();
+    return res.status(403).json({ success: false, message: `Access denied. Requires permission: ${perm}` });
+};
+
+module.exports = { protect, adminOnly, managerOrAdmin, staffOnly, requirePermission };

@@ -360,4 +360,114 @@ router.put('/cashouts/:id', async (req, res) => {
     }
 });
 
+// =============================================
+// EMPLOYEE / STAFF MANAGEMENT (Admin only)
+// =============================================
+
+// @desc    Get all staff (employees + managers)
+// @route   GET /api/admin/employees
+// @access  Admin
+router.get('/employees', async (req, res) => {
+    try {
+        const staff = await User.find({ role: { $in: ['employee', 'manager'] } })
+            .select('-password')
+            .sort({ createdAt: -1 });
+        res.json({ success: true, data: staff });
+    } catch (err) {
+        console.error('Get employees error:', err);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+});
+
+// @desc    Create new employee or manager account
+// @route   POST /api/admin/employees
+// @access  Admin
+router.post('/employees', async (req, res) => {
+    try {
+        const { username, email, password, role, permissions } = req.body;
+        if (!username || !email || !password) {
+            return res.status(400).json({ success: false, message: 'Username, email, and password are required' });
+        }
+        if (!['employee', 'manager'].includes(role)) {
+            return res.status(400).json({ success: false, message: 'Role must be employee or manager' });
+        }
+
+        const existing = await User.findOne({ $or: [{ email }, { username }] });
+        if (existing) {
+            return res.status(400).json({ success: false, message: 'Email or username already in use' });
+        }
+
+        const staff = await User.create({
+            username: username.trim(),
+            email: email.toLowerCase().trim(),
+            password,
+            role,
+            permissions: permissions || {
+                canManageProjects: role === 'manager',
+                canManageUsers: role === 'manager',
+                canViewTransactions: true,
+                canApprovePayouts: role === 'manager'
+            }
+        });
+
+        res.status(201).json({ success: true, data: { ...staff.toObject(), password: undefined } });
+    } catch (err) {
+        console.error('Create employee error:', err);
+        if (err.name === 'ValidationError') {
+            return res.status(400).json({ success: false, message: err.message });
+        }
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+});
+
+// @desc    Update employee permissions / role
+// @route   PUT /api/admin/employees/:id
+// @access  Admin
+router.put('/employees/:id', async (req, res) => {
+    try {
+        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+            return res.status(400).json({ success: false, message: 'Invalid ID' });
+        }
+        const { role, permissions } = req.body;
+        const updates = {};
+
+        if (role) {
+            if (!['employee', 'manager'].includes(role)) {
+                return res.status(400).json({ success: false, message: 'Role must be employee or manager' });
+            }
+            updates.role = role;
+        }
+        if (permissions) updates.permissions = permissions;
+
+        const staff = await User.findOneAndUpdate(
+            { _id: req.params.id, role: { $in: ['employee', 'manager'] } },
+            updates,
+            { new: true }
+        ).select('-password');
+
+        if (!staff) return res.status(404).json({ success: false, message: 'Staff member not found' });
+        res.json({ success: true, data: staff });
+    } catch (err) {
+        console.error('Update employee error:', err);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+});
+
+// @desc    Delete / remove employee or manager
+// @route   DELETE /api/admin/employees/:id
+// @access  Admin only
+router.delete('/employees/:id', async (req, res) => {
+    try {
+        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+            return res.status(400).json({ success: false, message: 'Invalid ID' });
+        }
+        const staff = await User.findOneAndDelete({ _id: req.params.id, role: { $in: ['employee', 'manager'] } });
+        if (!staff) return res.status(404).json({ success: false, message: 'Staff member not found' });
+        res.json({ success: true, message: 'Staff member removed successfully' });
+    } catch (err) {
+        console.error('Delete employee error:', err);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+});
+
 module.exports = router;

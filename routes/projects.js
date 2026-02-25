@@ -202,4 +202,65 @@ router.put('/:id', protect, async (req, res) => {
     }
 });
 
+// @desc    Toggle favourite on a project
+// @route   POST /api/projects/:id/favorite
+// @access  Private
+router.post('/:id/favorite', protect, async (req, res) => {
+    try {
+        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+            return res.status(400).json({ success: false, message: 'Invalid project ID' });
+        }
+        const project = await Project.findById(req.params.id);
+        if (!project) return res.status(404).json({ success: false, message: 'Project not found' });
+
+        const user = await User.findById(req.user._id);
+        const alreadyFav = user.favorites.some(f => f.toString() === req.params.id);
+
+        if (alreadyFav) {
+            user.favorites = user.favorites.filter(f => f.toString() !== req.params.id);
+        } else {
+            user.favorites.push(req.params.id);
+        }
+        await user.save();
+        res.json({ success: true, favorited: !alreadyFav, totalFavorites: user.favorites.length });
+    } catch (err) {
+        console.error('Favorite toggle error:', err.message);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+});
+
+// @desc    Get current user's favourited projects
+// @route   GET /api/projects/favorites/me
+// @access  Private
+router.get('/favorites/me', protect, async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id).populate({
+            path: 'favorites',
+            select: 'title category location currentAmount goalAmount status coverImage serialNumber',
+            match: { status: { $in: ['active', 'completed'] } }
+        });
+        const favorites = user.favorites.filter(Boolean);
+        res.json({ success: true, count: favorites.length, data: favorites });
+    } catch (err) {
+        console.error('Get favorites error:', err.message);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+});
+
+// @desc    Check if a project is favorited by the current user
+// @route   GET /api/projects/:id/favorite
+// @access  Private
+router.get('/:id/favorite', protect, async (req, res) => {
+    try {
+        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+            return res.status(400).json({ success: false, message: 'Invalid project ID' });
+        }
+        const user = await User.findById(req.user._id).select('favorites');
+        const favorited = user.favorites.some(f => f.toString() === req.params.id);
+        res.json({ success: true, favorited });
+    } catch (err) {
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+});
+
 module.exports = router;

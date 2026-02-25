@@ -715,11 +715,40 @@
                             </div>
                         </div>
 
-                        <div class="coin-form-group">
-                            <label class="coin-form-label">Select Project</label>
-                            <select id="projectSelect" class="coin-form-select">
-                                <option value="">Loading projects...</option>
-                            </select>
+                        <!-- Project picker tabs -->
+                        <div style="margin-bottom:1rem;">
+                            <div style="display:flex;gap:0;border-bottom:2px solid #e5e7eb;margin-bottom:.9rem;">
+                                <button id="tabFav" onclick="switchSendTab('fav')"
+                                    style="flex:1;padding:.55rem;background:none;border:none;border-bottom:2.5px solid var(--primary);color:var(--primary);font-weight:700;cursor:pointer;font-family:inherit;font-size:.88rem;">❤️
+                                    My Favorites</button>
+                                <button id="tabSearch" onclick="switchSendTab('search')"
+                                    style="flex:1;padding:.55rem;background:none;border:none;border-bottom:2.5px solid transparent;color:#9ca3af;font-weight:600;cursor:pointer;font-family:inherit;font-size:.88rem;">🔍
+                                    Search Projects</button>
+                            </div>
+
+                            <!-- Favorites panel -->
+                            <div id="panelFav">
+                                <div id="favProjectsList"
+                                    style="max-height:220px;overflow-y:auto;display:flex;flex-direction:column;gap:.5rem;">
+                                    <div style="text-align:center;padding:1.5rem;color:#9ca3af;font-size:.85rem;"><i
+                                            class="fas fa-spinner fa-spin"></i> Loading favorites...</div>
+                                </div>
+                            </div>
+
+                            <!-- Search panel (hidden) -->
+                            <div id="panelSearch" style="display:none;">
+                                <input type="text" id="projectSearchInput" placeholder="Search projects by name..."
+                                    style="width:100%;padding:.6rem .9rem;border:1.5px solid #e5e7eb;border-radius:10px;font-size:.88rem;outline:none;font-family:inherit;"
+                                    oninput="debounceSearch(this.value)" />
+                                <div id="searchProjectsList"
+                                    style="max-height:220px;overflow-y:auto;display:flex;flex-direction:column;gap:.5rem;margin-top:.6rem;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Selected project preview -->
+                        <div id="selectedProjectPreview"
+                            style="display:none;background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:10px;padding:.6rem .9rem;margin-bottom:.8rem;font-size:.88rem;color:#065f46;font-weight:600;">
                         </div>
 
                         <div class="coin-form-group">
@@ -817,20 +846,101 @@
             }
         }
 
+        // -------- Favorites & Search for Send Coins --------
+        let selectedProjectId = null;
+        let _searchTimer = null;
+
+        function switchSendTab(tab) {
+            const isFav = tab === 'fav';
+            document.getElementById('panelFav').style.display = isFav ? '' : 'none';
+            document.getElementById('panelSearch').style.display = isFav ? 'none' : '';
+            const tabFav = document.getElementById('tabFav');
+            const tabSearch = document.getElementById('tabSearch');
+            if (tabFav) { tabFav.style.borderBottomColor = isFav ? 'var(--primary)' : 'transparent'; tabFav.style.color = isFav ? 'var(--primary)' : '#9ca3af'; tabFav.style.fontWeight = isFav ? '700' : '600'; }
+            if (tabSearch) { tabSearch.style.borderBottomColor = isFav ? 'transparent' : 'var(--primary)'; tabSearch.style.color = isFav ? '#9ca3af' : 'var(--primary)'; tabSearch.style.fontWeight = isFav ? '600' : '700'; }
+        }
+
+        function renderProjectCard(p, container) {
+            const card = document.createElement('div');
+            card.style.cssText = 'padding:.6rem .9rem;border:1.5px solid #e5e7eb;border-radius:10px;cursor:pointer;transition:all .15s;background:#fff;display:flex;align-items:center;gap:.75rem;';
+            const pct = p.goalAmount ? Math.round((p.currentAmount || 0) / p.goalAmount * 100) : 0;
+            card.innerHTML = `
+                <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#00a651,#006c35);display:flex;align-items:center;justify-content:center;color:white;font-size:1rem;flex-shrink:0;"><i class="fas fa-rocket"></i></div>
+                <div style="flex:1;min-width:0;">
+                    <div style="font-weight:600;font-size:.88rem;color:#111;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${p.title}</div>
+                    <div style="font-size:.76rem;color:#6b7280;">${(p.category || '').replace(/\b\w/g, c => c.toUpperCase())} &middot; ${pct}% funded</div>
+                </div>`;
+            card.addEventListener('mouseenter', () => { card.style.borderColor = 'var(--primary)'; card.style.background = '#f0fdf4'; });
+            card.addEventListener('mouseleave', () => { card.style.borderColor = selectedProjectId === p._id ? 'var(--primary)' : '#e5e7eb'; card.style.background = selectedProjectId === p._id ? '#f0fdf4' : '#fff'; });
+            card.addEventListener('click', () => selectProject(p._id, p.title));
+            container.appendChild(card);
+        }
+
+        async function loadFavorites() {
+            const list = document.getElementById('favProjectsList');
+            if (!list || !token) { if (list) list.innerHTML = '<div style="text-align:center;padding:1.5rem;color:#9ca3af;font-size:.85rem;">Log in to see your favorites.</div>'; return; }
+            try {
+                const res = await fetch(`${API}/api/projects/favorites/me`, { headers: { 'Authorization': `Bearer ${token}` } });
+                const data = await res.json();
+                list.innerHTML = '';
+                if (data.success && data.data && data.data.length) {
+                    data.data.forEach(p => renderProjectCard(p, list));
+                } else {
+                    list.innerHTML = '<div style="text-align:center;padding:1.5rem;color:#9ca3af;font-size:.85rem;"><i class="fas fa-heart" style="font-size:1.4rem;display:block;margin-bottom:.5rem;color:#e5e7eb;"></i>No favorites yet.<br><small>Heart a project on its page to add it here.</small></div>';
+                }
+            } catch (e) {
+                list.innerHTML = '<div style="text-align:center;padding:1rem;color:#ef4444;font-size:.85rem;">Could not load favorites.</div>';
+            }
+        }
+
+        function debounceSearch(query) {
+            clearTimeout(_searchTimer);
+            _searchTimer = setTimeout(() => searchProjects(query), 350);
+        }
+
+        async function searchProjects(query) {
+            const list = document.getElementById('searchProjectsList');
+            if (!list) return;
+            list.innerHTML = '';
+            if (!query || query.trim().length < 2) return;
+            list.innerHTML = '<div style="text-align:center;padding:.75rem;color:#9ca3af;font-size:.85rem;"><i class="fas fa-spinner fa-spin"></i></div>';
+            try {
+                const res = await fetch(`${API}/api/projects?limit=10`, { headers: token ? { 'Authorization': `Bearer ${token}` } : {} });
+                const data = await res.json();
+                list.innerHTML = '';
+                if (data.success && data.data) {
+                    const q = query.toLowerCase();
+                    const filtered = data.data.filter(p => p.title.toLowerCase().includes(q));
+                    if (filtered.length) { filtered.forEach(p => renderProjectCard(p, list)); }
+                    else list.innerHTML = '<div style="text-align:center;padding:.75rem;color:#9ca3af;font-size:.85rem;">No projects match your search.</div>';
+                }
+            } catch (e) {
+                list.innerHTML = '<div style="text-align:center;padding:.75rem;color:#ef4444;font-size:.85rem;">Search failed.</div>';
+            }
+        }
+
+        function selectProject(id, title) {
+            selectedProjectId = id;
+            const preview = document.getElementById('selectedProjectPreview');
+            if (preview) {
+                preview.style.display = 'block';
+                preview.innerHTML = `<i class="fas fa-check-circle" style="color:#00a651;"></i> Selected: <span style="font-weight:700;">${title}</span>`;
+            }
+        }
+        // -------- End Favorites & Search --------
+
         // Load data on page load
         document.addEventListener('DOMContentLoaded', async () => {
             await loadBalance();
-            await loadProjects();
+            await loadFavorites();
             await loadHistory();
             checkPurchaseReturn();
 
             const params = new URLSearchParams(window.location.search);
             const projectId = params.get('projectId');
             if (projectId) {
-                const select = document.getElementById('projectSelect');
-                if (select && select.querySelector('option[value="' + projectId + '"]')) {
-                    select.value = projectId;
-                }
+                // Auto-select project if URL has projectId
+                selectProject(projectId, 'Selected Project');
             }
 
             // Quick amount buttons
@@ -860,21 +970,7 @@
             }
         }
 
-        async function loadProjects() {
-            try {
-                const res = await fetch(`${API}/api/projects`);
-                const data = await res.json();
-                const select = document.getElementById('projectSelect');
-                select.innerHTML = '<option value="">— Select a project —</option>';
-                if (data.success && data.data) {
-                    data.data.filter(p => p.status === 'active').forEach(p => {
-                        select.innerHTML += `<option value="${p._id}">${p.title} (${Math.round((p.currentAmount / p.goalAmount) * 100)}% funded)</option>`;
-                    });
-                }
-            } catch (err) {
-                console.error('Projects load error:', err);
-            }
-        }
+        // loadProjects() removed — replaced by favorites/search tab system
 
         async function loadHistory() {
             try {
@@ -965,11 +1061,11 @@
         }
 
         async function sendCoins() {
-            const projectId = document.getElementById('projectSelect').value;
+            const projectId = selectedProjectId;
             const amount = document.getElementById('sendAmount').value;
 
             if (!projectId) {
-                showToast('Please select a project', 'error');
+                showToast('Please select a project from Favorites or Search', 'error');
                 return;
             }
             if (!amount || amount < 1) {
