@@ -1288,40 +1288,56 @@
             } catch (err) {
                 console.error('Dashboard load error:', err);
                 statsGrid.innerHTML = '<div class="loading" style="color: var(--accent-red);"><i class="fas fa-exclamation-triangle"></i><p>Failed to load dashboard</p><small style="color: var(--admin-muted);">' + (err.message || 'Please check your connection and try again') + '</small></div>';
-                
-                // Also clear other tables
-                document.getElementById('topProjectsTable').innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--admin-muted);">Unable to load</td></tr>';
-                document.getElementById('recentTxTable').innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--admin-muted);">Unable to load</td></tr>';
             }
-        }
+        // Stats cards
+        document.getElementById('statsGrid').innerHTML = `
+            <div class="stat-card">
+                <div class="stat-icon green"><i class="fas fa-users"></i></div>
+                <div><div class="stat-value">${d.overview.totalUsers}</div><div class="stat-label">Total Users</div></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon blue"><i class="fas fa-project-diagram"></i></div>
+                <div><div class="stat-value">${d.overview.totalProjects}</div><div class="stat-label">Total Projects</div></div>
+            </div>
+            <div class="stat-card" style="border-color:${(d.overview.pendingProjects || 0) > 0 ? 'rgba(245,158,11,0.4)' : 'inherit'};cursor:${(d.overview.pendingProjects || 0) > 0 ? 'pointer' : 'default'}" onclick="${(d.overview.pendingProjects || 0) > 0 ? 'switchTab(\'projects\'); setTimeout(()=>{ document.getElementById(\'projectStatusFilter\').value=\'pending\'; loadAdminProjects(); }, 100);' : ''}">
+                <div class="stat-icon amber"><i class="fas fa-clock"></i></div>
+                <div><div class="stat-value" style="color:${(d.overview.pendingProjects || 0) > 0 ? '#FBBF24' : 'inherit'}">${d.overview.pendingProjects || 0}</div><div class="stat-label">Pending Review ${(d.overview.pendingProjects || 0) > 0 ? '⚠️' : ''}</div></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon purple"><i class="fas fa-coins"></i></div>
+                <div><div class="stat-value">${d.overview.totalCoinsBought.toLocaleString()}</div><div class="stat-label">Coins Sold</div></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon pink"><i class="fas fa-hand-holding-usd"></i></div>
+                <div><div class="stat-value">${d.overview.totalCashouts.toLocaleString()}</div><div class="stat-label">Cashed Out</div></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon red"><i class="fas fa-chart-bar"></i></div>
+                <div><div class="stat-value">${d.overview.platformRevenue.toLocaleString()} SAR</div><div class="stat-label">Fee Revenue</div></div>
+            </div>
+        `;
 
-        async function loadAdminUsers() {
-            const search = document.getElementById('userSearch')?.value || '';
-            try {
-                const data = await adminFetch(`${API}/api/admin/users?search=${encodeURIComponent(search)}&limit=50`);
-                if (!data.success) return;
-                document.getElementById('usersTable').innerHTML = data.data.map(u => `
-                    <tr>
-                        <td><strong>${u.username}</strong></td>
-                        <td>${u.email}</td>
-                        <td>${(u.coinBalance || 0).toLocaleString()}</td>
-                        <td>${(u.totalEarned || 0).toLocaleString()}</td>
-                        <td>${new Date(u.createdAt).toLocaleDateString()}</td>
-                        <td>
-                            <button class="action-btn" onclick="adjustCoins('${u._id}', '${u.username}')"><i class="fas fa-coins"></i> Adjust</button>
-                            <button class="action-btn" onclick="viewUser('${u._id}')" style="border-color:var(--accent-blue);color:var(--accent-blue);"><i class="fas fa-eye"></i> View</button>
-                            <button class="action-btn reject" onclick="deleteUser('${u._id}', '${u.username}')" style="border-color:var(--accent-red);color:var(--accent-red);"><i class="fas fa-trash"></i></button>
-                        </td>
-                    </tr>
-                `).join('') || '<tr><td colspan="6" style="text-align:center; color: var(--admin-muted);">No users found</td></tr>';
-            } catch (err) {
-                console.error('Users load error:', err);
-            }
-        }
-
-        let searchTimeout;
-        function searchUsers() {
-            clearTimeout(searchTimeout);
+        // Revenue chart
+        const revCtx = document.getElementById('revenueChart').getContext('2d');
+        new Chart(revCtx, {
+            type: 'line',
+            data: {
+                labels: d.charts.dailyRevenue.map(r => r._id.slice(5)),
+                datasets: [{
+                    label: 'Coins Sold (SAR)',
+                    data: d.charts.dailyRevenue.map(r => r.amount),
+                    borderColor: '#10B981',
+                    backgroundColor: 'rgba(16,185,129,0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { labels: { color: '#94A3B8' } } },
+                scales: {
+                    x: { ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,255,255,0.05)' } },
+                    y: { ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,255,255,0.05)' } }
             searchTimeout = setTimeout(loadAdminUsers, 300);
         }
 
