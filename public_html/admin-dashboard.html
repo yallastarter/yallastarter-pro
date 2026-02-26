@@ -1004,12 +1004,30 @@
 
     <script>
         const API = window.location.origin;
-        const token = localStorage.getItem('authToken');
-        const user = JSON.parse(localStorage.getItem('user') || 'null');
+        // Auth Check - Ensure user is admin, manager, or employee
+        if (!auth.isAuthenticated()) {
+            window.location.href = 'admin-login.html';
+        }
 
-        // Auth check
-        if (!user || user.role !== 'admin') {
-            window.location.href = '/admin-login.html';
+        const user = auth.getUser();
+        if (!user || !['admin', 'manager', 'employee'].includes(user.role)) {
+            auth.logout();
+            window.location.href = 'admin-login.html';
+        }
+
+        document.getElementById('adminName').textContent = user.username;
+        document.getElementById('adminRole').textContent = user.role.charAt(0).toUpperCase() + user.role.slice(1);
+
+        // Hide permissions if not admin
+        if (user.role !== 'admin') {
+            document.querySelector('[data-tab="employees"]').style.display = 'none';
+            document.querySelector('[data-tab="platform"]').style.display = 'none';
+
+            // Hide tabs based on specific permissions for managers/employees
+            if (!user.permissions?.canManageProjects) document.querySelector('[data-tab="projects"]').style.display = 'none';
+            if (!user.permissions?.canManageUsers) document.querySelector('[data-tab="users"]').style.display = 'none';
+            if (!user.permissions?.canViewTransactions) document.querySelector('[data-tab="transactions"]').style.display = 'none';
+            if (!user.permissions?.canApprovePayouts) document.querySelector('[data-tab="cashouts"]').style.display = 'none';
         }
 
         // Tab navigation
@@ -1223,6 +1241,8 @@
                         <td>${new Date(u.createdAt).toLocaleDateString()}</td>
                         <td>
                             <button class="action-btn" onclick="adjustCoins('${u._id}', '${u.username}')"><i class="fas fa-coins"></i> Adjust</button>
+                            <button class="action-btn" onclick="viewUser('${u._id}')" style="border-color:var(--accent-blue);color:var(--accent-blue);"><i class="fas fa-eye"></i> View</button>
+                            <button class="action-btn reject" onclick="deleteUser('${u._id}', '${u.username}')" style="border-color:var(--accent-red);color:var(--accent-red);"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
                 `).join('') || '<tr><td colspan="6" style="text-align:center; color: var(--admin-muted);">No users found</td></tr>';
@@ -1250,6 +1270,34 @@
             }
         }
 
+        async function viewUser(userId) {
+            try {
+                const data = await adminFetch(`${API}/api/admin/users/${userId}`);
+                if (data.success) {
+                    const u = data.data;
+                    alert(`User Profile: ${u.username}\nEmail: ${u.email}\nRole: ${u.role}\nCoins: ${u.coinBalance}\nSpent: ${u.totalSpent}\nEarned: ${u.totalEarned}\nProjects Created: ${u.projectCount}\nJoined: ${new Date(u.createdAt).toLocaleDateString()}`);
+                }
+            } catch (e) {
+                console.error('Error fetching user', e);
+            }
+        }
+
+        async function deleteUser(userId, username) {
+            if (!confirm(`Are you SURE you want to permanently delete user "${username}"? This cannot be undone.`)) return;
+            try {
+                const res = await fetch(`${API}/api/admin/users/${userId}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` } });
+                const data = await res.json();
+                if (data.success) {
+                    showToast('User deleted successfully');
+                    loadAdminUsers();
+                } else {
+                    alert(data.message);
+                }
+            } catch (err) {
+                alert('Error deleting user');
+            }
+        }
+
         async function loadAdminProjects() {
             const status = document.getElementById('projectStatusFilter')?.value || '';
             try {
@@ -1265,10 +1313,12 @@
                         <td><span class="badge ${p.status}">${p.status}</span></td>
                         <td style="color:var(--admin-muted);font-size:0.8rem;">${new Date(p.createdAt).toLocaleDateString()}</td>
                         <td style="white-space:nowrap;">
+                            <a href="/project-details.html?id=${p._id}" target="_blank" class="action-btn" style="border-color:var(--accent-blue);color:var(--accent-blue);text-decoration:none;"><i class="fas fa-eye"></i> View</a>
                             ${p.status === 'pending' ? `<button class="action-btn approve" onclick="approveProject('${p._id}')"><i class="fas fa-check"></i> Publish</button>` : ''}
                             ${p.status === 'pending' ? `<button class="action-btn reject" onclick="rejectProject('${p._id}')"><i class="fas fa-times"></i> Reject</button>` : ''}
                             ${p.status === 'draft' ? `<button class="action-btn approve" onclick="updateProject('${p._id}','pending')"><i class="fas fa-paper-plane"></i> Submit</button>` : ''}
                             ${p.status === 'active' ? `<button class="action-btn" onclick="updateProject('${p._id}','completed')" style="border-color:var(--accent-blue);color:var(--accent-blue);"><i class="fas fa-flag-checkered"></i> Complete</button>` : ''}
+                            ${p.status === 'active' ? `<button class="action-btn" onclick="updateProject('${p._id}','pending')" style="border-color:var(--accent-amber);color:var(--accent-amber);"><i class="fas fa-pause-circle"></i> Deactivate</button>` : ''}
                             ${p.status === 'rejected' ? `<button class="action-btn approve" onclick="approveProject('${p._id}')"><i class="fas fa-undo"></i> Re-publish</button>` : ''}
                             <button class="action-btn reject" onclick="deleteProject('${p._id}', '${p.title.replace(/'/g, '&#39;')}')" title="Delete permanently" style="border-color:#ef4444;color:#ef4444;"><i class="fas fa-trash"></i></button>
                         </td>
@@ -1550,25 +1600,30 @@
                     })
                 });
                 const data = await res.json();
-                if (data.success) loadEmployees();
-                else alert(data.message || 'Failed to update role.');
+                if (data.success) {
+                    loadEmployees();
+                } else alert('Error: ' + data.message);
             } catch (err) {
-                alert('Network error.');
+                alert('Network error updating role.');
             }
         }
 
-        async function removeEmployee(id, name) {
-            if (!confirm(`Are you sure you want to remove ${name} from staff? This cannot be undone.`)) return;
+        async function removeEmployee(id, username) {
+            if (!confirm(`Are you sure you want to completely remove staff member ${username}?`)) return;
             try {
                 const res = await fetch(`${API}/api/admin/employees/${id}`, {
                     method: 'DELETE',
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 const data = await res.json();
-                if (data.success) loadEmployees();
-                else alert(data.message || 'Failed to remove staff member.');
+                if (data.success) {
+                    loadEmployees();
+                } else {
+                    alert('Error removing staff: ' + data.message);
+                }
             } catch (err) {
-                alert('Network error.');
+                console.error('Remove staff error:', err);
+                alert('Network error removing staff');
             }
         }
         // ========= END EMPLOYEE MANAGEMENT =========

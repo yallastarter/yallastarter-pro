@@ -140,6 +140,7 @@ router.get('/users', async (req, res) => {
         const skip = (page - 1) * limit;
 
         const query = { role: { $ne: 'admin' } };
+        if (req.query.role) query.role = req.query.role;
         if (search) {
             query.$or = [
                 { username: { $regex: search, $options: 'i' } },
@@ -201,6 +202,43 @@ router.put('/users/:id', async (req, res) => {
         res.json({ success: true, data: user });
     } catch (error) {
         console.error('Admin update user error:', error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+});
+
+// @desc    Get single user detail
+// @route   GET /api/admin/users/:id
+// @access  Admin
+router.get('/users/:id', async (req, res) => {
+    try {
+        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+            return res.status(400).json({ success: false, message: 'Invalid user ID' });
+        }
+        const user = await User.findById(req.params.id).select('-password');
+        if (!user) return res.status(404).json({ success: false, message: 'User not found' });
+        const projectCount = await Project.countDocuments({ creator: user._id });
+        res.json({ success: true, data: { ...user.toObject(), projectCount } });
+    } catch (error) {
+        console.error('Admin get user error:', error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+});
+
+// @desc    Delete user
+// @route   DELETE /api/admin/users/:id
+// @access  Admin
+router.delete('/users/:id', async (req, res) => {
+    try {
+        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+            return res.status(400).json({ success: false, message: 'Invalid user ID' });
+        }
+        const user = await User.findById(req.params.id);
+        if (!user) return res.status(404).json({ success: false, message: 'User not found' });
+        if (user.role === 'admin') return res.status(403).json({ success: false, message: 'Cannot delete an admin account' });
+        await User.findByIdAndDelete(req.params.id);
+        res.json({ success: true, message: 'User deleted successfully' });
+    } catch (error) {
+        console.error('Admin delete user error:', error);
         res.status(500).json({ success: false, message: 'Server error' });
     }
 });

@@ -184,9 +184,9 @@
     </div>
 
     <script>
-        // If already logged in as admin, redirect
+        // If already logged in as authorized staff, redirect
         const existingUser = JSON.parse(localStorage.getItem('user') || 'null');
-        if (existingUser && existingUser.role === 'admin') {
+        if (existingUser && ['admin', 'manager', 'employee'].includes(existingUser.role)) {
             window.location.href = '/admin-dashboard.html';
         }
 
@@ -212,12 +212,12 @@
 
                 const data = await res.json();
 
-                if (data.success && data.user.role === 'admin') {
+                if (data.success && ['admin', 'manager', 'employee'].includes(data.user.role)) {
                     localStorage.setItem('authToken', data.token);
                     localStorage.setItem('user', JSON.stringify(data.user));
                     window.location.href = '/admin-dashboard.html';
                 } else if (data.success) {
-                    errorEl.textContent = 'Access denied. This account is not an admin.';
+                    errorEl.textContent = 'Access denied. This account is not authorized for the admin panel.';
                     errorEl.style.display = 'block';
                 } else {
                     errorEl.textContent = data.message || 'Invalid credentials';

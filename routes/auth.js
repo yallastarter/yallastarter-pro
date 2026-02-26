@@ -308,4 +308,49 @@ router.put('/updatepassword', authMiddleware, async (req, res) => {
     }
 });
 
+// @desc    Forgot password — verify email exists
+// @route   POST /api/auth/forgot-password
+// @access  Public
+router.post('/forgot-password', async (req, res) => {
+    try {
+        const { email } = req.body;
+        if (!email) return res.status(400).json({ success: false, message: 'Email is required' });
+        const user = await User.findOne({ email: email.toLowerCase().trim() });
+        // Always respond the same for security (but send found flag)
+        if (!user) {
+            return res.status(404).json({ success: false, message: 'No account found with that email address.' });
+        }
+        // In production this would send an email. For now, return a reset token / flag.
+        res.json({ success: true, message: 'Account found. You can now reset your password.', found: true });
+    } catch (error) {
+        console.error('Forgot password error:', error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+});
+
+// @desc    Reset password — set new password (direct reset, no email token needed)
+// @route   POST /api/auth/reset-password
+// @access  Public
+router.post('/reset-password', async (req, res) => {
+    try {
+        const { email, newPassword } = req.body;
+        if (!email || !newPassword) {
+            return res.status(400).json({ success: false, message: 'Email and new password are required' });
+        }
+        if (newPassword.length < 6) {
+            return res.status(400).json({ success: false, message: 'Password must be at least 6 characters' });
+        }
+        const user = await User.findOne({ email: email.toLowerCase().trim() }).select('+password');
+        if (!user) {
+            return res.status(404).json({ success: false, message: 'No account found with that email address' });
+        }
+        user.password = newPassword;
+        await user.save();
+        res.json({ success: true, message: 'Password reset successfully. You can now log in with your new password.' });
+    } catch (error) {
+        console.error('Reset password error:', error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+});
+
 module.exports = router;

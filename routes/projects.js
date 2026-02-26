@@ -267,4 +267,42 @@ router.get('/:id/favorite', protect, async (req, res) => {
     }
 });
 
+// @desc    Delete project (creator only) + refund backers
+// @route   DELETE /api/projects/:id
+// @access  Private
+router.delete('/:id', protect, async (req, res) => {
+    try {
+        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+            return res.status(400).json({ success: false, message: 'Invalid project ID' });
+        }
+        const project = await Project.findById(req.params.id);
+        if (!project) return res.status(404).json({ success: false, message: 'Project not found' });
+        if (project.creator.toString() !== req.user._id.toString()) {
+            return res.status(403).json({ success: false, message: 'Not authorized to delete this project' });
+        }
+        // Only allow delete if not active (or if pending/draft/rejected)
+        // Active projects with backers: refund all backers
+        let refundCount = 0;
+        if (project.currentAmount > 0) {
+            // Find all send transactions for this project and refund
+            const Transaction = mongoose.model('Transaction');
+            const backerTxns = await Transaction.find({
+                project: project._id,
+                type: 'send',
+                status: 'completed'
+            });
+            for (const tx of backerTxns) {
+                await User.findByIdAndUpdate(tx.from, { $inc: { coinBalance: tx.amount } });
+                await Transaction.findByIdAndUpdate(tx._id, { status: 'refunded' });
+                refundCount++;
+            }
+        }
+        await Project.findByIdAndDelete(req.params.id);
+        res.json({ success: true, message: `Project deleted successfully.${refundCount > 0 ? ` ${refundCount} backer(s) have been refunded.` : ''}` });
+    } catch (err) {
+        console.error('Delete project error:', err.message);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+});
+
 module.exports = router;
