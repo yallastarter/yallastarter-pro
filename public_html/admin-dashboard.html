@@ -1031,18 +1031,21 @@
     <script src="assets/js/auth-handler.js"></script>
     <script>
         const API = window.location.origin;
-        const token = (window.auth && window.auth.getToken && window.auth.getToken()) || localStorage.getItem('authToken') || localStorage.getItem('token');
-        // Auth Check - Ensure user is admin, manager, or employee
-        if (!auth.isAuthenticated()) {
+        const token = localStorage.getItem('authToken') || localStorage.getItem('token');
+        // Check token validity on load
+        if (!token) {
             window.location.href = 'admin-login.html';
+            return;
         }
-
-        const user = auth.getUser();
+        
+        // Verify admin role
+        const user = JSON.parse(localStorage.getItem('user') || 'null');
         if (!user || !['admin', 'manager', 'employee'].includes(user.role)) {
-            auth.logout();
+            localStorage.clear();
             window.location.href = 'admin-login.html';
+            return;
         }
-
+        
         document.getElementById('adminName').textContent = user.username;
         document.getElementById('adminRole').textContent = user.role.charAt(0).toUpperCase() + user.role.slice(1);
 
@@ -1094,23 +1097,49 @@
         // Load overview on start
         loadDashboard();
 
-        async function adminFetch(url) {
-            const res = await fetch(url, {
-                headers: { 'Authorization': `Bearer ${token}` }
-            });
-            return res.json();
+        async function adminFetch(url, options = {}) {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 second timeout
+            
+            try {
+                const res = await fetch(url, {
+                    signal: controller.signal,
+                    headers: { 'Authorization': `Bearer ${token}`, ...options.headers }
+                });
+                clearTimeout(timeoutId);
+                return res.json();
+            } catch (err) {
+                clearTimeout(timeoutId);
+                if (err.name === 'AbortError') {
+                    throw new Error('Request timeout - please check your internet connection');
+                }
+                throw err;
+            }
         }
 
         async function adminPut(url, body) {
-            const res = await fetch(url, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify(body)
-            });
-            return res.json();
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 15000);
+            
+            try {
+                const res = await fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(body),
+                    signal: controller.signal
+                });
+                clearTimeout(timeoutId);
+                return res.json();
+            } catch (err) {
+                clearTimeout(timeoutId);
+                if (err.name === 'AbortError') {
+                    throw new Error('Request timeout - please check your internet connection');
+                }
+                throw err;
+            }
         }
 
         async function loadDashboard() {
@@ -1382,12 +1411,18 @@
 
         async function loadAdminProjects() {
             const status = document.getElementById('projectStatusFilter')?.value || '';
+            const projectsTable = document.getElementById('projectsTable');
+            projectsTable.innerHTML = '<tr><td colspan="9" class="loading"><i class="fas fa-spinner fa-spin"></i></td></tr>';
+            
             try {
                 const data = await adminFetch(`${API}/api/admin/projects?status=${status}&limit=50`);
-                if (!data.success) return;
-                document.getElementById('projectsTable').innerHTML = data.data.map(p => `
+                if (!data.success) {
+                    projectsTable.innerHTML = '<tr><td colspan="9" style="text-align:center;color:var(--accent-red);"><i class="fas fa-exclamation-triangle"></i> Failed to load projects</td></tr>';
+                    return;
+                }
+                projectsTable.innerHTML = data.data.map(p => `
                     <tr>
-                        <td><strong>${p.title}</strong><br><small style="color:var(--admin-muted);font-size:0.75rem;">#${p.serialNumber || '—'}</small></td>
+                        <td><strong>${p.title}</strong><br><small style="color:var(--admin-muted);font-size:0.75rem;">#${p.serialNumber || '-'}</small></td>
                         <td>${p.creator?.username || '-'}</td>
                         <td style="color:var(--admin-muted);font-size:0.8rem;">${p.creator?.email || '-'}</td>
                         <td style="text-transform:capitalize;">${p.category}</td>
@@ -1401,13 +1436,14 @@
                             ${p.status === 'draft' ? `<button class="action-btn approve" onclick="updateProject('${p._id}','pending')"><i class="fas fa-paper-plane"></i> Submit</button>` : ''}
                             ${p.status === 'active' ? `<button class="action-btn" onclick="updateProject('${p._id}','completed')" style="border-color:var(--accent-blue);color:var(--accent-blue);"><i class="fas fa-flag-checkered"></i> Complete</button>` : ''}
                             ${p.status === 'active' ? `<button class="action-btn" onclick="updateProject('${p._id}','pending')" style="border-color:var(--accent-amber);color:var(--accent-amber);"><i class="fas fa-pause-circle"></i> Deactivate</button>` : ''}
-                            ${p.status === 'rejected' ? `<button class="action-btn approve" onclick="approveProject('${p._id}')"><i class="fas fa-undo"></i> Re-publish</button>` : ''}
+                            ${p.status === 'rejected' ? `<button class="action-btn approve" onclick="updateProject('${p._id}','active')"><i class="fas fa-undo"></i> Re-publish</button>` : ''}
                             <button class="action-btn reject" onclick="deleteProject('${p._id}', '${p.title.replace(/'/g, '&#39;')}')" title="Delete permanently" style="border-color:#ef4444;color:#ef4444;"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
-                `).join('') || '<tr><td colspan="8" style="text-align:center; color: var(--admin-muted);">No projects found</td></tr>';
+                `).join('') || '<tr><td colspan="9" style="text-align:center; color: var(--admin-muted);">No projects found</td></tr>';
             } catch (err) {
                 console.error('Projects load error:', err);
+                projectsTable.innerHTML = '<tr><td colspan="9" style="text-align:center;color:var(--accent-red);"><i class="fas fa-exclamation-triangle"></i> ' + (err.message || 'Network error loading projects') + '</td></tr>';
             }
         }
 

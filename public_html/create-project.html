@@ -668,11 +668,23 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="project-rewards" class="form-label">Rewards for Backers <span
-                                style="color:var(--neutral-500);font-weight:400;">(Optional)</span></label>
-                        <textarea id="project-rewards" class="form-control form-textarea"
-                            placeholder="Describe the rewards backers will receive..."></textarea>
+                    <!-- Dynamic Rewards Section -->
+                    <div class="form-group"
+                        style="margin-top: 2rem; border-top: 1px solid var(--neutral-200); padding-top: 1.5rem;">
+                        <h3 style="font-size: 1.2rem; margin-bottom: 1rem; color: var(--neutral-800);">Reward Tiers
+                            <span style="color:var(--neutral-500);font-weight:400;font-size:0.9rem;">(Optional)</span>
+                        </h3>
+                        <p style="color:var(--neutral-600); font-size: 0.9rem; margin-bottom: 1rem;">Offer different
+                            rewards to backers based on their contribution amount.</p>
+
+                        <div id="rewards-container">
+                            <!-- Rewards will be added here -->
+                        </div>
+
+                        <button type="button" id="btn-add-reward" class="btn btn-outline"
+                            style="width: 100%; padding: 0.75rem; border-style: dashed; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                            <i class="fas fa-plus"></i> Add Reward Tier
+                        </button>
                     </div>
                 </div>
 
@@ -990,6 +1002,52 @@
             }
         }
 
+        // Dynamic Rewards Logic
+        const rewardsContainer = document.getElementById('rewards-container');
+        const btnAddReward = document.getElementById('btn-add-reward');
+        let rewardCount = 0;
+
+        function addRewardTier() {
+            rewardCount++;
+            const div = document.createElement('div');
+            div.className = 'reward-tier-card';
+            div.style.cssText = 'background: var(--neutral-100); border: 1px solid var(--neutral-300); border-radius: 8px; padding: 1.25rem; margin-bottom: 1rem; position: relative;';
+            div.innerHTML = `
+                <button type="button" class="btn-remove-reward" onclick="this.parentElement.remove()" style="position: absolute; right: 1rem; top: 1rem; background: none; border: none; color: var(--neutral-500); cursor: pointer; padding: 0.5rem;"><i class="fas fa-times"></i></button>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <div>
+                        <label class="form-label" style="font-size: 0.85rem;">Reward Title *</label>
+                        <input type="text" class="form-control reward-title-input" placeholder="e.g. Early Bird" required>
+                    </div>
+                    <div>
+                        <label class="form-label" style="font-size: 0.85rem;">Minimum Amount (SAR) *</label>
+                        <input type="number" class="form-control reward-amount-input" placeholder="100" min="1" required>
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label class="form-label" style="font-size: 0.85rem;">Description *</label>
+                    <textarea class="form-control form-textarea reward-desc-input" placeholder="What will they receive?" rows="2" required></textarea>
+                </div>
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1rem;">
+                    <div>
+                        <label class="form-label" style="font-size: 0.85rem;">Included Items (comma-separated)</label>
+                        <input type="text" class="form-control reward-includes-input" placeholder="Item 1, Item 2">
+                    </div>
+                    <div>
+                        <label class="form-label" style="font-size: 0.85rem;">Est. Delivery</label>
+                        <input type="month" class="form-control reward-date-input">
+                    </div>
+                </div>
+            `;
+            rewardsContainer.appendChild(div);
+        }
+
+        if (btnAddReward) {
+            btnAddReward.addEventListener('click', addRewardTier);
+            // Add one default empty tier
+            addRewardTier();
+        }
+
         // Event listeners
         document.getElementById('btn-next').addEventListener('click', nextStep);
         document.getElementById('btn-prev').addEventListener('click', prevStep);
@@ -1045,7 +1103,24 @@
             const story = (document.getElementById('project-story') && document.getElementById('project-story').value) || '';
             const goalAmount = document.getElementById('funding-goal').value;
             const fundingDeadline = document.getElementById('funding-deadline').value;
-            const rewards = (document.getElementById('project-rewards') && document.getElementById('project-rewards').value) || '';
+            const rewards = [];
+            document.querySelectorAll('.reward-tier-card').forEach(card => {
+                const rTitle = card.querySelector('.reward-title-input').value.trim();
+                const rAmount = card.querySelector('.reward-amount-input').value;
+                const rDesc = card.querySelector('.reward-desc-input').value.trim();
+                const rIncludes = card.querySelector('.reward-includes-input').value.trim();
+                const rDate = card.querySelector('.reward-date-input').value;
+
+                if (rTitle && rAmount && rDesc) {
+                    rewards.push({
+                        title: rTitle,
+                        amount: Number(rAmount),
+                        description: rDesc,
+                        includes: rIncludes ? rIncludes.split(',').map(s => s.trim()).filter(Boolean) : [],
+                        deliveryDate: rDate || null
+                    });
+                }
+            });
             const videoUrl = (document.getElementById('project-video') && document.getElementById('project-video').value.trim()) || '';
 
             if (!title || !category || !location || !description || !goalAmount) {

@@ -864,11 +864,33 @@
     <script>
         const API = window.location.origin;
         const token = localStorage.getItem('authToken') || localStorage.getItem('token');
+        // Check token validity on load
+        if (!token) {
+            window.location.href = 'admin-login.html';
+            return;
+        }
+        
+        // Verify admin role
         const user = JSON.parse(localStorage.getItem('user') || 'null');
+        if (!user || !['admin', 'manager', 'employee'].includes(user.role)) {
+            localStorage.clear();
+            window.location.href = 'admin-login.html';
+            return;
+        }
+        
+        document.getElementById('adminName').textContent = user.username;
+        document.getElementById('adminRole').textContent = user.role.charAt(0).toUpperCase() + user.role.slice(1);
 
-        // Auth check
-        if (!user || user.role !== 'admin') {
-            window.location.href = '/admin-login.html';
+        // Hide permissions if not admin
+        if (user.role !== 'admin') {
+            document.querySelector('[data-tab="employees"]').style.display = 'none';
+            document.querySelector('[data-tab="platform"]').style.display = 'none';
+
+            // Hide tabs based on specific permissions for managers/employees
+            if (!user.permissions?.canManageProjects) document.querySelector('[data-tab="projects"]').style.display = 'none';
+            if (!user.permissions?.canManageUsers) document.querySelector('[data-tab="users"]').style.display = 'none';
+            if (!user.permissions?.canViewTransactions) document.querySelector('[data-tab="transactions"]').style.display = 'none';
+            if (!user.permissions?.canApprovePayouts) document.querySelector('[data-tab="cashouts"]').style.display = 'none';
         }
 
         // Tab navigation

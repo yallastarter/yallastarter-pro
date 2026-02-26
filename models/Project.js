@@ -60,7 +60,13 @@ const ProjectSchema = new mongoose.Schema({
     gallery: [{ type: String }],
     videoUrl: { type: String, default: null },
     story: { type: String, default: '' },
-    rewards: { type: String, default: '' },
+    rewards: [{
+        title: { type: String, required: true },
+        amount: { type: Number, required: true },
+        description: { type: String, required: true },
+        includes: [{ type: String }],
+        deliveryDate: { type: String }
+    }],
     createdAt: {
         type: Date,
         default: Date.now
