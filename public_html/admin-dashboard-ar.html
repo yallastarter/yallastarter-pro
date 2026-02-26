@@ -863,7 +863,7 @@
 
     <script>
         const API = window.location.origin;
-        const token = localStorage.getItem('authToken');
+        const token = localStorage.getItem('authToken') || localStorage.getItem('token');
         const user = JSON.parse(localStorage.getItem('user') || 'null');
 
         // Auth check

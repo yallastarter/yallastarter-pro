@@ -1028,6 +1028,7 @@
         </div>
     </div>
 
+    <script src="assets/js/auth-handler.js"></script>
     <script>
         const API = window.location.origin;
         const token = (window.auth && window.auth.getToken && window.auth.getToken()) || localStorage.getItem('authToken') || localStorage.getItem('token');
@@ -1713,6 +1714,7 @@
 
         function adminLogout() {
             localStorage.removeItem('authToken');
+            localStorage.removeItem('token');
             localStorage.removeItem('user');
             window.location.href = '/admin-login.html';
         }
