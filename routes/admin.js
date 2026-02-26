@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const { protect, staffOnly, requirePermission, adminOnly } = require('../middleware/auth');
+const User = require('../models/User');
+const Project = require('../models/Project');
+const Transaction = require('../models/Transaction');
 
 // All admin routes require authentication + staff role
 router.use(protect, staffOnly);
