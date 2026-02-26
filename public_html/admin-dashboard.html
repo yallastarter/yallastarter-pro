@@ -600,6 +600,11 @@
                 </div>
             </div>
             <div class="topbar-right">
+                <div
+                    style="text-align:right;display:flex;flex-direction:column;justify-content:center;margin-right:.5rem;">
+                    <span id="adminName" style="font-size:.9rem;font-weight:600;color:white;">Admin</span>
+                    <span id="adminRole" style="font-size:.75rem;color:var(--admin-muted);">Role</span>
+                </div>
                 <a href="index.html" class="topbar-btn"><i class="fas fa-external-link-alt"></i> View Site</a>
                 <button class="topbar-btn danger" onclick="adminLogout()"><i class="fas fa-sign-out-alt"></i>
                     Logout</button>
@@ -812,7 +817,13 @@
             <div class="tab-content" id="tab-cashouts">
                 <div class="panel-card">
                     <div class="panel-header">
-                        <div class="panel-title">Pending Cash Out Requests</div>
+                        <div class="panel-title">Cash Out Requests</div>
+                        <select class="panel-search" id="cashoutStatusFilter" onchange="loadAdminCashouts()"
+                            style="width:auto;">
+                            <option value="pending">⏳ Pending</option>
+                            <option value="completed">✅ Approved</option>
+                            <option value="failed">❌ Rejected</option>
+                        </select>
                     </div>
                     <table class="admin-table">
                         <thead>
@@ -1037,7 +1048,7 @@
             window.location.href = 'admin-login.html';
             return;
         }
-        
+
         // Verify admin role
         const user = JSON.parse(localStorage.getItem('user') || 'null');
         if (!user || !['admin', 'manager', 'employee'].includes(user.role)) {
@@ -1045,7 +1056,7 @@
             window.location.href = 'admin-login.html';
             return;
         }
-        
+
         document.getElementById('adminName').textContent = user.username;
         document.getElementById('adminRole').textContent = user.role.charAt(0).toUpperCase() + user.role.slice(1);
 
@@ -1099,20 +1110,23 @@
 
         async function adminFetch(url, options = {}) {
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 second timeout
-            
+            const timeoutId = setTimeout(() => controller.abort(), 15000);
             try {
+                const { headers, ...rest } = options;
                 const res = await fetch(url, {
+                    ...rest,
                     signal: controller.signal,
-                    headers: { 'Authorization': `Bearer ${token}`, ...options.headers }
+                    headers: { 'Authorization': `Bearer ${token}`, ...(headers || {}) }
                 });
                 clearTimeout(timeoutId);
+                if (!res.ok && res.status === 401) {
+                    adminLogout();
+                    throw new Error('Session expired');
+                }
                 return res.json();
             } catch (err) {
                 clearTimeout(timeoutId);
-                if (err.name === 'AbortError') {
-                    throw new Error('Request timeout - please check your internet connection');
-                }
+                if (err.name === 'AbortError') throw new Error('Request timeout - please check your internet connection');
                 throw err;
             }
         }
@@ -1120,7 +1134,7 @@
         async function adminPut(url, body) {
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 15000);
-            
+
             try {
                 const res = await fetch(url, {
                     method: 'PUT',
@@ -1145,7 +1159,7 @@
         async function loadDashboard() {
             const statsGrid = document.getElementById('statsGrid');
             statsGrid.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i><p>Loading stats...</p></div>';
-            
+
             try {
                 const data = await adminFetch(`${API}/api/admin/dashboard`);
                 if (!data.success) {
@@ -1289,6 +1303,46 @@
                 console.error('Dashboard load error:', err);
                 statsGrid.innerHTML = '<div class="loading" style="color: var(--accent-red);"><i class="fas fa-exclamation-triangle"></i><p>Failed to load dashboard</p><small style="color: var(--admin-muted);">' + (err.message || 'Please check your connection and try again') + '</small></div>';
             }
+        }
+
+        async function loadAdminUsers() {
+            const search = document.getElementById('userSearch')?.value || '';
+            const usersTable = document.getElementById('usersTable');
+            usersTable.innerHTML = '<tr><td colspan="6" class="loading"><i class="fas fa-spinner fa-spin"></i></td></tr>';
+            try {
+                const data = await adminFetch(`${API}/api/admin/users?search=${encodeURIComponent(search)}&limit=50`);
+                if (!data.success) {
+                    usersTable.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--accent-red);"><i class="fas fa-exclamation-triangle"></i> Failed to load users</td></tr>';
+                    return;
+                }
+                if (!data.data || data.data.length === 0) {
+                    usersTable.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--admin-muted);padding:2rem;">No users found</td></tr>';
+                    return;
+                }
+                usersTable.innerHTML = data.data.map(u => `
+                    <tr>
+                        <td><strong>${escHtml(u.username)}</strong>${u.suspended ? ' <span class="badge rejected" style="font-size:.65rem;">Suspended</span>' : ''}</td>
+                        <td style="color:var(--admin-muted);font-size:.82rem;">${escHtml(u.email)}</td>
+                        <td style="color:var(--accent-amber);font-weight:600;">${(u.coinBalance || 0).toLocaleString()}</td>
+                        <td style="color:var(--accent-green);font-weight:600;">${(u.totalEarned || 0).toLocaleString()}</td>
+                        <td style="color:var(--admin-muted);font-size:.8rem;">${new Date(u.createdAt).toLocaleDateString()}</td>
+                        <td style="white-space:nowrap;">
+                            <button class="action-btn" onclick="viewUser('${u._id}')" style="border-color:var(--accent-blue);color:var(--accent-blue);"><i class="fas fa-eye"></i> View</button>
+                            <button class="action-btn reject" onclick="deleteUser('${u._id}', '${escHtml(u.username).replace(/'/g, '&#39;')}')" title="Delete permanently"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (err) {
+                console.error('Users load error:', err);
+                usersTable.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--accent-red);">' + (err.message || 'Network error loading users') + '</td></tr>';
+            }
+        }
+
+        let _searchTimeout;
+        function searchUsers() {
+            clearTimeout(_searchTimeout);
+            _searchTimeout = setTimeout(loadAdminUsers, 350);
+        }
 
         async function adjustCoins(userId, username) {
             const amount = prompt(`Adjust coin balance for ${username}.\nEnter new balance:`);
@@ -1389,7 +1443,7 @@
             const status = document.getElementById('projectStatusFilter')?.value || '';
             const projectsTable = document.getElementById('projectsTable');
             projectsTable.innerHTML = '<tr><td colspan="9" class="loading"><i class="fas fa-spinner fa-spin"></i></td></tr>';
-            
+
             try {
                 const data = await adminFetch(`${API}/api/admin/projects?status=${status}&limit=50`);
                 if (!data.success) {
@@ -1505,8 +1559,18 @@
 
         async function updateProject(id, status) {
             if (!confirm(`Set project status to "${status}"?`)) return;
-            await adminPut(`${API}/api/admin/projects/${id}`, { status });
-            loadAdminProjects();
+            try {
+                const res = await adminPut(`${API}/api/admin/projects/${id}`, { status });
+                if (res.success) {
+                    showToast(`Project status set to "${status}"`, 'green');
+                    loadAdminProjects();
+                    loadDashboard();
+                } else {
+                    showToast('Error: ' + (res.message || 'Failed'), 'red');
+                }
+            } catch (e) {
+                showToast('Network error updating project', 'red');
+            }
         }
 
         async function loadAdminTransactions() {
@@ -1728,7 +1792,7 @@
             localStorage.removeItem('authToken');
             localStorage.removeItem('token');
             localStorage.removeItem('user');
-            window.location.href = '/admin-login.html';
+            window.location.href = 'admin-login.html';
         }
     </script>
 </body>
