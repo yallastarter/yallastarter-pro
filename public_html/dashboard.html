@@ -819,22 +819,26 @@
                         grid.innerHTML = '<p style="grid-column: 1/-1; color: var(--neutral-600);">No projects yet. <a href="create-project.html">Create your first project</a>.</p>';
                         return;
                     }
+                    const statusLabel = (s) => ({ active: '✅ Active', draft: '📝 Draft', pending: '⏳ Pending Review', completed: '🏁 Completed', rejected: '❌ Rejected' }[s] || s);
+                    const statusCls = (s) => ({ active: 'active', draft: 'draft', completed: 'completed', pending: 'pending', rejected: 'rejected' }[s] || 'draft');
                     grid.innerHTML = projects.map(p => {
                         const percent = p.goalAmount ? Math.min(100, Math.round((p.currentAmount / p.goalAmount) * 100)) : 0;
                         const daysLeft = p.deadline ? Math.max(0, Math.ceil((new Date(p.deadline) - new Date()) / (24 * 60 * 60 * 1000))) : 0;
-                        const imgSrc = p.coverImage || 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=600&q=80';
-                        const statusClass = p.status === 'active' ? 'active' : (p.status === 'completed' ? 'completed' : 'draft');
+                        const imgSrc = p.coverImage ? p.coverImage : 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=600&q=80';
+                        const createdDate = p.createdAt ? new Date(p.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : '—';
+                        const sClass = statusCls(p.status);
                         return `<div class="project-card">
-                            <div class="project-image"><img src="${imgSrc}" alt="${(p.title || '').replace(/"/g, '&quot;')}"></div>
+                            <div class="project-image"><img src="${imgSrc}" alt="${(p.title || '').replace(/"/g, '&quot;')}" onerror="this.src='https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=600&q=80'"></div>
                             <div class="project-content">
                                 <div class="project-category">${(p.category || '').charAt(0).toUpperCase() + (p.category || '').slice(1)}</div>
                                 <h3 class="project-title">${(p.title || '').replace(/</g, '&lt;')}</h3>
-                                <div class="project-status"><span class="status-badge ${statusClass}">${p.status || 'draft'}</span>${daysLeft > 0 ? '<span>' + daysLeft + ' days left</span>' : ''}</div>
+                                <div class="project-status"><span class="status-badge ${sClass}" style="${p.status === 'pending' ? 'background:#fef3c7;color:#d97706;' : p.status === 'rejected' ? 'background:#fee2e2;color:#dc2626;' : ''}">${statusLabel(p.status)}</span>${daysLeft > 0 ? '<span>' + daysLeft + ' days left</span>' : ''}</div>
                                 <div class="project-meta"><div>SAR ${(p.currentAmount || 0).toLocaleString()} raised</div><div>${percent}% funded</div></div>
                                 <div class="progress-bar"><div class="progress-fill" style="width: ${percent}%;"></div></div>
-                                <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
-                                    <a href="project-details.html?id=${p._id}" class="btn btn-sm btn-outline">View</a>
-                                    <a href="create-project.html?edit=${p._id}" class="btn btn-sm btn-primary">Edit</a>
+                                <div style="margin-top:.4rem;color:var(--neutral-500);font-size:.8rem;"><i class="fas fa-calendar-alt"></i> Created: ${createdDate}</div>
+                                <div style="display: flex; gap:.5rem; margin-top: 1rem;">
+                                    <a href="project-details.html?id=${p._id}" class="btn btn-sm btn-outline" style="flex:1;text-align:center;"><i class="fas fa-eye"></i> View</a>
+                                    <a href="my-projects.html" class="btn btn-sm btn-primary" style="flex:1;text-align:center;"><i class="fas fa-folder-open"></i> Manage</a>
                                 </div>
                             </div>
                         </div>`;

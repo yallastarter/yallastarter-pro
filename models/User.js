@@ -64,6 +64,10 @@ const UserSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now
+    },
+    suspended: {
+        type: Boolean,
+        default: false
     }
 });
 

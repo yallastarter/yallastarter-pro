@@ -1,13 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const { protect, adminOnly } = require('../middleware/auth');
-const User = require('../models/User');
-const Project = require('../models/Project');
-const Transaction = require('../models/Transaction');
+const { protect, staffOnly, requirePermission, adminOnly } = require('../middleware/auth');
 
-// All admin routes require authentication + admin role
-router.use(protect, adminOnly);
+// All admin routes require authentication + staff role
+router.use(protect, staffOnly);
 
 // @desc    Get dashboard statistics
 // @route   GET /api/admin/dashboard
@@ -131,8 +128,8 @@ router.get('/dashboard', async (req, res) => {
 
 // @desc    Get all users
 // @route   GET /api/admin/users
-// @access  Admin
-router.get('/users', async (req, res) => {
+// @access  Staff (canManageUsers)
+router.get('/users', requirePermission('canManageUsers'), async (req, res) => {
     try {
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 20;
@@ -169,21 +166,26 @@ router.get('/users', async (req, res) => {
 
 // @desc    Update user (suspend/activate/modify)
 // @route   PUT /api/admin/users/:id
-// @access  Admin
-router.put('/users/:id', async (req, res) => {
+// @access  Staff (canManageUsers)
+router.put('/users/:id', requirePermission('canManageUsers'), async (req, res) => {
     try {
         if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
             return res.status(400).json({ success: false, message: 'Invalid user ID' });
         }
 
-        const { role, coinBalance } = req.body;
+        const { role, coinBalance, suspended } = req.body;
         const updates = {};
         if (role !== undefined) {
-            if (!['user', 'admin'].includes(role)) {
-                return res.status(400).json({ success: false, message: 'Role must be user or admin' });
+            // Only admins can change roles to admin or change other employees roles
+            if (req.user.role !== 'admin') {
+                return res.status(403).json({ success: false, message: 'Only admins can change user roles' });
+            }
+            if (!['user', 'employee', 'manager', 'admin'].includes(role)) {
+                return res.status(400).json({ success: false, message: 'Invalid role' });
             }
             updates.role = role;
         }
+        if (suspended !== undefined) updates.suspended = !!suspended;
         if (coinBalance !== undefined) {
             const bal = parseInt(coinBalance);
             if (isNaN(bal) || bal < 0) {
@@ -208,8 +210,8 @@ router.put('/users/:id', async (req, res) => {
 
 // @desc    Get single user detail
 // @route   GET /api/admin/users/:id
-// @access  Admin
-router.get('/users/:id', async (req, res) => {
+// @access  Staff (canManageUsers)
+router.get('/users/:id', requirePermission('canManageUsers'), async (req, res) => {
     try {
         if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
             return res.status(400).json({ success: false, message: 'Invalid user ID' });
@@ -245,8 +247,8 @@ router.delete('/users/:id', async (req, res) => {
 
 // @desc    Get all projects
 // @route   GET /api/admin/projects
-// @access  Admin
-router.get('/projects', async (req, res) => {
+// @access  Staff (canManageProjects)
+router.get('/projects', requirePermission('canManageProjects'), async (req, res) => {
     try {
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 20;
@@ -277,8 +279,8 @@ router.get('/projects', async (req, res) => {
 
 // @desc    Update project status
 // @route   PUT /api/admin/projects/:id
-// @access  Admin
-router.put('/projects/:id', async (req, res) => {
+// @access  Staff (canManageProjects)
+router.put('/projects/:id', requirePermission('canManageProjects'), async (req, res) => {
     try {
         if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
             return res.status(400).json({ success: false, message: 'Invalid project ID' });
@@ -311,8 +313,8 @@ router.put('/projects/:id', async (req, res) => {
 
 // @desc    Delete a project
 // @route   DELETE /api/admin/projects/:id
-// @access  Admin
-router.delete('/projects/:id', async (req, res) => {
+// @access  AdminOnly
+router.delete('/projects/:id', adminOnly, async (req, res) => {
     try {
         if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
             return res.status(400).json({ success: false, message: 'Invalid project ID' });
@@ -333,8 +335,8 @@ router.delete('/projects/:id', async (req, res) => {
 
 // @desc    Get all transactions
 // @route   GET /api/admin/transactions
-// @access  Admin
-router.get('/transactions', async (req, res) => {
+// @access  Staff (canViewTransactions)
+router.get('/transactions', requirePermission('canViewTransactions'), async (req, res) => {
     try {
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 20;
@@ -367,8 +369,8 @@ router.get('/transactions', async (req, res) => {
 
 // @desc    Get pending cashout requests
 // @route   GET /api/admin/cashouts
-// @access  Admin
-router.get('/cashouts', async (req, res) => {
+// @access  Staff (canApprovePayouts)
+router.get('/cashouts', requirePermission('canApprovePayouts'), async (req, res) => {
     try {
         const transactions = await Transaction.find({
             type: 'cashout',
@@ -386,8 +388,8 @@ router.get('/cashouts', async (req, res) => {
 
 // @desc    Approve/reject cashout
 // @route   PUT /api/admin/cashouts/:id
-// @access  Admin
-router.put('/cashouts/:id', async (req, res) => {
+// @access  Staff (canApprovePayouts)
+router.put('/cashouts/:id', requirePermission('canApprovePayouts'), async (req, res) => {
     try {
         if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
             return res.status(400).json({ success: false, message: 'Invalid cashout ID' });
@@ -432,8 +434,8 @@ router.put('/cashouts/:id', async (req, res) => {
 
 // @desc    Get all staff (employees + managers)
 // @route   GET /api/admin/employees
-// @access  Admin
-router.get('/employees', async (req, res) => {
+// @access  AdminOnly
+router.get('/employees', adminOnly, async (req, res) => {
     try {
         const staff = await User.find({ role: { $in: ['employee', 'manager'] } })
             .select('-password')
@@ -447,8 +449,8 @@ router.get('/employees', async (req, res) => {
 
 // @desc    Create new employee or manager account
 // @route   POST /api/admin/employees
-// @access  Admin
-router.post('/employees', async (req, res) => {
+// @access  AdminOnly
+router.post('/employees', adminOnly, async (req, res) => {
     try {
         const { username, email, password, role, permissions } = req.body;
         if (!username || !email || !password) {
@@ -488,8 +490,8 @@ router.post('/employees', async (req, res) => {
 
 // @desc    Update employee permissions / role
 // @route   PUT /api/admin/employees/:id
-// @access  Admin
-router.put('/employees/:id', async (req, res) => {
+// @access  AdminOnly
+router.put('/employees/:id', adminOnly, async (req, res) => {
     try {
         if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
             return res.status(400).json({ success: false, message: 'Invalid ID' });

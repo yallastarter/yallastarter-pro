@@ -145,6 +145,11 @@ router.post('/login', async (req, res) => {
             return res.status(401).json({ success: false, message: 'Invalid credentials' });
         }
 
+        // Check if user is suspended
+        if (user.suspended) {
+            return res.status(403).json({ success: false, message: 'Your account has been suspended. Please contact support.' });
+        }
+
         // Create token
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
             expiresIn: '30d'

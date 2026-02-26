@@ -379,6 +379,43 @@
         const token = window.auth ? window.auth.getToken() : localStorage.getItem('token');
         const API = window.location.origin;
 
+        async function deleteProject(id, title) {
+            if (!confirm(`⚠️ Delete "${title}"?\n\nIf this project has backers, their coins will be refunded automatically.`)) return;
+            try {
+                const res = await fetch(API + '/api/projects/' + id, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': 'Bearer ' + token }
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showToast('✅ ' + data.message);
+                    loadMyProjects();
+                } else {
+                    alert(data.message || 'Error deleting project');
+                }
+            } catch (e) {
+                alert('Network error. Please try again.');
+            }
+        }
+
+        function showToast(msg) {
+            const t = document.createElement('div');
+            t.style.cssText = 'position:fixed;bottom:2rem;right:2rem;background:#065f46;color:white;padding:.9rem 1.5rem;border-radius:12px;font-size:.9rem;font-weight:600;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,.25);transition:opacity .4s;max-width:360px;';
+            t.textContent = msg;
+            document.body.appendChild(t);
+            setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 400); }, 3500);
+        }
+
+        function statusLabel(status) {
+            const map = { active: '✅ Active', draft: '📝 Draft', pending: '⏳ Pending Review', completed: '🏁 Completed', rejected: '❌ Rejected' };
+            return map[status] || status;
+        }
+
+        function statusClass(status) {
+            const map = { active: 'active', draft: 'draft', completed: 'completed', pending: 'pending', rejected: 'rejected' };
+            return map[status] || 'draft';
+        }
+
         async function loadMyProjects() {
             const grid = document.getElementById('my-projects-grid');
             try {
@@ -397,19 +434,30 @@
                 grid.innerHTML = projects.map(p => {
                     const percent = p.goalAmount ? Math.min(100, Math.round((p.currentAmount / p.goalAmount) * 100)) : 0;
                     const daysLeft = p.deadline ? Math.max(0, Math.ceil((new Date(p.deadline) - new Date()) / 86400000)) : 0;
-                    const imgSrc = p.coverImage || 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=600&q=80';
-                    const statusClass = p.status === 'active' ? 'active' : (p.status === 'completed' ? 'completed' : 'draft');
+                    const imgSrc = p.coverImage ? p.coverImage : 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=600&q=80';
+                    const createdDate = p.createdAt ? new Date(p.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : '—';
+                    const canEdit = ['draft', 'pending', 'rejected'].includes(p.status);
+                    const sClass = statusClass(p.status);
+                    const safeTitle = (p.title || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
                     return `<div class="project-card">
-                        <div class="project-image"><img src="${imgSrc}" alt="${(p.title || '').replace(/"/g, '&quot;')}"></div>
+                        <div class="project-image"><img src="${imgSrc}" alt="${safeTitle}" onerror="this.src='https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=600&q=80'"></div>
                         <div class="project-content">
                             <div class="project-category">${(p.category || '').charAt(0).toUpperCase() + (p.category || '').slice(1)}</div>
                             <h3 class="project-title">${(p.title || '').replace(/</g, '&lt;')}</h3>
-                            <div class="project-status"><span class="status-badge ${statusClass}">${p.status || 'draft'}</span>${daysLeft > 0 ? '<span>' + daysLeft + ' days left</span>' : ''}</div>
-                            <div class="project-meta"><div>SAR ${(p.currentAmount || 0).toLocaleString()} raised</div><div>${percent}% funded</div></div>
+                            <div class="project-status">
+                                <span class="status-badge ${sClass}" style="${p.status === 'pending' ? 'background:#fef3c7;color:#d97706;' : p.status === 'rejected' ? 'background:#fee2e2;color:#dc2626;' : ''}">${statusLabel(p.status)}</span>
+                                ${p.status === 'rejected' ? '<span style="color:#dc2626;font-size:.8rem;">❌ Rejected by admin</span>' : ''}
+                            </div>
+                            <div class="project-meta">
+                                <div>SAR ${(p.currentAmount || 0).toLocaleString()} raised</div>
+                                <div>${percent}% funded</div>
+                            </div>
                             <div class="progress-bar"><div class="progress-fill" style="width:${percent}%"></div></div>
-                            <div style="display:flex;justify-content:space-between;margin-top:1rem;">
-                                <a href="project-details.html?id=${p._id}" class="btn btn-sm btn-outline">View</a>
-                                <a href="create-project.html?edit=${p._id}" class="btn btn-sm btn-primary">Edit</a>
+                            <div style="margin-top:.5rem;color:var(--neutral-500);font-size:.8rem;"><i class="fas fa-calendar-alt"></i> Created: ${createdDate}</div>
+                            <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem;">
+                                <a href="project-details.html?id=${p._id}" class="btn btn-sm btn-outline" style="flex:1;text-align:center;"><i class="fas fa-eye"></i> View</a>
+                                ${canEdit ? `<a href="create-project.html?edit=${p._id}" class="btn btn-sm btn-primary" style="flex:1;text-align:center;"><i class="fas fa-edit"></i> Edit</a>` : ''}
+                                <button onclick="deleteProject('${p._id}', '${safeTitle}')" class="btn btn-sm" style="flex:1;background:#fee2e2;color:#dc2626;border:1px solid #fca5a5;border-radius:6px;cursor:pointer;font-family:inherit;"><i class="fas fa-trash"></i> Delete</button>
                             </div>
                         </div>
                     </div>`;

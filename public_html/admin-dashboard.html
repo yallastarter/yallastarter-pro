@@ -1002,8 +1002,35 @@
         </div>
     </main>
 
+    <!-- User Detail Modal -->
+    <div id="userDetailModal"
+        style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999;align-items:center;justify-content:center;backdrop-filter:blur(4px);"
+        onclick="if(event.target===this)this.style.display='none'">
+        <div
+            style="background:var(--admin-surface);border:1px solid var(--admin-border);border-radius:16px;padding:2rem;max-width:500px;width:95%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.5);">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
+                <h3 style="color:white;margin:0;font-size:1.2rem;"><i class="fas fa-user"
+                        style="color:var(--accent-blue);margin-right:.5rem;"></i> User Profile</h3>
+                <button onclick="document.getElementById('userDetailModal').style.display='none'"
+                    style="background:none;border:none;color:var(--admin-muted);font-size:1.4rem;cursor:pointer;">✕</button>
+            </div>
+            <div id="userDetailContent"></div>
+            <div style="margin-top:1.5rem;display:flex;gap:.75rem;flex-wrap:wrap;">
+                <button onclick="adjustCoinsModal()"
+                    style="flex:1;padding:.6rem 1rem;background:var(--accent-amber);color:#000;border:none;border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;"><i
+                        class="fas fa-coins"></i> Adjust Coins</button>
+                <button id="suspendUserBtn" onclick="suspendUserModal()"
+                    style="flex:1;padding:.6rem 1rem;background:var(--accent-red);color:white;border:none;border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;"><i
+                        class="fas fa-ban"></i> Suspend</button>
+                <button onclick="document.getElementById('userDetailModal').style.display='none'"
+                    style="flex:1;padding:.6rem 1rem;background:var(--admin-bg);color:var(--admin-muted);border:1px solid var(--admin-border);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;">Close</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         const API = window.location.origin;
+        const token = (window.auth && window.auth.getToken) ? window.auth.getToken() : localStorage.getItem('authToken');
         // Auth Check - Ensure user is admin, manager, or employee
         if (!auth.isAuthenticated()) {
             window.location.href = 'admin-login.html';
@@ -1270,16 +1297,70 @@
             }
         }
 
+        let _viewedUserId = null;
         async function viewUser(userId) {
+            _viewedUserId = userId;
             try {
                 const data = await adminFetch(`${API}/api/admin/users/${userId}`);
-                if (data.success) {
-                    const u = data.data;
-                    alert(`User Profile: ${u.username}\nEmail: ${u.email}\nRole: ${u.role}\nCoins: ${u.coinBalance}\nSpent: ${u.totalSpent}\nEarned: ${u.totalEarned}\nProjects Created: ${u.projectCount}\nJoined: ${new Date(u.createdAt).toLocaleDateString()}`);
-                }
+                if (!data.success) { showToast('Error fetching user', 'red'); return; }
+                const u = data.data;
+                const joined = u.createdAt ? new Date(u.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : '—';
+                document.getElementById('userDetailContent').innerHTML = `
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+                        <div style="background:var(--admin-bg);border-radius:10px;padding:1rem;">
+                            <div style="color:var(--admin-muted);font-size:.75rem;text-transform:uppercase;">Username</div>
+                            <div style="color:white;font-weight:600;font-size:1.1rem;">${escHtml(u.username || '—')}</div>
+                        </div>
+                        <div style="background:var(--admin-bg);border-radius:10px;padding:1rem;">
+                            <div style="color:var(--admin-muted);font-size:.75rem;text-transform:uppercase;">Role</div>
+                            <div style="color:white;font-weight:600;">${u.role || 'user'}</div>
+                        </div>
+                        <div style="background:var(--admin-bg);border-radius:10px;padding:1rem;grid-column:1/-1;">
+                            <div style="color:var(--admin-muted);font-size:.75rem;text-transform:uppercase;">Email</div>
+                            <div style="color:white;">${escHtml(u.email || '—')}</div>
+                        </div>
+                        <div style="background:var(--admin-bg);border-radius:10px;padding:1rem;">
+                            <div style="color:var(--admin-muted);font-size:.75rem;text-transform:uppercase;">Coin Balance</div>
+                            <div style="color:var(--accent-amber);font-weight:700;font-size:1.2rem;">${(u.coinBalance || 0).toLocaleString()}</div>
+                        </div>
+                        <div style="background:var(--admin-bg);border-radius:10px;padding:1rem;">
+                            <div style="color:var(--admin-muted);font-size:.75rem;text-transform:uppercase;">Total Earned</div>
+                            <div style="color:var(--accent-green);font-weight:700;font-size:1.2rem;">${(u.totalEarned || 0).toLocaleString()}</div>
+                        </div>
+                        <div style="background:var(--admin-bg);border-radius:10px;padding:1rem;">
+                            <div style="color:var(--admin-muted);font-size:.75rem;text-transform:uppercase;">Projects</div>
+                            <div style="color:white;font-weight:600;">${u.projectCount || 0}</div>
+                        </div>
+                        <div style="background:var(--admin-bg);border-radius:10px;padding:1rem;">
+                            <div style="color:var(--admin-muted);font-size:.75rem;text-transform:uppercase;">Joined</div>
+                            <div style="color:white;font-size:.9rem;">${joined}</div>
+                        </div>
+                    </div>`;
+                document.getElementById('userDetailModal').style.display = 'flex';
             } catch (e) {
                 console.error('Error fetching user', e);
+                showToast('Network error loading user', 'red');
             }
+        }
+
+        function escHtml(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+        async function adjustCoinsModal() {
+            const amount = prompt(`Adjust coins for this user.\nEnter new balance (number):`);
+            if (amount === null) return;
+            const newBalance = parseInt(amount);
+            if (isNaN(newBalance) || newBalance < 0) { alert('Invalid amount'); return; }
+            await adminPut(`${API}/api/admin/users/${_viewedUserId}`, { coinBalance: newBalance });
+            viewUser(_viewedUserId);
+            loadAdminUsers();
+        }
+
+        async function suspendUserModal() {
+            if (!confirm('Are you sure you want to suspend this user?')) return;
+            await adminPut(`${API}/api/admin/users/${_viewedUserId}`, { suspended: true });
+            showToast('User suspended', 'red');
+            loadAdminUsers();
+            document.getElementById('userDetailModal').style.display = 'none';
         }
 
         async function deleteUser(userId, username) {
@@ -1438,7 +1519,9 @@
 
         async function loadAdminCashouts() {
             try {
-                const data = await adminFetch(`${API}/api/admin/cashouts?status=pending`);
+                const filterEl = document.getElementById('cashoutStatusFilter');
+                const statusFilter = filterEl ? filterEl.value : 'pending';
+                const data = await adminFetch(`${API}/api/admin/cashouts?status=${statusFilter}`);
                 if (!data.success) return;
                 document.getElementById('cashoutsTable').innerHTML = data.data.map(tx => `
                     <tr>
