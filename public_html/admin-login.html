@@ -214,6 +214,7 @@
 
                 if (data.success && ['admin', 'manager', 'employee'].includes(data.user.role)) {
                     localStorage.setItem('authToken', data.token);
+                    localStorage.setItem('token', data.token);
                     localStorage.setItem('user', JSON.stringify(data.user));
                     window.location.href = '/admin-dashboard.html';
                 } else if (data.success) {

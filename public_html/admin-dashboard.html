@@ -1030,7 +1030,7 @@
 
     <script>
         const API = window.location.origin;
-        const token = (window.auth && window.auth.getToken) ? window.auth.getToken() : localStorage.getItem('authToken');
+        const token = (window.auth && window.auth.getToken && window.auth.getToken()) || localStorage.getItem('authToken') || localStorage.getItem('token');
         // Auth Check - Ensure user is admin, manager, or employee
         if (!auth.isAuthenticated()) {
             window.location.href = 'admin-login.html';
