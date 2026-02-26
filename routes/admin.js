@@ -19,6 +19,7 @@ router.get('/dashboard', async (req, res) => {
             totalProjects,
             activeProjects,
             completedProjects,
+            pendingProjects,
             totalTransactions,
             recentUsers,
             recentTransactions
@@ -27,6 +28,7 @@ router.get('/dashboard', async (req, res) => {
             Project.countDocuments(),
             Project.countDocuments({ status: 'active' }),
             Project.countDocuments({ status: 'completed' }),
+            Project.countDocuments({ status: 'pending' }),
             Transaction.countDocuments({ status: 'completed' }),
             User.find({ role: { $ne: 'admin' } })
                 .select('username email coinBalance createdAt')
@@ -104,6 +106,7 @@ router.get('/dashboard', async (req, res) => {
                     totalProjects,
                     activeProjects,
                     completedProjects,
+                    pendingProjects,
                     totalTransactions,
                     totalCoinsBought,
                     totalCoinsSent,
@@ -243,14 +246,17 @@ router.put('/projects/:id', async (req, res) => {
             return res.status(400).json({ success: false, message: 'Invalid project ID' });
         }
 
-        const { status } = req.body;
-        if (!status || !['draft', 'active', 'completed'].includes(status)) {
-            return res.status(400).json({ success: false, message: 'Status must be draft, active, or completed' });
+        const { status, rejectionReason } = req.body;
+        if (!status || !['draft', 'pending', 'active', 'completed', 'rejected'].includes(status)) {
+            return res.status(400).json({ success: false, message: 'Status must be draft, pending, active, completed, or rejected' });
         }
+
+        const updateData = { status };
+        if (rejectionReason) updateData.rejectionReason = rejectionReason;
 
         const project = await Project.findByIdAndUpdate(
             req.params.id,
-            { status },
+            updateData,
             { new: true }
         ).populate('creator', 'username email');
 
@@ -261,6 +267,28 @@ router.put('/projects/:id', async (req, res) => {
         res.json({ success: true, data: project });
     } catch (error) {
         console.error('Admin update project error:', error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+});
+
+// @desc    Delete a project
+// @route   DELETE /api/admin/projects/:id
+// @access  Admin
+router.delete('/projects/:id', async (req, res) => {
+    try {
+        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+            return res.status(400).json({ success: false, message: 'Invalid project ID' });
+        }
+
+        const project = await Project.findByIdAndDelete(req.params.id);
+
+        if (!project) {
+            return res.status(404).json({ success: false, message: 'Project not found' });
+        }
+
+        res.json({ success: true, message: 'Project deleted successfully' });
+    } catch (error) {
+        console.error('Admin delete project error:', error);
         res.status(500).json({ success: false, message: 'Server error' });
     }
 });

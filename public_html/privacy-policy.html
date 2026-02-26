@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="YallaStarter Privacy Policy — How we collect, use, and protect your personal data.">
+    <meta name="robots" content="index, follow">
+    <title>Privacy Policy - YallaStarter</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile-menu.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        .legal-hero {
+            background: linear-gradient(135deg, #1e3a5f 0%, #0f2440 100%);
+            color: white;
+            padding: 4rem 0 3rem;
+            text-align: center;
+        }
+
+        .legal-hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+        }
+
+        .legal-hero p {
+            font-size: 1.05rem;
+            opacity: 0.85;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .legal-meta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 0.4rem 1rem;
+            font-size: 0.88rem;
+            margin-top: 1rem;
+        }
+
+        .legal-container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem 5rem;
+        }
+
+        .legal-toc {
+            background: #eff6ff;
+            border: 1.5px solid #bfdbfe;
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .legal-toc h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1e3a5f;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .legal-toc ol {
+            margin: 0;
+            padding-left: 1.4rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.35rem 1.5rem;
+        }
+
+        .legal-toc a {
+            color: #1d4ed8;
+            text-decoration: none;
+            font-size: 0.92rem;
+            font-weight: 500;
+        }
+
+        .legal-toc a:hover {
+            text-decoration: underline;
+        }
+
+        .legal-section {
+            margin-bottom: 2.5rem;
+            padding-bottom: 2.5rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .legal-section:last-of-type {
+            border-bottom: none;
+        }
+
+        .legal-section h2 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #1e3a5f;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .legal-section h2 .section-num {
+            background: #1e3a5f;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .legal-section p {
+            color: #374151;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .legal-section ul {
+            padding-left: 1.5rem;
+            color: #374151;
+            line-height: 1.8;
+        }
+
+        .legal-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+
+        .data-table th {
+            background: #1e3a5f;
+            color: white;
+            padding: 0.75rem 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .data-table td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            color: #374151;
+            vertical-align: top;
+        }
+
+        .data-table tr:nth-child(even) td {
+            background: #f8fafc;
+        }
+
+        .rights-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .right-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 10px;
+            padding: 1rem;
+        }
+
+        .right-icon {
+            background: #006c35;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 0.8rem;
+        }
+
+        .right-item h4 {
+            margin: 0 0 0.25rem;
+            font-size: 0.92rem;
+            color: #065f46;
+        }
+
+        .right-item p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: #374151;
+        }
+
+        .highlight-box {
+            background: #fffbeb;
+            border-left: 4px solid #f59e0b;
+            border-radius: 0 10px 10px 0;
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            color: #92400e;
+            font-size: 0.93rem;
+        }
+
+        .contact-card {
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+            border: 1.5px solid #93c5fd;
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .contact-card h3 {
+            color: #1e3a5f;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card p {
+            color: #374151;
+            margin: 0;
+        }
+
+        .contact-card a {
+            color: #1d4ed8;
+            font-weight: 600;
+        }
+
+        @media (max-width: 640px) {
+            .legal-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .legal-toc ol {
+                grid-template-columns: 1fr;
+            }
+
+            .rights-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <span class="logo-text">YallaStarter</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html">Browse Projects</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="language-switcher">
+                <button class="language-btn active">English</button>
+                <button class="language-btn">العربية</button>
+            </div>
+            <div class="auth-buttons" id="authButtons">
+                <a href="login.html" class="btn btn-link">Log In</a>
+                <a href="signup.html" class="btn btn-primary">Sign Up</a>
+            </div>
+            <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+        </nav>
+        <div class="mobile-menu">
+            <div class="mobile-menu-header">
+                <div class="mobile-header-left">
+                    <div class="auth-buttons">
+                        <a href="login.html" class="btn btn-link">Log In</a>
+                        <a href="signup.html" class="btn btn-primary">Sign Up</a>
+                    </div>
+                </div>
+                <button class="mobile-close-btn"><i class="fas fa-times"></i></button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html">Browse Projects</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="legal-hero">
+        <div class="container">
+            <h1><i class="fas fa-shield-alt" style="margin-right:0.5rem;opacity:0.9;"></i>Privacy Policy</h1>
+            <p>We are committed to protecting your personal data and being transparent about how we use it.</p>
+            <div class="legal-meta">
+                <i class="fas fa-calendar-alt"></i>
+                Last Updated: February 26, 2026 &nbsp;|&nbsp; <i class="fas fa-globe"></i> Effective Immediately
+            </div>
+        </div>
+    </section>
+
+    <!-- Content -->
+    <div class="legal-container">
+
+        <!-- TOC -->
+        <div class="legal-toc">
+            <h3><i class="fas fa-list" style="margin-right:0.4rem;"></i>Table of Contents</h3>
+            <ol>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#collection">Data We Collect</a></li>
+                <li><a href="#usage">How We Use Your Data</a></li>
+                <li><a href="#sharing">Data Sharing</a></li>
+                <li><a href="#cookies">Cookies & Tracking</a></li>
+                <li><a href="#retention">Data Retention</a></li>
+                <li><a href="#security">Security</a></li>
+                <li><a href="#rights">Your Rights</a></li>
+                <li><a href="#children">Children's Privacy</a></li>
+                <li><a href="#changes">Changes to This Policy</a></li>
+                <li><a href="#contact-us">Contact Us</a></li>
+            </ol>
+        </div>
+
+        <!-- 1. Overview -->
+        <div class="legal-section" id="overview">
+            <h2><span class="section-num">1</span>Overview</h2>
+            <p>YallaStarter ("we," "us," "our") is committed to protecting your privacy. This Privacy Policy explains
+                how we collect, use, disclose, and safeguard your personal information when you use our crowdfunding
+                platform, website, and associated services.</p>
+            <p>By using YallaStarter, you agree to the collection and use of information in accordance with this policy.
+                This policy complies with the <strong>Saudi Personal Data Protection Law (PDPL)</strong> and applicable
+                international data protection standards.</p>
+        </div>
+
+        <!-- 2. Data Collection -->
+        <div class="legal-section" id="collection">
+            <h2><span class="section-num">2</span>Data We Collect</h2>
+            <p>We collect data you provide directly and data collected automatically through your use of our platform:
+            </p>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Examples</th>
+                        <th>Source</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Account Data</strong></td>
+                        <td>Name, email address, username, password (hashed)</td>
+                        <td>You provide directly</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Profile Data</strong></td>
+                        <td>Profile photo, bio, location, preferences</td>
+                        <td>You provide directly</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Project Data</strong></td>
+                        <td>Project title, description, images, funding goal, category</td>
+                        <td>You provide directly</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Financial Data</strong></td>
+                        <td>Coin purchase history, transaction records, bank info for cashouts</td>
+                        <td>Automatically recorded</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Usage Data</strong></td>
+                        <td>Pages visited, time on platform, features used, search queries</td>
+                        <td>Automatically collected</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Device Data</strong></td>
+                        <td>IP address, browser type, device type, OS</td>
+                        <td>Automatically collected</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Communication Data</strong></td>
+                        <td>Support tickets, messages, feedback forms</td>
+                        <td>You provide directly</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 3. Usage -->
+        <div class="legal-section" id="usage">
+            <h2><span class="section-num">3</span>How We Use Your Data</h2>
+            <p>We use your personal data for the following purposes:</p>
+            <ul>
+                <li><strong>Account Management:</strong> Creating, maintaining, and securing your account</li>
+                <li><strong>Platform Services:</strong> Processing transactions, managing projects, connecting creators
+                    with backers</li>
+                <li><strong>Communications:</strong> Sending you notifications, updates, security alerts, and support
+                    responses</li>
+                <li><strong>Marketing (with consent):</strong> Newsletters, platform updates, and promotional offers
+                    (you can opt out at any time)</li>
+                <li><strong>Analytics:</strong> Understanding how users interact with the platform to improve our
+                    services</li>
+                <li><strong>Compliance:</strong> Fulfilling legal obligations, resolving disputes, and enforcing our
+                    Terms of Service</li>
+                <li><strong>Fraud Prevention:</strong> Detecting and preventing fraudulent activity, abuse, and security
+                    threats</li>
+            </ul>
+        </div>
+
+        <!-- 4. Sharing -->
+        <div class="legal-section" id="sharing">
+            <h2><span class="section-num">4</span>Data Sharing</h2>
+            <p>We <strong>do not sell your personal data</strong>. We may share it only in these limited circumstances:
+            </p>
+            <ul>
+                <li><strong>Service Providers:</strong> Trusted third parties who help us operate the platform (e.g.,
+                    cloud hosting, payment processors, email services) — bound by strict confidentiality agreements</li>
+                <li><strong>Legal Obligations:</strong> When required by law, court order, or government authority</li>
+                <li><strong>Safety:</strong> To protect the safety and rights of our users or the public</li>
+                <li><strong>Business Transfers:</strong> In the event of a merger, acquisition, or asset sale, your data
+                    may be transferred — we will notify you in advance</li>
+                <li><strong>With Your Consent:</strong> Any other sharing will only occur with your explicit permission
+                </li>
+            </ul>
+            <div class="highlight-box">
+                <strong><i class="fas fa-info-circle"></i> Public project data:</strong>
+                Your project title, description, images, and creator name are publicly visible once a project is
+                approved and published. Your email address is never shown publicly.
+            </div>
+        </div>
+
+        <!-- 5. Cookies -->
+        <div class="legal-section" id="cookies">
+            <h2><span class="section-num">5</span>Cookies & Tracking</h2>
+            <p>We use cookies and similar tracking technologies to enhance your experience on our platform. Types of
+                cookies we use:</p>
+            <ul>
+                <li><strong>Essential Cookies:</strong> Required for the platform to function (authentication,
+                    security). Cannot be disabled.</li>
+                <li><strong>Preference Cookies:</strong> Remember your settings (language, region preferences)</li>
+                <li><strong>Analytics Cookies:</strong> Help us understand how users interact with the platform (e.g.,
+                    pages visited, session duration)</li>
+                <li><strong>Marketing Cookies:</strong> Used to show relevant content and promotions (only with consent)
+                </li>
+            </ul>
+            <p>You can control cookie preferences through your browser settings. Disabling certain cookies may affect
+                platform functionality.</p>
+        </div>
+
+        <!-- 6. Retention -->
+        <div class="legal-section" id="retention">
+            <h2><span class="section-num">6</span>Data Retention</h2>
+            <p>We retain your personal data for as long as your account is active or as needed to provide services.
+                Specifically:</p>
+            <ul>
+                <li><strong>Account data</strong> is kept while your account is active and for 2 years after deletion
+                    (for legal/fraud purposes)</li>
+                <li><strong>Transaction records</strong> are kept for 7 years to comply with financial regulations</li>
+                <li><strong>Communication logs</strong> are retained for 1 year after support case closure</li>
+                <li><strong>Analytics data</strong> is retained in anonymized form indefinitely</li>
+            </ul>
+            <p>You may request deletion of your account and data at any time (subject to legal retention obligations).
+                See Your Rights below.</p>
+        </div>
+
+        <!-- 7. Security -->
+        <div class="legal-section" id="security">
+            <h2><span class="section-num">7</span>Security</h2>
+            <p>We implement industry-standard security measures to protect your personal data:</p>
+            <ul>
+                <li>All passwords are hashed using bcrypt (never stored in plain text)</li>
+                <li>HTTPS/TLS encryption for all data in transit</li>
+                <li>Secure database access with role-based permissions</li>
+                <li>Regular security audits and vulnerability assessments</li>
+                <li>JWT (JSON Web Token) based authentication with expiration</li>
+            </ul>
+            <p>Despite our best efforts, no system is completely secure. Please use strong passwords and notify us
+                immediately if you suspect unauthorized access to your account.</p>
+        </div>
+
+        <!-- 8. Rights -->
+        <div class="legal-section" id="rights">
+            <h2><span class="section-num">8</span>Your Rights</h2>
+            <p>Depending on your location, you have the following rights regarding your personal data:</p>
+            <div class="rights-grid">
+                <div class="right-item">
+                    <div class="right-icon"><i class="fas fa-eye"></i></div>
+                    <div>
+                        <h4>Right to Access</h4>
+                        <p>Request a copy of all personal data we hold about you</p>
+                    </div>
+                </div>
+                <div class="right-item">
+                    <div class="right-icon"><i class="fas fa-edit"></i></div>
+                    <div>
+                        <h4>Right to Rectification</h4>
+                        <p>Correct inaccurate or incomplete personal data</p>
+                    </div>
+                </div>
+                <div class="right-item">
+                    <div class="right-icon"><i class="fas fa-trash-alt"></i></div>
+                    <div>
+                        <h4>Right to Erasure</h4>
+                        <p>Request deletion of your personal data ("right to be forgotten")</p>
+                    </div>
+                </div>
+                <div class="right-item">
+                    <div class="right-icon"><i class="fas fa-hand-paper"></i></div>
+                    <div>
+                        <h4>Right to Object</h4>
+                        <p>Object to processing of your data for marketing purposes</p>
+                    </div>
+                </div>
+                <div class="right-item">
+                    <div class="right-icon"><i class="fas fa-download"></i></div>
+                    <div>
+                        <h4>Data Portability</h4>
+                        <p>Receive your data in a machine-readable format</p>
+                    </div>
+                </div>
+                <div class="right-item">
+                    <div class="right-icon"><i class="fas fa-pause-circle"></i></div>
+                    <div>
+                        <h4>Restriction of Processing</h4>
+                        <p>Request that we limit how we process your data</p>
+                    </div>
+                </div>
+            </div>
+            <p style="margin-top:1rem;">To exercise any of these rights, contact us at <a
+                    href="mailto:privacy@yallastarter.com"
+                    style="color:#1d4ed8;font-weight:600;">privacy@yallastarter.com</a>. We will respond within 30 days.
+            </p>
+        </div>
+
+        <!-- 9. Children -->
+        <div class="legal-section" id="children">
+            <h2><span class="section-num">9</span>Children's Privacy</h2>
+            <p>YallaStarter is not intended for individuals under the age of 18. We do not knowingly collect personal
+                data from children. If we become aware that a child has provided us with personal data, we will take
+                steps to delete such information promptly.</p>
+            <p>If you believe we have inadvertently collected data from a child, please contact us immediately at <a
+                    href="mailto:privacy@yallastarter.com"
+                    style="color:#1d4ed8;font-weight:600;">privacy@yallastarter.com</a>.</p>
+        </div>
+
+        <!-- 10. Changes -->
+        <div class="legal-section" id="changes">
+            <h2><span class="section-num">10</span>Changes to This Policy</h2>
+            <p>We may update this Privacy Policy from time to time to reflect changes in our practices, technology, or
+                legal requirements. When we make significant changes, we will:</p>
+            <ul>
+                <li>Post the updated policy on this page with a revised "Last Updated" date</li>
+                <li>Notify registered users via email for material changes</li>
+                <li>Display a prominent notice on the platform</li>
+            </ul>
+            <p>We encourage you to review this policy periodically. Continued use of the platform after changes are
+                posted constitutes your acceptance of the revised policy.</p>
+        </div>
+
+        <!-- 11. Contact -->
+        <div class="legal-section" id="contact-us" style="border-bottom:none;">
+            <h2><span class="section-num">11</span>Contact Us</h2>
+            <p>For any privacy-related questions, requests, or concerns, please contact our Privacy team:</p>
+        </div>
+
+        <div class="contact-card">
+            <h3><i class="fas fa-shield-alt" style="margin-right:0.4rem;"></i>Privacy & Data Protection</h3>
+            <p>Email: <a href="mailto:privacy@yallastarter.com">privacy@yallastarter.com</a> &nbsp;|&nbsp; Support: <a
+                    href="support.html">Help Center</a></p>
+            <p style="margin-top:0.5rem;font-size:0.88rem;color:#6b7280;">Also see: <a
+                    href="terms-of-service.html">Terms of Service</a> &nbsp;|&nbsp; <a
+                    href="community-guidelines.html">Community Guidelines</a></p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>YallaStarter</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="how-it-works.html">How It Works</a></li>
+                        <li><a href="projects.html">Browse Projects</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="terms-of-service.html">Terms of Service</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="community-guidelines.html">Community Guidelines</a></li>
+                        <li><a href="trust-safety.html">Trust & Safety</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copyright">&copy; 2024 YallaStarter. All rights reserved.</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="mobile-menu.js"></script>
+    <script src="assets/js/auth-handler.js"></script>
+</body>
+
+</html>

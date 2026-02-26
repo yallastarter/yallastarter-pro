@@ -141,7 +141,11 @@ router.post('/', protect, async (req, res) => {
             return res.status(400).json({ success: false, message: 'Deadline must be a valid future date' });
         }
 
-        const projectStatus = status === 'active' ? 'active' : 'draft';
+        // Status logic: 'active' is only possible if admin sets it. Users submit as 'pending' (awaiting review).
+        // If the user explicitly passes status='draft', keep as draft. Otherwise default to 'pending'.
+        let projectStatus = 'pending';
+        if (status === 'draft') projectStatus = 'draft';
+
         const project = await Project.create({
             title: title.trim(),
             description: description.trim(),

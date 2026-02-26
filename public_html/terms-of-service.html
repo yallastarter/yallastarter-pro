@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="YallaStarter Terms of Service — Read our terms before using the platform.">
+    <meta name="robots" content="index, follow">
+    <title>Terms of Service - YallaStarter</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile-menu.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        .legal-hero {
+            background: linear-gradient(135deg, #006c35 0%, #004d25 100%);
+            color: white;
+            padding: 4rem 0 3rem;
+            text-align: center;
+        }
+
+        .legal-hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+        }
+
+        .legal-hero p {
+            font-size: 1.05rem;
+            opacity: 0.85;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .legal-meta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 0.4rem 1rem;
+            font-size: 0.88rem;
+            margin-top: 1rem;
+        }
+
+        .legal-container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem 5rem;
+        }
+
+        .legal-toc {
+            background: #f0fdf4;
+            border: 1.5px solid #bbf7d0;
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .legal-toc h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #065f46;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .legal-toc ol {
+            margin: 0;
+            padding-left: 1.4rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.35rem 1.5rem;
+        }
+
+        .legal-toc a {
+            color: #006c35;
+            text-decoration: none;
+            font-size: 0.92rem;
+            font-weight: 500;
+        }
+
+        .legal-toc a:hover {
+            text-decoration: underline;
+        }
+
+        .legal-section {
+            margin-bottom: 2.5rem;
+            padding-bottom: 2.5rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .legal-section:last-of-type {
+            border-bottom: none;
+        }
+
+        .legal-section h2 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #006c35;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .legal-section h2 .section-num {
+            background: #006c35;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .legal-section p {
+            color: #374151;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .legal-section ul,
+        .legal-section ol {
+            padding-left: 1.5rem;
+            color: #374151;
+            line-height: 1.8;
+        }
+
+        .legal-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .prohibited-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .prohibited-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+            color: #991b1b;
+            font-weight: 500;
+        }
+
+        .prohibited-item i {
+            color: #dc2626;
+            margin-top: 0.1rem;
+            flex-shrink: 0;
+        }
+
+        .highlight-box {
+            background: #fffbeb;
+            border-left: 4px solid #f59e0b;
+            border-radius: 0 10px 10px 0;
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            color: #92400e;
+            font-size: 0.93rem;
+        }
+
+        .highlight-box strong {
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-card {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border: 1.5px solid #86efac;
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .contact-card h3 {
+            color: #065f46;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card p {
+            color: #374151;
+            margin: 0;
+        }
+
+        .contact-card a {
+            color: #006c35;
+            font-weight: 600;
+        }
+
+        @media (max-width: 640px) {
+            .legal-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .legal-toc ol {
+                grid-template-columns: 1fr;
+            }
+
+            .prohibited-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <span class="logo-text">YallaStarter</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html">Browse Projects</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="language-switcher">
+                <button class="language-btn active">English</button>
+                <button class="language-btn">العربية</button>
+            </div>
+            <div class="auth-buttons" id="authButtons">
+                <a href="login.html" class="btn btn-link">Log In</a>
+                <a href="signup.html" class="btn btn-primary">Sign Up</a>
+            </div>
+            <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+        </nav>
+        <div class="mobile-menu">
+            <div class="mobile-menu-header">
+                <div class="mobile-header-left">
+                    <div class="auth-buttons">
+                        <a href="login.html" class="btn btn-link">Log In</a>
+                        <a href="signup.html" class="btn btn-primary">Sign Up</a>
+                    </div>
+                </div>
+                <button class="mobile-close-btn"><i class="fas fa-times"></i></button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html">Browse Projects</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="legal-hero">
+        <div class="container">
+            <h1><i class="fas fa-file-contract" style="margin-right:0.5rem;opacity:0.9;"></i>Terms of Service</h1>
+            <p>Please read these terms carefully before using the YallaStarter platform.</p>
+            <div class="legal-meta">
+                <i class="fas fa-calendar-alt"></i>
+                Last Updated: February 26, 2026 &nbsp;|&nbsp; <i class="fas fa-globe"></i> Effective Immediately
+            </div>
+        </div>
+    </section>
+
+    <!-- Content -->
+    <div class="legal-container">
+
+        <!-- Table of Contents -->
+        <div class="legal-toc">
+            <h3><i class="fas fa-list" style="margin-right:0.4rem;"></i>Table of Contents</h3>
+            <ol>
+                <li><a href="#acceptance">Acceptance of Terms</a></li>
+                <li><a href="#eligibility">Eligibility</a></li>
+                <li><a href="#account">Account Responsibilities</a></li>
+                <li><a href="#projects">Project Guidelines</a></li>
+                <li><a href="#prohibited">Prohibited Content & Conduct</a></li>
+                <li><a href="#fees">Fees & Payments</a></li>
+                <li><a href="#ip">Intellectual Property</a></li>
+                <li><a href="#privacy">Privacy</a></li>
+                <li><a href="#termination">Termination</a></li>
+                <li><a href="#liability">Limitation of Liability</a></li>
+                <li><a href="#governing">Governing Law</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ol>
+        </div>
+
+        <!-- 1. Acceptance -->
+        <div class="legal-section" id="acceptance">
+            <h2><span class="section-num">1</span>Acceptance of Terms</h2>
+            <p>Welcome to <strong>YallaStarter</strong> ("we," "us," "our," "the Platform"). By accessing or using our
+                website, mobile applications, or any services offered by YallaStarter, you agree to be bound by these
+                Terms of Service ("Terms") and our <a href="privacy-policy.html"
+                    style="color:#006c35;font-weight:600;">Privacy Policy</a>.</p>
+            <p>If you do not agree to these Terms, you must immediately discontinue use of the Platform. We reserve the
+                right to update these Terms at any time, and continued use after changes constitutes acceptance of the
+                revised Terms.</p>
+        </div>
+
+        <!-- 2. Eligibility -->
+        <div class="legal-section" id="eligibility">
+            <h2><span class="section-num">2</span>Eligibility</h2>
+            <p>To use YallaStarter you must:</p>
+            <ul>
+                <li>Be at least <strong>18 years old</strong>, or the age of majority in your jurisdiction</li>
+                <li>Have the legal capacity to enter into binding contracts</li>
+                <li>Not be prohibited from using the Platform under applicable law</li>
+                <li>Not have a previously suspended or terminated YallaStarter account</li>
+            </ul>
+            <p>By creating an account, you represent and warrant that you meet all of the above requirements.</p>
+        </div>
+
+        <!-- 3. Account -->
+        <div class="legal-section" id="account">
+            <h2><span class="section-num">3</span>Account Responsibilities</h2>
+            <p>You are responsible for maintaining the confidentiality of your account credentials and for all
+                activities that occur under your account. You agree to:</p>
+            <ul>
+                <li>Provide accurate, current, and complete information during registration</li>
+                <li>Update your information as necessary to keep it accurate</li>
+                <li>Notify us immediately of any unauthorized use of your account</li>
+                <li>Not share your password or allow anyone else to access your account</li>
+                <li>Not create multiple accounts for the purpose of circumventing restrictions</li>
+            </ul>
+            <div class="highlight-box">
+                <strong><i class="fas fa-exclamation-triangle"></i> Important:</strong>
+                YallaStarter will never ask for your password via email or chat. If you receive such a request, please
+                report it immediately to our security team.
+            </div>
+        </div>
+
+        <!-- 4. Projects -->
+        <div class="legal-section" id="projects">
+            <h2><span class="section-num">4</span>Project Guidelines</h2>
+            <p>As a project creator on YallaStarter, you agree to the following:</p>
+            <ul>
+                <li>All information provided about your project must be truthful, accurate, and not misleading</li>
+                <li>Projects must have a defined goal, timeline, and genuine intent to deliver on promises made to
+                    backers</li>
+                <li>You must have the rights to any content (images, videos, text) you upload to your project page</li>
+                <li>Funds raised must be used solely for the stated project purposes</li>
+                <li>You must provide regular updates to your backers throughout the campaign</li>
+                <li>Projects are subject to review and approval by YallaStarter before going live</li>
+                <li>We reserve the right to suspend or remove any project that violates these Terms</li>
+            </ul>
+            <p>YallaStarter is a platform that facilitates crowdfunding — we do not guarantee the success of any
+                project, and we are not responsible for the actions or omissions of project creators.</p>
+        </div>
+
+        <!-- 5. Prohibited -->
+        <div class="legal-section" id="prohibited">
+            <h2><span class="section-num">5</span>Prohibited Content & Conduct</h2>
+            <p>The following are strictly prohibited on YallaStarter. Violations may result in immediate account
+                termination and legal action:</p>
+
+            <div class="prohibited-grid">
+                <div class="prohibited-item">
+                    <i class="fas fa-ban"></i>
+                    <span>Illegal activities of any kind, including fraud, money laundering, or financing illegal
+                        operations</span>
+                </div>
+                <div class="prohibited-item">
+                    <i class="fas fa-ban"></i>
+                    <span>Adult content, pornography, or sexually explicit material of any nature</span>
+                </div>
+                <div class="prohibited-item">
+                    <i class="fas fa-ban"></i>
+                    <span>Hate speech, discrimination, or content targeting individuals based on race, religion, gender,
+                        nationality, or disability</span>
+                </div>
+                <div class="prohibited-item">
+                    <i class="fas fa-ban"></i>
+                    <span>Violence, threats, harassment, or content that promotes harm to people or animals</span>
+                </div>
+                <div class="prohibited-item">
+                    <i class="fas fa-ban"></i>
+                    <span>Weapons, drugs, controlled substances, or paraphernalia</span>
+                </div>
+                <div class="prohibited-item">
+                    <i class="fas fa-ban"></i>
+                    <span>Intellectual property infringement — unauthorized use of copyrights, trademarks, or
+                        patents</span>
+                </div>
+                <div class="prohibited-item">
+                    <i class="fas fa-ban"></i>
+                    <span>Gambling, lotteries, or projects with unclear financial structures resembling pyramid
+                        schemes</span>
+                </div>
+                <div class="prohibited-item">
+                    <i class="fas fa-ban"></i>
+                    <span>Projects that violate Saudi Arabian law, Islamic values, or local regulations</span>
+                </div>
+                <div class="prohibited-item">
+                    <i class="fas fa-ban"></i>
+                    <span>Impersonation of any individual, company, or organization</span>
+                </div>
+                <div class="prohibited-item">
+                    <i class="fas fa-ban"></i>
+                    <span>Spam, unsolicited communications, or automated bots on the platform</span>
+                </div>
+                <div class="prohibited-item">
+                    <i class="fas fa-ban"></i>
+                    <span>Attempting to hack, reverse-engineer, or disrupt platform services</span>
+                </div>
+                <div class="prohibited-item">
+                    <i class="fas fa-ban"></i>
+                    <span>Collecting personal data of other users without consent</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Fees -->
+        <div class="legal-section" id="fees">
+            <h2><span class="section-num">6</span>Fees & Payments</h2>
+            <p>YallaStarter charges a platform fee on successfully funded projects. By submitting a project, you agree
+                to our fee structure:</p>
+            <ul>
+                <li>Platform fees are deducted from successfully raised funds</li>
+                <li>Payment processing fees may apply and will be disclosed at checkout</li>
+                <li>Fees are non-refundable once a transaction is completed</li>
+                <li>YallaStarter uses a virtual coins (YS Coins) system for transactions — coins are at-platform
+                    currency and are subject to conversion terms</li>
+                <li>Cashout requests are subject to minimum thresholds and review timelines</li>
+            </ul>
+            <div class="highlight-box">
+                <strong><i class="fas fa-info-circle"></i> Note:</strong>
+                If a project fails to reach its funding goal, backers may be entitled to refunds depending on the
+                campaign type. See our Help Center for details.
+            </div>
+        </div>
+
+        <!-- 7. IP -->
+        <div class="legal-section" id="ip">
+            <h2><span class="section-num">7</span>Intellectual Property</h2>
+            <p>All content on the YallaStarter platform, including logos, branding, software, and design, is owned by
+                YallaStarter and protected by applicable intellectual property laws.</p>
+            <p>By uploading content to our platform, you grant YallaStarter a non-exclusive, worldwide, royalty-free
+                license to use, display, and promote your content for platform purposes (e.g., featuring your project on
+                the homepage).</p>
+            <p>You retain ownership of all original content you create. You are solely responsible for ensuring you have
+                the rights to any third-party content you use.</p>
+        </div>
+
+        <!-- 8. Privacy -->
+        <div class="legal-section" id="privacy">
+            <h2><span class="section-num">8</span>Privacy</h2>
+            <p>Your privacy matters to us. Our <a href="privacy-policy.html"
+                    style="color:#006c35;font-weight:600;">Privacy Policy</a> explains how we collect, use, and protect
+                your personal data. By using YallaStarter, you consent to our data practices as described in that
+                policy.</p>
+        </div>
+
+        <!-- 9. Termination -->
+        <div class="legal-section" id="termination">
+            <h2><span class="section-num">9</span>Termination</h2>
+            <p>YallaStarter reserves the right to suspend or permanently terminate your account, without notice, for any
+                of the following reasons:</p>
+            <ul>
+                <li>Violation of these Terms of Service</li>
+                <li>Fraudulent activity or misrepresentation</li>
+                <li>Actions that harm users, backers, or the platform</li>
+                <li>Legal obligations requiring us to do so</li>
+            </ul>
+            <p>You may also terminate your account at any time by contacting us. Upon termination, your right to use the
+                platform ceases immediately. Any outstanding obligations (e.g., delivering on funded projects) remain in
+                effect.</p>
+        </div>
+
+        <!-- 10. Liability -->
+        <div class="legal-section" id="liability">
+            <h2><span class="section-num">10</span>Limitation of Liability</h2>
+            <p>To the maximum extent permitted by law, YallaStarter shall not be liable for:</p>
+            <ul>
+                <li>Any indirect, incidental, special, or consequential damages</li>
+                <li>Loss of profits, data, goodwill, or business opportunities</li>
+                <li>Actions or omissions of project creators or backers</li>
+                <li>Technical failures, downtime, or data loss</li>
+                <li>Unauthorized access to your account resulting from your own negligence</li>
+            </ul>
+            <p>YallaStarter's total liability to you for any claim shall not exceed the amount you paid to YallaStarter
+                in the 12 months preceding the claim.</p>
+        </div>
+
+        <!-- 11. Governing Law -->
+        <div class="legal-section" id="governing">
+            <h2><span class="section-num">11</span>Governing Law</h2>
+            <p>These Terms are governed by the laws of the <strong>Kingdom of Saudi Arabia</strong>. Any disputes
+                arising from these Terms shall be resolved through the competent courts of Saudi Arabia, unless
+                otherwise agreed in writing.</p>
+        </div>
+
+        <!-- 12. Contact -->
+        <div class="legal-section" id="contact" style="border-bottom:none;">
+            <h2><span class="section-num">12</span>Contact Us</h2>
+            <p>If you have any questions about these Terms of Service, please reach out to us:</p>
+        </div>
+
+        <div class="contact-card">
+            <h3><i class="fas fa-envelope" style="margin-right:0.4rem;"></i>Legal & Compliance Team</h3>
+            <p>Email: <a href="mailto:legal@yallastarter.com">legal@yallastarter.com</a> &nbsp;|&nbsp; Support: <a
+                    href="support.html">Help Center</a></p>
+            <p style="margin-top:0.5rem;font-size:0.88rem;color:#6b7280;">Also see: <a
+                    href="privacy-policy.html">Privacy Policy</a> &nbsp;|&nbsp; <a
+                    href="community-guidelines.html">Community Guidelines</a></p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>YallaStarter</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="how-it-works.html">How It Works</a></li>
+                        <li><a href="projects.html">Browse Projects</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="terms-of-service.html">Terms of Service</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="community-guidelines.html">Community Guidelines</a></li>
+                        <li><a href="trust-safety.html">Trust & Safety</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copyright">&copy; 2024 YallaStarter. All rights reserved.</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="mobile-menu.js"></script>
+    <script src="assets/js/auth-handler.js"></script>
+</body>
+
+</html>

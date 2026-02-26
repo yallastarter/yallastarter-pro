@@ -53,7 +53,7 @@ const ProjectSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ['draft', 'active', 'completed'],
+        enum: ['draft', 'pending', 'active', 'completed', 'rejected'],
         default: 'draft'
     },
     coverImage: { type: String, default: null },
@@ -80,6 +80,7 @@ ProjectSchema.pre('save', async function (next) {
 // Indexes for performance
 ProjectSchema.index({ category: 1 });
 ProjectSchema.index({ status: 1 });
+ProjectSchema.index({ status: 1, createdAt: -1 }); // For pending review queries
 ProjectSchema.index({ creator: 1 });
 
 module.exports = mongoose.model('Project', ProjectSchema);
