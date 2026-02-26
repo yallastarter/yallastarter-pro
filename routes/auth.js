@@ -126,10 +126,12 @@ router.post('/login', async (req, res) => {
 
         // Check for user (normalize identifier for email checking)
         const idNorm = (typeof identifier === 'string') ? identifier.toLowerCase().trim() : '';
+        const idTrimmed = (typeof identifier === 'string') ? identifier.trim() : identifier;
+
         const user = await User.findOne({
             $or: [
                 { email: idNorm },
-                { username: typeof identifier === 'string' ? identifier.trim() : identifier }
+                { username: { $regex: new RegExp('^' + idTrimmed + '$', 'i') } }
             ]
         }).select('+password');
 
