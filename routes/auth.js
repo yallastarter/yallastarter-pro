@@ -114,16 +114,25 @@ router.post('/signup', async (req, res) => {
 // @access  Public
 router.post('/login', async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const { email, username, password } = req.body;
 
-        // Validate email & password
-        if (!email || !password) {
-            return res.status(400).json({ success: false, message: 'Please provide an email and password' });
+        // Accept either email or username (or an identifier field named 'email' containing a username)
+        const identifier = email || username;
+
+        // Validate identifier & password
+        if (!identifier || !password) {
+            return res.status(400).json({ success: false, message: 'Please provide an email or username and password' });
         }
 
-        // Check for user (normalize email for consistency)
-        const emailNorm = (typeof email === 'string') ? email.toLowerCase().trim() : '';
-        const user = await User.findOne({ email: emailNorm }).select('+password');
+        // Check for user (normalize identifier for email checking)
+        const idNorm = (typeof identifier === 'string') ? identifier.toLowerCase().trim() : '';
+        const user = await User.findOne({
+            $or: [
+                { email: idNorm },
+                { username: typeof identifier === 'string' ? identifier.trim() : identifier }
+            ]
+        }).select('+password');
+
         if (!user) {
             return res.status(401).json({ success: false, message: 'Invalid credentials' });
         }
