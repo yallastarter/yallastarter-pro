@@ -1143,9 +1143,15 @@
         }
 
         async function loadDashboard() {
+            const statsGrid = document.getElementById('statsGrid');
+            statsGrid.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i><p>Loading stats...</p></div>';
+            
             try {
                 const data = await adminFetch(`${API}/api/admin/dashboard`);
-                if (!data.success) return;
+                if (!data.success) {
+                    statsGrid.innerHTML = '<div class="loading" style="color: var(--accent-red);"><i class="fas fa-exclamation-triangle"></i><p>Failed to load dashboard data</p><small style="color: var(--admin-muted);">Please try refreshing the page</small></div>';
+                    return;
+                }
                 const d = data.data;
 
                 // Stats cards
@@ -1281,6 +1287,11 @@
 
             } catch (err) {
                 console.error('Dashboard load error:', err);
+                statsGrid.innerHTML = '<div class="loading" style="color: var(--accent-red);"><i class="fas fa-exclamation-triangle"></i><p>Failed to load dashboard</p><small style="color: var(--admin-muted);">' + (err.message || 'Please check your connection and try again') + '</small></div>';
+                
+                // Also clear other tables
+                document.getElementById('topProjectsTable').innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--admin-muted);">Unable to load</td></tr>';
+                document.getElementById('recentTxTable').innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--admin-muted);">Unable to load</td></tr>';
             }
         }
 
