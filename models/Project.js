@@ -61,9 +61,9 @@ const ProjectSchema = new mongoose.Schema({
     videoUrl: { type: String, default: null },
     story: { type: String, default: '' },
     rewards: [{
-        title: { type: String, required: true },
-        amount: { type: Number, required: true },
-        description: { type: String, required: true },
+        title: { type: String },
+        amount: { type: Number },
+        description: { type: String },
         includes: [{ type: String }],
         deliveryDate: { type: String }
     }],
