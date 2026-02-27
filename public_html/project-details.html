@@ -155,10 +155,12 @@
                             this project</a>
 
                         <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
-                            <button class="btn btn-outline" style="display: flex; align-items: center; gap: 0.5rem;">
-                                <i class="fas fa-heart"></i> Remind me
+                            <button id="likeBtn" class="btn btn-outline"
+                                style="display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-heart"></i> Like
                             </button>
-                            <button class="btn btn-outline" style="display: flex; align-items: center; gap: 0.5rem;">
+                            <button id="shareBtn" class="btn btn-outline"
+                                style="display: flex; align-items: center; gap: 0.5rem;">
                                 <i class="fas fa-share-alt"></i> Share
                             </button>
                         </div>
@@ -489,6 +491,88 @@
                         const backBtn = document.getElementById('backProjectBtn');
                         if (backBtn) {
                             backBtn.href = 'coins.html?projectId=' + encodeURIComponent(projectId);
+                        }
+
+                        // Favorite / Like Integration
+                        const likeBtn = document.getElementById('likeBtn');
+                        let isFavorited = false;
+
+                        const updateLikeUI = (fav) => {
+                            isFavorited = fav;
+                            if (likeBtn) {
+                                const heartIcon = likeBtn.querySelector('i');
+                                if (fav) {
+                                    likeBtn.classList.add('active');
+                                    likeBtn.style.backgroundColor = 'var(--primary)';
+                                    likeBtn.style.color = 'white';
+                                    if (heartIcon) heartIcon.style.color = 'white';
+                                } else {
+                                    likeBtn.classList.remove('active');
+                                    likeBtn.style.backgroundColor = 'transparent';
+                                    likeBtn.style.color = 'var(--primary)';
+                                    if (heartIcon) heartIcon.style.color = 'var(--primary)';
+                                }
+                            }
+                        };
+
+                        // Check initial favorite status
+                        const token = window.auth ? window.auth.getToken() : localStorage.getItem('token');
+                        if (token) {
+                            try {
+                                const favRes = await fetch(`/api/projects/${projectId}/favorite`, {
+                                    headers: { 'Authorization': 'Bearer ' + token }
+                                });
+                                const favData = await favRes.json();
+                                if (favData.success) updateLikeUI(favData.favorited);
+                            } catch (err) { console.error('Error checking favorite:', err); }
+                        }
+
+                        if (likeBtn) {
+                            likeBtn.addEventListener('click', async () => {
+                                if (!token) {
+                                    alert('Please log in to like a project!');
+                                    window.location.href = 'login.html';
+                                    return;
+                                }
+
+                                try {
+                                    likeBtn.disabled = true;
+                                    const res = await fetch(`/api/projects/${projectId}/favorite`, {
+                                        method: 'POST',
+                                        headers: { 'Authorization': 'Bearer ' + token }
+                                    });
+                                    const data = await res.json();
+                                    if (data.success) updateLikeUI(data.favorited);
+                                    else alert(data.message || 'Failed to toggle favorite.');
+                                } catch (err) {
+                                    console.error('Favorite toggle error:', err);
+                                } finally {
+                                    likeBtn.disabled = false;
+                                }
+                            });
+                        }
+
+                        // Share Integration
+                        const shareBtn = document.getElementById('shareBtn');
+                        if (shareBtn) {
+                            shareBtn.addEventListener('click', async () => {
+                                const shareData = {
+                                    title: document.title,
+                                    text: `Check out this project on YallaStarter: ${project.title}`,
+                                    url: window.location.href
+                                };
+
+                                try {
+                                    if (navigator.share) {
+                                        await navigator.share(shareData);
+                                    } else {
+                                        await navigator.clipboard.writeText(window.location.href);
+                                        alert('Link copied to clipboard!');
+                                    }
+                                } catch (err) {
+                                    console.error('Share error:', err);
+                                }
+                            });
                         }
 
                         // Story (using description + story)
