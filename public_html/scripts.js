@@ -188,65 +188,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Create Project Logic
-    const projectForm = document.querySelector('.project-form');
-    if (projectForm) {
-        const btnSubmit = document.getElementById('btn-submit');
-        if (btnSubmit) {
-            btnSubmit.addEventListener('click', async (e) => {
-                e.preventDefault();
-
-                const token = localStorage.getItem('token');
-                if (!token) {
-                    alert('Please log in to create a project.');
-                    const isAr = window.location.pathname.includes('-ar');
-                    window.location.href = isAr ? 'login-ar.html' : 'login.html';
-                    return;
-                }
-
-                // Gather Data
-                const formData = {
-                    title: document.getElementById('project-title').value,
-                    category: document.getElementById('project-category').value,
-                    location: document.getElementById('project-location').value,
-                    description: document.getElementById('project-description').value,
-                    goalAmount: document.getElementById('funding-goal').value,
-                    deadline: document.getElementById('funding-deadline').value
-                };
-
-                try {
-                    const originalText = btnSubmit.textContent;
-                    btnSubmit.textContent = 'Submitting...';
-                    btnSubmit.disabled = true;
-
-                    const res = await fetch('/api/projects', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${token}`
-                        },
-                        body: JSON.stringify(formData)
-                    });
-
-                    const data = await res.json();
-
-                    if (data.success) {
-                        alert('Project created successfully!');
-                        const isAr = window.location.pathname.includes('-ar');
-                        window.location.href = isAr ? 'projects-ar.html' : 'projects.html';
-                    } else {
-                        alert(data.error || 'Failed to create project');
-                    }
-                } catch (err) {
-                    console.error(err);
-                    alert('An error occurred.');
-                } finally {
-                    btnSubmit.textContent = 'Submit Project';
-                    btnSubmit.disabled = false;
-                }
-            });
-        }
-    }
+    // Removed legacy Create Project Logic block that was conflicting with form-specific handlers
     // Browse Projects Logic
     const projectsGrid = document.querySelector('.projects-grid');
     if (projectsGrid && window.location.pathname.includes('projects.html')) {

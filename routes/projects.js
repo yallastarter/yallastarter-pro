@@ -1,11 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
+const fs = require('fs');
 const multer = require('multer');
 const Project = require('../models/Project');
 const User = require('../models/User');
 const mongoose = require('mongoose');
 const { protect } = require('../middleware/auth');
+
+// Ensure upload directory exists before Multer uses it
+const uploadDir = path.join('public_html', 'uploads', 'projects');
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+}
 
 // Multer for project images (cover + gallery)
 const projectStorage = multer.diskStorage({

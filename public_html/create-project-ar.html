@@ -553,8 +553,32 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label">مدة الحملة (تاريخ الانتهاء)</label>
-                            <input type="date" id="funding-deadline" class="form-input" required>
+                            <label class="form-label">مدة الحملة (بالأيام)</label>
+                            <select id="project-duration" class="form-select" required>
+                                <option value="">اختر المدة</option>
+                                <option value="30">30 يوماً</option>
+                                <option value="45">45 يوماً</option>
+                                <option value="60">60 يوماً</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 2rem;">
+                            <label class="form-label">صورة الغلاف للمشروع</label>
+                            <input type="file" id="project-cover" class="form-input"
+                                accept="image/jpeg,image/png,image/webp" required>
+                            <small class="form-text"
+                                style="color: #666; font-size: 0.85rem; margin-top: 0.5rem; display: block;">الحد الأقصى
+                                8 ميجابايت. (JPEG, PNG, WebP)</small>
+                        </div>
+
+                        <!-- Error Message Container (Hidden by default) -->
+                        <div id="ar-error-container"
+                            style="display: none; background: #fff0f0; border-right: 4px solid #dc2626; padding: 1rem; margin-bottom: 1.5rem; border-radius: 8px;">
+                            <div style="color: #dc2626; font-weight: 700; margin-bottom: 0.5rem;">عذرا، لم يتم إنشاء
+                                المشروع</div>
+                            <div id="ar-error-msg" style="color: #555; font-size: 0.95rem; margin-bottom: 0.5rem;">
+                            </div>
+                            <div id="ar-error-fix" style="color: #047a2e; font-size: 0.9rem; font-weight: 600;"></div>
                         </div>
 
                         <button type="submit" id="btn-submit" class="submit-btn">إنشاء المشروع</button>
@@ -675,6 +699,123 @@
                 window.location.href = 'create-project-ar.html';
             }
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.querySelector('.project-form');
+            if (form) {
+                form.addEventListener('submit', async function (e) {
+                    e.preventDefault();
+
+                    const btn = document.getElementById('btn-submit');
+                    const errContainer = document.getElementById('ar-error-container');
+                    const errMsgEl = document.getElementById('ar-error-msg');
+                    const errFixEl = document.getElementById('ar-error-fix');
+                    const origText = btn.textContent;
+
+                    errContainer.style.display = 'none';
+                    btn.disabled = true;
+                    btn.textContent = 'جاري الإنشاء...';
+
+                    // Check for auth. Use window.auth first if available.
+                    let token = null;
+                    if (window.auth && typeof window.auth.getToken === 'function') {
+                        token = window.auth.getToken();
+                    } else {
+                        token = localStorage.getItem('token');
+                    }
+
+                    if (!token) {
+                        showErrorAR('أنت لست مسجل الدخول.', 'يرجى تسجيل الدخول أولاً للمتابعة.');
+                        btn.disabled = false;
+                        btn.textContent = origText;
+                        return;
+                    }
+
+                    const title = document.getElementById('project-title').value.trim();
+                    const category = document.getElementById('project-category').value;
+                    const location = document.getElementById('project-location').value.trim();
+                    const description = document.getElementById('project-description').value.trim();
+                    const goalAmount = document.getElementById('funding-goal').value;
+                    const duration = document.getElementById('project-duration').value;
+
+                    let deadline = '';
+                    if (duration) {
+                        const d = new Date();
+                        d.setDate(d.getDate() + parseInt(duration, 10));
+                        deadline = d.toISOString().slice(0, 10);
+                    }
+
+                    const coverInput = document.getElementById('project-cover');
+                    if (!coverInput.files || !coverInput.files[0]) {
+                        showErrorAR('صورة الغلاف مطلوبة.', 'الرجاء رفع صورة للغلاف.');
+                        btn.disabled = false;
+                        btn.textContent = origText;
+                        return;
+                    }
+
+                    let coverImage = null;
+                    try {
+                        // Upload image first
+                        const fd = new FormData();
+                        fd.append('cover', coverInput.files[0]);
+                        const uploadRes = await fetch('/api/projects/upload-cover', {
+                            method: 'POST',
+                            headers: { 'Authorization': 'Bearer ' + token },
+                            body: fd
+                        });
+                        const uploadData = await uploadRes.json();
+
+                        if (uploadData.success) {
+                            coverImage = uploadData.url;
+                        } else {
+                            showErrorAR('فشل رفع الصورة.', uploadData.message || 'تأكد من أن حجم الصورة أقل من 8 ميجابايت.');
+                            btn.disabled = false;
+                            btn.textContent = origText;
+                            return;
+                        }
+
+                        // Create Project
+                        const res = await fetch('/api/projects', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': 'Bearer ' + token
+                            },
+                            body: JSON.stringify({
+                                title, category, location, description,
+                                goalAmount: Number(goalAmount), deadline, coverImage, status: 'pending'
+                            })
+                        });
+                        const data = await res.json();
+
+                        if (data.success) {
+                            alert('تم إنشاء المشروع بنجاح ووضعه قيد المراجعة!');
+                            window.location.href = 'projects-ar.html';
+                        } else {
+                            const errMsg = data.message || 'فشل في إنشاء المشروع.';
+                            let fixMsg = 'تأكد من صحة جميع البيانات وحاول مرة أخرى.';
+                            const errLower = errMsg.toLowerCase();
+                            if (errLower.includes('title')) fixMsg = 'تحقق من عنوان المشروع.';
+                            else if (errLower.includes('category')) fixMsg = 'اختر فئة المشروع.';
+                            else if (errLower.includes('goal')) fixMsg = 'تأكد من أن المبلغ المطلوب صحيح.';
+                            else if (errLower.includes('auth')) fixMsg = 'انتهت الجلسة. يرجى تسجيل الدخول.';
+                            showErrorAR(errMsg, fixMsg);
+                        }
+                    } catch (err) {
+                        showErrorAR('حدث خطأ في الاتصال.', 'تحقق من اتصالك بالإنترنت وحاول مرة أخرى.');
+                    }
+                    btn.disabled = false;
+                    btn.textContent = origText;
+
+                    function showErrorAR(msg, fix) {
+                        errMsgEl.textContent = msg;
+                        errFixEl.textContent = fix ? '💡 ' + fix : '';
+                        errContainer.style.display = 'block';
+                        errContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                });
+            }
+        });
     </script>
 
     <!-- Universal Mobile Menu Script -->
