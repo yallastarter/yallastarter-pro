@@ -386,25 +386,11 @@
         }
 
         .badge.pending {
-            background: rgba(245, 158, 11, 0.2);
-            color: #FBBF24;
-            border: 1px solid rgba(245, 158, 11, 0.3);
-            animation: pulseAmber 2s ease-in-out infinite;
+            background: rgba(245, 158, 11, 0.15);
+            color: #F59E0B;
         }
 
-        @keyframes pulseAmber {
-
-            0%,
-            100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.7;
-            }
-        }
-
-        .badge.rejected {
+        .badge.failed {
             background: rgba(239, 68, 68, 0.15);
             color: #EF4444;
         }
@@ -600,11 +586,6 @@
                 </div>
             </div>
             <div class="topbar-right">
-                <div
-                    style="text-align:right;display:flex;flex-direction:column;justify-content:center;margin-right:.5rem;">
-                    <span id="adminName" style="font-size:.9rem;font-weight:600;color:white;">Admin</span>
-                    <span id="adminRole" style="font-size:.75rem;color:var(--admin-muted);">Role</span>
-                </div>
                 <a href="index.html" class="topbar-btn"><i class="fas fa-external-link-alt"></i> View Site</a>
                 <button class="topbar-btn danger" onclick="adminLogout()"><i class="fas fa-sign-out-alt"></i>
                     Logout</button>
@@ -633,39 +614,7 @@
                     </div>
                 </div>
 
-                <!-- Pending Review Alert Panel -->
-                <div class="panel-card" id="pendingReviewPanel"
-                    style="border-color: rgba(245,158,11,0.4); display:none;">
-                    <div class="panel-header">
-                        <div class="panel-title" style="color:#FBBF24;"><i class="fas fa-clock"
-                                style="margin-right:0.5rem;"></i>Projects Awaiting Review <span id="pendingReviewBadge"
-                                style="background:rgba(245,158,11,0.2);color:#F59E0B;padding:2px 10px;border-radius:20px;font-size:0.8rem;margin-left:0.5rem;">0</span>
-                        </div>
-                        <a href="#projects" data-tab="projects"
-                            onclick="switchTab('projects'); setTimeout(()=>{ document.getElementById('projectStatusFilter').value='pending'; loadAdminProjects(); }, 100);"
-                            style="font-size:0.85rem;color:var(--accent-amber);text-decoration:none;">View all →</a>
-                    </div>
-                    <table class="admin-table">
-                        <thead>
-                            <tr>
-                                <th>Project Title</th>
-                                <th>Creator</th>
-                                <th>Email</th>
-                                <th>Category</th>
-                                <th>Goal (SAR)</th>
-                                <th>Submitted</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="pendingReviewTable">
-                            <tr>
-                                <td colspan="7" style="text-align:center;color:var(--admin-muted);padding:1rem;">No
-                                    pending projects</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
+                <!-- Top Projects -->
                 <div class="panel-card">
                     <div class="panel-header">
                         <div class="panel-title"><i class="fas fa-trophy"
@@ -750,11 +699,9 @@
                         <select class="panel-search" id="projectStatusFilter" onchange="loadAdminProjects()"
                             style="width: auto;">
                             <option value="">All Statuses</option>
-                            <option value="pending">⏳ Pending Review</option>
-                            <option value="active">✅ Active</option>
-                            <option value="draft">📝 Draft</option>
-                            <option value="completed">🏁 Completed</option>
-                            <option value="rejected">❌ Rejected</option>
+                            <option value="active">Active</option>
+                            <option value="draft">Draft</option>
+                            <option value="completed">Completed</option>
                         </select>
                     </div>
                     <table class="admin-table">
@@ -762,11 +709,9 @@
                             <tr>
                                 <th>Title</th>
                                 <th>Creator</th>
-                                <th>Creator Email</th>
                                 <th>Category</th>
-                                <th>Goal (SAR)</th>
+                                <th>Funded</th>
                                 <th>Status</th>
-                                <th>Date</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -817,13 +762,7 @@
             <div class="tab-content" id="tab-cashouts">
                 <div class="panel-card">
                     <div class="panel-header">
-                        <div class="panel-title">Cash Out Requests</div>
-                        <select class="panel-search" id="cashoutStatusFilter" onchange="loadAdminCashouts()"
-                            style="width:auto;">
-                            <option value="pending">⏳ Pending</option>
-                            <option value="completed">✅ Approved</option>
-                            <option value="failed">❌ Rejected</option>
-                        </select>
+                        <div class="panel-title">Pending Cash Out Requests</div>
                     </div>
                     <table class="admin-table">
                         <thead>
@@ -1013,63 +952,14 @@
         </div>
     </main>
 
-    <!-- User Detail Modal -->
-    <div id="userDetailModal"
-        style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999;align-items:center;justify-content:center;backdrop-filter:blur(4px);"
-        onclick="if(event.target===this)this.style.display='none'">
-        <div
-            style="background:var(--admin-surface);border:1px solid var(--admin-border);border-radius:16px;padding:2rem;max-width:500px;width:95%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.5);">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
-                <h3 style="color:white;margin:0;font-size:1.2rem;"><i class="fas fa-user"
-                        style="color:var(--accent-blue);margin-right:.5rem;"></i> User Profile</h3>
-                <button onclick="document.getElementById('userDetailModal').style.display='none'"
-                    style="background:none;border:none;color:var(--admin-muted);font-size:1.4rem;cursor:pointer;">✕</button>
-            </div>
-            <div id="userDetailContent"></div>
-            <div style="margin-top:1.5rem;display:flex;gap:.75rem;flex-wrap:wrap;">
-                <button onclick="adjustCoinsModal()"
-                    style="flex:1;padding:.6rem 1rem;background:var(--accent-amber);color:#000;border:none;border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;"><i
-                        class="fas fa-coins"></i> Adjust Coins</button>
-                <button id="suspendUserBtn" onclick="suspendUserModal()"
-                    style="flex:1;padding:.6rem 1rem;background:var(--accent-red);color:white;border:none;border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;"><i
-                        class="fas fa-ban"></i> Suspend</button>
-                <button onclick="document.getElementById('userDetailModal').style.display='none'"
-                    style="flex:1;padding:.6rem 1rem;background:var(--admin-bg);color:var(--admin-muted);border:1px solid var(--admin-border);border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;">Close</button>
-            </div>
-        </div>
-    </div>
-
-    <script src="assets/js/auth-handler.js"></script>
     <script>
         const API = window.location.origin;
-        const token = localStorage.getItem('authToken') || localStorage.getItem('token');
-        // Check token validity on load
-        if (!token) {
-            window.location.href = 'admin-login.html';
-            return;
-        }
-
-        // Verify admin role
+        const token = localStorage.getItem('authToken');
         const user = JSON.parse(localStorage.getItem('user') || 'null');
-        if (!user || !['admin', 'manager', 'employee'].includes(user.role)) {
-            localStorage.clear();
-            window.location.href = 'admin-login.html';
-            return;
-        }
 
-        document.getElementById('adminName').textContent = user.username;
-        document.getElementById('adminRole').textContent = user.role.charAt(0).toUpperCase() + user.role.slice(1);
-
-        // Hide permissions if not admin
-        if (user.role !== 'admin') {
-            document.querySelector('[data-tab="employees"]').style.display = 'none';
-            document.querySelector('[data-tab="platform"]').style.display = 'none';
-
-            // Hide tabs based on specific permissions for managers/employees
-            if (!user.permissions?.canManageProjects) document.querySelector('[data-tab="projects"]').style.display = 'none';
-            if (!user.permissions?.canManageUsers) document.querySelector('[data-tab="users"]').style.display = 'none';
-            if (!user.permissions?.canViewTransactions) document.querySelector('[data-tab="transactions"]').style.display = 'none';
-            if (!user.permissions?.canApprovePayouts) document.querySelector('[data-tab="cashouts"]').style.display = 'none';
+        // Auth check
+        if (!user || user.role !== 'admin') {
+            window.location.href = '/admin-login.html';
         }
 
         // Tab navigation
@@ -1108,64 +998,29 @@
         // Load overview on start
         loadDashboard();
 
-        async function adminFetch(url, options = {}) {
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 15000);
-            try {
-                const { headers, ...rest } = options;
-                const res = await fetch(url, {
-                    ...rest,
-                    signal: controller.signal,
-                    headers: { 'Authorization': `Bearer ${token}`, ...(headers || {}) }
-                });
-                clearTimeout(timeoutId);
-                if (!res.ok && res.status === 401) {
-                    adminLogout();
-                    throw new Error('Session expired');
-                }
-                return res.json();
-            } catch (err) {
-                clearTimeout(timeoutId);
-                if (err.name === 'AbortError') throw new Error('Request timeout - please check your internet connection');
-                throw err;
-            }
+        async function adminFetch(url) {
+            const res = await fetch(url, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            return res.json();
         }
 
         async function adminPut(url, body) {
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 15000);
-
-            try {
-                const res = await fetch(url, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify(body),
-                    signal: controller.signal
-                });
-                clearTimeout(timeoutId);
-                return res.json();
-            } catch (err) {
-                clearTimeout(timeoutId);
-                if (err.name === 'AbortError') {
-                    throw new Error('Request timeout - please check your internet connection');
-                }
-                throw err;
-            }
+            const res = await fetch(url, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(body)
+            });
+            return res.json();
         }
 
         async function loadDashboard() {
-            const statsGrid = document.getElementById('statsGrid');
-            statsGrid.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i><p>Loading stats...</p></div>';
-
             try {
                 const data = await adminFetch(`${API}/api/admin/dashboard`);
-                if (!data.success) {
-                    statsGrid.innerHTML = '<div class="loading" style="color: var(--accent-red);"><i class="fas fa-exclamation-triangle"></i><p>Failed to load dashboard data</p><small style="color: var(--admin-muted);">Please try refreshing the page</small></div>';
-                    return;
-                }
+                if (!data.success) return;
                 const d = data.data;
 
                 // Stats cards
@@ -1178,13 +1033,13 @@
                         <div class="stat-icon blue"><i class="fas fa-project-diagram"></i></div>
                         <div><div class="stat-value">${d.overview.totalProjects}</div><div class="stat-label">Total Projects</div></div>
                     </div>
-                    <div class="stat-card" style="border-color:${(d.overview.pendingProjects || 0) > 0 ? 'rgba(245,158,11,0.4)' : 'inherit'};cursor:${(d.overview.pendingProjects || 0) > 0 ? 'pointer' : 'default'}" onclick="${(d.overview.pendingProjects || 0) > 0 ? 'switchTab(\'projects\'); setTimeout(()=>{ document.getElementById(\'projectStatusFilter\').value=\'pending\'; loadAdminProjects(); }, 100);' : ''}">
-                        <div class="stat-icon amber"><i class="fas fa-clock"></i></div>
-                        <div><div class="stat-value" style="color:${(d.overview.pendingProjects || 0) > 0 ? '#FBBF24' : 'inherit'}">${d.overview.pendingProjects || 0}</div><div class="stat-label">Pending Review ${(d.overview.pendingProjects || 0) > 0 ? '⚠️' : ''}</div></div>
-                    </div>
                     <div class="stat-card">
                         <div class="stat-icon purple"><i class="fas fa-coins"></i></div>
                         <div><div class="stat-value">${d.overview.totalCoinsBought.toLocaleString()}</div><div class="stat-label">Coins Sold</div></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon amber"><i class="fas fa-paper-plane"></i></div>
+                        <div><div class="stat-value">${d.overview.totalCoinsSent.toLocaleString()}</div><div class="stat-label">Coins Sent</div></div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon pink"><i class="fas fa-hand-holding-usd"></i></div>
@@ -1268,80 +1123,37 @@
                     </tr>
                 `).join('') || '<tr><td colspan="5" style="text-align: center; color: var(--admin-muted);">No transactions yet</td></tr>';
 
-                // Pending review panel
-                const pendingCount = d.overview.pendingProjects || 0;
-                const pendingPanel = document.getElementById('pendingReviewPanel');
-                const pendingBadge = document.getElementById('pendingReviewBadge');
-                if (pendingCount > 0) {
-                    pendingPanel.style.display = 'block';
-                    pendingBadge.textContent = pendingCount;
-                    // Load pending projects into review panel
-                    try {
-                        const pendData = await adminFetch(`${API}/api/admin/projects?status=pending&limit=20`);
-                        if (pendData.success) {
-                            document.getElementById('pendingReviewTable').innerHTML = pendData.data.map(p => `
-                                <tr>
-                                    <td><strong>${p.title}</strong><br><small style="color:var(--admin-muted);">#${p.serialNumber || '—'}</small></td>
-                                    <td>${p.creator?.username || '-'}</td>
-                                    <td style="color:var(--admin-muted);font-size:0.8rem;">${p.creator?.email || '-'}</td>
-                                    <td><span style="text-transform:capitalize;">${p.category}</span></td>
-                                    <td>${(p.goalAmount || 0).toLocaleString()} SAR</td>
-                                    <td>${new Date(p.createdAt).toLocaleDateString()}</td>
-                                    <td style="white-space:nowrap;">
-                                        <button class="action-btn approve" onclick="approveProject('${p._id}')" title="Approve & Publish"><i class="fas fa-check"></i> Publish</button>
-                                        <button class="action-btn reject" onclick="rejectProject('${p._id}')" title="Reject"><i class="fas fa-times"></i> Reject</button>
-                                    </td>
-                                </tr>
-                            `).join('');
-                        }
-                    } catch (e) { console.error('Pending projects error:', e); }
-                } else {
-                    pendingPanel.style.display = 'none';
-                }
-
             } catch (err) {
                 console.error('Dashboard load error:', err);
-                statsGrid.innerHTML = '<div class="loading" style="color: var(--accent-red);"><i class="fas fa-exclamation-triangle"></i><p>Failed to load dashboard</p><small style="color: var(--admin-muted);">' + (err.message || 'Please check your connection and try again') + '</small></div>';
             }
         }
 
         async function loadAdminUsers() {
             const search = document.getElementById('userSearch')?.value || '';
-            const usersTable = document.getElementById('usersTable');
-            usersTable.innerHTML = '<tr><td colspan="6" class="loading"><i class="fas fa-spinner fa-spin"></i></td></tr>';
             try {
                 const data = await adminFetch(`${API}/api/admin/users?search=${encodeURIComponent(search)}&limit=50`);
-                if (!data.success) {
-                    usersTable.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--accent-red);"><i class="fas fa-exclamation-triangle"></i> Failed to load users</td></tr>';
-                    return;
-                }
-                if (!data.data || data.data.length === 0) {
-                    usersTable.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--admin-muted);padding:2rem;">No users found</td></tr>';
-                    return;
-                }
-                usersTable.innerHTML = data.data.map(u => `
+                if (!data.success) return;
+                document.getElementById('usersTable').innerHTML = data.data.map(u => `
                     <tr>
-                        <td><strong>${escHtml(u.username)}</strong>${u.suspended ? ' <span class="badge rejected" style="font-size:.65rem;">Suspended</span>' : ''}</td>
-                        <td style="color:var(--admin-muted);font-size:.82rem;">${escHtml(u.email)}</td>
-                        <td style="color:var(--accent-amber);font-weight:600;">${(u.coinBalance || 0).toLocaleString()}</td>
-                        <td style="color:var(--accent-green);font-weight:600;">${(u.totalEarned || 0).toLocaleString()}</td>
-                        <td style="color:var(--admin-muted);font-size:.8rem;">${new Date(u.createdAt).toLocaleDateString()}</td>
-                        <td style="white-space:nowrap;">
-                            <button class="action-btn" onclick="viewUser('${u._id}')" style="border-color:var(--accent-blue);color:var(--accent-blue);"><i class="fas fa-eye"></i> View</button>
-                            <button class="action-btn reject" onclick="deleteUser('${u._id}', '${escHtml(u.username).replace(/'/g, '&#39;')}')" title="Delete permanently"><i class="fas fa-trash"></i></button>
+                        <td><strong>${u.username}</strong></td>
+                        <td>${u.email}</td>
+                        <td>${(u.coinBalance || 0).toLocaleString()}</td>
+                        <td>${(u.totalEarned || 0).toLocaleString()}</td>
+                        <td>${new Date(u.createdAt).toLocaleDateString()}</td>
+                        <td>
+                            <button class="action-btn" onclick="adjustCoins('${u._id}', '${u.username}')"><i class="fas fa-coins"></i> Adjust</button>
                         </td>
                     </tr>
-                `).join('');
+                `).join('') || '<tr><td colspan="6" style="text-align:center; color: var(--admin-muted);">No users found</td></tr>';
             } catch (err) {
                 console.error('Users load error:', err);
-                usersTable.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--accent-red);">' + (err.message || 'Network error loading users') + '</td></tr>';
             }
         }
 
-        let _searchTimeout;
+        let searchTimeout;
         function searchUsers() {
-            clearTimeout(_searchTimeout);
-            _searchTimeout = setTimeout(loadAdminUsers, 350);
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(loadAdminUsers, 300);
         }
 
         async function adjustCoins(userId, username) {
@@ -1357,220 +1169,34 @@
             }
         }
 
-        let _viewedUserId = null;
-        async function viewUser(userId) {
-            _viewedUserId = userId;
-            try {
-                const data = await adminFetch(`${API}/api/admin/users/${userId}`);
-                if (!data.success) { showToast('Error fetching user', 'red'); return; }
-                const u = data.data;
-                const joined = u.createdAt ? new Date(u.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : '—';
-                document.getElementById('userDetailContent').innerHTML = `
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
-                        <div style="background:var(--admin-bg);border-radius:10px;padding:1rem;">
-                            <div style="color:var(--admin-muted);font-size:.75rem;text-transform:uppercase;">Username</div>
-                            <div style="color:white;font-weight:600;font-size:1.1rem;">${escHtml(u.username || '—')}</div>
-                        </div>
-                        <div style="background:var(--admin-bg);border-radius:10px;padding:1rem;">
-                            <div style="color:var(--admin-muted);font-size:.75rem;text-transform:uppercase;">Role</div>
-                            <div style="color:white;font-weight:600;">${u.role || 'user'}</div>
-                        </div>
-                        <div style="background:var(--admin-bg);border-radius:10px;padding:1rem;grid-column:1/-1;">
-                            <div style="color:var(--admin-muted);font-size:.75rem;text-transform:uppercase;">Email</div>
-                            <div style="color:white;">${escHtml(u.email || '—')}</div>
-                        </div>
-                        <div style="background:var(--admin-bg);border-radius:10px;padding:1rem;">
-                            <div style="color:var(--admin-muted);font-size:.75rem;text-transform:uppercase;">Coin Balance</div>
-                            <div style="color:var(--accent-amber);font-weight:700;font-size:1.2rem;">${(u.coinBalance || 0).toLocaleString()}</div>
-                        </div>
-                        <div style="background:var(--admin-bg);border-radius:10px;padding:1rem;">
-                            <div style="color:var(--admin-muted);font-size:.75rem;text-transform:uppercase;">Total Earned</div>
-                            <div style="color:var(--accent-green);font-weight:700;font-size:1.2rem;">${(u.totalEarned || 0).toLocaleString()}</div>
-                        </div>
-                        <div style="background:var(--admin-bg);border-radius:10px;padding:1rem;">
-                            <div style="color:var(--admin-muted);font-size:.75rem;text-transform:uppercase;">Projects</div>
-                            <div style="color:white;font-weight:600;">${u.projectCount || 0}</div>
-                        </div>
-                        <div style="background:var(--admin-bg);border-radius:10px;padding:1rem;">
-                            <div style="color:var(--admin-muted);font-size:.75rem;text-transform:uppercase;">Joined</div>
-                            <div style="color:white;font-size:.9rem;">${joined}</div>
-                        </div>
-                    </div>`;
-                document.getElementById('userDetailModal').style.display = 'flex';
-            } catch (e) {
-                console.error('Error fetching user', e);
-                showToast('Network error loading user', 'red');
-            }
-        }
-
-        function escHtml(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
-
-        async function adjustCoinsModal() {
-            const amount = prompt(`Adjust coins for this user.\nEnter new balance (number):`);
-            if (amount === null) return;
-            const newBalance = parseInt(amount);
-            if (isNaN(newBalance) || newBalance < 0) { alert('Invalid amount'); return; }
-            await adminPut(`${API}/api/admin/users/${_viewedUserId}`, { coinBalance: newBalance });
-            viewUser(_viewedUserId);
-            loadAdminUsers();
-        }
-
-        async function suspendUserModal() {
-            if (!confirm('Are you sure you want to suspend this user?')) return;
-            await adminPut(`${API}/api/admin/users/${_viewedUserId}`, { suspended: true });
-            showToast('User suspended', 'red');
-            loadAdminUsers();
-            document.getElementById('userDetailModal').style.display = 'none';
-        }
-
-        async function deleteUser(userId, username) {
-            if (!confirm(`Are you SURE you want to permanently delete user "${username}"? This cannot be undone.`)) return;
-            try {
-                const res = await fetch(`${API}/api/admin/users/${userId}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` } });
-                const data = await res.json();
-                if (data.success) {
-                    showToast('User deleted successfully');
-                    loadAdminUsers();
-                } else {
-                    alert(data.message);
-                }
-            } catch (err) {
-                alert('Error deleting user');
-            }
-        }
-
         async function loadAdminProjects() {
             const status = document.getElementById('projectStatusFilter')?.value || '';
-            const projectsTable = document.getElementById('projectsTable');
-            projectsTable.innerHTML = '<tr><td colspan="9" class="loading"><i class="fas fa-spinner fa-spin"></i></td></tr>';
-
             try {
                 const data = await adminFetch(`${API}/api/admin/projects?status=${status}&limit=50`);
-                if (!data.success) {
-                    projectsTable.innerHTML = '<tr><td colspan="9" style="text-align:center;color:var(--accent-red);"><i class="fas fa-exclamation-triangle"></i> Failed to load projects</td></tr>';
-                    return;
-                }
-                projectsTable.innerHTML = data.data.map(p => `
+                if (!data.success) return;
+                document.getElementById('projectsTable').innerHTML = data.data.map(p => `
                     <tr>
-                        <td><strong>${p.title}</strong><br><small style="color:var(--admin-muted);font-size:0.75rem;">#${p.serialNumber || '-'}</small></td>
+                        <td><strong>${p.title}</strong></td>
                         <td>${p.creator?.username || '-'}</td>
-                        <td style="color:var(--admin-muted);font-size:0.8rem;">${p.creator?.email || '-'}</td>
-                        <td style="text-transform:capitalize;">${p.category}</td>
-                        <td>${(p.goalAmount || 0).toLocaleString()}</td>
+                        <td>${p.category}</td>
+                        <td>${p.currentAmount.toLocaleString()} / ${p.goalAmount.toLocaleString()}</td>
                         <td><span class="badge ${p.status}">${p.status}</span></td>
-                        <td style="color:var(--admin-muted);font-size:0.8rem;">${new Date(p.createdAt).toLocaleDateString()}</td>
-                        <td style="white-space:nowrap;">
-                            <a href="/project-details.html?id=${p._id}" target="_blank" class="action-btn" style="border-color:var(--accent-blue);color:var(--accent-blue);text-decoration:none;"><i class="fas fa-eye"></i> View</a>
-                            ${p.status === 'pending' ? `<button class="action-btn approve" onclick="approveProject('${p._id}')"><i class="fas fa-check"></i> Publish</button>` : ''}
-                            ${p.status === 'pending' ? `<button class="action-btn reject" onclick="rejectProject('${p._id}')"><i class="fas fa-times"></i> Reject</button>` : ''}
-                            ${p.status === 'draft' ? `<button class="action-btn approve" onclick="updateProject('${p._id}','pending')"><i class="fas fa-paper-plane"></i> Submit</button>` : ''}
-                            ${p.status === 'active' ? `<button class="action-btn" onclick="updateProject('${p._id}','completed')" style="border-color:var(--accent-blue);color:var(--accent-blue);"><i class="fas fa-flag-checkered"></i> Complete</button>` : ''}
-                            ${p.status === 'active' ? `<button class="action-btn" onclick="updateProject('${p._id}','pending')" style="border-color:var(--accent-amber);color:var(--accent-amber);"><i class="fas fa-pause-circle"></i> Deactivate</button>` : ''}
-                            ${p.status === 'rejected' ? `<button class="action-btn approve" onclick="updateProject('${p._id}','active')"><i class="fas fa-undo"></i> Re-publish</button>` : ''}
-                            <button class="action-btn reject" onclick="deleteProject('${p._id}', '${p.title.replace(/'/g, '&#39;')}')" title="Delete permanently" style="border-color:#ef4444;color:#ef4444;"><i class="fas fa-trash"></i></button>
+                        <td>
+                            ${p.status === 'draft' ? `<button class="action-btn approve" onclick="updateProject('${p._id}','active')">Activate</button>` : ''}
+                            ${p.status === 'active' ? `<button class="action-btn" onclick="updateProject('${p._id}','completed')">Complete</button>` : ''}
+                            ${p.status !== 'draft' ? `<button class="action-btn reject" onclick="updateProject('${p._id}','draft')">Deactivate</button>` : ''}
                         </td>
                     </tr>
-                `).join('') || '<tr><td colspan="9" style="text-align:center; color: var(--admin-muted);">No projects found</td></tr>';
+                `).join('') || '<tr><td colspan="6" style="text-align:center; color: var(--admin-muted);">No projects found</td></tr>';
             } catch (err) {
                 console.error('Projects load error:', err);
-                projectsTable.innerHTML = '<tr><td colspan="9" style="text-align:center;color:var(--accent-red);"><i class="fas fa-exclamation-triangle"></i> ' + (err.message || 'Network error loading projects') + '</td></tr>';
-            }
-        }
-
-        async function approveProject(id) {
-            if (!confirm('Approve and publish this project? It will go live on the platform.')) return;
-            try {
-                const res = await adminPut(`${API}/api/admin/projects/${id}`, { status: 'active' });
-                if (res.success) {
-                    showToast('✅ Project published successfully!', 'green');
-                    loadAdminProjects();
-                    loadDashboard();
-                } else {
-                    showToast('Error: ' + (res.message || 'Failed'), 'red');
-                }
-            } catch (e) { showToast('Error approving project', 'red'); }
-        }
-
-        async function rejectProject(id) {
-            const reason = prompt('Enter rejection reason (optional):');
-            if (reason === null) return; // cancelled
-            try {
-                const body = { status: 'rejected' };
-                if (reason) body.rejectionReason = reason;
-                const res = await adminPut(`${API}/api/admin/projects/${id}`, body);
-                if (res.success) {
-                    showToast('❌ Project rejected.', 'amber');
-                    loadAdminProjects();
-                    loadDashboard();
-                } else {
-                    showToast('Error: ' + (res.message || 'Failed'), 'red');
-                }
-            } catch (e) { showToast('Error rejecting project', 'red'); }
-        }
-
-        async function deleteProject(id, title) {
-            if (!confirm(`⚠️ PERMANENTLY DELETE "${title}"?\n\nThis cannot be undone.`)) return;
-            try {
-                const res = await fetch(`${API}/api/admin/projects/${id}`, {
-                    method: 'DELETE',
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                const data = await res.json();
-                if (data.success) {
-                    showToast('🗑️ Project deleted.', 'red');
-                    loadAdminProjects();
-                    loadDashboard();
-                } else {
-                    showToast('Error: ' + (data.message || 'Failed'), 'red');
-                }
-            } catch (e) { showToast('Error deleting project', 'red'); }
-        }
-
-        function showToast(msg, color) {
-            const colors = { green: '#10B981', red: '#EF4444', amber: '#F59E0B' };
-            const toast = document.createElement('div');
-            toast.style.cssText = `position:fixed;bottom:2rem;right:2rem;background:var(--admin-surface);border:1px solid ${colors[color] || '#10B981'};color:white;padding:.9rem 1.4rem;border-radius:12px;font-size:.9rem;font-weight:600;z-index:99999;box-shadow:0 8px 30px rgba(0,0,0,0.4);transition:opacity .4s;`;
-            toast.textContent = msg;
-            document.body.appendChild(toast);
-            setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 400); }, 3000);
-        }
-
-        function switchTab(tabName) {
-            document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
-            const link = document.querySelector(`.sidebar-nav a[data-tab="${tabName}"]`);
-            if (link) link.classList.add('active');
-            document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
-            const tab = document.getElementById('tab-' + tabName);
-            if (tab) tab.classList.add('active');
-            const titles = {
-                overview: ['Dashboard', 'Platform overview & analytics'],
-                users: ['User Management', 'View and manage all users'],
-                projects: ['Project Management', 'Approve, feature, and manage projects'],
-                transactions: ['Transactions', 'Monitor all coin transactions'],
-                cashouts: ['Cash Out Requests', 'Approve or reject cash out requests'],
-                employees: ['Staff Management', 'Manage employees and managers'],
-                platform: ['Platform Settings', 'System configuration and health']
-            };
-            if (titles[tabName]) {
-                document.getElementById('pageTitle').textContent = titles[tabName][0];
-                document.getElementById('pageSubtitle').textContent = titles[tabName][1];
             }
         }
 
         async function updateProject(id, status) {
             if (!confirm(`Set project status to "${status}"?`)) return;
-            try {
-                const res = await adminPut(`${API}/api/admin/projects/${id}`, { status });
-                if (res.success) {
-                    showToast(`Project status set to "${status}"`, 'green');
-                    loadAdminProjects();
-                    loadDashboard();
-                } else {
-                    showToast('Error: ' + (res.message || 'Failed'), 'red');
-                }
-            } catch (e) {
-                showToast('Network error updating project', 'red');
-            }
+            await adminPut(`${API}/api/admin/projects/${id}`, { status });
+            loadAdminProjects();
         }
 
         async function loadAdminTransactions() {
@@ -1596,9 +1222,7 @@
 
         async function loadAdminCashouts() {
             try {
-                const filterEl = document.getElementById('cashoutStatusFilter');
-                const statusFilter = filterEl ? filterEl.value : 'pending';
-                const data = await adminFetch(`${API}/api/admin/cashouts?status=${statusFilter}`);
+                const data = await adminFetch(`${API}/api/admin/cashouts?status=pending`);
                 if (!data.success) return;
                 document.getElementById('cashoutsTable').innerHTML = data.data.map(tx => `
                     <tr>
@@ -1760,39 +1384,33 @@
                     })
                 });
                 const data = await res.json();
-                if (data.success) {
-                    loadEmployees();
-                } else alert('Error: ' + data.message);
+                if (data.success) loadEmployees();
+                else alert(data.message || 'Failed to update role.');
             } catch (err) {
-                alert('Network error updating role.');
+                alert('Network error.');
             }
         }
 
-        async function removeEmployee(id, username) {
-            if (!confirm(`Are you sure you want to completely remove staff member ${username}?`)) return;
+        async function removeEmployee(id, name) {
+            if (!confirm(`Are you sure you want to remove ${name} from staff? This cannot be undone.`)) return;
             try {
                 const res = await fetch(`${API}/api/admin/employees/${id}`, {
                     method: 'DELETE',
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 const data = await res.json();
-                if (data.success) {
-                    loadEmployees();
-                } else {
-                    alert('Error removing staff: ' + data.message);
-                }
+                if (data.success) loadEmployees();
+                else alert(data.message || 'Failed to remove staff member.');
             } catch (err) {
-                console.error('Remove staff error:', err);
-                alert('Network error removing staff');
+                alert('Network error.');
             }
         }
         // ========= END EMPLOYEE MANAGEMENT =========
 
         function adminLogout() {
             localStorage.removeItem('authToken');
-            localStorage.removeItem('token');
             localStorage.removeItem('user');
-            window.location.href = 'admin-login.html';
+            window.location.href = '/admin-login.html';
         }
     </script>
 </body>
