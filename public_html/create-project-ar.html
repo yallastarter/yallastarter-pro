@@ -578,7 +578,9 @@
                             <div id="ar-error-fix" style="color: #047a2e; font-size: 0.9rem; font-weight: 600;"></div>
                         </div>
 
-                        <button type="submit" id="btn-submit" class="submit-btn">إنشاء المشروع</button>
+                        <button type="submit" id="btn-submit" class="submit-btn"
+                            onclick="if(window.handleProjectSubmission) window.handleProjectSubmission(event)">إنشاء
+                            المشروع</button>
                     </form>
                 </div>
 
@@ -699,119 +701,124 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             const form = document.querySelector('.project-form');
-            if (form) {
-                form.addEventListener('submit', async function (e) {
+            const btn = document.getElementById('btn-submit');
+            const errContainer = document.getElementById('ar-error-container');
+            const errMsgEl = document.getElementById('ar-error-msg');
+            const errFixEl = document.getElementById('ar-error-fix');
+
+            window.handleProjectSubmission = async function (e) {
+                if (e) {
                     e.preventDefault();
+                    if (e.stopPropagation) e.stopPropagation();
+                }
 
-                    const btn = document.getElementById('btn-submit');
-                    const errContainer = document.getElementById('ar-error-container');
-                    const errMsgEl = document.getElementById('ar-error-msg');
-                    const errFixEl = document.getElementById('ar-error-fix');
-                    const origText = btn.textContent;
+                if (!btn || btn.disabled) return;
+                const origText = btn.textContent;
 
-                    errContainer.style.display = 'none';
+                errContainer.style.display = 'none';
+
+                try {
                     btn.disabled = true;
                     btn.textContent = 'جاري الإنشاء...';
 
-                    // Check for auth. Use window.auth first if available.
-                    let token = null;
-                    if (window.auth && typeof window.auth.getToken === 'function') {
-                        token = window.auth.getToken();
-                    } else {
-                        token = localStorage.getItem('token');
+                    let token = window.auth ? window.auth.getToken() : localStorage.getItem('token');
+                    if (!token) {
+                        alert('أنت لست مسجل الدخول. يرجى تسجيل الدخول أولاً.');
+                        window.location.href = 'login-ar.html';
+                        return;
                     }
 
-                    if (!token) {
-                        showErrorAR('أنت لست مسجل الدخول.', 'يرجى تسجيل الدخول أولاً للمتابعة.');
+                    // Collect data
+                    const title = document.getElementById('project-title')?.value.trim();
+                    const category = document.getElementById('project-category')?.value;
+                    const location = document.getElementById('project-location')?.value.trim();
+                    const description = document.getElementById('project-description')?.value.trim();
+                    const goalAmount = document.getElementById('funding-goal')?.value;
+                    const duration = document.getElementById('project-duration')?.value;
+
+                    if (!title || !category || !location || !description || !goalAmount || !duration) {
+                        const missing = [];
+                        if (!title) missing.push('اسم المشروع');
+                        if (!category) missing.push('الفئة');
+                        if (!location) missing.push('الموقع');
+                        if (!description) missing.push('وصف المشروع');
+                        if (!goalAmount) missing.push('المبلغ المطلوب');
+                        if (!duration) missing.push('مدة الحملة');
+
+                        showErrorAR('الحقول المطلوبة مفقودة', 'يرجى ملء كافة الحقول: ' + missing.join('، '));
                         btn.disabled = false;
                         btn.textContent = origText;
                         return;
                     }
 
-                    const title = document.getElementById('project-title').value.trim();
-                    const category = document.getElementById('project-category').value;
-                    const location = document.getElementById('project-location').value.trim();
-                    const description = document.getElementById('project-description').value.trim();
-                    const goalAmount = document.getElementById('funding-goal').value;
-                    const duration = document.getElementById('project-duration').value;
-
-                    let deadline = '';
-                    if (duration) {
-                        const d = new Date();
-                        d.setDate(d.getDate() + parseInt(duration, 10));
-                        deadline = d.toISOString().slice(0, 10);
-                    }
+                    const d = new Date();
+                    d.setDate(d.getDate() + parseInt(duration, 10));
+                    const deadline = d.toISOString().slice(0, 10);
 
                     const coverInput = document.getElementById('project-cover');
-                    if (!coverInput.files || !coverInput.files[0]) {
-                        showErrorAR('صورة الغلاف مطلوبة.', 'الرجاء رفع صورة للغلاف.');
+                    if (!coverInput?.files?.[0]) {
+                        showErrorAR('صورة الغلاف مطلوبة', 'يرجى رفع صورة لغلاف المشروع في الخطوة السابقة.');
                         btn.disabled = false;
                         btn.textContent = origText;
                         return;
                     }
 
-                    let coverImage = null;
-                    try {
-                        // Upload image first
-                        const fd = new FormData();
-                        fd.append('cover', coverInput.files[0]);
-                        const uploadRes = await fetch('/api/projects/upload-cover', {
-                            method: 'POST',
-                            headers: { 'Authorization': 'Bearer ' + token },
-                            body: fd
-                        });
-                        const uploadData = await uploadRes.json();
+                    const API = window.location.origin;
 
-                        if (uploadData.success) {
-                            coverImage = uploadData.url;
-                        } else {
-                            showErrorAR('فشل رفع الصورة.', uploadData.message || 'تأكد من أن حجم الصورة أقل من 8 ميجابايت.');
-                            btn.disabled = false;
-                            btn.textContent = origText;
-                            return;
-                        }
+                    // 1. Upload Cover
+                    console.log('Uploading cover...');
+                    const fd = new FormData();
+                    fd.append('cover', coverInput.files[0]);
+                    const coverRes = await fetch(API + '/api/projects/upload-cover', {
+                        method: 'POST',
+                        headers: { 'Authorization': 'Bearer ' + token },
+                        body: fd
+                    });
+                    const coverData = await coverRes.json();
+                    if (!coverData.success) throw new Error(coverData.message || 'فشل رفع صورة الغلاف');
 
-                        // Create Project
-                        const res = await fetch('/api/projects', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'Authorization': 'Bearer ' + token
-                            },
-                            body: JSON.stringify({
-                                title, category, location, description,
-                                goalAmount: Number(goalAmount), deadline, coverImage, status: 'pending'
-                            })
-                        });
-                        const data = await res.json();
+                    // 2. Final Submission
+                    console.log('Creating project...');
+                    const res = await fetch(API + '/api/projects', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + token
+                        },
+                        body: JSON.stringify({
+                            title, category, location, description,
+                            goalAmount: Number(goalAmount),
+                            deadline,
+                            coverImage: coverData.url,
+                            status: 'pending'
+                        })
+                    });
+                    const data = await res.json();
 
-                        if (data.success) {
-                            alert('تم إنشاء المشروع بنجاح ووضعه قيد المراجعة!');
-                            window.location.href = 'projects-ar.html';
-                        } else {
-                            const errMsg = data.message || 'فشل في إنشاء المشروع.';
-                            let fixMsg = 'تأكد من صحة جميع البيانات وحاول مرة أخرى.';
-                            const errLower = errMsg.toLowerCase();
-                            if (errLower.includes('title')) fixMsg = 'تحقق من عنوان المشروع.';
-                            else if (errLower.includes('category')) fixMsg = 'اختر فئة المشروع.';
-                            else if (errLower.includes('goal')) fixMsg = 'تأكد من أن المبلغ المطلوب صحيح.';
-                            else if (errLower.includes('auth')) fixMsg = 'انتهت الجلسة. يرجى تسجيل الدخول.';
-                            showErrorAR(errMsg, fixMsg);
-                        }
-                    } catch (err) {
-                        showErrorAR('حدث خطأ في الاتصال.', 'تحقق من اتصالك بالإنترنت وحاول مرة أخرى.');
+                    if (data.success) {
+                        alert('تم إنشاء المشروع بنجاح ووضعه قيد المراجعة!');
+                        window.location.href = 'dashboard-ar.html';
+                    } else {
+                        throw new Error(data.message || 'فشل في إنشاء المشروع.');
                     }
+
+                } catch (err) {
+                    console.error('Submission error:', err);
+                    showErrorAR('حدث خطأ', err.message || 'يرجى المحاولة مرة أخرى لاحقاً.');
+                } finally {
                     btn.disabled = false;
                     btn.textContent = origText;
+                }
+            };
 
-                    function showErrorAR(msg, fix) {
-                        errMsgEl.textContent = msg;
-                        errFixEl.textContent = fix ? '💡 ' + fix : '';
-                        errContainer.style.display = 'block';
-                        errContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    }
-                });
+            function showErrorAR(msg, fix) {
+                errMsgEl.textContent = msg;
+                errFixEl.textContent = fix ? '💡 ' + fix : '';
+                errContainer.style.display = 'block';
+                errContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
+
+            if (form) form.addEventListener('submit', window.handleProjectSubmission);
         });
     </script>
 

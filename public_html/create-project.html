@@ -730,7 +730,8 @@
                 <div class="form-actions">
                     <button type="button" class="btn-prev" id="btn-prev" style="display: none;">Previous</button>
                     <button type="button" class="btn-next" id="btn-next">Next</button>
-                    <button type="submit" class="btn-submit" id="btn-submit" style="display: none;">Submit
+                    <button type="submit" class="btn-submit" id="btn-submit" style="display: none;"
+                        onclick="if(window.handleProjectSubmission) window.handleProjectSubmission(event)">Submit
                         Project</button>
                 </div>
                 <div id="form-message" style="display:none;"></div>
@@ -1068,216 +1069,184 @@
             document.getElementById('cover-preview-wrap').style.display = 'none';
         }
 
-        const form = document.querySelector('.project-form');
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const msgEl = document.getElementById('form-message');
-            msgEl.style.display = 'none';
-            const btn = document.getElementById('btn-submit');
-            const origText = btn.textContent;
-            btn.disabled = true;
-            btn.textContent = 'Creating...';
+        // Form Submission Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.querySelector('.project-form');
 
-            const token = window.auth ? window.auth.getToken() : localStorage.getItem('token');
-            if (!token) {
-                showError('You are not logged in.', 'Please log in to your account, then come back to create your project.');
-                btn.disabled = false;
-                btn.textContent = origText;
-                return;
-            }
-
-            const title = document.getElementById('project-title').value.trim();
-            const category = document.getElementById('project-category').value;
-            const location = document.getElementById('project-location').value.trim();
-            const duration = document.getElementById('project-duration').value;
-            const description = document.getElementById('project-description').value.trim();
-            const story = (document.getElementById('project-story') && document.getElementById('project-story').value) || '';
-            const goalAmount = document.getElementById('funding-goal').value;
-            const fundingDeadlineInput = document.getElementById('funding-deadline');
-            const fundingDeadline = fundingDeadlineInput ? fundingDeadlineInput.value : '';
-            const rewards = [];
-            document.querySelectorAll('.reward-tier-card').forEach(card => {
-                const rTitle = card.querySelector('.reward-title-input').value.trim();
-                const rAmount = card.querySelector('.reward-amount-input').value;
-                const rDesc = card.querySelector('.reward-desc-input').value.trim();
-                const rIncludes = card.querySelector('.reward-includes-input').value.trim();
-                const rDate = card.querySelector('.reward-date-input').value;
-
-                if (rTitle && rAmount && rDesc) {
-                    rewards.push({
-                        title: rTitle,
-                        amount: Number(rAmount),
-                        description: rDesc,
-                        includes: rIncludes ? rIncludes.split(',').map(s => s.trim()).filter(Boolean) : [],
-                        deliveryDate: rDate || null
-                    });
-                }
-            });
-            const videoUrl = (document.getElementById('project-video') && document.getElementById('project-video').value.trim()) || '';
-
-            if (!title || !category || !location || !description || !goalAmount) {
-                const missing = [];
-                if (!title) missing.push('Project Title');
-                if (!category) missing.push('Category');
-                if (!location) missing.push('Location');
-                if (!description) missing.push('Project Description');
-                if (!goalAmount) missing.push('Funding Goal');
-                showError(
-                    'Some required fields are missing: ' + missing.join(', ') + '.',
-                    'Please go back to the relevant steps and fill in all required fields before submitting.'
-                );
-                btn.disabled = false;
-                btn.textContent = origText;
-                return;
-            }
-
-            let deadline = fundingDeadline;
-            if (!deadline && duration) {
-                const d = new Date();
-                d.setDate(d.getDate() + parseInt(duration, 10));
-                deadline = d.toISOString().slice(0, 10);
-            }
-            if (!deadline || new Date(deadline) <= new Date()) {
-                showError(
-                    'The funding deadline is missing or in the past.',
-                    'Please go to Step 1 and select a Campaign Duration.'
-                );
-                showStep(1);
-                currentStep = 1;
-                btn.disabled = false;
-                btn.textContent = origText;
-                return;
-            }
-
-            // Check for cover image explicitly
-            const coverInput = document.getElementById('project-cover');
-            if (!coverInput || !coverInput.files || !coverInput.files[0]) {
-                showError('Project cover image is required.', 'Please go to Step 4 and upload a cover image (Max 8MB, valid image format).');
-                showStep(4);
-                currentStep = 4;
-                btn.disabled = false;
-                btn.textContent = origText;
-                return;
-            }
-
-            const API = window.location.origin;
-            let coverImage = null;
-            let gallery = [];
-
-            try {
-                const coverInput = document.getElementById('project-cover');
-                if (coverInput && coverInput.files && coverInput.files[0]) {
-                    const fd = new FormData();
-                    fd.append('cover', coverInput.files[0]);
-                    const r = await fetch(API + '/api/projects/upload-cover', {
-                        method: 'POST',
-                        headers: { 'Authorization': 'Bearer ' + token },
-                        body: fd
-                    });
-                    const j = await r.json();
-                    if (j.success) coverImage = j.url;
-                    else { showError(j.message || 'Cover image upload failed.', 'Make sure your image is under 8MB and in JPEG, PNG, GIF, or WebP format. Try uploading a different image.'); btn.disabled = false; btn.textContent = origText; return; }
+            window.handleProjectSubmission = async function (e) {
+                if (e) {
+                    e.preventDefault();
+                    if (e.stopPropagation) e.stopPropagation();
                 }
 
-                const galleryInput = document.getElementById('project-images');
-                if (galleryInput && galleryInput.files && galleryInput.files.length > 0) {
-                    const fd = new FormData();
-                    for (let i = 0; i < Math.min(galleryInput.files.length, 10); i++) fd.append('gallery', galleryInput.files[i]);
-                    const r = await fetch(API + '/api/projects/upload-gallery', {
-                        method: 'POST',
-                        headers: { 'Authorization': 'Bearer ' + token },
-                        body: fd
-                    });
-                    const j = await r.json();
-                    if (j.success) gallery = j.urls;
-                    else { showError(j.message || 'Gallery upload failed.', 'Make sure each image is under 8MB and in JPEG, PNG, GIF, or WebP format. You can upload up to 10 images.'); btn.disabled = false; btn.textContent = origText; return; }
-                }
+                console.log('Submission process initiated...');
+                const btn = document.getElementById('btn-submit');
+                if (!btn || btn.disabled) return;
 
-                const res = await fetch(API + '/api/projects', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + token
-                    },
-                    body: JSON.stringify({
-                        title,
-                        description,
-                        category,
-                        location,
-                        goalAmount: Number(goalAmount),
-                        deadline,
-                        coverImage,
-                        gallery,
-                        videoUrl: videoUrl || undefined,
-                        story,
-                        rewards,
-                        status: 'pending'
-                    })
-                });
-                const data = await res.json();
+                const origText = btn.textContent;
+                try {
+                    btn.disabled = true;
+                    btn.textContent = 'Processing...';
 
-                if (data.success && data.data) {
-                    const proj = data.data;
-                    const projId = proj.serialNumber || proj._id;
-                    const projTitle = proj.title || 'Your Project';
-                    const shareUrl = window.location.origin + '/projects.html?id=' + proj._id;
-
-                    document.getElementById('smProjectTitle').textContent = projTitle;
-                    document.getElementById('smProjectId').textContent = projId;
-                    const linkEl = document.getElementById('smShareLink');
-                    linkEl.value = shareUrl;
-
-                    // Generate QR code
-                    const qrEl = document.getElementById('smQrCode');
-                    qrEl.innerHTML = '';
-                    if (typeof QRCode !== 'undefined') {
-                        new QRCode(qrEl, { text: shareUrl, width: 160, height: 160, colorDark: '#006c35', colorLight: '#fff' });
-                    } else {
-                        qrEl.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(shareUrl)}&color=006c35" alt="QR Code" style="border-radius:8px;">`;
+                    // Ensure user is using a valid auth token
+                    let token = window.auth ? window.auth.getToken() : localStorage.getItem('token');
+                    if (!token) {
+                        alert('Your session has expired or you are not logged in. Redirecting to login page...');
+                        window.location.href = 'login.html';
+                        return;
                     }
 
-                    // Store share data globally for share buttons
-                    window._shareData = { url: shareUrl, title: projTitle };
+                    // Collect and trim primary fields
+                    const title = document.getElementById('project-title')?.value.trim();
+                    const category = document.getElementById('project-category')?.value;
+                    const location = document.getElementById('project-location')?.value.trim();
+                    const duration = document.getElementById('project-duration')?.value;
+                    const description = document.getElementById('project-description')?.value.trim();
+                    const goalAmount = document.getElementById('funding-goal')?.value;
 
-                    document.getElementById('successModal').style.display = 'flex';
-                    return;
+                    // Validate essential fields
+                    if (!title || !category || !location || !duration || !description || !goalAmount) {
+                        const missing = [];
+                        if (!title) missing.push('Project Title');
+                        if (!category) missing.push('Category');
+                        if (!location) missing.push('Location');
+                        if (!duration) missing.push('Campaign Duration');
+                        if (!description) missing.push('Project Description');
+                        if (!goalAmount) missing.push('Funding Goal');
+
+                        showError('Required Fields Missing', 'Please fill in: ' + missing.join(', '));
+                        btn.disabled = false;
+                        btn.textContent = origText;
+                        return;
+                    }
+
+                    // Deadline logic based on duration
+                    const d = new Date();
+                    d.setDate(d.getDate() + parseInt(duration, 10));
+                    const deadline = d.toISOString().slice(0, 10);
+
+                    // Image check (Mandatory)
+                    const coverInput = document.getElementById('project-cover');
+                    if (!coverInput?.files?.[0]) {
+                        showError('Cover Image Required', 'Please upload a project cover image in Step 4.');
+                        btn.disabled = false;
+                        btn.textContent = origText;
+                        return;
+                    }
+
+                    const API = window.location.origin;
+                    let coverImageUrl = null;
+                    let galleryUrls = [];
+
+                    // 1. Upload Cover Image
+                    console.log('Uploading cover...');
+                    const coverFD = new FormData();
+                    coverFD.append('cover', coverInput.files[0]);
+                    const coverRes = await fetch(API + '/api/projects/upload-cover', {
+                        method: 'POST',
+                        headers: { 'Authorization': 'Bearer ' + token },
+                        body: coverFD
+                    });
+                    const coverJ = await coverRes.json();
+                    if (!coverJ.success) throw new Error(coverJ.message || 'Cover image upload failed');
+                    coverImageUrl = coverJ.url;
+
+                    // 2. Upload Gallery (if any)
+                    const galleryInput = document.getElementById('project-images');
+                    if (galleryInput?.files?.length > 0) {
+                        console.log('Uploading gallery...');
+                        const galleryFD = new FormData();
+                        for (let i = 0; i < Math.min(galleryInput.files.length, 10); i++) {
+                            galleryFD.append('gallery', galleryInput.files[i]);
+                        }
+                        const gallRes = await fetch(API + '/api/projects/upload-gallery', {
+                            method: 'POST',
+                            headers: { 'Authorization': 'Bearer ' + token },
+                            body: galleryFD
+                        });
+                        const gallJ = await gallRes.json();
+                        if (gallJ.success) galleryUrls = gallJ.urls;
+                    }
+
+                    // 3. Process Rewards
+                    const rewards = [];
+                    document.querySelectorAll('.reward-tier-card').forEach(card => {
+                        const rt = card.querySelector('.reward-title-input')?.value.trim();
+                        const ra = card.querySelector('.reward-amount-input')?.value;
+                        const rd = card.querySelector('.reward-desc-input')?.value.trim();
+                        if (rt && ra && rd) {
+                            rewards.push({
+                                title: rt,
+                                amount: Number(ra),
+                                description: rd,
+                                includes: (card.querySelector('.reward-includes-input')?.value || '').split(',').map(s => s.trim()).filter(Boolean),
+                                deliveryDate: card.querySelector('.reward-date-input')?.value || null
+                            });
+                        }
+                    });
+
+                    // 4. Create Project Entry
+                    console.log('Saving project to database...');
+                    const payload = {
+                        title, category, location, description, deadline,
+                        goalAmount: Number(goalAmount),
+                        coverImage: coverImageUrl,
+                        gallery: galleryUrls,
+                        rewards,
+                        story: document.getElementById('project-story')?.value.trim() || '',
+                        challenges: document.getElementById('project-challenges')?.value.trim() || '',
+                        videoUrl: document.getElementById('project-video')?.value.trim() || '',
+                        tags: (document.getElementById('project-tags')?.value || '').split(',').map(s => s.trim()).filter(Boolean),
+                        status: 'pending'
+                    };
+
+                    const res = await fetch(API + '/api/projects', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + token
+                        },
+                        body: JSON.stringify(payload)
+                    });
+                    const data = await res.json();
+
+                    if (data.success && data.data) {
+                        console.log('Project created successfully!');
+                        const proj = data.data;
+                        const shareUrl = window.location.origin + '/project-details.html?id=' + proj._id;
+
+                        // Fill success modal
+                        if (document.getElementById('smProjectTitle')) document.getElementById('smProjectTitle').textContent = proj.title;
+                        if (document.getElementById('smProjectId')) document.getElementById('smProjectId').textContent = proj.serialNumber || proj._id;
+                        if (document.getElementById('smShareLink')) document.getElementById('smShareLink').value = shareUrl;
+
+                        // QR Code
+                        const qrEl = document.getElementById('smQrCode');
+                        if (qrEl) {
+                            qrEl.innerHTML = '';
+                            if (typeof QRCode !== 'undefined') {
+                                new QRCode(qrEl, { text: shareUrl, width: 160, height: 160, colorDark: '#006c35', colorLight: '#fff' });
+                            } else {
+                                qrEl.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(shareUrl)}&color=006c35" style="border-radius:8px;">`;
+                            }
+                        }
+
+                        window._shareData = { url: shareUrl, title: proj.title };
+                        document.getElementById('successModal').style.display = 'flex';
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    } else {
+                        throw new Error(data.message || 'Server rejected project creation');
+                    }
+                } catch (err) {
+                    console.error('Submission error:', err);
+                    showError('Submission Failed', err.message || 'A network error occurred. Please try again.');
+                } finally {
+                    btn.disabled = false;
+                    btn.textContent = origText;
                 }
-                // Parse error message and give fix advice
-                const errMsg = data.message || 'Failed to create project.';
-                let fixMsg = 'Please review your project details and try again.';
-                let errStep = currentStep;
+            };
 
-                const errLower = errMsg.toLowerCase();
-                if (errLower.includes('title') || errLower.includes('category') || errLower.includes('location')) {
-                    fixMsg = 'Go to Step 1 and check your project information.';
-                    errStep = 1;
-                } else if (errLower.includes('description') || errLower.includes('story')) {
-                    fixMsg = 'Go to Step 2 and check your project description.';
-                    errStep = 2;
-                } else if (errLower.includes('deadline') || errLower.includes('date')) {
-                    fixMsg = 'We could not calculate the funding deadline. Please make sure Campaign Duration is selected in Step 1.';
-                    errStep = 1;
-                } else if (errLower.includes('goal') || errLower.includes('amount')) {
-                    fixMsg = 'Go to Step 3 and enter a valid funding goal (minimum 1,000 SAR).';
-                    errStep = 3;
-                } else if (errLower.includes('cover') || errLower.includes('image')) {
-                    fixMsg = 'Go to Step 4 and upload a valid project cover image.';
-                    errStep = 4;
-                } else if (errLower.includes('auth') || errLower.includes('token') || errLower.includes('login')) {
-                    fixMsg = 'Your session may have expired. Please log out and back in.';
-                }
-
-                if (errStep !== currentStep) {
-                    showStep(errStep);
-                    currentStep = errStep;
-                }
-
-                showError(errMsg, fixMsg);
-            } catch (err) {
-                showError(err.message || 'A network error occurred.', 'Check your internet connection and try again. If the problem persists, try refreshing the page.');
-            }
-            btn.disabled = false;
-            btn.textContent = origText;
+            if (form) form.addEventListener('submit', window.handleProjectSubmission);
         });
 
         function showMsg(text, type, el) {
