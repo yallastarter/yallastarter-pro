@@ -432,66 +432,19 @@
     </style>
 
     <style>
-        body {
-            font-family: 'Tajawal', sans-serif;
-            text-align: right;
-            direction: rtl;
-        }
-
-        .dashboard-sidebar {
-            border-right: none;
-            border-left: 1px solid var(--neutral-200);
-        }
-
-        .sidebar-menu-icon {
-            margin-right: 0;
-            margin-left: 1rem;
-        }
-
-        .sidebar-menu-link.active {
-            border-right: none;
-            border-left: 3px solid var(--primary);
-        }
-
-        .nav-links {
-            margin-left: auto;
-            margin-right: 0;
-        }
-
-        .logo {
-            margin-left: 1rem;
-            margin-right: 0;
-        }
-
-        .user-avatar {
-            margin-right: 0;
-            margin-left: 1rem;
-        }
-
+        body { font-family: 'Tajawal', sans-serif; text-align: right; direction: rtl; }
+        .dashboard-sidebar { border-right: none; border-left: 1px solid var(--neutral-200); }
+        .sidebar-menu-icon { margin-right: 0; margin-left: 1rem; }
+        .sidebar-menu-link.active { border-right: none; border-left: 3px solid var(--primary); }
+        .nav-links { margin-left: auto; margin-right: 0; }
+        .logo { margin-left: 1rem; margin-right: 0; }
+        .user-avatar { margin-right: 0; margin-left: 1rem; }
         /* Fix dropdown for RTL */
-        .user-dropdown-menu {
-            right: auto;
-            left: 0;
-            text-align: right;
-            transform-origin: top left;
-        }
-
-        .dropdown-item {
-            display: flex !important;
-            align-items: center;
-            gap: 10px;
-            flex-direction: row;
-        }
-
-        .dropdown-item i {
-            margin-left: 0;
-            margin-right: 0;
-        }
-
+        .user-dropdown-menu { right: auto; left: 0; text-align: right; transform-origin: top left; }
+        .dropdown-item { display: flex !important; align-items: center; gap: 10px; flex-direction: row; }
+        .dropdown-item i { margin-left: 0; margin-right: 0; }
         /* Fix spinner for RTL */
-        .fa-spin {
-            display: inline-block;
-        }
+        .fa-spin { display: inline-block; }
     </style>
 </head>
 
@@ -506,7 +459,7 @@
                 <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
                 <ul class="nav-links">
                     <li><a href="index-ar.html">الرئيسية</a></li>
-                    <li><a href="projects-ar.html">تصفح المشاريع</a></li>
+                    <li><a href="projects.html">تصفح المشاريع</a></li>
                     <li><a href="dashboard-ar.html">لوحة التحكم</a></li>
                 </ul>
                 <div class="auth-buttons">
@@ -520,12 +473,9 @@
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="user-dropdown-menu">
-                            <a href="dashboard-ar.html" class="dropdown-item"><i class="fas fa-tachometer-alt"></i> لوحة
-                                التحكم</a>
-                            <a href="user-profile-ar.html" class="dropdown-item"><i class="fas fa-user"></i> الملف
-                                الشخصي</a>
-                            <a href="notifications-ar.html" class="dropdown-item active"><i class="fas fa-bell"></i>
-                                الإشعارات</a>
+                            <a href="dashboard-ar.html" class="dropdown-item"><i class="fas fa-tachometer-alt"></i> لوحة التحكم</a>
+                            <a href="user-profile-ar.html" class="dropdown-item"><i class="fas fa-user"></i> الملف الشخصي</a>
+                            <a href="notifications-ar.html" class="dropdown-item active"><i class="fas fa-bell"></i> الإشعارات</a>
                             <a href="settings-ar.html" class="dropdown-item"><i class="fas fa-cog"></i> الإعدادات</a>
                             <div class="dropdown-divider"></div>
                             <a href="javascript:void(0)" class="dropdown-item"
@@ -568,7 +518,7 @@
                 <li class="sidebar-menu-item"><a href="user-profile-ar.html" class="sidebar-menu-link"><i
                             class="fas fa-user sidebar-menu-icon"></i> الملف الشخصي</a></li>
                 <li class="sidebar-menu-item"><a href="settings-ar.html" class="sidebar-menu-link"><i
-                            class="fas fa-cog sidebar-menu-icon"></i> الإعدادات</a></li>
+                            class="fas fa-cog"></i> الإعدادات</a></li>
                 <li class="sidebar-menu-item"><a href="support-ar.html" class="sidebar-menu-link"><i
                             class="fas fa-question-circle sidebar-menu-icon"></i> المساعدة والدعم</a></li>
                 <li class="sidebar-menu-item"><a href="javascript:void(0)" class="sidebar-menu-link"
@@ -619,12 +569,14 @@
     </div>
 
     <script src="assets/js/session-init.js"></script>
+    <script src="assets/js/auth-handler.js"></script>
+    <script src="mobile-menu.js"></script>
     <script>
         // Protect page
         if (window.auth) {
             window.auth.protectPage();
             const user = window.auth ? (window.auth ? window.auth.getUser() : null) : null;
-            if (user && document.getElementById("sidebarName")) {
+            if (user && document.getElementById("userName")) {
                 document.getElementById('sidebarName').textContent = user.username || 'User';
                 document.getElementById('sidebarEmail').textContent = user.email || '';
                 document.getElementById('headerUserName').textContent = user.username || 'User';
@@ -664,10 +616,7 @@
         let readIds = JSON.parse(localStorage.getItem('readNotifIds') || '[]');
 
         function markRead(id) {
-            if (!readIds.includes(id)) {
-                readIds.push(id);
-                localStorage.setItem('readNotifIds', JSON.stringify(readIds));
-            }
+            if (!readIds.includes(id)) { readIds.push(id); localStorage.setItem('readNotifIds', JSON.stringify(readIds)); }
         }
         function isUnread(n) { return n.unread && !readIds.includes(n.id); }
 
@@ -686,31 +635,22 @@
 
         function renderNotifications() {
             const list = document.getElementById('notifList');
-            if (!list) return;
             let filtered = allNotifications;
             if (currentFilter === 'unread') filtered = allNotifications.filter(isUnread);
             else if (currentFilter !== 'all') filtered = allNotifications.filter(n => n.type === currentFilter);
 
             // Update counts
-            if (document.getElementById('countAll')) document.getElementById('countAll').textContent = allNotifications.length;
+            document.getElementById('countAll').textContent = allNotifications.length;
             const unreadCount = allNotifications.filter(isUnread).length;
-            if (document.getElementById('countUnread')) document.getElementById('countUnread').textContent = unreadCount;
-            if (document.getElementById('countProject')) document.getElementById('countProject').textContent = allNotifications.filter(n => n.type === 'project').length;
-            if (document.getElementById('countFunding')) document.getElementById('countFunding').textContent = allNotifications.filter(n => n.type === 'funding').length;
-            if (document.getElementById('countSystem')) document.getElementById('countSystem').textContent = allNotifications.filter(n => n.type === 'system').length;
-
+            document.getElementById('countUnread').textContent = unreadCount;
+            document.getElementById('countProject').textContent = allNotifications.filter(n => n.type === 'project').length;
+            document.getElementById('countFunding').textContent = allNotifications.filter(n => n.type === 'funding').length;
+            document.getElementById('countSystem').textContent = allNotifications.filter(n => n.type === 'system').length;
             const badge = document.getElementById('unreadBadge');
-            if (badge) {
-                if (unreadCount > 0) {
-                    badge.textContent = unreadCount;
-                    badge.style.display = 'inline-block';
-                } else {
-                    badge.style.display = 'none';
-                }
-            }
+            if (unreadCount > 0) { badge.textContent = unreadCount; badge.style.display = 'inline-block'; } else { badge.style.display = 'none'; }
 
             if (!filtered.length) {
-                list.innerHTML = `<div class="empty-state"><i class="fas fa-bell-slash"></i><p>No notifications in this category.</p></div>`;
+                list.innerHTML = '<div class="empty-state"><i class="fas fa-bell-slash"></i><p>No notifications in this category.</p></div>';
                 return;
             }
 

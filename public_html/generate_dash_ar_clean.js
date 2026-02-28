@@ -78,7 +78,7 @@ const translations = {
     'Dashboard</h1>': 'لوحة التحكم</h1>',
     'Dashboard</h2>': 'لوحة التحكم</h2>',
     'Total Backed': 'إجمالي الدعم',
-    'coins': 'عملة',
+    // 'coins': 'عملة', // Removed as it breaks URLs and classes
 
     // Links update
     'href="dashboard.html"': 'href="dashboard-ar.html"',
@@ -93,6 +93,20 @@ const translations = {
     'href="create-project.html"': 'href="create-project-ar.html"',
     'href="project-details.html"': 'href="project-details-ar.html"',
     'href="index.html"': 'href="index-ar.html"',
+    '>View</a>': '>عرض</a>',
+    '>Edit</a>': '>تعديل</a>',
+    '>Delete</button>': '>حذف</button>',
+    'raised': 'تم جمعها',
+    'No projects yet': 'لا توجد مشاريع بعد',
+    'Successfully funded': 'تم التمويل بنجاح',
+    'Backed by': 'مدعوم من',
+    'By ': 'بواسطة ',
+    'days left': 'يوم متبقي',
+    'Loading projects…': 'جاري تحميل المشاريع...',
+    'Loading backed projects…': 'جاري تحميل المشاريع المدعومة...',
+    'No backed projects yet': 'لم تقم بدعم أي مشاريع بعد',
+    'Total Raised': 'إجمالي ما تم جمعه',
+    'Active Projects': 'المشاريع النشطة',
 };
 
 // Sort keys by length descending to avoid partial matches
@@ -185,7 +199,12 @@ pages.forEach(page => {
             'Help & Support': 'المساعدة والدعم',
             'Logout': 'تسجيل الخروج',
             'Create Project': 'إنشاء مشروع',
-            'Create a Project': 'أنشئ مشروعاً'
+            'Create a Project': 'أنشئ مشروعاً',
+            'View': 'عرض',
+            'Edit': 'تعديل',
+            'Delete': 'حذف',
+            'Manage': 'إدارة',
+            'Home': 'الرئيسية',
         };
 
         for (const [en, ar] of Object.entries(sidebarMap)) {
@@ -218,6 +237,15 @@ pages.forEach(page => {
         content = content.replace(/id="المستخدم/g, 'id="user');
         content = content.replace(/window\.auth\.لوحة التحكم/g, 'window.auth.dashboard');
         content = content.replace(/window\.auth\.logout\(\)/g, "window.auth.logout()");
+
+        // Status labels in JS
+        content = content.replace(/'✅ Active'/g, "'✅ نشط'");
+        content = content.replace(/'📝 Draft'/g, "'📝 مسودة'");
+        content = content.replace(/'⏳ Pending Review'/g, "'⏳ قيد المراجعة'");
+        content = content.replace(/'🏁 Completed'/g, "'🏁 مكتمل'");
+        content = content.replace(/'❌ Rejected'/g, "'❌ مرفوض'");
+        content = content.replace(/'Successfully funded'/g, "'تم التمويل بنجاح'");
+        content = content.replace(/' Successfully ممول'/g, "' تم التمويل بنجاح'");
 
         // Fix the specific user profile update block to be safer
         content = content.replace(/if \(user\) \{/g, 'if (user && document.getElementById("userName")) {');

@@ -452,66 +452,19 @@
     </style>
 
     <style>
-        body {
-            font-family: 'Tajawal', sans-serif;
-            text-align: right;
-            direction: rtl;
-        }
-
-        .dashboard-sidebar {
-            border-right: none;
-            border-left: 1px solid var(--neutral-200);
-        }
-
-        .sidebar-menu-icon {
-            margin-right: 0;
-            margin-left: 1rem;
-        }
-
-        .sidebar-menu-link.active {
-            border-right: none;
-            border-left: 3px solid var(--primary);
-        }
-
-        .nav-links {
-            margin-left: auto;
-            margin-right: 0;
-        }
-
-        .logo {
-            margin-left: 1rem;
-            margin-right: 0;
-        }
-
-        .user-avatar {
-            margin-right: 0;
-            margin-left: 1rem;
-        }
-
+        body { font-family: 'Tajawal', sans-serif; text-align: right; direction: rtl; }
+        .dashboard-sidebar { border-right: none; border-left: 1px solid var(--neutral-200); }
+        .sidebar-menu-icon { margin-right: 0; margin-left: 1rem; }
+        .sidebar-menu-link.active { border-right: none; border-left: 3px solid var(--primary); }
+        .nav-links { margin-left: auto; margin-right: 0; }
+        .logo { margin-left: 1rem; margin-right: 0; }
+        .user-avatar { margin-right: 0; margin-left: 1rem; }
         /* Fix dropdown for RTL */
-        .user-dropdown-menu {
-            right: auto;
-            left: 0;
-            text-align: right;
-            transform-origin: top left;
-        }
-
-        .dropdown-item {
-            display: flex !important;
-            align-items: center;
-            gap: 10px;
-            flex-direction: row;
-        }
-
-        .dropdown-item i {
-            margin-left: 0;
-            margin-right: 0;
-        }
-
+        .user-dropdown-menu { right: auto; left: 0; text-align: right; transform-origin: top left; }
+        .dropdown-item { display: flex !important; align-items: center; gap: 10px; flex-direction: row; }
+        .dropdown-item i { margin-left: 0; margin-right: 0; }
         /* Fix spinner for RTL */
-        .fa-spin {
-            display: inline-block;
-        }
+        .fa-spin { display: inline-block; }
     </style>
 </head>
 
@@ -526,7 +479,7 @@
                 <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
                 <ul class="nav-links">
                     <li><a href="index-ar.html">الرئيسية</a></li>
-                    <li><a href="projects-ar.html">تصفح المشاريع</a></li>
+                    <li><a href="projects.html">تصفح المشاريع</a></li>
                     <li><a href="dashboard-ar.html">لوحة التحكم</a></li>
                 </ul>
                 <div class="auth-buttons">
@@ -540,12 +493,9 @@
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="user-dropdown-menu">
-                            <a href="dashboard-ar.html" class="dropdown-item"><i class="fas fa-tachometer-alt"></i> لوحة
-                                التحكم</a>
-                            <a href="user-profile-ar.html" class="dropdown-item"><i class="fas fa-user"></i> الملف
-                                الشخصي</a>
-                            <a href="notifications-ar.html" class="dropdown-item"><i class="fas fa-bell"></i>
-                                الإشعارات</a>
+                            <a href="dashboard-ar.html" class="dropdown-item"><i class="fas fa-tachometer-alt"></i> لوحة التحكم</a>
+                            <a href="user-profile-ar.html" class="dropdown-item"><i class="fas fa-user"></i> الملف الشخصي</a>
+                            <a href="notifications-ar.html" class="dropdown-item"><i class="fas fa-bell"></i> الإشعارات</a>
                             <a href="settings-ar.html" class="dropdown-item"><i class="fas fa-cog"></i> الإعدادات</a>
                             <div class="dropdown-divider"></div>
                             <a href="javascript:void(0)" class="dropdown-item"
@@ -584,236 +534,242 @@
                             class="fas fa-money-bill-wave sidebar-menu-icon"></i> المدفوعات</a></li>
                 <li class="sidebar-menu-item"><a href="coins-ar.html" class="sidebar-menu-link"><i
                             class="fas fa-coins sidebar-menu-icon"></i> محفظتي</a></li>
-                <li class="sidebar-menu-item"><a href="notifications-ar.html" class="sidebar-menu-link"><i </div>
+                <li class="sidebar-menu-item"><a href="notifications-ar.html" class="sidebar-menu-link"><i
+                            class="fas fa-bell sidebar-menu-icon"></i> الإشعارات</a></li>
+                <li class="sidebar-menu-item"><a href="user-profile-ar.html" class="sidebar-menu-link"><i
+                            class="fas fa-user sidebar-menu-icon"></i> الملف الشخصي</a></li>
+                <li class="sidebar-menu-item"><a href="settings-ar.html" class="sidebar-menu-link"><i
+                            class="fas fa-cog sidebar-menu-icon"></i> الإعدادات</a></li>
+                <li class="sidebar-menu-item"><a href="support-ar.html" class="sidebar-menu-link"><i
+                            class="fas fa-question-circle sidebar-menu-icon"></i> المساعدة والدعم</a></li>
+                <li class="sidebar-menu-item"><a href="javascript:void(0)" class="sidebar-menu-link"
+                        onclick="window.auth && window.auth.logout(); return false;"><i
+                            class="fas fa-sign-out-alt sidebar-menu-icon"></i> تسجيل الخروج</a></li>
+            </ul>
+        </div>
 
-                            <!-- Main Content -->
-                            <div class="payments-content">
-                                <div class="page-header">
-                                    <h1 class="page-title">Payments</h1>
-                                    <a href="coins-ar.html" class="btn btn-primary"><i class="fas fa-wallet"></i>
-                                        محفظتي</a>
-                                </div>
+        <!-- Main Content -->
+        <div class="payments-content">
+            <div class="page-header">
+                <h1 class="page-title">Payments</h1>
+                <a href="coins-ar.html" class="btn btn-primary"><i class="fas fa-wallet"></i> محفظتي</a>
+            </div>
 
-                                <!-- Summary Cards -->
-                                <div class="summary-grid">
-                                    <div class="summary-card">
-                                        <div class="summary-icon green"><i class="fas fa-arrow-down"></i></div>
-                                        <div>
-                                            <div class="summary-value" id="totalBacked">SAR 0</div>
-                                            <div class="summary-label">إجمالي الدعم</div>
-                                        </div>
-                                    </div>
-                                    <div class="summary-card">
-                                        <div class="summary-icon blue"><i class="fas fa-arrow-up"></i></div>
-                                        <div>
-                                            <div class="summary-value" id="totalReceived">SAR 0</div>
-                                            <div class="summary-label">Total Received</div>
-                                        </div>
-                                    </div>
-                                    <div class="summary-card">
-                                        <div class="summary-icon amber"><i class="fas fa-clock"></i></div>
-                                        <div>
-                                            <div class="summary-value" id="pendingCount">0</div>
-                                            <div class="summary-label">Pending Transactions</div>
-                                        </div>
-                                    </div>
-                                    <div class="summary-card">
-                                        <div class="summary-icon red"><i class="fas fa-receipt"></i></div>
-                                        <div>
-                                            <div class="summary-value" id="txCount">0</div>
-                                            <div class="summary-label">Total Transactions</div>
-                                        </div>
-                                    </div>
-                                </div>
+            <!-- Summary Cards -->
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <div class="summary-icon green"><i class="fas fa-arrow-down"></i></div>
+                    <div>
+                        <div class="summary-value" id="totalBacked">SAR 0</div>
+                        <div class="summary-label">إجمالي الدعم</div>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon blue"><i class="fas fa-arrow-up"></i></div>
+                    <div>
+                        <div class="summary-value" id="totalReceived">SAR 0</div>
+                        <div class="summary-label">Total Received</div>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon amber"><i class="fas fa-clock"></i></div>
+                    <div>
+                        <div class="summary-value" id="pendingCount">0</div>
+                        <div class="summary-label">Pending Transactions</div>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon red"><i class="fas fa-receipt"></i></div>
+                    <div>
+                        <div class="summary-value" id="txCount">0</div>
+                        <div class="summary-label">Total Transactions</div>
+                    </div>
+                </div>
+            </div>
 
-                                <!-- Transaction History -->
-                                <div class="section-card">
-                                    <div class="section-card-header">
-                                        <h2 class="section-card-title"><i class="fas fa-history"
-                                                style="color:var(--primary);margin-right:0.5rem;"></i>Transaction
-                                            History</h2>
-                                        <button class="btn btn-sm btn-outline" onclick="downloadCSV()"><i
-                                                class="fas fa-download"></i>
-                                            Export CSV</button>
-                                    </div>
-                                    <div class="table-wrap">
-                                        <table>
-                                            <thead>
-                                                <tr>
-                                                    <th>Date</th>
-                                                    <th>Description</th>
-                                                    <th>Type</th>
-                                                    <th>Amount</th>
-                                                    <th>Status</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="transactionTable">
-                                                <tr>
-                                                    <td colspan="5"
-                                                        style="text-align:center;padding:3rem;color:var(--neutral-500);">
-                                                        <i class="fas fa-spinner fa-spin"
-                                                            style="margin-right:0.5rem;"></i>Loading
-                                                        transactions...
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+            <!-- Transaction History -->
+            <div class="section-card">
+                <div class="section-card-header">
+                    <h2 class="section-card-title"><i class="fas fa-history"
+                            style="color:var(--primary);margin-right:0.5rem;"></i>Transaction History</h2>
+                    <button class="btn btn-sm btn-outline" onclick="downloadCSV()"><i class="fas fa-download"></i>
+                        Export CSV</button>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Type</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactionTable">
+                            <tr>
+                                <td colspan="5" style="text-align:center;padding:3rem;color:var(--neutral-500);">
+                                    <i class="fas fa-spinner fa-spin" style="margin-right:0.5rem;"></i>Loading
+                                    transactions...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-                                <!-- Payment Methods -->
-                                <div class="section-card">
-                                    <div class="section-card-header">
-                                        <h2 class="section-card-title"><i class="fas fa-credit-card"
-                                                style="color:var(--primary);margin-right:0.5rem;"></i>Payment Methods
-                                        </h2>
-                                    </div>
-                                    <div class="methods-grid">
-                                        <div class="method-card default" id="defaultMethodCard" style="display:none;">
-                                            <div class="method-icon">💳</div>
-                                            <div class="method-details">
-                                                <div class="method-name" id="defaultMethodName">Bank Card</div>
-                                                <div class="method-info" id="defaultMethodInfo">No card saved</div>
-                                            </div>
-                                            <span class="method-default-badge">Default</span>
-                                        </div>
-                                        <div id="noMethodMsg"
-                                            style="padding:1.5rem; color:var(--neutral-500); font-size:0.95rem; text-align:center; width:100%;">
-                                            <i class="fas fa-credit-card"
-                                                style="font-size:2rem; margin-bottom:0.75rem; display:block; color:var(--neutral-300);"></i>
-                                            No payment methods saved yet.
-                                        </div>
-                                        <button class="btn-add-method" onclick="showAddMethodModal()">
-                                            <i class="fas fa-plus-circle"></i> Add Payment Method
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-        </div><!-- end dashboard-container -->
+            <!-- Payment Methods -->
+            <div class="section-card">
+                <div class="section-card-header">
+                    <h2 class="section-card-title"><i class="fas fa-credit-card"
+                            style="color:var(--primary);margin-right:0.5rem;"></i>Payment Methods</h2>
+                </div>
+                <div class="methods-grid">
+                    <div class="method-card default" id="defaultMethodCard" style="display:none;">
+                        <div class="method-icon">💳</div>
+                        <div class="method-details">
+                            <div class="method-name" id="defaultMethodName">Bank Card</div>
+                            <div class="method-info" id="defaultMethodInfo">No card saved</div>
+                        </div>
+                        <span class="method-default-badge">Default</span>
+                    </div>
+                    <div id="noMethodMsg"
+                        style="padding:1.5rem; color:var(--neutral-500); font-size:0.95rem; text-align:center; width:100%;">
+                        <i class="fas fa-credit-card"
+                            style="font-size:2rem; margin-bottom:0.75rem; display:block; color:var(--neutral-300);"></i>
+                        No payment methods saved yet.
+                    </div>
+                    <button class="btn-add-method" onclick="showAddMethodModal()">
+                        <i class="fas fa-plus-circle"></i> Add Payment Method
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div><!-- end dashboard-container -->
 
-        <!-- Auth + Mobile Menu Scripts -->
-        <script src="assets/js/session-init.js"></script>
-        <script src="assets/js/auth-handler.js"></script>
-        <script src="mobile-menu.js"></script>
-        <script>
-            // Protect page
-            if (window.auth) {
-                window.auth.protectPage();
-                const user = window.auth ? (window.auth ? window.auth.getUser() : null) : null;
-                if (user && document.getElementById("userName")) {
-                    document.getElementById('sidebarName').textContent = user.username || 'User';
-                    document.getElementById('sidebarEmail').textContent = user.email || '';
-                    document.getElementById('headerUserName').textContent = user.username || 'User';
-                    if (user.photoUrl) {
-                        const av = document.getElementById('sidebarAvatar');
-                        av.style.backgroundImage = `url(${user.photoUrl})`;
-                        av.style.backgroundSize = 'cover';
-                        av.innerHTML = '';
-                        document.getElementById('headerAvatar').style.backgroundImage = `url(${user.photoUrl})`;
-                        document.getElementById('headerAvatar').style.backgroundSize = 'cover';
-                        document.getElementById('headerAvatar').innerHTML = '';
-                    }
+    <!-- Auth + Mobile Menu Scripts -->
+    <script src="assets/js/session-init.js"></script>
+    <script src="assets/js/auth-handler.js"></script>
+    <script src="mobile-menu.js"></script>
+    <script>
+        // Protect page
+        if (window.auth) {
+            window.auth.protectPage();
+            const user = window.auth ? (window.auth ? window.auth.getUser() : null) : null;
+            if (user && document.getElementById("userName")) {
+                document.getElementById('sidebarName').textContent = user.username || 'User';
+                document.getElementById('sidebarEmail').textContent = user.email || '';
+                document.getElementById('headerUserName').textContent = user.username || 'User';
+                if (user.photoUrl) {
+                    const av = document.getElementById('sidebarAvatar');
+                    av.style.backgroundImage = `url(${user.photoUrl})`;
+                    av.style.backgroundSize = 'cover';
+                    av.innerHTML = '';
+                    document.getElementById('headerAvatar').style.backgroundImage = `url(${user.photoUrl})`;
+                    document.getElementById('headerAvatar').style.backgroundSize = 'cover';
+                    document.getElementById('headerAvatar').innerHTML = '';
                 }
             }
+        }
 
-            // User Dropdown
-            const dropBtn = document.querySelector('.user-dropdown-btn');
-            const dropMenu = document.querySelector('.user-dropdown-menu');
-            dropBtn?.addEventListener('click', () => dropMenu.classList.toggle('show'));
-            window.addEventListener('click', e => {
-                if (!e.target.closest('.user-dropdown-btn')) dropMenu?.classList.remove('show');
+        // User Dropdown
+        const dropBtn = document.querySelector('.user-dropdown-btn');
+        const dropMenu = document.querySelector('.user-dropdown-menu');
+        dropBtn?.addEventListener('click', () => dropMenu.classList.toggle('show'));
+        window.addEventListener('click', e => {
+            if (!e.target.closest('.user-dropdown-btn')) dropMenu?.classList.remove('show');
+        });
+
+        // Track loaded transactions for CSV export
+        let loadedTransactions = [];
+
+        function downloadCSV() {
+            const rows = [['Date', 'Description', 'Type', 'Amount', 'Status']];
+            loadedTransactions.forEach(tx => {
+                rows.push([tx.date, tx.desc, tx.type, (tx.amount < 0 ? '-' : '+') + 'SAR ' + Math.abs(tx.amount), tx.status]);
             });
+            if (!rows.length) { alert('No transactions to export.'); return; }
+            const csv = rows.map(r => r.map(c => `"${c}"`).join(',')).join('\n');
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url; a.download = 'yallastarter-payments.csv'; a.click();
+        }
 
-            // Track loaded transactions for CSV export
-            let loadedTransactions = [];
-
-            function downloadCSV() {
-                const rows = [['Date', 'Description', 'Type', 'Amount', 'Status']];
-                loadedTransactions.forEach(tx => {
-                    rows.push([tx.date, tx.desc, tx.type, (tx.amount < 0 ? '-' : '+') + 'SAR ' + Math.abs(tx.amount), tx.status]);
-                });
-                if (!rows.length) { alert('No transactions to export.'); return; }
-                const csv = rows.map(r => r.map(c => `"${c}"`).join(',')).join('\n');
-                const blob = new Blob([csv], { type: 'text/csv' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url; a.download = 'yallastarter-payments.csv'; a.click();
+        function renderTransactions(txs) {
+            loadedTransactions = txs;
+            const tbody = document.getElementById('transactionTable');
+            if (!txs.length) {
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:3rem;color:var(--neutral-500);">No transactions found.</td></tr>';
+                return;
             }
-
-            function renderTransactions(txs) {
-                loadedTransactions = txs;
-                const tbody = document.getElementById('transactionTable');
-                if (!txs.length) {
-                    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:3rem;color:var(--neutral-500);">No transactions found.</td></tr>';
-                    return;
-                }
-                let backed = 0, received = 0, pending = 0;
-                tbody.innerHTML = txs.map(tx => {
-                    const isOut = tx.amount < 0;
-                    const absAmt = Math.abs(tx.amount);
-                    if (isOut) backed += absAmt;
-                    else if (tx.status === 'completed') received += absAmt;
-                    if (tx.status === 'pending') pending++;
-                    const statusClass = tx.status === 'completed' ? 'badge-success' : tx.status === 'pending' ? 'badge-pending' : tx.status === 'refunded' ? 'badge-refunded' : 'badge-failed';
-                    const amtClass = isOut ? 'tx-amount-out' : 'tx-amount-in';
-                    const amtSign = isOut ? '-' : '+';
-                    return `<tr>
+            let backed = 0, received = 0, pending = 0;
+            tbody.innerHTML = txs.map(tx => {
+                const isOut = tx.amount < 0;
+                const absAmt = Math.abs(tx.amount);
+                if (isOut) backed += absAmt;
+                else if (tx.status === 'completed') received += absAmt;
+                if (tx.status === 'pending') pending++;
+                const statusClass = tx.status === 'completed' ? 'badge-success' : tx.status === 'pending' ? 'badge-pending' : tx.status === 'refunded' ? 'badge-refunded' : 'badge-failed';
+                const amtClass = isOut ? 'tx-amount-out' : 'tx-amount-in';
+                const amtSign = isOut ? '-' : '+';
+                return `<tr>
                     <td style="white-space:nowrap;color:var(--neutral-600);">${tx.date}</td>
                     <td>${tx.desc}</td>
                     <td><span class="badge" style="background:var(--neutral-200);color:var(--neutral-700);">${tx.type}</span></td>
                     <td class="${amtClass}">${amtSign}SAR ${absAmt.toLocaleString()}</td>
                     <td><span class="badge ${statusClass}">${tx.status.charAt(0).toUpperCase() + tx.status.slice(1)}</span></td>
                 </tr>`;
-                }).join('');
-                document.getElementById('totalBacked').textContent = 'SAR ' + backed.toLocaleString();
-                document.getElementById('totalReceived').textContent = 'SAR ' + received.toLocaleString();
-                document.getElementById('pendingCount').textContent = pending;
-                document.getElementById('txCount').textContent = txs.length;
-            }
+            }).join('');
+            document.getElementById('totalBacked').textContent = 'SAR ' + backed.toLocaleString();
+            document.getElementById('totalReceived').textContent = 'SAR ' + received.toLocaleString();
+            document.getElementById('pendingCount').textContent = pending;
+            document.getElementById('txCount').textContent = txs.length;
+        }
 
-            // Load from API — NO fallback to fake data
-            async function loadTransactions() {
-                const token = (window.auth && typeof window.auth.getToken === 'function') ? window.auth.getToken() : localStorage.getItem('token');
-                const tbody = document.getElementById('transactionTable');
-                if (token) {
-                    try {
-                        const res = await fetch('/api/عملة/history', { headers: { 'Authorization': `Bearer ${token}` } });
-                        const data = await res.json();
-                        if (data.success && data.data && data.data.length) {
-                            renderTransactions(data.data.map(tx => ({
-                                date: new Date(tx.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-                                desc: tx.description || (tx.type === 'send' ? 'Backed project' : tx.type === 'purchase' ? 'Coin purchase' : 'Cash out'),
-                                type: tx.type === 'purchase' ? 'Purchase' : tx.type === 'send' ? 'Backing' : 'Cash Out',
-                                amount: tx.type === 'send' || tx.type === 'cashout' ? -tx.amount : tx.amount,
-                                status: tx.status || 'completed'
-                            })));
-                            return;
-                        }
-                    } catch (e) { console.error('Payment load error', e); }
-                }
-                // Empty state
-                tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;padding:3rem;color:var(--neutral-500);">
+        // Load from API — NO fallback to fake data
+        async function loadTransactions() {
+            const token = (window.auth && typeof window.auth.getToken === 'function') ? window.auth.getToken() : localStorage.getItem('token');
+            const tbody = document.getElementById('transactionTable');
+            if (token) {
+                try {
+                    const res = await fetch('/api/coins/history', { headers: { 'Authorization': `Bearer ${token}` } });
+                    const data = await res.json();
+                    if (data.success && data.data && data.data.length) {
+                        renderTransactions(data.data.map(tx => ({
+                            date: new Date(tx.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+                            desc: tx.description || (tx.type === 'send' ? 'Backed project' : tx.type === 'purchase' ? 'Coin purchase' : 'Cash out'),
+                            type: tx.type === 'purchase' ? 'Purchase' : tx.type === 'send' ? 'Backing' : 'Cash Out',
+                            amount: tx.type === 'send' || tx.type === 'cashout' ? -tx.amount : tx.amount,
+                            status: tx.status || 'completed'
+                        })));
+                        return;
+                    }
+                } catch (e) { console.error('Payment load error', e); }
+            }
+            // Empty state
+            tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;padding:3rem;color:var(--neutral-500);">
                 <i class="fas fa-receipt" style="font-size:2.5rem;display:block;margin-bottom:1rem;color:var(--neutral-300);"></i>
                 No transactions yet.
             </td></tr>`;
-            }
+        }
 
-            setTimeout(() => { loadTransactions(); }, 500);
+        setTimeout(() => { loadTransactions(); }, 500);
 
-            function showAddMethodModal() {
-                const toast = document.createElement('div');
-                toast.textContent = '💳 Add Payment Method feature coming soon!';
-                Object.assign(toast.style, {
-                    position: 'fixed', bottom: '2rem', right: '2rem',
-                    background: '#006c35', color: 'white', padding: '1rem 1.5rem',
-                    borderRadius: '10px', boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
-                    zIndex: 9999, fontWeight: '500', fontSize: '0.95rem',
-                    transition: 'opacity 0.4s ease'
-                });
-                document.body.appendChild(toast);
-                setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 400); }, 3000);
-            }
-        </script>
+        function showAddMethodModal() {
+            const toast = document.createElement('div');
+            toast.textContent = '💳 Add Payment Method feature coming soon!';
+            Object.assign(toast.style, {
+                position: 'fixed', bottom: '2rem', right: '2rem',
+                background: '#006c35', color: 'white', padding: '1rem 1.5rem',
+                borderRadius: '10px', boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
+                zIndex: 9999, fontWeight: '500', fontSize: '0.95rem',
+                transition: 'opacity 0.4s ease'
+            });
+            document.body.appendChild(toast);
+            setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 400); }, 3000);
+        }
+    </script>
 </body>
 
 </html>

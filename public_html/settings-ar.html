@@ -200,66 +200,19 @@
     </style>
 
     <style>
-        body {
-            font-family: 'Tajawal', sans-serif;
-            text-align: right;
-            direction: rtl;
-        }
-
-        .dashboard-sidebar {
-            border-right: none;
-            border-left: 1px solid var(--neutral-200);
-        }
-
-        .sidebar-menu-icon {
-            margin-right: 0;
-            margin-left: 1rem;
-        }
-
-        .sidebar-menu-link.active {
-            border-right: none;
-            border-left: 3px solid var(--primary);
-        }
-
-        .nav-links {
-            margin-left: auto;
-            margin-right: 0;
-        }
-
-        .logo {
-            margin-left: 1rem;
-            margin-right: 0;
-        }
-
-        .user-avatar {
-            margin-right: 0;
-            margin-left: 1rem;
-        }
-
+        body { font-family: 'Tajawal', sans-serif; text-align: right; direction: rtl; }
+        .dashboard-sidebar { border-right: none; border-left: 1px solid var(--neutral-200); }
+        .sidebar-menu-icon { margin-right: 0; margin-left: 1rem; }
+        .sidebar-menu-link.active { border-right: none; border-left: 3px solid var(--primary); }
+        .nav-links { margin-left: auto; margin-right: 0; }
+        .logo { margin-left: 1rem; margin-right: 0; }
+        .user-avatar { margin-right: 0; margin-left: 1rem; }
         /* Fix dropdown for RTL */
-        .user-dropdown-menu {
-            right: auto;
-            left: 0;
-            text-align: right;
-            transform-origin: top left;
-        }
-
-        .dropdown-item {
-            display: flex !important;
-            align-items: center;
-            gap: 10px;
-            flex-direction: row;
-        }
-
-        .dropdown-item i {
-            margin-left: 0;
-            margin-right: 0;
-        }
-
+        .user-dropdown-menu { right: auto; left: 0; text-align: right; transform-origin: top left; }
+        .dropdown-item { display: flex !important; align-items: center; gap: 10px; flex-direction: row; }
+        .dropdown-item i { margin-left: 0; margin-right: 0; }
         /* Fix spinner for RTL */
-        .fa-spin {
-            display: inline-block;
-        }
+        .fa-spin { display: inline-block; }
     </style>
 </head>
 
@@ -273,33 +226,44 @@
                 </a>
 
                 <button class="mobile-menu-btn">
-                    <button class="user-dropdown-btn">
-                        <div class="user-avatar-small" id="headerAvatar"
-                            style="width: 35px; height: 35px; border-radius: 50%; background: linear-gradient(135deg, #006c35 0%, #00a651 100%); display: flex; align-items: center; justify-content: center;">
-                            <i class="fas fa-user" style="font-size: 1rem; color: white;"></i>
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <ul class="nav-links">
+                    <li><a href="index-ar.html">الرئيسية</a></li>
+                    <li><a href="projects.html">تصفح المشاريع</a></li>
+                    <li><a href="dashboard-ar.html">لوحة التحكم</a></li>
+                </ul>
+
+                <div class="auth-buttons">
+                    <div class="user-dropdown">
+                        <button class="user-dropdown-btn">
+                            <div class="user-avatar-small" id="headerAvatar"
+                                style="width: 35px; height: 35px; border-radius: 50%; background: linear-gradient(135deg, #006c35 0%, #00a651 100%); display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-user" style="font-size: 1rem; color: white;"></i>
+                            </div>
+                            <span id="headerUserName">User</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="user-dropdown-menu">
+                            <a href="dashboard-ar.html" class="dropdown-item">
+                                <i class="fas fa-tachometer-alt"></i> لوحة التحكم
+                            </a>
+                            <a href="user-profile-ar.html" class="dropdown-item">
+                                <i class="fas fa-user"></i> الملف الشخصي
+                            </a>
+                            <a href="settings-ar.html" class="dropdown-item active">
+                                <i class="fas fa-cog"></i> الإعدادات
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="javascript:void(0)" class="dropdown-item"
+                                onclick="window.auth.logout(); return false;">
+                                <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+                            </a>
                         </div>
-                        <span id="headerUserName">User</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="user-dropdown-menu">
-                        <a href="dashboard-ar.html" class="dropdown-item">
-                            <i class="fas fa-tachometer-alt"></i> لوحة التحكم
-                        </a>
-                        <a href="user-profile-ar.html" class="dropdown-item">
-                            <i class="fas fa-user"></i> الملف الشخصي
-                        </a>
-                        <a href="settings-ar.html" class="dropdown-item active">
-                            <i class="fas fa-cog"></i> الإعدادات
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="javascript:void(0)" class="dropdown-item"
-                            onclick="window.auth.logout(); return false;">
-                            <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
-                        </a>
                     </div>
-        </div>
-        </div>
-        </nav>
+                </div>
+            </nav>
         </div>
     </header>
 
