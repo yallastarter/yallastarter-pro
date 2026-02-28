@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const axios = require('axios');
 const rateLimit = require('express-rate-limit');
 const Mind71Chat = require('../models/Mind71Chat');
 const { v4: uuidv4 } = require('uuid');
@@ -65,7 +64,7 @@ router.post('/chat', chatLimiter, async (req, res) => {
                 language: lang,
                 messages: [{ role: 'system', content: SYSTEM_PROMPTS[lang] || SYSTEM_PROMPTS.en }]
             });
-            // Link to user if logged in (assuming req.user exists from auth middleware)
+            // Link to user if logged in
             if (req.user) chat.userId = req.user.id;
         }
 
@@ -74,29 +73,36 @@ router.post('/chat', chatLimiter, async (req, res) => {
 
         // Keep last 12 turns (24 messages including system prompt)
         if (chat.messages.length > 25) {
-            // Keep system prompt + last 24 messages
             const systemPrompt = chat.messages[0];
             const recentMessages = chat.messages.slice(-24);
             chat.messages = [systemPrompt, ...recentMessages];
         }
 
-        // Call OpenRouter
+        // Call OpenRouter using native fetch
         try {
-            const response = await axios.post('https://openrouter.ai/api/v1/chat/completions', {
-                model: model,
-                messages: chat.messages.map(m => ({ role: m.role, content: m.content })),
-                temperature: 0.7,
-                max_tokens: 1000
-            }, {
+            const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+                method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${apiKey}`,
                     'HTTP-Referer': 'https://yallastarter.com',
                     'X-Title': 'YallaStarter Mind71',
                     'Content-Type': 'application/json'
-                }
+                },
+                body: JSON.stringify({
+                    model: model,
+                    messages: chat.messages.map(m => ({ role: m.role, content: m.content })),
+                    temperature: 0.7,
+                    max_tokens: 1000
+                })
             });
 
-            const reply = response.data.choices[0].message.content;
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`HTTP ${response.status}: ${errorText}`);
+            }
+
+            const data = await response.json();
+            const reply = data.choices[0].message.content;
 
             // Add assistant reply to history
             chat.messages.push({ role: 'assistant', content: reply });
@@ -111,9 +117,8 @@ router.post('/chat', chatLimiter, async (req, res) => {
             });
 
         } catch (apiError) {
-            console.error('OpenRouter API Error:', apiError.response ? apiError.response.data : apiError.message);
+            console.error('OpenRouter Fetch Error:', apiError.message);
 
-            // Helpful fallback if API fails
             const errorMsg = lang === 'ar'
                 ? 'عذراً، واجهت مشكلة في الاتصال بمزود الخدمة. يرجى المحاولة مرة أخرى لاحقاً.'
                 : 'Sorry, I am having trouble connecting to my brain right now. Please try again later.';
