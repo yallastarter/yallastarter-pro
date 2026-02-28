@@ -357,6 +357,214 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
+        /* Chat Interface Styles */
+        .mind71-chat-section {
+            padding: 4rem 0;
+            background: #f1f5f9;
+            border-bottom: 1px solid var(--ai-border);
+        }
+
+        .chat-wrapper {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            height: 550px;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--ai-border);
+        }
+
+        .chat-sidebar {
+            background: #1e293b;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            color: white;
+        }
+
+        .btn-new-chat {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 0.8rem;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-new-chat:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .chat-history-info {
+            margin-top: auto;
+            font-size: 0.85rem;
+            opacity: 0.7;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .chat-main {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            background: #ffffff;
+        }
+
+        .message {
+            max-width: 85%;
+            display: flex;
+        }
+
+        .message.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .message.assistant {
+            align-self: flex-start;
+        }
+
+        .message-content {
+            padding: 0.8rem 1.1rem;
+            border-radius: 15px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            position: relative;
+        }
+
+        .user .message-content {
+            background: var(--ai-primary);
+            color: white;
+            border-bottom-right-radius: 2px;
+        }
+
+        .assistant .message-content {
+            background: #f1f5f9;
+            color: var(--ai-text);
+            border-bottom-left-radius: 2px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .chat-input-area {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--ai-border);
+            background: white;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: #f8fafc;
+            border: 1px solid var(--ai-border);
+            border-radius: 12px;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-wrapper:focus-within {
+            border-color: var(--ai-primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        #chatInput {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            padding: 0.5rem 0;
+            font-family: inherit;
+            font-size: 0.95rem;
+            resize: none;
+            max-height: 120px;
+        }
+
+        .send-btn {
+            background: var(--ai-primary);
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            margin-left: 0.5rem;
+        }
+
+        .send-btn:hover {
+            background: var(--ai-primary-dark);
+            transform: scale(1.05);
+        }
+
+        .send-btn:disabled {
+            background: #cbd5e1;
+            cursor: not-allowed;
+        }
+
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 0.5rem 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            background: var(--ai-primary);
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out;
+            opacity: 0.6;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-6px);
+            }
+        }
+
+        .chat-disclaimer {
+            font-size: 0.75rem;
+            color: var(--ai-text-light);
+            text-align: center;
+            margin-top: 0.6rem;
+        }
+
         /* AI Features Section */
         .ai-features {
             padding: 6rem 0;
@@ -461,7 +669,7 @@
         }
 
         .feature-benefits li::before {
-            content: '?';
+            content: '✓';
             position: absolute;
             left: 0;
             color: var(--ai-primary);
@@ -618,126 +826,39 @@
             color: var(--ai-primary);
         }
 
-        /* Mobile Responsive */
+        /* Responsive */
+        @media (max-width: 992px) {
+            .chat-wrapper {
+                grid-template-columns: 1fr;
+                height: 500px;
+            }
+
+            .chat-sidebar {
+                display: none;
+            }
+        }
+
         @media (max-width: 768px) {
-            .header {
-                padding: 0.3rem 0.8rem;
+            .mind71-hero-title {
+                font-size: 2.5rem;
             }
 
-            .navbar {
-                gap: 0.5rem;
+            .section-title {
+                font-size: 2.5rem;
             }
 
-            .logo-text {
-                font-size: 1.3rem;
+            .features-grid {
+                grid-template-columns: 1fr;
             }
 
-            .nav-links {
-                display: none;
-            }
-
-            .auth-buttons {
-                display: none;
-            }
-
+            .nav-links,
+            .auth-buttons,
             .language-switcher {
                 display: none;
             }
 
             .mobile-menu-btn {
                 display: block;
-            }
-
-            .mobile-menu {
-                padding: 0.8rem;
-            }
-
-            .mobile-menu .nav-links a {
-                padding: 0.6rem 0;
-                font-size: 0.95rem;
-            }
-
-            .mind71-hero-title {
-                font-size: 2.5rem;
-            }
-
-            .mind71-hero-subtitle {
-                font-size: 1.2rem;
-            }
-
-            .mind71-hero-description {
-                font-size: 1rem;
-            }
-
-            .mind71-hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .section-title {
-                font-size: 2.5rem;
-            }
-
-            .section-subtitle {
-                font-size: 1.1rem;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .feature-card {
-                padding: 2rem;
-            }
-
-            .capabilities-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .cta-title {
-                font-size: 2rem;
-            }
-
-            .cta-description {
-                font-size: 1.1rem;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .mind71-hero {
-                padding: 4rem 0;
-            }
-
-            .mind71-hero-title {
-                font-size: 2rem;
-            }
-
-            .mind71-hero-subtitle {
-                font-size: 1.1rem;
-            }
-
-            .ai-features,
-            .ai-capabilities,
-            .mind71-cta {
-                padding: 4rem 0;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .feature-card {
-                padding: 1.5rem;
-            }
-
-            .capability-item {
-                padding: 1.5rem;
             }
         }
     </style>
@@ -750,7 +871,6 @@
             <a href="index.html" class="logo">
                 <span class="logo-text">YallaStarter</span>
             </a>
-
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="entertainment.html">Entertainment Projects</a></li>
@@ -761,49 +881,39 @@
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
-
             <div class="language-switcher">
                 <button class="language-btn active" onclick="switchLanguage('en')">English</button>
                 <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
             </div>
-
-            <div class="auth-buttons">
+            <div class="auth-buttons" id="auth-buttons">
                 <a href="create-project.html" class="btn btn-primary">Start a Project</a>
                 <a href="login.html" class="btn btn-link">Log In</a>
             </div>
-
-            <button class="mobile-menu-btn">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
             </button>
         </nav>
-
-        <div class="mobile-menu">
-            <div class="mobile-menu-header">
-
-                <button class="mobile-close-btn">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="entertainment.html">Entertainment Projects</a></li>
-                <li><a href="vision2030.html">Vision 2030 Projects</a></li>
-                <li><a href="mind71.html" class="active">MIND71 AI</a></li>
-                <li><a href="projects.html">Browse Projects</a></li>
-                <li><a href="how-it-works.html">How It Works</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-            <div class="language-switcher">
-                <button class="language-btn active" onclick="switchLanguage('en')">English</button>
-                <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
-            </div>
-            <div class="auth-buttons">
-                <a href="create-project.html" class="btn btn-primary">Start a Project</a>
-                <a href="login.html" class="btn btn-link">Log In</a>
-            </div>
-        </div>
     </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul class="nav-links" style="display: block;">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="entertainment.html">Entertainment Projects</a></li>
+            <li><a href="vision2030.html">Vision 2030 Projects</a></li>
+            <li><a href="mind71.html" class="active">MIND71 AI</a></li>
+            <li><a href="projects.html">Browse Projects</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+        <div class="language-switcher" style="display: flex;">
+            <button class="language-btn active" onclick="switchLanguage('en')">English</button>
+            <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
+        </div>
+        <div class="auth-buttons" style="display: flex; flex-direction: column; margin-top: 1rem;">
+            <a href="create-project.html" class="btn btn-primary">Start a Project</a>
+            <a href="login.html" class="btn btn-link">Log In</a>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="mind71-hero">
@@ -813,7 +923,7 @@
                 Investment Intelligence</p>
             <p class="mind71-hero-description">MIND71 is the first AI system made to understand Saudi Arabian rules,
                 culture, common sense, Arabic culture, laws, market analysis, investment strategies, the Saudi economy,
-                and best practices that follow Vision 2030 and General Entertainment Authority (GEA) guidelines.</p>
+                and best practices that follow Vision 2030 and GEA guidelines.</p>
             <div class="mind71-hero-buttons">
                 <a href="#features" class="btn-ai">Explore Saudi AI Features</a>
                 <a href="#demo" class="btn-ai">Try Saudi AI Demo</a>
@@ -821,174 +931,7 @@
         </div>
     </section>
 
-    <!-- AI Features Section -->
-    <section class="ai-features" id="features">
-        <div class="container">
-            <h2 class="section-title">Saudi Arabia's AI-Powered Intelligence System</h2>
-            <p class="section-subtitle">Discover how MIND71's advanced AI capabilities, specifically designed for Saudi
-                Arabia, transform project creation, analysis, and funding decisions while respecting local culture and
-                regulations</p>
-
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-brain"></i>
-                    </div>
-                    <h3 class="feature-title">Saudi Market Intelligence</h3>
-                    <p class="feature-description">MIND71 analyzes your project concept using advanced AI algorithms
-                        specifically trained on Saudi Arabian market data, regulations, and cultural context.</p>
-                    <ul class="feature-benefits">
-                        <li>Saudi market opportunity assessment</li>
-                        <li>Local competitive analysis</li>
-                        <li>Vision 2030 alignment check</li>
-                        <li>Saudi success probability calculation</li>
-                    </ul>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-lightbulb"></i>
-                    </div>
-                    <h3 class="feature-title">Saudi Cultural Intelligence</h3>
-                    <p class="feature-description">MIND71 understands Saudi Arabian culture, common sense, and Arabic
-                        cultural values to provide culturally appropriate project enhancement suggestions.</p>
-                    <ul class="feature-benefits">
-                        <li>Saudi cultural compliance</li>
-                        <li>Arabic cultural sensitivity</li>
-                        <li>Local market appeal optimization</li>
-                        <li>Cultural trend integration</li>
-                    </ul>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3 class="feature-title">Saudi Investment Intelligence</h3>
-                    <p class="feature-description">MIND71 provides comprehensive Saudi market analysis, investment
-                        planning, and economic insights aligned with Vision 2030 goals.</p>
-                    <ul class="feature-benefits">
-                        <li>Saudi market gap identification</li>
-                        <li>Investment opportunity analysis</li>
-                        <li>Vision 2030 alignment check</li>
-                        <li>Economic trend forecasting</li>
-                    </ul>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3 class="feature-title">Saudi Regulatory Compliance</h3>
-                    <p class="feature-description">MIND71 ensures your projects comply with Saudi Arabian laws, GEA
-                        regulations, and Vision 2030 requirements for successful funding.</p>
-                    <ul class="feature-benefits">
-                        <li>Saudi law compliance check</li>
-                        <li>GEA regulation validation</li>
-                        <li>Vision 2030 alignment</li>
-                        <li>Regulatory risk assessment</li>
-                    </ul>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-cogs"></i>
-                    </div>
-                    <h3 class="feature-title">Saudi Workflow Optimization</h3>
-                    <p class="feature-description">Streamlined AI-powered workflows specifically designed for Saudi
-                        Arabian project development, GEA submission, and Vision 2030 compliance.</p>
-                    <ul class="feature-benefits">
-                        <li>Saudi-specific step guidance</li>
-                        <li>GEA compliance validation</li>
-                        <li>Vision 2030 progress tracking</li>
-                        <li>Local quality assurance</li>
-                    </ul>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3 class="feature-title">GEA & Vision 2030 Integration</h3>
-                    <p class="feature-description">Seamless integration with GEA's funding processes and Vision 2030
-                        goals, providing AI-powered insights for informed Saudi decision-making.</p>
-                    <ul class="feature-benefits">
-                        <li>GEA regulation compliance</li>
-                        <li>Vision 2030 alignment check</li>
-                        <li>Saudi funding optimization</li>
-                        <li>Local approval guidance</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- AI Capabilities Section -->
-    <section class="ai-capabilities">
-        <div class="container">
-            <h2 class="section-title">Saudi Arabia's Advanced AI Capabilities</h2>
-            <p class="section-subtitle">Explore the cutting-edge technologies that power MIND71's intelligent
-                decision-making, specifically designed for Saudi Arabian market and culture</p>
-
-            <div class="capabilities-grid">
-                <div class="capability-item">
-                    <div class="capability-icon">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <h3 class="capability-title">Machine Learning</h3>
-                    <p class="capability-description">Advanced ML algorithms that learn from project data to provide
-                        increasingly accurate insights and recommendations.</p>
-                </div>
-
-                <div class="capability-item">
-                    <div class="capability-icon">
-                        <i class="fas fa-language"></i>
-                    </div>
-                    <h3 class="capability-title">Natural Language Processing</h3>
-                    <p class="capability-description">NLP technology that understands and analyzes project descriptions,
-                        feedback, and market trends.</p>
-                </div>
-
-                <div class="capability-item">
-                    <div class="capability-icon">
-                        <i class="fas fa-eye"></i>
-                    </div>
-                    <h3 class="capability-title">Computer Vision</h3>
-                    <p class="capability-description">AI vision systems that analyze project images, mockups, and visual
-                        content for quality assessment.</p>
-                </div>
-
-                <div class="capability-item">
-                    <div class="capability-icon">
-                        <i class="fas fa-chart-pie"></i>
-                    </div>
-                    <h3 class="capability-title">Predictive Analytics</h3>
-                    <p class="capability-description">Data-driven predictions about project success, market trends, and
-                        funding outcomes.</p>
-                </div>
-
-                <div class="capability-item">
-                    <div class="capability-icon">
-                        <i class="fas fa-network-wired"></i>
-                    </div>
-                    <h3 class="capability-title">Neural Networks</h3>
-                    <p class="capability-description">Deep learning networks that identify complex patterns and
-                        relationships in project data.</p>
-                </div>
-
-                <div class="capability-item">
-                    <div class="capability-icon">
-                        <i class="fas fa-database"></i>
-                    </div>
-                    <h3 class="capability-title">Big Data Analysis</h3>
-                    <p class="capability-description">Processing and analyzing vast amounts of project and market data
-                        for comprehensive insights.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Chat Interface Section -->
+    <!-- Chat Interface Section (Above the fold) -->
     <section class="mind71-chat-section" id="demo">
         <div class="container">
             <h2 class="section-title">Consult MIND71 AI</h2>
@@ -1034,235 +977,83 @@
         </div>
     </section>
 
-    <style>
-        .mind71-chat-section {
-            padding: 6rem 0;
-            background: #f1f5f9;
-        }
+    <!-- AI Features Section -->
+    <section class="ai-features" id="features">
+        <div class="container">
+            <h2 class="section-title">Saudi Arabia's AI-Powered Intelligence System</h2>
+            <p class="section-subtitle">Discover how MIND71's advanced AI capabilities, specifically designed for Saudi
+                Arabia, transform project creation, analysis, and funding decisions.</p>
 
-        .chat-wrapper {
-            display: grid;
-            grid-template-columns: 260px 1fr;
-            height: 600px;
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
-            border: 1px solid var(--ai-border);
-        }
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-brain"></i></div>
+                    <h3 class="feature-title">Market Intelligence</h3>
+                    <p class="feature-description">MIND71 analyzes your project concept using advanced AI algorithms
+                        specifically trained on Saudi Arabian market data and regulations.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-lightbulb"></i></div>
+                    <h3 class="feature-title">Cultural Intelligence</h3>
+                    <p class="feature-description">MIND71 understands Saudi culture and Arabic values to provide
+                        culturally appropriate project enhancement suggestions.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3 class="feature-title">Investment Intelligence</h3>
+                    <p class="feature-description">Comprehensive Saudi market analysis and economic insights aligned
+                        with Vision 2030 goals.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        .chat-sidebar {
-            background: #1e293b;
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            color: white;
-        }
+    <!-- AI Capabilities Section -->
+    <section class="ai-capabilities">
+        <div class="container">
+            <h2 class="section-title">Advanced AI Capabilities</h2>
+            <div class="capabilities-grid">
+                <div class="capability-item">
+                    <div class="capability-icon"><i class="fas fa-robot"></i></div>
+                    <h3 class="capability-title">Machine Learning</h3>
+                    <p class="capability-description">Algorithms that learn from project data to provide accurate
+                        insights.</p>
+                </div>
+                <div class="capability-item">
+                    <div class="capability-icon"><i class="fas fa-language"></i></div>
+                    <h3 class="capability-title">NLP</h3>
+                    <p class="capability-description">Understands project descriptions and feedback.</p>
+                </div>
+                <div class="capability-item">
+                    <div class="capability-icon"><i class="fas fa-chart-pie"></i></div>
+                    <h3 class="capability-title">Predictive Analytics</h3>
+                    <p class="capability-description">Data-driven predictions about project success.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        .btn-new-chat {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 0.8rem;
-            border-radius: 10px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <div class="footer-copyright">&copy; 2025 YallaStarter. All rights reserved.</div>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-        .btn-new-chat:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .chat-history-info {
-            margin-top: auto;
-            font-size: 0.85rem;
-            opacity: 0.7;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-        }
-
-        .chat-main {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            position: relative;
-        }
-
-        .chat-messages {
-            flex: 1;
-            overflow-y: auto;
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            background: #ffffff;
-        }
-
-        .message {
-            max-width: 80%;
-            display: flex;
-        }
-
-        .message.user {
-            align-self: flex-end;
-            flex-direction: row-reverse;
-        }
-
-        .message.assistant {
-            align-self: flex-start;
-        }
-
-        .message-content {
-            padding: 1rem 1.2rem;
-            border-radius: 15px;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            position: relative;
-        }
-
-        .user .message-content {
-            background: var(--ai-primary);
-            color: white;
-            border-bottom-right-radius: 2px;
-        }
-
-        .assistant .message-content {
-            background: #f1f5f9;
-            color: var(--ai-text);
-            border-bottom-left-radius: 2px;
-            border: 1px solid #e2e8f0;
-        }
-
-        .chat-input-area {
-            padding: 1.5rem 2rem;
-            border-top: 1px solid var(--ai-border);
-            background: white;
-        }
-
-        .input-wrapper {
-            position: relative;
-            display: flex;
-            align-items: center;
-            background: #f8fafc;
-            border: 1px solid var(--ai-border);
-            border-radius: 12px;
-            padding: 0.5rem 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .input-wrapper:focus-within {
-            border-color: var(--ai-primary);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
-        }
-
-        #chatInput {
-            flex: 1;
-            background: transparent;
-            border: none;
-            outline: none;
-            padding: 0.5rem 0;
-            font-family: inherit;
-            font-size: 0.95rem;
-            resize: none;
-            max-height: 150px;
-        }
-
-        .send-btn {
-            background: var(--ai-primary);
-            color: white;
-            border: none;
-            width: 35px;
-            height: 35px;
-            border-radius: 8px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            margin-left: 0.5rem;
-        }
-
-        .send-btn:hover {
-            background: var(--ai-primary-dark);
-            transform: scale(1.05);
-        }
-
-        .send-btn:disabled {
-            background: #cbd5e1;
-            cursor: not-allowed;
-        }
-
-        .typing-indicator {
-            display: flex;
-            gap: 4px;
-            padding: 0.5rem 1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .typing-indicator span {
-            width: 8px;
-            height: 8px;
-            background: var(--ai-primary);
-            border-radius: 50%;
-            animation: bounce 1.4s infinite ease-in-out;
-            opacity: 0.6;
-        }
-
-        .typing-indicator span:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .typing-indicator span:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-
-        @keyframes bounce {
-
-            0%,
-            80%,
-            100% {
-                transform: translateY(0);
-            }
-
-            40% {
-                transform: translateY(-6px);
-            }
-        }
-
-        .chat-disclaimer {
-            font-size: 0.75rem;
-            color: var(--ai-text-light);
-            text-align: center;
-            margin-top: 0.8rem;
-        }
-
-        @media (max-width: 992px) {
-            .chat-wrapper {
-                grid-template-columns: 1fr;
-            }
-
-            .chat-sidebar {
-                display: none;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .chat-messages {
-                padding: 1rem;
-            }
-
-            .message {
-                max-width: 90%;
-            }
-        }
-    </style>
-
+    <!-- Scripts -->
+    <script src="mobile-menu.js"></script>
+    <script src="assets/js/session-init.js"></script>
     <script>
+        function switchLanguage(lang) {
+            window.location.href = lang === 'ar' ? 'mind71-ar.html' : 'mind71.html';
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             const chatMessages = document.getElementById('chatMessages');
             const chatInput = document.getElementById('chatInput');
@@ -1273,7 +1064,6 @@
             let conversationId = localStorage.getItem('mind71_conv_id');
             let isTyping = false;
 
-            // Auto-resize textarea
             chatInput.addEventListener('input', function () {
                 this.style.height = 'auto';
                 this.style.height = (this.scrollHeight) + 'px';
@@ -1283,12 +1073,10 @@
                 const message = chatInput.value.trim();
                 if (!message || isTyping) return;
 
-                // Add User Message
                 addMessage(message, 'user');
                 chatInput.value = '';
                 chatInput.style.height = 'auto';
 
-                // Show Typing
                 isTyping = true;
                 typingIndicator.style.display = 'flex';
                 sendBtn.disabled = true;
@@ -1298,21 +1086,16 @@
                     const response = await fetch('/api/mind71/chat', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            message,
-                            lang: 'en',
-                            conversationId
-                        })
+                        body: JSON.stringify({ message, lang: 'en', conversationId })
                     });
 
                     const data = await response.json();
-
                     if (data.success) {
                         conversationId = data.conversationId;
                         localStorage.setItem('mind71_conv_id', conversationId);
                         addMessage(data.reply, 'assistant');
                     } else {
-                        addMessage("Sorry, I encountered an error. Please try again.", 'assistant');
+                        addMessage("Something went wrong. Please try again.", 'assistant');
                     }
                 } catch (error) {
                     addMessage("Network error. Please check your connection.", 'assistant');
@@ -1326,18 +1109,14 @@
             function addMessage(text, role) {
                 const msgDiv = document.createElement('div');
                 msgDiv.className = `message ${role}`;
-
                 const contentDiv = document.createElement('div');
                 contentDiv.className = 'message-content';
 
-                // Simple typewriter effect for assistant
                 if (role === 'assistant') {
                     contentDiv.innerHTML = '';
                     msgDiv.appendChild(contentDiv);
                     chatMessages.appendChild(msgDiv);
-
-                    let i = 0;
-                    const speed = 10; // ms
+                    let i = 0; const speed = 15;
                     function type() {
                         if (i < text.length) {
                             contentDiv.innerHTML += text.charAt(i);
@@ -1356,7 +1135,6 @@
             }
 
             sendBtn.addEventListener('click', sendMessage);
-
             chatInput.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' && !e.shiftKey) {
                     e.preventDefault();
@@ -1370,109 +1148,12 @@
                     localStorage.removeItem('mind71_conv_id');
                     chatMessages.innerHTML = `
                         <div class="message assistant">
-                            <div class="message-content">
-                                Conversation reset. How can I assist you today?
-                            </div>
-                        </div>
-                    `;
+                            <div class="message-content">Conversation reset. How can I assist you today?</div>
+                        </div>`;
                 }
             });
         });
     </script>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>YallaStarter</h3>
-                    <ul class="footer-links">
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="how-it-works.html">How It Works</a></li>
-                        <li><a href="projects.html">Browse Projects</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
-                        <li><a href="coming-soon.html">Careers</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-column">
-                    <h3>For Creators</h3>
-                    <ul class="footer-links">
-                        <li><a href="create-project.html">Start a Project</a></li>
-                        <li><a href="coming-soon.html">Creator Handbook</a></li>
-                        <li><a href="coming-soon.html">Creator Resources</a></li>
-                        <li><a href="coming-soon.html">Creator FAQs</a></li>
-                        <li><a href="coming-soon.html">Success Stories</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-column">
-                    <h3>For Backers</h3>
-                    <ul class="footer-links">
-                        <li><a href="coming-soon.html">Backer FAQs</a></li>
-                        <li><a href="coming-soon.html">Trust & Safety</a></li>
-                        <li><a href="coming-soon.html">Backer Resources</a></li>
-                        <li><a href="coming-soon.html">Payment Methods</a></li>
-                        <li><a href="coming-soon.html">Backer Protection</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-column">
-                    <h3>Connect With Us</h3>
-                    <ul class="footer-links">
-                        <li><a href="coming-soon.html">Newsletter</a></li>
-                        <li><a href="coming-soon.html">Blog</a></li>
-                        <li><a href="coming-soon.html">Events</a></li>
-                        <li><a href="coming-soon.html">Support</a></li>
-                        <li><a href="coming-soon.html">Community Guidelines</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <div class="footer-copyright">
-                    &copy; 2025 YallaStarter. All rights reserved.
-                </div>
-
-                <div class="footer-social">
-                    <a href="coming-soon.html" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                    <a href="coming-soon.html" class="social-icon"><i class="fab fa-twitter"></i></a>
-                    <a href="coming-soon.html" class="social-icon"><i class="fab fa-instagram"></i></a>
-                    <a href="coming-soon.html" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Universal Mobile Menu Script -->
-    <script src="mobile-menu.js"></script>
-
-    <script>
-        // Language Switcher Function
-        function switchLanguage(lang) {
-            if (lang === 'ar') {
-                window.location.href = 'mind71-ar.html';
-            } else {
-                window.location.href = 'mind71.html';
-            }
-        }
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-    </script>
-    <!-- Session persistence: replace auth buttons with user dropdown if logged in -->
-    <script src="assets/js/session-init.js"></script>
 </body>
 
 </html>
