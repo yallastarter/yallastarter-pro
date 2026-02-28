@@ -4,24 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="قم بإدارة مشاريعك وحملاتك في يلا ستارتر من لوحة التحكم الشخصية الخاصة بك. تتبع تقدم التمويل وتفاعل مع الداعمين.">
-    <meta name="keywords" content="لوحة التحكم, إدارة المشاريع, تمويل جماعي, السعودية">
-    <meta name="author" content="يلا ستارتر">
-    <meta name="robots" content="index, follow">
-
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="لوحة التحكم - يلا ستارتر">
-    <meta property="og:description" content="قم بإدارة مشاريعك وحملاتك في يلا ستارتر من لوحة التحكم الشخصية الخاصة بك.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yallastarter.com/dashboard-ar">
-
-    <!-- Preload Critical Resources -->
-    <link rel="preload" href="styles.css" as="style">
-    <link rel="preload"
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap"
-        as="style">
-
+    <meta name="description" content="View your payment history and manage payment methods on YallaStarter.">
     <title>المدفوعات - يلا ستارتر</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="mobile-menu.css">
@@ -33,12 +16,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Tajawal', 'Poppins', sans-serif;
-            text-align: right;
-            direction: rtl;
-        }
-
+        /* Dashboard Layout */
         .dashboard-container {
             display: grid;
             grid-template-columns: 250px 1fr;
@@ -47,9 +25,7 @@
 
         .dashboard-sidebar {
             background-color: var(--neutral-100);
-            border-left: 1px solid var(--neutral-300);
-            /* RTL border */
-            border-right: none;
+            border-right: 1px solid var(--neutral-300);
             padding: 2rem 0;
         }
 
@@ -65,15 +41,12 @@
             height: 50px;
             border-radius: 50%;
             overflow: hidden;
-            margin-left: 1rem;
-            /* RTL margin */
-            margin-right: 0;
-        }
-
-        .user-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            margin-right: 1rem;
+            background: linear-gradient(135deg, #006c35 0%, #00a651 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
         }
 
         .user-info {
@@ -87,8 +60,9 @@
         }
 
         .user-email {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--neutral-600);
+            word-break: break-all;
         }
 
         .sidebar-menu {
@@ -98,7 +72,7 @@
         }
 
         .sidebar-menu-item {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
         }
 
         .sidebar-menu-link {
@@ -119,194 +93,341 @@
             background-color: var(--primary-light);
             color: var(--primary);
             font-weight: 500;
-            border-left: 3px solid var(--primary);
-            /* RTL border */
-            border-right: none;
+            border-right: 3px solid var(--primary);
         }
 
         .sidebar-menu-icon {
-            margin-left: 1rem;
-            /* RTL margin */
-            margin-right: 0;
+            margin-right: 1rem;
             width: 20px;
             text-align: center;
         }
 
-        .dashboard-content {
+        /* Payments Content */
+        .payments-content {
             padding: 2rem;
         }
 
-        .dashboard-header {
+        .page-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 2rem;
         }
 
-        .dashboard-title {
+        .page-title {
             font-size: 1.8rem;
             font-weight: 700;
             color: var(--neutral-900);
         }
 
-        .dashboard-actions {
+        /* Summary Cards */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .summary-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--box-shadow);
             display: flex;
+            align-items: center;
             gap: 1rem;
         }
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            background-color: white;
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            box-shadow: var(--box-shadow);
-        }
-
-        .stat-value {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            color: var(--neutral-600);
-            font-size: 0.9rem;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .project-card {
-            background-color: white;
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--box-shadow);
-        }
-
-        .project-image {
-            height: 160px;
-            overflow: hidden;
-        }
-
-        .project-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .project-content {
-            padding: 1.5rem;
-        }
-
-        .project-category {
-            display: inline-block;
-            background-color: var(--primary-light);
-            color: var(--primary);
-            font-size: 0.8rem;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            margin-bottom: 0.8rem;
-        }
-
-        .project-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 0.8rem;
-            color: var(--neutral-900);
-        }
-
-        .project-status {
+        .summary-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
-            margin-bottom: 1rem;
+            justify-content: center;
+            font-size: 1.4rem;
+            flex-shrink: 0;
         }
 
-        .status-badge {
-            display: inline-block;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            margin-left: 0.5rem;
-            /* RTL margin */
-            margin-right: 0;
+        .summary-icon.green {
+            background: var(--primary-light);
+            color: var(--primary);
         }
 
-        .status-badge.draft {
-            background-color: var(--neutral-200);
-            color: var(--neutral-700);
-        }
-
-        .status-badge.active {
-            background-color: var(--success-light);
-            color: var(--success);
-        }
-
-        .status-badge.completed {
-            background-color: var(--info-light);
+        .summary-icon.blue {
+            background: var(--info-light);
             color: var(--info);
         }
 
-        .project-meta {
-            display: flex;
-            justify-content: space-between;
+        .summary-icon.amber {
+            background: var(--warning-light);
+            color: var(--warning);
+        }
+
+        .summary-icon.red {
+            background: var(--danger-light);
+            color: var(--danger);
+        }
+
+        .summary-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--neutral-900);
+        }
+
+        .summary-label {
+            font-size: 0.85rem;
             color: var(--neutral-600);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
         }
 
-        .project-actions {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .tab-container {
+        /* Transactions Table */
+        .section-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
             margin-bottom: 2rem;
         }
 
-        .tabs-nav {
+        .section-card-header {
             display: flex;
-            border-bottom: 1px solid var(--neutral-300);
-            margin-bottom: 1.5rem;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 1.5rem 1rem;
+            border-bottom: 1px solid var(--neutral-200);
         }
 
-        .tab-item {
-            padding: 0.8rem 1.5rem;
-            cursor: pointer;
+        .section-card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--neutral-900);
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead th {
+            padding: 0.9rem 1.5rem;
+            text-align: left;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
             color: var(--neutral-600);
-            font-weight: 500;
-            border-bottom: 2px solid transparent;
+            background: var(--neutral-100);
+            border-bottom: 1px solid var(--neutral-200);
+        }
+
+        tbody td {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--neutral-200);
+            color: var(--neutral-800);
+            font-size: 0.95rem;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background: var(--neutral-100);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+
+        .badge-success {
+            background: var(--success-light);
+            color: var(--success);
+        }
+
+        .badge-pending {
+            background: var(--warning-light);
+            color: var(--warning);
+        }
+
+        .badge-failed {
+            background: var(--danger-light);
+            color: var(--danger);
+        }
+
+        .badge-refunded {
+            background: var(--info-light);
+            color: var(--info);
+        }
+
+        .tx-amount-out {
+            color: var(--danger);
+            font-weight: 600;
+        }
+
+        .tx-amount-in {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        /* Payment Methods */
+        .methods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+            padding: 1.5rem;
+        }
+
+        .method-card {
+            border: 2px solid var(--neutral-200);
+            border-radius: var(--border-radius);
+            padding: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
             transition: var(--transition);
+            cursor: pointer;
         }
 
-        .tab-item:hover {
+        .method-card:hover {
+            border-color: var(--primary);
+        }
+
+        .method-card.default {
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .method-icon {
+            font-size: 2rem;
+            width: 48px;
+            text-align: center;
+        }
+
+        .method-details {
+            flex: 1;
+        }
+
+        .method-name {
+            font-weight: 600;
+            color: var(--neutral-900);
+        }
+
+        .method-info {
+            font-size: 0.85rem;
+            color: var(--neutral-600);
+        }
+
+        .method-default-badge {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--primary);
+            background: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            border: 1px solid var(--primary);
+        }
+
+        .btn-add-method {
+            border: 2px dashed var(--neutral-300);
+            border-radius: var(--border-radius);
+            padding: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            color: var(--neutral-500);
+            cursor: pointer;
+            transition: var(--transition);
+            background: transparent;
+            width: 100%;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .btn-add-method:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        /* Logo Text */
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
             color: var(--primary);
         }
 
-        .tab-item.active {
-            color: var(--primary);
-            border-bottom-color: var(--primary);
+        /* Dropdown */
+        .user-dropdown {
+            position: relative;
         }
 
-        .tab-content {
+        .user-dropdown-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0.3rem 0.5rem;
+            border-radius: 8px;
+            color: var(--neutral-800);
+            font-weight: 500;
+        }
+
+        .user-dropdown-btn:hover {
+            background: var(--neutral-100);
+        }
+
+        .user-dropdown-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+            min-width: 200px;
             display: none;
+            z-index: 1000;
         }
 
-        .tab-content.active {
+        .user-dropdown-menu.show {
             display: block;
         }
 
-        /* Mobile Responsive */
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: var(--neutral-700);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .dropdown-item:hover {
+            background: var(--neutral-100);
+            color: var(--primary);
+        }
+
+        .dropdown-item.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .dropdown-divider {
+            border-top: 1px solid var(--neutral-200);
+            margin: 0.25rem 0;
+        }
+
         @media (max-width: 992px) {
             .dashboard-container {
                 grid-template-columns: 1fr;
@@ -317,24 +438,33 @@
             }
         }
 
-        /* Header Adjustments for RTL */
-        .header {
-            direction: rtl;
-        }
+        @media (max-width: 576px) {
+            .payments-content {
+                padding: 1rem;
+            }
 
-        .navbar {
-            justify-content: space-between;
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
         }
+    </style>
 
-        .nav-links {
-            margin-left: auto;
-            margin-right: 0;
-        }
-
-        .logo {
-            margin-left: 0.8rem;
-            margin-right: 0;
-        }
+    <style>
+        body { font-family: 'Tajawal', sans-serif; text-align: right; direction: rtl; }
+        .dashboard-sidebar { border-right: none; border-left: 1px solid var(--neutral-200); }
+        .sidebar-menu-icon { margin-right: 0; margin-left: 1rem; }
+        .sidebar-menu-link.active { border-right: none; border-left: 3px solid var(--primary); }
+        .nav-links { margin-left: auto; margin-right: 0; }
+        .logo { margin-left: 1rem; margin-right: 0; }
+        .user-avatar { margin-right: 0; margin-left: 1rem; }
+        /* Fix dropdown for RTL */
+        .user-dropdown-menu { right: auto; left: 0; text-align: right; transform-origin: top left; }
+        .dropdown-item { display: flex !important; align-items: center; gap: 10px; flex-direction: row; }
+        .dropdown-item i { margin-left: 0; margin-right: 0; }
+        /* Fix spinner for RTL */
+        .fa-spin { display: inline-block; }
     </style>
 </head>
 
@@ -344,147 +474,84 @@
         <div class="container">
             <nav class="navbar">
                 <a href="index-ar.html" class="logo">
-                    <span class="logo-text">يلا ستارتر</span>
+                    <span class="logo-text">YallaStarter</span>
                 </a>
-
-                <button class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
-                </button>
-
+                <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
                 <ul class="nav-links">
                     <li><a href="index-ar.html">الرئيسية</a></li>
-                    <li><a href="projects-ar.html">تصفح المشاريع</a></li>
-                    <li><a href="how-it-works-ar.html">كيف يعمل</a></li>
-                    <li><a href="about-ar.html">من نحن</a></li>
-                    <li><a href="contact-ar.html">اتصل بنا</a></li>
+                    <li><a href="projects.html">تصفح المشاريع</a></li>
+                    <li><a href="dashboard-ar.html">لوحة التحكم</a></li>
                 </ul>
-
                 <div class="auth-buttons">
                     <div class="user-dropdown">
                         <button class="user-dropdown-btn">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User Avatar"
-                                class="user-avatar-small">
-                            <span class="user-name">محمد</span>
+                            <div id="headerAvatar"
+                                style="width:35px;height:35px;border-radius:50%;background:linear-gradient(135deg,#006c35 0%,#00a651 100%);display:flex;align-items:center;justify-content:center;">
+                                <i class="fas fa-user" style="font-size:1rem;color:white;"></i>
+                            </div>
+                            <span id="headerUserName">User</span>
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="user-dropdown-menu">
-                            <a href="dashboard-ar.html" class="dropdown-item active">
-                                <i class="fas fa-tachometer-alt"></i> لوحة التحكم
-                            </a>
-                            <a href="user-profile-ar.html" class="dropdown-item">
-                                <i class="fas fa-user"></i> الملف الشخصي
-                            </a>
-                            <a href="#" class="dropdown-item">
-                                <i class="fas fa-cog"></i> الإعدادات
-                            </a>
+                            <a href="dashboard-ar.html" class="dropdown-item"><i class="fas fa-tachometer-alt"></i> لوحة التحكم</a>
+                            <a href="user-profile-ar.html" class="dropdown-item"><i class="fas fa-user"></i> الملف الشخصي</a>
+                            <a href="notifications-ar.html" class="dropdown-item"><i class="fas fa-bell"></i> الإشعارات</a>
+                            <a href="settings-ar.html" class="dropdown-item"><i class="fas fa-cog"></i> الإعدادات</a>
                             <div class="dropdown-divider"></div>
-                            <a href="index-ar.html" class="dropdown-item logout-link">
+                            <a href="javascript:void(0)" class="dropdown-item"
+                                onclick="window.auth && window.auth.logout(); return false;">
                                 <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
                             </a>
                         </div>
                     </div>
                 </div>
-
             </nav>
-
-            <div class="mobile-menu">
-                <div class="mobile-menu-header">
-
-                    <button class="mobile-close-btn">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <ul class="nav-links">
-                    <li><a href="index-ar.html">الرئيسية</a></li>
-                    <li><a href="projects-ar.html">تصفح المشاريع</a></li>
-                    <li><a href="how-it-works-ar.html">كيف يعمل</a></li>
-                    <li><a href="about-ar.html">من نحن</a></li>
-                    <li><a href="contact-ar.html">اتصل بنا</a></li>
-                </ul>
-                <div class="language-switcher">
-                    <button class="language-btn active" onclick="switchLanguage('ar')">العربية</button>
-                    <button class="language-btn" onclick="switchLanguage('en')">English</button>
-                </div>
-                <div class="auth-buttons">
-                    <div class="user-dropdown">
-                        <button class="user-dropdown-btn">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User Avatar"
-                                class="user-avatar-small">
-                            <span class="user-name">محمد</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="user-dropdown-menu">
-                            <a href="dashboard-ar.html" class="dropdown-item active">
-                                <i class="fas fa-tachometer-alt"></i> لوحة التحكم
-                            </a>
-                            <a href="user-profile-ar.html" class="dropdown-item">
-                                <i class="fas fa-user"></i> الملف الشخصي
-                            </a>
-                            <a href="#" class="dropdown-item">
-                                <i class="fas fa-cog"></i> الإعدادات
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="index-ar.html" class="dropdown-item logout-link">
-                                <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        </div>
     </header>
 
-    <!-- Dashboard -->
+    <!-- Dashboard Container -->
     <div class="dashboard-container">
+
         <!-- Sidebar -->
         <div class="dashboard-sidebar">
             <div class="user-profile">
-                <div class="user-avatar">
-                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User Avatar">
+                <div class="user-avatar" id="sidebarAvatar">
+                    <i class="fas fa-user" style="font-size:1.5rem;color:white;"></i>
                 </div>
                 <div class="user-info">
-                    <div class="user-name">محمد آل سعود</div>
-                    <div class="user-email">mohammed@example.com</div>
+                    <div class="user-name" id="sidebarName">User</div>
+                    <div class="user-email" id="sidebarEmail">user@example.com</div>
                 </div>
             </div>
-
             <ul class="sidebar-menu">
-                <li class="sidebar-menu-item">
-                    <a href="dashboard-ar.html" class="sidebar-menu-link"><i class="fas fa-tachometer-alt sidebar-menu-icon"></i> لوحة التحكم</a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a href="my-projects-ar.html" class="sidebar-menu-link"><i class="fas fa-rocket sidebar-menu-icon"></i> مشاريعي</a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a href="backed-projects-ar.html" class="sidebar-menu-link"><i class="fas fa-hand-holding-heart sidebar-menu-icon"></i> المشاريع المدعومة</a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a href="payments-ar.html" class="sidebar-menu-link active"><i class="fas fa-money-bill-wave sidebar-menu-icon"></i> المدفوعات</a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a href="notifications-ar.html" class="sidebar-menu-link"><i class="fas fa-bell sidebar-menu-icon"></i> الإشعارات</a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a href="user-profile-ar.html" class="sidebar-menu-link"><i class="fas fa-user sidebar-menu-icon"></i> الملف الشخصي</a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a href="settings-ar.html" class="sidebar-menu-link"><i class="fas fa-cog sidebar-menu-icon"></i> الإعدادات</a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a href="support-ar.html" class="sidebar-menu-link"><i class="fas fa-question-circle sidebar-menu-icon"></i> المساعدة والدعم</a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a href="index-ar.html" class="sidebar-menu-link logout-link">
-                        <i class="fas fa-sign-out-alt sidebar-menu-icon"></i>
-                        تسجيل الخروج
-                    </a>
-                </li>
+                <li class="sidebar-menu-item"><a href="dashboard-ar.html" class="sidebar-menu-link"><i
+                            class="fas fa-tachometer-alt sidebar-menu-icon"></i> لوحة التحكم</a></li>
+                <li class="sidebar-menu-item"><a href="my-projects-ar.html" class="sidebar-menu-link"><i
+                            class="fas fa-rocket sidebar-menu-icon"></i> مشاريعي</a></li>
+                <li class="sidebar-menu-item"><a href="backed-projects-ar.html" class="sidebar-menu-link"><i
+                            class="fas fa-hand-holding-heart sidebar-menu-icon"></i> المشاريع المدعومة</a></li>
+                <li class="sidebar-menu-item"><a href="payments-ar.html" class="sidebar-menu-link active"><i
+                            class="fas fa-money-bill-wave sidebar-menu-icon"></i> المدفوعات</a></li>
+                <li class="sidebar-menu-item"><a href="coins-ar.html" class="sidebar-menu-link"><i
+                            class="fas fa-coins sidebar-menu-icon"></i> محفظتي</a></li>
+                <li class="sidebar-menu-item"><a href="notifications-ar.html" class="sidebar-menu-link"><i
+                            class="fas fa-bell sidebar-menu-icon"></i> الإشعارات</a></li>
+                <li class="sidebar-menu-item"><a href="user-profile-ar.html" class="sidebar-menu-link"><i
+                            class="fas fa-user sidebar-menu-icon"></i> الملف الشخصي</a></li>
+                <li class="sidebar-menu-item"><a href="settings-ar.html" class="sidebar-menu-link"><i
+                            class="fas fa-cog sidebar-menu-icon"></i> الإعدادات</a></li>
+                <li class="sidebar-menu-item"><a href="support-ar.html" class="sidebar-menu-link"><i
+                            class="fas fa-question-circle sidebar-menu-icon"></i> المساعدة والدعم</a></li>
+                <li class="sidebar-menu-item"><a href="javascript:void(0)" class="sidebar-menu-link"
+                        onclick="window.auth && window.auth.logout(); return false;"><i
+                            class="fas fa-sign-out-alt sidebar-menu-icon"></i> تسجيل الخروج</a></li>
             </ul>
         </div>
 
-        <!-- Content -->
-        <div class="dashboard-content">
+        <!-- Main Content -->
+        <div class="payments-content">
             <div class="page-header">
-                <h1 class="page-title">المدفوعات</h1>
+                <h1 class="page-title">Payments</h1>
                 <a href="coins-ar.html" class="btn btn-primary"><i class="fas fa-wallet"></i> محفظتي</a>
             </div>
 
@@ -520,11 +587,11 @@
                 </div>
             </div>
 
-            <!-- سجل المعاملات -->
+            <!-- Transaction History -->
             <div class="section-card">
                 <div class="section-card-header">
                     <h2 class="section-card-title"><i class="fas fa-history"
-                            style="color:var(--primary);margin-right:0.5rem;"></i>سجل المعاملات</h2>
+                            style="color:var(--primary);margin-right:0.5rem;"></i>Transaction History</h2>
                     <button class="btn btn-sm btn-outline" onclick="downloadCSV()"><i class="fas fa-download"></i>
                         تصدير CSV</button>
                 </div>
@@ -551,7 +618,7 @@
                 </div>
             </div>
 
-            <!-- طرق الدفع -->
+            <!-- Payment Methods -->
             <div class="section-card">
                 <div class="section-card-header">
                     <h2 class="section-card-title"><i class="fas fa-credit-card"
@@ -562,610 +629,147 @@
                         <div class="method-icon">💳</div>
                         <div class="method-details">
                             <div class="method-name" id="defaultMethodName">بطاقة بنكية</div>
-                            <div class="method-info" id="defaultMethodInfo">لا توجد بطاقة محفوظة</div>
+                            <div class="method-info" id="defaultMethodInfo">No card saved</div>
                         </div>
-                        <span class="method-default-badge">الافتراضي</span>
+                        <span class="method-default-badge">Default</span>
                     </div>
                     <div id="noMethodMsg"
                         style="padding:1.5rem; color:var(--neutral-500); font-size:0.95rem; text-align:center; width:100%;">
                         <i class="fas fa-credit-card"
                             style="font-size:2rem; margin-bottom:0.75rem; display:block; color:var(--neutral-300);"></i>
-                        لا توجد طرق دفع محفوظة بعد.
+                        No payment methods saved yet.
                     </div>
                     <button class="btn-add-method" onclick="showAddMethodModal()">
-                        <i class="fas fa-plus-circle"></i> إضافة طريقة دفع
+                        <i class="fas fa-plus-circle"></i> Add Payment Method
                     </button>
                 </div>
             </div>
-        
-    </div>
-
-    <!DOCTYPE html>
-<html lang="ar" dir="rtl">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="قم بإدارة مشاريعك وحملاتك في يلا ستارتر من لوحة التحكم الشخصية الخاصة بك. تتبع تقدم التمويل وتفاعل مع الداعمين.">
-    <meta name="keywords" content="لوحة التحكم, إدارة المشاريع, تمويل جماعي, السعودية">
-    <meta name="author" content="يلا ستارتر">
-    <meta name="robots" content="index, follow">
-
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="لوحة التحكم - يلا ستارتر">
-    <meta property="og:description" content="قم بإدارة مشاريعك وحملاتك في يلا ستارتر من لوحة التحكم الشخصية الخاصة بك.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yallastarter.com/dashboard-ar">
-
-    <!-- Preload Critical Resources -->
-    <link rel="preload" href="styles.css" as="style">
-    <link rel="preload"
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap"
-        as="style">
-
-    <title>لوحة التحكم - يلا ستارتر</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="mobile-menu.css">
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body {
-            font-family: 'Tajawal', 'Poppins', sans-serif;
-            text-align: right;
-            direction: rtl;
-        }
-
-        .dashboard-container {
-            display: grid;
-            grid-template-columns: 250px 1fr;
-            min-height: calc(100vh - 70px);
-        }
-
-        .dashboard-sidebar {
-            background-color: var(--neutral-100);
-            border-left: 1px solid var(--neutral-300);
-            /* RTL border */
-            border-right: none;
-            padding: 2rem 0;
-        }
-
-        .user-profile {
-            display: flex;
-            align-items: center;
-            padding: 0 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .user-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            overflow: hidden;
-            margin-left: 1rem;
-            /* RTL margin */
-            margin-right: 0;
-        }
-
-        .user-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .user-info {
-            flex: 1;
-        }
-
-        .user-name {
-            font-weight: 600;
-            color: var(--neutral-900);
-            margin-bottom: 0.2rem;
-        }
-
-        .user-email {
-            font-size: 0.9rem;
-            color: var(--neutral-600);
-        }
-
-        .sidebar-menu {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .sidebar-menu-item {
-            margin-bottom: 0.5rem;
-        }
-
-        .sidebar-menu-link {
-            display: flex;
-            align-items: center;
-            padding: 0.8rem 1.5rem;
-            color: var(--neutral-700);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .sidebar-menu-link:hover {
-            background-color: var(--neutral-200);
-            color: var(--primary);
-        }
-
-        .sidebar-menu-link.active {
-            background-color: var(--primary-light);
-            color: var(--primary);
-            font-weight: 500;
-            border-left: 3px solid var(--primary);
-            /* RTL border */
-            border-right: none;
-        }
-
-        .sidebar-menu-icon {
-            margin-left: 1rem;
-            /* RTL margin */
-            margin-right: 0;
-            width: 20px;
-            text-align: center;
-        }
-
-        .dashboard-content {
-            padding: 2rem;
-        }
-
-        .dashboard-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-
-        .dashboard-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--neutral-900);
-        }
-
-        .dashboard-actions {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            background-color: white;
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            box-shadow: var(--box-shadow);
-        }
-
-        .stat-value {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            color: var(--neutral-600);
-            font-size: 0.9rem;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .project-card {
-            background-color: white;
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--box-shadow);
-        }
-
-        .project-image {
-            height: 160px;
-            overflow: hidden;
-        }
-
-        .project-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .project-content {
-            padding: 1.5rem;
-        }
-
-        .project-category {
-            display: inline-block;
-            background-color: var(--primary-light);
-            color: var(--primary);
-            font-size: 0.8rem;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            margin-bottom: 0.8rem;
-        }
-
-        .project-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 0.8rem;
-            color: var(--neutral-900);
-        }
-
-        .project-status {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .status-badge {
-            display: inline-block;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            margin-left: 0.5rem;
-            /* RTL margin */
-            margin-right: 0;
-        }
-
-        .status-badge.draft {
-            background-color: var(--neutral-200);
-            color: var(--neutral-700);
-        }
-
-        .status-badge.active {
-            background-color: var(--success-light);
-            color: var(--success);
-        }
-
-        .status-badge.completed {
-            background-color: var(--info-light);
-            color: var(--info);
-        }
-
-        .project-meta {
-            display: flex;
-            justify-content: space-between;
-            color: var(--neutral-600);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .project-actions {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .tab-container {
-            margin-bottom: 2rem;
-        }
-
-        .tabs-nav {
-            display: flex;
-            border-bottom: 1px solid var(--neutral-300);
-            margin-bottom: 1.5rem;
-        }
-
-        .tab-item {
-            padding: 0.8rem 1.5rem;
-            cursor: pointer;
-            color: var(--neutral-600);
-            font-weight: 500;
-            border-bottom: 2px solid transparent;
-            transition: var(--transition);
-        }
-
-        .tab-item:hover {
-            color: var(--primary);
-        }
-
-        .tab-item.active {
-            color: var(--primary);
-            border-bottom-color: var(--primary);
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 992px) {
-            .dashboard-container {
-                grid-template-columns: 1fr;
-            }
-
-            .dashboard-sidebar {
-                display: none;
-            }
-        }
-
-        /* Header Adjustments for RTL */
-        .header {
-            direction: rtl;
-        }
-
-        .navbar {
-            justify-content: space-between;
-        }
-
-        .nav-links {
-            margin-left: auto;
-            margin-right: 0;
-        }
-
-        .logo {
-            margin-left: 0.8rem;
-            margin-right: 0;
-        }
-    </style>
-</head>
-
-<body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <nav class="navbar">
-                <a href="index-ar.html" class="logo">
-                    <span class="logo-text">يلا ستارتر</span>
-                </a>
-
-                <button class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
-                </button>
-
-                <ul class="nav-links">
-                    <li><a href="index-ar.html">الرئيسية</a></li>
-                    <li><a href="projects-ar.html">تصفح المشاريع</a></li>
-                    <li><a href="how-it-works-ar.html">كيف يعمل</a></li>
-                    <li><a href="about-ar.html">من نحن</a></li>
-                    <li><a href="contact-ar.html">اتصل بنا</a></li>
-                </ul>
-
-                <div class="auth-buttons">
-                    <div class="user-dropdown">
-                        <button class="user-dropdown-btn">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User Avatar"
-                                class="user-avatar-small">
-                            <span class="user-name">محمد</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="user-dropdown-menu">
-                            <a href="dashboard-ar.html" class="dropdown-item active">
-                                <i class="fas fa-tachometer-alt"></i> لوحة التحكم
-                            </a>
-                            <a href="user-profile-ar.html" class="dropdown-item">
-                                <i class="fas fa-user"></i> الملف الشخصي
-                            </a>
-                            <a href="#" class="dropdown-item">
-                                <i class="fas fa-cog"></i> الإعدادات
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="index-ar.html" class="dropdown-item logout-link">
-                                <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-            </nav>
-
-            <div class="mobile-menu">
-                <div class="mobile-menu-header">
-
-                    <button class="mobile-close-btn">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <ul class="nav-links">
-                    <li><a href="index-ar.html">الرئيسية</a></li>
-                    <li><a href="projects-ar.html">تصفح المشاريع</a></li>
-                    <li><a href="how-it-works-ar.html">كيف يعمل</a></li>
-                    <li><a href="about-ar.html">من نحن</a></li>
-                    <li><a href="contact-ar.html">اتصل بنا</a></li>
-                </ul>
-                <div class="language-switcher">
-                    <button class="language-btn active" onclick="switchLanguage('ar')">العربية</button>
-                    <button class="language-btn" onclick="switchLanguage('en')">English</button>
-                </div>
-                <div class="auth-buttons">
-                    <div class="user-dropdown">
-                        <button class="user-dropdown-btn">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User Avatar"
-                                class="user-avatar-small">
-                            <span class="user-name">محمد</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="user-dropdown-menu">
-                            <a href="dashboard-ar.html" class="dropdown-item active">
-                                <i class="fas fa-tachometer-alt"></i> لوحة التحكم
-                            </a>
-                            <a href="user-profile-ar.html" class="dropdown-item">
-                                <i class="fas fa-user"></i> الملف الشخصي
-                            </a>
-                            <a href="#" class="dropdown-item">
-                                <i class="fas fa-cog"></i> الإعدادات
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="index-ar.html" class="dropdown-item logout-link">
-                                <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </header>
-
-    <!-- Dashboard -->
-    <div class="dashboard-container">
-        <!-- Sidebar -->
-        <div class="dashboard-sidebar">
-            <div class="user-profile">
-                <div class="user-avatar">
-                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User Avatar">
-                </div>
-                <div class="user-info">
-                    <div class="user-name">محمد آل سعود</div>
-                    <div class="user-email">mohammed@example.com</div>
-                </div>
-            </div>
-
-            <ul class="sidebar-menu">
-                <li class="sidebar-menu-item">
-                    <a href="dashboard-ar.html" class="sidebar-menu-link"><i class="fas fa-tachometer-alt sidebar-menu-icon"></i> لوحة التحكم</a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a href="my-projects-ar.html" class="sidebar-menu-link"><i class="fas fa-rocket sidebar-menu-icon"></i> مشاريعي</a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a href="backed-projects-ar.html" class="sidebar-menu-link"><i class="fas fa-hand-holding-heart sidebar-menu-icon"></i> المشاريع المدعومة</a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a href="payments-ar.html" class="sidebar-menu-link active"><i class="fas fa-money-bill-wave sidebar-menu-icon"></i> المدفوعات</a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a href="notifications-ar.html" class="sidebar-menu-link"><i class="fas fa-bell sidebar-menu-icon"></i> الإشعارات</a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a href="user-profile-ar.html" class="sidebar-menu-link"><i class="fas fa-user sidebar-menu-icon"></i> الملف الشخصي</a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a href="settings-ar.html" class="sidebar-menu-link"><i class="fas fa-cog sidebar-menu-icon"></i> الإعدادات</a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a href="support-ar.html" class="sidebar-menu-link"><i class="fas fa-question-circle sidebar-menu-icon"></i> المساعدة والدعم</a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a href="index-ar.html" class="sidebar-menu-link logout-link">
-                        <i class="fas fa-sign-out-alt sidebar-menu-icon"></i>
-                        تسجيل الخروج
-                    </a>
-                </li>
-            </ul>
         </div>
+    </div><!-- end dashboard-container -->
 
-        <!-- Content -->
-        <div class="dashboard-content">
-            <div class="dashboard-header">
-                <h1 class="dashboard-title">لوحة التحكم</h1>
-
-                <div class="dashboard-actions">
-                    <a href="create-project-ar.html" class="btn btn-primary">
-                        <i class="fas fa-plus"></i> أنشئ مشروعاً
-                    </a>
-                </div>
-            </div>
-
-            <!-- Stats -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-value">3</div>
-                    <div class="stat-label">المشاريع النشطة</div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-value">12</div>
-                    <div class="stat-label">المشاريع المدعومة</div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-value">15,200 ر.س</div>
-                    <div class="stat-label">إجمالي التمويل</div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-value">8,500 ر.س</div>
-                    <div class="stat-label">إجمالي الدعم</div>
-                </div>
-            </div>
-
-            <!-- Tabs -->
-            <div class="tab-container">
-                <div class="tabs-nav">
-                    <div class="tab-item active">مشاريعي</div>
-                    <div class="tab-item">المشاريع المدعومة</div>
-                </div>
-
-                <!-- My Projects Tab -->
-                <div class="tab-content active">
-                    <div class="projects-grid">
-                        <div class="project-card">
-                            <div class="project-image">
-                                <img src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                                    alt="Solar Panels">
-                            </div>
-                            <div class="project-content">
-                                <div class="project-category">تقنية</div>
-                                <h3 class="project-title">ألواح شمسية ذكية للمنازل السعودية</h3>
-                                <div class="project-status">
-                                    <span class="status-badge active">نشط</span>
-                                    <span>باقي 18 يوم</span>
-                                </div>
-                                <div class="project-meta">
-                                    <div>320,500 ر.س تم جمعها</div>
-                                    <div>64% مكتمل</div>
-                                </div>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: 64%;"></div>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
-                                    <a href="project-details-ar.html" class="btn btn-sm btn-outline">عرض</a>
-                                    <a href="#" class="btn btn-sm btn-primary">تعديل</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Backed Projects Tab -->
-                <div class="tab-content">
-                    <div class="empty-state">
-                        <div class="empty-state-icon">
-                            <i class="fas fa-hand-holding-heart"></i>
-                        </div>
-                        <h3 class="empty-state-title">لم تدعم أي مشاريع بعد</h3>
-                        <p class="empty-state-description">استكشف المشاريع الإبداعية وكن جزءاً من النجاح.</p>
-                        <a href="projects-ar.html" class="btn btn-primary">تصفح المشاريع</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Universal Mobile Menu Script -->
+    <!-- Auth + Mobile Menu Scripts -->
+    <script src="assets/js/session-init.js"></script>
+    <script src="assets/js/auth-handler.js"></script>
     <script src="mobile-menu.js"></script>
-
     <script>
-        function switchLanguage(lang) {
-            if (lang === 'en') {
-                window.location.href = 'dashboard.html';
-            } else if (lang === 'ar') {
-                window.location.href = 'dashboard-ar.html';
+        // Protect page
+        if (window.auth) {
+            window.auth.protectPage();
+            const user = window.auth ? (window.auth ? window.auth.getUser() : null) : null;
+            if (user && document.getElementById("userName")) {
+                document.getElementById('sidebarName').textContent = user.username || 'User';
+                document.getElementById('sidebarEmail').textContent = user.email || '';
+                document.getElementById('headerUserName').textContent = user.username || 'User';
+                if (user.photoUrl) {
+                    const av = document.getElementById('sidebarAvatar');
+                    av.style.backgroundImage = `url(${user.photoUrl})`;
+                    av.style.backgroundSize = 'cover';
+                    av.innerHTML = '';
+                    document.getElementById('headerAvatar').style.backgroundImage = `url(${user.photoUrl})`;
+                    document.getElementById('headerAvatar').style.backgroundSize = 'cover';
+                    document.getElementById('headerAvatar').innerHTML = '';
+                }
             }
+        }
+
+        // User Dropdown
+        const dropBtn = document.querySelector('.user-dropdown-btn');
+        const dropMenu = document.querySelector('.user-dropdown-menu');
+        dropBtn?.addEventListener('click', () => dropMenu.classList.toggle('show'));
+        window.addEventListener('click', e => {
+            if (!e.target.closest('.user-dropdown-btn')) dropMenu?.classList.remove('show');
+        });
+
+        // Track loaded transactions for CSV export
+        let loadedTransactions = [];
+
+        function downloadCSV() {
+            const rows = [['Date', 'Description', 'Type', 'Amount', 'Status']];
+            loadedTransactions.forEach(tx => {
+                rows.push([tx.date, tx.desc, tx.type, (tx.amount < 0 ? '-' : '+') + 'ريال ' + Math.abs(tx.amount), tx.status]);
+            });
+            if (!rows.length) { alert('No transactions to export.'); return; }
+            const csv = rows.map(r => r.map(c => `"${c}"`).join(',')).join('\n');
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url; a.download = 'yallastarter-payments.csv'; a.click();
+        }
+
+        function renderTransactions(txs) {
+            loadedTransactions = txs;
+            const tbody = document.getElementById('transactionTable');
+            if (!txs.length) {
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:3rem;color:var(--neutral-500);">لم يتم العثور على معاملات.</td></tr>';
+                return;
+            }
+            let backed = 0, received = 0, pending = 0;
+            tbody.innerHTML = txs.map(tx => {
+                const isOut = tx.amount < 0;
+                const absAmt = Math.abs(tx.amount);
+                if (isOut) backed += absAmt;
+                else if (tx.status === 'completed') received += absAmt;
+                if (tx.status === 'pending') pending++;
+                const statusClass = tx.status === 'completed' ? 'badge-success' : tx.status === 'pending' ? 'badge-pending' : tx.status === 'refunded' ? 'badge-refunded' : 'badge-failed';
+                const amtClass = isOut ? 'tx-amount-out' : 'tx-amount-in';
+                const amtSign = isOut ? '-' : '+';
+                return `<tr>
+                    <td style="white-space:nowrap;color:var(--neutral-600);">${tx.date}</td>
+                    <td>${tx.desc}</td>
+                    <td><span class="badge" style="background:var(--neutral-200);color:var(--neutral-700);">${tx.type}</span></td>
+                    <td class="${amtClass}">${amtSign}ريال ${absAmt.toLocaleString()}</td>
+                    <td><span class="badge ${statusClass}">${tx.status.charAt(0).toUpperCase() + tx.status.slice(1)}</span></td>
+                </tr>`;
+            }).join('');
+            document.getElementById('totalBacked').textContent = 'ريال ' + backed.toLocaleString();
+            document.getElementById('totalReceived').textContent = 'ريال ' + received.toLocaleString();
+            document.getElementById('pendingCount').textContent = pending;
+            document.getElementById('txCount').textContent = txs.length;
+        }
+
+        // Load from API — NO fallback to fake data
+        async function loadTransactions() {
+            const token = (window.auth && typeof window.auth.getToken === 'function') ? window.auth.getToken() : localStorage.getItem('token');
+            const tbody = document.getElementById('transactionTable');
+            if (token) {
+                try {
+                    const res = await fetch('/api/coins/history', { headers: { 'Authorization': `Bearer ${token}` } });
+                    const data = await res.json();
+                    if (data.success && data.data && data.data.length) {
+                        renderTransactions(data.data.map(tx => ({
+                            date: new Date(tx.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+                            desc: tx.description || (tx.type === 'send' ? 'Backed project' : tx.type === 'purchase' ? 'Coin purchase' : 'Cash out'),
+                            type: tx.type === 'purchase' ? 'Purchase' : tx.type === 'send' ? 'Backing' : 'Cash Out',
+                            amount: tx.type === 'send' || tx.type === 'cashout' ? -tx.amount : tx.amount,
+                            status: tx.status || 'completed'
+                        })));
+                        return;
+                    }
+                } catch (e) { console.error('Payment load error', e); }
+            }
+            // Empty state
+            tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;padding:3rem;color:var(--neutral-500);">
+                <i class="fas fa-receipt" style="font-size:2.5rem;display:block;margin-bottom:1rem;color:var(--neutral-300);"></i>
+                No transactions yet.
+            </td></tr>`;
+        }
+
+        setTimeout(() => loadTransactions();, 500);
+
+        function showAddMethodModal() {
+            const toast = document.createElement('div');
+            toast.textContent = '💳 Add Payment Method feature coming soon!';
+            Object.assign(toast.style, {
+                position: 'fixed', bottom: '2rem', right: '2rem',
+                background: '#006c35', color: 'white', padding: '1rem 1.5rem',
+                borderRadius: '10px', boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
+                zIndex: 9999, fontWeight: '500', fontSize: '0.95rem',
+                transition: 'opacity 0.4s ease'
+            });
+            document.body.appendChild(toast);
+            setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 400); }, 3000);
         }
     </script>
-
-    <!-- Link to Main Scripts -->
-    <script src="scripts.js"></script>
 </body>
 
 </html>

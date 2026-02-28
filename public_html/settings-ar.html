@@ -4,337 +4,215 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="قم بإدارة مشاريعك وحملاتك في يلا ستارتر من لوحة التحكم الشخصية الخاصة بك. تتبع تقدم التمويل وتفاعل مع الداعمين.">
-    <meta name="keywords" content="لوحة التحكم, إدارة المشاريع, تمويل جماعي, السعودية">
-    <meta name="author" content="يلا ستارتر">
-    <meta name="robots" content="index, follow">
-
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="لوحة التحكم - يلا ستارتر">
-    <meta property="og:description" content="قم بإدارة مشاريعك وحملاتك في يلا ستارتر من لوحة التحكم الشخصية الخاصة بك.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yallastarter.com/dashboard-ar">
-
-    <!-- Preload Critical Resources -->
-    <link rel="preload" href="styles.css" as="style">
-    <link rel="preload"
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap"
-        as="style">
-
+    <meta name="description" content="Manage your YallaStarter account settings, preferences, and security options.">
     <title>الإعدادات - يلا ستارتر</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="mobile-menu.css">
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Tajawal', 'Poppins', sans-serif;
-            text-align: right;
-            direction: rtl;
+        .settings-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
         }
 
-        .dashboard-container {
-            display: grid;
-            grid-template-columns: 250px 1fr;
-            min-height: calc(100vh - 70px);
-        }
-
-        .dashboard-sidebar {
-            background-color: var(--neutral-100);
-            border-left: 1px solid var(--neutral-300);
-            /* RTL border */
-            border-right: none;
-            padding: 2rem 0;
-        }
-
-        .user-profile {
-            display: flex;
-            align-items: center;
-            padding: 0 1.5rem;
+        .settings-header {
             margin-bottom: 2rem;
         }
 
-        .user-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            overflow: hidden;
-            margin-left: 1rem;
-            /* RTL margin */
-            margin-right: 0;
-        }
-
-        .user-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .user-info {
-            flex: 1;
-        }
-
-        .user-name {
-            font-weight: 600;
-            color: var(--neutral-900);
-            margin-bottom: 0.2rem;
-        }
-
-        .user-email {
-            font-size: 0.9rem;
-            color: var(--neutral-600);
-        }
-
-        .sidebar-menu {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .sidebar-menu-item {
-            margin-bottom: 0.5rem;
-        }
-
-        .sidebar-menu-link {
-            display: flex;
-            align-items: center;
-            padding: 0.8rem 1.5rem;
-            color: var(--neutral-700);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .sidebar-menu-link:hover {
-            background-color: var(--neutral-200);
-            color: var(--primary);
-        }
-
-        .sidebar-menu-link.active {
-            background-color: var(--primary-light);
-            color: var(--primary);
-            font-weight: 500;
-            border-left: 3px solid var(--primary);
-            /* RTL border */
-            border-right: none;
-        }
-
-        .sidebar-menu-icon {
-            margin-left: 1rem;
-            /* RTL margin */
-            margin-right: 0;
-            width: 20px;
-            text-align: center;
-        }
-
-        .dashboard-content {
-            padding: 2rem;
-        }
-
-        .dashboard-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-
-        .dashboard-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--neutral-900);
-        }
-
-        .dashboard-actions {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            background-color: white;
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            box-shadow: var(--box-shadow);
-        }
-
-        .stat-value {
+        .settings-title {
             font-size: 2rem;
             font-weight: 700;
-            color: var(--primary);
+            color: var(--neutral-900);
             margin-bottom: 0.5rem;
         }
 
-        .stat-label {
+        .settings-subtitle {
             color: var(--neutral-600);
-            font-size: 0.9rem;
         }
 
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .project-card {
-            background-color: white;
+        .settings-section {
+            background: white;
             border-radius: var(--border-radius);
-            overflow: hidden;
+            padding: 2rem;
+            margin-bottom: 2rem;
             box-shadow: var(--box-shadow);
         }
 
-        .project-image {
-            height: 160px;
-            overflow: hidden;
-        }
-
-        .project-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .project-content {
-            padding: 1.5rem;
-        }
-
-        .project-category {
-            display: inline-block;
-            background-color: var(--primary-light);
-            color: var(--primary);
-            font-size: 0.8rem;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            margin-bottom: 0.8rem;
-        }
-
-        .project-title {
-            font-size: 1.2rem;
+        .section-title {
+            font-size: 1.3rem;
             font-weight: 600;
-            margin-bottom: 0.8rem;
             color: var(--neutral-900);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--neutral-200);
         }
 
-        .project-status {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .status-badge {
-            display: inline-block;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            margin-left: 0.5rem;
-            /* RTL margin */
-            margin-right: 0;
-        }
-
-        .status-badge.draft {
-            background-color: var(--neutral-200);
-            color: var(--neutral-700);
-        }
-
-        .status-badge.active {
-            background-color: var(--success-light);
-            color: var(--success);
-        }
-
-        .status-badge.completed {
-            background-color: var(--info-light);
-            color: var(--info);
-        }
-
-        .project-meta {
-            display: flex;
-            justify-content: space-between;
-            color: var(--neutral-600);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .project-actions {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .tab-container {
-            margin-bottom: 2rem;
-        }
-
-        .tabs-nav {
-            display: flex;
-            border-bottom: 1px solid var(--neutral-300);
+        .form-group {
             margin-bottom: 1.5rem;
         }
 
-        .tab-item {
-            padding: 0.8rem 1.5rem;
-            cursor: pointer;
-            color: var(--neutral-600);
+        .form-label {
+            display: block;
             font-weight: 500;
-            border-bottom: 2px solid transparent;
-            transition: var(--transition);
+            color: var(--neutral-700);
+            margin-bottom: 0.5rem;
         }
 
-        .tab-item:hover {
-            color: var(--primary);
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--neutral-200);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
         }
 
-        .tab-item.active {
-            color: var(--primary);
-            border-bottom-color: var(--primary);
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 166, 81, 0.1);
         }
 
-        .tab-content {
+        .btn-save {
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-save:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--neutral-300);
+            transition: 0.4s;
+            border-radius: 24px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.toggle-slider {
+            background-color: var(--primary);
+        }
+
+        input:checked+.toggle-slider:before {
+            transform: translateX(26px);
+        }
+
+        .preference-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--neutral-200);
+        }
+
+        .preference-item:last-child {
+            border-bottom: none;
+        }
+
+        .preference-info h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--neutral-900);
+            margin-bottom: 0.25rem;
+        }
+
+        .preference-info p {
+            font-size: 0.9rem;
+            color: var(--neutral-600);
+            margin: 0;
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
             display: none;
         }
 
-        .tab-content.active {
+        .alert.show {
             display: block;
         }
 
-        /* Mobile Responsive */
-        @media (max-width: 992px) {
-            .dashboard-container {
-                grid-template-columns: 1fr;
+        .alert-success {
+            background: var(--success-light);
+            color: var(--success);
+            border: 1px solid var(--success);
+        }
+
+        .alert-error {
+            background: var(--danger-light);
+            color: var(--danger);
+            border: 1px solid var(--danger);
+        }
+
+        @media (max-width: 768px) {
+            .settings-section {
+                padding: 1.5rem;
             }
 
-            .dashboard-sidebar {
-                display: none;
+            .preference-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
             }
         }
+    </style>
 
-        /* Header Adjustments for RTL */
-        .header {
-            direction: rtl;
-        }
-
-        .navbar {
-            justify-content: space-between;
-        }
-
-        .nav-links {
-            margin-left: auto;
-            margin-right: 0;
-        }
-
-        .logo {
-            margin-left: 0.8rem;
-            margin-right: 0;
-        }
+    <style>
+        body { font-family: 'Tajawal', sans-serif; text-align: right; direction: rtl; }
+        .dashboard-sidebar { border-right: none; border-left: 1px solid var(--neutral-200); }
+        .sidebar-menu-icon { margin-right: 0; margin-left: 1rem; }
+        .sidebar-menu-link.active { border-right: none; border-left: 3px solid var(--primary); }
+        .nav-links { margin-left: auto; margin-right: 0; }
+        .logo { margin-left: 1rem; margin-right: 0; }
+        .user-avatar { margin-right: 0; margin-left: 1rem; }
+        /* Fix dropdown for RTL */
+        .user-dropdown-menu { right: auto; left: 0; text-align: right; transform-origin: top left; }
+        .dropdown-item { display: flex !important; align-items: center; gap: 10px; flex-direction: row; }
+        .dropdown-item i { margin-left: 0; margin-right: 0; }
+        /* Fix spinner for RTL */
+        .fa-spin { display: inline-block; }
     </style>
 </head>
 
@@ -344,7 +222,7 @@
         <div class="container">
             <nav class="navbar">
                 <a href="index-ar.html" class="logo">
-                    <span class="logo-text">يلا ستارتر</span>
+                    <span class="logo-text">YallaStarter</span>
                 </a>
 
                 <button class="mobile-menu-btn">
@@ -353,198 +231,105 @@
 
                 <ul class="nav-links">
                     <li><a href="index-ar.html">الرئيسية</a></li>
-                    <li><a href="projects-ar.html">تصفح المشاريع</a></li>
-                    <li><a href="how-it-works-ar.html">كيف يعمل</a></li>
-                    <li><a href="about-ar.html">من نحن</a></li>
-                    <li><a href="contact-ar.html">اتصل بنا</a></li>
+                    <li><a href="projects.html">تصفح المشاريع</a></li>
+                    <li><a href="dashboard-ar.html">لوحة التحكم</a></li>
                 </ul>
 
                 <div class="auth-buttons">
                     <div class="user-dropdown">
                         <button class="user-dropdown-btn">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User Avatar"
-                                class="user-avatar-small">
-                            <span class="user-name">محمد</span>
+                            <div class="user-avatar-small" id="headerAvatar"
+                                style="width: 35px; height: 35px; border-radius: 50%; background: linear-gradient(135deg, #006c35 0%, #00a651 100%); display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-user" style="font-size: 1rem; color: white;"></i>
+                            </div>
+                            <span id="headerUserName">User</span>
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="user-dropdown-menu">
-                            <a href="dashboard-ar.html" class="dropdown-item active">
+                            <a href="dashboard-ar.html" class="dropdown-item">
                                 <i class="fas fa-tachometer-alt"></i> لوحة التحكم
                             </a>
                             <a href="user-profile-ar.html" class="dropdown-item">
                                 <i class="fas fa-user"></i> الملف الشخصي
                             </a>
-                            <a href="#" class="dropdown-item">
+                            <a href="settings-ar.html" class="dropdown-item active">
                                 <i class="fas fa-cog"></i> الإعدادات
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a href="index-ar.html" class="dropdown-item logout-link">
+                            <a href="javascript:void(0)" class="dropdown-item"
+                                onclick="window.auth.logout(); return false;">
                                 <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
                             </a>
                         </div>
                     </div>
                 </div>
-
             </nav>
-
-            <div class="mobile-menu">
-                <div class="mobile-menu-header">
-
-                    <button class="mobile-close-btn">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <ul class="nav-links">
-                    <li><a href="index-ar.html">الرئيسية</a></li>
-                    <li><a href="projects-ar.html">تصفح المشاريع</a></li>
-                    <li><a href="how-it-works-ar.html">كيف يعمل</a></li>
-                    <li><a href="about-ar.html">من نحن</a></li>
-                    <li><a href="contact-ar.html">اتصل بنا</a></li>
-                </ul>
-                <div class="language-switcher">
-                    <button class="language-btn active" onclick="switchLanguage('ar')">العربية</button>
-                    <button class="language-btn" onclick="switchLanguage('en')">English</button>
-                </div>
-                <div class="auth-buttons">
-                    <div class="user-dropdown">
-                        <button class="user-dropdown-btn">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User Avatar"
-                                class="user-avatar-small">
-                            <span class="user-name">محمد</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="user-dropdown-menu">
-                            <a href="dashboard-ar.html" class="dropdown-item active">
-                                <i class="fas fa-tachometer-alt"></i> لوحة التحكم
-                            </a>
-                            <a href="user-profile-ar.html" class="dropdown-item">
-                                <i class="fas fa-user"></i> الملف الشخصي
-                            </a>
-                            <a href="#" class="dropdown-item">
-                                <i class="fas fa-cog"></i> الإعدادات
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="index-ar.html" class="dropdown-item logout-link">
-                                <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        </div>
     </header>
 
-    <!-- Dashboard -->
-    <div class="dashboard-container">
-        <!-- Sidebar -->
-        <div class="dashboard-sidebar">
-            <div class="user-profile">
-                <div class="user-avatar">
-                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User Avatar">
-                </div>
-                <div class="user-info">
-                    <div class="user-name">محمد آل سعود</div>
-                    <div class="user-email">mohammed@example.com</div>
-                </div>
-            </div>
-
-            <ul class="sidebar-menu">
-                <li class="sidebar-menu-item">
-                    <a href="dashboard-ar.html" class="sidebar-menu-link"><i class="fas fa-tachometer-alt sidebar-menu-icon"></i> لوحة التحكم</a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a href="my-projects-ar.html" class="sidebar-menu-link"><i class="fas fa-rocket sidebar-menu-icon"></i> مشاريعي</a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a href="backed-projects-ar.html" class="sidebar-menu-link"><i class="fas fa-hand-holding-heart sidebar-menu-icon"></i> المشاريع المدعومة</a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a href="payments-ar.html" class="sidebar-menu-link"><i class="fas fa-money-bill-wave sidebar-menu-icon"></i> المدفوعات</a>
-                    <a href="coins-ar.html" class="sidebar-menu-link"><i class="fas fa-coins sidebar-menu-icon"></i> محفظتي</a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a href="notifications-ar.html" class="sidebar-menu-link"><i class="fas fa-bell sidebar-menu-icon"></i> الإشعارات</a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a href="user-profile-ar.html" class="sidebar-menu-link"><i class="fas fa-user sidebar-menu-icon"></i> الملف الشخصي</a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a href="settings-ar.html" class="sidebar-menu-link active"><i class="fas fa-cog sidebar-menu-icon"></i> الإعدادات</a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a href="support-ar.html" class="sidebar-menu-link"><i class="fas fa-question-circle sidebar-menu-icon"></i> المساعدة والدعم</a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a href="index-ar.html" class="sidebar-menu-link logout-link">
-                        <i class="fas fa-sign-out-alt sidebar-menu-icon"></i>
-                        تسجيل الخروج
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <!-- Content -->
-        <div class="dashboard-content"><div class="settings-container" style="max-width:none; margin:0; padding:0;">
+    <!-- Settings Content -->
+    <div class="settings-container">
         <div class="settings-header">
-            <h1 class="settings-title">الإعدادات</h1>
-            <p class="settings-subtitle">إدارة تفضيلات حسابك وإعداداته</p>
+            <h1 class="settings-title">Settings</h1>
+            <p class="settings-subtitle">Manage your account preferences and settings</p>
         </div>
 
         <div id="alertContainer"></div>
 
-        <!-- Account الإعدادات -->
+        <!-- Account Settings -->
         <div class="settings-section">
-            <h2 class="section-title">معلومات الحساب</h2>
+            <h2 class="section-title">Account Information</h2>
             <form id="accountForm">
                 <div class="form-group">
-                    <label for="username" class="form-label">اسم المستخدم</label>
-                    <input type="text" id="username" class="form-control" placeholder="أدخل اسم المستخدم">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" id="username" class="form-control" placeholder="Enter your username">
                 </div>
                 <div class="form-group">
-                    <label for="email" class="form-label">عنوان البريد الإلكتروني</label>
-                    <input type="email" id="email" class="form-control" placeholder="أدخل بريدك الإلكتروني">
+                    <label for="email" class="form-label">البريد الإلكتروني</label>
+                    <input type="email" id="email" class="form-control" placeholder="Enter your email">
                 </div>
                 <button type="submit" class="btn-save">حفظ التغييرات</button>
             </form>
         </div>
 
-        <!-- Password الإعدادات -->
+        <!-- Password Settings -->
         <div class="settings-section">
-            <h2 class="section-title">تغيير كلمة المرور</h2>
+            <h2 class="section-title">Change Password</h2>
             <form id="passwordForm">
                 <div class="form-group">
                     <label for="currentPassword" class="form-label">كلمة المرور الحالية</label>
                     <input type="password" id="currentPassword" class="form-control"
-                        placeholder="أدخل كلمة المرور الحالية">
+                        placeholder="Enter current password">
                 </div>
                 <div class="form-group">
                     <label for="newPassword" class="form-label">كلمة المرور الجديدة</label>
-                    <input type="password" id="newPassword" class="form-control" placeholder="أدخل كلمة المرور الجديدة">
+                    <input type="password" id="newPassword" class="form-control" placeholder="Enter new password">
                 </div>
                 <div class="form-group">
-                    <label for="confirmPassword" class="form-label">Confirm كلمة المرور الجديدة</label>
+                    <label for="confirmPassword" class="form-label">تأكيد كلمة المرور الجديدة</label>
                     <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm new password">
                 </div>
-                <button type="submit" class="btn-save">تحديث كلمة المرور</button>
+                <button type="submit" class="btn-save">Update Password</button>
             </form>
         </div>
 
-        <!-- تفضيلات الإشعارات -->
+        <!-- Notification Preferences -->
         <div class="settings-section">
-            <h2 class="section-title">تفضيلات الإشعارات</h2>
+            <h2 class="section-title">Notification Preferences</h2>
             <div class="preference-item">
                 <div class="preference-info">
-                    <h4>Email الإشعارات</h4>
-                    <p>تلقي تحديثات عبر البريد الإلكتروني حول مشاريعك</p>
+                    <h4>Email Notifications</h4>
+                    <p>Receive email updates about your projects and backed campaigns</p>
                 </div>
                 <label class="toggle-switch">
-                    <input type="checkbox" id="emailالإشعارات" checked>
+                    <input type="checkbox" id="emailNotifications" checked>
                     <span class="toggle-slider"></span>
                 </label>
             </div>
             <div class="preference-item">
                 <div class="preference-info">
-                    <h4>تحديثات المشروع</h4>
-                    <p>احصل على إشعارات بتحديثات المشاريع المدعومة</p>
+                    <h4>Project Updates</h4>
+                    <p>Get notified when projects you backed post updates</p>
                 </div>
                 <label class="toggle-switch">
                     <input type="checkbox" id="projectUpdates" checked>
@@ -553,8 +338,8 @@
             </div>
             <div class="preference-item">
                 <div class="preference-info">
-                    <h4>النشرة البريدية</h4>
-                    <p>احصل على نشرتنا الأسبوعية بالمشاريع المميزة</p>
+                    <h4>Newsletter</h4>
+                    <p>Receive our weekly newsletter with featured projects</p>
                 </div>
                 <label class="toggle-switch">
                     <input type="checkbox" id="newsletter">
@@ -562,595 +347,121 @@
                 </label>
             </div>
         </div>
-    
     </div>
 
-    <!DOCTYPE html>
-<html lang="ar" dir="rtl">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="قم بإدارة مشاريعك وحملاتك في يلا ستارتر من لوحة التحكم الشخصية الخاصة بك. تتبع تقدم التمويل وتفاعل مع الداعمين.">
-    <meta name="keywords" content="لوحة التحكم, إدارة المشاريع, تمويل جماعي, السعودية">
-    <meta name="author" content="يلا ستارتر">
-    <meta name="robots" content="index, follow">
-
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="لوحة التحكم - يلا ستارتر">
-    <meta property="og:description" content="قم بإدارة مشاريعك وحملاتك في يلا ستارتر من لوحة التحكم الشخصية الخاصة بك.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yallastarter.com/dashboard-ar">
-
-    <!-- Preload Critical Resources -->
-    <link rel="preload" href="styles.css" as="style">
-    <link rel="preload"
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap"
-        as="style">
-
-    <title>لوحة التحكم - يلا ستارتر</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="mobile-menu.css">
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body {
-            font-family: 'Tajawal', 'Poppins', sans-serif;
-            text-align: right;
-            direction: rtl;
-        }
-
-        .dashboard-container {
-            display: grid;
-            grid-template-columns: 250px 1fr;
-            min-height: calc(100vh - 70px);
-        }
-
-        .dashboard-sidebar {
-            background-color: var(--neutral-100);
-            border-left: 1px solid var(--neutral-300);
-            /* RTL border */
-            border-right: none;
-            padding: 2rem 0;
-        }
-
-        .user-profile {
-            display: flex;
-            align-items: center;
-            padding: 0 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .user-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            overflow: hidden;
-            margin-left: 1rem;
-            /* RTL margin */
-            margin-right: 0;
-        }
-
-        .user-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .user-info {
-            flex: 1;
-        }
-
-        .user-name {
-            font-weight: 600;
-            color: var(--neutral-900);
-            margin-bottom: 0.2rem;
-        }
-
-        .user-email {
-            font-size: 0.9rem;
-            color: var(--neutral-600);
-        }
-
-        .sidebar-menu {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .sidebar-menu-item {
-            margin-bottom: 0.5rem;
-        }
-
-        .sidebar-menu-link {
-            display: flex;
-            align-items: center;
-            padding: 0.8rem 1.5rem;
-            color: var(--neutral-700);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .sidebar-menu-link:hover {
-            background-color: var(--neutral-200);
-            color: var(--primary);
-        }
-
-        .sidebar-menu-link.active {
-            background-color: var(--primary-light);
-            color: var(--primary);
-            font-weight: 500;
-            border-left: 3px solid var(--primary);
-            /* RTL border */
-            border-right: none;
-        }
-
-        .sidebar-menu-icon {
-            margin-left: 1rem;
-            /* RTL margin */
-            margin-right: 0;
-            width: 20px;
-            text-align: center;
-        }
-
-        .dashboard-content {
-            padding: 2rem;
-        }
-
-        .dashboard-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-
-        .dashboard-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--neutral-900);
-        }
-
-        .dashboard-actions {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            background-color: white;
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            box-shadow: var(--box-shadow);
-        }
-
-        .stat-value {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            color: var(--neutral-600);
-            font-size: 0.9rem;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .project-card {
-            background-color: white;
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--box-shadow);
-        }
-
-        .project-image {
-            height: 160px;
-            overflow: hidden;
-        }
-
-        .project-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .project-content {
-            padding: 1.5rem;
-        }
-
-        .project-category {
-            display: inline-block;
-            background-color: var(--primary-light);
-            color: var(--primary);
-            font-size: 0.8rem;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            margin-bottom: 0.8rem;
-        }
-
-        .project-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 0.8rem;
-            color: var(--neutral-900);
-        }
-
-        .project-status {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .status-badge {
-            display: inline-block;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            margin-left: 0.5rem;
-            /* RTL margin */
-            margin-right: 0;
-        }
-
-        .status-badge.draft {
-            background-color: var(--neutral-200);
-            color: var(--neutral-700);
-        }
-
-        .status-badge.active {
-            background-color: var(--success-light);
-            color: var(--success);
-        }
-
-        .status-badge.completed {
-            background-color: var(--info-light);
-            color: var(--info);
-        }
-
-        .project-meta {
-            display: flex;
-            justify-content: space-between;
-            color: var(--neutral-600);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .project-actions {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .tab-container {
-            margin-bottom: 2rem;
-        }
-
-        .tabs-nav {
-            display: flex;
-            border-bottom: 1px solid var(--neutral-300);
-            margin-bottom: 1.5rem;
-        }
-
-        .tab-item {
-            padding: 0.8rem 1.5rem;
-            cursor: pointer;
-            color: var(--neutral-600);
-            font-weight: 500;
-            border-bottom: 2px solid transparent;
-            transition: var(--transition);
-        }
-
-        .tab-item:hover {
-            color: var(--primary);
-        }
-
-        .tab-item.active {
-            color: var(--primary);
-            border-bottom-color: var(--primary);
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 992px) {
-            .dashboard-container {
-                grid-template-columns: 1fr;
-            }
-
-            .dashboard-sidebar {
-                display: none;
-            }
-        }
-
-        /* Header Adjustments for RTL */
-        .header {
-            direction: rtl;
-        }
-
-        .navbar {
-            justify-content: space-between;
-        }
-
-        .nav-links {
-            margin-left: auto;
-            margin-right: 0;
-        }
-
-        .logo {
-            margin-left: 0.8rem;
-            margin-right: 0;
-        }
-    </style>
-</head>
-
-<body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <nav class="navbar">
-                <a href="index-ar.html" class="logo">
-                    <span class="logo-text">يلا ستارتر</span>
-                </a>
-
-                <button class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
-                </button>
-
-                <ul class="nav-links">
-                    <li><a href="index-ar.html">الرئيسية</a></li>
-                    <li><a href="projects-ar.html">تصفح المشاريع</a></li>
-                    <li><a href="how-it-works-ar.html">كيف يعمل</a></li>
-                    <li><a href="about-ar.html">من نحن</a></li>
-                    <li><a href="contact-ar.html">اتصل بنا</a></li>
-                </ul>
-
-                <div class="auth-buttons">
-                    <div class="user-dropdown">
-                        <button class="user-dropdown-btn">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User Avatar"
-                                class="user-avatar-small">
-                            <span class="user-name">محمد</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="user-dropdown-menu">
-                            <a href="dashboard-ar.html" class="dropdown-item active">
-                                <i class="fas fa-tachometer-alt"></i> لوحة التحكم
-                            </a>
-                            <a href="user-profile-ar.html" class="dropdown-item">
-                                <i class="fas fa-user"></i> الملف الشخصي
-                            </a>
-                            <a href="#" class="dropdown-item">
-                                <i class="fas fa-cog"></i> الإعدادات
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="index-ar.html" class="dropdown-item logout-link">
-                                <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-            </nav>
-
-            <div class="mobile-menu">
-                <div class="mobile-menu-header">
-
-                    <button class="mobile-close-btn">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <ul class="nav-links">
-                    <li><a href="index-ar.html">الرئيسية</a></li>
-                    <li><a href="projects-ar.html">تصفح المشاريع</a></li>
-                    <li><a href="how-it-works-ar.html">كيف يعمل</a></li>
-                    <li><a href="about-ar.html">من نحن</a></li>
-                    <li><a href="contact-ar.html">اتصل بنا</a></li>
-                </ul>
-                <div class="language-switcher">
-                    <button class="language-btn active" onclick="switchLanguage('ar')">العربية</button>
-                    <button class="language-btn" onclick="switchLanguage('en')">English</button>
-                </div>
-                <div class="auth-buttons">
-                    <div class="user-dropdown">
-                        <button class="user-dropdown-btn">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User Avatar"
-                                class="user-avatar-small">
-                            <span class="user-name">محمد</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="user-dropdown-menu">
-                            <a href="dashboard-ar.html" class="dropdown-item active">
-                                <i class="fas fa-tachometer-alt"></i> لوحة التحكم
-                            </a>
-                            <a href="user-profile-ar.html" class="dropdown-item">
-                                <i class="fas fa-user"></i> الملف الشخصي
-                            </a>
-                            <a href="#" class="dropdown-item">
-                                <i class="fas fa-cog"></i> الإعدادات
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="index-ar.html" class="dropdown-item logout-link">
-                                <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </header>
-
-    <!-- Dashboard -->
-    <div class="dashboard-container">
-        <!-- Sidebar -->
-        <div class="dashboard-sidebar">
-            <div class="user-profile">
-                <div class="user-avatar">
-                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User Avatar">
-                </div>
-                <div class="user-info">
-                    <div class="user-name">محمد آل سعود</div>
-                    <div class="user-email">mohammed@example.com</div>
-                </div>
-            </div>
-
-            <ul class="sidebar-menu">
-                <li class="sidebar-menu-item">
-                    <a href="dashboard-ar.html" class="sidebar-menu-link"><i class="fas fa-tachometer-alt sidebar-menu-icon"></i> لوحة التحكم</a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a href="my-projects-ar.html" class="sidebar-menu-link"><i class="fas fa-rocket sidebar-menu-icon"></i> مشاريعي</a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a href="backed-projects-ar.html" class="sidebar-menu-link"><i class="fas fa-hand-holding-heart sidebar-menu-icon"></i> المشاريع المدعومة</a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a href="payments-ar.html" class="sidebar-menu-link"><i class="fas fa-money-bill-wave sidebar-menu-icon"></i> المدفوعات</a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a href="notifications-ar.html" class="sidebar-menu-link"><i class="fas fa-bell sidebar-menu-icon"></i> الإشعارات</a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a href="user-profile-ar.html" class="sidebar-menu-link"><i class="fas fa-user sidebar-menu-icon"></i> الملف الشخصي</a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a href="settings-ar.html" class="sidebar-menu-link active"><i class="fas fa-cog sidebar-menu-icon"></i> الإعدادات</a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a href="support-ar.html" class="sidebar-menu-link"><i class="fas fa-question-circle sidebar-menu-icon"></i> المساعدة والدعم</a>
-                </li>
-                <li class="sidebar-menu-item">
-                    <a href="index-ar.html" class="sidebar-menu-link logout-link">
-                        <i class="fas fa-sign-out-alt sidebar-menu-icon"></i>
-                        تسجيل الخروج
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <!-- Content -->
-        <div class="dashboard-content">
-            <div class="dashboard-header">
-                <h1 class="dashboard-title">لوحة التحكم</h1>
-
-                <div class="dashboard-actions">
-                    <a href="create-project-ar.html" class="btn btn-primary">
-                        <i class="fas fa-plus"></i> أنشئ مشروعاً
-                    </a>
-                </div>
-            </div>
-
-            <!-- Stats -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-value">3</div>
-                    <div class="stat-label">المشاريع النشطة</div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-value">12</div>
-                    <div class="stat-label">المشاريع المدعومة</div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-value">15,200 ر.س</div>
-                    <div class="stat-label">إجمالي التمويل</div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-value">8,500 ر.س</div>
-                    <div class="stat-label">إجمالي الدعم</div>
-                </div>
-            </div>
-
-            <!-- Tabs -->
-            <div class="tab-container">
-                <div class="tabs-nav">
-                    <div class="tab-item active">مشاريعي</div>
-                    <div class="tab-item">المشاريع المدعومة</div>
-                </div>
-
-                <!-- My Projects Tab -->
-                <div class="tab-content active">
-                    <div class="projects-grid">
-                        <div class="project-card">
-                            <div class="project-image">
-                                <img src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                                    alt="Solar Panels">
-                            </div>
-                            <div class="project-content">
-                                <div class="project-category">تقنية</div>
-                                <h3 class="project-title">ألواح شمسية ذكية للمنازل السعودية</h3>
-                                <div class="project-status">
-                                    <span class="status-badge active">نشط</span>
-                                    <span>باقي 18 يوم</span>
-                                </div>
-                                <div class="project-meta">
-                                    <div>320,500 ر.س تم جمعها</div>
-                                    <div>64% مكتمل</div>
-                                </div>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: 64%;"></div>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
-                                    <a href="project-details-ar.html" class="btn btn-sm btn-outline">عرض</a>
-                                    <a href="#" class="btn btn-sm btn-primary">تعديل</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Backed Projects Tab -->
-                <div class="tab-content">
-                    <div class="empty-state">
-                        <div class="empty-state-icon">
-                            <i class="fas fa-hand-holding-heart"></i>
-                        </div>
-                        <h3 class="empty-state-title">لم تدعم أي مشاريع بعد</h3>
-                        <p class="empty-state-description">استكشف المشاريع الإبداعية وكن جزءاً من النجاح.</p>
-                        <a href="projects-ar.html" class="btn btn-primary">تصفح المشاريع</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Universal Mobile Menu Script -->
+    <!-- Authentication Handler -->
+    <script src="assets/js/session-init.js"></script>
+    <script src="assets/js/auth-handler.js"></script>
     <script src="mobile-menu.js"></script>
 
     <script>
-        function switchLanguage(lang) {
-            if (lang === 'en') {
-                window.location.href = 'dashboard.html';
-            } else if (lang === 'ar') {
-                window.location.href = 'dashboard-ar.html';
+        // Protect page
+        if (window.auth) {
+            window.auth.protectPage();
+
+            // Load user data
+            const user = window.auth ? (window.auth ? window.auth.getUser() : null) : null;
+            if (user && document.getElementById("userName")) {
+                document.getElementById('username').value = user.username || '';
+                document.getElementById('email').value = user.email || '';
+                document.getElementById('headerUserName').textContent = user.username || 'User';
+
+                if (user.photoUrl) {
+                    const headerAvatar = document.getElementById('headerAvatar');
+                    headerAvatar.style.backgroundImage = `url(${user.photoUrl})`;
+                    headerAvatar.style.backgroundSize = 'cover';
+                    headerAvatar.innerHTML = '';
+                }
             }
         }
-    </script>
 
-    <!-- Link to Main Scripts -->
-    <script src="scripts.js"></script>
+        // Show alert
+        function showAlert(message, type = 'success') {
+            const container = document.getElementById('alertContainer');
+            container.innerHTML = `<div class="alert alert-${type} show">${message}</div>`;
+            setTimeout(() => {
+                container.innerHTML = '';
+            }, 5000);
+        }
+
+        // Account form submission
+        document.getElementById('accountForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+
+            if (window.auth) {
+                const result = await window.auth.updateProfile({ username, email });
+                if (result.success) {
+                    showAlert('Account information updated successfully!');
+                } else {
+                    showAlert(result.message || 'Update failed', 'error');
+                }
+            }
+        });
+
+        // Password form submission
+        document.getElementById('passwordForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (newPassword !== confirmPassword) {
+                showAlert('New passwords do not match', 'error');
+                return;
+            }
+
+            if (newPassword.length < 8) {
+                showAlert('Password must be at least 8 characters long', 'error');
+                return;
+            }
+
+            try {
+                const token = localStorage.getItem('token');
+                if (!token) return;
+
+                const res = await fetch('/api/auth/updatepassword', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ currentPassword, newPassword })
+                });
+
+                const data = await res.json();
+
+                if (data.success) {
+                    showAlert('Password updated successfully!');
+                    document.getElementById('passwordForm').reset();
+                } else {
+                    showAlert(data.error || 'Password update failed', 'error');
+                }
+            } catch (err) {
+                console.error(err);
+                showAlert('An error occurred', 'error');
+            }
+        });
+
+        // User dropdown toggle
+        const userDropdownBtn = document.querySelector('.user-dropdown-btn');
+        const userDropdownMenu = document.querySelector('.user-dropdown-menu');
+
+        userDropdownBtn?.addEventListener('click', () => {
+            userDropdownMenu.classList.toggle('show');
+        });
+
+        window.addEventListener('click', (event) => {
+            if (!event.target.matches('.user-dropdown-btn') && !event.target.closest('.user-dropdown-btn')) {
+                if (userDropdownMenu?.classList.contains('show')) {
+                    userDropdownMenu.classList.remove('show');
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>

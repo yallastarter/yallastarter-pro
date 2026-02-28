@@ -5,16 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="قم بإدارة مشاريعك وحملاتك في يلا ستارتر من لوحة التحكم الشخصية الخاصة بك. تتبع تقدم التمويل وتفاعل مع الداعمين.">
-    <meta name="keywords" content="لوحة التحكم, إدارة المشاريع, تمويل جماعي, السعودية">
-    <meta name="author" content="يلا ستارتر">
+        content="Manage your YallaStarter projects and campaigns from your personalized dashboard. Track funding progress and engage with backers.">
+    <meta name="keywords" content="dashboard, project management, crowdfunding, Saudi Arabia">
+    <meta name="author" content="YallaStarter">
     <meta name="robots" content="index, follow">
 
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="لوحة التحكم - يلا ستارتر">
-    <meta property="og:description" content="قم بإدارة مشاريعك وحملاتك في يلا ستارتر من لوحة التحكم الشخصية الخاصة بك.">
+    <meta property="og:title" content="Dashboard - YallaStarter">
+    <meta property="og:description"
+        content="Manage your YallaStarter projects and campaigns from your personalized dashboard. Track funding progress and engage with backers.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yallastarter.com/dashboard-ar">
+    <meta property="og:url" content="https://yallastarter.com/dashboard">
 
     <!-- Preload Critical Resources -->
     <link rel="preload" href="styles.css" as="style">
@@ -33,12 +34,6 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Tajawal', 'Poppins', sans-serif;
-            text-align: right;
-            direction: rtl;
-        }
-
         .dashboard-container {
             display: grid;
             grid-template-columns: 250px 1fr;
@@ -47,9 +42,7 @@
 
         .dashboard-sidebar {
             background-color: var(--neutral-100);
-            border-left: 1px solid var(--neutral-300);
-            /* RTL border */
-            border-right: none;
+            border-right: 1px solid var(--neutral-300);
             padding: 2rem 0;
         }
 
@@ -65,9 +58,7 @@
             height: 50px;
             border-radius: 50%;
             overflow: hidden;
-            margin-left: 1rem;
-            /* RTL margin */
-            margin-right: 0;
+            margin-right: 1rem;
         }
 
         .user-avatar img {
@@ -119,15 +110,11 @@
             background-color: var(--primary-light);
             color: var(--primary);
             font-weight: 500;
-            border-left: 3px solid var(--primary);
-            /* RTL border */
-            border-right: none;
+            border-right: 3px solid var(--primary);
         }
 
         .sidebar-menu-icon {
-            margin-left: 1rem;
-            /* RTL margin */
-            margin-right: 0;
+            margin-right: 1rem;
             width: 20px;
             text-align: center;
         }
@@ -237,9 +224,7 @@
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 500;
-            margin-left: 0.5rem;
-            /* RTL margin */
-            margin-right: 0;
+            margin-right: 0.5rem;
         }
 
         .status-badge.draft {
@@ -306,7 +291,114 @@
             display: block;
         }
 
-        /* Mobile Responsive */
+        .backed-projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .backed-project-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        .backed-project-image {
+            height: 160px;
+            overflow: hidden;
+        }
+
+        .backed-project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .backed-project-content {
+            padding: 1.5rem;
+        }
+
+        .backed-project-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: var(--neutral-900);
+        }
+
+        .backed-project-creator {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .creator-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 0.8rem;
+        }
+
+        .creator-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .creator-name {
+            color: var(--neutral-700);
+            font-size: 0.9rem;
+        }
+
+        .backed-project-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--neutral-600);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .backed-amount {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .backed-date {
+            color: var(--neutral-600);
+        }
+
+        .backed-project-status {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            background-color: var(--neutral-100);
+            border-radius: var(--border-radius);
+        }
+
+        .empty-state-icon {
+            font-size: 3rem;
+            color: var(--neutral-400);
+            margin-bottom: 1rem;
+        }
+
+        .empty-state-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--neutral-700);
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-state-description {
+            color: var(--neutral-600);
+            margin-bottom: 1.5rem;
+        }
+
         @media (max-width: 992px) {
             .dashboard-container {
                 grid-template-columns: 1fr;
@@ -317,24 +409,29 @@
             }
         }
 
-        /* Header Adjustments for RTL */
-        .header {
-            direction: rtl;
+        /* Logo Text Fallback Styling */
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: none;
         }
+    </style>
 
-        .navbar {
-            justify-content: space-between;
-        }
-
-        .nav-links {
-            margin-left: auto;
-            margin-right: 0;
-        }
-
-        .logo {
-            margin-left: 0.8rem;
-            margin-right: 0;
-        }
+    <style>
+        body { font-family: 'Tajawal', sans-serif; text-align: right; direction: rtl; }
+        .dashboard-sidebar { border-right: none; border-left: 1px solid var(--neutral-200); }
+        .sidebar-menu-icon { margin-right: 0; margin-left: 1rem; }
+        .sidebar-menu-link.active { border-right: none; border-left: 3px solid var(--primary); }
+        .nav-links { margin-left: auto; margin-right: 0; }
+        .logo { margin-left: 1rem; margin-right: 0; }
+        .user-avatar { margin-right: 0; margin-left: 1rem; }
+        /* Fix dropdown for RTL */
+        .user-dropdown-menu { right: auto; left: 0; text-align: right; transform-origin: top left; }
+        .dropdown-item { display: flex !important; align-items: center; gap: 10px; flex-direction: row; }
+        .dropdown-item i { margin-left: 0; margin-right: 0; }
+        /* Fix spinner for RTL */
+        .fa-spin { display: inline-block; }
     </style>
 </head>
 
@@ -344,7 +441,7 @@
         <div class="container">
             <nav class="navbar">
                 <a href="index-ar.html" class="logo">
-                    <span class="logo-text">يلا ستارتر</span>
+                    <span class="logo-text">YallaStarter</span>
                 </a>
 
                 <button class="mobile-menu-btn">
@@ -353,18 +450,20 @@
 
                 <ul class="nav-links">
                     <li><a href="index-ar.html">الرئيسية</a></li>
-                    <li><a href="projects-ar.html">تصفح المشاريع</a></li>
-                    <li><a href="how-it-works-ar.html">كيف يعمل</a></li>
-                    <li><a href="about-ar.html">من نحن</a></li>
-                    <li><a href="contact-ar.html">اتصل بنا</a></li>
+                    <li><a href="projects.html">تصفح المشاريع</a></li>
+                    <li><a href="how-it-works.html">كيف يعمل</a></li>
+                    <li><a href="about.html">من نحن</a></li>
+                    <li><a href="contact.html">اتصل بنا</a></li>
                 </ul>
 
                 <div class="auth-buttons">
                     <div class="user-dropdown">
                         <button class="user-dropdown-btn">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User Avatar"
-                                class="user-avatar-small">
-                            <span class="user-name">محمد</span>
+                            <div class="user-avatar-small" id="headerAvatar"
+                                style="width: 35px; height: 35px; border-radius: 50%; background: linear-gradient(135deg, #006c35 0%, #00a651 100%); display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-user" style="font-size: 1rem; color: white;"></i>
+                            </div>
+                            <span id="headerUserName">User</span>
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="user-dropdown-menu">
@@ -374,11 +473,12 @@
                             <a href="user-profile-ar.html" class="dropdown-item">
                                 <i class="fas fa-user"></i> الملف الشخصي
                             </a>
-                            <a href="#" class="dropdown-item">
+                            <a href="settings-ar.html" class="dropdown-item">
                                 <i class="fas fa-cog"></i> الإعدادات
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a href="index-ar.html" class="dropdown-item logout-link">
+                            <a href="javascript:void(0)" class="dropdown-item"
+                                onclick="window.auth.logout(); return false;">
                                 <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
                             </a>
                         </div>
@@ -396,21 +496,21 @@
                 </div>
                 <ul class="nav-links">
                     <li><a href="index-ar.html">الرئيسية</a></li>
-                    <li><a href="projects-ar.html">تصفح المشاريع</a></li>
-                    <li><a href="how-it-works-ar.html">كيف يعمل</a></li>
-                    <li><a href="about-ar.html">من نحن</a></li>
-                    <li><a href="contact-ar.html">اتصل بنا</a></li>
+                    <li><a href="projects.html">تصفح المشاريع</a></li>
+                    <li><a href="how-it-works.html">كيف يعمل</a></li>
+                    <li><a href="about.html">من نحن</a></li>
+                    <li><a href="contact.html">اتصل بنا</a></li>
                 </ul>
                 <div class="language-switcher">
-                    <button class="language-btn active" onclick="switchLanguage('ar')">العربية</button>
-                    <button class="language-btn" onclick="switchLanguage('en')">English</button>
+                    <button class="language-btn active" onclick="switchLanguage('en')">English</button>
+                    <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
                 </div>
                 <div class="auth-buttons">
                     <div class="user-dropdown">
                         <button class="user-dropdown-btn">
                             <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User Avatar"
                                 class="user-avatar-small">
-                            <span class="user-name">محمد</span>
+                            <span>Mohammed</span>
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="user-dropdown-menu">
@@ -420,11 +520,15 @@
                             <a href="user-profile-ar.html" class="dropdown-item">
                                 <i class="fas fa-user"></i> الملف الشخصي
                             </a>
-                            <a href="#" class="dropdown-item">
+                            <a href="settings-ar.html" class="dropdown-item">
                                 <i class="fas fa-cog"></i> الإعدادات
                             </a>
+                            <a href="coins-ar.html" class="dropdown-item">
+                                <i class="fas fa-coins"></i> محفظتي
+                            </a>
                             <div class="dropdown-divider"></div>
-                            <a href="index-ar.html" class="dropdown-item logout-link">
+                            <a href="javascript:void(0)" class="dropdown-item"
+                                onclick="window.auth.logout(); return false;">
                                 <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
                             </a>
                         </div>
@@ -438,45 +542,67 @@
         <!-- Sidebar -->
         <div class="dashboard-sidebar">
             <div class="user-profile">
-                <div class="user-avatar">
-                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User Avatar">
+                <div class="user-avatar" id="sidebarAvatar"
+                    style="background: linear-gradient(135deg, #006c35 0%, #00a651 100%); display: flex; align-items: center; justify-content: center; cursor: pointer;"
+                    onclick="uploadHandler.triggerUpload('profilePhotoInput')">
+                    <i class="fas fa-user" style="font-size: 2rem; color: white;"></i>
                 </div>
                 <div class="user-info">
-                    <div class="user-name">محمد آل سعود</div>
-                    <div class="user-email">mohammed@example.com</div>
+                    <div class="user-name" id="userName">User</div>
+                    <div class="user-email" id="userEmail">user@example.com</div>
                 </div>
             </div>
 
             <ul class="sidebar-menu">
                 <li class="sidebar-menu-item">
-                    <a href="dashboard-ar.html" class="sidebar-menu-link active"><i class="fas fa-tachometer-alt sidebar-menu-icon"></i> لوحة التحكم</a>
+                    <a href="dashboard-ar.html" class="sidebar-menu-link active">
+                        <i class="fas fa-tachometer-alt sidebar-menu-icon"></i> لوحة التحكم
+                    </a>
                 </li>
                 <li class="sidebar-menu-item">
-                    <a href="my-projects-ar.html" class="sidebar-menu-link"><i class="fas fa-rocket sidebar-menu-icon"></i> مشاريعي</a>
+                    <a href="my-projects-ar.html" class="sidebar-menu-link">
+                        <i class="fas fa-rocket sidebar-menu-icon"></i> مشاريعي
+                    </a>
                 </li>
                 <li class="sidebar-menu-item">
-                    <a href="backed-projects-ar.html" class="sidebar-menu-link"><i class="fas fa-hand-holding-heart sidebar-menu-icon"></i> المشاريع المدعومة</a>
+                    <a href="backed-projects-ar.html" class="sidebar-menu-link">
+                        <i class="fas fa-hand-holding-heart sidebar-menu-icon"></i> المشاريع المدعومة
+                    </a>
                 </li>
                 <li class="sidebar-menu-item">
-                    <a href="payments-ar.html" class="sidebar-menu-link"><i class="fas fa-money-bill-wave sidebar-menu-icon"></i> المدفوعات</a>
-                    <a href="coins-ar.html" class="sidebar-menu-link"><i class="fas fa-coins sidebar-menu-icon"></i> محفظتي</a>
+                    <a href="payments-ar.html" class="sidebar-menu-link">
+                        <i class="fas fa-money-bill-wave sidebar-menu-icon"></i> المدفوعات
+                    </a>
                 </li>
                 <li class="sidebar-menu-item">
-                    <a href="notifications-ar.html" class="sidebar-menu-link"><i class="fas fa-bell sidebar-menu-icon"></i> الإشعارات</a>
+                    <a href="coins-ar.html" class="sidebar-menu-link">
+                        <i class="fas fa-coins sidebar-menu-icon"></i> محفظتي
+                    </a>
                 </li>
                 <li class="sidebar-menu-item">
-                    <a href="user-profile-ar.html" class="sidebar-menu-link"><i class="fas fa-user sidebar-menu-icon"></i> الملف الشخصي</a>
+                    <a href="notifications-ar.html" class="sidebar-menu-link">
+                        <i class="fas fa-bell sidebar-menu-icon"></i> الإشعارات
+                    </a>
                 </li>
                 <li class="sidebar-menu-item">
-                    <a href="settings-ar.html" class="sidebar-menu-link"><i class="fas fa-cog sidebar-menu-icon"></i> الإعدادات</a>
+                    <a href="user-profile-ar.html" class="sidebar-menu-link">
+                        <i class="fas fa-user sidebar-menu-icon"></i> الملف الشخصي
+                    </a>
                 </li>
                 <li class="sidebar-menu-item">
-                    <a href="support-ar.html" class="sidebar-menu-link"><i class="fas fa-question-circle sidebar-menu-icon"></i> المساعدة والدعم</a>
+                    <a href="settings-ar.html" class="sidebar-menu-link">
+                        <i class="fas fa-cog sidebar-menu-icon"></i> الإعدادات
+                    </a>
                 </li>
                 <li class="sidebar-menu-item">
-                    <a href="index-ar.html" class="sidebar-menu-link logout-link">
-                        <i class="fas fa-sign-out-alt sidebar-menu-icon"></i>
-                        تسجيل الخروج
+                    <a href="support-ar.html" class="sidebar-menu-link">
+                        <i class="fas fa-question-circle sidebar-menu-icon"></i> المساعدة والدعم
+                    </a>
+                </li>
+                <li class="sidebar-menu-item">
+                    <a href="javascript:void(0)" class="sidebar-menu-link"
+                        onclick="window.auth.logout(); return false;">
+                        <i class="fas fa-sign-out-alt sidebar-menu-icon"></i> تسجيل الخروج
                     </a>
                 </li>
             </ul>
@@ -489,7 +615,7 @@
 
                 <div class="dashboard-actions">
                     <a href="create-project-ar.html" class="btn btn-primary">
-                        <i class="fas fa-plus"></i> أنشئ مشروعاً
+                        <i class="fas fa-plus"></i> إنشاء مشروع
                     </a>
                 </div>
             </div>
@@ -497,22 +623,19 @@
             <!-- Stats -->
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="stat-value">3</div>
+                    <div class="stat-value" id="stat-active-projects">—</div>
                     <div class="stat-label">المشاريع النشطة</div>
                 </div>
-
                 <div class="stat-card">
-                    <div class="stat-value">12</div>
+                    <div class="stat-value" id="stat-backed-count">—</div>
                     <div class="stat-label">المشاريع المدعومة</div>
                 </div>
-
                 <div class="stat-card">
-                    <div class="stat-value">15,200 ر.س</div>
-                    <div class="stat-label">إجمالي التمويل</div>
+                    <div class="stat-value" id="stat-total-تم جمعها">—</div>
+                    <div class="stat-label">إجمالي ما تم جمعه</div>
                 </div>
-
                 <div class="stat-card">
-                    <div class="stat-value">8,500 ر.س</div>
+                    <div class="stat-value" id="stat-total-backed">—</div>
                     <div class="stat-label">إجمالي الدعم</div>
                 </div>
             </div>
@@ -526,29 +649,29 @@
 
                 <!-- My Projects Tab -->
                 <div class="tab-content active">
-                    <div class="projects-grid">
-                        <div class="project-card">
+                    <div class="projects-grid" id="my-projects-grid">
+                        <div class="project-card" id="my-projects-placeholder">
                             <div class="project-image">
-                                <img src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                                    alt="Solar Panels">
+                                <img src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                                    alt="Smart Solar Panels">
                             </div>
                             <div class="project-content">
-                                <div class="project-category">تقنية</div>
-                                <h3 class="project-title">ألواح شمسية ذكية للمنازل السعودية</h3>
+                                <div class="project-category">Technology</div>
+                                <h3 class="project-title">Smart Solar Panels for Saudi Homes</h3>
                                 <div class="project-status">
                                     <span class="status-badge active">نشط</span>
-                                    <span>باقي 18 يوم</span>
+                                    <span>18 يوم متبقي</span>
                                 </div>
                                 <div class="project-meta">
-                                    <div>320,500 ر.س تم جمعها</div>
-                                    <div>64% مكتمل</div>
+                                    <div>ريال 320,500 تم جمعها</div>
+                                    <div>64% ممول</div>
                                 </div>
                                 <div class="progress-bar">
                                     <div class="progress-fill" style="width: 64%;"></div>
                                 </div>
                                 <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
-                                    <a href="project-details-ar.html" class="btn btn-sm btn-outline">عرض</a>
-                                    <a href="#" class="btn btn-sm btn-primary">تعديل</a>
+                                    <a href="project-details-ar.html" class="btn btn-sm btn-outline">View</a>
+                                    <a href="create-project-ar.html" class="btn btn-sm btn-primary">Edit</a>
                                 </div>
                             </div>
                         </div>
@@ -557,34 +680,234 @@
 
                 <!-- Backed Projects Tab -->
                 <div class="tab-content">
-                    <div class="empty-state">
-                        <div class="empty-state-icon">
-                            <i class="fas fa-hand-holding-heart"></i>
+                    <div class="backed-projects-grid" id="backed-projects-grid">
+                        <div class="backed-project-card" id="backed-placeholder">
+                            <div class="backed-project-image">
+                                <img src="https://images.unsplash.com/photo-1576153192621-7a3be10b356e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                                    alt="Eco-Friendly Water Bottles">
+                            </div>
+                            <div class="backed-project-content">
+                                <h3 class="backed-project-title">Eco-Friendly Water Bottles Made from Date Palm Waste
+                                </h3>
+                                <div class="backed-project-creator">
+                                    <div class="creator-avatar">
+                                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Creator">
+                                    </div>
+                                    <div class="creator-name">By Fatima Al-Zahrani</div>
+                                </div>
+                                <div class="backed-project-meta">
+                                    <div class="backed-amount">ريال 500 backed</div>
+                                    <div class="backed-date">May 15, 2025</div>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 85%;"></div>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
+                                    <span style="color: var(--success); font-size: 0.9rem;">
+                                        <i class="fas fa-check-circle"></i> Successfully ممول
+                                    </span>
+                                    <a href="project-details-ar.html" class="btn btn-sm btn-outline">View</a>
+                                </div>
+                            </div>
                         </div>
-                        <h3 class="empty-state-title">لم تدعم أي مشاريع بعد</h3>
-                        <p class="empty-state-description">استكشف المشاريع الإبداعية وكن جزءاً من النجاح.</p>
-                        <a href="projects-ar.html" class="btn btn-primary">تصفح المشاريع</a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Universal Mobile Menu Script -->
-    <script src="mobile-menu.js"></script>
+        <!-- Hidden file input for photo upload -->
+        <input type="file" id="profilePhotoInput" accept="image/*" style="display: none;">
 
-    <script>
-        function switchLanguage(lang) {
-            if (lang === 'en') {
-                window.location.href = 'dashboard.html';
-            } else if (lang === 'ar') {
-                window.location.href = 'dashboard-ar.html';
+        <!-- Authentication and Upload Handlers -->
+        <script src="assets/js/session-init.js"></script>
+    <script src="assets/js/auth-handler.js"></script>
+        <script src="assets/js/upload-handler.js"></script>
+
+        <script>
+            // Handle Google OAuth callback first (token & user in URL)
+            if (window.auth && window.location.search.includes('token=') && window.location.search.includes('user=')) {
+                if (window.auth.handleOAuthCallback()) {
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                }
             }
-        }
-    </script>
+            // Protect page - redirect to login if not authenticated
+            if (window.auth) {
+                window.auth.protectPage();
 
-    <!-- Link to Main Scripts -->
-    <script src="scripts.js"></script>
+                // Load user data
+                const user = window.auth ? (window.auth ? window.auth.getUser() : null) : null;
+                if (user && document.getElementById("userName")) {
+                    document.getElementById('userName').textContent = user.username || 'User';
+                    document.getElementById('userEmail').textContent = user.email || 'user@example.com';
+                    document.getElementById('headerUserName').textContent = user.username || 'User';
+
+                    // Load profile photo if exists
+                    if (user.photoUrl) {
+                        const sidebarAvatar = document.getElementById('sidebarAvatar');
+                        const headerAvatar = document.getElementById('headerAvatar');
+
+                        sidebarAvatar.style.backgroundImage = `url(${user.photoUrl})`;
+                        sidebarAvatar.style.backgroundSize = 'cover';
+                        sidebarAvatar.innerHTML = '';
+
+                        headerAvatar.style.backgroundImage = `url(${user.photoUrl})`;
+                        headerAvatar.style.backgroundSize = 'cover';
+                        headerAvatar.innerHTML = '';
+                    }
+                }
+            }
+
+            // Setup photo upload
+            if (window.uploadHandler) {
+                uploadHandler.setupFileInput('profilePhotoInput', 'sidebarAvatar', {
+                    autoUpload: true,
+                    onSuccess: (result) => {
+                        // Update header avatar too
+                        const headerAvatar = document.getElementById('headerAvatar');
+                        headerAvatar.style.backgroundImage = `url(${result.photoUrl})`;
+                        headerAvatar.style.backgroundSize = 'cover';
+                        headerAvatar.innerHTML = '';
+
+                        alert('Profile photo updated successfully!');
+                    }
+                });
+            }
+
+            // User Dropdown Toggle
+            const userDropdownBtn = document.querySelector('.user-dropdown-btn');
+            const userDropdownMenu = document.querySelector('.user-dropdown-menu');
+
+            userDropdownBtn.addEventListener('click', () => {
+                userDropdownMenu.classList.toggle('show');
+            });
+
+            // Close dropdown when clicking outside
+            window.addEventListener('click', (event) => {
+                if (!event.target.matches('.user-dropdown-btn') && !event.target.closest('.user-dropdown-btn')) {
+                    if (userDropdownMenu.classList.contains('show')) {
+                        userDropdownMenu.classList.remove('show');
+                    }
+                }
+            });
+
+            // Tabs
+            const tabItems = document.querySelectorAll('.tab-item');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabItems.forEach((tab, index) => {
+                tab.addEventListener('click', () => {
+                    tabItems.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+
+                    tab.classList.add('active');
+                    tabContents[index].classList.add('active');
+                });
+            });
+
+            const token = (window.auth && typeof window.auth.getToken === 'function') ? window.auth.getToken() : localStorage.getItem('token');
+            const API = window.location.origin;
+
+            async function loadMyProjects() {
+                const grid = document.getElementById('my-projects-grid');
+                if (!grid) return;
+                try {
+                    const res = await fetch(API + '/api/projects/user/me', { headers: { 'Authorization': 'Bearer ' + token } });
+                    const data = await res.json();
+                    const placeholder = document.getElementById('my-projects-placeholder');
+                    if (placeholder) placeholder.remove();
+                    const projects = data.data || [];
+                    const activeCount = projects.filter(p => p.status === 'active').length;
+                    const totalRaised = projects.reduce((sum, p) => sum + (p.currentAmount || 0), 0);
+                    const statActive = document.getElementById('stat-active-projects');
+                    const statRaised = document.getElementById('stat-total-تم جمعها');
+                    if (statActive) statActive.textContent = activeCount;
+                    if (statRaised) statRaised.textContent = 'ريال ' + totalRaised.toLocaleString();
+                    if (projects.length === 0) {
+                        grid.innerHTML = '<p style="grid-column: 1/-1; color: var(--neutral-600);">لا توجد مشاريع بعد. <a href="create-project-ar.html">Create your first project</a>.</p>';
+                        return;
+                    }
+                    const statusLabel = (s) => ({ active: '✅ نشط', draft: '📝 مسودة', pending: '⏳ قيد المراجعة', completed: '🏁 اكتمل', rejected: '❌ مرفوض' }[s] || s);
+                    const statusCls = (s) => ({ active: 'active', draft: 'draft', completed: 'completed', pending: 'pending', rejected: 'rejected' }[s] || 'draft');
+                    grid.innerHTML = projects.map(p => {
+                        const percent = p.goalAmount ? Math.min(100, Math.round((p.currentAmount / p.goalAmount) * 100)) : 0;
+                        const daysLeft = p.deadline ? Math.max(0, Math.ceil((new Date(p.deadline) - new Date()) / (24 * 60 * 60 * 1000))) : 0;
+                        const imgSrc = p.coverImage ? p.coverImage : 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=600&q=80';
+                        const createdDate = p.createdAt ? new Date(p.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : '—';
+                        const sClass = statusCls(p.status);
+                        return `<div class="project-card">
+                            <div class="project-image"><img src="${imgSrc}" alt="${(p.title || '').replace(/"/g, '&quot;')}" onerror="this.src='https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=600&q=80'"></div>
+                            <div class="project-content">
+                                <div class="project-category">${(p.category || '').charAt(0).toUpperCase() + (p.category || '').slice(1)}</div>
+                                <h3 class="project-title">${(p.title || '').replace(/</g, '&lt;')}</h3>
+                                <div class="project-status"><span class="status-badge ${sClass}" style="${p.status === 'pending' ? 'background:#fef3c7;color:#d97706;' : p.status === 'rejected' ? 'background:#fee2e2;color:#dc2626;' : ''}">${statusLabel(p.status)}</span>${daysLeft > 0 ? '<span>' + daysLeft + ' يوم متبقي</span>' : ''}</div>
+                                <div class="project-meta"><div>ريال ${(p.currentAmount || 0).toLocaleString()} تم جمعها</div><div>${percent}% ممول</div></div>
+                                <div class="progress-bar"><div class="progress-fill" style="width: ${percent}%;"></div></div>
+                                <div style="margin-top:.4rem;color:var(--neutral-500);font-size:.8rem;"><i class="fas fa-calendar-alt"></i> Created: ${createdDate}</div>
+                                <div style="display: flex; gap:.5rem; margin-top: 1rem;">
+                                    <a href="project-details.html?id=${p._id}" class="btn btn-sm btn-outline" style="flex:1;text-align:center;"><i class="fas fa-eye"></i> عرض</a>
+                                    <a href="my-projects-ar.html" class="btn btn-sm btn-primary" style="flex:1;text-align:center;"><i class="fas fa-folder-open"></i> Manage</a>
+                                </div>
+                            </div>
+                        </div>`;
+                    }).join('');
+                } catch (e) {
+                    if (document.getElementById('my-projects-placeholder')) document.getElementById('my-projects-placeholder').remove();
+                    grid.innerHTML = '<p style="grid-column: 1/-1; color: var(--neutral-600);">Could not load projects.</p>';
+                }
+            }
+
+            async function loadBackedProjects() {
+                const grid = document.getElementById('backed-projects-grid');
+                if (!grid) return;
+                try {
+                    const res = await fetch(API + '/api/coins/backed', { headers: { 'Authorization': 'Bearer ' + token } });
+                    const data = await res.json();
+                    const placeholder = document.getElementById('backed-placeholder');
+                    if (placeholder) placeholder.remove();
+                    const backed = data.data || [];
+                    const statBackedCount = document.getElementById('stat-backed-count');
+                    const statTotalBacked = document.getElementById('stat-total-backed');
+                    if (statBackedCount) statBackedCount.textContent = backed.length;
+                    const totalBackedCoins = backed.reduce((sum, b) => sum + (b.totalBacked || 0), 0);
+                    if (statTotalBacked) statTotalBacked.textContent = totalBackedCoins + ' coins';
+                    if (backed.length === 0) {
+                        grid.innerHTML = '<p style="grid-column: 1/-1; color: var(--neutral-600);">You haven\'t backed any projects yet. <a href="projects.html">Browse projects</a>.</p>';
+                        return;
+                    }
+                    grid.innerHTML = backed.map(({ project, totalBacked, lastBackedAt }) => {
+                        if (!project) return '';
+                        const p = project;
+                        const percent = p.goalAmount ? Math.min(100, Math.round((p.currentAmount / p.goalAmount) * 100)) : 0;
+                        const daysLeft = p.deadline ? Math.max(0, Math.ceil((new Date(p.deadline) - new Date()) / (24 * 60 * 60 * 1000))) : 0;
+                        const imgSrc = p.coverImage || 'https://images.unsplash.com/photo-1576153192621-7a3be10b356e?w=600&q=80';
+                        const creatorName = p.creator && (p.creator.username || p.creator.email) ? p.creator.username || p.creator.email : 'Creator';
+                        const dateStr = lastBackedAt ? new Date(lastBackedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
+                        return `<div class="backed-project-card">
+                            <div class="backed-project-image"><img src="${imgSrc}" alt="${(p.title || '').replace(/"/g, '&quot;')}"></div>
+                            <div class="backed-project-content">
+                                <h3 class="backed-project-title">${(p.title || '').replace(/</g, '&lt;')}</h3>
+                                <div class="backed-project-creator"><div class="creator-avatar"><i class="fas fa-user" style="font-size: 1.5rem; color: var(--neutral-500);"></i></div><div class="creator-name">By ${(creatorName || '').replace(/</g, '&lt;')}</div></div>
+                                <div class="backed-project-meta"><div class="backed-amount">${totalBacked || 0} coins backed</div><div class="backed-date">${dateStr}</div></div>
+                                <div class="progress-bar"><div class="progress-fill" style="width: ${percent}%;"></div></div>
+                                <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
+                                    ${percent >= 100 ? '<span style="color: var(--success); font-size: 0.9rem;"><i class="fas fa-check-circle"></i> Successfully ممول</span>' : '<span style="color: var(--primary); font-size: 0.9rem;"><i class="fas fa-clock"></i> ' + daysLeft + ' يوم متبقي</span>'}
+                                    <a href="project-details.html?id=${p._id}" class="btn btn-sm btn-outline">View</a>
+                                </div>
+                            </div>
+                        </div>`;
+                    }).join('');
+                } catch (e) {
+                    if (document.getElementById('backed-placeholder')) document.getElementById('backed-placeholder').remove();
+                    grid.innerHTML = '<p style="grid-column: 1/-1; color: var(--neutral-600);">Could not load backed projects.</p>';
+                }
+            }
+
+            setTimeout(() => loadMyProjects();, 500);
+            setTimeout(() => loadBackedProjects();, 500);
+        </script>
+
+        <!-- Universal Mobile Menu Script -->
+        <script src="mobile-menu.js"></script>
 </body>
 
 </html>

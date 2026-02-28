@@ -2,20 +2,20 @@
 <html lang="ar" dir="rtl">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="ابدأ مشروعك مع يلا ستارتر. اكتشف كيف يمكنك إنشاء مشروع إبداعي والحصول على التمويل الجماعي.">
-    <meta name="keywords" content="إنشاء مشروع, مشروع إبداعي, تمويل جماعي, يلا ستارتر">
-    <meta name="author" content="يلا ستارتر">
+        content="Create and launch your crowdfunding project on YallaStarter. Turn your innovative ideas into reality with support from our community.">
+    <meta name="keywords" content="create project, crowdfunding, launch project, Saudi Arabia, innovation">
+    <meta name="author" content="YallaStarter">
     <meta name="robots" content="index, follow">
 
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="إنشاء مشروع - يلا ستارتر">
+    <meta property="og:title" content="Create a Project - YallaStarter">
     <meta property="og:description"
-        content="ابدأ مشروعك مع يلا ستارتر. اكتشف كيف يمكنك إنشاء مشروع إبداعي والحصول على التمويل الجماعي.">
+        content="Create and launch your crowdfunding project on YallaStarter. Turn your innovative ideas into reality with support from our community.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yallastarter.com/create-project-ar">
+    <meta property="og:url" content="https://yallastarter.com/create-project">
 
     <!-- Preload Critical Resources -->
     <link rel="preload" href="styles.css" as="style">
@@ -33,13 +33,8 @@
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
     <style>
-        body {
-            direction: rtl;
-            text-align: right;
-            font-family: 'Tajawal', 'Poppins', sans-serif;
-        }
-
         /* Header Styles */
         .header {
             background-color: white;
@@ -63,7 +58,7 @@
             align-items: center;
             text-decoration: none;
             flex-shrink: 0;
-            margin-left: 0.8rem;
+            margin-right: 0.8rem;
             transition: transform 0.2s ease;
         }
 
@@ -201,9 +196,9 @@
             color: var(--primary);
         }
 
-        /* Create Project Hero */
+        /* Hero Section */
         .create-project-hero {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            background-color: var(--primary);
             color: white;
             padding: 4rem 0;
             text-align: center;
@@ -216,30 +211,82 @@
         }
 
         .create-project-hero-subtitle {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             max-width: 700px;
             margin: 0 auto;
-            opacity: 0.9;
         }
 
-        /* Create Project Content */
-        .create-project-content {
-            padding: 4rem 0;
+        /* Form Steps */
+        .form-steps {
+            display: flex;
+            justify-content: space-between;
+            margin: 3rem 0;
+            position: relative;
         }
 
-        .create-project-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: start;
+        .form-steps::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--neutral-300);
+            z-index: 0;
         }
 
-        /* Create Project Form */
-        .create-project-form {
-            background: white;
-            padding: 2rem;
+        .form-step {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--neutral-300);
+            color: var(--neutral-600);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .form-step.active .step-number {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .form-step.completed .step-number {
+            background-color: var(--success);
+            color: white;
+        }
+
+        .step-label {
+            font-weight: 500;
+            color: var(--neutral-700);
+            text-align: center;
+        }
+
+        /* Form Styles */
+        .form-section {
+            background-color: white;
             border-radius: 12px;
+            padding: 2rem;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .form-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--neutral-900);
+            margin-bottom: 1.5rem;
         }
 
         .form-group {
@@ -248,149 +295,140 @@
 
         .form-label {
             display: block;
-            font-weight: 600;
-            color: var(--neutral-800);
+            font-weight: 500;
+            color: var(--neutral-700);
             margin-bottom: 0.5rem;
         }
 
-        .form-input,
-        .form-textarea,
-        .form-select {
+        .form-control {
             width: 100%;
-            padding: 0.8rem;
-            border: 2px solid var(--neutral-300);
+            padding: 0.75rem;
+            border: 1px solid var(--neutral-300);
             border-radius: 8px;
             font-size: 1rem;
             transition: border-color 0.3s ease;
-            font-family: inherit;
         }
 
-        .form-input:focus,
-        .form-textarea:focus,
-        .form-select:focus {
+        .form-control:focus {
             outline: none;
             border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 108, 53, 0.1);
         }
 
         .form-textarea {
-            resize: vertical;
             min-height: 120px;
+            resize: vertical;
         }
 
-        .submit-btn {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            padding: 1rem 2rem;
+        .form-select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--neutral-200);
+        }
+
+        .btn-prev {
+            background-color: var(--neutral-300);
+            color: var(--neutral-700);
             border: none;
+            padding: 0.75rem 1.5rem;
             border-radius: 8px;
-            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-prev:hover {
+            background-color: var(--neutral-400);
+        }
+
+        .btn-next {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-next:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-submit {
+            background-color: var(--success);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            width: 100%;
         }
 
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 108, 53, 0.3);
+        .btn-submit:hover {
+            background-color: #047a2e;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(4, 122, 46, 0.35);
+            opacity: 1;
         }
 
-        /* Create Project Guide */
-        .create-project-guide {
-            background: var(--neutral-100);
-            padding: 2rem;
-            border-radius: 12px;
+        /* Field validation error */
+        .field-error {
+            border-color: #dc2626 !important;
+            animation: shake 0.4s ease;
         }
 
-        .create-project-guide h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--neutral-900);
-            margin-bottom: 1.5rem;
-        }
-
-        .guide-step {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            padding: 1rem;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
-
-        .step-number {
-            width: 40px;
-            height: 40px;
-            background: var(--primary-light);
-            color: var(--primary);
-            border-radius: 50%;
+        .field-error-msg {
+            color: #dc2626;
+            font-size: 0.82rem;
+            margin-top: 0.3rem;
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            font-weight: 700;
-            flex-shrink: 0;
+            gap: 0.4rem;
         }
 
-        .step-content h4 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--neutral-900);
-            margin-bottom: 0.5rem;
-        }
+        @keyframes shake {
 
-        .step-content p {
-            color: var(--neutral-700);
-            margin: 0;
-            line-height: 1.6;
-        }
+            0%,
+            100% {
+                transform: translateX(0);
+            }
 
-        /* Tips Section */
-        .tips-section {
-            background: var(--neutral-100);
-            padding: 4rem 0;
-            margin-top: 2rem;
-        }
+            20% {
+                transform: translateX(-6px);
+            }
 
-        .tips-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
+            40% {
+                transform: translateX(6px);
+            }
 
-        .tip-item {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
+            60% {
+                transform: translateX(-4px);
+            }
 
-        .tip-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--primary-light);
-            color: var(--primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .tip-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--neutral-900);
-            margin-bottom: 1rem;
-        }
-
-        .tip-description {
-            color: var(--neutral-700);
-            line-height: 1.6;
+            80% {
+                transform: translateX(4px);
+            }
         }
 
         /* Mobile Responsive */
@@ -427,15 +465,46 @@
                 font-size: 1rem;
             }
 
-            .create-project-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
+            .form-steps {
+                flex-direction: column;
+                gap: 1rem;
             }
 
-            .tips-grid {
+            .form-steps::before {
+                display: none;
+            }
+
+            .form-row {
                 grid-template-columns: 1fr;
             }
+
+            .form-actions {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .btn-prev,
+            .btn-next,
+            .btn-submit {
+                width: 100%;
+            }
         }
+    </style>
+
+    <style>
+        body { font-family: 'Tajawal', sans-serif; text-align: right; direction: rtl; }
+        .dashboard-sidebar { border-right: none; border-left: 1px solid var(--neutral-200); }
+        .sidebar-menu-icon { margin-right: 0; margin-left: 1rem; }
+        .sidebar-menu-link.active { border-right: none; border-left: 3px solid var(--primary); }
+        .nav-links { margin-left: auto; margin-right: 0; }
+        .logo { margin-left: 1rem; margin-right: 0; }
+        .user-avatar { margin-right: 0; margin-left: 1rem; }
+        /* Fix dropdown for RTL */
+        .user-dropdown-menu { right: auto; left: 0; text-align: right; transform-origin: top left; }
+        .dropdown-item { display: flex !important; align-items: center; gap: 10px; flex-direction: row; }
+        .dropdown-item i { margin-left: 0; margin-right: 0; }
+        /* Fix spinner for RTL */
+        .fa-spin { display: inline-block; }
     </style>
 </head>
 
@@ -444,27 +513,25 @@
     <header class="header">
         <nav class="navbar">
             <a href="index-ar.html" class="logo">
-                <span class="logo-text">يلا ستارتر</span>
+                <span class="logo-text">YallaStarter</span>
             </a>
 
             <ul class="nav-links">
                 <li><a href="index-ar.html">الرئيسية</a></li>
-                <li><a href="entertainment-ar.html">الترفيه الإبداعي</a></li>
-                <li><a href="vision2030-ar.html">مشاريع ابداعية من رؤية 2030</a></li>
-                <li><a href="mind71-ar.html">MIND71 AI</a></li>
-                <li><a href="projects-ar.html">المشاريع</a></li>
-                <li><a href="how-it-works-ar.html">كيف يعمل</a></li>
-                <li><a href="contact-ar.html">اتصل بنا</a></li>
+                <li><a href="entertainment.html">Entertainment Projects</a></li>
+                <li><a href="vision2030.html">Vision 2030 Projects</a></li>
+                <li><a href="projects.html">تصفح المشاريع</a></li>
+                <li><a href="how-it-works.html">كيف يعمل</a></li>
             </ul>
 
             <div class="language-switcher">
-                <button class="language-btn active" onclick="switchLanguage('ar')">العربية</button>
-                <button class="language-btn" onclick="switchLanguage('en')">English</button>
+                <button class="language-btn active" onclick="switchLanguage('en')">English</button>
+                <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
             </div>
 
             <div class="auth-buttons">
-                <a href="create-project-ar.html" class="btn btn-primary">إنشاء مشروع</a>
-                <a href="login-ar.html" class="btn btn-link">تسجيل الدخول</a>
+                <a href="create-project-ar.html" class="btn btn-primary active">Start a Project</a>
+                <a href="login.html" class="btn btn-link">تسجيل الدخول</a>
             </div>
 
             <button class="mobile-menu-btn">
@@ -474,237 +541,553 @@
 
         <div class="mobile-menu">
             <div class="mobile-menu-header">
+
                 <button class="mobile-close-btn">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
             <ul class="nav-links">
                 <li><a href="index-ar.html">الرئيسية</a></li>
-                <li><a href="entertainment-ar.html">الترفيه الإبداعي</a></li>
-                <li><a href="vision2030-ar.html">مشاريع ابداعية من رؤية 2030</a></li>
-                <li><a href="mind71-ar.html">MIND71 AI</a></li>
-                <li><a href="projects-ar.html">المشاريع</a></li>
-                <li><a href="how-it-works-ar.html">كيف يعمل</a></li>
-                <li><a href="contact-ar.html">اتصل بنا</a></li>
+                <li><a href="entertainment.html">Entertainment Projects</a></li>
+                <li><a href="vision2030.html">Vision 2030 Projects</a></li>
+                <li><a href="projects.html">تصفح المشاريع</a></li>
+                <li><a href="how-it-works.html">كيف يعمل</a></li>
             </ul>
             <div class="language-switcher">
-                <button class="language-btn active" onclick="switchLanguage('ar')">العربية</button>
-                <button class="language-btn" onclick="switchLanguage('en')">English</button>
+                <button class="language-btn active" onclick="switchLanguage('en')">English</button>
+                <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
             </div>
             <div class="auth-buttons">
-                <a href="create-project-ar.html" class="btn btn-primary">إنشاء مشروع</a>
-                <a href="login-ar.html" class="btn btn-link">تسجيل الدخول</a>
+                <a href="create-project-ar.html" class="btn btn-primary active">Start a Project</a>
+                <a href="login.html" class="btn btn-link">تسجيل الدخول</a>
             </div>
         </div>
     </header>
 
-    <!-- Create Project Hero -->
+    <!-- Hero Section -->
     <section class="create-project-hero">
         <div class="container">
-            <h1 class="create-project-hero-title">إنشاء مشروع</h1>
-            <p class="create-project-hero-subtitle">ابدأ مشروعك مع يلا ستارتر. اكتشف كيف يمكنك إنشاء مشروع إبداعي
-                والحصول على التمويل الجماعي</p>
+            <h1 class="create-project-hero-title">Start Your Project</h1>
+            <p class="create-project-hero-subtitle">Turn your innovative ideas into reality with support from our
+                community</p>
         </div>
     </section>
 
-    <!-- Create Project Content -->
-    <section class="create-project-content">
+    <!-- Form Steps -->
+    <section class="section">
         <div class="container">
-            <div class="create-project-grid">
-                <!-- Create Project Form -->
-                <div class="create-project-form">
-                    <h3>إنشاء مشروع جديد</h3>
-                    <form class="project-form">
-                        <div class="form-group">
-                            <label class="form-label">عنوان المشروع</label>
-                            <input type="text" id="project-title" class="form-input" placeholder="أدخل اسم المشروع">
+            <div class="form-steps">
+                <div class="form-step active">
+                    <div class="step-number">1</div>
+                    <div class="step-label">Basic Info</div>
+                </div>
+                <div class="form-step">
+                    <div class="step-number">2</div>
+                    <div class="step-label">Project Details</div>
+                </div>
+                <div class="form-step">
+                    <div class="step-number">3</div>
+                    <div class="step-label">Funding & Rewards</div>
+                </div>
+                <div class="form-step">
+                    <div class="step-number">4</div>
+                    <div class="step-label">Review & Submit</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Form -->
+    <section class="section">
+        <div class="container">
+            <form class="project-form">
+                <!-- Step 1: Basic Info -->
+                <div class="form-section" id="step-1">
+                    <h2 class="form-title">Basic Information</h2>
+
+                    <div class="form-group">
+                        <label for="project-title" class="form-label">Project Title</label>
+                        <input type="text" id="project-title" class="form-control"
+                            placeholder="Enter your project title">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="project-category" class="form-label">Category</label>
+                        <select id="project-category" class="form-control form-select">
+                            <option value="">Select a category</option>
+                            <option value="technology">Technology</option>
+                            <option value="arts">Arts & Culture</option>
+                            <option value="environment">Environment</option>
+                            <option value="education">Education</option>
+                            <option value="entertainment">Entertainment</option>
+                            <option value="food">Food & Craft</option>
+                            <option value="social">Social Impact</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="project-location" class="form-label">Location</label>
+                        <input type="text" id="project-location" class="form-control" placeholder="City, Saudi Arabia">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="project-duration" class="form-label">Campaign Duration</label>
+                        <select id="project-duration" class="form-control form-select">
+                            <option value="">Select duration</option>
+                            <option value="30">30 days</option>
+                            <option value="45">45 days</option>
+                            <option value="60">60 days</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Step 2: Project Details -->
+                <div class="form-section" id="step-2" style="display: none;">
+                    <h2 class="form-title">Project Details</h2>
+
+                    <div class="form-group">
+                        <label for="project-description" class="form-label">Project Description</label>
+                        <textarea id="project-description" class="form-control form-textarea"
+                            placeholder="Describe your project in detail..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="project-story" class="form-label">Your Story <span
+                                style="color:var(--neutral-500);font-weight:400;">(Optional)</span></label>
+                        <textarea id="project-story" class="form-control form-textarea"
+                            placeholder="Tell us about yourself and why this project matters..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="project-challenges" class="form-label">Challenges & Solutions <span
+                                style="color:var(--neutral-500);font-weight:400;">(Optional)</span></label>
+                        <textarea id="project-challenges" class="form-control form-textarea"
+                            placeholder="What challenges do you face and how will you solve them?"></textarea>
+                    </div>
+                </div>
+
+                <!-- Step 3: Funding & Rewards -->
+                <div class="form-section" id="step-3" style="display: none;">
+                    <h2 class="form-title">Funding & Rewards</h2>
+
+                    <div class="form-group">
+                        <label for="funding-goal" class="form-label">Funding Goal (SAR)</label>
+                        <input type="number" id="funding-goal" class="form-control" placeholder="50000" min="1000">
+                        <small class="form-text">Minimum funding goal is 1,000 SAR.</small>
+                    </div>
+
+                    <!-- Dynamic Rewards Section -->
+                    <div class="form-group"
+                        style="margin-top: 2rem; border-top: 1px solid var(--neutral-200); padding-top: 1.5rem;">
+                        <h3 style="font-size: 1.2rem; margin-bottom: 1rem; color: var(--neutral-800);">Reward Tiers
+                            <span style="color:var(--neutral-500);font-weight:400;font-size:0.9rem;">(Optional)</span>
+                        </h3>
+                        <p style="color:var(--neutral-600); font-size: 0.9rem; margin-bottom: 1rem;">Offer different
+                            rewards to backers based on their contribution amount.</p>
+
+                        <div id="rewards-container">
+                            <!-- Rewards will be added here -->
                         </div>
 
-                        <div class="form-group">
-                            <label class="form-label">فئة المشروع</label>
-                            <select id="project-category" class="form-select">
-                                <option value="">اختر فئة المشروع</option>
-                                <option value="Entertainment">ترفيه</option>
-                                <option value="Technology">تقنية</option>
-                                <option value="Art">فن</option>
-                                <option value="Business">أعمال</option>
-                                <option value="Social">اجتماعي</option>
-                                <option value="Other">أخرى</option>
-                            </select>
-                        </div>
+                        <button type="button" id="btn-add-reward" class="btn btn-outline"
+                            style="width: 100%; padding: 0.75rem; border-style: dashed; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                            <i class="fas fa-plus"></i> Add Reward Tier
+                        </button>
+                    </div>
+                </div>
 
-                        <div class="form-group">
-                            <label class="form-label">الموقع</label>
-                            <input type="text" id="project-location" class="form-input" placeholder="المدينة، الدولة">
-                        </div>
+                <!-- Step 4: Review & Submit -->
+                <div class="form-section" id="step-4" style="display: none;">
+                    <h2 class="form-title">Review & Submit</h2>
 
-                        <div class="form-group">
-                            <label class="form-label">وصف المشروع</label>
-                            <textarea id="project-description" class="form-textarea"
-                                placeholder="اكتب وصف المشروع..."></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label">المبلغ المطلوب (ر.س)</label>
-                            <input type="number" id="funding-goal" class="form-input" placeholder="أدخل المبلغ المطلوب">
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label">مدة الحملة (بالأيام)</label>
-                            <select id="project-duration" class="form-select">
-                                <option value="">اختر المدة</option>
-                                <option value="30">30 يوماً</option>
-                                <option value="45">45 يوماً</option>
-                                <option value="60">60 يوماً</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group" style="margin-bottom: 2rem;">
-                            <label class="form-label">صورة الغلاف للمشروع</label>
-                            <input type="file" id="project-cover" class="form-input"
-                                accept="image/jpeg,image/png,image/webp">
-                            <small class="form-text"
-                                style="color: #666; font-size: 0.85rem; margin-top: 0.5rem; display: block;">الحد الأقصى
-                                8 ميجابايت. (JPEG, PNG, WebP)</small>
-                        </div>
-
-                        <!-- Error Message Container (Hidden by default) -->
-                        <div id="ar-error-container"
-                            style="display: none; background: #fff0f0; border-right: 4px solid #dc2626; padding: 1rem; margin-bottom: 1.5rem; border-radius: 8px;">
-                            <div style="color: #dc2626; font-weight: 700; margin-bottom: 0.5rem;">عذرا، لم يتم إنشاء
-                                المشروع</div>
-                            <div id="ar-error-msg" style="color: #555; font-size: 0.95rem; margin-bottom: 0.5rem;">
+                    <div class="form-group">
+                        <label for="project-cover" class="form-label">Cover Image</label>
+                        <input type="file" id="project-cover" class="form-control"
+                            accept="image/jpeg,image/jpg,image/png,image/gif,image/webp">
+                        <small class="form-text">Max 8MB. JPEG, PNG, GIF, WebP.</small>
+                        <!-- Live preview -->
+                        <div id="cover-preview-wrap" style="display:none; margin-top:0.75rem; position:relative;">
+                            <img id="cover-preview-img" src="" alt="Cover preview"
+                                style="width:100%; max-height:220px; object-fit:cover; border-radius:10px; border:2px solid #00a651;">
+                            <div
+                                style="display:flex; align-items:center; gap:0.5rem; margin-top:0.4rem; color:#059669; font-size:0.85rem; font-weight:600;">
+                                <i class="fas fa-check-circle"></i>
+                                <span id="cover-preview-name">Image ready to upload</span>
+                                <button type="button" onclick="clearCoverPreview()"
+                                    style="margin-left:auto; background:none; border:none; color:#dc2626; cursor:pointer; font-size:0.85rem;">
+                                    <i class="fas fa-times"></i> Remove
+                                </button>
                             </div>
-                            <div id="ar-error-fix" style="color: #047a2e; font-size: 0.9rem; font-weight: 600;"></div>
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="project-images" class="form-label">Gallery Images (optional)</label>
+                        <input type="file" id="project-images" class="form-control"
+                            accept="image/jpeg,image/jpg,image/png,image/gif,image/webp" multiple>
+                        <small class="form-text">Up to 10 images, 8MB each.</small>
+                    </div>
 
-                        <button type="submit" id="btn-submit" class="submit-btn"
-                            onclick="if(window.handleProjectSubmission) window.handleProjectSubmission(event)">إنشاء
-                            المشروع</button>
-                    </form>
+                    <div class="form-group">
+                        <label for="project-video" class="form-label">Project Video (Optional)</label>
+                        <input type="url" id="project-video" class="form-control" placeholder="YouTube or Vimeo URL">
+                        <small class="form-text">A video can significantly increase your chances of success</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="project-tags" class="form-label">Tags <span
+                                style="color:var(--neutral-500);font-weight:400;">(Optional)</span></label>
+                        <input type="text" id="project-tags" class="form-control"
+                            placeholder="Enter tags separated by commas">
+                        <small class="form-text">Help people discover your project with relevant tags</small>
+                    </div>
                 </div>
 
-                <!-- Create Project Guide -->
-                <div class="create-project-guide">
-                    <h3>دليل إنشاء المشروع</h3>
+                <!-- Form Actions -->
+                <div class="form-actions">
+                    <button type="button" class="btn-prev" id="btn-prev" style="display: none;">Previous</button>
+                    <button type="button" class="btn-next" id="btn-next">Next</button>
+                    <button type="submit" class="btn-submit" id="btn-submit" style="display: none;"
+                        onclick="if(window.handleProjectSubmission) window.handleProjectSubmission(event)">Submit
+                        Project</button>
+                </div>
+                <div id="form-message" style="display:none;"></div>
+            </form>
 
-                    <div class="guide-step">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h4>اكتب فكرة مشروعك</h4>
-                            <p>ابدأ بفكرة واضحة ومحددة. اكتب وصفاً مفصلاً لمشروعك وما تريد تحقيقه.</p>
+            <!-- SUCCESS MODAL — Full screen, beautiful -->
+            <div id="successModal"
+                style="display:none; position:fixed; inset:0; background:rgba(5,20,40,0.75); z-index:9999; align-items:center; justify-content:center; padding:1rem; backdrop-filter:blur(6px);">
+                <div
+                    style="background:white; border-radius:28px; padding:0; max-width:600px; width:100%; box-shadow:0 40px 80px rgba(0,0,0,0.35); animation:popIn .45s cubic-bezier(.34,1.56,.64,1); overflow:hidden; max-height:96vh; overflow-y:auto;">
+                    <!-- Header gradient -->
+                    <div
+                        style="background:linear-gradient(135deg,#00a651 0%,#006c35 100%); padding:2.5rem 2rem 1.5rem; text-align:center; position:relative;">
+                        <div style="font-size:4rem; line-height:1; margin-bottom:0.75rem;">🎉</div>
+                        <h2 style="color:white; font-size:1.85rem; font-weight:800; margin:0;">Project Submitted!</h2>
+                        <p style="color:rgba(255,255,255,0.85); margin:0.5rem 0 0; font-size:1rem;">Your project has
+                            been submitted successfully for admin review</p>
+                    </div>
+                    <!-- Review notice banner -->
+                    <div
+                        style="background:#fffbeb; border-bottom:1px solid #fde68a; padding:0.85rem 2rem; display:flex; align-items:center; gap:0.6rem;">
+                        <span style="font-size:1.2rem;">⏳</span>
+                        <span style="font-size:0.88rem; color:#92400e; font-weight:500;">Our admin team will review your
+                            project and publish it once approved. You'll be notified of the decision.</span>
+                    </div>
+                    <!-- Body -->
+                    <div style="padding:2rem;">
+                        <!-- Project title -->
+                        <div style="text-align:center; margin-bottom:1.5rem;">
+                            <div
+                                style="font-size:0.85rem; color:#6b7280; text-transform:uppercase; letter-spacing:.05em; margin-bottom:.25rem;">
+                                Project Name</div>
+                            <div id="smProjectTitle" style="font-size:1.3rem; font-weight:700; color:#111;"></div>
+                        </div>
+
+                        <!-- Project ID + link -->
+                        <div
+                            style="background:#f0fdf4; border:1.5px solid #bbf7d0; border-radius:16px; padding:1.25rem 1.5rem; margin-bottom:1.5rem;">
+                            <div
+                                style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:.75rem;">
+                                <div>
+                                    <div
+                                        style="font-size:0.78rem; color:#059669; font-weight:600; text-transform:uppercase; letter-spacing:.04em;">
+                                        Project ID</div>
+                                    <div id="smProjectId"
+                                        style="font-size:1rem; font-weight:700; color:#065f46; font-family:monospace; margin-top:2px;">
+                                        —</div>
+                                </div>
+                                <div>
+                                    <div
+                                        style="font-size:0.78rem; color:#059669; font-weight:600; text-transform:uppercase; letter-spacing:.04em;">
+                                        Status</div>
+                                    <span
+                                        style="background:#fef3c7; color:#d97706; font-size:0.8rem; font-weight:700; padding:3px 10px; border-radius:20px; display:inline-block; margin-top:2px;">⏳
+                                        Pending Admin Review</span>
+                                </div>
+                            </div>
+                            <div style="margin-top:1rem;">
+                                <div
+                                    style="font-size:0.78rem; color:#059669; font-weight:600; text-transform:uppercase; letter-spacing:.04em; margin-bottom:.4rem;">
+                                    Shareable Link</div>
+                                <div style="display:flex; gap:.5rem; align-items:center;">
+                                    <input id="smShareLink" type="text" readonly
+                                        style="flex:1; padding:.5rem .8rem; border:1.5px solid #bbf7d0; border-radius:8px; font-size:.82rem; color:#065f46; background:#fff; outline:none; font-family:monospace;" />
+                                    <button onclick="copyShareLink()"
+                                        style="padding:.5rem .9rem; background:#00a651; color:white; border:none; border-radius:8px; cursor:pointer; font-size:.82rem; font-weight:600; white-space:nowrap;"><i
+                                            class="fas fa-copy"></i> Copy</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- QR Code -->
+                        <div style="text-align:center; margin-bottom:1.5rem;">
+                            <div style="font-size:0.85rem; color:#6b7280; font-weight:600; margin-bottom:.75rem;">📱 QR
+                                Code — Share Anywhere</div>
+                            <div id="smQrCode"
+                                style="display:inline-block; padding:.75rem; border:2px solid #e5e7eb; border-radius:16px; background:white;">
+                            </div>
+                        </div>
+
+                        <!-- Social Share -->
+                        <div style="margin-bottom:1.5rem;">
+                            <div
+                                style="font-size:0.85rem; color:#6b7280; font-weight:600; text-align:center; margin-bottom:.9rem;">
+                                Share on Social Media</div>
+                            <div style="display:flex; flex-wrap:wrap; gap:.6rem; justify-content:center;">
+                                <button onclick="shareOn('facebook')"
+                                    style="display:flex;align-items:center;gap:.5rem;padding:.6rem 1.1rem;border:none;border-radius:10px;cursor:pointer;font-weight:600;font-size:.85rem;background:#1877f2;color:white;"><i
+                                        class="fab fa-facebook-f"></i> Facebook</button>
+                                <button onclick="shareOn('instagram')"
+                                    style="display:flex;align-items:center;gap:.5rem;padding:.6rem 1.1rem;border:none;border-radius:10px;cursor:pointer;font-weight:600;font-size:.85rem;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:white;"><i
+                                        class="fab fa-instagram"></i> Instagram</button>
+                                <button onclick="shareOn('tiktok')"
+                                    style="display:flex;align-items:center;gap:.5rem;padding:.6rem 1.1rem;border:none;border-radius:10px;cursor:pointer;font-weight:600;font-size:.85rem;background:#000;color:white;"><i
+                                        class="fab fa-tiktok"></i> TikTok</button>
+                                <button onclick="shareOn('snapchat')"
+                                    style="display:flex;align-items:center;gap:.5rem;padding:.6rem 1.1rem;border:none;border-radius:10px;cursor:pointer;font-weight:600;font-size:.85rem;background:#FFFC00;color:#000;"><i
+                                        class="fab fa-snapchat-ghost"></i> Snapchat</button>
+                                <button onclick="shareOn('twitter')"
+                                    style="display:flex;align-items:center;gap:.5rem;padding:.6rem 1.1rem;border:none;border-radius:10px;cursor:pointer;font-weight:600;font-size:.85rem;background:#1da1f2;color:white;"><i
+                                        class="fab fa-twitter"></i> Twitter/X</button>
+                                <button onclick="shareOn('whatsapp')"
+                                    style="display:flex;align-items:center;gap:.5rem;padding:.6rem 1.1rem;border:none;border-radius:10px;cursor:pointer;font-weight:600;font-size:.85rem;background:#25d366;color:white;"><i
+                                        class="fab fa-whatsapp"></i> WhatsApp</button>
+                                <button onclick="shareOn('email')"
+                                    style="display:flex;align-items:center;gap:.5rem;padding:.6rem 1.1rem;border:none;border-radius:10px;cursor:pointer;font-weight:600;font-size:.85rem;background:#6b7280;color:white;"><i
+                                        class="fas fa-envelope"></i> Email</button>
+                            </div>
+                        </div>
+
+                        <!-- CTAs -->
+                        <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+                            <a href="dashboard-ar.html"
+                                style="padding:.85rem 2rem;border-radius:12px;text-decoration:none;background:#00a651;color:white;font-weight:700;font-size:.95rem;"><i
+                                    class="fas fa-tachometer-alt"></i> Go to Dashboard</a>
+                            <a href="my-projects-ar.html"
+                                style="padding:.85rem 2rem;border-radius:12px;text-decoration:none;border:2px solid #00a651;color:#00a651;font-weight:700;font-size:.95rem;"><i
+                                    class="fas fa-folder-open"></i> مشاريعي</a>
                         </div>
                     </div>
+                </div>
+            </div>
 
-                    <div class="guide-step">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h4>حدد هدفك المالي</h4>
-                            <p>حدد المبلغ الذي تحتاجه لتنفيذ مشروعك. كن واقعياً في تقدير التكاليف.</p>
-                        </div>
+            <!-- ERROR BANNER -->
+            <div id="errorBanner"
+                style="display:none; position:fixed; bottom:2rem; left:50%; transform:translateX(-50%); background:#fff; border:2px solid #dc2626; border-radius:16px; padding:1.5rem 2rem; max-width:560px; width:90%; box-shadow:0 10px 40px rgba(220,38,38,0.15); z-index:9999;">
+                <div style="display:flex;align-items:flex-start;gap:1rem;">
+                    <div style="font-size:2rem;flex-shrink:0;">❌</div>
+                    <div style="flex:1;">
+                        <div style="font-weight:700;font-size:1.05rem;color:#dc2626;margin-bottom:0.4rem;">Submission
+                            Failed</div>
+                        <div id="errorBannerMsg" style="color:#555;font-size:0.95rem;margin-bottom:0.75rem;"></div>
+                        <div id="errorBannerFix" style="color:#047a2e;font-size:0.9rem;font-weight:500;"></div>
                     </div>
-
-                    <div class="guide-step">
-                        <div class="step-number">3</div>
-                        <div class="step-content">
-                            <h4>أضف صور وفيديو</h4>
-                            <p>أضف صوراً وفيديوهات تعرض مشروعك. الصور الجيدة تساعد في جذب الممولين.</p>
-                        </div>
-                    </div>
-
-                    <div class="guide-step">
-                        <div class="step-number">4</div>
-                        <div class="step-content">
-                            <h4>حدد مدة الحملة</h4>
-                            <p>اختر مدة مناسبة لحملتك. عادة ما تكون 30-60 يوماً.</p>
-                        </div>
-                    </div>
-
-                    <div class="guide-step">
-                        <div class="step-number">5</div>
-                        <div class="step-content">
-                            <h4>انشر مشروعك</h4>
-                            <p>بعد الموافقة على مشروعك، سيتم نشره على الموقع ويمكن للممولين البدء في التمويل.</p>
-                        </div>
-                    </div>
+                    <button onclick="document.getElementById('errorBanner').style.display='none'"
+                        style="background:none;border:none;cursor:pointer;font-size:1.2rem;color:#999;flex-shrink:0;">✕</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Tips Section -->
-    <section class="tips-section">
-        <div class="container">
-            <h2 class="section-title">نصائح مفيدة</h2>
-            <p class="section-subtitle">تعلم من أفضل الممارسات لإنشاء مشروع ناجح</p>
-
-            <div class="tips-grid">
-                <div class="tip-item">
-                    <div class="tip-icon">
-                        <i class="fas fa-lightbulb"></i>
-                    </div>
-                    <h3 class="tip-title">كن صادقاً</h3>
-                    <p class="tip-description">اكتب وصفاً واضحاً ومفهوماً. اشرح فكرة مشروعك وما تريد تحقيقه.</p>
-                </div>
-
-                <div class="tip-item">
-                    <div class="tip-icon">
-                        <i class="fas fa-camera"></i>
-                    </div>
-                    <h3 class="tip-title">استخدم صوراً جيدة</h3>
-                    <p class="tip-description">أضف صوراً عالية الجودة. الصور الجيدة تساعد في جذب الممولين.</p>
-                </div>
-
-                <div class="tip-item">
-                    <div class="tip-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3 class="tip-title">شارك مع الأصدقاء</h3>
-                    <p class="tip-description">شارك مشروعك مع أصدقائك وعائلتك. الدعم الأولي يساعد في نجاح المشروع.</p>
-                </div>
-
-                <div class="tip-item">
-                    <div class="tip-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3 class="tip-title">حدد أهدافاً واقعية</h3>
-                    <p class="tip-description">حدد مبلغاً واقعياً. ابدأ بمبلغ صغير وزد تدريجياً.</p>
-                </div>
-
-                <div class="tip-item">
-                    <div class="tip-icon">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <h3 class="tip-title">كن صادقاً</h3>
-                    <p class="tip-description">كن صادقاً مع الممولين. اشرح كيف ستستخدم الأموال.</p>
-                </div>
-
-                <div class="tip-item">
-                    <div class="tip-icon">
-                        <i class="fas fa-share-alt"></i>
-                    </div>
-                    <h3 class="tip-title">شارك بانتظام</h3>
-                    <p class="tip-description">شارك تحديثات منتظمة مع الممولين. ابقهم على اطلاع بالتقدم.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    <script src="assets/js/auth-handler.js"></script>
+    <script src="scripts.js"></script>
     <script>
-        function switchLanguage(lang) {
-            if (lang === 'en') {
-                window.location.href = 'create-project.html';
-            } else if (lang === 'ar') {
-                window.location.href = 'create-project-ar.html';
+        if (window.auth) window.auth.protectPage();
+
+        let currentStep = 1;
+        const totalSteps = 4;
+
+        function showStep(step) {
+            // Hide all steps
+            for (let i = 1; i <= totalSteps; i++) {
+                document.getElementById(`step-${i}`).style.display = 'none';
+            }
+
+            // Show current step
+            document.getElementById(`step-${step}`).style.display = 'block';
+
+            // Update step indicators
+            updateStepIndicators(step);
+
+            // Update buttons
+            updateButtons(step);
+        }
+
+        function updateStepIndicators(step) {
+            const steps = document.querySelectorAll('.form-step');
+            steps.forEach((stepEl, index) => {
+                stepEl.classList.remove('active', 'completed');
+                if (index + 1 < step) {
+                    stepEl.classList.add('completed');
+                } else if (index + 1 === step) {
+                    stepEl.classList.add('active');
+                }
+            });
+        }
+
+        function updateButtons(step) {
+            const btnPrev = document.getElementById('btn-prev');
+            const btnNext = document.getElementById('btn-next');
+            const btnSubmit = document.getElementById('btn-submit');
+
+            if (step === 1) {
+                btnPrev.style.display = 'none';
+                btnNext.style.display = 'block';
+                btnSubmit.style.display = 'none';
+            } else if (step === totalSteps) {
+                btnPrev.style.display = 'block';
+                btnNext.style.display = 'none';
+                btnSubmit.style.display = 'block';
+            } else {
+                btnPrev.style.display = 'block';
+                btnNext.style.display = 'block';
+                btnSubmit.style.display = 'none';
             }
         }
 
+        // Per-step required fields
+        const STEP_REQUIRED = {
+            1: [
+                { id: 'project-title', label: 'Project Title' },
+                { id: 'project-category', label: 'Category' },
+                { id: 'project-location', label: 'Location' },
+                { id: 'project-duration', label: 'Campaign Duration' }
+            ],
+            2: [
+                { id: 'project-description', label: 'Project Description' }
+            ],
+            3: [
+                { id: 'funding-goal', label: 'Funding Goal' }
+            ]
+        };
+
+        function clearFieldErrors() {
+            document.querySelectorAll('.field-error').forEach(el => el.classList.remove('field-error'));
+            document.querySelectorAll('.field-error-msg').forEach(el => el.remove());
+        }
+
+        function validateStep(step) {
+            clearFieldErrors();
+            const required = STEP_REQUIRED[step];
+            if (!required) return true;
+            let valid = true;
+            required.forEach(({ id, label }) => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                const empty = !el.value || el.value.trim() === '' || el.value === '';
+                if (empty) {
+                    el.classList.add('field-error');
+                    const msg = document.createElement('div');
+                    msg.className = 'field-error-msg';
+                    msg.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${label} is required`;
+                    el.parentNode.appendChild(msg);
+                    valid = false;
+                }
+                el.addEventListener('input', () => {
+                    el.classList.remove('field-error');
+                    el.parentNode.querySelectorAll('.field-error-msg').forEach(m => m.remove());
+                }, { once: true });
+            });
+            if (!valid) {
+                const firstErr = document.querySelector('.field-error');
+                if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            return valid;
+        }
+
+        function nextStep() {
+            if (!validateStep(currentStep)) return;
+            if (currentStep < totalSteps) {
+                currentStep++;
+                showStep(currentStep);
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        }
+
+        // Dynamic Rewards Logic
+        const rewardsContainer = document.getElementById('rewards-container');
+        const btnAddReward = document.getElementById('btn-add-reward');
+        let rewardCount = 0;
+
+        function addRewardTier() {
+            rewardCount++;
+            const div = document.createElement('div');
+            div.className = 'reward-tier-card';
+            div.style.cssText = 'background: var(--neutral-100); border: 1px solid var(--neutral-300); border-radius: 8px; padding: 1.25rem; margin-bottom: 1rem; position: relative;';
+            div.innerHTML = `
+                <button type="button" class="btn-remove-reward" onclick="this.parentElement.remove()" style="position: absolute; right: 1rem; top: 1rem; background: none; border: none; color: var(--neutral-500); cursor: pointer; padding: 0.5rem;"><i class="fas fa-times"></i></button>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <div>
+                        <label class="form-label" style="font-size: 0.85rem;">Reward Title</label>
+                        <input type="text" class="form-control reward-title-input" placeholder="e.g. Early Bird">
+                    </div>
+                    <div>
+                        <label class="form-label" style="font-size: 0.85rem;">Minimum Amount (SAR)</label>
+                        <input type="number" class="form-control reward-amount-input" placeholder="100" min="1">
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label class="form-label" style="font-size: 0.85rem;">Description</label>
+                    <textarea class="form-control form-textarea reward-desc-input" placeholder="What will they receive?" rows="2"></textarea>
+                </div>
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1rem;">
+                    <div>
+                        <label class="form-label" style="font-size: 0.85rem;">Included Items (comma-separated)</label>
+                        <input type="text" class="form-control reward-includes-input" placeholder="Item 1, Item 2">
+                    </div>
+                    <div>
+                        <label class="form-label" style="font-size: 0.85rem;">Est. Delivery</label>
+                        <input type="month" class="form-control reward-date-input">
+                    </div>
+                </div>
+            `;
+            rewardsContainer.appendChild(div);
+        }
+
+        if (btnAddReward) {
+            btnAddReward.addEventListener('click', addRewardTier);
+            // Add one default empty tier
+            addRewardTier();
+        }
+
+        // Event listeners
+        document.getElementById('btn-next').addEventListener('click', nextStep);
+        document.getElementById('btn-prev').addEventListener('click', prevStep);
+
+        // Cover image preview — fires when user selects a file
+        document.getElementById('project-cover').addEventListener('change', function () {
+            const file = this.files && this.files[0];
+            if (!file) { clearCoverPreview(); return; }
+            if (file.size > 8 * 1024 * 1024) {
+                alert('Image must be under 8MB.');
+                this.value = '';
+                clearCoverPreview();
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById('cover-preview-img').src = e.target.result;
+                document.getElementById('cover-preview-name').textContent = file.name + ' (' + (file.size / 1024).toFixed(0) + ' KB) — Ready to upload';
+                document.getElementById('cover-preview-wrap').style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        });
+
+        function clearCoverPreview() {
+            document.getElementById('project-cover').value = '';
+            document.getElementById('cover-preview-img').src = '';
+            document.getElementById('cover-preview-wrap').style.display = 'none';
+        }
+
+        // Form Submission Logic
         document.addEventListener('DOMContentLoaded', () => {
             const form = document.querySelector('.project-form');
-            const btn = document.getElementById('btn-submit');
-            const errContainer = document.getElementById('ar-error-container');
-            const errMsgEl = document.getElementById('ar-error-msg');
-            const errFixEl = document.getElementById('ar-error-fix');
 
             window.handleProjectSubmission = async function (e) {
                 if (e) {
@@ -712,119 +1095,237 @@
                     if (e.stopPropagation) e.stopPropagation();
                 }
 
+                console.log('Submission process initiated...');
+                const btn = document.getElementById('btn-submit');
                 if (!btn || btn.disabled) return;
+
                 const origText = btn.textContent;
-
-                errContainer.style.display = 'none';
-
                 try {
                     btn.disabled = true;
-                    btn.textContent = 'جاري الإنشاء...';
+                    btn.textContent = 'Processing...';
 
+                    // Ensure user is using a valid auth token
                     let token = window.auth ? window.auth.getToken() : localStorage.getItem('token');
                     if (!token) {
-                        alert('أنت لست مسجل الدخول. يرجى تسجيل الدخول أولاً.');
-                        window.location.href = 'login-ar.html';
+                        alert('Your session has expired or you are not logged in. Redirecting to login page...');
+                        window.location.href = 'login.html';
                         return;
                     }
 
-                    // Collect data
+                    // Collect and trim primary fields
                     const title = document.getElementById('project-title')?.value.trim();
                     const category = document.getElementById('project-category')?.value;
                     const location = document.getElementById('project-location')?.value.trim();
+                    const duration = document.getElementById('project-duration')?.value;
                     const description = document.getElementById('project-description')?.value.trim();
                     const goalAmount = document.getElementById('funding-goal')?.value;
-                    const duration = document.getElementById('project-duration')?.value;
 
-                    if (!title || !category || !location || !description || !goalAmount || !duration) {
+                    // Validate essential fields
+                    if (!title || !category || !location || !duration || !description || !goalAmount) {
                         const missing = [];
-                        if (!title) missing.push('اسم المشروع');
-                        if (!category) missing.push('الفئة');
-                        if (!location) missing.push('الموقع');
-                        if (!description) missing.push('وصف المشروع');
-                        if (!goalAmount) missing.push('المبلغ المطلوب');
-                        if (!duration) missing.push('مدة الحملة');
+                        if (!title) missing.push('Project Title');
+                        if (!category) missing.push('Category');
+                        if (!location) missing.push('Location');
+                        if (!duration) missing.push('Campaign Duration');
+                        if (!description) missing.push('Project Description');
+                        if (!goalAmount) missing.push('Funding Goal');
 
-                        showErrorAR('الحقول المطلوبة مفقودة', 'يرجى ملء كافة الحقول: ' + missing.join('، '));
+                        showError('Required Fields Missing', 'Please fill in: ' + missing.join(', '));
                         btn.disabled = false;
                         btn.textContent = origText;
                         return;
                     }
 
+                    // Deadline logic based on duration
                     const d = new Date();
                     d.setDate(d.getDate() + parseInt(duration, 10));
                     const deadline = d.toISOString().slice(0, 10);
 
+                    // Image check (Mandatory)
                     const coverInput = document.getElementById('project-cover');
                     if (!coverInput?.files?.[0]) {
-                        showErrorAR('صورة الغلاف مطلوبة', 'يرجى رفع صورة لغلاف المشروع في الخطوة السابقة.');
+                        showError('Cover Image Required', 'Please upload a project cover image in Step 4.');
                         btn.disabled = false;
                         btn.textContent = origText;
                         return;
                     }
 
                     const API = window.location.origin;
+                    let coverImageUrl = null;
+                    let galleryUrls = [];
 
-                    // 1. Upload Cover
+                    // 1. Upload Cover Image
                     console.log('Uploading cover...');
-                    const fd = new FormData();
-                    fd.append('cover', coverInput.files[0]);
+                    const coverFD = new FormData();
+                    coverFD.append('cover', coverInput.files[0]);
                     const coverRes = await fetch(API + '/api/projects/upload-cover', {
                         method: 'POST',
                         headers: { 'Authorization': 'Bearer ' + token },
-                        body: fd
+                        body: coverFD
                     });
-                    const coverData = await coverRes.json();
-                    if (!coverData.success) throw new Error(coverData.message || 'فشل رفع صورة الغلاف');
+                    const coverJ = await coverRes.json();
+                    if (!coverJ.success) throw new Error(coverJ.message || 'Cover image upload failed');
+                    coverImageUrl = coverJ.url;
 
-                    // 2. Final Submission
-                    console.log('Creating project...');
+                    // 2. Upload Gallery (if any)
+                    const galleryInput = document.getElementById('project-images');
+                    if (galleryInput?.files?.length > 0) {
+                        console.log('Uploading gallery...');
+                        const galleryFD = new FormData();
+                        for (let i = 0; i < Math.min(galleryInput.files.length, 10); i++) {
+                            galleryFD.append('gallery', galleryInput.files[i]);
+                        }
+                        const gallRes = await fetch(API + '/api/projects/upload-gallery', {
+                            method: 'POST',
+                            headers: { 'Authorization': 'Bearer ' + token },
+                            body: galleryFD
+                        });
+                        const gallJ = await gallRes.json();
+                        if (gallJ.success) galleryUrls = gallJ.urls;
+                    }
+
+                    // 3. Process Rewards
+                    const rewards = [];
+                    document.querySelectorAll('.reward-tier-card').forEach(card => {
+                        const rt = card.querySelector('.reward-title-input')?.value.trim();
+                        const ra = card.querySelector('.reward-amount-input')?.value;
+                        const rd = card.querySelector('.reward-desc-input')?.value.trim();
+                        if (rt && ra && rd) {
+                            rewards.push({
+                                title: rt,
+                                amount: Number(ra),
+                                description: rd,
+                                includes: (card.querySelector('.reward-includes-input')?.value || '').split(',').map(s => s.trim()).filter(Boolean),
+                                deliveryDate: card.querySelector('.reward-date-input')?.value || null
+                            });
+                        }
+                    });
+
+                    // 4. Create Project Entry
+                    console.log('Saving project to database...');
+                    const payload = {
+                        title, category, location, description, deadline,
+                        goalAmount: Number(goalAmount),
+                        coverImage: coverImageUrl,
+                        gallery: galleryUrls,
+                        rewards,
+                        story: document.getElementById('project-story')?.value.trim() || '',
+                        challenges: document.getElementById('project-challenges')?.value.trim() || '',
+                        videoUrl: document.getElementById('project-video')?.value.trim() || '',
+                        tags: (document.getElementById('project-tags')?.value || '').split(',').map(s => s.trim()).filter(Boolean),
+                        status: 'pending'
+                    };
+
                     const res = await fetch(API + '/api/projects', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                             'Authorization': 'Bearer ' + token
                         },
-                        body: JSON.stringify({
-                            title, category, location, description,
-                            goalAmount: Number(goalAmount),
-                            deadline,
-                            coverImage: coverData.url,
-                            status: 'pending'
-                        })
+                        body: JSON.stringify(payload)
                     });
                     const data = await res.json();
 
-                    if (data.success) {
-                        alert('تم إنشاء المشروع بنجاح ووضعه قيد المراجعة!');
-                        window.location.href = 'dashboard-ar.html';
-                    } else {
-                        throw new Error(data.message || 'فشل في إنشاء المشروع.');
-                    }
+                    if (data.success && data.data) {
+                        console.log('Project created successfully!');
+                        const proj = data.data;
+                        const shareUrl = window.location.origin + '/project-details.html?id=' + proj._id;
 
+                        // Fill success modal
+                        if (document.getElementById('smProjectTitle')) document.getElementById('smProjectTitle').textContent = proj.title;
+                        if (document.getElementById('smProjectId')) document.getElementById('smProjectId').textContent = proj.serialNumber || proj._id;
+                        if (document.getElementById('smShareLink')) document.getElementById('smShareLink').value = shareUrl;
+
+                        // QR Code
+                        const qrEl = document.getElementById('smQrCode');
+                        if (qrEl) {
+                            qrEl.innerHTML = '';
+                            if (typeof QRCode !== 'undefined') {
+                                new QRCode(qrEl, { text: shareUrl, width: 160, height: 160, colorDark: '#006c35', colorLight: '#fff' });
+                            } else {
+                                qrEl.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(shareUrl)}&color=006c35" style="border-radius:8px;">`;
+                            }
+                        }
+
+                        window._shareData = { url: shareUrl, title: proj.title };
+                        document.getElementById('successModal').style.display = 'flex';
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    } else {
+                        throw new Error(data.message || 'Server rejected project creation');
+                    }
                 } catch (err) {
                     console.error('Submission error:', err);
-                    showErrorAR('حدث خطأ', err.message || 'يرجى المحاولة مرة أخرى لاحقاً.');
+                    showError('Submission Failed', err.message || 'A network error occurred. Please try again.');
                 } finally {
                     btn.disabled = false;
                     btn.textContent = origText;
                 }
             };
 
-            function showErrorAR(msg, fix) {
-                errMsgEl.textContent = msg;
-                errFixEl.textContent = fix ? '💡 ' + fix : '';
-                errContainer.style.display = 'block';
-                errContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-
             if (form) form.addEventListener('submit', window.handleProjectSubmission);
         });
+
+        function showMsg(text, type, el) {
+            // Legacy inline fallback (unused by main flow now)
+        }
+
+        function showError(msg, fix) {
+            document.getElementById('errorBannerMsg').textContent = msg;
+            document.getElementById('errorBannerFix').textContent = fix ? '✅ How to fix: ' + fix : '';
+            const b = document.getElementById('errorBanner');
+            b.style.display = 'block';
+            b.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function copyShareLink() {
+            const el = document.getElementById('smShareLink');
+            if (!el) return;
+            navigator.clipboard.writeText(el.value).then(() => {
+                const btn = el.nextElementSibling;
+                if (btn) { btn.textContent = '✓ Copied!'; setTimeout(() => { btn.innerHTML = '<i class="fas fa-copy"></i> Copy'; }, 2000); }
+            });
+        }
+
+        function shareOn(platform) {
+            const sd = window._shareData || {};
+            const url = encodeURIComponent(sd.url || window.location.href);
+            const title = encodeURIComponent((sd.title || 'My Project') + ' — Support on YallaStarter! ');
+            const links = {
+                facebook: `https://www.facebook.com/sharer/sharer.php?u=${url}`,
+                twitter: `https://twitter.com/intent/tweet?url=${url}&text=${title}`,
+                whatsapp: `https://wa.me/?text=${title}${url}`,
+                snapchat: `https://www.snapchat.com/scan?attachmentUrl=${url}`,
+                instagram: null,  // Instagram has no share-link API; open profile
+                tiktok: null,
+                email: `mailto:?subject=${title}&body=Check%20out%20this%20project:%20${url}`
+            };
+            if (links[platform]) {
+                window.open(links[platform], '_blank', 'width=600,height=450');
+            } else if (platform === 'instagram') {
+                // Instagram: copy link + open instagram.com
+                navigator.clipboard.writeText(decodeURIComponent(url)).catch(() => { });
+                alert('Link copied! Open Instagram and paste it in your Story or Bio.');
+                window.open('https://instagram.com', '_blank');
+            } else if (platform === 'tiktok') {
+                navigator.clipboard.writeText(decodeURIComponent(url)).catch(() => { });
+                alert('Link copied! Open TikTok and paste it in your bio or a comment.');
+                window.open('https://tiktok.com', '_blank');
+            }
+        }
+
+        function switchLanguage(lang) {
+            if (lang === 'en') {
+                window.location.href = 'create-project.html';
+            } else if (lang === 'ar') {
+                window.location.href = 'create-project-ar.html';
+            }
+        }
     </script>
 
     <!-- Universal Mobile Menu Script -->
     <script src="mobile-menu.js"></script>
-
+    <!-- Session: shows user dropdown when logged in -->
+    <script src="assets/js/session-init.js"></script>
 </body>
 
 </html>
