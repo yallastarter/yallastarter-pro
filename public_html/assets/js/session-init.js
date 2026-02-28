@@ -8,7 +8,7 @@
 (function () {
     var token = localStorage.getItem('token');
     var user = null;
-    try { user = JSON.parse(localStorage.getItem('user')); } catch (e) {}
+    try { user = JSON.parse(localStorage.getItem('user')); } catch (e) { }
 
     var authContainers = document.querySelectorAll('.auth-buttons');
     if (!authContainers.length) return;
@@ -27,7 +27,7 @@
         var profileUrl = isArabic ? 'user-profile-ar.html' : 'user-profile.html'; // Assuming such page exists, or fallback
         var notificationsUrl = isArabic ? 'notifications-ar.html' : 'notifications.html';
         var settingsUrl = isArabic ? 'settings-ar.html' : 'settings.html';
-        
+
         var txtDashboard = isArabic ? 'لوحة التحكم' : 'Dashboard';
         var txtProfile = isArabic ? 'الملف الشخصي' : 'Profile';
         var txtNotifications = isArabic ? 'الإشعارات' : 'Notifications';
@@ -36,8 +36,11 @@
 
         var dropdownHtml = '<div class="user-dropdown">'
             + '<button class="user-dropdown-btn" id="sessionDropdownBtn">'
-            + avatarHtml
-            + '<span id="sessionUserName">' + displayName + '</span>'
+            + (user.photoUrl
+                ? '<div id="headerAvatar" class="user-avatar-small" style="width:35px;height:35px;border-radius:50%;background-image:url(' + user.photoUrl + ');background-size:cover;background-position:center;"></div>'
+                : '<div id="headerAvatar" class="user-avatar-small" style="width:35px;height:35px;border-radius:50%;background:linear-gradient(135deg,#006c35 0%,#00a651 100%);display:flex;align-items:center;justify-content:center;"><i class="fas fa-user" style="font-size:1rem;color:white;"></i></div>'
+            )
+            + '<span id="headerUserName">' + displayName + '</span>'
             + '<i class="fas fa-chevron-down"></i>'
             + '</button>'
             + '<div class="user-dropdown-menu" id="sessionDropdownMenu">'
@@ -50,7 +53,15 @@
             + '</div></div>';
 
         authContainers.forEach(function (container) {
-            container.innerHTML = dropdownHtml;
+            // Check if we are on a dashboard page which already has its own logic
+            if (window.location.pathname.includes('dashboard') || window.location.pathname.includes('projects-ar')) {
+                // On dashboard pages, we only want to update if it's currently guest state (has Login link)
+                if (container.querySelector('a[href*="login"]') || !container.innerHTML.trim()) {
+                    container.innerHTML = dropdownHtml;
+                }
+            } else {
+                container.innerHTML = dropdownHtml;
+            }
         });
 
         // Wire up dropdown toggles
@@ -89,7 +100,7 @@
                 var createUrl = isArabic ? 'create-project-ar.html' : 'create-project.html';
                 var loginUrl = isArabic ? 'login-ar.html' : 'login.html';
                 var signUrl = isArabic ? 'signup-ar.html' : 'signup.html';
-                
+
                 var txtCreate = isArabic ? 'ابدأ مشروعك' : 'Start a Project';
                 var txtLogin = isArabic ? 'تسجيل الدخول' : 'Log In';
 

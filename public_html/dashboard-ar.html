@@ -631,7 +631,7 @@
                     <div class="stat-label">المشاريع المدعومة</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-value" id="stat-total-تم جمعها">—</div>
+                    <div class="stat-value" id="stat-total-raised">—</div>
                     <div class="stat-label">إجمالي ما تم جمعه</div>
                 </div>
                 <div class="stat-card">
@@ -663,7 +663,7 @@
                                     <span>18 يوم متبقي</span>
                                 </div>
                                 <div class="project-meta">
-                                    <div>ريال 320,500 تم جمعها</div>
+                                    <div>ريال 320,500 raised</div>
                                     <div>64% ممول</div>
                                 </div>
                                 <div class="progress-bar">
@@ -819,7 +819,7 @@
                     const activeCount = projects.filter(p => p.status === 'active').length;
                     const totalRaised = projects.reduce((sum, p) => sum + (p.currentAmount || 0), 0);
                     const statActive = document.getElementById('stat-active-projects');
-                    const statRaised = document.getElementById('stat-total-تم جمعها');
+                    const statRaised = document.getElementById('stat-total-raised');
                     if (statActive) statActive.textContent = activeCount;
                     if (statRaised) statRaised.textContent = 'ريال ' + totalRaised.toLocaleString();
                     if (projects.length === 0) {
@@ -840,7 +840,7 @@
                                 <div class="project-category">${(p.category || '').charAt(0).toUpperCase() + (p.category || '').slice(1)}</div>
                                 <h3 class="project-title">${(p.title || '').replace(/</g, '&lt;')}</h3>
                                 <div class="project-status"><span class="status-badge ${sClass}" style="${p.status === 'pending' ? 'background:#fef3c7;color:#d97706;' : p.status === 'rejected' ? 'background:#fee2e2;color:#dc2626;' : ''}">${statusLabel(p.status)}</span>${daysLeft > 0 ? '<span>' + daysLeft + ' يوم متبقي</span>' : ''}</div>
-                                <div class="project-meta"><div>ريال ${(p.currentAmount || 0).toLocaleString()} تم جمعها</div><div>${percent}% ممول</div></div>
+                                <div class="project-meta"><div>ريال ${(p.currentAmount || 0).toLocaleString()} raised</div><div>${percent}% ممول</div></div>
                                 <div class="progress-bar"><div class="progress-fill" style="width: ${percent}%;"></div></div>
                                 <div style="margin-top:.4rem;color:var(--neutral-500);font-size:.8rem;"><i class="fas fa-calendar-alt"></i> Created: ${createdDate}</div>
                                 <div style="display: flex; gap:.5rem; margin-top: 1rem;">
