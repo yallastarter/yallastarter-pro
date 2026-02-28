@@ -258,98 +258,77 @@
     </style>
 
     <style>
-        body { font-family: 'Tajawal', sans-serif; text-align: right; direction: rtl; }
-        .dashboard-sidebar { border-right: none; border-left: 1px solid var(--neutral-200); }
-        .sidebar-menu-icon { margin-right: 0; margin-left: 1rem; }
-        .sidebar-menu-link.active { border-right: none; border-left: 3px solid var(--primary); }
-        .nav-links { margin-left: auto; margin-right: 0; }
-        .logo { margin-left: 1rem; margin-right: 0; }
-        .user-avatar { margin-right: 0; margin-left: 1rem; }
+        body {
+            font-family: 'Tajawal', sans-serif;
+            text-align: right;
+            direction: rtl;
+        }
+
+        .dashboard-sidebar {
+            border-right: none;
+            border-left: 1px solid var(--neutral-200);
+        }
+
+        .sidebar-menu-icon {
+            margin-right: 0;
+            margin-left: 1rem;
+        }
+
+        .sidebar-menu-link.active {
+            border-right: none;
+            border-left: 3px solid var(--primary);
+        }
+
+        .nav-links {
+            margin-left: auto;
+            margin-right: 0;
+        }
+
+        .logo {
+            margin-left: 1rem;
+            margin-right: 0;
+        }
+
+        .user-avatar {
+            margin-right: 0;
+            margin-left: 1rem;
+        }
+
         /* Fix dropdown for RTL */
-        .user-dropdown-menu { right: auto; left: 0; text-align: right; transform-origin: top left; }
-        .dropdown-item { display: flex !important; align-items: center; gap: 10px; flex-direction: row; }
-        .dropdown-item i { margin-left: 0; margin-right: 0; }
+        .user-dropdown-menu {
+            right: auto;
+            left: 0;
+            text-align: right;
+            transform-origin: top left;
+        }
+
+        .dropdown-item {
+            display: flex !important;
+            align-items: center;
+            gap: 10px;
+            flex-direction: row;
+        }
+
+        .dropdown-item i {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
         /* Fix spinner for RTL */
-        .fa-spin { display: inline-block; }
+        .fa-spin {
+            display: inline-block;
+        }
     </style>
 </head>
 
 <body>
     <!-- Header -->
     <header class="header">
-        <div class="container">
-            <nav class="navbar">
-                <a href="index-ar.html" class="logo"><span class="logo-text">YallaStarter</span></a>
-                <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
-                <ul class="nav-links">
-                    <li><a href="index-ar.html">الرئيسية</a></li>
-                    <li><a href="projects.html">تصفح المشاريع</a></li>
-                    <li><a href="how-it-works.html">كيف يعمل</a></li>
-                    <li><a href="about.html">من نحن</a></li>
-                    <li><a href="contact.html">اتصل بنا</a></li>
-                </ul>
-                <div class="auth-buttons">
-                    <div class="user-dropdown">
-                        <button class="user-dropdown-btn">
-                            <div class="user-avatar-small" id="headerAvatar"
-                                style="width: 35px; height: 35px; border-radius: 50%; background: linear-gradient(135deg, #006c35 0%, #00a651 100%); display: flex; align-items: center; justify-content: center;">
-                                <i class="fas fa-user" style="font-size: 1rem; color: white;"></i>
-                            </div>
-                            <span id="headerUserName">User</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="user-dropdown-menu">
-                            <a href="dashboard-ar.html" class="dropdown-item"><i class="fas fa-tachometer-alt"></i> لوحة التحكم</a>
-                            <a href="user-profile-ar.html" class="dropdown-item"><i class="fas fa-user"></i> الملف الشخصي</a>
-                            <a href="settings-ar.html" class="dropdown-item"><i class="fas fa-cog"></i> الإعدادات</a>
-                            <div class="dropdown-divider"></div>
-                            <a href="javascript:void(0)" class="dropdown-item"
-                                onclick="window.auth.logout(); return false;"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</a>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Dashboard -->
-    <div class="dashboard-container">
-        <!-- Sidebar -->
-        <div class="dashboard-sidebar">
-            <div class="user-profile">
-                <div class="user-avatar" id="sidebarAvatar"
-                    style="background: linear-gradient(135deg, #006c35 0%, #00a651 100%); display: flex; align-items: center; justify-content: center;">
-                    <i class="fas fa-user" style="font-size: 2rem; color: white;"></i>
-                </div>
-                <div class="user-info">
-                    <div class="user-name" id="userName">User</div>
-                    <div class="user-email" id="userEmail">user@example.com</div>
-                </div>
-            </div>
-
-            <ul class="sidebar-menu">
-                <li class="sidebar-menu-item"><a href="dashboard-ar.html" class="sidebar-menu-link"><i
-                            class="fas fa-tachometer-alt sidebar-menu-icon"></i> لوحة التحكم</a></li>
-                <li class="sidebar-menu-item"><a href="my-projects-ar.html" class="sidebar-menu-link active"><i
-                            class="fas fa-rocket sidebar-menu-icon"></i> مشاريعي</a></li>
-                <li class="sidebar-menu-item"><a href="backed-projects-ar.html" class="sidebar-menu-link"><i
-                            class="fas fa-hand-holding-heart sidebar-menu-icon"></i> المشاريع المدعومة</a></li>
-                <li class="sidebar-menu-item"><a href="payments-ar.html" class="sidebar-menu-link"><i
-                            class="fas fa-money-bill-wave sidebar-menu-icon"></i> المدفوعات</a></li>
-                <li class="sidebar-menu-item"><a href="عملة-ar.html" class="sidebar-menu-link"><i
-                            class="fas fa-عملة sidebar-menu-icon"></i> محفظتي</a></li>
-                <li class="sidebar-menu-item"><a href="notifications-ar.html" class="sidebar-menu-link"><i
-                            class="fas fa-bell sidebar-menu-icon"></i> الإشعارات</a></li>
-                <li class="sidebar-menu-item"><a href="user-profile-ar.html" class="sidebar-menu-link"><i
-                            class="fas fa-user sidebar-menu-icon"></i> الملف الشخصي</a></li>
-                <li class="sidebar-menu-item"><a href="settings-ar.html" class="sidebar-menu-link"><i
-                            class="fas fa-cog sidebar-menu-icon"></i> الإعدادات</a></li>
-                <li class="sidebar-menu-item"><a href="support-ar.html" class="sidebar-menu-link"><i
-                            class="fas fa-question-circle sidebar-menu-icon"></i> المساعدة والدعم</a></li>
-                <li class="sidebar-menu-item"><a href="javascript:void(0)" class="sidebar-menu-link"
-                        onclick="window.auth.logout(); return false;"><i
-                            class="fas fa-sign-out-alt sidebar-menu-icon"></i> تسجيل الخروج</a></li>
-            </ul>
+        class="fas fa-question-circle sidebar-menu-icon"></i> المساعدة والدعم</a></li>
+        <li class="sidebar-menu-item"><a href="javascript:void(0)" class="sidebar-menu-link"
+                onclick="window.auth.logout(); return false;"><i class="fas fa-sign-out-alt sidebar-menu-icon"></i>
+                تسجيل الخروج</a></li>
+        </ul>
         </div>
 
         <!-- Content -->
@@ -369,106 +348,106 @@
                 </div>
             </div>
         </div>
-    </div>
+        </div>
 
-    <!-- Scripts -->
-    <script src="assets/js/session-init.js"></script>
-    <script src="assets/js/auth-handler.js"></script>
-    <script src="assets/js/upload-handler.js"></script>
-    <script>
-        // Protect page
-        if (window.auth) {
-            window.auth.protectPage();
-            const user = window.auth ? (window.auth ? window.auth.getUser() : null) : null;
-            if (user && document.getElementById("userName")) {
-                document.getElementById('userName').textContent = user.username || 'User';
-                document.getElementById('userEmail').textContent = user.email || '';
-                document.getElementById('headerUserName').textContent = user.username || 'User';
-                if (user.photoUrl) {
-                    ['sidebarAvatar', 'headerAvatar'].forEach(id => {
-                        const el = document.getElementById(id);
-                        el.style.backgroundImage = `url(${user.photoUrl})`;
-                        el.style.backgroundSize = 'cover';
-                        el.innerHTML = '';
+        <!-- Scripts -->
+        <script src="assets/js/session-init.js"></script>
+        <script src="assets/js/auth-handler.js"></script>
+        <script src="assets/js/upload-handler.js"></script>
+        <script>
+            // Protect page
+            if (window.auth) {
+                window.auth.protectPage();
+                const user = window.auth ? (window.auth ? window.auth.getUser() : null) : null;
+                if (user && document.getElementById("userName")) {
+                    document.getElementById('userName').textContent = user.username || 'User';
+                    document.getElementById('userEmail').textContent = user.email || '';
+                    document.getElementById('headerUserName').textContent = user.username || 'User';
+                    if (user.photoUrl) {
+                        ['sidebarAvatar', 'headerAvatar'].forEach(id => {
+                            const el = document.getElementById(id);
+                            el.style.backgroundImage = `url(${user.photoUrl})`;
+                            el.style.backgroundSize = 'cover';
+                            el.innerHTML = '';
+                        });
+                    }
+                }
+            }
+
+            // Dropdown
+            const userDropdownBtn = document.querySelector('.user-dropdown-btn');
+            const userDropdownMenu = document.querySelector('.user-dropdown-menu');
+            userDropdownBtn?.addEventListener('click', () => userDropdownMenu.classList.toggle('show'));
+            window.addEventListener('click', e => {
+                if (!e.target.matches('.user-dropdown-btn') && !e.target.closest('.user-dropdown-btn'))
+                    userDropdownMenu?.classList.remove('show');
+            });
+
+            // Load projects
+            const token = (window.auth && typeof window.auth.getToken === 'function') ? window.auth.getToken() : localStorage.getItem('token');
+            const API = window.location.origin;
+
+            async function deleteProject(id, title) {
+                if (!confirm(`⚠️ Delete "${title}"?\n\nIf this project has backers, their عملة will be refunded automatically.`)) return;
+                try {
+                    const res = await fetch(API + '/api/projects/' + id, {
+                        method: 'DELETE',
+                        headers: { 'Authorization': 'Bearer ' + token }
                     });
+                    const data = await res.json();
+                    if (data.success) {
+                        showToast('✅ ' + data.message);
+                        setTimeout(() => { loadMyProjects(); }, 500);
+                    } else {
+                        alert(data.message || 'Error deleting project');
+                    }
+                } catch (e) {
+                    alert('Network error. Please try again.');
                 }
             }
-        }
 
-        // Dropdown
-        const userDropdownBtn = document.querySelector('.user-dropdown-btn');
-        const userDropdownMenu = document.querySelector('.user-dropdown-menu');
-        userDropdownBtn?.addEventListener('click', () => userDropdownMenu.classList.toggle('show'));
-        window.addEventListener('click', e => {
-            if (!e.target.matches('.user-dropdown-btn') && !e.target.closest('.user-dropdown-btn'))
-                userDropdownMenu?.classList.remove('show');
-        });
-
-        // Load projects
-        const token = (window.auth && typeof window.auth.getToken === 'function') ? window.auth.getToken() : localStorage.getItem('token');
-        const API = window.location.origin;
-
-        async function deleteProject(id, title) {
-            if (!confirm(`⚠️ Delete "${title}"?\n\nIf this project has backers, their عملة will be refunded automatically.`)) return;
-            try {
-                const res = await fetch(API + '/api/projects/' + id, {
-                    method: 'DELETE',
-                    headers: { 'Authorization': 'Bearer ' + token }
-                });
-                const data = await res.json();
-                if (data.success) {
-                    showToast('✅ ' + data.message);
-                    setTimeout(() => { loadMyProjects(); }, 500);
-                } else {
-                    alert(data.message || 'Error deleting project');
-                }
-            } catch (e) {
-                alert('Network error. Please try again.');
+            function showToast(msg) {
+                const t = document.createElement('div');
+                t.style.cssText = 'position:fixed;bottom:2rem;right:2rem;background:#065f46;color:white;padding:.9rem 1.5rem;border-radius:12px;font-size:.9rem;font-weight:600;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,.25);transition:opacity .4s;max-width:360px;';
+                t.textContent = msg;
+                document.body.appendChild(t);
+                setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 400); }, 3500);
             }
-        }
 
-        function showToast(msg) {
-            const t = document.createElement('div');
-            t.style.cssText = 'position:fixed;bottom:2rem;right:2rem;background:#065f46;color:white;padding:.9rem 1.5rem;border-radius:12px;font-size:.9rem;font-weight:600;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,.25);transition:opacity .4s;max-width:360px;';
-            t.textContent = msg;
-            document.body.appendChild(t);
-            setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 400); }, 3500);
-        }
+            function statusLabel(status) {
+                const map = { active: '✅ Active', draft: '📝 Draft', pending: '⏳ Pending Review', completed: '🏁 Completed', rejected: '❌ Rejected' };
+                return map[status] || status;
+            }
 
-        function statusLabel(status) {
-            const map = { active: '✅ Active', draft: '📝 Draft', pending: '⏳ Pending Review', completed: '🏁 Completed', rejected: '❌ Rejected' };
-            return map[status] || status;
-        }
+            function statusClass(status) {
+                const map = { active: 'active', draft: 'draft', completed: 'completed', pending: 'pending', rejected: 'rejected' };
+                return map[status] || 'draft';
+            }
 
-        function statusClass(status) {
-            const map = { active: 'active', draft: 'draft', completed: 'completed', pending: 'pending', rejected: 'rejected' };
-            return map[status] || 'draft';
-        }
-
-        async function loadMyProjects() {
-            const grid = document.getElementById('my-projects-grid');
-            try {
-                const res = await fetch(API + '/api/projects/user/me', { headers: { 'Authorization': 'Bearer ' + token } });
-                const data = await res.json();
-                const projects = data.data || [];
-                if (projects.length === 0) {
-                    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1;">
+            async function loadMyProjects() {
+                const grid = document.getElementById('my-projects-grid');
+                try {
+                    const res = await fetch(API + '/api/projects/user/me', { headers: { 'Authorization': 'Bearer ' + token } });
+                    const data = await res.json();
+                    const projects = data.data || [];
+                    if (projects.length === 0) {
+                        grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1;">
                         <div class="empty-state-icon"><i class="fas fa-rocket"></i></div>
                         <div class="empty-state-title">No projects yet</div>
                         <div class="empty-state-description">You haven't created any projects. Start your first one!</div>
                         <a href="create-project-ar.html" class="btn btn-primary"> إنشاء مشروع </a>
                     </div>`;
-                    return;
-                }
-                grid.innerHTML = projects.map(p => {
-                    const percent = p.goalAmount ? Math.min(100, Math.round((p.currentAmount / p.goalAmount) * 100)) : 0;
-                    const daysLeft = p.deadline ? Math.max(0, Math.ceil((new Date(p.deadline) - new Date()) / 86400000)) : 0;
-                    const imgSrc = p.coverImage ? p.coverImage : 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=600&q=80';
-                    const createdDate = p.createdAt ? new Date(p.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : '—';
-                    const canEdit = ['draft', 'pending', 'rejected'].includes(p.status);
-                    const sClass = statusClass(p.status);
-                    const safeTitle = (p.title || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
-                    return `<div class="project-card">
+                        return;
+                    }
+                    grid.innerHTML = projects.map(p => {
+                        const percent = p.goalAmount ? Math.min(100, Math.round((p.currentAmount / p.goalAmount) * 100)) : 0;
+                        const daysLeft = p.deadline ? Math.max(0, Math.ceil((new Date(p.deadline) - new Date()) / 86400000)) : 0;
+                        const imgSrc = p.coverImage ? p.coverImage : 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=600&q=80';
+                        const createdDate = p.createdAt ? new Date(p.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : '—';
+                        const canEdit = ['draft', 'pending', 'rejected'].includes(p.status);
+                        const sClass = statusClass(p.status);
+                        const safeTitle = (p.title || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
+                        return `<div class="project-card">
                         <div class="project-image"><img src="${imgSrc}" alt="${safeTitle}" onerror="this.src='https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=600&q=80'"></div>
                         <div class="project-content">
                             <div class="project-category">${(p.category || '').charAt(0).toUpperCase() + (p.category || '').slice(1)}</div>
@@ -493,14 +472,14 @@
                             </div>
                         </div>
                     </div>`;
-                }).join('');
-            } catch (e) {
-                grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><div class="empty-state-icon"><i class="fas fa-exclamation-triangle"></i></div><div class="empty-state-title">Could not load projects</div><div class="empty-state-description">Please try refreshing the page.</div></div>';
+                    }).join('');
+                } catch (e) {
+                    grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><div class="empty-state-icon"><i class="fas fa-exclamation-triangle"></i></div><div class="empty-state-title">Could not load projects</div><div class="empty-state-description">Please try refreshing the page.</div></div>';
+                }
             }
-        }
-        setTimeout(() => { loadMyProjects(); }, 500);
-    </script>
-    <script src="mobile-menu.js"></script>
+            setTimeout(() => { loadMyProjects(); }, 500);
+        </script>
+        <script src="mobile-menu.js"></script>
 </body>
 
 </html>

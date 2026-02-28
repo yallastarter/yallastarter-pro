@@ -522,19 +522,66 @@
     </style>
 
     <style>
-        body { font-family: 'Tajawal', sans-serif; text-align: right; direction: rtl; }
-        .dashboard-sidebar { border-right: none; border-left: 1px solid var(--neutral-200); }
-        .sidebar-menu-icon { margin-right: 0; margin-left: 1rem; }
-        .sidebar-menu-link.active { border-right: none; border-left: 3px solid var(--primary); }
-        .nav-links { margin-left: auto; margin-right: 0; }
-        .logo { margin-left: 1rem; margin-right: 0; }
-        .user-avatar { margin-right: 0; margin-left: 1rem; }
+        body {
+            font-family: 'Tajawal', sans-serif;
+            text-align: right;
+            direction: rtl;
+        }
+
+        .dashboard-sidebar {
+            border-right: none;
+            border-left: 1px solid var(--neutral-200);
+        }
+
+        .sidebar-menu-icon {
+            margin-right: 0;
+            margin-left: 1rem;
+        }
+
+        .sidebar-menu-link.active {
+            border-right: none;
+            border-left: 3px solid var(--primary);
+        }
+
+        .nav-links {
+            margin-left: auto;
+            margin-right: 0;
+        }
+
+        .logo {
+            margin-left: 1rem;
+            margin-right: 0;
+        }
+
+        .user-avatar {
+            margin-right: 0;
+            margin-left: 1rem;
+        }
+
         /* Fix dropdown for RTL */
-        .user-dropdown-menu { right: auto; left: 0; text-align: right; transform-origin: top left; }
-        .dropdown-item { display: flex !important; align-items: center; gap: 10px; flex-direction: row; }
-        .dropdown-item i { margin-left: 0; margin-right: 0; }
+        .user-dropdown-menu {
+            right: auto;
+            left: 0;
+            text-align: right;
+            transform-origin: top left;
+        }
+
+        .dropdown-item {
+            display: flex !important;
+            align-items: center;
+            gap: 10px;
+            flex-direction: row;
+        }
+
+        .dropdown-item i {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
         /* Fix spinner for RTL */
-        .fa-spin { display: inline-block; }
+        .fa-spin {
+            display: inline-block;
+        }
     </style>
 </head>
 
@@ -551,9 +598,9 @@
                 </button>
                 <ul class="nav-links">
                     <li><a href="index-ar.html">الرئيسية</a></li>
-                    <li><a href="projects.html">تصفح المشاريع</a></li>
+                    <li><a href="projects-ar.html">تصفح المشاريع</a></li>
                     <li><a href="dashboard-ar.html">لوحة التحكم</a></li>
-                    <li><a href="عملة-ar.html" class="active" style="color: var(--primary); font-weight: 600;">
+                    <li><a href="coins-ar.html" class="active" style="color: var(--primary); font-weight: 600;">
                             <span class="coin-mini">Y</span> Coins
                         </a></li>
                 </ul>
@@ -577,8 +624,8 @@
                             <a href="settings-ar.html" class="dropdown-item">
                                 <i class="fas fa-cog"></i> الإعدادات
                             </a>
-                            <a href="عملة-ar.html" class="dropdown-item active">
-                                <i class="fas fa-عملة"></i> محفظتي
+                            <a href="coins-ar.html" class="dropdown-item active">
+                                <i class="fas fa-coins"></i> محفظتي
                             </a>
                             <div class="dropdown-divider"></div>
                             <a href="javascript:void(0)" class="dropdown-item"
@@ -594,440 +641,512 @@
                     <button class="mobile-close-btn">
                         <i class="fas fa-times"></i>
                     </button>
-                </div>
-                <ul class="nav-links">
-                <li><a href="dashboard-ar.html">لوحة التحكم</a></li>
-                <li><a href="my-projects-ar.html">مشاريعي</a></li>
-                <li><a href="backed-projects-ar.html">المشاريع المدعومة</a></li>
-                <li><a href="create-project-ar.html">إنشاء مشروع</a></li>
-            
-                    <li><a href="index-ar.html">الرئيسية</a></li>
-                    <li><a href="projects.html">تصفح المشاريع</a></li>
-                    <li><a href="dashboard-ar.html">لوحة التحكم</a></li>
-                    <li><a href="عملة-ar.html">Coins</a></li>
-                </ul>
-                <div class="auth-buttons">
-                    <div class="user-dropdown">
-                        <button class="user-dropdown-btn">
-                            <div class="user-avatar-small"
-                                style="width: 35px; height: 35px; border-radius: 50%; background: linear-gradient(135deg, #006c35 0%, #00a651 100%); display: flex; align-items: center; justify-content: center;">
-                                <i class="fas fa-user" style="font-size: 1rem; color: white;"></i>
-                            </div>
-                            <span id="mobileUserName">User</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="user-dropdown-menu">
-                            <a href="dashboard-ar.html" class="dropdown-item">لوحة التحكم</a>
-                            <a href="عملة-ar.html" class="dropdown-item active"> محفظتي </a>
-                            <a href="javascript:void(0)" class="dropdown-item"
-                                onclick="window.auth && window.auth.logout(); return false;">تسجيل الخروج</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
+                    </head>
 
-    <div class="dashboard-container">
-        <div class="dashboard-sidebar">
-            <div class="user-profile">
-                <div class="user-avatar"
-                    style="background: linear-gradient(135deg, #006c35 0%, #00a651 100%); display: flex; align-items: center; justify-content: center;">
-                    <i class="fas fa-user" style="font-size: 2rem; color: white;"></i>
-                </div>
-                <div class="user-info">
-                    <div class="user-name" id="sidebarUserName">User</div>
-                    <div class="user-email" id="sidebarUserEmail">user@example.com</div>
-                </div>
-            </div>
-            <ul class="sidebar-menu">
-                <li class="sidebar-menu-item"><a href="dashboard-ar.html" class="sidebar-menu-link"><i
-                            class="fas fa-tachometer-alt sidebar-menu-icon"></i> لوحة التحكم</a></li>
-                <li class="sidebar-menu-item"><a href="my-projects-ar.html" class="sidebar-menu-link"><i
-                            class="fas fa-rocket sidebar-menu-icon"></i> مشاريعي</a></li>
-                <li class="sidebar-menu-item"><a href="backed-projects-ar.html" class="sidebar-menu-link"><i
-                            class="fas fa-hand-holding-heart sidebar-menu-icon"></i> المشاريع المدعومة</a></li>
-                <li class="sidebar-menu-item"><a href="payments-ar.html" class="sidebar-menu-link"><i
-                            class="fas fa-money-bill-wave sidebar-menu-icon"></i> المدفوعات</a></li>
-                <li class="sidebar-menu-item"><a href="عملة-ar.html" class="sidebar-menu-link active"><i
-                            class="fas fa-عملة sidebar-menu-icon"></i> محفظتي</a></li>
-                <li class="sidebar-menu-item"><a href="notifications-ar.html" class="sidebar-menu-link"><i
-                            class="fas fa-bell sidebar-menu-icon"></i> الإشعارات</a></li>
-                <li class="sidebar-menu-item"><a href="user-profile-ar.html" class="sidebar-menu-link"><i
-                            class="fas fa-user sidebar-menu-icon"></i> الملف الشخصي</a></li>
-                <li class="sidebar-menu-item"><a href="settings-ar.html" class="sidebar-menu-link"><i
-                            class="fas fa-cog sidebar-menu-icon"></i> الإعدادات</a></li>
-                <li class="sidebar-menu-item"><a href="support-ar.html" class="sidebar-menu-link"><i
-                            class="fas fa-question-circle sidebar-menu-icon"></i> المساعدة والدعم</a></li>
-                <li class="sidebar-menu-item"><a href="javascript:void(0)" class="sidebar-menu-link"
-                        onclick="window.auth && window.auth.logout(); return false;"><i
-                            class="fas fa-sign-out-alt sidebar-menu-icon"></i> تسجيل الخروج</a></li>
-            </ul>
-        </div>
-        <div class="dashboard-content">
-            <!-- Wallet Content -->
-            <div class="wallet-container">
-                <!-- Balance Hero -->
-                <div class="wallet-hero">
-                    <div class="coin-icon-large" id="coinIconLarge">
-                        <img src="images/coin.png" alt="YallaStarter Coin" class="coin-icon-img" loading="eager"
-                            onload="this.parentElement.classList.add('coin-img-loaded');"
-                            onerror="this.style.display='none'; this.parentElement.classList.remove('coin-img-loaded');">
-                        <span class="coin-icon-fallback">Y</span>
-                    </div>
-                    <div class="wallet-info">
-                        <div class="wallet-label">Your Coin Balance</div>
-                        <div class="wallet-balance" id="balanceDisplay">0</div>
-                        <div class="wallet-balance-sar">≈ <span id="sarDisplay">0</span> SAR</div>
-                        <div class="wallet-stats">
-                            <div class="wallet-stat">
-                                <i class="fas fa-arrow-down"></i>
-                                <span>Earned: <strong id="earnedDisplay">0</strong></span>
-                            </div>
-                            <div class="wallet-stat">
-                                <i class="fas fa-arrow-up"></i>
-                                <span>Spent: <strong id="spentDisplay">0</strong></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Action Cards -->
-                <div class="actions-grid">
-                    <!-- Buy Coins -->
-                    <div class="action-card">
-                        <div class="action-header">
-                            <div class="action-icon buy">
-                                <i class="fas fa-plus-circle"></i>
-                            </div>
-                            <div>
-                                <div class="action-title">Buy Coins</div>
-                                <div class="action-desc">1 Coin = 1 SAR • No fees for backers</div>
-                            </div>
-                        </div>
-
-                        <div class="quick-amounts">
-                            <button class="quick-amount-btn" data-amount="10">10</button>
-                            <button class="quick-amount-btn" data-amount="50">50</button>
-                            <button class="quick-amount-btn" data-amount="100">100</button>
-                            <button class="quick-amount-btn" data-amount="500">500</button>
-                        </div>
-
-                        <div class="coin-form-group">
-                            <label class="coin-form-label">Custom Amount</label>
-                            <input type="number" id="buyAmount" class="coin-form-input" placeholder="Enter amount"
-                                min="1" max="100000">
-                        </div>
-
-                        <button class="coin-btn buy" id="buyBtn" onclick="buyCoins()">
-                            <i class="fas fa-credit-card"></i> Buy with Bank Card
-                        </button>
-                    </div>
-
-                    <!-- Send Coins -->
-                    <div class="action-card">
-                        <div class="action-header">
-                            <div class="action-icon send">
-                                <i class="fas fa-paper-plane"></i>
-                            </div>
-                            <div>
-                                <div class="action-title">Send Coins</div>
-                                <div class="action-desc">Back a project you love</div>
-                            </div>
-                        </div>
-
-                        <!-- Project picker tabs -->
-                        <div style="margin-bottom:1rem;">
-                            <div style="display:flex;gap:0;border-bottom:2px solid #e5e7eb;margin-bottom:.9rem;">
-                                <button id="tabFav" onclick="switchSendTab('fav')"
-                                    style="flex:1;padding:.55rem;background:none;border:none;border-bottom:2.5px solid var(--primary);color:var(--primary);font-weight:700;cursor:pointer;font-family:inherit;font-size:.88rem;">❤️
-                                    My Favorites</button>
-                                <button id="tabSearch" onclick="switchSendTab('search')"
-                                    style="flex:1;padding:.55rem;background:none;border:none;border-bottom:2.5px solid transparent;color:#9ca3af;font-weight:600;cursor:pointer;font-family:inherit;font-size:.88rem;">🔍
-                                    Search Projects</button>
-                            </div>
-
-                            <!-- Favorites panel -->
-                            <div id="panelFav">
-                                <div id="favProjectsList"
-                                    style="max-height:220px;overflow-y:auto;display:flex;flex-direction:column;gap:.5rem;">
-                                    <div style="text-align:center;padding:1.5rem;color:#9ca3af;font-size:.85rem;"><i
-                                            class="fas fa-spinner fa-spin"></i> Loading favorites...</div>
+                    <body>
+                        <!-- Header (same as dashboard) -->
+                        <header class="header">
+                            <div class="container">
+                                <nav class="navbar">
+                                    <a href="index-ar.html" class="logo">
+                                        <span class="logo-text">YallaStarter</span>
+                                    </a>
+                                    <button class="mobile-menu-btn">
+                                        <i class="fas fa-bars"></i>
+                                    </button>
+                                    <ul class="nav-links">
+                                        <li><a href="index-ar.html">الرئيسية</a></li>
+                                        <li><a href="projects-ar.html">تصفح المشاريع</a></li>
+                                        <li><a href="dashboard-ar.html">لوحة التحكم</a></li>
+                                        <li><a href="coins-ar.html" class="active"
+                                                style="color: var(--primary); font-weight: 600;">
+                                                <span class="coin-mini">Y</span> Coins
+                                            </a></li>
+                                    </ul>
+                                    <div class="auth-buttons">
+                                        <div class="user-dropdown">
+                                            <button class="user-dropdown-btn">
+                                                <div class="user-avatar-small" id="headerAvatar"
+                                                    style="width: 35px; height: 35px; border-radius: 50%; background: linear-gradient(135deg, #006c35 0%, #00a651 100%); display: flex; align-items: center; justify-content: center;">
+                                                    <i class="fas fa-user" style="font-size: 1rem; color: white;"></i>
+                                                </div>
+                                                <span id="headerUserName">User</span>
+                                                <i class="fas fa-chevron-down"></i>
+                                            </button>
+                                            <div class="user-dropdown-menu">
+                                                <a href="dashboard-ar.html" class="dropdown-item">
+                                                    <i class="fas fa-tachometer-alt"></i> لوحة التحكم
+                                                </a>
+                                                <a href="user-profile-ar.html" class="dropdown-item">
+                                                    <i class="fas fa-user"></i> الملف الشخصي
+                                                </a>
+                                                <a href="settings-ar.html" class="dropdown-item">
+                                                    <i class="fas fa-cog"></i> الإعدادات
+                                                </a>
+                                                <a href="coins-ar.html" class="dropdown-item active">
+                                                    <i class="fas fa-coins"></i> محفظتي
+                                                </a>
+                                                <div class="dropdown-divider"></div>
+                                                <a href="javascript:void(0)" class="dropdown-item"
+                                                    onclick="window.auth && window.auth.logout(); return false;">
+                                                    <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </nav>
+                                <div class="mobile-menu">
+                                    <div class="mobile-menu-header">
+                                        <button class="mobile-close-btn">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                    <ul class="nav-links">
+                                        <li><a href="dashboard-ar.html">لوحة التحكم</a></li>
+                                        <li><a href="my-projects-ar.html">مشاريعي</a></li>
+                                        <li><a href="backed-projects-ar.html">المشاريع المدعومة</a></li>
+                                    </ul>
+                                    <div class="auth-buttons">
+                                        <div class="user-dropdown">
+                                            <button class="user-dropdown-btn">
+                                                <div class="user-avatar-small"
+                                                    style="width: 35px; height: 35px; border-radius: 50%; background: linear-gradient(135deg, #006c35 0%, #00a651 100%); display: flex; align-items: center; justify-content: center;">
+                                                    <i class="fas fa-user" style="font-size: 1rem; color: white;"></i>
+                                                </div>
+                                                <span id="mobileUserName">User</span>
+                                                <i class="fas fa-chevron-down"></i>
+                                            </button>
+                                            <div class="user-dropdown-menu">
+                                                <a href="dashboard-ar.html" class="dropdown-item">لوحة التحكم</a>
+                                                <a href="عملة-ar.html" class="dropdown-item active"> محفظتي </a>
+                                                <a href="javascript:void(0)" class="dropdown-item"
+                                                    onclick="window.auth && window.auth.logout(); return false;">تسجيل
+                                                    الخروج</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                        </header>
 
-                            <!-- Search panel (hidden) -->
-                            <div id="panelSearch" style="display:none;">
-                                <input type="text" id="projectSearchInput" placeholder="Search projects by name..."
-                                    style="width:100%;padding:.6rem .9rem;border:1.5px solid #e5e7eb;border-radius:10px;font-size:.88rem;outline:none;font-family:inherit;"
-                                    oninput="debounceSearch(this.value)" />
-                                <div id="searchProjectsList"
-                                    style="max-height:220px;overflow-y:auto;display:flex;flex-direction:column;gap:.5rem;margin-top:.6rem;">
+                        <div class="dashboard-container">
+                            <div class="dashboard-sidebar">
+                                <div class="user-profile">
+                                    <div class="user-avatar"
+                                        style="background: linear-gradient(135deg, #006c35 0%, #00a651 100%); display: flex; align-items: center; justify-content: center;">
+                                        <i class="fas fa-user" style="font-size: 2rem; color: white;"></i>
+                                    </div>
+                                    <div class="user-info">
+                                        <div class="user-name" id="sidebarUserName">User</div>
+                                        <div class="user-email" id="sidebarUserEmail">user@example.com</div>
+                                    </div>
+                                </div>
+                                <ul class="sidebar-menu">
+                                    <li class="sidebar-menu-item"><a href="dashboard-ar.html"
+                                            class="sidebar-menu-link"><i
+                                                class="fas fa-tachometer-alt sidebar-menu-icon"></i> لوحة التحكم</a>
+                                    </li>
+                                    <li class="sidebar-menu-item"><a href="my-projects-ar.html"
+                                            class="sidebar-menu-link"><i class="fas fa-rocket sidebar-menu-icon"></i>
+                                            مشاريعي</a></li>
+                                    <li class="sidebar-menu-item"><a href="backed-projects-ar.html"
+                                            class="sidebar-menu-link"><i
+                                                class="fas fa-hand-holding-heart sidebar-menu-icon"></i> المشاريع
+                                            المدعومة</a></li>
+                                    <li class="sidebar-menu-item"><a href="payments-ar.html"
+                                            class="sidebar-menu-link"><i
+                                                class="fas fa-money-bill-wave sidebar-menu-icon"></i> المدفوعات</a></li>
+                                    <li class="sidebar-menu-item"><a href="عملة-ar.html"
+                                            class="sidebar-menu-link active"><i
+                                                class="fas fa-عملة sidebar-menu-icon"></i> محفظتي</a></li>
+                                    <li class="sidebar-menu-item"><a href="notifications-ar.html"
+                                            class="sidebar-menu-link"><i class="fas fa-bell sidebar-menu-icon"></i>
+                                            الإشعارات</a></li>
+                                    <li class="sidebar-menu-item"><a href="user-profile-ar.html"
+                                            class="sidebar-menu-link"><i class="fas fa-user sidebar-menu-icon"></i>
+                                            الملف الشخصي</a></li>
+                                    <li class="sidebar-menu-item"><a href="settings-ar.html"
+                                            class="sidebar-menu-link"><i class="fas fa-cog sidebar-menu-icon"></i>
+                                            الإعدادات</a></li>
+                                    <li class="sidebar-menu-item"><a href="support-ar.html" class="sidebar-menu-link"><i
+                                                class="fas fa-question-circle sidebar-menu-icon"></i> المساعدة
+                                            والدعم</a></li>
+                                    <li class="sidebar-menu-item"><a href="javascript:void(0)" class="sidebar-menu-link"
+                                            onclick="window.auth && window.auth.logout(); return false;"><i
+                                                class="fas fa-sign-out-alt sidebar-menu-icon"></i> تسجيل الخروج</a></li>
+                                </ul>
+                            </div>
+                            <div class="dashboard-content">
+                                <!-- Wallet Content -->
+                                <div class="wallet-container">
+                                    <!-- Balance Hero -->
+                                    <div class="wallet-hero">
+                                        <div class="coin-icon-large" id="coinIconLarge">
+                                            <img src="images/coin.png" alt="YallaStarter Coin" class="coin-icon-img"
+                                                loading="eager"
+                                                onload="this.parentElement.classList.add('coin-img-loaded');"
+                                                onerror="this.style.display='none'; this.parentElement.classList.remove('coin-img-loaded');">
+                                            <span class="coin-icon-fallback">Y</span>
+                                        </div>
+                                        <div class="wallet-info">
+                                            <div class="wallet-label">Your Coin Balance</div>
+                                            <div class="wallet-balance" id="balanceDisplay">0</div>
+                                            <div class="wallet-balance-sar">≈ <span id="sarDisplay">0</span> SAR</div>
+                                            <div class="wallet-stats">
+                                                <div class="wallet-stat">
+                                                    <i class="fas fa-arrow-down"></i>
+                                                    <span>Earned: <strong id="earnedDisplay">0</strong></span>
+                                                </div>
+                                                <div class="wallet-stat">
+                                                    <i class="fas fa-arrow-up"></i>
+                                                    <span>Spent: <strong id="spentDisplay">0</strong></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Action Cards -->
+                                    <div class="actions-grid">
+                                        <!-- Buy Coins -->
+                                        <div class="action-card">
+                                            <div class="action-header">
+                                                <div class="action-icon buy">
+                                                    <i class="fas fa-plus-circle"></i>
+                                                </div>
+                                                <div>
+                                                    <div class="action-title">Buy Coins</div>
+                                                    <div class="action-desc">1 Coin = 1 SAR • No fees for backers</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="quick-amounts">
+                                                <button class="quick-amount-btn" data-amount="10">10</button>
+                                                <button class="quick-amount-btn" data-amount="50">50</button>
+                                                <button class="quick-amount-btn" data-amount="100">100</button>
+                                                <button class="quick-amount-btn" data-amount="500">500</button>
+                                            </div>
+
+                                            <div class="coin-form-group">
+                                                <label class="coin-form-label">Custom Amount</label>
+                                                <input type="number" id="buyAmount" class="coin-form-input"
+                                                    placeholder="Enter amount" min="1" max="100000">
+                                            </div>
+
+                                            <button class="coin-btn buy" id="buyBtn" onclick="buyCoins()">
+                                                <i class="fas fa-credit-card"></i> Buy with Bank Card
+                                            </button>
+                                        </div>
+
+                                        <!-- Send Coins -->
+                                        <div class="action-card">
+                                            <div class="action-header">
+                                                <div class="action-icon send">
+                                                    <i class="fas fa-paper-plane"></i>
+                                                </div>
+                                                <div>
+                                                    <div class="action-title">Send Coins</div>
+                                                    <div class="action-desc">Back a project you love</div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Project picker tabs -->
+                                            <div style="margin-bottom:1rem;">
+                                                <div
+                                                    style="display:flex;gap:0;border-bottom:2px solid #e5e7eb;margin-bottom:.9rem;">
+                                                    <button id="tabFav" onclick="switchSendTab('fav')"
+                                                        style="flex:1;padding:.55rem;background:none;border:none;border-bottom:2.5px solid var(--primary);color:var(--primary);font-weight:700;cursor:pointer;font-family:inherit;font-size:.88rem;">❤️
+                                                        My Favorites</button>
+                                                    <button id="tabSearch" onclick="switchSendTab('search')"
+                                                        style="flex:1;padding:.55rem;background:none;border:none;border-bottom:2.5px solid transparent;color:#9ca3af;font-weight:600;cursor:pointer;font-family:inherit;font-size:.88rem;">🔍
+                                                        Search Projects</button>
+                                                </div>
+
+                                                <!-- Favorites panel -->
+                                                <div id="panelFav">
+                                                    <div id="favProjectsList"
+                                                        style="max-height:220px;overflow-y:auto;display:flex;flex-direction:column;gap:.5rem;">
+                                                        <div
+                                                            style="text-align:center;padding:1.5rem;color:#9ca3af;font-size:.85rem;">
+                                                            <i class="fas fa-spinner fa-spin"></i> Loading favorites...
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Search panel (hidden) -->
+                                                <div id="panelSearch" style="display:none;">
+                                                    <input type="text" id="projectSearchInput"
+                                                        placeholder="Search projects by name..."
+                                                        style="width:100%;padding:.6rem .9rem;border:1.5px solid #e5e7eb;border-radius:10px;font-size:.88rem;outline:none;font-family:inherit;"
+                                                        oninput="debounceSearch(this.value)" />
+                                                    <div id="searchProjectsList"
+                                                        style="max-height:220px;overflow-y:auto;display:flex;flex-direction:column;gap:.5rem;margin-top:.6rem;">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Selected project preview -->
+                                            <div id="selectedProjectPreview"
+                                                style="display:none;background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:10px;padding:.6rem .9rem;margin-bottom:.8rem;font-size:.88rem;color:#065f46;font-weight:600;">
+                                            </div>
+
+                                            <div class="coin-form-group">
+                                                <label class="coin-form-label">Amount</label>
+                                                <input type="number" id="sendAmount" class="coin-form-input"
+                                                    placeholder="Enter عملة to send" min="1">
+                                            </div>
+
+                                            <button class="coin-btn send" onclick="sendCoins()">
+                                                <i class="fas fa-paper-plane"></i> Send Coins
+                                            </button>
+                                        </div>
+
+                                        <!-- Cash Out -->
+                                        <div class="action-card">
+                                            <div class="action-header">
+                                                <div class="action-icon cashout">
+                                                    <i class="fas fa-university"></i>
+                                                </div>
+                                                <div>
+                                                    <div class="action-title">Cash Out</div>
+                                                    <div class="action-desc">Transfer to bank (min 100 عملة)</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="coin-form-group">
+                                                <label class="coin-form-label">Amount to Cash Out</label>
+                                                <input type="number" id="cashoutAmount" class="coin-form-input"
+                                                    placeholder="Min 100 عملة" min="100" oninput="updateFeeBreakdown()">
+                                            </div>
+
+                                            <div class="fee-breakdown" id="feeBreakdown" style="display:none;">
+                                                <div class="fee-row">
+                                                    <span>Gross Amount</span>
+                                                    <span id="feeGross">0 SAR</span>
+                                                </div>
+                                                <div class="fee-row">
+                                                    <span>Processing Fee (8%)</span>
+                                                    <span id="feeProcessing" style="color:#DC2626;">-0 SAR</span>
+                                                </div>
+                                                <div class="fee-row">
+                                                    <span>Bank Transfer Fee (6%)</span>
+                                                    <span id="feeBank" style="color:#DC2626;">-0 SAR</span>
+                                                </div>
+                                                <div class="fee-row total">
+                                                    <span>You Receive</span>
+                                                    <span id="feeNet" style="color:#059669;">0 SAR</span>
+                                                </div>
+                                            </div>
+
+                                            <button class="coin-btn cashout" onclick="cashOut()"
+                                                style="margin-top: 1rem;">
+                                                <i class="fas fa-money-bill-wave"></i> Request Cash Out
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Transaction History -->
+                                    <div class="history-section">
+                                        <div class="history-header">
+                                            <h2 class="history-title"><i class="fas fa-history"
+                                                    style="color: var(--primary); margin-right: 0.5rem;"></i>Transaction
+                                                History</h2>
+                                        </div>
+
+                                        <ul class="tx-list" id="txList">
+                                            <li class="empty-history" id="emptyHistory">
+                                                <i class="fas fa-receipt"></i>
+                                                <p>No transactions yet. Buy some عملة to get started!</p>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Selected project preview -->
-                        <div id="selectedProjectPreview"
-                            style="display:none;background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:10px;padding:.6rem .9rem;margin-bottom:.8rem;font-size:.88rem;color:#065f46;font-weight:600;">
-                        </div>
+                        <!-- Scripts -->
+                        <script src="assets/js/session-init.js"></script>
+                        <script src="assets/js/auth-handler.js"></script>
+                        <script src="scripts.js"></script>
+                        <script src="mobile-menu.js"></script>
+                        <script>
+                            const API = window.location.origin;
+                            const token = (window.auth && typeof window.auth.getToken === 'function') ? window.auth.getToken() : localStorage.getItem('token');
 
-                        <div class="coin-form-group">
-                            <label class="coin-form-label">Amount</label>
-                            <input type="number" id="sendAmount" class="coin-form-input"
-                                placeholder="Enter عملة to send" min="1">
-                        </div>
+                            // Protect page and show user in sidebar/header
+                            if (window.auth) {
+                                window.auth.protectPage();
+                                const u = (window.auth ? window.auth.getUser() : null);
+                                if (u) {
+                                    const name = u.name || u.username || u.email || 'User';
+                                    const email = u.email || '';
+                                    const set = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text; };
+                                    set('sidebarUserName', name);
+                                    set('sidebarUserEmail', email);
+                                    set('headerUserName', name);
+                                    set('mobileUserName', name);
+                                }
+                            }
 
-                        <button class="coin-btn send" onclick="sendCoins()">
-                            <i class="fas fa-paper-plane"></i> Send Coins
-                        </button>
-                    </div>
+                            // -------- Favorites & Search for Send Coins --------
+                            let selectedProjectId = null;
+                            let _searchTimer = null;
 
-                    <!-- Cash Out -->
-                    <div class="action-card">
-                        <div class="action-header">
-                            <div class="action-icon cashout">
-                                <i class="fas fa-university"></i>
-                            </div>
-                            <div>
-                                <div class="action-title">Cash Out</div>
-                                <div class="action-desc">Transfer to bank (min 100 عملة)</div>
-                            </div>
-                        </div>
+                            function switchSendTab(tab) {
+                                const isFav = tab === 'fav';
+                                document.getElementById('panelFav').style.display = isFav ? '' : 'none';
+                                document.getElementById('panelSearch').style.display = isFav ? 'none' : '';
+                                const tabFav = document.getElementById('tabFav');
+                                const tabSearch = document.getElementById('tabSearch');
+                                if (tabFav) { tabFav.style.borderBottomColor = isFav ? 'var(--primary)' : 'transparent'; tabFav.style.color = isFav ? 'var(--primary)' : '#9ca3af'; tabFav.style.fontWeight = isFav ? '700' : '600'; }
+                                if (tabSearch) { tabSearch.style.borderBottomColor = isFav ? 'transparent' : 'var(--primary)'; tabSearch.style.color = isFav ? '#9ca3af' : 'var(--primary)'; tabSearch.style.fontWeight = isFav ? '600' : '700'; }
+                            }
 
-                        <div class="coin-form-group">
-                            <label class="coin-form-label">Amount to Cash Out</label>
-                            <input type="number" id="cashoutAmount" class="coin-form-input" placeholder="Min 100 عملة"
-                                min="100" oninput="updateFeeBreakdown()">
-                        </div>
-
-                        <div class="fee-breakdown" id="feeBreakdown" style="display:none;">
-                            <div class="fee-row">
-                                <span>Gross Amount</span>
-                                <span id="feeGross">0 SAR</span>
-                            </div>
-                            <div class="fee-row">
-                                <span>Processing Fee (8%)</span>
-                                <span id="feeProcessing" style="color:#DC2626;">-0 SAR</span>
-                            </div>
-                            <div class="fee-row">
-                                <span>Bank Transfer Fee (6%)</span>
-                                <span id="feeBank" style="color:#DC2626;">-0 SAR</span>
-                            </div>
-                            <div class="fee-row total">
-                                <span>You Receive</span>
-                                <span id="feeNet" style="color:#059669;">0 SAR</span>
-                            </div>
-                        </div>
-
-                        <button class="coin-btn cashout" onclick="cashOut()" style="margin-top: 1rem;">
-                            <i class="fas fa-money-bill-wave"></i> Request Cash Out
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Transaction History -->
-                <div class="history-section">
-                    <div class="history-header">
-                        <h2 class="history-title"><i class="fas fa-history"
-                                style="color: var(--primary); margin-right: 0.5rem;"></i>Transaction History</h2>
-                    </div>
-
-                    <ul class="tx-list" id="txList">
-                        <li class="empty-history" id="emptyHistory">
-                            <i class="fas fa-receipt"></i>
-                            <p>No transactions yet. Buy some عملة to get started!</p>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Scripts -->
-    <script src="assets/js/session-init.js"></script>
-    <script src="assets/js/auth-handler.js"></script>
-    <script src="scripts.js"></script>
-    <script src="mobile-menu.js"></script>
-    <script>
-        const API = window.location.origin;
-        const token = (window.auth && typeof window.auth.getToken === 'function') ? window.auth.getToken() : localStorage.getItem('token');
-
-        // Protect page and show user in sidebar/header
-        if (window.auth) {
-            window.auth.protectPage();
-            const u = (window.auth ? window.auth.getUser() : null);
-            if (u) {
-                const name = u.name || u.username || u.email || 'User';
-                const email = u.email || '';
-                const set = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text; };
-                set('sidebarUserName', name);
-                set('sidebarUserEmail', email);
-                set('headerUserName', name);
-                set('mobileUserName', name);
-            }
-        }
-
-        // -------- Favorites & Search for Send Coins --------
-        let selectedProjectId = null;
-        let _searchTimer = null;
-
-        function switchSendTab(tab) {
-            const isFav = tab === 'fav';
-            document.getElementById('panelFav').style.display = isFav ? '' : 'none';
-            document.getElementById('panelSearch').style.display = isFav ? 'none' : '';
-            const tabFav = document.getElementById('tabFav');
-            const tabSearch = document.getElementById('tabSearch');
-            if (tabFav) { tabFav.style.borderBottomColor = isFav ? 'var(--primary)' : 'transparent'; tabFav.style.color = isFav ? 'var(--primary)' : '#9ca3af'; tabFav.style.fontWeight = isFav ? '700' : '600'; }
-            if (tabSearch) { tabSearch.style.borderBottomColor = isFav ? 'transparent' : 'var(--primary)'; tabSearch.style.color = isFav ? '#9ca3af' : 'var(--primary)'; tabSearch.style.fontWeight = isFav ? '600' : '700'; }
-        }
-
-        function renderProjectCard(p, container) {
-            const card = document.createElement('div');
-            card.style.cssText = 'padding:.6rem .9rem;border:1.5px solid #e5e7eb;border-radius:10px;cursor:pointer;transition:all .15s;background:#fff;display:flex;align-items:center;gap:.75rem;';
-            const pct = p.goalAmount ? Math.round((p.currentAmount || 0) / p.goalAmount * 100) : 0;
-            card.innerHTML = `
+                            function renderProjectCard(p, container) {
+                                const card = document.createElement('div');
+                                card.style.cssText = 'padding:.6rem .9rem;border:1.5px solid #e5e7eb;border-radius:10px;cursor:pointer;transition:all .15s;background:#fff;display:flex;align-items:center;gap:.75rem;';
+                                const pct = p.goalAmount ? Math.round((p.currentAmount || 0) / p.goalAmount * 100) : 0;
+                                card.innerHTML = `
                 <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#00a651,#006c35);display:flex;align-items:center;justify-content:center;color:white;font-size:1rem;flex-shrink:0;"><i class="fas fa-rocket"></i></div>
                 <div style="flex:1;min-width:0;">
                     <div style="font-weight:600;font-size:.88rem;color:#111;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${p.title}</div>
                     <div style="font-size:.76rem;color:#6b7280;">${(p.category || '').replace(/\b\w/g, c => c.toUpperCase())} &middot; ${pct}% ممول</div>
                 </div>`;
-            card.addEventListener('mouseenter', () => { card.style.borderColor = 'var(--primary)'; card.style.background = '#f0fdf4'; });
-            card.addEventListener('mouseleave', () => { card.style.borderColor = selectedProjectId === p._id ? 'var(--primary)' : '#e5e7eb'; card.style.background = selectedProjectId === p._id ? '#f0fdf4' : '#fff'; });
-            card.addEventListener('click', () => selectProject(p._id, p.title));
-            container.appendChild(card);
-        }
+                                card.addEventListener('mouseenter', () => { card.style.borderColor = 'var(--primary)'; card.style.background = '#f0fdf4'; });
+                                card.addEventListener('mouseleave', () => { card.style.borderColor = selectedProjectId === p._id ? 'var(--primary)' : '#e5e7eb'; card.style.background = selectedProjectId === p._id ? '#f0fdf4' : '#fff'; });
+                                card.addEventListener('click', () => selectProject(p._id, p.title));
+                                container.appendChild(card);
+                            }
 
-        async function loadFavorites() {
-            const list = document.getElementById('favProjectsList');
-            if (!list || !token) { if (list) list.innerHTML = '<div style="text-align:center;padding:1.5rem;color:#9ca3af;font-size:.85rem;">Log in to see your favorites.</div>'; return; }
-            try {
-                const res = await fetch(`${API}/api/projects/favorites/me`, { headers: { 'Authorization': `Bearer ${token}` } });
-                const data = await res.json();
-                list.innerHTML = '';
-                if (data.success && data.data && data.data.length) {
-                    data.data.forEach(p => renderProjectCard(p, list));
-                } else {
-                    list.innerHTML = '<div style="text-align:center;padding:1.5rem;color:#9ca3af;font-size:.85rem;"><i class="fas fa-heart" style="font-size:1.4rem;display:block;margin-bottom:.5rem;color:#e5e7eb;"></i>No favorites yet.<br><small>Heart a project on its page to add it here.</small></div>';
-                }
-            } catch (e) {
-                list.innerHTML = '<div style="text-align:center;padding:1rem;color:#ef4444;font-size:.85rem;">Could not load favorites.</div>';
-            }
-        }
+                            async function loadFavorites() {
+                                const list = document.getElementById('favProjectsList');
+                                if (!list || !token) { if (list) list.innerHTML = '<div style="text-align:center;padding:1.5rem;color:#9ca3af;font-size:.85rem;">Log in to see your favorites.</div>'; return; }
+                                try {
+                                    const res = await fetch(`${API}/api/projects/favorites/me`, { headers: { 'Authorization': `Bearer ${token}` } });
+                                    const data = await res.json();
+                                    list.innerHTML = '';
+                                    if (data.success && data.data && data.data.length) {
+                                        data.data.forEach(p => renderProjectCard(p, list));
+                                    } else {
+                                        list.innerHTML = '<div style="text-align:center;padding:1.5rem;color:#9ca3af;font-size:.85rem;"><i class="fas fa-heart" style="font-size:1.4rem;display:block;margin-bottom:.5rem;color:#e5e7eb;"></i>No favorites yet.<br><small>Heart a project on its page to add it here.</small></div>';
+                                    }
+                                } catch (e) {
+                                    list.innerHTML = '<div style="text-align:center;padding:1rem;color:#ef4444;font-size:.85rem;">Could not load favorites.</div>';
+                                }
+                            }
 
-        function debounceSearch(query) {
-            clearTimeout(_searchTimer);
-            _searchTimer = setTimeout(() => searchProjects(query), 350);
-        }
+                            function debounceSearch(query) {
+                                clearTimeout(_searchTimer);
+                                _searchTimer = setTimeout(() => searchProjects(query), 350);
+                            }
 
-        async function searchProjects(query) {
-            const list = document.getElementById('searchProjectsList');
-            if (!list) return;
-            list.innerHTML = '';
-            if (!query || query.trim().length < 2) return;
-            list.innerHTML = '<div style="text-align:center;padding:.75rem;color:#9ca3af;font-size:.85rem;"><i class="fas fa-spinner fa-spin"></i></div>';
-            try {
-                const res = await fetch(`${API}/api/projects?limit=10`, { headers: token ? { 'Authorization': `Bearer ${token}` } : {} });
-                const data = await res.json();
-                list.innerHTML = '';
-                if (data.success && data.data) {
-                    const q = query.toLowerCase();
-                    const filtered = data.data.filter(p => p.title.toLowerCase().includes(q));
-                    if (filtered.length) { filtered.forEach(p => renderProjectCard(p, list)); }
-                    else list.innerHTML = '<div style="text-align:center;padding:.75rem;color:#9ca3af;font-size:.85rem;">No projects match your search.</div>';
-                }
-            } catch (e) {
-                list.innerHTML = '<div style="text-align:center;padding:.75rem;color:#ef4444;font-size:.85rem;">Search failed.</div>';
-            }
-        }
+                            async function searchProjects(query) {
+                                const list = document.getElementById('searchProjectsList');
+                                if (!list) return;
+                                list.innerHTML = '';
+                                if (!query || query.trim().length < 2) return;
+                                list.innerHTML = '<div style="text-align:center;padding:.75rem;color:#9ca3af;font-size:.85rem;"><i class="fas fa-spinner fa-spin"></i></div>';
+                                try {
+                                    const res = await fetch(`${API}/api/projects?limit=10`, { headers: token ? { 'Authorization': `Bearer ${token}` } : {} });
+                                    const data = await res.json();
+                                    list.innerHTML = '';
+                                    if (data.success && data.data) {
+                                        const q = query.toLowerCase();
+                                        const filtered = data.data.filter(p => p.title.toLowerCase().includes(q));
+                                        if (filtered.length) { filtered.forEach(p => renderProjectCard(p, list)); }
+                                        else list.innerHTML = '<div style="text-align:center;padding:.75rem;color:#9ca3af;font-size:.85rem;">No projects match your search.</div>';
+                                    }
+                                } catch (e) {
+                                    list.innerHTML = '<div style="text-align:center;padding:.75rem;color:#ef4444;font-size:.85rem;">Search failed.</div>';
+                                }
+                            }
 
-        function selectProject(id, title) {
-            selectedProjectId = id;
-            const preview = document.getElementById('selectedProjectPreview');
-            if (preview) {
-                preview.style.display = 'block';
-                preview.innerHTML = `<i class="fas fa-check-circle" style="color:#00a651;"></i> Selected: <span style="font-weight:700;">${title}</span>`;
-            }
-        }
-        // -------- End Favorites & Search --------
+                            function selectProject(id, title) {
+                                selectedProjectId = id;
+                                const preview = document.getElementById('selectedProjectPreview');
+                                if (preview) {
+                                    preview.style.display = 'block';
+                                    preview.innerHTML = `<i class="fas fa-check-circle" style="color:#00a651;"></i> Selected: <span style="font-weight:700;">${title}</span>`;
+                                }
+                            }
+                            // -------- End Favorites & Search --------
 
-        // Load data on page load
-        document.addEventListener('DOMContentLoaded', async () => {
-            await setTimeout(() => { loadBalance(); }, 500);
-            await setTimeout(() => { loadFavorites(); }, 500);
-            await setTimeout(() => { loadHistory(); }, 500);
-            checkPurchaseReturn();
+                            // Load data on page load
+                            document.addEventListener('DOMContentLoaded', async () => {
+                                await setTimeout(() => { loadBalance(); }, 500);
+                                await setTimeout(() => { loadFavorites(); }, 500);
+                                await setTimeout(() => { loadHistory(); }, 500);
+                                checkPurchaseReturn();
 
-            const params = new URLSearchParams(window.location.search);
-            const projectId = params.get('projectId');
-            if (projectId) {
-                // Auto-select project if URL has projectId
-                selectProject(projectId, 'Selected Project');
-            }
+                                const params = new URLSearchParams(window.location.search);
+                                const projectId = params.get('projectId');
+                                if (projectId) {
+                                    // Auto-select project if URL has projectId
+                                    selectProject(projectId, 'Selected Project');
+                                }
 
-            // Quick amount buttons
-            document.querySelectorAll('.quick-amount-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    document.querySelectorAll('.quick-amount-btn').forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    document.getElementById('buyAmount').value = btn.dataset.amount;
-                });
-            });
-        });
+                                // Quick amount buttons
+                                document.querySelectorAll('.quick-amount-btn').forEach(btn => {
+                                    btn.addEventListener('click', () => {
+                                        document.querySelectorAll('.quick-amount-btn').forEach(b => b.classList.remove('active'));
+                                        btn.classList.add('active');
+                                        document.getElementById('buyAmount').value = btn.dataset.amount;
+                                    });
+                                });
+                            });
 
-        async function loadBalance() {
-            try {
-                const res = await fetch(`${API}/api/عملة/balance`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                const data = await res.json();
-                if (data.success) {
-                    document.getElementById('balanceDisplay').textContent = data.balance.toLocaleString();
-                    document.getElementById('sarDisplay').textContent = data.balance.toLocaleString();
-                    document.getElementById('earnedDisplay').textContent = data.totalEarned.toLocaleString();
-                    document.getElementById('spentDisplay').textContent = data.totalSpent.toLocaleString();
-                }
-            } catch (err) {
-                console.error('Balance load error:', err);
-            }
-        }
+                            async function loadBalance() {
+                                try {
+                                    const res = await fetch(`${API}/api/عملة/balance`, {
+                                        headers: { 'Authorization': `Bearer ${token}` }
+                                    });
+                                    const data = await res.json();
+                                    if (data.success) {
+                                        document.getElementById('balanceDisplay').textContent = data.balance.toLocaleString();
+                                        document.getElementById('sarDisplay').textContent = data.balance.toLocaleString();
+                                        document.getElementById('earnedDisplay').textContent = data.totalEarned.toLocaleString();
+                                        document.getElementById('spentDisplay').textContent = data.totalSpent.toLocaleString();
+                                    }
+                                } catch (err) {
+                                    console.error('Balance load error:', err);
+                                }
+                            }
 
-        // loadProjects() removed — replaced by favorites/search tab system
+                            // loadProjects() removed — replaced by favorites/search tab system
 
-        async function loadHistory() {
-            try {
-                const res = await fetch(`${API}/api/عملة/history`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                const data = await res.json();
-                const list = document.getElementById('txList');
+                            async function loadHistory() {
+                                try {
+                                    const res = await fetch(`${API}/api/عملة/history`, {
+                                        headers: { 'Authorization': `Bearer ${token}` }
+                                    });
+                                    const data = await res.json();
+                                    const list = document.getElementById('txList');
 
-                if (data.success && data.data.length > 0) {
-                    list.innerHTML = data.data.map(tx => {
-                        const userId = JSON.parse(localStorage.getItem('user'))?.id;
-                        const isOutgoing = tx.from?._id === userId || tx.from?.id === userId;
-                        let icon, desc, amountClass;
+                                    if (data.success && data.data.length > 0) {
+                                        list.innerHTML = data.data.map(tx => {
+                                            const userId = JSON.parse(localStorage.getItem('user'))?.id;
+                                            const isOutgoing = tx.from?._id === userId || tx.from?.id === userId;
+                                            let icon, desc, amountClass;
 
-                        if (tx.type === 'purchase') {
-                            icon = '<div class="tx-icon purchase"><i class="fas fa-plus"></i></div>';
-                            desc = tx.description || `Bought ${tx.amount} عملة`;
-                            amountClass = 'positive';
-                        } else if (tx.type === 'send') {
-                            icon = '<div class="tx-icon send"><i class="fas fa-paper-plane"></i></div>';
-                            desc = tx.description || `Sent to ${tx.project?.title || 'project'}`;
-                            amountClass = isOutgoing ? 'negative' : 'positive';
-                        } else {
-                            icon = '<div class="tx-icon cashout"><i class="fas fa-university"></i></div>';
-                            desc = tx.description || `Cash out ${tx.amount} عملة`;
-                            amountClass = 'negative';
-                        }
+                                            if (tx.type === 'purchase') {
+                                                icon = '<div class="tx-icon purchase"><i class="fas fa-plus"></i></div>';
+                                                desc = tx.description || `Bought ${tx.amount} عملة`;
+                                                amountClass = 'positive';
+                                            } else if (tx.type === 'send') {
+                                                icon = '<div class="tx-icon send"><i class="fas fa-paper-plane"></i></div>';
+                                                desc = tx.description || `Sent to ${tx.project?.title || 'project'}`;
+                                                amountClass = isOutgoing ? 'negative' : 'positive';
+                                            } else {
+                                                icon = '<div class="tx-icon cashout"><i class="fas fa-university"></i></div>';
+                                                desc = tx.description || `Cash out ${tx.amount} عملة`;
+                                                amountClass = 'negative';
+                                            }
 
-                        const prefix = amountClass === 'positive' ? '+' : '-';
-                        const date = new Date(tx.createdAt).toLocaleDateString('en-US', {
-                            month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit'
-                        });
+                                            const prefix = amountClass === 'positive' ? '+' : '-';
+                                            const date = new Date(tx.createdAt).toLocaleDateString('en-US', {
+                                                month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit'
+                                            });
 
-                        return `
+                                            return `
                             <li class="tx-item">
                                 ${icon}
                                 <div class="tx-info">
@@ -1040,175 +1159,175 @@
                                 </div>
                             </li>
                         `;
-                    }).join('');
-                }
-            } catch (err) {
-                console.error('History load error:', err);
-            }
-        }
+                                        }).join('');
+                                    }
+                                } catch (err) {
+                                    console.error('History load error:', err);
+                                }
+                            }
 
-        async function buyCoins() {
-            const amount = document.getElementById('buyAmount').value;
-            if (!amount || amount < 1) {
-                showToast('Please enter a valid amount', 'error');
-                return;
-            }
+                            async function buyCoins() {
+                                const amount = document.getElementById('buyAmount').value;
+                                if (!amount || amount < 1) {
+                                    showToast('Please enter a valid amount', 'error');
+                                    return;
+                                }
 
-            const btn = document.getElementById('buyBtn');
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                                const btn = document.getElementById('buyBtn');
+                                btn.disabled = true;
+                                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
 
-            try {
-                const res = await fetch(`${API}/api/عملة/buy`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify({ amount: parseInt(amount) })
-                });
-                const data = await res.json();
+                                try {
+                                    const res = await fetch(`${API}/api/عملة/buy`, {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                            'Authorization': `Bearer ${token}`
+                                        },
+                                        body: JSON.stringify({ amount: parseInt(amount) })
+                                    });
+                                    const data = await res.json();
 
-                if (data.success && data.url) {
-                    window.location.href = data.url;
-                } else {
-                    showToast(data.message || 'Purchase failed', 'error');
-                }
-            } catch (err) {
-                showToast('Network error', 'error');
-            } finally {
-                btn.disabled = false;
-                btn.innerHTML = '<i class="fas fa-credit-card"></i> Buy with Bank Card';
-            }
-        }
+                                    if (data.success && data.url) {
+                                        window.location.href = data.url;
+                                    } else {
+                                        showToast(data.message || 'Purchase failed', 'error');
+                                    }
+                                } catch (err) {
+                                    showToast('Network error', 'error');
+                                } finally {
+                                    btn.disabled = false;
+                                    btn.innerHTML = '<i class="fas fa-credit-card"></i> Buy with Bank Card';
+                                }
+                            }
 
-        async function sendCoins() {
-            const projectId = selectedProjectId;
-            const amount = document.getElementById('sendAmount').value;
+                            async function sendCoins() {
+                                const projectId = selectedProjectId;
+                                const amount = document.getElementById('sendAmount').value;
 
-            if (!projectId) {
-                showToast('Please select a project from Favorites or Search', 'error');
-                return;
-            }
-            if (!amount || amount < 1) {
-                showToast('Please enter a valid amount', 'error');
-                return;
-            }
+                                if (!projectId) {
+                                    showToast('Please select a project from Favorites or Search', 'error');
+                                    return;
+                                }
+                                if (!amount || amount < 1) {
+                                    showToast('Please enter a valid amount', 'error');
+                                    return;
+                                }
 
-            try {
-                const res = await fetch(`${API}/api/عملة/send`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify({ projectId, amount: parseInt(amount) })
-                });
-                const data = await res.json();
+                                try {
+                                    const res = await fetch(`${API}/api/عملة/send`, {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                            'Authorization': `Bearer ${token}`
+                                        },
+                                        body: JSON.stringify({ projectId, amount: parseInt(amount) })
+                                    });
+                                    const data = await res.json();
 
-                if (data.success) {
-                    showToast(data.message, 'success');
-                    document.getElementById('sendAmount').value = '';
-                    await setTimeout(() => { loadBalance(); }, 500);
-                    await setTimeout(() => { loadHistory(); }, 500);
-                } else {
-                    showToast(data.message || 'Transfer failed', 'error');
-                }
-            } catch (err) {
-                showToast('Network error', 'error');
-            }
-        }
+                                    if (data.success) {
+                                        showToast(data.message, 'success');
+                                        document.getElementById('sendAmount').value = '';
+                                        await setTimeout(() => { loadBalance(); }, 500);
+                                        await setTimeout(() => { loadHistory(); }, 500);
+                                    } else {
+                                        showToast(data.message || 'Transfer failed', 'error');
+                                    }
+                                } catch (err) {
+                                    showToast('Network error', 'error');
+                                }
+                            }
 
-        function updateFeeBreakdown() {
-            const amount = parseInt(document.getElementById('cashoutAmount').value) || 0;
-            const breakdown = document.getElementById('feeBreakdown');
+                            function updateFeeBreakdown() {
+                                const amount = parseInt(document.getElementById('cashoutAmount').value) || 0;
+                                const breakdown = document.getElementById('feeBreakdown');
 
-            if (amount >= 100) {
-                const processing = Math.ceil(amount * 0.08);
-                const bank = Math.ceil(amount * 0.06);
-                const net = amount - processing - bank;
+                                if (amount >= 100) {
+                                    const processing = Math.ceil(amount * 0.08);
+                                    const bank = Math.ceil(amount * 0.06);
+                                    const net = amount - processing - bank;
 
-                document.getElementById('feeGross').textContent = `${amount} SAR`;
-                document.getElementById('feeProcessing').textContent = `-${processing} SAR`;
-                document.getElementById('feeBank').textContent = `-${bank} SAR`;
-                document.getElementById('feeNet').textContent = `${net} SAR`;
-                breakdown.style.display = 'block';
-            } else {
-                breakdown.style.display = 'none';
-            }
-        }
+                                    document.getElementById('feeGross').textContent = `${amount} SAR`;
+                                    document.getElementById('feeProcessing').textContent = `-${processing} SAR`;
+                                    document.getElementById('feeBank').textContent = `-${bank} SAR`;
+                                    document.getElementById('feeNet').textContent = `${net} SAR`;
+                                    breakdown.style.display = 'block';
+                                } else {
+                                    breakdown.style.display = 'none';
+                                }
+                            }
 
-        async function cashOut() {
-            const amount = document.getElementById('cashoutAmount').value;
-            if (!amount || amount < 100) {
-                showToast('Minimum cashout is 100 عملة', 'error');
-                return;
-            }
+                            async function cashOut() {
+                                const amount = document.getElementById('cashoutAmount').value;
+                                if (!amount || amount < 100) {
+                                    showToast('Minimum cashout is 100 عملة', 'error');
+                                    return;
+                                }
 
-            if (!confirm(`Are you sure you want to cash out ${amount} عملة? A 14% fee (8% processing + 6% bank) will be applied. No refunds.`)) {
-                return;
-            }
+                                if (!confirm(`Are you sure you want to cash out ${amount} عملة? A 14% fee (8% processing + 6% bank) will be applied. No refunds.`)) {
+                                    return;
+                                }
 
-            try {
-                const res = await fetch(`${API}/api/عملة/cashout`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify({ amount: parseInt(amount) })
-                });
-                const data = await res.json();
+                                try {
+                                    const res = await fetch(`${API}/api/عملة/cashout`, {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                            'Authorization': `Bearer ${token}`
+                                        },
+                                        body: JSON.stringify({ amount: parseInt(amount) })
+                                    });
+                                    const data = await res.json();
 
-                if (data.success) {
-                    showToast(data.message, 'success');
-                    document.getElementById('cashoutAmount').value = '';
-                    document.getElementById('feeBreakdown').style.display = 'none';
-                    await setTimeout(() => { loadBalance(); }, 500);
-                    await setTimeout(() => { loadHistory(); }, 500);
-                } else {
-                    showToast(data.message || 'Cashout failed', 'error');
-                }
-            } catch (err) {
-                showToast('Network error', 'error');
-            }
-        }
+                                    if (data.success) {
+                                        showToast(data.message, 'success');
+                                        document.getElementById('cashoutAmount').value = '';
+                                        document.getElementById('feeBreakdown').style.display = 'none';
+                                        await setTimeout(() => { loadBalance(); }, 500);
+                                        await setTimeout(() => { loadHistory(); }, 500);
+                                    } else {
+                                        showToast(data.message || 'Cashout failed', 'error');
+                                    }
+                                } catch (err) {
+                                    showToast('Network error', 'error');
+                                }
+                            }
 
-        function checkPurchaseReturn() {
-            const params = new URLSearchParams(window.location.search);
-            if (params.get('purchase') === 'success') {
-                const sessionId = params.get('session_id');
-                if (sessionId) {
-                    confirmPurchase(sessionId);
-                }
-                window.history.replaceState({}, '', '/عملة.html');
-            } else if (params.get('purchase') === 'cancelled') {
-                showToast('Purchase was cancelled', 'error');
-                window.history.replaceState({}, '', '/عملة.html');
-            }
-        }
+                            function checkPurchaseReturn() {
+                                const params = new URLSearchParams(window.location.search);
+                                if (params.get('purchase') === 'success') {
+                                    const sessionId = params.get('session_id');
+                                    if (sessionId) {
+                                        confirmPurchase(sessionId);
+                                    }
+                                    window.history.replaceState({}, '', '/عملة.html');
+                                } else if (params.get('purchase') === 'cancelled') {
+                                    showToast('Purchase was cancelled', 'error');
+                                    window.history.replaceState({}, '', '/عملة.html');
+                                }
+                            }
 
-        async function confirmPurchase(sessionId) {
-            try {
-                const res = await fetch(`${API}/api/عملة/confirm-purchase`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify({ sessionId })
-                });
-                const data = await res.json();
-                if (data.success) {
-                    showToast(data.message, 'success');
-                    await setTimeout(() => { loadBalance(); }, 500);
-                    await setTimeout(() => { loadHistory(); }, 500);
-                }
-            } catch (err) {
-                console.error('Confirm purchase error:', err);
-            }
-        }
-    </script>
-</body>
+                            async function confirmPurchase(sessionId) {
+                                try {
+                                    const res = await fetch(`${API}/api/عملة/confirm-purchase`, {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                            'Authorization': `Bearer ${token}`
+                                        },
+                                        body: JSON.stringify({ sessionId })
+                                    });
+                                    const data = await res.json();
+                                    if (data.success) {
+                                        showToast(data.message, 'success');
+                                        await setTimeout(() => { loadBalance(); }, 500);
+                                        await setTimeout(() => { loadHistory(); }, 500);
+                                    }
+                                } catch (err) {
+                                    console.error('Confirm purchase error:', err);
+                                }
+                            }
+                        </script>
+                    </body>
 
 </html>

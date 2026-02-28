@@ -14,7 +14,11 @@ const replacements = [
     { old: 'href="user-profile.html"', new: 'href="user-profile-ar.html"' },
     { old: 'href="settings.html"', new: 'href="settings-ar.html"' },
     { old: 'href="support.html"', new: 'href="support-ar.html"' },
-    { old: 'href="coming-soon.html"', new: 'href="#"' }, // For any that were manually set to coming-soon that shouldn't be.
+    { old: 'href="projects.html"', new: 'href="projects-ar.html"' },
+    { old: 'href="how-it-works.html"', new: 'href="how-it-works-ar.html"' },
+    { old: 'href="about.html"', new: 'href="about-ar.html"' },
+    { old: 'href="contact.html"', new: 'href="contact-ar.html"' },
+    { old: 'href="coming-soon.html"', new: 'href="#"' },
 ];
 
 // Some pages might have coming-soon.html instead of the actual link because dashboard-ar.html had it.

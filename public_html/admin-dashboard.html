@@ -1182,9 +1182,9 @@
                         <td>${p.currentAmount.toLocaleString()} / ${p.goalAmount.toLocaleString()}</td>
                         <td><span class="badge ${p.status}">${p.status}</span></td>
                         <td>
-                            ${p.status === 'draft' ? `<button class="action-btn approve" onclick="updateProject('${p._id}','active')">Activate</button>` : ''}
+                            <button class="action-btn approve" onclick="updateProject('${p._id}','active')">Activate</button>
                             ${p.status === 'active' ? `<button class="action-btn" onclick="updateProject('${p._id}','completed')">Complete</button>` : ''}
-                            ${p.status !== 'draft' ? `<button class="action-btn reject" onclick="updateProject('${p._id}','draft')">Deactivate</button>` : ''}
+                            <button class="action-btn reject" onclick="updateProject('${p._id}','draft')">Deactivate</button>
                         </td>
                     </tr>
                 `).join('') || '<tr><td colspan="6" style="text-align:center; color: var(--admin-muted);">No projects found</td></tr>';

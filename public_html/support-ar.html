@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Get help and support for YallaStarter. Find answers to common questions, contact our support team, and access helpful resources.">
+    <meta name="description"
+        content="Get help and support for YallaStarter. Find answers to common questions, contact our support team, and access helpful resources.">
     <meta name="keywords" content="support, help, YallaStarter, FAQ, contact">
     <meta name="author" content="YallaStarter">
     <meta name="robots" content="index, follow">
-    
+
     <title>المساعدة والدعم - يلا ستارتر</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="mobile-menu.css">
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         .support-hero {
@@ -23,31 +27,31 @@
             padding: 4rem 0;
             text-align: center;
         }
-        
+
         .support-hero h1 {
             font-size: 3rem;
             font-weight: 700;
             margin-bottom: 1rem;
         }
-        
+
         .support-hero p {
             font-size: 1.2rem;
             opacity: 0.9;
             max-width: 600px;
             margin: 0 auto;
         }
-        
+
         .support-content {
             padding: 4rem 0;
         }
-        
+
         .support-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-bottom: 3rem;
         }
-        
+
         .support-card {
             background: white;
             border-radius: var(--border-radius);
@@ -57,12 +61,12 @@
             border: 1px solid var(--neutral-200);
             transition: var(--transition);
         }
-        
+
         .support-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
-        
+
         .support-icon {
             width: 60px;
             height: 60px;
@@ -75,20 +79,20 @@
             color: var(--primary);
             font-size: 1.5rem;
         }
-        
+
         .support-title {
             font-size: 1.3rem;
             font-weight: 600;
             margin-bottom: 1rem;
             color: var(--neutral-900);
         }
-        
+
         .support-description {
             color: var(--neutral-700);
             line-height: 1.6;
             margin-bottom: 1.5rem;
         }
-        
+
         .support-btn {
             background: var(--gradient-primary);
             color: white;
@@ -99,17 +103,17 @@
             transition: var(--transition);
             display: inline-block;
         }
-        
+
         .support-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(0, 166, 81, 0.3);
         }
-        
+
         .faq-section {
             background: var(--neutral-100);
             padding: 4rem 0;
         }
-        
+
         .faq-item {
             background: white;
             border-radius: var(--border-radius);
@@ -117,7 +121,7 @@
             box-shadow: var(--box-shadow);
             overflow: hidden;
         }
-        
+
         .faq-question {
             padding: 1.5rem;
             background: white;
@@ -133,39 +137,39 @@
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .faq-question:hover {
             background: var(--neutral-50);
         }
-        
+
         .faq-answer {
             padding: 0 1.5rem 1.5rem;
             color: var(--neutral-700);
             line-height: 1.6;
             display: none;
         }
-        
+
         .faq-answer.active {
             display: block;
         }
-        
+
         .faq-icon {
             transition: transform 0.3s ease;
         }
-        
+
         .faq-icon.rotated {
             transform: rotate(180deg);
         }
-        
+
         @media (max-width: 768px) {
             .support-hero h1 {
                 font-size: 2rem;
             }
-            
+
             .support-hero p {
                 font-size: 1rem;
             }
-            
+
             .support-grid {
                 grid-template-columns: 1fr;
             }
@@ -173,21 +177,69 @@
     </style>
 
     <style>
-        body { font-family: 'Tajawal', sans-serif; text-align: right; direction: rtl; }
-        .dashboard-sidebar { border-right: none; border-left: 1px solid var(--neutral-200); }
-        .sidebar-menu-icon { margin-right: 0; margin-left: 1rem; }
-        .sidebar-menu-link.active { border-right: none; border-left: 3px solid var(--primary); }
-        .nav-links { margin-left: auto; margin-right: 0; }
-        .logo { margin-left: 1rem; margin-right: 0; }
-        .user-avatar { margin-right: 0; margin-left: 1rem; }
+        body {
+            font-family: 'Tajawal', sans-serif;
+            text-align: right;
+            direction: rtl;
+        }
+
+        .dashboard-sidebar {
+            border-right: none;
+            border-left: 1px solid var(--neutral-200);
+        }
+
+        .sidebar-menu-icon {
+            margin-right: 0;
+            margin-left: 1rem;
+        }
+
+        .sidebar-menu-link.active {
+            border-right: none;
+            border-left: 3px solid var(--primary);
+        }
+
+        .nav-links {
+            margin-left: auto;
+            margin-right: 0;
+        }
+
+        .logo {
+            margin-left: 1rem;
+            margin-right: 0;
+        }
+
+        .user-avatar {
+            margin-right: 0;
+            margin-left: 1rem;
+        }
+
         /* Fix dropdown for RTL */
-        .user-dropdown-menu { right: auto; left: 0; text-align: right; transform-origin: top left; }
-        .dropdown-item { display: flex !important; align-items: center; gap: 10px; flex-direction: row; }
-        .dropdown-item i { margin-left: 0; margin-right: 0; }
+        .user-dropdown-menu {
+            right: auto;
+            left: 0;
+            text-align: right;
+            transform-origin: top left;
+        }
+
+        .dropdown-item {
+            display: flex !important;
+            align-items: center;
+            gap: 10px;
+            flex-direction: row;
+        }
+
+        .dropdown-item i {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
         /* Fix spinner for RTL */
-        .fa-spin { display: inline-block; }
+        .fa-spin {
+            display: inline-block;
+        }
     </style>
 </head>
+
 <body>
     <!-- Header -->
     <header class="header">
@@ -195,7 +247,7 @@
             <a href="index-ar.html" class="logo">
                 <span class="logo-text">YallaStarter</span>
             </a>
-        
+
             <ul class="nav-links">
                 <li><a href="index-ar.html">الرئيسية</a></li>
                 <li><a href="entertainment.html">مشاريع ترفيهية</a></li>
@@ -206,22 +258,22 @@
                 <li><a href="about.html">من نحن</a></li>
                 <li><a href="contact.html">اتصل بنا</a></li>
             </ul>
-            
+
             <div class="language-switcher">
                 <button class="language-btn active" onclick="switchLanguage('en')">English</button>
                 <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
             </div>
-            
+
             <div class="auth-buttons">
                 <a href="create-project-ar.html" class="btn btn-primary">أنشئ مشروعاً</a>
                 <a href="login.html" class="btn btn-link">تسجيل الدخول</a>
             </div>
-            
+
             <button class="mobile-menu-btn">
                 <i class="fas fa-bars"></i>
             </button>
         </nav>
-        
+
         <div class="mobile-menu">
             <div class="mobile-menu-header">
                 <div class="mobile-header-left">
@@ -268,10 +320,11 @@
                         <i class="fas fa-question-circle"></i>
                     </div>
                     <h3 class="support-title">FAQ</h3>
-                    <p class="support-description">Find quick answers to the most common questions about using YallaStarter</p>
+                    <p class="support-description">Find quick answers to the most common questions about using
+                        YallaStarter</p>
                     <a href="#faq" class="support-btn">View FAQ</a>
                 </div>
-                
+
                 <div class="support-card">
                     <div class="support-icon">
                         <i class="fas fa-envelope"></i>
@@ -280,7 +333,7 @@
                     <p class="support-description">Send us an email and we'll get back to you within 24 hours</p>
                     <a href="mailto:support@yallastarter.com" class="support-btn">Email Us</a>
                 </div>
-                
+
                 <div class="support-card">
                     <div class="support-icon">
                         <i class="fas fa-phone"></i>
@@ -289,7 +342,7 @@
                     <p class="support-description">Call us for immediate assistance with urgent issues</p>
                     <a href="tel:+966112345678" class="support-btn">Call Us</a>
                 </div>
-                
+
                 <div class="support-card">
                     <div class="support-icon">
                         <i class="fas fa-comments"></i>
@@ -298,7 +351,7 @@
                     <p class="support-description">Chat with our support team in real-time during business hours</p>
                     <a href="javascript:void(0)" class="support-btn" onclick="openLiveChat()">Start Chat</a>
                 </div>
-                
+
                 <div class="support-card">
                     <div class="support-icon">
                         <i class="fas fa-book"></i>
@@ -307,7 +360,7 @@
                     <p class="support-description">Browse our comprehensive help articles and guides</p>
                     <a href="creator-handbook.html" class="support-btn">Help Center</a>
                 </div>
-                
+
                 <div class="support-card">
                     <div class="support-icon">
                         <i class="fas fa-users"></i>
@@ -325,84 +378,100 @@
         <div class="container">
             <h2 class="section-title">Frequently Asked Questions</h2>
             <p class="section-subtitle">Quick answers to common questions</p>
-            
+
             <div class="faq-item">
                 <button class="faq-question" onclick="toggleFAQ(this)">
                     How do I create a project on YallaStarter?
                     <i class="fas fa-chevron-down faq-icon"></i>
                 </button>
                 <div class="faq-answer">
-                    <p>Creating a project is easy! Click "أنشئ مشروعاً" in the top navigation, fill out your project details, add photos and videos, set your funding goal and timeline, and launch your campaign. Make sure to read our Creator Handbook for detailed guidance.</p>
+                    <p>Creating a project is easy! Click "أنشئ مشروعاً" in the top navigation, fill out your project
+                        details, add photos and videos, set your funding goal and timeline, and launch your campaign.
+                        Make sure to read our Creator Handbook for detailed guidance.</p>
                 </div>
             </div>
-            
+
             <div class="faq-item">
                 <button class="faq-question" onclick="toggleFAQ(this)">
                     What fees does YallaStarter charge?
                     <i class="fas fa-chevron-down faq-icon"></i>
                 </button>
                 <div class="faq-answer">
-                    <p>YallaStarter charges a 5% platform fee on successfully ممول projects. Payment processing fees are additional (typically 3-4%). If your project doesn't reach its funding goal, no fees are charged.</p>
+                    <p>YallaStarter charges a 5% platform fee on successfully ممول projects. Payment processing fees are
+                        additional (typically 3-4%). If your project doesn't reach its funding goal, no fees are
+                        charged.</p>
                 </div>
             </div>
-            
+
             <div class="faq-item">
                 <button class="faq-question" onclick="toggleFAQ(this)">
                     How do I back a project?
                     <i class="fas fa-chevron-down faq-icon"></i>
                 </button>
                 <div class="faq-answer">
-                    <p>To back a project, simply visit the project page, choose a reward tier that interests you, click "Back This Project," and complete the payment process. You'll receive updates from the creator throughout the campaign.</p>
+                    <p>To back a project, simply visit the project page, choose a reward tier that interests you, click
+                        "Back This Project," and complete the payment process. You'll receive updates from the creator
+                        throughout the campaign.</p>
                 </div>
             </div>
-            
+
             <div class="faq-item">
                 <button class="faq-question" onclick="toggleFAQ(this)">
                     What happens if a project doesn't reach its goal?
                     <i class="fas fa-chevron-down faq-icon"></i>
                 </button>
                 <div class="faq-answer">
-                    <p>If a project doesn't reach its funding goal by the deadline, all backers are automatically refunded and no money is collected. This is called "all-or-nothing" funding, which protects both creators and backers.</p>
+                    <p>If a project doesn't reach its funding goal by the deadline, all backers are automatically
+                        refunded and no money is collected. This is called "all-or-nothing" funding, which protects both
+                        creators and backers.</p>
                 </div>
             </div>
-            
+
             <div class="faq-item">
                 <button class="faq-question" onclick="toggleFAQ(this)">
                     How do I get my rewards?
                     <i class="fas fa-chevron-down faq-icon"></i>
                 </button>
                 <div class="faq-answer">
-                    <p>Once a project is successfully ممول, creators will begin production and fulfillment. You'll receive updates on progress and estimated delivery dates. Digital rewards are typically delivered immediately, while physical rewards may take weeks or months depending on the project.</p>
+                    <p>Once a project is successfully ممول, creators will begin production and fulfillment. You'll
+                        receive updates on progress and estimated delivery dates. Digital rewards are typically
+                        delivered immediately, while physical rewards may take weeks or months depending on the project.
+                    </p>
                 </div>
             </div>
-            
+
             <div class="faq-item">
                 <button class="faq-question" onclick="toggleFAQ(this)">
                     Can I cancel my pledge?
                     <i class="fas fa-chevron-down faq-icon"></i>
                 </button>
                 <div class="faq-answer">
-                    <p>Yes, you can cancel your pledge at any time before the project's funding deadline. Simply go to your account settings and cancel your pledge. You won't be charged if you cancel before the project ends.</p>
+                    <p>Yes, you can cancel your pledge at any time before the project's funding deadline. Simply go to
+                        your account settings and cancel your pledge. You won't be charged if you cancel before the
+                        project ends.</p>
                 </div>
             </div>
-            
+
             <div class="faq-item">
                 <button class="faq-question" onclick="toggleFAQ(this)">
                     What payment methods do you accept?
                     <i class="fas fa-chevron-down faq-icon"></i>
                 </button>
                 <div class="faq-answer">
-                    <p>We accept all major credit cards (Visa, MasterCard, American Express), debit cards, and local payment methods popular in Saudi Arabia. All payments are processed securely through our payment partners.</p>
+                    <p>We accept all major credit cards (Visa, MasterCard, American Express), debit cards, and local
+                        payment methods popular in Saudi Arabia. All payments are processed securely through our payment
+                        partners.</p>
                 </div>
             </div>
-            
+
             <div class="faq-item">
                 <button class="faq-question" onclick="toggleFAQ(this)">
                     How do I contact a project creator?
                     <i class="fas fa-chevron-down faq-icon"></i>
                 </button>
                 <div class="faq-answer">
-                    <p>You can contact project creators through the project page by clicking "Ask a Question" or by commenting on project updates. Creators typically respond within 24-48 hours.</p>
+                    <p>You can contact project creators through the project page by clicking "Ask a Question" or by
+                        commenting on project updates. Creators typically respond within 24-48 hours.</p>
                 </div>
             </div>
         </div>
@@ -416,26 +485,26 @@
                     <h3>YallaStarter</h3>
                     <ul class="footer-links">
                         <li><a href="index-ar.html">الرئيسية</a></li>
-                        <li><a href="projects.html">تصفح المشاريع</a></li>
-                        <li><a href="how-it-works.html">كيف يعمل</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="projects-ar.html">تصفح المشاريع</a></li>
+                        <li><a href="how-it-works-ar.html">كيف يعمل</a></li>
+                        <li><a href="about-ar.html">About Us</a></li>
+                        <li><a href="contact-ar.html">Contact Us</a></li>
                         <li><a href="careers.html">Careers</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-column">
                     <h3>For Creators</h3>
                     <ul class="footer-links">
                         <li><a href="create-project-ar.html">أنشئ مشروعاً</a></li>
-                        <li><a href="capstone-projects.html">Capstone Projects</a></li>
+                        <li><a href="capstone-projects-ar.html">Capstone Projects</a></li>
                         <li><a href="creator-handbook.html">Creator Handbook</a></li>
                         <li><a href="creator-resources.html">Creator Resources</a></li>
                         <li><a href="creator-faqs.html">Creator FAQs</a></li>
                         <li><a href="success-stories.html">Success Stories</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-column">
                     <h3>For Backers</h3>
                     <ul class="footer-links">
@@ -446,7 +515,7 @@
                         <li><a href="backer-protection.html">Backer Protection</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-column">
                     <h3>Connect With Us</h3>
                     <ul class="footer-links">
@@ -454,22 +523,23 @@
                         <li><a href="blog.html">Blog</a></li>
                         <li><a href="events.html">Events</a></li>
                         <li><a href="support-ar.html">Support</a></li>
-                        <li><a href="admin-login.html" class="employee-access-link"><i class="fas fa-user-shield" style="margin-right: 5px; opacity: 0.7;"></i>Employee Access</a></li>
+                        <li><a href="admin-login.html" class="employee-access-link"><i class="fas fa-user-shield"
+                                    style="margin-right: 5px; opacity: 0.7;"></i>Employee Access</a></li>
                         <li><a href="community-guidelines.html">Community Guidelines</a></li>
                     </ul>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
                 <div class="footer-copyright">
                     &copy; 2025 YallaStarter. All rights reserved.
                 </div>
-                
+
                 <div class="footer-social">
-                    <a href="contact.html" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                    <a href="contact.html" class="social-icon"><i class="fab fa-twitter"></i></a>
-                    <a href="contact.html" class="social-icon"><i class="fab fa-instagram"></i></a>
-                    <a href="contact.html" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="contact-ar.html" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="contact-ar.html" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="contact-ar.html" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="contact-ar.html" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
         </div>
@@ -477,7 +547,7 @@
 
     <!-- Universal Mobile Menu Script -->
     <script src="mobile-menu.js"></script>
-    
+
     <script>
         // Language Switcher
         function switchLanguage(lang) {
@@ -487,12 +557,12 @@
                 window.location.href = 'support-ar.html';
             }
         }
-        
+
         // FAQ Toggle
         function toggleFAQ(button) {
             const answer = button.nextElementSibling;
             const icon = button.querySelector('.faq-icon');
-            
+
             if (answer.classList.contains('active')) {
                 answer.classList.remove('active');
                 icon.classList.remove('rotated');
@@ -504,18 +574,18 @@
                 document.querySelectorAll('.faq-icon.rotated').forEach(item => {
                     item.classList.remove('rotated');
                 });
-                
+
                 // Open this FAQ
                 answer.classList.add('active');
                 icon.classList.add('rotated');
             }
         }
-        
+
         // Live Chat (placeholder)
         function openLiveChat() {
             alert('Live chat feature coming soon! Please use email or phone support for now.');
         }
     </script>
 </body>
-</html>
 
+</html>
