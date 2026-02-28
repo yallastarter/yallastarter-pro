@@ -532,8 +532,8 @@
                             class="fas fa-hand-holding-heart sidebar-menu-icon"></i> المشاريع المدعومة</a></li>
                 <li class="sidebar-menu-item"><a href="payments-ar.html" class="sidebar-menu-link active"><i
                             class="fas fa-money-bill-wave sidebar-menu-icon"></i> المدفوعات</a></li>
-                <li class="sidebar-menu-item"><a href="coins-ar.html" class="sidebar-menu-link"><i
-                            class="fas fa-coins sidebar-menu-icon"></i> محفظتي</a></li>
+                <li class="sidebar-menu-item"><a href="عملة-ar.html" class="sidebar-menu-link"><i
+                            class="fas fa-عملة sidebar-menu-icon"></i> محفظتي</a></li>
                 <li class="sidebar-menu-item"><a href="notifications-ar.html" class="sidebar-menu-link"><i
                             class="fas fa-bell sidebar-menu-icon"></i> الإشعارات</a></li>
                 <li class="sidebar-menu-item"><a href="user-profile-ar.html" class="sidebar-menu-link"><i
@@ -552,7 +552,7 @@
         <div class="payments-content">
             <div class="page-header">
                 <h1 class="page-title">Payments</h1>
-                <a href="coins-ar.html" class="btn btn-primary"><i class="fas fa-wallet"></i> محفظتي</a>
+                <a href="عملة-ar.html" class="btn btn-primary"><i class="fas fa-wallet"></i> محفظتي</a>
             </div>
 
             <!-- Summary Cards -->
@@ -560,29 +560,29 @@
                 <div class="summary-card">
                     <div class="summary-icon green"><i class="fas fa-arrow-down"></i></div>
                     <div>
-                        <div class="summary-value" id="totalBacked">ريال 0</div>
+                        <div class="summary-value" id="totalBacked">SAR 0</div>
                         <div class="summary-label">إجمالي الدعم</div>
                     </div>
                 </div>
                 <div class="summary-card">
                     <div class="summary-icon blue"><i class="fas fa-arrow-up"></i></div>
                     <div>
-                        <div class="summary-value" id="totalReceived">ريال 0</div>
-                        <div class="summary-label">إجمالي المستلم</div>
+                        <div class="summary-value" id="totalReceived">SAR 0</div>
+                        <div class="summary-label">Total Received</div>
                     </div>
                 </div>
                 <div class="summary-card">
                     <div class="summary-icon amber"><i class="fas fa-clock"></i></div>
                     <div>
                         <div class="summary-value" id="pendingCount">0</div>
-                        <div class="summary-label">المعاملات المعلقة</div>
+                        <div class="summary-label">Pending Transactions</div>
                     </div>
                 </div>
                 <div class="summary-card">
                     <div class="summary-icon red"><i class="fas fa-receipt"></i></div>
                     <div>
                         <div class="summary-value" id="txCount">0</div>
-                        <div class="summary-label">إجمالي المعاملات</div>
+                        <div class="summary-label">Total Transactions</div>
                     </div>
                 </div>
             </div>
@@ -593,17 +593,17 @@
                     <h2 class="section-card-title"><i class="fas fa-history"
                             style="color:var(--primary);margin-right:0.5rem;"></i>Transaction History</h2>
                     <button class="btn btn-sm btn-outline" onclick="downloadCSV()"><i class="fas fa-download"></i>
-                        تصدير CSV</button>
+                        Export CSV</button>
                 </div>
                 <div class="table-wrap">
                     <table>
                         <thead>
                             <tr>
-                                <th>التاريخ</th>
-                                <th>الوصف</th>
-                                <th>النوع</th>
-                                <th>المبلغ</th>
-                                <th>الحالة</th>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Type</th>
+                                <th>Amount</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody id="transactionTable">
@@ -622,13 +622,13 @@
             <div class="section-card">
                 <div class="section-card-header">
                     <h2 class="section-card-title"><i class="fas fa-credit-card"
-                            style="color:var(--primary);margin-right:0.5rem;"></i>طرق الدفع</h2>
+                            style="color:var(--primary);margin-right:0.5rem;"></i>Payment Methods</h2>
                 </div>
                 <div class="methods-grid">
                     <div class="method-card default" id="defaultMethodCard" style="display:none;">
                         <div class="method-icon">💳</div>
                         <div class="method-details">
-                            <div class="method-name" id="defaultMethodName">بطاقة بنكية</div>
+                            <div class="method-name" id="defaultMethodName">Bank Card</div>
                             <div class="method-info" id="defaultMethodInfo">No card saved</div>
                         </div>
                         <span class="method-default-badge">Default</span>
@@ -686,7 +686,7 @@
         function downloadCSV() {
             const rows = [['Date', 'Description', 'Type', 'Amount', 'Status']];
             loadedTransactions.forEach(tx => {
-                rows.push([tx.date, tx.desc, tx.type, (tx.amount < 0 ? '-' : '+') + 'ريال ' + Math.abs(tx.amount), tx.status]);
+                rows.push([tx.date, tx.desc, tx.type, (tx.amount < 0 ? '-' : '+') + 'SAR ' + Math.abs(tx.amount), tx.status]);
             });
             if (!rows.length) { alert('No transactions to export.'); return; }
             const csv = rows.map(r => r.map(c => `"${c}"`).join(',')).join('\n');
@@ -700,7 +700,7 @@
             loadedTransactions = txs;
             const tbody = document.getElementById('transactionTable');
             if (!txs.length) {
-                tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:3rem;color:var(--neutral-500);">لم يتم العثور على معاملات.</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:3rem;color:var(--neutral-500);">No transactions found.</td></tr>';
                 return;
             }
             let backed = 0, received = 0, pending = 0;
@@ -717,12 +717,12 @@
                     <td style="white-space:nowrap;color:var(--neutral-600);">${tx.date}</td>
                     <td>${tx.desc}</td>
                     <td><span class="badge" style="background:var(--neutral-200);color:var(--neutral-700);">${tx.type}</span></td>
-                    <td class="${amtClass}">${amtSign}ريال ${absAmt.toLocaleString()}</td>
+                    <td class="${amtClass}">${amtSign}SAR ${absAmt.toLocaleString()}</td>
                     <td><span class="badge ${statusClass}">${tx.status.charAt(0).toUpperCase() + tx.status.slice(1)}</span></td>
                 </tr>`;
             }).join('');
-            document.getElementById('totalBacked').textContent = 'ريال ' + backed.toLocaleString();
-            document.getElementById('totalReceived').textContent = 'ريال ' + received.toLocaleString();
+            document.getElementById('totalBacked').textContent = 'SAR ' + backed.toLocaleString();
+            document.getElementById('totalReceived').textContent = 'SAR ' + received.toLocaleString();
             document.getElementById('pendingCount').textContent = pending;
             document.getElementById('txCount').textContent = txs.length;
         }
@@ -733,7 +733,7 @@
             const tbody = document.getElementById('transactionTable');
             if (token) {
                 try {
-                    const res = await fetch('/api/coins/history', { headers: { 'Authorization': `Bearer ${token}` } });
+                    const res = await fetch('/api/عملة/history', { headers: { 'Authorization': `Bearer ${token}` } });
                     const data = await res.json();
                     if (data.success && data.data && data.data.length) {
                         renderTransactions(data.data.map(tx => ({

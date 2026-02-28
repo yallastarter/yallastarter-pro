@@ -511,8 +511,8 @@
                             class="fas fa-hand-holding-heart sidebar-menu-icon"></i> المشاريع المدعومة</a></li>
                 <li class="sidebar-menu-item"><a href="payments-ar.html" class="sidebar-menu-link"><i
                             class="fas fa-money-bill-wave sidebar-menu-icon"></i> المدفوعات</a></li>
-                <li class="sidebar-menu-item"><a href="coins-ar.html" class="sidebar-menu-link"><i
-                            class="fas fa-coins sidebar-menu-icon"></i> محفظتي</a></li>
+                <li class="sidebar-menu-item"><a href="عملة-ar.html" class="sidebar-menu-link"><i
+                            class="fas fa-عملة sidebar-menu-icon"></i> محفظتي</a></li>
                 <li class="sidebar-menu-item"><a href="notifications-ar.html" class="sidebar-menu-link active"><i
                             class="fas fa-bell sidebar-menu-icon"></i> الإشعارات</a></li>
                 <li class="sidebar-menu-item"><a href="user-profile-ar.html" class="sidebar-menu-link"><i
@@ -535,7 +535,7 @@
                 </h1>
                 <div class="page-actions">
                     <button class="btn btn-sm btn-outline" id="markAllReadBtn" onclick="markAllRead()">
-                        <i class="fas fa-check-double"></i> تحديد الكل كمقروء
+                        <i class="fas fa-check-double"></i> Mark All Read
                     </button>
                 </div>
             </div>
@@ -560,7 +560,7 @@
                     <div class="notification-item">
                         <div class="notif-icon green"><i class="fas fa-spinner fa-spin"></i></div>
                         <div class="notif-body">
-                            <div class="notif-title">جاري تحميل الإشعارات...</div>
+                            <div class="notif-title">Loading notifications...</div>
                         </div>
                     </div>
                 </div>
@@ -604,10 +604,10 @@
         const allNotifications = [
             { id: 1, type: 'funding', icon: 'green', iconClass: 'fas fa-chart-line', title: 'Funding Milestone Reached!', desc: 'Your project "Smart Solar Panels" has reached 75% of its funding goal. Keep up the momentum!', time: '2 hours ago', unread: true, link: 'project-solar-energy.html', linkText: 'View Project' },
             { id: 2, type: 'project', icon: 'blue', iconClass: 'fas fa-bell', title: 'Project Update: Riyadh Music Festival', desc: 'The creator posted a new update about venue selection and artist lineup.', time: '5 hours ago', unread: true, link: 'project-riyadh-music-festival.html', linkText: 'Read Update' },
-            { id: 3, type: 'funding', icon: 'green', iconClass: 'fas fa-hand-holding-usd', title: 'New Backer on Your Project', desc: 'Abdullah Al-Thani backed your "Smart Solar Panels" project with ريال 500.', time: '1 day ago', unread: true, link: 'dashboard.html', linkText: 'See Dashboard' },
+            { id: 3, type: 'funding', icon: 'green', iconClass: 'fas fa-hand-holding-usd', title: 'New Backer on Your Project', desc: 'Abdullah Al-Thani backed your "Smart Solar Panels" project with SAR 500.', time: '1 day ago', unread: true, link: 'dashboard.html', linkText: 'See Dashboard' },
             { id: 4, type: 'system', icon: 'purple', iconClass: 'fas fa-shield-alt', title: 'Security Alert', desc: 'A new sign-in was detected from Chrome on Windows. If this wasn\'t you, please change your password immediately.', time: '2 days ago', unread: false, link: 'settings.html', linkText: 'Review Settings' },
             { id: 5, type: 'project', icon: 'amber', iconClass: 'fas fa-clock', title: 'Campaign Ending Soon', desc: '"Smart Cities IoT Platform" that you backed is ending in 3 days. Share it to help it reach its goal!', time: '2 days ago', unread: false, link: 'project-smart-city-iot.html', linkText: 'View Project' },
-            { id: 6, type: 'funding', icon: 'green', iconClass: 'fas fa-check-circle', title: 'Backing Confirmed', desc: 'Your ريال 200 backing to "Riyadh Music Festival" has been confirmed and processed successfully.', time: '5 days ago', unread: false, link: 'payments.html', linkText: 'View Payments' },
+            { id: 6, type: 'funding', icon: 'green', iconClass: 'fas fa-check-circle', title: 'Backing Confirmed', desc: 'Your SAR 200 backing to "Riyadh Music Festival" has been confirmed and processed successfully.', time: '5 days ago', unread: false, link: 'payments.html', linkText: 'View Payments' },
             { id: 7, type: 'system', icon: 'blue', iconClass: 'fas fa-gift', title: 'Welcome to YallaStarter!', desc: 'Your account is set up and ready! Explore hundreds of innovative Saudi projects waiting for support.', time: '1 week ago', unread: false, link: 'projects.html', linkText: 'Explore Projects' },
             { id: 8, type: 'project', icon: 'red', iconClass: 'fas fa-exclamation-circle', title: 'Project Review Required', desc: 'Your project "Solar Panels for Saudi Homes" requires a small update before it can go live. Check the rejection note.', time: '2 weeks ago', unread: false, link: 'dashboard.html', linkText: 'View Details' },
         ];

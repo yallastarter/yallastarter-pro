@@ -30,126 +30,55 @@ const translations = {
     '>Dashboard</a>': '>لوحة التحكم</a>',
     '>Profile</a>': '>الملف الشخصي</a>',
     '>Settings</a>': '>الإعدادات</a>',
-    '>لوحة التحكم</a>': '>لوحة التحكم</a>',
 
-    // Sidebar & Menus (Including split lines)
-    '</i> Dashboard': '</i> لوحة التحكم',
-    '</i> My Projects': '</i> مشاريعي',
-    '</i> Backed Projects': '</i> المشاريع المدعومة',
-    '</i> Payments': '</i> المدفوعات',
-    '</i> My Wallet': '</i> محفظتي',
-    '</i> Notifications': '</i> الإشعارات',
-    '</i> Profile': '</i> الملف الشخصي',
-    '</i> Settings': '</i> الإعدادات',
-    '</i> Help & Support': '</i> المساعدة والدعم',
-    '</i> Logout': '</i> تسجيل الخروج',
-    '> Dashboard': '> لوحة التحكم',
-    '> My Projects': '> مشاريعي',
-    '> Backed Projects': '> المشاريع المدعومة',
-    '> Payments': '> المدفوعات',
-    '> My Wallet': '> محفظتي',
-    '> Notifications': '> الإشعارات',
-    '> Profile': '> الملف الشخصي',
-    '> Settings': '> الإعدادات',
-    '> Help & Support': '> المساعدة والدعم',
-    '> Logout': '> تسجيل الخروج',
+    // Create Project Page
+    'Start Your Project': 'ابدأ مشروعك',
+    'Turn your innovative ideas into reality with support from our community': 'حول أفكارك المبتكرة إلى واقع بدعم من مجتمعنا',
+    'Basic Information': 'معلومات أساسية',
+    'Basic Info': 'معلومات أساسية',
+    'Project Details': 'تفاصيل المشروع',
+    'Funding & Rewards': 'التمويل والمكافآت',
+    'Review & Submit': 'المراجعة والإرسال',
+    'Project Title': 'عنوان المشروع',
+    'Short Description': 'وصف قصير',
+    'Goal Amount': 'المبلغ المستهدف',
+    'Campaign Duration': 'مدة الحملة',
+    'Project Duration (days)': 'مدة المشروع (بالأيام)',
+    'Project Video URL': 'رابط فيديو المشروع',
+    'Full Description': 'الوصف الكامل',
+    'Project Image': 'صورة المشروع',
+    'Location': 'الموقع',
+    'Next Step': 'الخطوة التالية',
+    'Previous Step': 'الخطوة السابقة',
+    'Submit Project': 'إرسال المشروع',
+    'Step 1': 'الخطوة 1',
+    'Step 2': 'الخطوة 2',
+    'Step 3': 'الخطوة 3',
+    'Step 4': 'الخطوة 4',
+    'Category': 'الفئة',
+    'Select a category': 'اختر فئة',
+    'Select duration': 'اختر المدة',
+    'Enter your project title': 'أدخل عنوان مشروعك',
+    'City, Saudi Arabia': 'المدينة، المملكة العربية السعودية',
+    'Next': 'التالي',
+    'Previous': 'السابق',
+    'Save as Draft': 'حفظ كمسودة',
+    'Entertainment Projects': 'مشاريع ترفيهية',
+    'Vision 2030 Projects': 'مشاريع رؤية 2030',
+    'Start a Project': 'أنشئ مشروعاً',
+    'Created': 'تاريخ الإنشاء',
 
-    // Dashboard Landing Page specific
-    '<div class="stat-label">Total Balance</div>': '<div class="stat-label">إجمالي الرصيد</div>',
-    '<div class="stat-label">Active Projects</div>': '<div class="stat-label">المشاريع النشطة</div>',
-    '<div class="stat-label">Successful Projects</div>': '<div class="stat-label">المشاريع الناجحة</div>',
-    '<div class="stat-label">Total Backers</div>': '<div class="stat-label">إجمالي الداعمين</div>',
-    '<div class="stat-label">Total Raised</div>': '<div class="stat-label">إجمالي ما تم جمعه</div>',
-    '<div class="stat-label">Total Backed</div>': '<div class="stat-label">إجمالي الدعم</div>',
-    '<div class="tab-item active">My Projects</div>': '<div class="tab-item active">مشاريعي</div>',
-    '<div class="tab-item">Backed Projects</div>': '<div class="tab-item">المشاريع المدعومة</div>',
-
-    '>Total Balance</h2>': '>إجمالي الرصيد</h2>',
-    '>Active Projects</h2>': '>المشاريع النشطة</h2>',
-    '>Successful Projects</h2>': '>المشاريع الناجحة</h2>',
-    '>Total Backers</h2>': '>إجمالي الداعمين</h2>',
-    '>Total Raised</h2>': '>إجمالي ما تم جمعه</h2>',
-    '>Successful Projects</h3>': '>المشاريع الناجحة</h3>',
-    '>Active Projects</h3>': '>المشاريع النشطة</h3>',
-    '>Backed Projects</h2>': '>المشاريع المدعومة</h2>',
-    '>My Projects</h2>': '>مشاريعي</h2>',
-    'View All': 'عرض الكل',
-    'Quick Actions': 'إجراءات سريعة',
-    '>Create a Project</a>': '>أنشئ مشروعاً</a>',
-    'Recent Activity': 'النشاط الأخير',
-    'No recent activity': 'لا يوجد نشاط أخير',
-    'Loading dashboard data...': 'جاري تحميل بيانات لوحة التحكم...',
-    '>Backed Projects</a>': '>المشاريع المدعومة</a>',
-
-    // Titles & Headers
-    '<h1 class="dashboard-title">Dashboard</h1>': '<h1 class="dashboard-title">لوحة التحكم</h1>',
-    '<h1 class="dashboard-title">My Projects</h1>': '<h1 class="dashboard-title">مشاريعي</h1>',
-    '<h1 class="dashboard-title">Payments</h1>': '<h1 class="dashboard-title">المدفوعات</h1>',
-    '<h1 class="dashboard-title">Settings</h1>': '<h1 class="dashboard-title">الإعدادات</h1>',
-    '<h1 class="dashboard-title">Backed Projects</h1>': '<h1 class="dashboard-title">المشاريع المدعومة</h1>',
-    'class="dashboard-title">Notifications': 'class="dashboard-title">الإشعارات',
-
-    // Specific placeholders & Dynamic Content
-    'Loading your projects…': 'جاري تحميل مشاريعك...',
-    'Loading transactions...': 'جاري تحميل المعاملات...',
-    'Loading notifications...': 'جاري تحميل الإشعارات...',
-    'No projects yet': 'لا توجد مشاريع بعد',
-    "You haven't created any projects. Start your first one!": "لم تقم بإنشاء أي مشاريع بعد. ابدأ مشروعك الأول!",
+    // Dashboard Items
+    'My Projects': 'مشاريعي',
+    'Backed Projects': 'المشاريع المدعومة',
+    'Manage</a>': 'إدارة</a>',
     '>raised<': '>تم جمعها<',
     'funded': 'ممول',
     'days left': 'يوم متبقي',
-    '>Create Project</a>': '>إنشاء مشروع</a>',
-    ' View</a>': ' عرض</a>',
-    ' Edit</a>': ' تعديل</a>',
-    ' Delete</button>': ' حذف</button>',
-    '>Total Raised<': '>إجمالي ما تم جمعه<',
+    'Dashboard</h1>': 'لوحة التحكم</h1>',
+    'Dashboard</h2>': 'لوحة التحكم</h2>',
     'Total Backed': 'إجمالي الدعم',
-    'Total Received': 'إجمالي المستلم',
-    'Pending Transactions': 'المعاملات المعلقة',
-    'Total Transactions': 'إجمالي المعاملات',
-    'No transactions found.': 'لم يتم العثور على معاملات.',
-
-    // Status Labels
-    ": '✅ Active'": ": '✅ نشط'",
-    ": '📝 Draft'": ": '📝 مسودة'",
-    ": '⏳ Pending Review'": ": '⏳ قيد المراجعة'",
-    ": '🏁 Completed'": ": '🏁 اكتمل'",
-    ": '❌ Rejected'": ": '❌ مرفوض'",
-    '>Active</span>': '>نشط</span>',
-    '>Draft</span>': '>مسودة</span>',
-    '>LIVE</span>': '>مباشر</span>',
-    '>OFFLINE</span>': '>غير متصل</span>',
-    '>🏁 ENDED</span>': '>🏁 انتهى</span>',
-    '❌ Rejected by admin': '❌ مرفوض من قبل المشرف',
-    'Delete "${title}"?': 'حذف "${title}"؟',
-    'their coins will be refunded automatically.': 'سيتم استرداد عملاتهم تلقائياً.',
-
-    // Profile & Settings
-    '>Profile Details</h2>': '>تفاصيل الملف الشخصي</h2>',
-    '>Security Settings</h2>': '>إعدادات الأمان</h2>',
-    'Save Changes': 'حفظ التغييرات',
-    'Update Profile': 'تحديث الملف الشخصي',
-    'Full Name': 'الاسم الكامل',
-    'Email Address': 'البريد الإلكتروني',
-    'Phone Number': 'رقم الهاتف',
-    'Current Password': 'كلمة المرور الحالية',
-    'New Password': 'كلمة المرور الجديدة',
-    'Confirm New Password': 'تأكيد كلمة المرور الجديدة',
-
-    // Payments Table
-    '<th>Date</th>': '<th>التاريخ</th>',
-    '<th>Description</th>': '<th>الوصف</th>',
-    '<th>Type</th>': '<th>النوع</th>',
-    '<th>Amount</th>': '<th>المبلغ</th>',
-    '<th>Status</th>': '<th>الحالة</th>',
-    '>Payment Methods</h2>': '>طرق الدفع</h2>',
-    '>Bank Card</div>': '>بطاقة بنكية</div>',
-    'Export CSV': 'تصدير CSV',
-    'Mark All Read': 'تحديد الكل كمقروء',
-
-    // Currency
-    'SAR ': 'ريال ',
-    'SAR 0': 'ريال 0',
+    'coins': 'عملة',
 
     // Links update
     'href="dashboard.html"': 'href="dashboard-ar.html"',
@@ -203,16 +132,44 @@ pages.forEach(page => {
             content = content.split(en).join(translations[en]);
         }
 
-        // Broad Card Title translation
+        // Card Titles
         const cardTitles = {
             'Backed Projects': 'المشاريع المدعومة',
             'Active Projects': 'المشاريع النشطة',
             'Successful Projects': 'المشاريع الناجحة',
-            'Total Raised': 'إجمالي ما تم جمعه'
+            'Total Raised': 'إجمالي ما تم جمعه',
+            'Total Backed': 'إجمالي الدعم',
+            'Dashboard': 'لوحة التحكم'
         };
         for (const [en, ar] of Object.entries(cardTitles)) {
             const r = new RegExp(`(<h[23][^>]*>)\\s*${en}\\s*(</h[23]>)`, 'g');
             content = content.replace(r, `$1${ar}$2`);
+        }
+
+
+        // Subtitle Multi-line Fix
+        const subtitleEn = /Turn your innovative ideas into reality with support from our[\s\n\r]*community/g;
+        content = content.replace(subtitleEn, 'حول أفكارك المبتكرة إلى واقع بدعم من مجتمعنا');
+
+        // Mobile Menu Dashboard Links Injection
+
+        const isDashboard = page.name.includes('dashboard') || page.name.includes('projects') ||
+            page.name.includes('payments') || page.name.includes('notifications') ||
+            page.name.includes('coins') || page.name.includes('profile') ||
+            page.name.includes('settings') || page.name.includes('project-details') ||
+            page.name.includes('create-project');
+
+        if (isDashboard) {
+            const mobileLinksRegex = /<div class="mobile-menu">[\s\S]*?<ul class="nav-links">([\s\S]*?)<\/ul>/;
+            const dashLinks = `
+                <li><a href="dashboard-ar.html">لوحة التحكم</a></li>
+                <li><a href="my-projects-ar.html">مشاريعي</a></li>
+                <li><a href="backed-projects-ar.html">المشاريع المدعومة</a></li>
+                <li><a href="create-project-ar.html">إنشاء مشروع</a></li>
+            `;
+            content = content.replace(mobileLinksRegex, (match, p1) => {
+                return match.replace(p1, dashLinks + p1);
+            });
         }
 
         // --- Robust Regex translation for Sidebar & Menus (handles split lines) ---

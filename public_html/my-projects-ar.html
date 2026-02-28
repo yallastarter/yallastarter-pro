@@ -336,8 +336,8 @@
                             class="fas fa-hand-holding-heart sidebar-menu-icon"></i> المشاريع المدعومة</a></li>
                 <li class="sidebar-menu-item"><a href="payments-ar.html" class="sidebar-menu-link"><i
                             class="fas fa-money-bill-wave sidebar-menu-icon"></i> المدفوعات</a></li>
-                <li class="sidebar-menu-item"><a href="coins-ar.html" class="sidebar-menu-link"><i
-                            class="fas fa-coins sidebar-menu-icon"></i> محفظتي</a></li>
+                <li class="sidebar-menu-item"><a href="عملة-ar.html" class="sidebar-menu-link"><i
+                            class="fas fa-عملة sidebar-menu-icon"></i> محفظتي</a></li>
                 <li class="sidebar-menu-item"><a href="notifications-ar.html" class="sidebar-menu-link"><i
                             class="fas fa-bell sidebar-menu-icon"></i> الإشعارات</a></li>
                 <li class="sidebar-menu-item"><a href="user-profile-ar.html" class="sidebar-menu-link"><i
@@ -365,7 +365,7 @@
                 <!-- Placeholder while loading -->
                 <div class="empty-state" id="loading-state" style="grid-column: 1/-1;">
                     <div class="empty-state-icon"><i class="fas fa-spinner fa-spin"></i></div>
-                    <div class="empty-state-title">جاري تحميل مشاريعك...</div>
+                    <div class="empty-state-title">Loading your projects…</div>
                 </div>
             </div>
         </div>
@@ -409,7 +409,7 @@
         const API = window.location.origin;
 
         async function deleteProject(id, title) {
-            if (!confirm(`⚠️ حذف "${title}"؟\n\nIf this project has backers, سيتم استرداد عملاتهم تلقائياً.`)) return;
+            if (!confirm(`⚠️ Delete "${title}"?\n\nIf this project has backers, their عملة will be refunded automatically.`)) return;
             try {
                 const res = await fetch(API + '/api/projects/' + id, {
                     method: 'DELETE',
@@ -436,7 +436,7 @@
         }
 
         function statusLabel(status) {
-            const map = { active: '✅ نشط', draft: '📝 مسودة', pending: '⏳ قيد المراجعة', completed: '🏁 اكتمل', rejected: '❌ مرفوض' };
+            const map = { active: '✅ Active', draft: '📝 Draft', pending: '⏳ Pending Review', completed: '🏁 Completed', rejected: '❌ Rejected' };
             return map[status] || status;
         }
 
@@ -454,9 +454,9 @@
                 if (projects.length === 0) {
                     grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1;">
                         <div class="empty-state-icon"><i class="fas fa-rocket"></i></div>
-                        <div class="empty-state-title">لا توجد مشاريع بعد</div>
-                        <div class="empty-state-description">لم تقم بإنشاء أي مشاريع بعد. ابدأ مشروعك الأول!</div>
-                        <a href="create-project-ar.html" class="btn btn-primary">إنشاء مشروع</a>
+                        <div class="empty-state-title">No projects yet</div>
+                        <div class="empty-state-description">You haven't created any projects. Start your first one!</div>
+                        <a href="create-project-ar.html" class="btn btn-primary"> إنشاء مشروع </a>
                     </div>`;
                     return;
                 }
@@ -475,21 +475,21 @@
                             <h3 class="project-title">${(p.title || '').replace(/</g, '&lt;')}</h3>
                              <div class="project-status" style="display:flex;flex-wrap:wrap;align-items:center;gap:6px;">
                                  <span class="status-badge ${sClass}" style="${p.status === 'pending' ? 'background:#fef3c7;color:#d97706;' : p.status === 'rejected' ? 'background:#fee2e2;color:#dc2626;' : ''}">${statusLabel(p.status)}</span>
-                                 ${p.status === 'active' ? `<span style="display:inline-flex;align-items:center;gap:4px;background:#dcfce7;color:#16a34a;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:20px;border:1.5px solid #86efac;"><span style="width:7px;height:7px;border-radius:50%;background:#16a34a;display:inline-block;animation:liveBlink 1.4s ease-in-out infinite;"></span>مباشر</span>` : ''}
-                                 ${(p.status === 'draft' || p.status === 'pending') ? `<span style="display:inline-flex;align-items:center;gap:4px;background:#f3f4f6;color:#9ca3af;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:20px;border:1.5px solid #e5e7eb;"><span style="width:7px;height:7px;border-radius:50%;background:#9ca3af;display:inline-block;"></span>غير متصل</span>` : ''}
-                                 ${p.status === 'completed' ? `<span style="display:inline-flex;align-items:center;gap:4px;background:#eff6ff;color:#3b82f6;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:20px;border:1.5px solid #bfdbfe;">🏁 انتهى</span>` : ''}
-                                 ${p.status === 'rejected' ? '<span style="color:#dc2626;font-size:.8rem;">❌ مرفوض من قبل المشرف</span>' : ''}
+                                 ${p.status === 'active' ? `<span style="display:inline-flex;align-items:center;gap:4px;background:#dcfce7;color:#16a34a;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:20px;border:1.5px solid #86efac;"><span style="width:7px;height:7px;border-radius:50%;background:#16a34a;display:inline-block;animation:liveBlink 1.4s ease-in-out infinite;"></span>LIVE</span>` : ''}
+                                 ${(p.status === 'draft' || p.status === 'pending') ? `<span style="display:inline-flex;align-items:center;gap:4px;background:#f3f4f6;color:#9ca3af;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:20px;border:1.5px solid #e5e7eb;"><span style="width:7px;height:7px;border-radius:50%;background:#9ca3af;display:inline-block;"></span>OFFLINE</span>` : ''}
+                                 ${p.status === 'completed' ? `<span style="display:inline-flex;align-items:center;gap:4px;background:#eff6ff;color:#3b82f6;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:20px;border:1.5px solid #bfdbfe;">🏁 ENDED</span>` : ''}
+                                 ${p.status === 'rejected' ? '<span style="color:#dc2626;font-size:.8rem;">❌ Rejected by admin</span>' : ''}
                              </div>
                             <div class="project-meta">
-                                <div>ريال ${(p.currentAmount || 0).toLocaleString()} raised</div>
+                                <div>SAR ${(p.currentAmount || 0).toLocaleString()} raised</div>
                                 <div>${percent}% ممول</div>
                             </div>
                             <div class="progress-bar"><div class="progress-fill" style="width:${percent}%"></div></div>
-                            <div style="margin-top:.5rem;color:var(--neutral-500);font-size:.8rem;"><i class="fas fa-calendar-alt"></i> Created: ${createdDate}</div>
+                            <div style="margin-top:.5rem;color:var(--neutral-500);font-size:.8rem;"><i class="fas fa-calendar-alt"></i> تاريخ الإنشاء: ${createdDate}</div>
                             <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem;">
-                                <a href="project-details.html?id=${p._id}" class="btn btn-sm btn-outline" style="flex:1;text-align:center;"><i class="fas fa-eye"></i> عرض</a>
-                                ${canEdit ? `<a href="create-project.html?edit=${p._id}" class="btn btn-sm btn-primary" style="flex:1;text-align:center;"><i class="fas fa-edit"></i> تعديل</a>` : ''}
-                                <button onclick="deleteProject('${p._id}', '${safeTitle}')" class="btn btn-sm" style="flex:1;background:#fee2e2;color:#dc2626;border:1px solid #fca5a5;border-radius:6px;cursor:pointer;font-family:inherit;"><i class="fas fa-trash"></i> حذف</button>
+                                <a href="project-details.html?id=${p._id}" class="btn btn-sm btn-outline" style="flex:1;text-align:center;"><i class="fas fa-eye"></i> View</a>
+                                ${canEdit ? `<a href="create-project.html?edit=${p._id}" class="btn btn-sm btn-primary" style="flex:1;text-align:center;"><i class="fas fa-edit"></i> Edit</a>` : ''}
+                                <button onclick="deleteProject('${p._id}', '${safeTitle}')" class="btn btn-sm" style="flex:1;background:#fee2e2;color:#dc2626;border:1px solid #fca5a5;border-radius:6px;cursor:pointer;font-family:inherit;"><i class="fas fa-trash"></i> Delete</button>
                             </div>
                         </div>
                     </div>`;

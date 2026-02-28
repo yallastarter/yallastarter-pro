@@ -314,8 +314,8 @@
                             class="fas fa-hand-holding-heart sidebar-menu-icon"></i> المشاريع المدعومة</a></li>
                 <li class="sidebar-menu-item"><a href="payments-ar.html" class="sidebar-menu-link"><i
                             class="fas fa-money-bill-wave sidebar-menu-icon"></i> المدفوعات</a></li>
-                <li class="sidebar-menu-item"><a href="coins-ar.html" class="sidebar-menu-link"><i
-                            class="fas fa-coins sidebar-menu-icon"></i> محفظتي</a></li>
+                <li class="sidebar-menu-item"><a href="عملة-ar.html" class="sidebar-menu-link"><i
+                            class="fas fa-عملة sidebar-menu-icon"></i> محفظتي</a></li>
                 <li class="sidebar-menu-item"><a href="notifications-ar.html" class="sidebar-menu-link"><i
                             class="fas fa-bell sidebar-menu-icon"></i> الإشعارات</a></li>
                 <li class="sidebar-menu-item"><a href="user-profile-ar.html" class="sidebar-menu-link"><i
@@ -387,7 +387,7 @@
         async function loadBackedProjects() {
             const grid = document.getElementById('backed-projects-grid');
             try {
-                const res = await fetch(API + '/api/coins/backed', { headers: { 'Authorization': 'Bearer ' + token } });
+                const res = await fetch(API + '/api/عملة/backed', { headers: { 'Authorization': 'Bearer ' + token } });
                 const data = await res.json();
                 const backed = data.data || [];
                 if (backed.length === 0) {
@@ -416,7 +416,7 @@
                                 <div class="creator-name">By ${(creatorName || '').replace(/</g, '&lt;')}</div>
                             </div>
                             <div class="backed-project-meta">
-                                <div class="backed-amount">${totalBacked || 0} coins backed</div>
+                                <div class="backed-amount">${totalBacked || 0} عملة backed</div>
                                 <div class="backed-date">${dateStr}</div>
                             </div>
                             <div class="progress-bar"><div class="progress-fill" style="width:${percent}%"></div></div>

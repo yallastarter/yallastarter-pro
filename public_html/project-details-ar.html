@@ -85,9 +85,14 @@
                         </button>
                     </div>
                     <ul class="nav-links">
+                <li><a href="dashboard-ar.html">لوحة التحكم</a></li>
+                <li><a href="my-projects-ar.html">مشاريعي</a></li>
+                <li><a href="backed-projects-ar.html">المشاريع المدعومة</a></li>
+                <li><a href="create-project-ar.html">إنشاء مشروع</a></li>
+            
                         <li><a href="index-ar.html">الرئيسية</a></li>
-                        <li><a href="entertainment.html">Entertainment Projects</a></li>
-                        <li><a href="vision2030.html">Vision 2030 Projects</a></li>
+                        <li><a href="entertainment.html">مشاريع ترفيهية</a></li>
+                        <li><a href="vision2030.html">مشاريع رؤية 2030</a></li>
                         <li><a href="mind71.html">MIND71 AI</a></li>
                         <li><a href="projects.html" class="active">تصفح المشاريع</a></li>
                         <li><a href="how-it-works.html">كيف يعمل</a></li>
@@ -99,7 +104,7 @@
                         <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
                     </div>
                     <div class="auth-buttons">
-                        <a href="create-project-ar.html" class="btn btn-primary">Start a Project</a>
+                        <a href="create-project-ar.html" class="btn btn-primary">أنشئ مشروعاً</a>
                         <a href="login.html" class="btn btn-link">تسجيل الدخول</a>
                     </div>
                 </div>
@@ -107,7 +112,7 @@
         </div>
     </header>
 
-    <!-- Project Details -->
+    <!-- تفاصيل المشروع -->
     <section class="project-details">
         <div class="container">
             <!-- Breadcrumb -->
@@ -146,8 +151,8 @@
 
                     <div class="project-funding">
                         <div class="funding-stats">
-                            <div class="funding-amount">ريال 320,500</div>
-                            <div class="funding-goal">of ريال 500,000 goal</div>
+                            <div class="funding-amount">SAR 320,500</div>
+                            <div class="funding-goal">of SAR 500,000 goal</div>
                         </div>
                         <div class="progress-bar">
                             <div class="progress-fill" style="width: 64%;"></div>
@@ -351,7 +356,7 @@
                 <div class="footer-column">
                     <h3>For Creators</h3>
                     <ul class="footer-links">
-                        <li><a href="create-project-ar.html">Start a Project</a></li>
+                        <li><a href="create-project-ar.html">أنشئ مشروعاً</a></li>
                         <li><a href="creator-handbook.html">Creator Handbook</a></li>
                         <li><a href="creator-resources.html">Creator Resources</a></li>
                         <li><a href="creator-faqs.html">Creator FAQs</a></li>
@@ -455,8 +460,8 @@
                         document.querySelector('.project-info-description').textContent = project.description;
                         document.querySelector('.project-info-category').textContent = project.category || 'General';
 
-                        document.querySelector('.funding-amount').textContent = `ريال ${project.currentAmount}`;
-                        document.querySelector('.funding-goal').textContent = `of ريال ${project.goalAmount} goal`;
+                        document.querySelector('.funding-amount').textContent = `SAR ${project.currentAmount}`;
+                        document.querySelector('.funding-goal').textContent = `of SAR ${project.goalAmount} goal`;
                         document.querySelector('.progress-fill').style.width = `${percent}%`;
 
                         // Creator (Mock if not fully populated)
@@ -506,7 +511,7 @@
                         // Back this project link
                         const backBtn = document.getElementById('backProjectBtn');
                         if (backBtn) {
-                            backBtn.href = 'coins.html?projectId=' + encodeURIComponent(projectId);
+                            backBtn.href = 'عملة.html?projectId=' + encodeURIComponent(projectId);
                         }
 
                         // Favorite / Like Integration
@@ -594,7 +599,7 @@
                         // Story (using description + story)
                         const storyHtml = project.story
                             ? `<h2>About This Project</h2><p>${project.description}</p><div>${project.story.replace(/\n/g, '<br>')}</div>`
-                            : `<h2>About This Project</h2><p>${project.description}</p><h3>Category</h3><p>${project.category}</p><h3>Funding Status</h3><p>This project has raised ريال ${project.currentAmount} of its ريال ${project.goalAmount} goal (${percent}%).</p>`;
+                            : `<h2>About This Project</h2><p>${project.description}</p><h3>الفئة</h3><p>${project.category}</p><h3>Funding Status</h3><p>This project has raised SAR ${project.currentAmount} of its SAR ${project.goalAmount} goal (${percent}%).</p>`;
                         const storyEl = document.querySelector('.project-story');
                         if (storyEl) storyEl.innerHTML = storyHtml;
                         // Rewards
@@ -625,7 +630,7 @@
                                     card.innerHTML = `
                                         <div class="reward-header">
                                             <h4 class="reward-name">${reward.title}</h4>
-                                            <div class="reward-amount">ريال ${reward.amount.toLocaleString()}</div>
+                                            <div class="reward-amount">SAR ${reward.amount.toLocaleString()}</div>
                                         </div>
                                         <p class="reward-description">${reward.description}</p>
                                         ${includesHtml}
@@ -642,7 +647,7 @@
                                             <div class="reward-amount">Any Amount</div>
                                         </div>
                                         <p class="reward-description">Back this project with a custom amount to help bring it to life.</p>
-                                        <button class="btn btn-primary" style="width: 100%;" onclick="window.location.href='coins.html?projectId=${project._id}'">Pledge Without Reward</button>
+                                        <button class="btn btn-primary" style="width: 100%;" onclick="window.location.href='عملة.html?projectId=${project._id}'">Pledge Without Reward</button>
                                     </div>
                                 `;
                             }
@@ -653,7 +658,7 @@
                 }
             }
 
-            // "Back this project" is a link to coins.html?projectId=... (set above when project loads)
+            // "Back this project" is a link to عملة.html?projectId=... (set above when project loads)
         });
     </script>
 </body>

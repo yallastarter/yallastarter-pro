@@ -495,6 +495,11 @@
                     </button>
                 </div>
                 <ul class="nav-links">
+                <li><a href="dashboard-ar.html">لوحة التحكم</a></li>
+                <li><a href="my-projects-ar.html">مشاريعي</a></li>
+                <li><a href="backed-projects-ar.html">المشاريع المدعومة</a></li>
+                <li><a href="create-project-ar.html">إنشاء مشروع</a></li>
+            
                     <li><a href="index-ar.html">الرئيسية</a></li>
                     <li><a href="projects.html">تصفح المشاريع</a></li>
                     <li><a href="how-it-works.html">كيف يعمل</a></li>
@@ -523,8 +528,8 @@
                             <a href="settings-ar.html" class="dropdown-item">
                                 <i class="fas fa-cog"></i> الإعدادات
                             </a>
-                            <a href="coins-ar.html" class="dropdown-item">
-                                <i class="fas fa-coins"></i> محفظتي
+                            <a href="عملة-ar.html" class="dropdown-item">
+                                <i class="fas fa-عملة"></i> محفظتي
                             </a>
                             <div class="dropdown-divider"></div>
                             <a href="javascript:void(0)" class="dropdown-item"
@@ -561,12 +566,14 @@
                 </li>
                 <li class="sidebar-menu-item">
                     <a href="my-projects-ar.html" class="sidebar-menu-link">
-                        <i class="fas fa-rocket sidebar-menu-icon"></i> مشاريعي
+                        <i class="fas fa-rocket sidebar-menu-icon"></i>
+                        مشاريعي
                     </a>
                 </li>
                 <li class="sidebar-menu-item">
                     <a href="backed-projects-ar.html" class="sidebar-menu-link">
-                        <i class="fas fa-hand-holding-heart sidebar-menu-icon"></i> المشاريع المدعومة
+                        <i class="fas fa-hand-holding-heart sidebar-menu-icon"></i>
+                        المشاريع المدعومة
                     </a>
                 </li>
                 <li class="sidebar-menu-item">
@@ -575,8 +582,8 @@
                     </a>
                 </li>
                 <li class="sidebar-menu-item">
-                    <a href="coins-ar.html" class="sidebar-menu-link">
-                        <i class="fas fa-coins sidebar-menu-icon"></i> محفظتي
+                    <a href="عملة-ar.html" class="sidebar-menu-link">
+                        <i class="fas fa-عملة sidebar-menu-icon"></i> محفظتي
                     </a>
                 </li>
                 <li class="sidebar-menu-item">
@@ -647,7 +654,7 @@
                     <div class="tab-item">المشاريع المدعومة</div>
                 </div>
 
-                <!-- My Projects Tab -->
+                <!-- مشاريعي Tab -->
                 <div class="tab-content active">
                     <div class="projects-grid" id="my-projects-grid">
                         <div class="project-card" id="my-projects-placeholder">
@@ -659,11 +666,11 @@
                                 <div class="project-category">Technology</div>
                                 <h3 class="project-title">Smart Solar Panels for Saudi Homes</h3>
                                 <div class="project-status">
-                                    <span class="status-badge active">نشط</span>
+                                    <span class="status-badge active">Active</span>
                                     <span>18 يوم متبقي</span>
                                 </div>
                                 <div class="project-meta">
-                                    <div>ريال 320,500 raised</div>
+                                    <div>SAR 320,500 raised</div>
                                     <div>64% ممول</div>
                                 </div>
                                 <div class="progress-bar">
@@ -678,7 +685,7 @@
                     </div>
                 </div>
 
-                <!-- Backed Projects Tab -->
+                <!-- المشاريع المدعومة Tab -->
                 <div class="tab-content">
                     <div class="backed-projects-grid" id="backed-projects-grid">
                         <div class="backed-project-card" id="backed-placeholder">
@@ -696,7 +703,7 @@
                                     <div class="creator-name">By Fatima Al-Zahrani</div>
                                 </div>
                                 <div class="backed-project-meta">
-                                    <div class="backed-amount">ريال 500 backed</div>
+                                    <div class="backed-amount">SAR 500 backed</div>
                                     <div class="backed-date">May 15, 2025</div>
                                 </div>
                                 <div class="progress-bar">
@@ -821,12 +828,12 @@
                     const statActive = document.getElementById('stat-active-projects');
                     const statRaised = document.getElementById('stat-total-raised');
                     if (statActive) statActive.textContent = activeCount;
-                    if (statRaised) statRaised.textContent = 'ريال ' + totalRaised.toLocaleString();
+                    if (statRaised) statRaised.textContent = 'SAR ' + totalRaised.toLocaleString();
                     if (projects.length === 0) {
-                        grid.innerHTML = '<p style="grid-column: 1/-1; color: var(--neutral-600);">لا توجد مشاريع بعد. <a href="create-project-ar.html">Create your first project</a>.</p>';
+                        grid.innerHTML = '<p style="grid-column: 1/-1; color: var(--neutral-600);">No projects yet. <a href="create-project-ar.html">Create your first project</a>.</p>';
                         return;
                     }
-                    const statusLabel = (s) => ({ active: '✅ نشط', draft: '📝 مسودة', pending: '⏳ قيد المراجعة', completed: '🏁 اكتمل', rejected: '❌ مرفوض' }[s] || s);
+                    const statusLabel = (s) => ({ active: '✅ Active', draft: '📝 Draft', pending: '⏳ Pending Review', completed: '🏁 Completed', rejected: '❌ Rejected' }[s] || s);
                     const statusCls = (s) => ({ active: 'active', draft: 'draft', completed: 'completed', pending: 'pending', rejected: 'rejected' }[s] || 'draft');
                     grid.innerHTML = projects.map(p => {
                         const percent = p.goalAmount ? Math.min(100, Math.round((p.currentAmount / p.goalAmount) * 100)) : 0;
@@ -840,12 +847,12 @@
                                 <div class="project-category">${(p.category || '').charAt(0).toUpperCase() + (p.category || '').slice(1)}</div>
                                 <h3 class="project-title">${(p.title || '').replace(/</g, '&lt;')}</h3>
                                 <div class="project-status"><span class="status-badge ${sClass}" style="${p.status === 'pending' ? 'background:#fef3c7;color:#d97706;' : p.status === 'rejected' ? 'background:#fee2e2;color:#dc2626;' : ''}">${statusLabel(p.status)}</span>${daysLeft > 0 ? '<span>' + daysLeft + ' يوم متبقي</span>' : ''}</div>
-                                <div class="project-meta"><div>ريال ${(p.currentAmount || 0).toLocaleString()} raised</div><div>${percent}% ممول</div></div>
+                                <div class="project-meta"><div>SAR ${(p.currentAmount || 0).toLocaleString()} raised</div><div>${percent}% ممول</div></div>
                                 <div class="progress-bar"><div class="progress-fill" style="width: ${percent}%;"></div></div>
-                                <div style="margin-top:.4rem;color:var(--neutral-500);font-size:.8rem;"><i class="fas fa-calendar-alt"></i> Created: ${createdDate}</div>
+                                <div style="margin-top:.4rem;color:var(--neutral-500);font-size:.8rem;"><i class="fas fa-calendar-alt"></i> تاريخ الإنشاء: ${createdDate}</div>
                                 <div style="display: flex; gap:.5rem; margin-top: 1rem;">
-                                    <a href="project-details.html?id=${p._id}" class="btn btn-sm btn-outline" style="flex:1;text-align:center;"><i class="fas fa-eye"></i> عرض</a>
-                                    <a href="my-projects-ar.html" class="btn btn-sm btn-primary" style="flex:1;text-align:center;"><i class="fas fa-folder-open"></i> Manage</a>
+                                    <a href="project-details.html?id=${p._id}" class="btn btn-sm btn-outline" style="flex:1;text-align:center;"><i class="fas fa-eye"></i> View</a>
+                                    <a href="my-projects-ar.html" class="btn btn-sm btn-primary" style="flex:1;text-align:center;"><i class="fas fa-folder-open"></i> إدارة</a>
                                 </div>
                             </div>
                         </div>`;
@@ -860,7 +867,7 @@
                 const grid = document.getElementById('backed-projects-grid');
                 if (!grid) return;
                 try {
-                    const res = await fetch(API + '/api/coins/backed', { headers: { 'Authorization': 'Bearer ' + token } });
+                    const res = await fetch(API + '/api/عملة/backed', { headers: { 'Authorization': 'Bearer ' + token } });
                     const data = await res.json();
                     const placeholder = document.getElementById('backed-placeholder');
                     if (placeholder) placeholder.remove();
@@ -869,7 +876,7 @@
                     const statTotalBacked = document.getElementById('stat-total-backed');
                     if (statBackedCount) statBackedCount.textContent = backed.length;
                     const totalBackedCoins = backed.reduce((sum, b) => sum + (b.totalBacked || 0), 0);
-                    if (statTotalBacked) statTotalBacked.textContent = totalBackedCoins + ' coins';
+                    if (statTotalBacked) statTotalBacked.textContent = totalBackedCoins + ' عملة';
                     if (backed.length === 0) {
                         grid.innerHTML = '<p style="grid-column: 1/-1; color: var(--neutral-600);">You haven\'t backed any projects yet. <a href="projects.html">Browse projects</a>.</p>';
                         return;
@@ -887,7 +894,7 @@
                             <div class="backed-project-content">
                                 <h3 class="backed-project-title">${(p.title || '').replace(/</g, '&lt;')}</h3>
                                 <div class="backed-project-creator"><div class="creator-avatar"><i class="fas fa-user" style="font-size: 1.5rem; color: var(--neutral-500);"></i></div><div class="creator-name">By ${(creatorName || '').replace(/</g, '&lt;')}</div></div>
-                                <div class="backed-project-meta"><div class="backed-amount">${totalBacked || 0} coins backed</div><div class="backed-date">${dateStr}</div></div>
+                                <div class="backed-project-meta"><div class="backed-amount">${totalBacked || 0} عملة backed</div><div class="backed-date">${dateStr}</div></div>
                                 <div class="progress-bar"><div class="progress-fill" style="width: ${percent}%;"></div></div>
                                 <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
                                     ${percent >= 100 ? '<span style="color: var(--success); font-size: 0.9rem;"><i class="fas fa-check-circle"></i> Successfully ممول</span>' : '<span style="color: var(--primary); font-size: 0.9rem;"><i class="fas fa-clock"></i> ' + daysLeft + ' يوم متبقي</span>'}

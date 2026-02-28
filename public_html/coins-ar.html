@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Manage your YallaStarter coins. Buy, send, and track your virtual currency.">
+    <meta name="description" content="Manage your YallaStarter عملة. Buy, send, and track your virtual currency.">
     <title>محفظتي - يلا ستارتر</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="mobile-menu.css">
@@ -553,7 +553,7 @@
                     <li><a href="index-ar.html">الرئيسية</a></li>
                     <li><a href="projects.html">تصفح المشاريع</a></li>
                     <li><a href="dashboard-ar.html">لوحة التحكم</a></li>
-                    <li><a href="coins-ar.html" class="active" style="color: var(--primary); font-weight: 600;">
+                    <li><a href="عملة-ar.html" class="active" style="color: var(--primary); font-weight: 600;">
                             <span class="coin-mini">Y</span> Coins
                         </a></li>
                 </ul>
@@ -577,8 +577,8 @@
                             <a href="settings-ar.html" class="dropdown-item">
                                 <i class="fas fa-cog"></i> الإعدادات
                             </a>
-                            <a href="coins-ar.html" class="dropdown-item active">
-                                <i class="fas fa-coins"></i> محفظتي
+                            <a href="عملة-ar.html" class="dropdown-item active">
+                                <i class="fas fa-عملة"></i> محفظتي
                             </a>
                             <div class="dropdown-divider"></div>
                             <a href="javascript:void(0)" class="dropdown-item"
@@ -596,10 +596,15 @@
                     </button>
                 </div>
                 <ul class="nav-links">
+                <li><a href="dashboard-ar.html">لوحة التحكم</a></li>
+                <li><a href="my-projects-ar.html">مشاريعي</a></li>
+                <li><a href="backed-projects-ar.html">المشاريع المدعومة</a></li>
+                <li><a href="create-project-ar.html">إنشاء مشروع</a></li>
+            
                     <li><a href="index-ar.html">الرئيسية</a></li>
                     <li><a href="projects.html">تصفح المشاريع</a></li>
                     <li><a href="dashboard-ar.html">لوحة التحكم</a></li>
-                    <li><a href="coins-ar.html">Coins</a></li>
+                    <li><a href="عملة-ar.html">Coins</a></li>
                 </ul>
                 <div class="auth-buttons">
                     <div class="user-dropdown">
@@ -613,7 +618,7 @@
                         </button>
                         <div class="user-dropdown-menu">
                             <a href="dashboard-ar.html" class="dropdown-item">لوحة التحكم</a>
-                            <a href="coins-ar.html" class="dropdown-item active"> محفظتي </a>
+                            <a href="عملة-ar.html" class="dropdown-item active"> محفظتي </a>
                             <a href="javascript:void(0)" class="dropdown-item"
                                 onclick="window.auth && window.auth.logout(); return false;">تسجيل الخروج</a>
                         </div>
@@ -644,8 +649,8 @@
                             class="fas fa-hand-holding-heart sidebar-menu-icon"></i> المشاريع المدعومة</a></li>
                 <li class="sidebar-menu-item"><a href="payments-ar.html" class="sidebar-menu-link"><i
                             class="fas fa-money-bill-wave sidebar-menu-icon"></i> المدفوعات</a></li>
-                <li class="sidebar-menu-item"><a href="coins-ar.html" class="sidebar-menu-link active"><i
-                            class="fas fa-coins sidebar-menu-icon"></i> محفظتي</a></li>
+                <li class="sidebar-menu-item"><a href="عملة-ar.html" class="sidebar-menu-link active"><i
+                            class="fas fa-عملة sidebar-menu-icon"></i> محفظتي</a></li>
                 <li class="sidebar-menu-item"><a href="notifications-ar.html" class="sidebar-menu-link"><i
                             class="fas fa-bell sidebar-menu-icon"></i> الإشعارات</a></li>
                 <li class="sidebar-menu-item"><a href="user-profile-ar.html" class="sidebar-menu-link"><i
@@ -697,7 +702,7 @@
                             </div>
                             <div>
                                 <div class="action-title">Buy Coins</div>
-                                <div class="action-desc">1 Coin = 1 ريال • No fees for backers</div>
+                                <div class="action-desc">1 Coin = 1 SAR • No fees for backers</div>
                             </div>
                         </div>
 
@@ -770,7 +775,7 @@
                         <div class="coin-form-group">
                             <label class="coin-form-label">Amount</label>
                             <input type="number" id="sendAmount" class="coin-form-input"
-                                placeholder="Enter coins to send" min="1">
+                                placeholder="Enter عملة to send" min="1">
                         </div>
 
                         <button class="coin-btn send" onclick="sendCoins()">
@@ -786,13 +791,13 @@
                             </div>
                             <div>
                                 <div class="action-title">Cash Out</div>
-                                <div class="action-desc">Transfer to bank (min 100 coins)</div>
+                                <div class="action-desc">Transfer to bank (min 100 عملة)</div>
                             </div>
                         </div>
 
                         <div class="coin-form-group">
                             <label class="coin-form-label">Amount to Cash Out</label>
-                            <input type="number" id="cashoutAmount" class="coin-form-input" placeholder="Min 100 coins"
+                            <input type="number" id="cashoutAmount" class="coin-form-input" placeholder="Min 100 عملة"
                                 min="100" oninput="updateFeeBreakdown()">
                         </div>
 
@@ -831,7 +836,7 @@
                     <ul class="tx-list" id="txList">
                         <li class="empty-history" id="emptyHistory">
                             <i class="fas fa-receipt"></i>
-                            <p>No transactions yet. Buy some coins to get started!</p>
+                            <p>No transactions yet. Buy some عملة to get started!</p>
                         </li>
                     </ul>
                 </div>
@@ -972,7 +977,7 @@
 
         async function loadBalance() {
             try {
-                const res = await fetch(`${API}/api/coins/balance`, {
+                const res = await fetch(`${API}/api/عملة/balance`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 const data = await res.json();
@@ -991,7 +996,7 @@
 
         async function loadHistory() {
             try {
-                const res = await fetch(`${API}/api/coins/history`, {
+                const res = await fetch(`${API}/api/عملة/history`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 const data = await res.json();
@@ -1005,7 +1010,7 @@
 
                         if (tx.type === 'purchase') {
                             icon = '<div class="tx-icon purchase"><i class="fas fa-plus"></i></div>';
-                            desc = tx.description || `Bought ${tx.amount} coins`;
+                            desc = tx.description || `Bought ${tx.amount} عملة`;
                             amountClass = 'positive';
                         } else if (tx.type === 'send') {
                             icon = '<div class="tx-icon send"><i class="fas fa-paper-plane"></i></div>';
@@ -1013,7 +1018,7 @@
                             amountClass = isOutgoing ? 'negative' : 'positive';
                         } else {
                             icon = '<div class="tx-icon cashout"><i class="fas fa-university"></i></div>';
-                            desc = tx.description || `Cash out ${tx.amount} coins`;
+                            desc = tx.description || `Cash out ${tx.amount} عملة`;
                             amountClass = 'negative';
                         }
 
@@ -1054,7 +1059,7 @@
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
 
             try {
-                const res = await fetch(`${API}/api/coins/buy`, {
+                const res = await fetch(`${API}/api/عملة/buy`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -1091,7 +1096,7 @@
             }
 
             try {
-                const res = await fetch(`${API}/api/coins/send`, {
+                const res = await fetch(`${API}/api/عملة/send`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -1136,16 +1141,16 @@
         async function cashOut() {
             const amount = document.getElementById('cashoutAmount').value;
             if (!amount || amount < 100) {
-                showToast('Minimum cashout is 100 coins', 'error');
+                showToast('Minimum cashout is 100 عملة', 'error');
                 return;
             }
 
-            if (!confirm(`Are you sure you want to cash out ${amount} coins? A 14% fee (8% processing + 6% bank) will be applied. No refunds.`)) {
+            if (!confirm(`Are you sure you want to cash out ${amount} عملة? A 14% fee (8% processing + 6% bank) will be applied. No refunds.`)) {
                 return;
             }
 
             try {
-                const res = await fetch(`${API}/api/coins/cashout`, {
+                const res = await fetch(`${API}/api/عملة/cashout`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -1176,16 +1181,16 @@
                 if (sessionId) {
                     confirmPurchase(sessionId);
                 }
-                window.history.replaceState({}, '', '/coins.html');
+                window.history.replaceState({}, '', '/عملة.html');
             } else if (params.get('purchase') === 'cancelled') {
                 showToast('Purchase was cancelled', 'error');
-                window.history.replaceState({}, '', '/coins.html');
+                window.history.replaceState({}, '', '/عملة.html');
             }
         }
 
         async function confirmPurchase(sessionId) {
             try {
-                const res = await fetch(`${API}/api/coins/confirm-purchase`, {
+                const res = await fetch(`${API}/api/عملة/confirm-purchase`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
