@@ -418,7 +418,7 @@
                 const data = await res.json();
                 if (data.success) {
                     showToast('✅ ' + data.message);
-                    setTimeout(() => loadMyProjects();, 500);
+                    setTimeout(() => { loadMyProjects(); }, 500);
                 } else {
                     alert(data.message || 'Error deleting project');
                 }
@@ -498,7 +498,7 @@
                 grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><div class="empty-state-icon"><i class="fas fa-exclamation-triangle"></i></div><div class="empty-state-title">Could not load projects</div><div class="empty-state-description">Please try refreshing the page.</div></div>';
             }
         }
-        setTimeout(() => loadMyProjects();, 500);
+        setTimeout(() => { loadMyProjects(); }, 500);
     </script>
     <script src="mobile-menu.js"></script>
 </body>

@@ -431,7 +431,7 @@
                 grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><div class="empty-state-icon"><i class="fas fa-exclamation-triangle"></i></div><div class="empty-state-title">Could not load backed projects</div><div class="empty-state-description">Please try refreshing the page.</div></div>';
             }
         }
-        setTimeout(() => loadBackedProjects();, 500);
+        setTimeout(() => { loadBackedProjects(); }, 500);
     </script>
     <script src="mobile-menu.js"></script>
 </body>

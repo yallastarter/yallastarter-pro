@@ -948,9 +948,9 @@
 
         // Load data on page load
         document.addEventListener('DOMContentLoaded', async () => {
-            await setTimeout(() => loadBalance();, 500);
-            await setTimeout(() => loadFavorites();, 500);
-            await setTimeout(() => loadHistory();, 500);
+            await setTimeout(() => { loadBalance(); }, 500);
+            await setTimeout(() => { loadFavorites(); }, 500);
+            await setTimeout(() => { loadHistory(); }, 500);
             checkPurchaseReturn();
 
             const params = new URLSearchParams(window.location.search);
@@ -1104,8 +1104,8 @@
                 if (data.success) {
                     showToast(data.message, 'success');
                     document.getElementById('sendAmount').value = '';
-                    await setTimeout(() => loadBalance();, 500);
-                    await setTimeout(() => loadHistory();, 500);
+                    await setTimeout(() => { loadBalance(); }, 500);
+                    await setTimeout(() => { loadHistory(); }, 500);
                 } else {
                     showToast(data.message || 'Transfer failed', 'error');
                 }
@@ -1159,8 +1159,8 @@
                     showToast(data.message, 'success');
                     document.getElementById('cashoutAmount').value = '';
                     document.getElementById('feeBreakdown').style.display = 'none';
-                    await setTimeout(() => loadBalance();, 500);
-                    await setTimeout(() => loadHistory();, 500);
+                    await setTimeout(() => { loadBalance(); }, 500);
+                    await setTimeout(() => { loadHistory(); }, 500);
                 } else {
                     showToast(data.message || 'Cashout failed', 'error');
                 }
@@ -1196,8 +1196,8 @@
                 const data = await res.json();
                 if (data.success) {
                     showToast(data.message, 'success');
-                    await setTimeout(() => loadBalance();, 500);
-                    await setTimeout(() => loadHistory();, 500);
+                    await setTimeout(() => { loadBalance(); }, 500);
+                    await setTimeout(() => { loadHistory(); }, 500);
                 }
             } catch (err) {
                 console.error('Confirm purchase error:', err);

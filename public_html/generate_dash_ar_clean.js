@@ -270,7 +270,7 @@ pages.forEach(page => {
         }
 
         // Add safety delay to any function call that starts with load (loadMyProjects, loadDashboardData, etc.)
-        content = content.replace(/(\s)(load\w+\(\);)/g, '$1setTimeout(() => $2, 500);');
+        content = content.replace(/(\s)(load\w+\(\);)/g, '$1setTimeout(() => { $2 }, 500);');
 
         // Final manual translations for any missed stat labels
         content = content.replace(/>Total Raised</g, '>إجمالي ما تم جمعه<');
