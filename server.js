@@ -132,6 +132,7 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/projects', require('./routes/projects'));
 app.use('/api/coins', require('./routes/coins'));
 app.use('/api/admin', require('./routes/admin'));
+app.use('/api/mind71', require('./routes/mind71Chat'));
 
 // Health Check — Render uses this to monitor the service
 app.get('/api/health', (req, res) => {

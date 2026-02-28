@@ -1,30 +1,37 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="MIND71 - منصة الابتكار الرائدة في المملكة العربية السعودية. نربط المبدعين بالداعمين لتحقيق أحلامهم الإبداعية في جميع المجالات.">
-    <meta name="keywords" content="MIND71 AI, منصة الابتكار, مشاريع إبداعية, تمويل جماعي, مشاريع مبتكرة, ريادة أعمال, مشاريع تقنية, مشاريع ثقافية">
+    <meta name="description"
+        content="MIND71 - منصة الابتكار الرائدة في المملكة العربية السعودية. نربط المبدعين بالداعمين لتحقيق أحلامهم الإبداعية في جميع المجالات.">
+    <meta name="keywords"
+        content="MIND71 AI, منصة الابتكار, مشاريع إبداعية, تمويل جماعي, مشاريع مبتكرة, ريادة أعمال, مشاريع تقنية, مشاريع ثقافية">
     <meta name="author" content="يلا ستارتر">
     <meta name="robots" content="index, follow">
-    
+
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="MIND71 - منصة الابتكار الرائدة في المملكة">
     <meta property="og:description" content="MIND71 AI - نربط المبدعين بالداعمين لتحقيق أحلامهم الإبداعية.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://yallastarter.com/mind71-ar">
-    
+
     <!-- Preload Critical Resources -->
     <link rel="preload" href="styles.css" as="style">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700&display=swap" as="style">
-    
+    <link rel="preload"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700&display=swap"
+        as="style">
+
     <title>MIND71 - منصة الابتكار الرائدة | يلا ستارتر</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="mobile-menu.css">
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -40,7 +47,7 @@
             --ai-card: #ffffff;
             --ai-border: #e2e8f0;
         }
-        
+
         body {
             font-family: 'Tajawal', 'Poppins', sans-serif;
             background: var(--ai-bg);
@@ -49,7 +56,7 @@
             direction: rtl;
             text-align: right;
         }
-        
+
         .header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
@@ -59,7 +66,7 @@
             z-index: 100;
             padding: 0.5rem 1rem;
         }
-        
+
         .navbar {
             display: flex;
             align-items: center;
@@ -68,7 +75,7 @@
             margin: 0 auto;
             gap: 1rem;
         }
-        
+
         .logo {
             display: flex;
             align-items: center;
@@ -76,11 +83,11 @@
             flex-shrink: 0;
             transition: transform 0.2s ease;
         }
-        
+
         .logo:hover {
             transform: scale(1.02);
         }
-        
+
         .logo-text {
             font-size: 1.5rem;
             font-weight: 700;
@@ -89,7 +96,7 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        
+
         .nav-links {
             display: flex;
             align-items: center;
@@ -98,11 +105,11 @@
             padding: 0;
             list-style: none;
         }
-        
+
         .nav-links li {
             list-style: none;
         }
-        
+
         .nav-links a {
             color: var(--ai-text);
             font-weight: 500;
@@ -114,12 +121,12 @@
             font-size: 1rem;
             border-bottom: 2px solid transparent;
         }
-        
+
         .nav-links a:hover {
             color: var(--ai-primary);
             background-color: rgba(99, 102, 241, 0.05);
         }
-        
+
         .nav-links a.active {
             color: var(--ai-primary);
             font-weight: 600;
@@ -127,14 +134,14 @@
             padding: 0.5rem 1rem;
             border-bottom: 2px solid var(--ai-primary);
         }
-        
+
         .language-switcher {
             display: flex;
             align-items: center;
             gap: 0.5rem;
             margin-left: auto;
         }
-        
+
         .language-btn {
             background: transparent;
             border: 2px solid var(--ai-primary);
@@ -146,18 +153,18 @@
             transition: all 0.3s ease;
             font-size: 0.9rem;
         }
-        
+
         .language-btn:hover {
             background: var(--ai-primary);
             color: white;
             transform: translateY(-1px);
         }
-        
+
         .language-btn.active {
             background: var(--ai-primary);
             color: white;
         }
-        
+
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -169,12 +176,12 @@
             border-radius: 6px;
             transition: all 0.3s ease;
         }
-        
+
         .mobile-menu-btn:hover {
             background-color: rgba(99, 102, 241, 0.05);
             color: var(--ai-primary);
         }
-        
+
         .mobile-menu {
             width: 100%;
             background-color: white;
@@ -186,21 +193,21 @@
             transform: translateY(-10px);
             transition: all 0.3s ease;
         }
-        
+
         .mobile-menu.show {
             opacity: 1;
             transform: translateY(0);
         }
-        
+
         .mobile-menu .nav-links {
             list-style: none;
             margin: 1rem 0;
         }
-        
+
         .mobile-menu .nav-links li {
             margin-bottom: 0.8rem;
         }
-        
+
         .mobile-menu .nav-links a {
             color: var(--ai-text);
             font-weight: 500;
@@ -208,7 +215,7 @@
             padding: 0.8rem 0;
             font-size: 1rem;
         }
-        
+
         .mobile-menu .auth-buttons {
             display: flex;
             flex-direction: column;
@@ -217,7 +224,7 @@
             padding-top: 1rem;
             border-top: 1px solid var(--ai-border);
         }
-        
+
         .mobile-menu .auth-buttons a {
             width: 100%;
             text-align: center;
@@ -225,26 +232,26 @@
             border-radius: 8px;
             font-weight: 600;
         }
-        
+
         .mobile-menu .auth-buttons .language-switcher {
             display: flex;
             gap: 0.5rem;
             justify-content: center;
             margin-top: 0.5rem;
         }
-        
+
         .mobile-menu .auth-buttons .language-switcher .language-btn {
             padding: 0.5rem 1rem;
             font-size: 0.9rem;
         }
-        
+
         /* Main Auth Buttons Styling */
         .auth-buttons {
             display: flex;
             gap: 0.6rem;
             align-items: center;
         }
-        
+
         .auth-buttons .btn {
             padding: 0.6rem 1.2rem;
             font-size: 0.95rem;
@@ -253,84 +260,84 @@
             transition: all 0.3s ease;
             text-decoration: none;
         }
-        
+
         .auth-buttons .btn-primary {
             background: var(--ai-gradient);
             color: white;
             border: 2px solid var(--ai-primary);
             box-shadow: var(--ai-glow);
         }
-        
+
         .auth-buttons .btn-primary:hover {
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
         }
-        
+
         .auth-buttons .btn-secondary {
             background: transparent;
             color: var(--ai-primary);
             border: 2px solid var(--ai-primary);
             font-weight: 600;
         }
-        
+
         .auth-buttons .btn-secondary:hover {
             background: var(--ai-primary);
             color: white;
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
         }
-        
+
         .auth-buttons .btn-link {
             background: transparent;
             color: var(--ai-text-light);
             border: none;
             padding: 0.6rem 1rem;
         }
-        
+
         .auth-buttons .btn-link:hover {
             color: var(--ai-primary);
         }
-        
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .header {
                 padding: 0.3rem 0.8rem;
             }
-            
+
             .navbar {
                 gap: 0.5rem;
             }
-            
+
             .logo-text {
                 font-size: 1.3rem;
             }
-            
+
             .nav-links {
                 display: none;
             }
-            
+
             .auth-buttons {
                 display: none;
             }
-            
+
             .language-switcher {
                 display: none;
             }
-            
+
             .mobile-menu-btn {
                 display: block;
             }
-            
+
             .mobile-menu {
                 padding: 0.8rem;
             }
-            
+
             .mobile-menu .nav-links a {
                 padding: 0.6rem 0;
                 font-size: 0.95rem;
             }
         }
-        
+
         /* Hero Section */
         .hero {
             background: var(--ai-gradient);
@@ -340,7 +347,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .hero::before {
             content: '';
             position: absolute;
@@ -351,7 +358,7 @@
             background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
             opacity: 0.3;
         }
-        
+
         .hero-content {
             position: relative;
             z-index: 2;
@@ -359,7 +366,7 @@
             margin: 0 auto;
             padding: 0 2rem;
         }
-        
+
         .hero-title {
             font-size: 3.5rem;
             font-weight: 800;
@@ -370,21 +377,21 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        
+
         .hero-subtitle {
             font-size: 1.3rem;
             margin-bottom: 2rem;
             line-height: 1.6;
             opacity: 0.95;
         }
-        
+
         .hero-buttons {
             display: flex;
             gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
         }
-        
+
         .btn {
             display: inline-block;
             padding: 1rem 2rem;
@@ -396,35 +403,35 @@
             border: none;
             cursor: pointer;
         }
-        
+
         .btn-primary {
             background: white;
             color: var(--ai-primary);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
-        
+
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
         }
-        
+
         .btn-secondary {
             background: transparent;
             color: white;
             border: 2px solid white;
         }
-        
+
         .btn-secondary:hover {
             background: white;
             color: var(--ai-primary);
             transform: translateY(-2px);
         }
-        
+
         /* Sections */
         .section {
             padding: 4rem 0;
         }
-        
+
         .section-title {
             font-size: 2.5rem;
             font-weight: 700;
@@ -432,7 +439,7 @@
             margin-bottom: 1rem;
             color: var(--ai-text);
         }
-        
+
         .section-subtitle {
             font-size: 1.2rem;
             text-align: center;
@@ -440,13 +447,13 @@
             max-width: 600px;
             margin: 0 auto 3rem;
         }
-        
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
         }
-        
+
         /* Features Grid */
         .features-grid {
             display: grid;
@@ -454,7 +461,7 @@
             gap: 2rem;
             margin-bottom: 3rem;
         }
-        
+
         .feature-card {
             background: var(--ai-card);
             border-radius: 16px;
@@ -464,13 +471,13 @@
             border: 1px solid var(--ai-border);
             text-align: center;
         }
-        
+
         .feature-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
             border-color: var(--ai-primary);
         }
-        
+
         .feature-icon {
             font-size: 3rem;
             margin-bottom: 1rem;
@@ -479,31 +486,31 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        
+
         .feature-title {
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--ai-text);
             margin-bottom: 1rem;
         }
-        
+
         .feature-description {
             color: var(--ai-text-light);
             line-height: 1.6;
         }
-        
+
         /* AI Demo Section */
         .ai-demo-section {
             background: var(--ai-bg);
             padding: 4rem 0;
             margin: 2rem 0;
         }
-        
+
         .ai-demo-header {
             text-align: center;
             margin-bottom: 3rem;
         }
-        
+
         .ai-demo-icon {
             font-size: 4rem;
             margin-bottom: 1rem;
@@ -513,20 +520,20 @@
             background-clip: text;
             animation: pulse 2s infinite;
         }
-        
+
         .ai-demo-title {
             font-size: 2.5rem;
             font-weight: 700;
             color: var(--ai-text);
             margin-bottom: 0.5rem;
         }
-        
+
         .ai-demo-subtitle {
             font-size: 1.2rem;
             color: var(--ai-text-light);
             font-weight: 500;
         }
-        
+
         .ai-demo-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -539,7 +546,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .ai-demo-content::before {
             content: '';
             position: absolute;
@@ -550,20 +557,20 @@
             background: var(--ai-gradient);
             animation: shimmer 3s infinite;
         }
-        
+
         .ai-demo-text h3 {
             font-size: 1.8rem;
             font-weight: 700;
             color: var(--ai-text);
             margin-bottom: 1rem;
         }
-        
+
         .ai-demo-text p {
             color: var(--ai-text-light);
             line-height: 1.6;
             margin-bottom: 1.5rem;
         }
-        
+
         .ai-demo-visual {
             text-align: center;
             padding: 2rem;
@@ -571,94 +578,98 @@
             border-radius: 16px;
             border: 2px dashed var(--ai-primary);
         }
-        
+
         .ai-demo-visual i {
             font-size: 4rem;
             color: var(--ai-primary);
             margin-bottom: 1rem;
         }
-        
+
         @keyframes pulse {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: scale(1);
             }
+
             50% {
                 transform: scale(1.05);
             }
         }
-        
+
         @keyframes shimmer {
             0% {
                 background-position: -200px 0;
             }
+
             100% {
                 background-position: 200px 0;
             }
         }
-        
+
         @media (max-width: 768px) {
             .ai-demo-content {
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
-            
+
             .ai-demo-title {
                 font-size: 2rem;
             }
-            
+
             .hero-title {
                 font-size: 2.5rem;
             }
-            
+
             .hero-subtitle {
                 font-size: 1.1rem;
             }
-            
+
             .hero-buttons {
                 flex-direction: column;
                 align-items: center;
             }
         }
-        
+
         /* Footer */
         .footer {
             background-color: var(--ai-text);
             color: white;
             padding: 3rem 0 1rem;
         }
-        
+
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
             margin-bottom: 2rem;
         }
-        
+
         .footer-column h3 {
             color: var(--ai-primary);
             margin-bottom: 1rem;
             font-size: 1.2rem;
         }
-        
+
         .footer-links {
             list-style: none;
             padding: 0;
         }
-        
+
         .footer-links li {
             margin-bottom: 0.5rem;
         }
-        
+
         .footer-links a {
             color: #cbd5e1;
             text-decoration: none;
             transition: color 0.3s ease;
         }
-        
+
         .footer-links a:hover {
             color: var(--ai-primary);
         }
-        
+
         .footer-bottom {
             border-top: 1px solid #475569;
             padding-top: 1rem;
@@ -668,26 +679,26 @@
             flex-wrap: wrap;
             gap: 1rem;
         }
-        
+
         .footer-copyright {
             color: #94a3b8;
         }
-        
+
         .footer-social {
             display: flex;
             gap: 1rem;
         }
-        
+
         .social-icon {
             color: #94a3b8;
             font-size: 1.2rem;
             transition: color 0.3s ease;
         }
-        
+
         .social-icon:hover {
             color: var(--ai-primary);
         }
-        
+
         @media (max-width: 768px) {
             .footer-bottom {
                 flex-direction: column;
@@ -696,6 +707,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Header -->
     <header class="header">
@@ -703,7 +715,7 @@
             <a href="index-ar.html" class="logo">
                 <span class="logo-text">يلا ستارتر</span>
             </a>
-        
+
             <ul class="nav-links">
                 <li><a href="index-ar.html">الرئيسية</a></li>
                 <li><a href="entertainment-ar.html">الترفيه الإبداعي</a></li>
@@ -713,22 +725,22 @@
                 <li><a href="how-it-works-ar.html">كيف يعمل</a></li>
                 <li><a href="contact-ar.html">اتصل بنا</a></li>
             </ul>
-            
+
             <div class="language-switcher">
                 <button class="language-btn active" onclick="switchLanguage('ar')">العربية</button>
                 <button class="language-btn" onclick="switchLanguage('en')">English</button>
             </div>
-            
+
             <div class="auth-buttons">
                 <a href="create-project-ar.html" class="btn btn-primary">ابدأ مشروعك</a>
                 <a href="login-ar.html" class="btn btn-link">تسجيل الدخول</a>
             </div>
-            
+
             <button class="mobile-menu-btn">
                 <i class="fas fa-bars"></i>
             </button>
         </nav>
-        
+
         <div class="mobile-menu">
             <div class="mobile-menu-header">
                 <button class="mobile-close-btn">
@@ -759,7 +771,8 @@
     <section class="hero">
         <div class="hero-content">
             <h1 class="hero-title">MIND71</h1>
-            <p class="hero-subtitle">منصة الابتكار الرائدة التي تجمع بين الذكاء الاصطناعي والإبداع البشري. اكتشف كيف يمكنك تحويل أفكارك إلى واقع ملموس.</p>
+            <p class="hero-subtitle">منصة الابتكار الرائدة التي تجمع بين الذكاء الاصطناعي والإبداع البشري. اكتشف كيف
+                يمكنك تحويل أفكارك إلى واقع ملموس.</p>
             <div class="hero-buttons">
                 <a href="#features" class="btn btn-primary">اكتشف المميزات</a>
                 <a href="#demo" class="btn btn-secondary">شاهد العرض</a>
@@ -772,38 +785,39 @@
         <div class="container">
             <h2 class="section-title">مميزات MIND71</h2>
             <p class="section-subtitle">اكتشف كيف يمكنك استخدام الذكاء الاصطناعي لتحويل أفكارك إلى مشاريع ناجحة</p>
-            
+
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">💡</div>
                     <h3 class="feature-title">توليد الأفكار الإبداعية</h3>
-                    <p class="feature-description">استخدم الذكاء الاصطناعي لتوليد أفكار إبداعية ومبتكرة في جميع المجالات.</p>
+                    <p class="feature-description">استخدم الذكاء الاصطناعي لتوليد أفكار إبداعية ومبتكرة في جميع
+                        المجالات.</p>
                 </div>
-                
+
                 <div class="feature-card">
                     <div class="feature-icon">🚀</div>
                     <h3 class="feature-title">تطوير المشاريع</h3>
                     <p class="feature-description">احصل على مساعدة في تطوير مشروعك من الفكرة إلى التنفيذ.</p>
                 </div>
-                
+
                 <div class="feature-card">
                     <div class="feature-icon">🎯</div>
                     <h3 class="feature-title">تحليل السوق</h3>
                     <p class="feature-description">احصل على تحليل شامل للسوق وفرص النجاح لمشروعك.</p>
                 </div>
-                
+
                 <div class="feature-card">
                     <div class="feature-icon">🤝</div>
                     <h3 class="feature-title">الشبكات المهنية</h3>
                     <p class="feature-description">تواصل مع المبدعين والمستثمرين في مجالك.</p>
                 </div>
-                
+
                 <div class="feature-card">
                     <div class="feature-icon">📊</div>
                     <h3 class="feature-title">التقارير الذكية</h3>
                     <p class="feature-description">احصل على تقارير مفصلة عن أداء مشروعك وتوصيات للتحسين.</p>
                 </div>
-                
+
                 <div class="feature-card">
                     <div class="feature-icon">🎨</div>
                     <h3 class="feature-title">التصميم الإبداعي</h3>
@@ -813,36 +827,416 @@
         </div>
     </section>
 
-    <!-- AI Demo Section -->
-    <section id="demo" class="ai-demo-section">
+    <!-- Chat Interface Section -->
+    <section class="mind71-chat-section" id="demo">
         <div class="container">
-            <div class="ai-demo-header">
-                <div class="ai-demo-icon">🤖</div>
-                <h2 class="ai-demo-title">عرض الذكاء الاصطناعي</h2>
-                <p class="ai-demo-subtitle">اكتشف كيف يعمل MIND71 في تحويل أفكارك إلى مشاريع ناجحة</p>
-            </div>
-            
-            <div class="ai-demo-content">
-                <div class="ai-demo-text">
-                    <h3>ما هو MIND71؟</h3>
-                    <p>MIND71 هو منصة ذكية تجمع بين الذكاء الاصطناعي والإبداع البشري لتحويل الأفكار إلى مشاريع ناجحة:</p>
-                    <ul>
-                        <li>توليد الأفكار الإبداعية</li>
-                        <li>تحليل السوق والفرص</li>
-                        <li>تطوير خطة العمل</li>
-                        <li>إنشاء التصميمات</li>
-                        <li>إدارة المشروع</li>
-                    </ul>
-                    <p>ابدأ رحلتك الإبداعية اليوم!</p>
+            <h2 class="section-title">استشر ذكاء MIND71 الاصطناعي</h2>
+            <p class="section-subtitle">احصل على استشارات ذكاء أعمال فورية متوافق مع رؤية 2030 والسوق السعودي.</p>
+
+            <div class="chat-wrapper">
+                <div class="chat-sidebar">
+                    <button class="btn-new-chat" id="newChatBtn">
+                        <i class="fas fa-plus"></i> محادثة جديدة
+                    </button>
+                    <div class="chat-history-info">
+                        <p>MIND71 محسن خصيصاً للسوق والثقافة السعودية.</p>
+                    </div>
                 </div>
-                <div class="ai-demo-visual">
-                    <i class="fas fa-brain"></i>
-                    <h4>ابدأ الآن</h4>
-                    <p>انضم إلى مجتمع المبدعين</p>
+
+                <div class="chat-main">
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message assistant">
+                            <div class="message-content">
+                                مرحباً بك! أنا MIND71، مستشارك لذكاء الأعمال السعودي. كيف يمكنني مساعدتك اليوم في مشروعك
+                                أو خططك الاستثمارية في المملكة؟
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chat-input-area">
+                        <div class="typing-indicator" id="typingIndicator" style="display: none;">
+                            <span></span><span></span><span></span>
+                        </div>
+                        <div class="input-wrapper">
+                            <textarea id="chatInput" placeholder="اسأل MIND71 عن السوق السعودي، رؤية 2030، GEA..."
+                                rows="1"></textarea>
+                            <button id="sendBtn" class="send-btn">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                        <p class="chat-disclaimer">قد يقدم MIND71 نصائح مولدة بالذكاء الاصطناعي. يرجى التحقق دائماً من
+                            اللوائح السعودية الرسمية.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <style>
+        .mind71-chat-section {
+            padding: 6rem 0;
+            background: #f1f5f9;
+        }
+
+        .chat-wrapper {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            height: 600px;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--ai-border);
+            direction: rtl;
+        }
+
+        .chat-sidebar {
+            background: #1e293b;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            color: white;
+        }
+
+        .btn-new-chat {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 0.8rem;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        .btn-new-chat i {
+            margin-left: 5px;
+        }
+
+        .btn-new-chat:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .chat-history-info {
+            margin-top: auto;
+            font-size: 0.85rem;
+            opacity: 0.7;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .chat-main {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            background: #ffffff;
+        }
+
+        .message {
+            max-width: 80%;
+            display: flex;
+        }
+
+        .message.user {
+            align-self: flex-start;
+            flex-direction: row;
+        }
+
+        .message.assistant {
+            align-self: flex-end;
+            flex-direction: row;
+        }
+
+        /* Adjustment for RTL bubbles */
+        .message.user {
+            align-self: flex-start;
+        }
+
+        .message.assistant {
+            align-self: flex-end;
+        }
+
+        .message-content {
+            padding: 1rem 1.2rem;
+            border-radius: 15px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        .user .message-content {
+            background: var(--ai-primary);
+            color: white;
+            border-bottom-left-radius: 2px;
+        }
+
+        .assistant .message-content {
+            background: #f1f5f9;
+            color: var(--ai-text);
+            border-bottom-right-radius: 2px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .chat-input-area {
+            padding: 1.5rem 2rem;
+            border-top: 1px solid var(--ai-border);
+            background: white;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: #f8fafc;
+            border: 1px solid var(--ai-border);
+            border-radius: 12px;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-wrapper:focus-within {
+            border-color: var(--ai-primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        #chatInput {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            padding: 0.5rem 0;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 0.95rem;
+            resize: none;
+            max-height: 150px;
+            text-align: right;
+        }
+
+        .send-btn {
+            background: var(--ai-primary);
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            margin-right: 0.5rem;
+            transform: scaleX(-1);
+            /* Flip plane icon for RTL */
+        }
+
+        .send-btn:hover {
+            background: var(--ai-primary-dark);
+            transform: scale(1.05) scaleX(-1);
+        }
+
+        .send-btn:disabled {
+            background: #cbd5e1;
+            cursor: not-allowed;
+        }
+
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 0.5rem 1rem;
+            margin-bottom: 0.5rem;
+            justify-content: flex-end;
+        }
+
+        .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            background: var(--ai-primary);
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out;
+            opacity: 0.6;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-6px);
+            }
+        }
+
+        .chat-disclaimer {
+            font-size: 0.75rem;
+            color: var(--ai-text-light);
+            text-align: center;
+            margin-top: 0.8rem;
+        }
+
+        @media (max-width: 992px) {
+            .chat-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .chat-sidebar {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .chat-messages {
+                padding: 1rem;
+            }
+
+            .message {
+                max-width: 90%;
+            }
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const chatMessages = document.getElementById('chatMessages');
+            const chatInput = document.getElementById('chatInput');
+            const sendBtn = document.getElementById('sendBtn');
+            const newChatBtn = document.getElementById('newChatBtn');
+            const typingIndicator = document.getElementById('typingIndicator');
+
+            let conversationId = localStorage.getItem('mind71_conv_id_ar');
+            let isTyping = false;
+
+            // Auto-resize textarea
+            chatInput.addEventListener('input', function () {
+                this.style.height = 'auto';
+                this.style.height = (this.scrollHeight) + 'px';
+            });
+
+            async function sendMessage() {
+                const message = chatInput.value.trim();
+                if (!message || isTyping) return;
+
+                // Add User Message
+                addMessage(message, 'user');
+                chatInput.value = '';
+                chatInput.style.height = 'auto';
+
+                // Show Typing
+                isTyping = true;
+                typingIndicator.style.display = 'flex';
+                sendBtn.disabled = true;
+                chatMessages.scrollTo(0, chatMessages.scrollHeight);
+
+                try {
+                    const response = await fetch('/api/mind71/chat', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            message,
+                            lang: 'ar',
+                            conversationId
+                        })
+                    });
+
+                    const data = await response.json();
+
+                    if (data.success) {
+                        conversationId = data.conversationId;
+                        localStorage.setItem('mind71_conv_id_ar', conversationId);
+                        addMessage(data.reply, 'assistant');
+                    } else {
+                        addMessage("عذراً، حدث خطأ ما. يرجى المحاولة مرة أخرى.", 'assistant');
+                    }
+                } catch (error) {
+                    addMessage("خطأ في الشبكة. يرجى التحقق من اتصالك.", 'assistant');
+                } finally {
+                    isTyping = false;
+                    typingIndicator.style.display = 'none';
+                    sendBtn.disabled = false;
+                }
+            }
+
+            function addMessage(text, role) {
+                const msgDiv = document.createElement('div');
+                msgDiv.className = `message ${role}`;
+
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'message-content';
+
+                // Simple typewriter effect for assistant
+                if (role === 'assistant') {
+                    contentDiv.innerHTML = '';
+                    msgDiv.appendChild(contentDiv);
+                    chatMessages.appendChild(msgDiv);
+
+                    let i = 0;
+                    const speed = 10; // ms
+                    function type() {
+                        if (i < text.length) {
+                            contentDiv.innerHTML += text.charAt(i);
+                            i++;
+                            chatMessages.scrollTo(0, chatMessages.scrollHeight);
+                            setTimeout(type, speed);
+                        }
+                    }
+                    type();
+                } else {
+                    contentDiv.textContent = text;
+                    msgDiv.appendChild(contentDiv);
+                    chatMessages.appendChild(msgDiv);
+                    chatMessages.scrollTo(0, chatMessages.scrollHeight);
+                }
+            }
+
+            sendBtn.addEventListener('click', sendMessage);
+
+            chatInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+
+            newChatBtn.addEventListener('click', () => {
+                if (confirm('هل تريد بدء محادثة جديدة؟')) {
+                    conversationId = null;
+                    localStorage.removeItem('mind71_conv_id_ar');
+                    chatMessages.innerHTML = `
+                        <div class="message assistant">
+                            <div class="message-content">
+                                تم تصفير المحادثة. كيف يمكنني مساعدتك اليوم؟
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+        });
+    </script>
 
     <!-- Footer -->
     <footer class="footer">
@@ -857,7 +1251,7 @@
                         <li><a href="contact-ar.html">اتصل بنا</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-column">
                     <h3>للمبدعين</h3>
                     <ul class="footer-links">
@@ -869,7 +1263,7 @@
                         <li><a href="#">قصص النجاح</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-column">
                     <h3>للمبدعين</h3>
                     <ul class="footer-links">
@@ -880,7 +1274,7 @@
                         <li><a href="#">حماية الداعمين</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-column">
                     <h3>معلومات إضافية</h3>
                     <ul class="footer-links">
@@ -892,12 +1286,12 @@
                     </ul>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
                 <div class="footer-copyright">
                     &copy; 2025 يلا ستارتر. جميع الحقوق محفوظة.
                 </div>
-                
+
                 <div class="footer-social">
                     <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
                     <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
@@ -910,7 +1304,7 @@
 
     <!-- Universal Mobile Menu Script -->
     <script src="mobile-menu.js"></script>
-    
+
     <script>
         // Language Switcher
         function switchLanguage(lang) {
@@ -922,8 +1316,5 @@
         }
     </script>
 </body>
+
 </html>
-
-
-
-
