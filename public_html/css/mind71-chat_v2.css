@@ -441,38 +441,179 @@ body {
     height: 64px !important;
     display: flex !important;
     align-items: center !important;
+    padding: 0 2rem !important;
+}
+
+.navbar {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+}
+
+.header .logo {
+    text-decoration: none !important;
 }
 
 .header .logo-text {
     color: var(--saudi-green-bright) !important;
     font-weight: 800 !important;
     letter-spacing: -0.05em !important;
+    font-size: 1.5rem !important;
+}
+
+.header .nav-links {
+    display: flex !important;
+    list-style: none !important;
+    gap: 1.5rem !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    align-items: center !important;
+}
+
+.header .nav-links li {
+    list-style: none !important;
 }
 
 .header .nav-links a {
-    color: var(--text-secondary) !important;
-    font-size: 0.9rem !important;
+    color: var(--saudi-green-bright) !important;
+    /* Made green per user request */
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    transition: all 0.2s ease !important;
+    opacity: 0.8;
 }
 
 .header .nav-links a:hover,
 .header .nav-links a.active {
     color: white !important;
+    opacity: 1;
+}
+
+.header .auth-buttons {
+    display: flex !important;
+    gap: 1rem !important;
+    align-items: center !important;
 }
 
 .header .btn-primary {
     background: var(--saudi-green) !important;
+    color: white !important;
     border: none !important;
+    padding: 0.5rem 1.25rem !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    font-size: 0.85rem !important;
     box-shadow: 0 0 15px var(--saudi-green-glow) !important;
+    text-decoration: none !important;
+}
+
+.header .btn-link {
+    color: var(--saudi-green-bright) !important;
+    text-decoration: none !important;
+    font-weight: 600 !important;
+    font-size: 0.85rem !important;
+}
+
+.header .language-switcher {
+    display: flex !important;
+    gap: 0.5rem !important;
 }
 
 .header .language-btn {
-    border-color: var(--glass-border) !important;
+    background: transparent !important;
+    border: 1px solid var(--glass-border) !important;
     color: var(--text-secondary) !important;
+    padding: 0.25rem 0.5rem !important;
+    border-radius: 6px !important;
+    font-size: 0.75rem !important;
+    cursor: pointer !important;
 }
 
 .header .language-btn.active {
     background: var(--glass-shine) !important;
     color: white !important;
+}
+
+/* Mobile Menu Button Styling within Mind71 Theme */
+.header .mobile-menu-btn {
+    display: none !important;
+    color: var(--saudi-green-bright) !important;
+}
+
+@media (max-width: 1023px) {
+
+    .header .nav-links,
+    .header .auth-buttons,
+    .header .language-switcher {
+        display: none !important;
+    }
+
+    .header .mobile-menu-btn {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: transparent !important;
+        border: none !important;
+        font-size: 1.5rem !important;
+        cursor: pointer !important;
+        padding: 0.5rem !important;
+    }
+
+    /* Mobile Menu Container */
+    .mobile-menu {
+        position: fixed !important;
+        top: 64px !important;
+        left: 0 !important;
+        width: 100% !important;
+        background: var(--navy-bg) !important;
+        border-bottom: 1px solid var(--glass-border) !important;
+        max-height: 0 !important;
+        overflow: hidden !important;
+        transition: max-height 0.3s ease-out, opacity 0.3s ease !important;
+        opacity: 0 !important;
+        z-index: 999 !important;
+        padding: 0 1.5rem !important;
+    }
+
+    .header.nav-open .mobile-menu {
+        max-height: 100vh !important;
+        opacity: 1 !important;
+        padding: 2rem 1.5rem !important;
+    }
+
+    .mobile-menu .nav-links {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 1rem !important;
+        margin-bottom: 2rem !important;
+    }
+
+    .mobile-menu .nav-links a {
+        color: var(--saudi-green-bright) !important;
+        font-size: 1.1rem !important;
+        padding: 0.75rem 0 !important;
+        border-bottom: 1px solid var(--glass-border) !important;
+        display: block !important;
+    }
+
+    .mobile-menu .auth-buttons {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 1rem !important;
+    }
+
+    .mobile-menu .auth-buttons .btn-primary {
+        text-align: center !important;
+        padding: 1rem !important;
+    }
+
+    .mobile-menu .language-switcher {
+        display: flex !important;
+        margin-top: 1.5rem !important;
+        gap: 1rem !important;
+    }
 }
 
 /* Adjust layout for top global header */
