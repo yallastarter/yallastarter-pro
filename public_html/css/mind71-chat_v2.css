@@ -391,27 +391,6 @@ body {
     animation: fadeIn 0.3s ease;
 }
 
-.hud-stop-btn {
-    background: rgba(255, 68, 68, 0.1);
-    border: 1px solid rgba(255, 68, 68, 0.2);
-    color: #ff4444;
-    padding: 0.4rem 0.8rem;
-    border-radius: 8px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: all 0.2s ease;
-}
-
-.hud-stop-btn:hover {
-    background: rgba(255, 68, 68, 0.2);
-    border-color: rgba(255, 68, 68, 0.4);
-    transform: translateY(-1px);
-}
-
 /* Animations */
 @keyframes orbPulse {
 

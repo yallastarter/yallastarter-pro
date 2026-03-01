@@ -67,50 +67,12 @@ class ChatLayout {
         row.appendChild(box);
         this.elements.scroll.appendChild(row);
         this.scrollToBottom();
-        return box; // Return for streaming updates
-    }
-
-    createStreamingBox() {
-        if (this.elements.scroll.querySelector('h1')) {
-            this.elements.scroll.innerHTML = '';
-        }
-
-        const row = document.createElement('div');
-        row.className = `message-row ai-msg`;
-
-        const box = document.createElement('div');
-        box.className = 'message-box markdown-content';
-        box.innerHTML = '<span class="cursor">|</span>';
-
-        row.appendChild(box);
-        this.elements.scroll.appendChild(row);
-        this.scrollToBottom();
-        return box;
-    }
-
-    updateStreamingBox(box, content) {
-        if (typeof marked !== 'undefined') {
-            box.innerHTML = marked.parse(content);
-            box.querySelectorAll('pre code').forEach((block) => {
-                if (typeof hljs !== 'undefined') hljs.highlightElement(block);
-            });
-        } else {
-            box.textContent = content;
-        }
-        this.scrollToBottom();
     }
 
     setThinking(status) {
         this.isTyping = status;
         this.elements.sendBtn.disabled = status;
         this.elements.thinking.style.display = status ? 'flex' : 'none';
-
-        // Handle stop button visibility
-        const stopBtn = document.querySelector('#stop-generating');
-        if (stopBtn) {
-            stopBtn.style.display = status ? 'flex' : 'none';
-        }
-
         if (status) this.scrollToBottom();
     }
 
