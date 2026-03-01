@@ -1097,7 +1097,7 @@
                     } else {
                         const errorMsg = data.message || "Something went wrong";
                         const statusSuffix = data.providerStatus ? ` (Status: ${data.providerStatus})` : "";
-                        addMessage(`${errorMsg}${statusSuffix}. Please try again.`, 'assistant');
+                        addMessage(`AI provider error${statusSuffix}: ${errorMsg}`, 'assistant');
                     }
                 } catch (error) {
                     addMessage("Network error or server unavailable. Please check your connection.", 'assistant');

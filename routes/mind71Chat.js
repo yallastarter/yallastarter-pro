@@ -38,8 +38,10 @@ router.get('/health', (req, res) => {
         ok: true,
         nodeEnv: process.env.NODE_ENV,
         openrouterKeySet: !!process.env.OPENROUTER_API_KEY,
+        openrouterKeyPrefix: (process.env.OPENROUTER_API_KEY || "").slice(0, 8),
         mind71Model: process.env.MIND71_MODEL || null,
-        baseUrl: process.env.BASE_URL || process.env.CLIENT_URL || null
+        baseUrl: process.env.BASE_URL || null,
+        clientUrl: process.env.CLIENT_URL || null
     });
 });
 
@@ -52,7 +54,7 @@ router.post('/chat', chatLimiter, async (req, res) => {
             console.error('MIND71 ERROR: OPENROUTER_API_KEY not configured');
             return res.status(500).json({
                 success: false,
-                message: "OPENROUTER_API_KEY not configured"
+                message: "OPENROUTER_API_KEY not configured in Render env vars"
             });
         }
 
@@ -66,10 +68,13 @@ router.post('/chat', chatLimiter, async (req, res) => {
 
         const apiKey = process.env.OPENROUTER_API_KEY;
         const model = process.env.MIND71_MODEL || "deepseek/deepseek-r1-distill-qwen-1.5b";
-        const referer = process.env.BASE_URL || process.env.CLIENT_URL || "https://yallastarter-pro.onrender.com";
+        const referer = process.env.BASE_URL || process.env.CLIENT_URL || "https://www.yallastarter.com";
 
-        // Debug logging (exact line requested)
-        console.log("[mind71] keySet=", !!process.env.OPENROUTER_API_KEY, "keyPrefix=", (process.env.OPENROUTER_API_KEY || "").slice(0, 8), "model=", process.env.MIND71_MODEL);
+        // Diagnostic logs
+        console.log("[mind71] route hit");
+        console.log("[mind71] keySet=", !!process.env.OPENROUTER_API_KEY,
+            "keyPrefix=", (process.env.OPENROUTER_API_KEY || "").slice(0, 8),
+            "model=", (process.env.MIND71_MODEL || ""));
 
         // Handle conversation persistence
         let chat;
@@ -120,18 +125,18 @@ router.post('/chat', chatLimiter, async (req, res) => {
 
             if (!response.ok) {
                 const errorData = await response.text();
-                const trimmedError = errorData.substring(0, 500);
-                console.error(`[MIND71] Provider Error (${response.status}):`, trimmedError);
+                // Log provider failure with status and body (exact format requested)
+                console.log("[mind71] openrouter status=", response.status, "body=", errorData.slice(0, 500));
 
                 if (response.status === 401) {
                     return res.status(401).json({
                         success: false,
-                        message: "OpenRouter auth failed (401). Check OPENROUTER_API_KEY in Render and redeploy.",
+                        message: "OpenRouter auth failed (401). Verify OPENROUTER_API_KEY in Render and redeploy.",
                         providerStatus: 401
                     });
                 }
 
-                return res.status(502).json({
+                return res.status(response.status === 403 ? 403 : 502).json({
                     success: false,
                     message: "AI provider error",
                     providerStatus: response.status
