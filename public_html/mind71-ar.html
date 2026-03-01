@@ -34,6 +34,63 @@
 </head>
 
 <body>
+    <header class="header">
+        <nav class="navbar">
+            <a href="index-ar.html" class="logo">
+                <span class="logo-text">يلا ستارتر</span>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="index-ar.html">الرئيسية</a></li>
+                <li><a href="entertainment-ar.html">الترفيه الإبداعي</a></li>
+                <li><a href="vision2030-ar.html">مشاريع ابداعية من رؤية 2030</a></li>
+                <li><a href="mind71-ar.html" class="active">MIND71 AI</a></li>
+                <li><a href="projects-ar.html">المشاريع</a></li>
+                <li><a href="how-it-works-ar.html">كيف يعمل</a></li>
+                <li><a href="contact-ar.html">اتصل بنا</a></li>
+            </ul>
+
+            <div class="language-switcher">
+                <button class="language-btn active" onclick="switchLanguage('ar')">العربية</button>
+                <button class="language-btn" onclick="switchLanguage('en')">English</button>
+            </div>
+
+            <div class="auth-buttons">
+                <a href="create-project-ar.html" class="btn btn-primary">ابدأ مشروعك</a>
+                <a href="login-ar.html" class="btn btn-link">تسجيل الدخول</a>
+            </div>
+
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+
+        <div class="mobile-menu">
+            <div class="mobile-menu-header">
+                <div class="mobile-header-left">
+                    <div class="auth-buttons">
+                        <a href="create-project-ar.html" class="btn btn-primary">ابدأ مشروعك</a>
+                        <a href="login-ar.html" class="btn btn-link">تسجيل الدخول</a>
+                        <div class="language-switcher">
+                            <button class="language-btn active" onclick="switchLanguage('ar')">العربية</button>
+                            <button class="language-btn" onclick="switchLanguage('en')">English</button>
+                        </div>
+                    </div>
+                </div>
+                <button class="mobile-close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index-ar.html">الرئيسية</a></li>
+                <li><a href="entertainment-ar.html">الترفيه الإبداعي</a></li>
+                <li><a href="vision2030-ar.html">مشاريع ابداعية من رؤية 2030</a></li>
+                <li><a href="mind71-ar.html" class="active">MIND71 AI</a></li>
+                <li><a href="projects-ar.html">المشاريع</a></li>
+            </ul>
+        </div>
+    </header>
+
     <!-- Neural Background Layer -->
     <div class="neural-bg">
         <div class="neural-particles"></div>
@@ -72,9 +129,6 @@
                     <div class="status-indicator">
                         <div class="status-dot"></div>
                         CORE_ACTIVE
-                    </div>
-                    <div style="color: var(--text-dim); font-size: 0.8rem; font-weight: 500;">
-                        مركز: <span id="model-badge" style="color: var(--accent-blue);">DEEPSEEK_R1_X_1.5B</span>
                     </div>
                 </div>
 
@@ -124,6 +178,17 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="mobile-menu.js"></script>
+    <script src="assets/js/session-init.js"></script>
+    <script>
+        function switchLanguage(lang) {
+            if (lang === 'en') {
+                window.location.href = 'mind71.html';
+            } else if (lang === 'ar') {
+                window.location.href = 'mind71-ar.html';
+            }
+        }
+    </script>
     <script type="module" src="assets/js/mind71-chat_v2.js"></script>
 </body>
 

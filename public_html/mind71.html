@@ -20,6 +20,65 @@
 </head>
 
 <body>
+    <header class="header" role="banner">
+        <nav class="navbar" role="navigation" aria-label="Main">
+            <a href="index.html" class="logo">
+                <span class="logo-text">YallaStarter</span>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="entertainment.html">Entertainment Projects</a></li>
+                <li><a href="vision2030.html">Vision 2030 Projects</a></li>
+                <li><a href="mind71.html" class="active">MIND71 AI</a></li>
+                <li><a href="projects.html">Browse Projects</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+
+            <div class="language-switcher">
+                <button class="language-btn active" onclick="switchLanguage('en')">English</button>
+                <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
+            </div>
+
+            <div class="auth-buttons">
+                <a href="create-project.html" class="btn btn-primary">Start a Project</a>
+                <a href="login.html" class="btn btn-link">Log In</a>
+            </div>
+
+            <button type="button" class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false"
+                aria-controls="mobile-menu">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </button>
+        </nav>
+
+        <div id="mobile-menu" class="mobile-menu" aria-label="Mobile navigation" aria-hidden="true">
+            <div class="mobile-menu-header">
+                <div class="mobile-header-left">
+                    <div class="language-switcher">
+                        <button class="language-btn active" onclick="switchLanguage('en')">English</button>
+                        <button class="language-btn" onclick="switchLanguage('ar')">العربية</button>
+                    </div>
+                    <div class="auth-buttons">
+                        <a href="create-project.html" class="btn btn-primary">Start a Project</a>
+                        <a href="login.html" class="btn btn-link">Log In</a>
+                    </div>
+                </div>
+                <button class="mobile-close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="entertainment.html">Entertainment Projects</a></li>
+                <li><a href="vision2030.html">Vision 2030 Projects</a></li>
+                <li><a href="mind71.html" class="active">MIND71 AI</a></li>
+                <li><a href="projects.html">Browse Projects</a></li>
+            </ul>
+        </div>
+    </header>
+
     <!-- Neural Background Layer -->
     <div class="neural-bg">
         <div class="neural-particles"></div>
@@ -58,9 +117,6 @@
                     <div class="status-indicator">
                         <div class="status-dot"></div>
                         CORE_ACTIVE
-                    </div>
-                    <div style="color: var(--text-dim); font-size: 0.8rem; font-weight: 500;">
-                        HUB: <span id="model-badge" style="color: var(--accent-blue);">DEEPSEEK_R1_X_1.5B</span>
                     </div>
                 </div>
 
@@ -111,6 +167,17 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="mobile-menu.js"></script>
+    <script src="assets/js/session-init.js"></script>
+    <script>
+        function switchLanguage(lang) {
+            if (lang === 'en') {
+                window.location.href = 'mind71.html';
+            } else if (lang === 'ar') {
+                window.location.href = 'mind71-ar.html';
+            }
+        }
+    </script>
     <script type="module" src="assets/js/mind71-chat_v2.js"></script>
 </body>
 
