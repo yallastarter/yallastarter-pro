@@ -11,6 +11,7 @@ class ChatLayout {
             input: document.querySelector('#main-input'),
             sendBtn: document.querySelector('.btn-send-glow'),
             thinking: document.querySelector('.thinking-feedback'),
+            stopBtn: document.querySelector('#stop-generation'),
             modelBadge: document.querySelector('#model-badge')
         };
         this.isTyping = false;
@@ -73,6 +74,9 @@ class ChatLayout {
         this.isTyping = status;
         this.elements.sendBtn.disabled = status;
         this.elements.thinking.style.display = status ? 'flex' : 'none';
+        if (this.elements.stopBtn) {
+            this.elements.stopBtn.style.display = status ? 'flex' : 'none';
+        }
         if (status) this.scrollToBottom();
     }
 

@@ -305,36 +305,43 @@ body {
 
 .hud-glass-card {
     width: 100%;
-    max-width: 800px;
-    background: rgba(15, 23, 42, 0.8);
+    max-width: 900px;
+    background: rgba(15, 23, 42, 0.9);
     border: 1px solid var(--glass-border);
-    backdrop-filter: blur(20px);
-    border-radius: 24px;
-    padding: 0.75rem 1.25rem;
+    backdrop-filter: blur(30px);
+    border-radius: 26px;
+    padding: 1rem 1.5rem;
     display: flex;
     align-items: flex-end;
     gap: 1rem;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
     transition: all 0.3s ease;
 }
 
 .hud-glass-card:focus-within {
     border-color: var(--saudi-green);
-    box-shadow: 0 0 30px rgba(0, 132, 61, 0.2), 0 20px 50px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 40px rgba(0, 132, 61, 0.2), 0 25px 60px rgba(0, 0, 0, 0.6);
 }
 
-.main-input {
+#main-input {
     flex: 1;
     background: transparent;
     border: none;
     outline: none;
     color: white;
-    font-size: 1rem;
-    min-height: 50px;
-    max-height: 250px;
-    padding: 0.75rem 0;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    min-height: 28px;
+    max-height: 400px;
+    padding: 0.5rem 0;
     resize: none;
     transition: height 0.2s ease;
+    font-family: inherit;
+}
+
+#main-input::placeholder {
+    color: var(--text-dim);
+    opacity: 0.5;
 }
 
 .hud-actions {
@@ -371,6 +378,19 @@ body {
 .btn-send-glow:hover {
     transform: scale(1.05);
     box-shadow: 0 0 25px var(--saudi-green-glow);
+}
+
+.btn-stop-glow {
+    background: #ef4444 !important;
+    color: white !important;
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+    display: none;
+}
+
+.btn-stop-glow:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(239, 68, 68, 0.6);
+    background: #dc2626 !important;
 }
 
 .btn-send-glow:disabled {

@@ -79,35 +79,135 @@ class Mind71Platform {
         this.layout.resetInput();
         this.layout.setThinking(true);
 
+        // Abort Controller for "Stop generating"
+        this.abortController = new AbortController();
+        const stopBtn = document.querySelector('#stop-generation');
+        const abortHandler = () => {
+            if (this.abortController) {
+                this.abortController.abort();
+            }
+        };
+
+        if (stopBtn) {
+            stopBtn.addEventListener('click', abortHandler);
+        }
+
         try {
-            const response = await fetch('/api/mind71/chat', {
+            const response = await fetch('/api/mind71/chat-stream', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     message: text,
                     conversationId: chatId,
                     lang: document.documentElement.lang || 'en'
-                })
+                }),
+                signal: this.abortController.signal
             });
 
-            const data = await response.json();
-
-            if (data.success) {
-                chat.messages.push({ role: 'assistant', content: data.reply });
-                this.layout.addMessageToUI(data.reply, 'assistant');
-            } else {
-                const errStatus = data.providerStatus ? ` (Status: ${data.providerStatus})` : "";
-                this.layout.addMessageToUI(`Intelligence Failure${errStatus}: ${data.message}`, 'ai');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
+
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder('utf-8');
+            let assistantMessage = "";
+            let messageBoxInitialised = false;
+            let currentMessageRow = null;
+            let currentMessageBox = null;
+
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+
+                const chunk = decoder.decode(value, { stream: true });
+                const lines = chunk.split('\n');
+
+                for (const line of lines) {
+                    if (line.startsWith('data: ')) {
+                        const dataStr = line.slice(6).trim();
+                        if (dataStr === '[DONE]') continue;
+
+                        try {
+                            const parsed = JSON.parse(dataStr);
+
+                            if (parsed.error) {
+                                console.error("Stream Error:", parsed);
+                                this.layout.addMessageToUI(`Intelligence Failure: ${parsed.error}`, 'ai');
+                                break;
+                            }
+
+                            if (parsed.metadata) {
+                                // Conversation ID sync if needed
+                                continue;
+                            }
+
+                            if (parsed.choices && parsed.choices[0] && parsed.choices[0].delta) {
+                                const content = parsed.choices[0].delta.content || "";
+                                assistantMessage += content;
+
+                                // Real-time UI update
+                                if (!messageBoxInitialised && assistantMessage.length > 0) {
+                                    // Remove empty state if present
+                                    if (this.layout.elements.scroll.querySelector('h1')) {
+                                        this.layout.elements.scroll.innerHTML = '';
+                                    }
+
+                                    currentMessageRow = document.createElement('div');
+                                    currentMessageRow.className = 'message-row ai-msg';
+                                    currentMessageRow.style.animation = 'fadeInSlide 0.4s ease-out';
+
+                                    currentMessageBox = document.createElement('div');
+                                    currentMessageBox.className = 'message-box markdown-content';
+
+                                    currentMessageRow.appendChild(currentMessageBox);
+                                    this.layout.elements.scroll.appendChild(currentMessageRow);
+
+                                    messageBoxInitialised = true;
+                                }
+
+                                if (currentMessageBox) {
+                                    if (typeof marked !== 'undefined') {
+                                        currentMessageBox.innerHTML = marked.parse(assistantMessage);
+                                        currentMessageBox.querySelectorAll('pre code').forEach((block) => {
+                                            if (typeof hljs !== 'undefined') hljs.highlightElement(block);
+                                        });
+                                    } else {
+                                        currentMessageBox.textContent = assistantMessage;
+                                    }
+                                    this.layout.scrollToBottom();
+                                }
+                            }
+                        } catch (e) {
+                            // Ignore parse errors for incomplete chunks
+                        }
+                    }
+                }
+            }
+
+            // Save final message to history
+            if (assistantMessage) {
+                chat.messages.push({ role: 'assistant', content: assistantMessage });
+            }
+
         } catch (err) {
-            console.error('System Failure:', err);
-            this.layout.addMessageToUI("Intelligence link severed. Check connection and retry.", 'ai');
+            if (err.name === 'AbortError') {
+                console.log('Generation stopped by user');
+                // The partial message is already in the UI and state if we reached the stream reader
+            } else {
+                console.error('System Failure:', err);
+                this.layout.addMessageToUI("Intelligence link severed. Check connection and retry.", 'ai');
+            }
         } finally {
+            if (stopBtn) {
+                stopBtn.removeEventListener('click', abortHandler);
+            }
+            this.abortController = null;
             this.layout.setThinking(false);
             store.save(); // Persist history
         }
     }
 }
+
 
 // Spark the platform
 document.addEventListener('DOMContentLoaded', () => {
