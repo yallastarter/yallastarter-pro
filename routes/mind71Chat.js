@@ -227,7 +227,7 @@ router.post('/chat-stream', chatLimiter, async (req, res) => {
         // Initial metadata chunk
         res.write(`data: ${JSON.stringify({ metadata: { conversationId: currentConvId } })}\n\n`);
 
-        const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+        const response = await fetch("https://openrouter.ai/v1/chat/completions", {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
@@ -245,7 +245,14 @@ router.post('/chat-stream', chatLimiter, async (req, res) => {
 
         if (!response.ok) {
             const errBody = await response.text();
-            res.write(`data: ${JSON.stringify({ error: "Upstream Error", details: errBody })}\n\n`);
+            console.error(`[MIND71] OpenRouter Error (${response.status}):`, errBody);
+
+            let userFriendlyMessage = "Upstream Error";
+            if (response.status === 401) userFriendlyMessage = "OpenRouter Auth Failed (Check API Key)";
+            if (response.status === 402) userFriendlyMessage = "OpenRouter Credits Exhausted";
+            if (response.status === 429) userFriendlyMessage = "OpenRouter Rate Limit Exceeded";
+
+            res.write(`data: ${JSON.stringify({ error: userFriendlyMessage, details: errBody })}\n\n`);
             return res.end();
         }
 
