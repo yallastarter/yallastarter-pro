@@ -29,11 +29,34 @@ const SYSTEM_PROMPTS = {
     - اجعل ردودك موجزة وعملية.`
 };
 
+/**
+ * GET /api/mind71/health
+ * Diagnostic endpoint for Render environment verification
+ */
+router.get('/health', (req, res) => {
+    res.json({
+        ok: true,
+        nodeEnv: process.env.NODE_ENV,
+        openrouterKeySet: !!process.env.OPENROUTER_API_KEY,
+        mind71Model: process.env.MIND71_MODEL || null,
+        baseUrl: process.env.BASE_URL || process.env.CLIENT_URL || null
+    });
+});
+
 router.post('/chat', chatLimiter, async (req, res) => {
     try {
         const { message, lang = 'en', conversationId } = req.body;
 
-        // Validation
+        // Validation for missing API Key
+        if (!process.env.OPENROUTER_API_KEY) {
+            console.error('MIND71 ERROR: OPENROUTER_API_KEY not configured');
+            return res.status(500).json({
+                success: false,
+                message: "OPENROUTER_API_KEY not configured"
+            });
+        }
+
+        // Message Validation
         if (!message || typeof message !== 'string' || message.trim().length === 0) {
             return res.status(400).json({ success: false, message: 'Message is required' });
         }
@@ -42,12 +65,12 @@ router.post('/chat', chatLimiter, async (req, res) => {
         }
 
         const apiKey = process.env.OPENROUTER_API_KEY;
-        const model = process.env.MIND71_MODEL || 'deepseek/deepseek-r1:free';
+        // Use requested free model as default
+        const model = process.env.MIND71_MODEL || "deepseek/deepseek-r1-distill-qwen-1.5b";
+        const referer = process.env.BASE_URL || process.env.CLIENT_URL || "https://yallastarter-pro.onrender.com";
 
-        if (!apiKey) {
-            console.error('MIND71 ERROR: OPENROUTER_API_KEY not set');
-            return res.status(500).json({ success: false, message: 'AI service is temporarily unavailable.' });
-        }
+        // Debug logging (exact line requested)
+        console.log("[mind71] keySet=", !!process.env.OPENROUTER_API_KEY, "model=", model, "len=", message.length);
 
         // Handle conversation persistence
         let chat;
@@ -64,50 +87,56 @@ router.post('/chat', chatLimiter, async (req, res) => {
                 language: lang,
                 messages: [{ role: 'system', content: SYSTEM_PROMPTS[lang] || SYSTEM_PROMPTS.en }]
             });
-            // Link to user if logged in
             if (req.user) chat.userId = req.user.id;
         }
 
         // Add user message to history
         chat.messages.push({ role: 'user', content: message });
 
-        // Keep last 12 turns (24 messages including system prompt)
+        // Keep conversation window (max 25 messages)
         if (chat.messages.length > 25) {
             const systemPrompt = chat.messages[0];
             const recentMessages = chat.messages.slice(-24);
             chat.messages = [systemPrompt, ...recentMessages];
         }
 
-        // Call OpenRouter using native fetch
+        // Call OpenRouter
         try {
-            const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-                method: 'POST',
+            const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+                method: "POST",
                 headers: {
-                    'Authorization': `Bearer ${apiKey}`,
-                    'HTTP-Referer': 'https://yallastarter.com',
-                    'X-Title': 'YallaStarter Mind71',
-                    'Content-Type': 'application/json'
+                    "Authorization": `Bearer ${apiKey}`,
+                    "Content-Type": "application/json",
+                    "HTTP-Referer": referer,
+                    "X-Title": "Mind71"
                 },
                 body: JSON.stringify({
                     model: model,
                     messages: chat.messages.map(m => ({ role: m.role, content: m.content })),
-                    temperature: 0.7,
-                    max_tokens: 1000
+                    temperature: 0.7
                 })
             });
 
+            console.log(`[MIND71] OpenRouter Status: ${response.status}`);
+
             if (!response.ok) {
-                const errorText = await response.text();
-                throw new Error(`HTTP ${response.status}: ${errorText}`);
+                const errorData = await response.text();
+                // Log provider failure with status and trimmed body (500 chars)
+                console.error(`[MIND71] Provider Error (${response.status}):`, errorData.substring(0, 500));
+
+                return res.status(502).json({
+                    success: false,
+                    message: "AI provider error",
+                    providerStatus: response.status
+                });
             }
 
             const data = await response.json();
             const reply = data.choices[0].message.content;
 
-            // Add assistant reply to history
+            // Add assistant reply and save
             chat.messages.push({ role: 'assistant', content: reply });
             chat.lastActivity = new Date();
-
             await chat.save();
 
             res.json({
@@ -117,17 +146,15 @@ router.post('/chat', chatLimiter, async (req, res) => {
             });
 
         } catch (apiError) {
-            console.error('OpenRouter Fetch Error:', apiError.message);
-
-            const errorMsg = lang === 'ar'
-                ? 'عذراً، واجهت مشكلة في الاتصال بمزود الخدمة. يرجى المحاولة مرة أخرى لاحقاً.'
-                : 'Sorry, I am having trouble connecting to my brain right now. Please try again later.';
-
-            res.status(502).json({ success: false, message: errorMsg });
+            console.error('[MIND71] Fetch Exception:', apiError.message);
+            res.status(502).json({
+                success: false,
+                message: lang === 'ar' ? 'خطأ في الاتصال بمزود الخدمة' : 'AI Service communication error'
+            });
         }
 
     } catch (error) {
-        console.error('Mind71 Internal Error:', error);
+        console.error('[MIND71] Internal Error:', error);
         res.status(500).json({ success: false, message: 'Internal server error' });
     }
 });

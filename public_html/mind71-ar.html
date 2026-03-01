@@ -441,9 +441,13 @@
                         conversationId = data.conversationId;
                         localStorage.setItem('mind71_conv_id_ar', conversationId);
                         addMessage(data.reply, 'assistant');
+                    } else {
+                        const errorMsg = data.message || "حدث خطأ ما";
+                        const statusSuffix = data.providerStatus ? ` (Status: ${data.providerStatus})` : "";
+                        addMessage(`${errorMsg}${statusSuffix}. يرجى المحاولة مرة أخرى.`, 'assistant');
                     }
                 } catch (e) {
-                    addMessage("عذراً، حدث خطأ. حاول مرة أخرى.", 'assistant');
+                    addMessage("عذراً، حدث خطأ في الشبكة أو الخادم. حاول مرة أخرى.", 'assistant');
                 } finally {
                     isTyping = false;
                     typingIndicator.style.display = 'none';

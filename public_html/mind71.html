@@ -1095,10 +1095,12 @@
                         localStorage.setItem('mind71_conv_id', conversationId);
                         addMessage(data.reply, 'assistant');
                     } else {
-                        addMessage("Something went wrong. Please try again.", 'assistant');
+                        const errorMsg = data.message || "Something went wrong";
+                        const statusSuffix = data.providerStatus ? ` (Status: ${data.providerStatus})` : "";
+                        addMessage(`${errorMsg}${statusSuffix}. Please try again.`, 'assistant');
                     }
                 } catch (error) {
-                    addMessage("Network error. Please check your connection.", 'assistant');
+                    addMessage("Network error or server unavailable. Please check your connection.", 'assistant');
                 } finally {
                     isTyping = false;
                     typingIndicator.style.display = 'none';
