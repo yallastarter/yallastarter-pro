@@ -294,6 +294,30 @@ body {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
+/* Typing Indicator (Blinking Cursor) */
+.message-row.ai-msg.typing .message-box::after {
+    content: '';
+    display: inline-block;
+    width: 2px;
+    height: 1.2em;
+    background-color: var(--saudi-green-bright);
+    margin-left: 5px;
+    vertical-align: middle;
+    animation: cursorBlink 1s step-end infinite;
+}
+
+@keyframes cursorBlink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
 /* Input HUD */
 .chat-input-hud {
     padding: 2rem;

@@ -81,6 +81,11 @@ class Mind71Platform {
         this.layout.resetInput();
         this.layout.setThinking(true);
 
+        // CREATE INSTANT AI BUBBLE
+        let assistantMessage = "";
+        let currentMessageBox = this.layout.addMessageToUI("", 'ai');
+        let currentMessageRow = currentMessageBox.closest('.message-row');
+
         // Abort Controller for "Stop generating"
         this.abortController = new AbortController();
         const stopBtn = document.querySelector('#stop-generation');
@@ -114,7 +119,6 @@ class Mind71Platform {
                     const errData = JSON.parse(errText);
                     errMsg = errData.message || errMsg;
                 } catch (e) {
-                    // Not JSON, use text if short
                     if (errText.length < 100) errMsg = errText;
                 }
                 throw new Error(errMsg);
@@ -122,10 +126,6 @@ class Mind71Platform {
 
             const reader = response.body.getReader();
             const decoder = new TextDecoder('utf-8');
-            let assistantMessage = "";
-            let messageBoxInitialised = false;
-            let currentMessageRow = null;
-            let currentMessageBox = null;
 
             while (true) {
                 const { done, value } = await reader.read();
@@ -144,40 +144,18 @@ class Mind71Platform {
 
                             if (parsed.error) {
                                 console.error("Stream Error:", parsed);
-                                this.layout.addMessageToUI(`Intelligence Failure: ${parsed.error}`, 'ai');
-                                break;
-                            }
-
-                            if (parsed.metadata) {
-                                // Conversation ID sync if needed
-                                continue;
+                                throw new Error(parsed.error);
                             }
 
                             if (parsed.choices && parsed.choices[0] && parsed.choices[0].delta) {
                                 const content = parsed.choices[0].delta.content || "";
-                                assistantMessage += content;
-
-                                // Real-time UI update
-                                if (!messageBoxInitialised && assistantMessage.length > 0) {
-                                    // Remove empty state if present
-                                    if (this.layout.elements.scroll.querySelector('h1')) {
-                                        this.layout.elements.scroll.innerHTML = '';
+                                if (content) {
+                                    if (currentMessageRow.classList.contains('typing')) {
+                                        currentMessageRow.classList.remove('typing');
                                     }
+                                    assistantMessage += content;
 
-                                    currentMessageRow = document.createElement('div');
-                                    currentMessageRow.className = 'message-row ai-msg';
-                                    currentMessageRow.style.animation = 'fadeInSlide 0.4s ease-out';
-
-                                    currentMessageBox = document.createElement('div');
-                                    currentMessageBox.className = 'message-box markdown-content';
-
-                                    currentMessageRow.appendChild(currentMessageBox);
-                                    this.layout.elements.scroll.appendChild(currentMessageRow);
-
-                                    messageBoxInitialised = true;
-                                }
-
-                                if (currentMessageBox) {
+                                    // Real-time UI update
                                     if (typeof marked !== 'undefined') {
                                         currentMessageBox.innerHTML = marked.parse(assistantMessage);
                                         currentMessageBox.querySelectorAll('pre code').forEach((block) => {
@@ -190,7 +168,8 @@ class Mind71Platform {
                                 }
                             }
                         } catch (e) {
-                            // Ignore parse errors for incomplete chunks
+                            if (e instanceof SyntaxError) continue;
+                            throw e;
                         }
                     }
                 }
@@ -202,12 +181,17 @@ class Mind71Platform {
             }
 
         } catch (err) {
+            currentMessageRow.classList.remove('typing');
             if (err.name === 'AbortError') {
                 console.log('Generation stopped by user');
-                // The partial message is already in the UI and state if we reached the stream reader
+                if (!assistantMessage) {
+                    currentMessageBox.innerHTML = `<span style="opacity:0.5; font-style:italic;">Generation halted.</span>`;
+                }
             } else {
                 console.error('System Failure:', err);
-                this.layout.addMessageToUI("Intelligence link severed. Check connection and retry.", 'ai');
+                currentMessageBox.innerHTML = `<div class="error-msg" style="color: #ef4444; font-size: 0.9rem;">
+                    <i class="fa-solid fa-triangle-exclamation"></i> ${err.message}
+                </div>`;
             }
         } finally {
             if (stopBtn) {

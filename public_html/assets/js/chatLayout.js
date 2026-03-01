@@ -51,23 +51,28 @@ class ChatLayout {
 
         const row = document.createElement('div');
         row.className = `message-row ${role === 'user' ? 'user-msg' : 'ai-msg'}`;
+        if (role === 'ai') row.classList.add('typing');
 
         const box = document.createElement('div');
         box.className = 'message-box markdown-content';
 
-        // Parse markdown and sanitize/highlight
-        if (typeof marked !== 'undefined') {
-            box.innerHTML = marked.parse(content);
-            box.querySelectorAll('pre code').forEach((block) => {
-                if (typeof hljs !== 'undefined') hljs.highlightElement(block);
-            });
-        } else {
-            box.textContent = content;
+        if (content) {
+            // Parse markdown and sanitize/highlight
+            if (typeof marked !== 'undefined') {
+                box.innerHTML = marked.parse(content);
+                box.querySelectorAll('pre code').forEach((block) => {
+                    if (typeof hljs !== 'undefined') hljs.highlightElement(block);
+                });
+            } else {
+                box.textContent = content;
+            }
         }
 
         row.appendChild(box);
         this.elements.scroll.appendChild(row);
         this.scrollToBottom();
+
+        return box;
     }
 
     setThinking(status) {
