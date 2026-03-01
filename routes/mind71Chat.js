@@ -66,15 +66,23 @@ router.post('/chat', chatLimiter, async (req, res) => {
             return res.status(400).json({ success: false, message: 'Message exceeds 2000 characters limit' });
         }
 
-        const apiKey = process.env.OPENROUTER_API_KEY;
-        const model = process.env.MIND71_MODEL || "deepseek/deepseek-r1-distill-qwen-1.5b";
+        const primaryModel = process.env.MIND71_MODEL || "deepseek/deepseek-r1-distill-qwen-1.5b";
+        const fallbackModels = [
+            "z-ai/glm-4.5-air:free",
+            "stepfun/step-3.5-flash:free",
+            "nvidia/nemotron-nano-9b-v2:free"
+        ];
+
+        // Final list of models to try
+        const modelsToTry = [primaryModel, ...fallbackModels.filter(m => m !== primaryModel)];
+
         const referer = process.env.BASE_URL || process.env.CLIENT_URL || "https://www.yallastarter.com";
 
         // Diagnostic logs
         console.log("[mind71] route hit");
         console.log("[mind71] keySet=", !!process.env.OPENROUTER_API_KEY,
             "keyPrefix=", (process.env.OPENROUTER_API_KEY || "").slice(0, 8),
-            "model=", (process.env.MIND71_MODEL || ""));
+            "primaryModel=", primaryModel);
 
         // Handle conversation persistence
         let chat;
@@ -104,64 +112,70 @@ router.post('/chat', chatLimiter, async (req, res) => {
             chat.messages = [systemPrompt, ...recentMessages];
         }
 
-        // Call OpenRouter
-        try {
-            const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-                method: "POST",
-                headers: {
-                    "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
-                    "Content-Type": "application/json",
-                    "HTTP-Referer": referer,
-                    "X-Title": "YallaStarter Mind71"
-                },
-                body: JSON.stringify({
-                    model: model,
-                    messages: chat.messages.map(m => ({ role: m.role, content: m.content })),
-                    temperature: 0.7
-                })
-            });
+        // Call OpenRouter with fallbacks
+        let lastError = null;
+        let successfulReply = null;
 
-            console.log(`[MIND71] OpenRouter Status: ${response.status}`);
-
-            if (!response.ok) {
-                const errorData = await response.text();
-                // Log provider failure with status and body (exact format requested)
-                console.log("[mind71] openrouter status=", response.status, "body=", errorData.slice(0, 500));
-
-                if (response.status === 401) {
-                    return res.status(401).json({
-                        success: false,
-                        message: "OpenRouter auth failed (401). Verify OPENROUTER_API_KEY in Render and redeploy.",
-                        providerStatus: 401
-                    });
-                }
-
-                return res.status(response.status === 403 ? 403 : 502).json({
-                    success: false,
-                    message: "AI provider error",
-                    providerStatus: response.status
+        for (const model of modelsToTry) {
+            try {
+                console.log(`[mind71] attempting completion with model: ${model}`);
+                const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+                    method: "POST",
+                    headers: {
+                        "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
+                        "Content-Type": "application/json",
+                        "HTTP-Referer": referer,
+                        "X-Title": "YallaStarter Mind71"
+                    },
+                    body: JSON.stringify({
+                        model: model,
+                        messages: chat.messages.map(m => ({ role: m.role, content: m.content })),
+                        temperature: 0.7
+                    })
                 });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    successfulReply = data.choices[0].message.content;
+                    console.log(`[mind71] success with model: ${model}`);
+                    break; // Exit loop on success
+                } else {
+                    const errorData = await response.text();
+                    console.log(`[mind71] model ${model} failed - status: ${response.status} body: ${errorData.slice(0, 500)}`);
+
+                    if (response.status === 401) {
+                        return res.status(401).json({
+                            success: false,
+                            message: "OpenRouter auth failed (401). Verify OPENROUTER_API_KEY in Render and redeploy.",
+                            providerStatus: 401
+                        });
+                    }
+                    lastError = { status: response.status, body: errorData.slice(0, 500) };
+                }
+            } catch (err) {
+                console.error(`[mind71] fetch exception with model ${model}:`, err.message);
+                lastError = { status: 502, body: err.message };
             }
+        }
 
-            const data = await response.json();
-            const reply = data.choices[0].message.content;
-
+        if (successfulReply) {
             // Add assistant reply and save
-            chat.messages.push({ role: 'assistant', content: reply });
+            chat.messages.push({ role: 'assistant', content: successfulReply });
             chat.lastActivity = new Date();
             await chat.save();
 
-            res.json({
+            return res.json({
                 success: true,
-                reply: reply,
+                reply: successfulReply,
                 conversationId: currentConvId
             });
-
-        } catch (apiError) {
-            console.error('[MIND71] Fetch Exception:', apiError.message);
-            res.status(502).json({
+        } else {
+            // All models failed
+            return res.status(lastError?.status || 502).json({
                 success: false,
-                message: lang === 'ar' ? 'خطأ في الاتصال بمزود الخدمة' : 'AI Service communication error'
+                message: "AI provider error (all fallback models failed)",
+                providerStatus: lastError?.status || 502,
+                details: lastError?.body
             });
         }
 
