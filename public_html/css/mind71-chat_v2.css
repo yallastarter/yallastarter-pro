@@ -487,7 +487,7 @@ body {
 
 .header .nav-links a:hover,
 .header .nav-links a.active {
-    color: white !important;
+    color: var(--saudi-green-bright) !important;
     opacity: 1;
 }
 
@@ -524,7 +524,7 @@ body {
 .header .language-btn {
     background: transparent !important;
     border: 1px solid var(--glass-border) !important;
-    color: var(--text-secondary) !important;
+    color: var(--saudi-green-bright) !important;
     padding: 0.25rem 0.5rem !important;
     border-radius: 6px !important;
     font-size: 0.75rem !important;
@@ -533,7 +533,8 @@ body {
 
 .header .language-btn.active {
     background: var(--glass-shine) !important;
-    color: white !important;
+    color: var(--saudi-green-bright) !important;
+    border-color: var(--saudi-green) !important;
 }
 
 /* Mobile Menu Button Styling within Mind71 Theme */
