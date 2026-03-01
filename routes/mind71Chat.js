@@ -187,6 +187,7 @@ router.post('/chat', chatLimiter, async (req, res) => {
 
 router.post('/chat-stream', chatLimiter, async (req, res) => {
     try {
+        console.log(`[MIND71] Request Body:`, JSON.stringify(req.body));
         const { message, lang = 'en', conversationId } = req.body;
 
         if (!process.env.OPENROUTER_API_KEY) {
@@ -224,10 +225,13 @@ router.post('/chat-stream', chatLimiter, async (req, res) => {
         res.setHeader('Cache-Control', 'no-cache');
         res.setHeader('Connection', 'keep-alive');
 
+        console.log(`[MIND71] Starting stream for model: ${primaryModel}`);
+
         // Initial metadata chunk
         res.write(`data: ${JSON.stringify({ metadata: { conversationId: currentConvId } })}\n\n`);
 
-        const response = await fetch("https://openrouter.ai/v1/chat/completions", {
+        console.log(`[MIND71] Fetching from OpenRouter...`);
+        const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,

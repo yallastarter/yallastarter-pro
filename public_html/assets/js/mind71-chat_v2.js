@@ -105,7 +105,9 @@ class Mind71Platform {
             });
 
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                const errData = await response.json().catch(() => ({}));
+                const errMsg = errData.message || `System Error ${response.status}`;
+                throw new Error(errMsg);
             }
 
             const reader = response.body.getReader();
