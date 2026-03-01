@@ -580,12 +580,22 @@
             window.location.href = 'dashboard.html';
         }
 
+        // Check for redirect reason (e.g., timeout)
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('reason') === 'timeout') {
+            const alertDiv = document.createElement('div');
+            alertDiv.style.cssText = 'background: #fff3cd; color: #856404; padding: 1rem; border-radius: 12px; margin-bottom: 1.5rem; font-size: 0.9rem; border: 1px solid #ffeeba;';
+            alertDiv.innerHTML = '<i class="fas fa-clock"></i> Your session has expired due to inactivity. Please log in again.';
+            document.querySelector('.auth-header').after(alertDiv);
+        }
+
         // Handle login form submission
         document.querySelector('.auth-form').addEventListener('submit', async function (e) {
             e.preventDefault();
 
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
+            const remember = document.getElementById('remember')?.checked;
             const loginBtn = document.querySelector('.btn-login');
 
             if (!email || !password) {
@@ -597,7 +607,7 @@
             loginBtn.textContent = 'Logging in...';
 
             try {
-                const result = await window.auth.login({ email, password });
+                const result = await window.auth.login({ email, password, remember });
 
                 if (result.success) {
                     window.location.href = 'dashboard.html';

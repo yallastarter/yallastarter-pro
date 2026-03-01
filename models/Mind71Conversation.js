@@ -33,6 +33,10 @@ const Mind71ChatSchema = new mongoose.Schema({
         enum: ['en', 'ar'],
         default: 'en'
     },
+    title: {
+        type: String,
+        default: 'New Strategy'
+    },
     messages: [ChatMessageSchema],
     lastActivity: {
         type: Date,
@@ -43,4 +47,4 @@ const Mind71ChatSchema = new mongoose.Schema({
 // Index for cleanup and faster queries
 Mind71ChatSchema.index({ lastActivity: -1 });
 
-module.exports = mongoose.model('Mind71Chat', Mind71ChatSchema);
+module.exports = mongoose.model('Mind71Conversation', Mind71ChatSchema);

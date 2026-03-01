@@ -652,6 +652,11 @@
                         </div>
 
                         <div class="form-checkbox">
+                            <input type="checkbox" id="remember" name="remember">
+                            <label for="remember">Remember me</label>
+                        </div>
+
+                        <div class="form-checkbox">
                             <input type="checkbox" id="terms" name="terms" required>
                             <label for="terms">
                                 I agree to the <a href="terms-of-service.html" target="_blank">Terms of Service</a> and
@@ -921,7 +926,8 @@
                     const result = await window.auth.signup({
                         username: document.getElementById('fullName').value,
                         email: document.getElementById('email').value,
-                        password: document.getElementById('password').value
+                        password: document.getElementById('password').value,
+                        remember: document.getElementById('remember')?.checked
                     });
 
                     if (result.success) {

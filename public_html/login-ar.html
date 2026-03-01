@@ -507,7 +507,8 @@
             <form class="login-form auth-form">
                 <div class="form-group">
                     <label class="form-label" for="email">البريد الإلكتروني أو اسم المستخدم</label>
-                    <input type="text" id="email" class="form-input" placeholder="أدخل بريدك الإلكتروني أو اسم المستخدم" required>
+                    <input type="text" id="email" class="form-input" placeholder="أدخل بريدك الإلكتروني أو اسم المستخدم"
+                        required>
                 </div>
 
                 <div class="form-group">
@@ -567,12 +568,22 @@
             window.location.href = 'dashboard-ar.html';
         }
 
+        // التحقق من سبب إعادة التوجيه (مثلاً: انتهاء الجلسة)
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('reason') === 'timeout') {
+            const alertDiv = document.createElement('div');
+            alertDiv.style.cssText = 'background: #fff3cd; color: #856404; padding: 1rem; border-radius: 12px; margin-bottom: 1.5rem; font-size: 0.9rem; border: 1px solid #ffeeba; text-align: right;';
+            alertDiv.innerHTML = '<i class="fas fa-clock"></i> انتهت جلسة العمل الخاصة بك بسبب عدم النشاط. يرجى تسجيل الدخول مرة أخرى.';
+            document.querySelector('.login-header').after(alertDiv);
+        }
+
         // Handle login form submission
         document.querySelector('.auth-form').addEventListener('submit', async function (e) {
             e.preventDefault();
 
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
+            const remember = document.getElementById('remember')?.checked;
             const loginBtn = document.querySelector('.login-btn');
 
             if (!email || !password) {
@@ -584,7 +595,7 @@
             loginBtn.textContent = 'جاري تسجيل الدخول...';
 
             try {
-                const result = await window.auth.login({ email, password });
+                const result = await window.auth.login({ email, password, remember });
 
                 if (result.success) {
                     window.location.href = 'dashboard-ar.html';

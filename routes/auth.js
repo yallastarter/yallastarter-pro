@@ -82,8 +82,10 @@ router.post('/signup', async (req, res) => {
         });
 
         // Create token
+        const { remember } = req.body;
+        const expiresIn = remember ? '7d' : '2h';
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-            expiresIn: '30d'
+            expiresIn
         });
 
         res.status(201).json({
@@ -151,8 +153,10 @@ router.post('/login', async (req, res) => {
         }
 
         // Create token
+        const remember = req.body.remember === true;
+        const expiresIn = remember ? '7d' : '2h';
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-            expiresIn: '30d'
+            expiresIn
         });
 
         res.status(200).json({
@@ -183,8 +187,10 @@ router.get('/google', passport.authenticate('google', { scope: ['profile', 'emai
 router.get('/google/callback',
     passport.authenticate('google', { failureRedirect: '/login.html', session: false }),
     (req, res) => {
+        // Google OAuth is typically for one session unless browser stays open
+        // Standardizing on 2h for redirect sessions
         const token = jwt.sign({ userId: req.user._id }, process.env.JWT_SECRET, {
-            expiresIn: '30d'
+            expiresIn: '2h'
         });
         const userStr = encodeURIComponent(JSON.stringify({
             id: req.user._id,

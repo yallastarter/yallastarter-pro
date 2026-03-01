@@ -4,8 +4,8 @@
 
 class ConversationStore {
     constructor() {
-        this.STORAGE_KEY = 'mind71_v2_chats';
-        this.ACTIVE_KEY = 'mind71_v2_active';
+        this.STORAGE_KEY = 'mind71_v2_chats'; // List of metadata {id, title, lastUpdate}
+        this.ACTIVE_KEY = 'mind71_conversationId';
         this.chats = this.load();
     }
 
@@ -22,15 +22,58 @@ class ConversationStore {
         localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.chats));
     }
 
-    create(title = 'New Strategy') {
+    // Sync threads for logged in users
+    async sync() {
+        const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+        if (!token) return;
+
+        try {
+            const res = await fetch('/api/mind71/conversations', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const data = await res.json();
+            if (data.success) {
+                // Merge/Override with backend data
+                this.chats = data.conversations.map(c => ({
+                    id: c.conversationId,
+                    title: c.title,
+                    lastUpdate: c.lastActivity,
+                    messages: [] // Messages loaded on demand
+                }));
+                this.save();
+            }
+        } catch (err) {
+            console.error('Sync failed:', err);
+        }
+    }
+
+    async getHistory(id) {
+        const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+        const headers = {};
+        if (token) headers['Authorization'] = `Bearer ${token}`;
+
+        try {
+            const res = await fetch(`/api/mind71/conversation/${id}`, { headers });
+            const data = await res.json();
+            if (data.success) {
+                return data.messages;
+            }
+        } catch (err) {
+            console.error('Failed to fetch history:', err);
+        }
+        return [];
+    }
+
+    create() {
+        const newId = crypto.randomUUID();
         const newChat = {
-            id: crypto.randomUUID(),
-            title: title,
+            id: newId,
+            title: 'New Strategy',
             messages: [],
-            createdAt: new Date().toISOString(),
             lastUpdate: new Date().toISOString()
         };
         this.chats.unshift(newChat);
+        this.setActiveId(newId);
         this.save();
         return newChat;
     }
@@ -44,12 +87,11 @@ class ConversationStore {
         if (index !== -1) {
             this.chats[index] = { ...this.chats[index], ...updates, lastUpdate: new Date().toISOString() };
             this.save();
+        } else {
+            // New thread from backend or unknown
+            this.chats.unshift({ id, ...updates, lastUpdate: new Date().toISOString() });
+            this.save();
         }
-    }
-
-    delete(id) {
-        this.chats = this.chats.filter(c => c.id !== id);
-        this.save();
     }
 
     setActiveId(id) {

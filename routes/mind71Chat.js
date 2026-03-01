@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const rateLimit = require('express-rate-limit');
-const Mind71Chat = require('../models/Mind71Chat');
+const Mind71Conversation = require('../models/Mind71Conversation');
 const { v4: uuidv4 } = require('uuid');
+const jwt = require('jsonwebtoken');
+const User = require('../models/User');
 
 // Rate limiter for chat endpoint
 const chatLimiter = rateLimit({
@@ -10,6 +12,22 @@ const chatLimiter = rateLimit({
     max: 50, // limit each IP to 50 requests per windowMs
     message: { success: false, message: 'Too many requests, please try again later.' }
 });
+
+// Optional Auth Middleware for Mind71
+const getUserOptional = async (req, res, next) => {
+    let token;
+    if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+        try {
+            token = req.headers.authorization.split(' ')[1];
+            const decoded = jwt.verify(token, process.env.JWT_SECRET);
+            const uid = decoded.userId || decoded.id;
+            req.user = await User.findById(uid).select('-password');
+        } catch (error) {
+            // Silence error, continue as anonymous
+        }
+    }
+    next();
+};
 
 // System Prompts
 const SYSTEM_PROMPTS = {
@@ -30,208 +48,97 @@ const SYSTEM_PROMPTS = {
 };
 
 /**
- * GET /api/mind71/health
- * Diagnostic endpoint for Render environment verification
+ * GET /api/mind71/conversations
+ * List threads for logged-in user
  */
-router.get('/health', (req, res) => {
-    res.json({
-        ok: true,
-        nodeEnv: process.env.NODE_ENV,
-        openrouterKeySet: !!process.env.OPENROUTER_API_KEY,
-        openrouterKeyPrefix: (process.env.OPENROUTER_API_KEY || "").slice(0, 8),
-        mind71Model: process.env.MIND71_MODEL || null,
-        baseUrl: process.env.BASE_URL || null,
-        clientUrl: process.env.CLIENT_URL || null
-    });
-});
-
-router.post('/chat', chatLimiter, async (req, res) => {
+router.get('/conversations', getUserOptional, async (req, res) => {
     try {
-        const { message, lang = 'en', conversationId } = req.body;
-
-        // Validation for missing API Key
-        if (!process.env.OPENROUTER_API_KEY) {
-            console.error('MIND71 ERROR: OPENROUTER_API_KEY not configured');
-            return res.status(500).json({
-                success: false,
-                message: "OPENROUTER_API_KEY not configured in Render env vars"
-            });
+        if (!req.user) {
+            return res.json({ success: true, conversations: [] });
         }
-
-        // Message Validation
-        if (!message || typeof message !== 'string' || message.trim().length === 0) {
-            return res.status(400).json({ success: false, message: 'Message is required' });
-        }
-        if (message.length > 2000) {
-            return res.status(400).json({ success: false, message: 'Message exceeds 2000 characters limit' });
-        }
-
-        const primaryModel = process.env.MIND71_MODEL || "deepseek/deepseek-r1-distill-qwen-1.5b";
-        const fallbackModels = [
-            "z-ai/glm-4.5-air:free",
-            "stepfun/step-3.5-flash:free",
-            "nvidia/nemotron-nano-9b-v2:free"
-        ];
-
-        // Final list of models to try
-        const modelsToTry = [primaryModel, ...fallbackModels.filter(m => m !== primaryModel)];
-
-        const referer = process.env.BASE_URL || process.env.CLIENT_URL || "https://www.yallastarter.com";
-
-        // Diagnostic logs
-        console.log("[mind71] route hit");
-        console.log("[mind71] keySet=", !!process.env.OPENROUTER_API_KEY,
-            "keyPrefix=", (process.env.OPENROUTER_API_KEY || "").slice(0, 8),
-            "primaryModel=", primaryModel);
-
-        // Handle conversation persistence
-        let chat;
-        let currentConvId = conversationId;
-
-        if (currentConvId) {
-            chat = await Mind71Chat.findOne({ conversationId: currentConvId });
-        }
-
-        if (!chat) {
-            currentConvId = uuidv4();
-            chat = new Mind71Chat({
-                conversationId: currentConvId,
-                language: lang,
-                messages: [{ role: 'system', content: SYSTEM_PROMPTS[lang] || SYSTEM_PROMPTS.en }]
-            });
-            if (req.user) chat.userId = req.user.id;
-        }
-
-        // Add user message to history
-        chat.messages.push({ role: 'user', content: message });
-
-        // Keep conversation window (max 25 messages)
-        if (chat.messages.length > 25) {
-            const systemPrompt = chat.messages[0];
-            const recentMessages = chat.messages.slice(-24);
-            chat.messages = [systemPrompt, ...recentMessages];
-        }
-
-        // Call OpenRouter with fallbacks
-        let lastError = null;
-        let successfulReply = null;
-
-        for (const model of modelsToTry) {
-            try {
-                console.log(`[mind71] attempting completion with model: ${model}`);
-                const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-                    method: "POST",
-                    headers: {
-                        "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
-                        "Content-Type": "application/json",
-                        "HTTP-Referer": referer,
-                        "X-Title": "YallaStarter Mind71"
-                    },
-                    body: JSON.stringify({
-                        model: model,
-                        messages: chat.messages.map(m => ({ role: m.role, content: m.content })),
-                        temperature: 0.7
-                    })
-                });
-
-                if (response.ok) {
-                    const data = await response.json();
-                    successfulReply = data.choices[0].message.content;
-                    console.log(`[mind71] success with model: ${model}`);
-                    break; // Exit loop on success
-                } else {
-                    const errorData = await response.text();
-                    console.log(`[mind71] model ${model} failed - status: ${response.status} body: ${errorData.slice(0, 500)}`);
-
-                    if (response.status === 401) {
-                        return res.status(401).json({
-                            success: false,
-                            message: "OpenRouter auth failed (401). Verify OPENROUTER_API_KEY in Render and redeploy.",
-                            providerStatus: 401
-                        });
-                    }
-                    lastError = { status: response.status, body: errorData.slice(0, 500) };
-                }
-            } catch (err) {
-                console.error(`[mind71] fetch exception with model ${model}:`, err.message);
-                lastError = { status: 502, body: err.message };
-            }
-        }
-
-        if (successfulReply) {
-            // Add assistant reply and save
-            chat.messages.push({ role: 'assistant', content: successfulReply });
-            chat.lastActivity = new Date();
-            await chat.save();
-
-            return res.json({
-                success: true,
-                reply: successfulReply,
-                conversationId: currentConvId
-            });
-        } else {
-            // All models failed
-            return res.status(lastError?.status || 502).json({
-                success: false,
-                message: "AI provider error (all fallback models failed)",
-                providerStatus: lastError?.status || 502,
-                details: lastError?.body
-            });
-        }
-
-    } catch (error) {
-        console.error('[MIND71] Internal Error:', error);
-        res.status(500).json({ success: false, message: 'Internal server error' });
+        const conversations = await Mind71Conversation.find({ userId: req.user._id })
+            .select('conversationId title lastActivity language')
+            .sort({ lastActivity: -1 })
+            .limit(50);
+        res.json({ success: true, conversations });
+    } catch (err) {
+        res.status(500).json({ success: false, message: 'Failed to fetch conversations' });
     }
 });
 
-router.post('/chat-stream', chatLimiter, async (req, res) => {
-    console.log(`[MIND71] POST /api/mind71/chat-stream request received`);
+/**
+ * GET /api/mind71/conversation/:id
+ * Get history for a specific thread
+ */
+router.get('/conversation/:id', getUserOptional, async (req, res) => {
     try {
-        console.log(`[MIND71] Request Body:`, JSON.stringify(req.body));
+        const query = { conversationId: req.params.id };
+        if (req.user) {
+            query.userId = req.user._id;
+        }
+
+        const chat = await Mind71Conversation.findOne(query);
+        if (!chat) {
+            return res.status(404).json({ success: false, message: 'Conversation not found' });
+        }
+        res.json({ success: true, messages: chat.messages, title: chat.title });
+    } catch (err) {
+        res.status(500).json({ success: false, message: 'Failed to fetch history' });
+    }
+});
+
+router.post('/chat', chatLimiter, getUserOptional, async (req, res) => {
+    try {
         const { message, lang = 'en', conversationId } = req.body;
 
         if (!process.env.OPENROUTER_API_KEY) {
-            return res.status(500).json({ success: false, message: "API Key not configured" });
+            return res.status(500).json({ success: false, message: "OpenRouter key missing" });
         }
 
-        if (!message) return res.status(400).json({ success: false, message: "Message required" });
+        if (!message || message.trim().length === 0) {
+            return res.status(400).json({ success: false, message: 'Message is required' });
+        }
 
-        const primaryModel = process.env.MIND71_MODEL || "deepseek/deepseek-r1-distill-qwen-1.5b";
-        const referer = process.env.BASE_URL || process.env.CLIENT_URL || "https://www.yallastarter.com";
+        const primaryModel = process.env.MIND71_MODEL || "z-ai/glm-4.5-air:free";
+        const referer = process.env.BASE_URL || "https://www.yallastarter.com";
 
-        // Handle conversation persistence
+        // 1. Load or Create Conversation
         let chat;
         let currentConvId = conversationId;
+
         if (currentConvId) {
-            chat = await Mind71Chat.findOne({ conversationId: currentConvId });
+            const query = { conversationId: currentConvId };
+            if (req.user) query.userId = req.user._id;
+            chat = await Mind71Conversation.findOne(query);
         }
+
         if (!chat) {
-            currentConvId = uuidv4();
-            chat = new Mind71Chat({
+            currentConvId = currentConvId || uuidv4();
+            chat = new Mind71Conversation({
                 conversationId: currentConvId,
                 language: lang,
                 messages: [{ role: 'system', content: SYSTEM_PROMPTS[lang] || SYSTEM_PROMPTS.en }]
             });
-            if (req.user) chat.userId = req.user.id;
+            if (req.user) chat.userId = req.user._id;
         }
 
+        // 2. Generate Title if needed
+        const userMsgCount = chat.messages.filter(m => m.role === 'user').length;
+        if (userMsgCount === 0 || chat.title === 'New Strategy') {
+            const cleanTitle = message.trim().split(/\s+/).slice(0, 6).join(' ');
+            chat.title = cleanTitle + (message.split(/\s+/).length > 6 ? '...' : '');
+        }
+
+        // 3. Append User Message
         chat.messages.push({ role: 'user', content: message });
-        if (chat.messages.length > 25) {
-            chat.messages = [chat.messages[0], ...chat.messages.slice(-24)];
-        }
 
-        // SSE Headers
-        res.setHeader('Content-Type', 'text/event-stream');
-        res.setHeader('Cache-Control', 'no-cache');
-        res.setHeader('Connection', 'keep-alive');
+        // 4. Prepare Context (System + last 24 messages)
+        const messagesForAI = [
+            chat.messages[0], // System
+            ...chat.messages.slice(1).slice(-24)
+        ];
 
-        console.log(`[MIND71] Starting stream for model: ${primaryModel}`);
-
-        // Initial metadata chunk
-        res.write(`data: ${JSON.stringify({ metadata: { conversationId: currentConvId } })}\n\n`);
-
-        console.log(`[MIND71] Fetching from OpenRouter...`);
+        // 5. Call OpenRouter
         const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
             method: "POST",
             headers: {
@@ -242,46 +149,114 @@ router.post('/chat-stream', chatLimiter, async (req, res) => {
             },
             body: JSON.stringify({
                 model: primaryModel,
-                messages: chat.messages.map(m => ({ role: m.role, content: m.content })),
+                messages: messagesForAI.map(m => ({ role: m.role, content: m.content })),
+                temperature: 0.7
+            })
+        });
+
+        if (!response.ok) {
+            const errData = await response.text();
+            return res.status(response.status).json({ success: false, message: "AI error", details: errData });
+        }
+
+        const data = await response.json();
+        const reply = data.choices[0].message.content;
+
+        // 6. Save Reply
+        chat.messages.push({ role: 'assistant', content: reply });
+        chat.lastActivity = new Date();
+        await chat.save();
+
+        res.json({ success: true, reply, conversationId: currentConvId, title: chat.title });
+
+    } catch (error) {
+        console.error('[MIND71] Error:', error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+});
+
+router.post('/chat-stream', chatLimiter, getUserOptional, async (req, res) => {
+    try {
+        const { message, lang = 'en', conversationId } = req.body;
+
+        if (!process.env.OPENROUTER_API_KEY) {
+            return res.status(500).json({ success: false, message: "API key missing" });
+        }
+
+        const primaryModel = process.env.MIND71_MODEL || "z-ai/glm-4.5-air:free";
+        const referer = process.env.BASE_URL || "https://www.yallastarter.com";
+
+        let chat;
+        let currentConvId = conversationId;
+
+        if (currentConvId) {
+            const query = { conversationId: currentConvId };
+            if (req.user) query.userId = req.user._id;
+            chat = await Mind71Conversation.findOne(query);
+        }
+
+        if (!chat) {
+            currentConvId = currentConvId || uuidv4();
+            chat = new Mind71Conversation({
+                conversationId: currentConvId,
+                language: lang,
+                messages: [{ role: 'system', content: SYSTEM_PROMPTS[lang] || SYSTEM_PROMPTS.en }]
+            });
+            if (req.user) chat.userId = req.user._id;
+        }
+
+        // Title logic
+        const userMsgCount = chat.messages.filter(m => m.role === 'user').length;
+        if (userMsgCount === 0 || chat.title === 'New Strategy') {
+            const cleanTitle = message.trim().split(/\s+/).slice(0, 6).join(' ');
+            chat.title = cleanTitle + (message.split(/\s+/).length > 6 ? '...' : '');
+        }
+
+        chat.messages.push({ role: 'user', content: message });
+        const messagesForAI = [chat.messages[0], ...chat.messages.slice(1).slice(-24)];
+
+        // SSE Headers
+        res.setHeader('Content-Type', 'text/event-stream');
+        res.setHeader('Cache-Control', 'no-cache');
+        res.setHeader('Connection', 'keep-alive');
+
+        // Initial metadata
+        res.write(`data: ${JSON.stringify({ metadata: { conversationId: currentConvId, title: chat.title } })}\n\n`);
+
+        const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
+                "Content-Type": "application/json",
+                "HTTP-Referer": referer,
+                "X-Title": "YallaStarter Mind71"
+            },
+            body: JSON.stringify({
+                model: primaryModel,
+                messages: messagesForAI.map(m => ({ role: m.role, content: m.content })),
                 stream: true,
                 temperature: 0.7
             })
         });
 
         if (!response.ok) {
-            const errBody = await response.text();
-            console.log(`[MIND71] Upstream OpenRouter Error - Status: ${response.status}, Body: ${errBody}`);
-            console.error(`[MIND71] OpenRouter Error (${response.status}):`, errBody);
-
-            let userFriendlyMessage = "Upstream Error";
-            if (response.status === 401) userFriendlyMessage = "OpenRouter Auth Failed (Check API Key)";
-            if (response.status === 402) userFriendlyMessage = "OpenRouter Credits Exhausted";
-            if (response.status === 429) userFriendlyMessage = "OpenRouter Rate Limit Exceeded";
-
-            res.write(`data: ${JSON.stringify({ error: userFriendlyMessage, details: errBody })}\n\n`);
+            res.write(`data: ${JSON.stringify({ error: "Stream start failed" })}\n\n`);
             return res.end();
         }
 
         const reader = response.body.getReader();
         const decoder = new TextDecoder();
         let fullReply = "";
-        console.log(`[MIND71] Upstream OpenRouter Success - Status: ${response.status}`);
 
-        // Handle client disconnect
-        let isAborted = false;
-        req.on('close', () => {
-            isAborted = true;
-            reader.cancel();
-        });
+        req.on('close', () => reader.cancel());
 
-        while (!isAborted) {
+        while (true) {
             const { done, value } = await reader.read();
             if (done) break;
 
             const chunk = decoder.decode(value, { stream: true });
             res.write(chunk);
 
-            // Extract content for saving to DB
             const lines = chunk.split('\n');
             for (const line of lines) {
                 if (line.startsWith('data: ')) {
@@ -289,14 +264,13 @@ router.post('/chat-stream', chatLimiter, async (req, res) => {
                     if (dataStr === '[DONE]') continue;
                     try {
                         const parsed = JSON.parse(dataStr);
-                        const content = parsed.choices[0]?.delta?.content || "";
-                        fullReply += content;
+                        fullReply += (parsed.choices[0]?.delta?.content || "");
                     } catch (e) { }
                 }
             }
         }
 
-        if (fullReply && !isAborted) {
+        if (fullReply) {
             chat.messages.push({ role: 'assistant', content: fullReply });
             chat.lastActivity = new Date();
             await chat.save();

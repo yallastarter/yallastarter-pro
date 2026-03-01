@@ -17,7 +17,7 @@ class Mind71Platform {
         this.init();
     }
 
-    init() {
+    async init() {
         const input = document.querySelector('#main-input');
         const sendBtn = document.querySelector('.btn-send-glow');
 
@@ -36,25 +36,38 @@ class Mind71Platform {
             }
         });
 
+        // Sync with backend on start
+        await store.sync();
+
         // Load initial state
         const activeId = store.getActiveId();
-        if (activeId && store.get(activeId)) {
-            this.switchChat(activeId);
+        if (activeId) {
+            await this.switchChat(activeId);
         } else if (store.chats.length > 0) {
-            this.switchChat(store.chats[0].id);
+            await this.switchChat(store.chats[0].id);
         } else {
             this.sidebar.newChatBtn.click();
         }
     }
 
-    switchChat(id) {
+    async switchChat(id) {
         if (!id) {
             this.layout.renderMessages([]);
             return;
         }
+
         store.setActiveId(id);
-        const chat = store.get(id);
-        this.layout.renderMessages(chat.messages);
+        let chat = store.get(id);
+
+        // Load history if needed
+        if (chat && (!chat.messages || chat.messages.length === 0)) {
+            this.layout.setThinking(true);
+            const history = await store.getHistory(id);
+            if (chat) chat.messages = history;
+            this.layout.setThinking(false);
+        }
+
+        this.layout.renderMessages(chat ? chat.messages : []);
         this.sidebar.render();
     }
 
@@ -74,7 +87,8 @@ class Mind71Platform {
 
         // Auto-title strategy
         if (chat.title === 'New Strategy') {
-            chat.title = text.substring(0, 30) + (text.length > 30 ? '...' : '');
+            const cleanTitle = text.trim().split(/\s+/).slice(0, 6).join(' ');
+            chat.title = cleanTitle + (text.split(/\s+/).length > 6 ? '...' : '');
             this.sidebar.render();
         }
 
@@ -128,6 +142,15 @@ class Mind71Platform {
             if (!data.success) throw new Error(data.message || "Intelligence Failure");
 
             const reply = data.reply;
+
+            // Sync metadata
+            if (data.title && chat.title === 'New Strategy') {
+                chat.title = data.title;
+                this.sidebar.render();
+            }
+            if (data.conversationId) {
+                store.setActiveId(data.conversationId);
+            }
 
             // ANIMATE RESPONSE
             await this.animateText(reply, currentMessageBox, currentMessageRow);
