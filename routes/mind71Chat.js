@@ -68,9 +68,8 @@ router.post('/chat', chatLimiter, async (req, res) => {
         const model = process.env.MIND71_MODEL || "deepseek/deepseek-r1-distill-qwen-1.5b";
         const referer = process.env.BASE_URL || process.env.CLIENT_URL || "https://yallastarter-pro.onrender.com";
 
-        // Debug logging (prefix only, never full key)
-        const keyPrefix = apiKey ? `${apiKey.substring(0, 7)}...` : 'not set';
-        console.log(`[mind71] keySet=${!!apiKey} prefix=${keyPrefix} model=${model} len=${message.length}`);
+        // Debug logging (exact line requested)
+        console.log("[mind71] keySet=", !!process.env.OPENROUTER_API_KEY, "keyPrefix=", (process.env.OPENROUTER_API_KEY || "").slice(0, 8), "model=", process.env.MIND71_MODEL);
 
         // Handle conversation persistence
         let chat;
@@ -127,7 +126,7 @@ router.post('/chat', chatLimiter, async (req, res) => {
                 if (response.status === 401) {
                     return res.status(401).json({
                         success: false,
-                        message: "OpenRouter authentication failed (401). Check OPENROUTER_API_KEY in Render.",
+                        message: "OpenRouter auth failed (401). Check OPENROUTER_API_KEY in Render and redeploy.",
                         providerStatus: 401
                     });
                 }
