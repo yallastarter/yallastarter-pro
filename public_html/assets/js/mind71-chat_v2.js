@@ -100,8 +100,8 @@ class Mind71Platform {
         }
 
         try {
-            console.log("calling /api/mind71/chat-stream");
-            const response = await fetch('/api/mind71/chat-stream', {
+            console.log("calling /api/mind71/chat");
+            const response = await fetch('/api/mind71/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -124,61 +124,16 @@ class Mind71Platform {
                 throw new Error(errMsg);
             }
 
-            const reader = response.body.getReader();
-            const decoder = new TextDecoder('utf-8');
+            const data = await response.json();
+            if (!data.success) throw new Error(data.message || "Intelligence Failure");
 
-            while (true) {
-                const { done, value } = await reader.read();
-                if (done) break;
+            const reply = data.reply;
 
-                const chunk = decoder.decode(value, { stream: true });
-                const lines = chunk.split('\n');
+            // ANIMATE RESPONSE
+            await this.animateText(reply, currentMessageBox, currentMessageRow);
 
-                for (const line of lines) {
-                    if (line.startsWith('data: ')) {
-                        const dataStr = line.slice(6).trim();
-                        if (dataStr === '[DONE]') continue;
-
-                        try {
-                            const parsed = JSON.parse(dataStr);
-
-                            if (parsed.error) {
-                                console.error("Stream Error:", parsed);
-                                throw new Error(parsed.error);
-                            }
-
-                            if (parsed.choices && parsed.choices[0] && parsed.choices[0].delta) {
-                                const content = parsed.choices[0].delta.content || "";
-                                if (content) {
-                                    if (currentMessageRow.classList.contains('typing')) {
-                                        currentMessageRow.classList.remove('typing');
-                                    }
-                                    assistantMessage += content;
-
-                                    // Real-time UI update
-                                    if (typeof marked !== 'undefined') {
-                                        currentMessageBox.innerHTML = marked.parse(assistantMessage);
-                                        currentMessageBox.querySelectorAll('pre code').forEach((block) => {
-                                            if (typeof hljs !== 'undefined') hljs.highlightElement(block);
-                                        });
-                                    } else {
-                                        currentMessageBox.textContent = assistantMessage;
-                                    }
-                                    this.layout.scrollToBottom();
-                                }
-                            }
-                        } catch (e) {
-                            if (e instanceof SyntaxError) continue;
-                            throw e;
-                        }
-                    }
-                }
-            }
-
-            // Save final message to history
-            if (assistantMessage) {
-                chat.messages.push({ role: 'assistant', content: assistantMessage });
-            }
+            // Save to history
+            chat.messages.push({ role: 'assistant', content: reply });
 
         } catch (err) {
             currentMessageRow.classList.remove('typing');
@@ -201,6 +156,49 @@ class Mind71Platform {
             this.layout.setThinking(false);
             store.save(); // Persist history
         }
+    }
+
+    /**
+     * Simulated Typewriter Effect
+     * Animates text in word chunks
+     */
+    async animateText(text, box, row) {
+        const words = text.split(' ');
+        let currentText = "";
+
+        // Remove empty state from scroll if needed
+        if (this.layout.elements.scroll.querySelector('h1')) {
+            this.layout.elements.scroll.innerHTML = '';
+        }
+
+        row.classList.add('typing');
+
+        for (let i = 0; i < words.length;) {
+            if (!this.abortController || this.abortController.signal.aborted) break;
+
+            // Chunks of 3-8 words, adaptive based on length
+            const chunkSize = words.length > 100 ? 8 : 4;
+            const chunk = words.slice(i, i + chunkSize).join(' ');
+            currentText += (i === 0 ? "" : " ") + chunk;
+            i += chunkSize;
+
+            // Update UI
+            if (typeof marked !== 'undefined') {
+                box.innerHTML = marked.parse(currentText);
+                box.querySelectorAll('pre code').forEach((block) => {
+                    if (typeof hljs !== 'undefined') hljs.highlightElement(block);
+                });
+            } else {
+                box.textContent = currentText;
+            }
+
+            this.layout.scrollToBottom();
+
+            // 25-50ms tick
+            await new Promise(resolve => setTimeout(resolve, 35));
+        }
+
+        row.classList.remove('typing');
     }
 }
 
