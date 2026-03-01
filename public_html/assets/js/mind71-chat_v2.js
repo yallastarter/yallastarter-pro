@@ -8,6 +8,7 @@ import ChatLayout from './chatLayout.js';
 
 class Mind71Platform {
     constructor() {
+        console.log("mind71 chat loaded");
         this.layout = new ChatLayout();
         this.sidebar = new SidebarManager({
             onChatSelect: (id) => this.switchChat(id)
@@ -60,6 +61,7 @@ class Mind71Platform {
     async handleSend() {
         const input = document.querySelector('#main-input');
         const text = input.value.trim();
+        console.log("send clicked", text);
         if (!text || this.layout.isTyping) return;
 
         const chatId = store.getActiveId();
@@ -93,6 +95,7 @@ class Mind71Platform {
         }
 
         try {
+            console.log("calling /api/mind71/chat-stream");
             const response = await fetch('/api/mind71/chat-stream', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -105,8 +108,15 @@ class Mind71Platform {
             });
 
             if (!response.ok) {
-                const errData = await response.json().catch(() => ({}));
-                const errMsg = errData.message || `System Error ${response.status}`;
+                const errText = await response.text().catch(() => "Unknown Connection Error");
+                let errMsg = `System Error ${response.status}`;
+                try {
+                    const errData = JSON.parse(errText);
+                    errMsg = errData.message || errMsg;
+                } catch (e) {
+                    // Not JSON, use text if short
+                    if (errText.length < 100) errMsg = errText;
+                }
                 throw new Error(errMsg);
             }
 

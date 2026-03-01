@@ -186,6 +186,7 @@ router.post('/chat', chatLimiter, async (req, res) => {
 });
 
 router.post('/chat-stream', chatLimiter, async (req, res) => {
+    console.log(`[MIND71] POST /api/mind71/chat-stream request received`);
     try {
         console.log(`[MIND71] Request Body:`, JSON.stringify(req.body));
         const { message, lang = 'en', conversationId } = req.body;
@@ -249,6 +250,7 @@ router.post('/chat-stream', chatLimiter, async (req, res) => {
 
         if (!response.ok) {
             const errBody = await response.text();
+            console.log(`[MIND71] Upstream OpenRouter Error - Status: ${response.status}, Body: ${errBody}`);
             console.error(`[MIND71] OpenRouter Error (${response.status}):`, errBody);
 
             let userFriendlyMessage = "Upstream Error";
@@ -263,6 +265,7 @@ router.post('/chat-stream', chatLimiter, async (req, res) => {
         const reader = response.body.getReader();
         const decoder = new TextDecoder();
         let fullReply = "";
+        console.log(`[MIND71] Upstream OpenRouter Success - Status: ${response.status}`);
 
         // Handle client disconnect
         let isAborted = false;
