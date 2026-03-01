@@ -616,6 +616,107 @@ body {
     }
 }
 
+/* User Dropdown Styling for Mind71 Theme */
+.user-dropdown {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.user-dropdown-btn {
+    background: transparent !important;
+    border: 1px solid var(--glass-border) !important;
+    color: var(--saudi-green-bright) !important;
+    padding: 0.4rem 0.8rem !important;
+    border-radius: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+    cursor: pointer !important;
+    font-weight: 600 !important;
+    font-size: 0.85rem !important;
+    transition: all 0.2s ease !important;
+}
+
+.user-dropdown-btn img,
+.user-dropdown-btn div {
+    flex-shrink: 0 !important;
+}
+
+#headerAvatar,
+#sessionAvatar {
+    margin-right: 0 !important;
+    /* Reset any global margins */
+}
+
+.user-dropdown-menu {
+    position: absolute !important;
+    top: calc(100% + 10px) !important;
+    right: 0 !important;
+    width: 220px !important;
+    background: var(--navy-bg) !important;
+    border: 1px solid var(--glass-border) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6) !important;
+    padding: 0.5rem !important;
+    display: none !important;
+    flex-direction: column !important;
+    z-index: 1001 !important;
+    backdrop-filter: blur(25px) !important;
+}
+
+.user-dropdown-menu.show {
+    display: flex !important;
+    animation: dropdownFadeIn 0.2s ease-out !important;
+}
+
+@keyframes dropdownFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dropdown-item {
+    color: var(--text-secondary) !important;
+    padding: 0.7rem 1rem !important;
+    text-decoration: none !important;
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+    border-radius: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.8rem !important;
+}
+
+.dropdown-item:hover {
+    background: var(--glass-shine) !important;
+    color: white !important;
+}
+
+.dropdown-divider {
+    height: 1px !important;
+    background: var(--glass-border) !important;
+    margin: 0.4rem !important;
+}
+
+/* Ensure mobile menu and its contents are truly invisible when closed to prevent overlap cluster */
+.mobile-menu:not(.nav-open .mobile-menu) {
+    display: none !important;
+}
+
+@media (max-width: 1023px) {
+    .mobile-menu {
+        display: block !important;
+        position: fixed !important;
+    }
+}
+
 /* Adjust layout for top global header */
 .app-shell {
     margin-top: 64px;
