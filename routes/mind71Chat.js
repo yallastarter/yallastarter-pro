@@ -65,12 +65,12 @@ router.post('/chat', chatLimiter, async (req, res) => {
         }
 
         const apiKey = process.env.OPENROUTER_API_KEY;
-        // Use requested free model as default
         const model = process.env.MIND71_MODEL || "deepseek/deepseek-r1-distill-qwen-1.5b";
         const referer = process.env.BASE_URL || process.env.CLIENT_URL || "https://yallastarter-pro.onrender.com";
 
-        // Debug logging (exact line requested)
-        console.log("[mind71] keySet=", !!process.env.OPENROUTER_API_KEY, "model=", model, "len=", message.length);
+        // Debug logging (prefix only, never full key)
+        const keyPrefix = apiKey ? `${apiKey.substring(0, 7)}...` : 'not set';
+        console.log(`[mind71] keySet=${!!apiKey} prefix=${keyPrefix} model=${model} len=${message.length}`);
 
         // Handle conversation persistence
         let chat;
@@ -105,10 +105,10 @@ router.post('/chat', chatLimiter, async (req, res) => {
             const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
                 method: "POST",
                 headers: {
-                    "Authorization": `Bearer ${apiKey}`,
+                    "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
                     "Content-Type": "application/json",
                     "HTTP-Referer": referer,
-                    "X-Title": "Mind71"
+                    "X-Title": "YallaStarter Mind71"
                 },
                 body: JSON.stringify({
                     model: model,
@@ -121,8 +121,16 @@ router.post('/chat', chatLimiter, async (req, res) => {
 
             if (!response.ok) {
                 const errorData = await response.text();
-                // Log provider failure with status and trimmed body (500 chars)
-                console.error(`[MIND71] Provider Error (${response.status}):`, errorData.substring(0, 500));
+                const trimmedError = errorData.substring(0, 500);
+                console.error(`[MIND71] Provider Error (${response.status}):`, trimmedError);
+
+                if (response.status === 401) {
+                    return res.status(401).json({
+                        success: false,
+                        message: "OpenRouter authentication failed (401). Check OPENROUTER_API_KEY in Render.",
+                        providerStatus: 401
+                    });
+                }
 
                 return res.status(502).json({
                     success: false,
