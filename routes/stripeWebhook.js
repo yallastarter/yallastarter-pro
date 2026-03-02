@@ -3,27 +3,24 @@ const router = express.Router();
 
 /**
  * GET /api/stripe/webhook
- * Safe verification endpoint for Stripe webhook route.
+ * Safe verification endpoint for browser check.
  */
-router.get('/webhook', (req, res) => {
-    res.status(200).json({
+router.get("/webhook", (req, res) => {
+    return res.status(200).json({
         ok: true,
-        route: "stripe webhook",
-        timestamp: new Date().toISOString()
+        route: "/api/stripe/webhook"
     });
 });
 
 /**
  * POST /api/stripe/webhook
  * Main Stripe webhook receiver.
- * Uses express.raw() middleware mounted in server.js to preserve raw body.
+ * Uses express.raw() specifically on this route to preserve raw body signature.
  */
-router.post('/webhook', (req, res) => {
-    console.log("Stripe webhook hit", new Date().toISOString());
-
-    // For now, we just acknowledge receipt.
-    // Stripe expects a 200 response to acknowledge successful delivery.
-    res.status(200).json({ received: true });
+router.post("/webhook", express.raw({ type: "application/json" }), (req, res) => {
+    console.log("✅ Stripe webhook hit", new Date().toISOString());
+    // In a real scenario, you'd use the raw body for Stripe signature verification.
+    return res.status(200).json({ received: true });
 });
 
 module.exports = router;
