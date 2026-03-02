@@ -27,6 +27,26 @@ class Mind71Platform {
             input.style.height = input.scrollHeight + 'px';
         });
 
+        // Mobile Scroll behavior
+        input.addEventListener('focus', () => {
+            if (window.innerWidth <= 768) {
+                setTimeout(() => this.layout.scrollToBottom(), 300);
+            }
+        });
+
+        // Mobile Sidebar Toggle
+        const sidebarToggle = document.querySelector('.mobile-sidebar-toggle');
+        const sidebarClose = document.querySelector('.sidebar-close-btn');
+        const sidebarBackdrop = document.querySelector('.sidebar-backdrop');
+
+        const toggleSidebar = (show) => {
+            document.body.classList.toggle('sidebar-open', show);
+        };
+
+        if (sidebarToggle) sidebarToggle.addEventListener('click', () => toggleSidebar(true));
+        if (sidebarClose) sidebarClose.addEventListener('click', () => toggleSidebar(false));
+        if (sidebarBackdrop) sidebarBackdrop.addEventListener('click', () => toggleSidebar(false));
+
         // Send events
         sendBtn.addEventListener('click', () => this.handleSend());
         input.addEventListener('keydown', (e) => {
@@ -55,6 +75,9 @@ class Mind71Platform {
             this.layout.renderMessages([]);
             return;
         }
+
+        // Close sidebar on mobile after selecting chat
+        document.body.classList.remove('sidebar-open');
 
         store.setActiveId(id);
         let chat = store.get(id);

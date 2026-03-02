@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="description" content="MIND71 - منصة متقدمة للذكاء الاصطناعي لدعم الابتكار السعودي ورؤية 2030.">
     <title>منصة MIND71 الاستراتيجية | يلا ستارتر</title>
 
@@ -94,6 +94,9 @@
             <div class="sidebar-brand">
                 <div class="brand-orb"></div>
                 <span class="brand-name">MIND71</span>
+                <button class="sidebar-close-btn" aria-label="أغلق القائمة الجانبية">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
             </div>
 
             <div class="new-chat-btn-wrapper">
@@ -117,6 +120,9 @@
         <main class="chat-window">
             <!-- Top HUD -->
             <header class="top-nav">
+                <button class="hud-icon-btn mobile-sidebar-toggle" aria-label="افتح القائمة الجانبية">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
                 <div class="platform-status">
                     <div class="status-indicator">
                         <div class="status-dot"></div>
@@ -169,6 +175,7 @@
                 </div>
             </div>
         </main>
+        <div class="sidebar-backdrop"></div>
     </div>
 
     <!-- Scripts -->

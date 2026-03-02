@@ -814,3 +814,181 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.2);
 }
+
+/* Sidebar Responsive Elements */
+.mobile-sidebar-toggle,
+.sidebar-close-btn {
+    display: none !important;
+}
+
+.sidebar-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    z-index: 95;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Body Scroll Lock */
+body.sidebar-open {
+    overflow: hidden !important;
+    touch-action: none;
+}
+
+@media (max-width: 768px) {
+    :root {
+        --sidebar-width: 280px;
+    }
+
+    body {
+        height: 100dvh;
+    }
+
+    .header {
+        padding: 0 1rem !important;
+    }
+
+    .header .logo-text {
+        font-size: 1.25rem !important;
+    }
+
+    .app-shell {
+        height: calc(100dvh - 64px) !important;
+        margin-top: 64px !important;
+        overflow: hidden;
+    }
+
+    /* Sidebar as Drawer */
+    .app-sidebar {
+        position: fixed !important;
+        left: 0;
+        top: 64px;
+        height: calc(100dvh - 64px) !important;
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1000 !important;
+        background: var(--navy-bg) !important;
+        box-shadow: 20px 0 50px rgba(0, 0, 0, 0.5);
+    }
+
+    body.sidebar-open .app-sidebar {
+        transform: translateX(0);
+    }
+
+    body.sidebar-open .sidebar-backdrop {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .mobile-sidebar-toggle {
+        display: flex !important;
+    }
+
+    .sidebar-close-btn {
+        display: flex !important;
+        position: absolute;
+        right: 1rem;
+        top: 1.5rem;
+        background: transparent;
+        border: none;
+        color: var(--text-secondary);
+        font-size: 1.25rem;
+        cursor: pointer;
+    }
+
+    .sidebar-brand {
+        padding-right: 3rem;
+    }
+
+    /* Chat Window */
+    .chat-window {
+        width: 100%;
+    }
+
+    .top-nav {
+        padding: 0 1rem;
+    }
+
+    .platform-status {
+        display: none;
+    }
+
+    /* Message Flow */
+    .chat-scroll {
+        padding: 1rem;
+    }
+
+    .message-row {
+        max-width: 100%;
+        margin-bottom: 1.5rem;
+    }
+
+    .message-box {
+        max-width: 94%;
+        padding: 1rem;
+        font-size: 0.95rem;
+        line-height: 1.7;
+    }
+
+    /* Sticky Composer */
+    .chat-input-hud {
+        padding: 1rem;
+        position: sticky;
+        bottom: 0;
+        background: linear-gradient(to top, var(--navy-bg) 80%, transparent);
+        padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+        z-index: 10;
+    }
+
+    .hud-glass-card {
+        padding: 0.75rem 1rem;
+        border-radius: 20px;
+        gap: 0.5rem;
+        max-width: 100%;
+    }
+
+    #main-input {
+        font-size: 1rem;
+    }
+
+    .hud-icon-btn {
+        width: 38px;
+        height: 38px;
+    }
+
+    /* Hide redundant elements on very small screens */
+    .chat-input-hud>div:last-child {
+        display: none !important;
+    }
+}
+
+/* Ensure long words don't break layout */
+.message-box {
+    word-break: break-word;
+    overflow-wrap: anywhere;
+}
+
+/* RTL Overrides for Mobile Sidebar */
+@media (max-width: 768px) {
+    [dir="rtl"] .app-sidebar {
+        left: auto !important;
+        right: 0 !important;
+        transform: translateX(100%);
+    }
+
+    [dir="rtl"].sidebar-open .app-sidebar,
+    [dir="rtl"] .sidebar-open .app-sidebar {
+        transform: translateX(0);
+    }
+
+    [dir="rtl"] .sidebar-close-btn {
+        right: auto !important;
+        left: 1rem !important;
+    }
+}
