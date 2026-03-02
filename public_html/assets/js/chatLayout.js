@@ -85,8 +85,14 @@ class ChatLayout {
         if (status) this.scrollToBottom();
     }
 
-    scrollToBottom() {
-        this.elements.scroll.scrollTop = this.elements.scroll.scrollHeight;
+    scrollToBottom(force = false) {
+        const { scroll } = this.elements;
+        const threshold = 100; // px from bottom to be considered "at bottom"
+        const isAtBottom = scroll.scrollHeight - scroll.scrollTop - scroll.clientHeight < threshold;
+
+        if (force || isAtBottom) {
+            scroll.scrollTop = scroll.scrollHeight;
+        }
     }
 
     resetInput() {

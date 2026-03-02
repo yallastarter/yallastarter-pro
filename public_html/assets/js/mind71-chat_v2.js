@@ -137,8 +137,8 @@ class Mind71Platform {
         }
 
         try {
-            console.log("calling /api/mind71/chat");
-            const response = await fetch('/api/mind71/chat', {
+            console.log("calling /api/mind71/chat-stream");
+            const response = await fetch('/api/mind71/chat-stream', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -151,35 +151,75 @@ class Mind71Platform {
 
             if (!response.ok) {
                 const errText = await response.text().catch(() => "Unknown Connection Error");
-                let errMsg = `System Error ${response.status}`;
-                try {
-                    const errData = JSON.parse(errText);
-                    errMsg = errData.message || errMsg;
-                } catch (e) {
-                    if (errText.length < 100) errMsg = errText;
+                throw new Error(errText || `System Error ${response.status}`);
+            }
+
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder();
+            let accumulatedResponse = "";
+            let partialData = "";
+
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+
+                const chunk = decoder.decode(value, { stream: true });
+                const lines = (partialData + chunk).split('\n\n');
+                partialData = lines.pop(); // last element might be incomplete
+
+                for (const line of lines) {
+                    if (line.startsWith('data: ')) {
+                        const dataStr = line.slice(6).trim();
+                        if (!dataStr) continue;
+
+                        try {
+                            const data = JSON.parse(dataStr);
+
+                            if (data.metadata) {
+                                // Sync metadata
+                                if (data.metadata.title && chat.title === 'New Strategy') {
+                                    chat.title = data.metadata.title;
+                                    this.sidebar.render();
+                                }
+                                if (data.metadata.conversationId) {
+                                    store.setActiveId(data.metadata.conversationId);
+                                }
+                            }
+
+                            if (data.delta) {
+                                accumulatedResponse += data.delta;
+                                assistantMessage = accumulatedResponse; // for safety
+
+                                // Update UI immediately
+                                if (typeof marked !== 'undefined') {
+                                    currentMessageBox.innerHTML = marked.parse(accumulatedResponse);
+                                    currentMessageBox.querySelectorAll('pre code').forEach((block) => {
+                                        if (typeof hljs !== 'undefined') hljs.highlightElement(block);
+                                    });
+                                } else {
+                                    currentMessageBox.textContent = accumulatedResponse;
+                                }
+                                this.layout.scrollToBottom(true); // true = sticky scroll
+                            }
+
+                            if (data.error) {
+                                throw new Error(data.error);
+                            }
+
+                            if (data.done) {
+                                // Stream finished
+                            }
+                        } catch (e) {
+                            // JSON might be partial or malformed if chunked mid-line
+                            if (e instanceof SyntaxError) continue;
+                            throw e;
+                        }
+                    }
                 }
-                throw new Error(errMsg);
             }
 
-            const data = await response.json();
-            if (!data.success) throw new Error(data.message || "Intelligence Failure");
-
-            const reply = data.reply;
-
-            // Sync metadata
-            if (data.title && chat.title === 'New Strategy') {
-                chat.title = data.title;
-                this.sidebar.render();
-            }
-            if (data.conversationId) {
-                store.setActiveId(data.conversationId);
-            }
-
-            // ANIMATE RESPONSE
-            await this.animateText(reply, currentMessageBox, currentMessageRow);
-
-            // Save to history
-            chat.messages.push({ role: 'assistant', content: reply });
+            // Save to history after full stream
+            chat.messages.push({ role: 'assistant', content: accumulatedResponse });
 
         } catch (err) {
             currentMessageRow.classList.remove('typing');
@@ -200,52 +240,11 @@ class Mind71Platform {
             }
             this.abortController = null;
             this.layout.setThinking(false);
+            currentMessageRow.classList.remove('typing');
             store.save(); // Persist history
         }
     }
 
-    /**
-     * Simulated Typewriter Effect
-     * Animates text in word chunks
-     */
-    async animateText(text, box, row) {
-        const words = text.split(' ');
-        let currentText = "";
-
-        // Remove empty state from scroll if needed
-        if (this.layout.elements.scroll.querySelector('h1')) {
-            this.layout.elements.scroll.innerHTML = '';
-        }
-
-        row.classList.add('typing');
-
-        for (let i = 0; i < words.length;) {
-            if (!this.abortController || this.abortController.signal.aborted) break;
-
-            // Chunks of 3-8 words, adaptive based on length
-            const chunkSize = words.length > 100 ? 8 : 4;
-            const chunk = words.slice(i, i + chunkSize).join(' ');
-            currentText += (i === 0 ? "" : " ") + chunk;
-            i += chunkSize;
-
-            // Update UI
-            if (typeof marked !== 'undefined') {
-                box.innerHTML = marked.parse(currentText);
-                box.querySelectorAll('pre code').forEach((block) => {
-                    if (typeof hljs !== 'undefined') hljs.highlightElement(block);
-                });
-            } else {
-                box.textContent = currentText;
-            }
-
-            this.layout.scrollToBottom();
-
-            // 25-50ms tick
-            await new Promise(resolve => setTimeout(resolve, 35));
-        }
-
-        row.classList.remove('typing');
-    }
 }
 
 

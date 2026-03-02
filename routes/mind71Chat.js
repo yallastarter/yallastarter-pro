@@ -176,11 +176,17 @@ router.post('/chat', chatLimiter, getUserOptional, async (req, res) => {
 });
 
 router.post('/chat-stream', chatLimiter, getUserOptional, async (req, res) => {
+    const abortController = new AbortController();
+
     try {
         const { message, lang = 'en', conversationId } = req.body;
 
         if (!process.env.OPENROUTER_API_KEY) {
             return res.status(500).json({ success: false, message: "API key missing" });
+        }
+
+        if (!message || message.trim().length === 0) {
+            return res.status(400).json({ success: false, message: 'Message is required' });
         }
 
         const primaryModel = process.env.MIND71_MODEL || "z-ai/glm-4.5-air:free";
@@ -215,15 +221,16 @@ router.post('/chat-stream', chatLimiter, getUserOptional, async (req, res) => {
         chat.messages.push({ role: 'user', content: message });
         const messagesForAI = [chat.messages[0], ...chat.messages.slice(1).slice(-24)];
 
-        // SSE Headers
+        // Configure SSE
         res.setHeader('Content-Type', 'text/event-stream');
         res.setHeader('Cache-Control', 'no-cache');
         res.setHeader('Connection', 'keep-alive');
+        res.flushHeaders();
 
-        // Initial metadata
+        // Send metadata first
         res.write(`data: ${JSON.stringify({ metadata: { conversationId: currentConvId, title: chat.title } })}\n\n`);
 
-        const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+        const openrouterResponse = await fetch("https://openrouter.ai/api/v1/chat/completions", {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
@@ -236,36 +243,51 @@ router.post('/chat-stream', chatLimiter, getUserOptional, async (req, res) => {
                 messages: messagesForAI.map(m => ({ role: m.role, content: m.content })),
                 stream: true,
                 temperature: 0.7
-            })
+            }),
+            signal: abortController.signal
         });
 
-        if (!response.ok) {
-            res.write(`data: ${JSON.stringify({ error: "Stream start failed" })}\n\n`);
+        if (!openrouterResponse.ok) {
+            const errText = await openrouterResponse.text();
+            res.write(`data: ${JSON.stringify({ error: "AI Intelligence unreachable", details: errText })}\n\n`);
             return res.end();
         }
 
-        const reader = response.body.getReader();
+        const reader = openrouterResponse.body.getReader();
         const decoder = new TextDecoder();
         let fullReply = "";
+        let partialLine = "";
 
-        req.on('close', () => reader.cancel());
+        req.on('close', () => {
+            abortController.abort();
+            reader.cancel();
+        });
 
         while (true) {
             const { done, value } = await reader.read();
             if (done) break;
 
             const chunk = decoder.decode(value, { stream: true });
-            res.write(chunk);
 
-            const lines = chunk.split('\n');
+            // OpenRouter sends SSE, we need to parse and re-emit in our format
+            const lines = (partialLine + chunk).split('\n');
+            partialLine = lines.pop(); // save incomplete line for next chunk
+
             for (const line of lines) {
                 if (line.startsWith('data: ')) {
                     const dataStr = line.slice(6).trim();
                     if (dataStr === '[DONE]') continue;
+
                     try {
                         const parsed = JSON.parse(dataStr);
-                        fullReply += (parsed.choices[0]?.delta?.content || "");
-                    } catch (e) { }
+                        const delta = parsed.choices[0]?.delta?.content || "";
+                        if (delta) {
+                            fullReply += delta;
+                            res.write(`data: ${JSON.stringify({ delta })}\n\n`);
+                        }
+                    } catch (e) {
+                        // Skip malformed JSON
+                    }
                 }
             }
         }
@@ -276,9 +298,16 @@ router.post('/chat-stream', chatLimiter, getUserOptional, async (req, res) => {
             await chat.save();
         }
 
+        res.write(`data: ${JSON.stringify({ done: true })}\n\n`);
         res.end();
+
     } catch (error) {
-        console.error('[MIND71] Stream Error:', error);
+        if (error.name === 'AbortError') {
+            console.log('[MIND71] Stream aborted by client');
+        } else {
+            console.error('[MIND71] Stream Error:', error);
+            res.write(`data: ${JSON.stringify({ error: "Intelligence sync interrupted" })}\n\n`);
+        }
         res.end();
     }
 });
