@@ -43,17 +43,30 @@ if (!process.env.STRIPE_SECRET_KEY) {
 }
 
 const app = express();
-console.log("✅ DEPLOYED server.js loaded at", new Date().toISOString());
 
-app.get("/__deployed", (req, res) => {
-    return res.status(200).json({
-        ok: true,
-        msg: "deployed route working",
-        time: new Date().toISOString(),
-    });
+app.use((req, res, next) => {
+    console.log("REQ:", req.method, req.originalUrl);
+    next();
 });
 
-app.get("/api/ping", (req, res) => res.status(200).json({ ok: true }));
+app.get("/__deployed", (req, res) => {
+    return res.status(200).json({ ok: true, route: "/__deployed" });
+});
+
+app.get("/api/ping", (req, res) => {
+    return res.status(200).json({ ok: true, route: "/api/ping" });
+});
+
+app.get("/api/stripe/webhook", (req, res) => {
+    return res.status(200).json({ ok: true, route: "/api/stripe/webhook" });
+});
+
+app.post("/api/stripe/webhook", express.raw({ type: "application/json" }), (req, res) => {
+    console.log("✅ Stripe webhook hit:", new Date().toISOString());
+    return res.status(200).json({ received: true });
+});
+
+console.log("✅ DEPLOYED server.js loaded at", new Date().toISOString());
 
 const PORT = process.env.PORT || 3000;
 const isProduction = process.env.NODE_ENV === 'production';
@@ -70,12 +83,6 @@ fs.mkdirSync(uploadsProjects, { recursive: true });
 
 // Middleware — Stripe webhook needs raw body, must be BEFORE json parser
 app.use('/api/coins/webhook', express.raw({ type: 'application/json' }));
-
-// API Routes that need to be mounted BEFORE global body parsers if they handle raw bodies
-app.use("/api/stripe", require("./routes/stripeWebhook"));
-
-// Debug/Verification route
-app.get("/api/ping", (req, res) => res.status(200).json({ ok: true }));
 
 // Standard middleware
 app.use(express.json({ limit: '10mb' }));
