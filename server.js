@@ -55,6 +55,10 @@ fs.mkdirSync(uploadsProjects, { recursive: true });
 
 // Middleware — Stripe webhook needs raw body, must be BEFORE json parser
 app.use('/api/coins/webhook', express.raw({ type: 'application/json' }));
+app.use('/api/stripe/webhook', express.raw({ type: 'application/json' }));
+
+// API Routes that need to be mounted BEFORE global body parsers if they handle raw bodies
+app.use('/api/stripe', require('./routes/stripeWebhook'));
 
 // Standard middleware
 app.use(express.json({ limit: '10mb' }));
