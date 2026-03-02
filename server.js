@@ -43,6 +43,18 @@ if (!process.env.STRIPE_SECRET_KEY) {
 }
 
 const app = express();
+console.log("✅ DEPLOYED server.js loaded at", new Date().toISOString());
+
+app.get("/__deployed", (req, res) => {
+    return res.status(200).json({
+        ok: true,
+        msg: "deployed route working",
+        time: new Date().toISOString(),
+    });
+});
+
+app.get("/api/ping", (req, res) => res.status(200).json({ ok: true }));
+
 const PORT = process.env.PORT || 3000;
 const isProduction = process.env.NODE_ENV === 'production';
 
