@@ -11,6 +11,9 @@ const bcrypt = require('bcryptjs');
 // Load environment variables
 dotenv.config();
 
+// Deployment version: 1.0.1
+
+
 // ==========================================
 // Environment Variable Validation
 // ==========================================
