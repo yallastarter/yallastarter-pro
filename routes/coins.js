@@ -3,6 +3,8 @@ const router = express.Router();
 const User = require('../models/User');
 const Project = require('../models/Project');
 const Transaction = require('../models/Transaction');
+const StripeEventLog = require('../models/StripeEventLog');
+const CoinTransaction = require('../models/CoinTransaction');
 const mongoose = require('mongoose');
 const { protect } = require('../middleware/auth');
 
@@ -73,19 +75,36 @@ router.post('/buy', protect, async (req, res) => {
             metadata: {
                 userId: req.user._id.toString(),
                 coinAmount: coinAmount.toString(),
+                coins: coinAmount.toString(),
+                currency: 'sar',
+                amountMinor: amountInHalalas.toString(),
                 type: 'coin_purchase'
             },
+            client_reference_id: req.user._id.toString(),
             customer_email: req.user.email
         });
 
-        // Create pending transaction
+        // Create pending legacy transaction for backward compatibility (optional)
         await Transaction.create({
             type: 'purchase',
             from: req.user._id,
             amount: coinAmount,
             stripeSessionId: session.id,
             status: 'pending',
-            description: `Purchase of ${coinAmount} coins`
+            description: `Purchase of ${coinAmount} coins (v1.0.2 audit active)`
+        });
+
+        // Create pending CoinTransaction audit record
+        await CoinTransaction.create({
+            userId: req.user._id,
+            type: 'coin_purchase',
+            coins: coinAmount,
+            amount: coinAmount,
+            amountMinor: amountInHalalas,
+            currency: 'sar',
+            stripeSessionId: session.id,
+            status: 'pending',
+            metadata: { initial: true }
         });
 
         res.json({
@@ -127,39 +146,122 @@ const handleStripeWebhook = async (req, res) => {
         return res.status(400).send(`Webhook Error: ${err.message}`);
     }
 
-    if (event.type === 'checkout.session.completed') {
-        const session = event.data.object;
+    const eventId = event.id;
+    const eventType = event.type;
 
-        if (session.metadata && session.metadata.type === 'coin_purchase') {
-            const userId = session.metadata.userId;
-            const coinAmount = parseInt(session.metadata.coinAmount);
-
-            try {
-                // IDEMPOTENT: Only update if status is 'pending'
-                const transaction = await Transaction.findOneAndUpdate(
-                    { stripeSessionId: session.id, status: 'pending' },
-                    {
-                        status: 'completed',
-                        stripePaymentId: session.payment_intent
-                    },
-                    { new: true }
-                );
-
-                if (transaction) {
-                    // Credit coins — coinBalance goes up, this is a purchase not earnings
-                    await User.findByIdAndUpdate(userId, {
-                        $inc: { coinBalance: coinAmount }
-                    });
-                    console.log(`✅ Webhook: Credited ${coinAmount} coins to user ${userId}`);
-                } else {
-                    console.log(`ℹ️ Webhook: Transaction ${session.id} already processed or not found.`);
-                }
-            } catch (error) {
-                console.error('Webhook processing error:', error);
+    // 1. Idempotency Check: Log the event
+    let eventLog;
+    try {
+        eventLog = await StripeEventLog.create({
+            eventId: eventId,
+            eventType: eventType,
+            sessionId: event.data.object.id,
+            paymentIntentId: event.data.object.payment_intent,
+            livemode: event.livemode,
+            status: 'ignored', // Default, update later
+            rawSummary: {
+                id: event.id,
+                type: event.type,
+                session: event.data.object.id
             }
+        });
+    } catch (err) {
+        if (err.code === 11000) {
+            console.log(`[WEBHOOK] Duplicate event ${eventId} ignored.`);
+            return res.status(200).json({ received: true, duplicate: true });
         }
+        console.error(`[WEBHOOK] Error logging event ${eventId}:`, err.message);
+        return res.status(500).json({ error: 'Database error' });
     }
 
+    // 2. Process specific events
+    if (eventType === 'checkout.session.completed') {
+        const session = event.data.object;
+        const metadata = session.metadata;
+
+        if (!metadata || !metadata.userId || !metadata.coins) {
+            console.error(`[WEBHOOK] Missing metadata for session ${session.id}`);
+            eventLog.status = 'failed';
+            eventLog.errorMessage = 'Missing metadata (userId/coins)';
+            await eventLog.save();
+            return res.status(200).json({ received: true, error: 'missing_metadata' });
+        }
+
+        const userId = metadata.userId;
+        const coins = parseInt(metadata.coins);
+        const amountMinor = parseInt(metadata.amountMinor || (coins * 100));
+        const currency = (metadata.currency || 'sar').toLowerCase();
+
+        // Validation
+        if (isNaN(coins) || coins <= 0) {
+            eventLog.status = 'failed';
+            eventLog.errorMessage = `Invalid coins value: ${metadata.coins}`;
+            await eventLog.save();
+            return res.status(200).json({ received: true, error: 'invalid_coins' });
+        }
+
+        try {
+            // 3. Atomic Updates (using session if possible, but Atlas free tier might not support it reliably without replica sets)
+            // We use fine-grained updates and idempotency guards.
+
+            // Deduplicate at CoinTransaction level too (belt and braces)
+            const existingTx = await CoinTransaction.findOne({ stripeEventId: eventId, type: 'coin_purchase' });
+            if (existingTx) {
+                eventLog.status = 'processed';
+                await eventLog.save();
+                return res.status(200).json({ received: true, note: 'already_credited' });
+            }
+
+            // Perform updates
+            const userUpdate = await User.findByIdAndUpdate(userId, {
+                $inc: { coinBalance: coins }
+            }, { new: true });
+
+            if (!userUpdate) throw new Error(`User ${userId} not found`);
+
+            // Create success audit record
+            await CoinTransaction.findOneAndUpdate(
+                { stripeSessionId: session.id, type: 'coin_purchase' },
+                {
+                    userId,
+                    coins,
+                    amount: coins, // 1:1 ratio
+                    amountMinor,
+                    currency,
+                    stripePaymentIntentId: session.payment_intent,
+                    stripeEventId: eventId,
+                    status: 'succeeded',
+                    metadata: { ...metadata, processedAt: new Date() }
+                },
+                { upsert: true, new: true }
+            );
+
+            // Update legacy transaction for backward compatibility
+            await Transaction.findOneAndUpdate(
+                { stripeSessionId: session.id },
+                { status: 'completed', stripePaymentId: session.payment_intent },
+                { new: true }
+            );
+
+            console.log(`[WEBHOOK] Credited ${coins} coins to user ${userId} | Event=${eventId}`);
+
+            eventLog.status = 'processed';
+            await eventLog.save();
+        } catch (error) {
+            console.error('[WEBHOOK] Processing failure:', error.message);
+            eventLog.status = 'failed';
+            eventLog.errorMessage = error.message;
+            await eventLog.save();
+            // Return 200 so Stripe stops retrying, but we've logged the failure
+            return res.status(200).json({ received: true, error: 'processing_failed' });
+        }
+    } else {
+        // Other events ignored
+        eventLog.status = 'ignored';
+        await eventLog.save();
+    }
+
+    console.log(`stripe_webhook: type=${eventType} eventId=${eventId} sessionId=${event.data.object.id} status=${eventLog.status}`);
     res.json({ received: true });
 };
 
@@ -483,6 +585,48 @@ router.put('/bank-account', protect, async (req, res) => {
         res.json({ success: true, bankAccount: user.bankAccount });
     } catch (error) {
         console.error('Bank account update error:', error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+});
+
+// @desc    Get Stripe integration health
+// @route   GET /api/coins/health
+// @access  Public
+router.get('/health', (req, res) => {
+    res.json({
+        ok: true,
+        stripeConfigured: !!process.env.STRIPE_SECRET_KEY,
+        webhookConfigured: !!process.env.STRIPE_WEBHOOK_SECRET,
+        timestamp: new Date().toISOString()
+    });
+});
+
+// @desc    Get coin transaction history (Audit Trail)
+// @route   GET /api/coins/transactions
+// @access  Private
+router.get('/transactions', protect, async (req, res) => {
+    try {
+        const userId = req.query.userId || req.user._id;
+
+        // Security: Self or Admin/Employee only
+        const isAuthUser = userId.toString() === req.user._id.toString();
+        const isAdmin = ['admin', 'employee', 'manager'].includes(req.user.role);
+
+        if (!isAuthUser && !isAdmin) {
+            return res.status(403).json({ success: false, message: 'Unauthorized access to transaction logs' });
+        }
+
+        const transactions = await CoinTransaction.find({ userId })
+            .sort({ createdAt: -1 })
+            .limit(20);
+
+        res.json({
+            success: true,
+            count: transactions.length,
+            data: transactions
+        });
+    } catch (error) {
+        console.error('Transactions audit fetch error:', error);
         res.status(500).json({ success: false, message: 'Server error' });
     }
 });
