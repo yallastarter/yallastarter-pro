@@ -49,21 +49,44 @@ app.use((req, res, next) => {
     next();
 });
 
+const { handleStripeWebhook } = require('./routes/coins');
+
 app.get("/__deployed", (req, res) => {
-    return res.status(200).json({ ok: true, route: "/__deployed" });
+    return res.status(200).json({
+        ok: true,
+        route: "/__deployed",
+        version: "1.0.1",
+        time: new Date().toISOString()
+    });
 });
 
 app.get("/api/ping", (req, res) => {
-    return res.status(200).json({ ok: true, route: "/api/ping" });
+    return res.status(200).json({
+        ok: true,
+        route: "/api/ping",
+        time: new Date().toISOString()
+    });
 });
 
 app.get("/api/stripe/webhook", (req, res) => {
-    return res.status(200).json({ ok: true, route: "/api/stripe/webhook" });
+    console.log(`[INFO] GET /api/stripe/webhook | Host: ${req.headers.host} | ${new Date().toISOString()}`);
+    return res.status(200).json({
+        ok: true,
+        route: "/api/stripe/webhook",
+        message: "Canonical webhook is /api/coins/webhook. Please update your Stripe settings."
+    });
 });
 
+// Alias for old webhook path
 app.post("/api/stripe/webhook", express.raw({ type: "application/json" }), (req, res) => {
-    console.log("✅ Stripe webhook hit:", new Date().toISOString());
-    return res.status(200).json({ received: true });
+    console.log(`[WEBHOOK] POST /api/stripe/webhook | Host: ${req.headers.host} | ${new Date().toISOString()}`);
+    return handleStripeWebhook(req, res);
+});
+
+// Ensure POST /api/coins/webhook uses raw body (MUST BE BEFORE express.json)
+app.post("/api/coins/webhook", express.raw({ type: "application/json" }), (req, res, next) => {
+    console.log(`[WEBHOOK] POST /api/coins/webhook | Host: ${req.headers.host} | ${new Date().toISOString()}`);
+    next();
 });
 
 console.log("✅ DEPLOYED server.js loaded at", new Date().toISOString());
@@ -80,9 +103,6 @@ const uploadsProfiles = path.join(__dirname, 'public_html', 'uploads', 'profiles
 const uploadsProjects = path.join(__dirname, 'public_html', 'uploads', 'projects');
 fs.mkdirSync(uploadsProfiles, { recursive: true });
 fs.mkdirSync(uploadsProjects, { recursive: true });
-
-// Middleware — Stripe webhook needs raw body, must be BEFORE json parser
-app.use('/api/coins/webhook', express.raw({ type: 'application/json' }));
 
 // Standard middleware
 app.use(express.json({ limit: '10mb' }));
@@ -158,7 +178,7 @@ app.use(express.static(path.join(__dirname, 'public_html')));
 // API Routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/projects', require('./routes/projects'));
-app.use('/api/coins', require('./routes/coins'));
+app.use('/api/coins', require('./routes/coins').router);
 app.use('/api/admin', require('./routes/admin'));
 app.use('/api/mind71', require('./routes/mind71Chat'));
 
@@ -228,7 +248,12 @@ async function seedAdmin() {
 
 // Start Server
 app.listen(PORT, async () => {
-    console.log(`Server running on port ${PORT} (${process.env.NODE_ENV || 'development'})`);
+    console.log(`==========================================`);
+    console.log(`🚀 YallaStarter-Pro v1.0.1 started`);
+    console.log(`📅 Timestamp: ${new Date().toISOString()}`);
+    console.log(`📡 Port: ${PORT}`);
+    console.log(`🌍 Env: ${process.env.NODE_ENV || 'development'}`);
+    console.log(`==========================================`);
     await seedAdmin();
 });
 

@@ -100,10 +100,21 @@ yallastarter-pro/
 | GET | `/balance` | Get current coin balance | Private |
 | POST | `/buy` | Create Stripe checkout session | Private |
 | POST | `/confirm-purchase` | Confirm purchase after redirect | Private |
+| GET | `/webhook` | Get webhook info | Public |
+| POST | `/webhook` | Stripe webhook endpoint | Public |
 | POST | `/send` | Back a project (send coins) | Private |
 | POST | `/cashout` | Request cashout (creators) | Private |
 | GET | `/history` | Get transaction history | Private |
 | PUT | `/bank-account` | Update bank account details | Private |
+
+### System & Verification
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|--------|
+| GET | `/__deployed` | Verify deployment status | Public |
+| GET | `/api/ping` | API health check | Public |
+| GET | `/api/health` | Extended health metrics | Public |
+| GET | `/api/stripe/webhook` | Alias for webhook info | Public |
+| POST | `/api/stripe/webhook` | Alias for Stripe webhook | Public |
 
 ### Admin (`/api/admin`)
 | Method | Endpoint | Description | Access |

@@ -99,10 +99,19 @@ router.post('/buy', protect, async (req, res) => {
     }
 });
 
-// @desc    Stripe webhook to confirm payment
-// @route   POST /api/coins/webhook
-// @access  Public (Stripe signature verified)
-router.post('/webhook', async (req, res) => {
+// @desc    Stripe webhook info
+// @route   GET /api/coins/webhook
+// @access  Public
+router.get('/webhook', (req, res) => {
+    res.status(200).json({
+        ok: true,
+        route: "/api/coins/webhook",
+        message: "Stripe webhook endpoint. Use POST for actual webhooks."
+    });
+});
+
+// Webhook handler function (exported for aliasing)
+const handleStripeWebhook = async (req, res) => {
     const sig = req.headers['stripe-signature'];
     let event;
 
@@ -152,7 +161,12 @@ router.post('/webhook', async (req, res) => {
     }
 
     res.json({ received: true });
-});
+};
+
+// @desc    Stripe webhook to confirm payment
+// @route   POST /api/coins/webhook
+// @access  Public (Stripe signature verified)
+router.post('/webhook', handleStripeWebhook);
 
 // @desc    Confirm purchase (called by frontend after successful checkout)
 // @route   POST /api/coins/confirm-purchase
@@ -473,4 +487,4 @@ router.put('/bank-account', protect, async (req, res) => {
     }
 });
 
-module.exports = router;
+module.exports = { router, handleStripeWebhook };
