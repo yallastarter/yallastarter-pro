@@ -81,23 +81,75 @@ router.get('/user/me', protect, async (req, res) => {
     }
 });
 
-// @desc    Get single project
+// @desc    Get single project by PID or ID
 // @route   GET /api/projects/:id
 // @access  Public
 router.get('/:id', async (req, res) => {
     try {
-        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-            return res.status(400).json({ success: false, message: 'Invalid project ID' });
-        }
+        let project;
+        const isObjectId = mongoose.Types.ObjectId.isValid(req.params.id);
 
-        const project = await Project.findById(req.params.id).populate('creator', 'username email');
+        if (isObjectId) {
+            project = await Project.findById(req.params.id).populate('creator', 'username');
+        } else {
+            project = await Project.findOne({ pid: req.params.id.toLowerCase() }).populate('creator', 'username');
+        }
 
         if (!project) {
             return res.status(404).json({ success: false, message: 'Project not found' });
         }
 
-        res.status(200).json({ success: true, data: project });
+        // Compute fields
+        const Transaction = mongoose.model('Transaction');
+
+        // raisedAmount: sum of completed 'send' transactions
+        const backings = await Transaction.find({
+            project: project._id,
+            type: 'send',
+            status: 'completed'
+        });
+        const raisedAmount = backings.reduce((sum, tx) => sum + tx.amount, 0);
+
+        // backersCount: unique users who backed
+        const backersCount = new Set(backings.map(tx => tx.from.toString())).size;
+
+        // fundedPercent: min(100, (raisedAmount / goal) * 100)
+        const fundedPercent = Math.min(100, Math.round((raisedAmount / project.goalAmount) * 100));
+
+        // daysLeft: max(0, ceil((endDate - now) / 1day))
+        const now = new Date();
+        const diff = project.deadline - now;
+        const daysLeft = Math.max(0, Math.ceil(diff / (1000 * 60 * 60 * 24)));
+
+        const publicData = {
+            pid: project.pid,
+            serialNumber: project.serialNumber,
+            title: project.title,
+            tagline: project.tagline || project.description.substring(0, 150),
+            description: project.description,
+            category: project.category,
+            location: project.location,
+            goalAmount: project.goalAmount,
+            raisedAmount,
+            backersCount,
+            fundedPercent,
+            daysLeft,
+            heroImageUrl: project.heroImageUrl || project.coverImage,
+            cardImageUrl: project.coverImage,
+            gallery: project.gallery,
+            videoUrl: project.videoUrl,
+            story: project.story,
+            aboutSections: project.aboutSections && project.aboutSections.length > 0 ? project.aboutSections : [project.story || project.description],
+            rewardTiers: project.rewards,
+            creator: project.creator,
+            status: project.status,
+            createdAt: project.createdAt,
+            deadline: project.deadline
+        };
+
+        res.status(200).json({ success: true, data: publicData });
     } catch (err) {
+        console.error('Get project error:', err);
         res.status(500).json({ success: false, message: 'Server error' });
     }
 });
@@ -155,6 +207,8 @@ router.post('/', protect, async (req, res) => {
 
         const project = await Project.create({
             title: title.trim(),
+            pid: req.body.pid, // optional, model hook handles if missing
+            tagline: req.body.tagline,
             description: description.trim(),
             category: category.toLowerCase(),
             location: location.trim(),
@@ -163,10 +217,12 @@ router.post('/', protect, async (req, res) => {
             creator: req.user._id,
             status: projectStatus,
             coverImage: coverImage || null,
+            heroImageUrl: req.body.heroImageUrl || coverImage || null,
             gallery: Array.isArray(gallery) ? gallery : (gallery ? [gallery] : []),
             videoUrl: videoUrl || null,
             story: story || '',
-            rewards: rewards || ''
+            aboutSections: req.body.aboutSections || [],
+            rewards: rewards || []
         });
 
         res.status(201).json({ success: true, data: project });

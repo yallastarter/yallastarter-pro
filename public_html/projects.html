@@ -628,9 +628,12 @@
                 const safeTitle = (p.title || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
                 const category = (p.category || 'General').toUpperCase();
 
+                // Use pid if available, otherwise _id
+                const projectIdentifier = p.pid || p._id;
+
                 // create card element so we can use dataset for filtering
                 const a = document.createElement('a');
-                a.href = `project-details.html?id=${p._id}`;
+                a.href = `project.html?pid=${projectIdentifier}`;
                 a.className = 'project-card';
                 a.dataset.title = safeTitle;
                 a.dataset.category = category.toLowerCase();
