@@ -788,8 +788,15 @@
     <script>
         function handleBack() {
             const pid = new URLSearchParams(location.search).get('pid');
-            // For now, redirect to coins page or alert
-            alert('Backing flow coming soon! Contact the creator to support this project.');
+            // Check if user is logged in (token in either storage)
+            const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+            if (token) {
+                // Logged-in: go to payments page
+                window.location.href = `payments.html?pid=${encodeURIComponent(pid)}`;
+            } else {
+                // Guest: go to guest checkout
+                window.location.href = `guest-checkout.html?pid=${encodeURIComponent(pid)}`;
+            }
         }
 
         function handleShare() {
