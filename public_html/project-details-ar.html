@@ -35,19 +35,66 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        body { font-family: 'Tajawal', sans-serif; text-align: right; direction: rtl; }
-        .dashboard-sidebar { border-right: none; border-left: 1px solid var(--neutral-200); }
-        .sidebar-menu-icon { margin-right: 0; margin-left: 1rem; }
-        .sidebar-menu-link.active { border-right: none; border-left: 3px solid var(--primary); }
-        .nav-links { margin-left: auto; margin-right: 0; }
-        .logo { margin-left: 1rem; margin-right: 0; }
-        .user-avatar { margin-right: 0; margin-left: 1rem; }
+        body {
+            font-family: 'Tajawal', sans-serif;
+            text-align: right;
+            direction: rtl;
+        }
+
+        .dashboard-sidebar {
+            border-right: none;
+            border-left: 1px solid var(--neutral-200);
+        }
+
+        .sidebar-menu-icon {
+            margin-right: 0;
+            margin-left: 1rem;
+        }
+
+        .sidebar-menu-link.active {
+            border-right: none;
+            border-left: 3px solid var(--primary);
+        }
+
+        .nav-links {
+            margin-left: auto;
+            margin-right: 0;
+        }
+
+        .logo {
+            margin-left: 1rem;
+            margin-right: 0;
+        }
+
+        .user-avatar {
+            margin-right: 0;
+            margin-left: 1rem;
+        }
+
         /* Fix dropdown for RTL */
-        .user-dropdown-menu { right: auto; left: 0; text-align: right; transform-origin: top left; }
-        .dropdown-item { display: flex !important; align-items: center; gap: 10px; flex-direction: row; }
-        .dropdown-item i { margin-left: 0; margin-right: 0; }
+        .user-dropdown-menu {
+            right: auto;
+            left: 0;
+            text-align: right;
+            transform-origin: top left;
+        }
+
+        .dropdown-item {
+            display: flex !important;
+            align-items: center;
+            gap: 10px;
+            flex-direction: row;
+        }
+
+        .dropdown-item i {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
         /* Fix spinner for RTL */
-        .fa-spin { display: inline-block; }
+        .fa-spin {
+            display: inline-block;
+        }
     </style>
 </head>
 
@@ -85,11 +132,11 @@
                         </button>
                     </div>
                     <ul class="nav-links">
-                <li><a href="dashboard-ar.html">لوحة التحكم</a></li>
-                <li><a href="my-projects-ar.html">مشاريعي</a></li>
-                <li><a href="backed-projects-ar.html">المشاريع المدعومة</a></li>
-                <li><a href="create-project-ar.html">إنشاء مشروع</a></li>
-            
+                        <li><a href="dashboard-ar.html">لوحة التحكم</a></li>
+                        <li><a href="my-projects-ar.html">مشاريعي</a></li>
+                        <li><a href="backed-projects-ar.html">المشاريع المدعومة</a></li>
+                        <li><a href="create-project-ar.html">إنشاء مشروع</a></li>
+
                         <li><a href="index-ar.html">الرئيسية</a></li>
                         <li><a href="entertainment.html">مشاريع ترفيهية</a></li>
                         <li><a href="vision2030.html">مشاريع رؤية 2030</a></li>
@@ -492,19 +539,52 @@
                                 galleryEl.appendChild(img);
                             });
                         }
-                        // Video embed
+                        // Video embed utilities
+                        const getYouTubeEmbedUrl = (url) => {
+                            if (!url) return null;
+
+                            // Handle various YouTube formats
+                            let videoId = '';
+                            if (url.includes('youtu.be/')) {
+                                videoId = url.split('youtu.be/')[1].split(/[?#]/)[0];
+                            } else if (url.includes('youtube.com/embed/')) {
+                                videoId = url.split('youtube.com/embed/')[1].split(/[?#]/)[0];
+                            } else if (url.includes('v/')) {
+                                videoId = url.split('v/')[1].split(/[?#]/)[0];
+                            } else if (url.includes('watch?v=')) {
+                                videoId = url.split('watch?v=')[1].split(/[?#]/)[0];
+                            } else if (url.includes('watch/')) {
+                                videoId = url.split('watch/')[1].split(/[?#]/)[0];
+                            }
+
+                            if (videoId) {
+                                const origin = window.location.origin;
+                                return `https://www.youtube.com/embed/${videoId}?rel=0&enablejsapi=1&origin=${encodeURIComponent(origin)}`;
+                            }
+                            return null;
+                        };
+
                         const videoWrap = document.getElementById('projectVideoWrap');
                         if (videoWrap && project.videoUrl) {
-                            let embedUrl = '';
-                            if (project.videoUrl.includes('youtube.com') || project.videoUrl.includes('youtu.be')) {
-                                const m = project.videoUrl.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&?]+)/);
-                                embedUrl = m ? 'https://www.youtube.com/embed/' + m[1] : '';
-                            } else if (project.videoUrl.includes('vimeo.com')) {
+                            let embedUrl = getYouTubeEmbedUrl(project.videoUrl);
+
+                            if (!embedUrl && project.videoUrl.includes('vimeo.com')) {
                                 const m = project.videoUrl.match(/vimeo\.com\/(\d+)/);
                                 embedUrl = m ? 'https://player.vimeo.com/video/' + m[1] : '';
                             }
+
                             if (embedUrl) {
-                                videoWrap.innerHTML = '<iframe width="100%" height="400" src="' + embedUrl + '" frameborder="0" allowfullscreen></iframe>';
+                                videoWrap.innerHTML = `
+                                    <div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                                        <iframe 
+                                            src="${embedUrl}" 
+                                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                                            frameborder="0" 
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                            allowfullscreen>
+                                        </iframe>
+                                    </div>
+                                `;
                                 videoWrap.style.display = 'block';
                             }
                         }
