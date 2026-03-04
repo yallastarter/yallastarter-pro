@@ -85,15 +85,22 @@
 
         // Hero background
         const heroBg = document.getElementById('hero-bg');
-        if (heroBg && p.heroImageUrl) {
-            heroBg.style.backgroundImage = `url('${p.heroImageUrl}')`;
+        const imgSrc = p.heroImageUrl || p.coverImage || p.cardImageUrl || null;
+        const fallbackSrc = 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=800&q=80';
+        if (heroBg && imgSrc) {
+            heroBg.style.backgroundImage = `url('${imgSrc}')`;
         }
 
         // Hero image card
         const heroImg = document.getElementById('proj-hero-img');
         if (heroImg) {
-            heroImg.src = p.heroImageUrl || p.cardImageUrl || 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=800&q=80';
+            heroImg.src = imgSrc || fallbackSrc;
             heroImg.alt = p.title;
+            heroImg.onerror = function () {
+                this.onerror = null;
+                this.src = fallbackSrc;
+                if (heroBg) heroBg.style.backgroundImage = `url('${fallbackSrc}')`;
+            };
         }
 
         // ── Creator card

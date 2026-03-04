@@ -7,12 +7,85 @@ const StripeEventLog = require('../models/StripeEventLog');
 const CoinTransaction = require('../models/CoinTransaction');
 const mongoose = require('mongoose');
 const { protect } = require('../middleware/auth');
+const nodemailer = require('nodemailer');
 
 // Initialize Stripe only if key is available
 let stripe;
 if (process.env.STRIPE_SECRET_KEY) {
     stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 }
+
+// ── Email helper ──────────────────────────────────────────────────────────────
+async function sendPaymentConfirmationEmail({ toEmail, toName, coins, amount, projectTitle, projectPid, transactionId }) {
+    // Only send if SMTP config is provided
+    const smtpUser = process.env.SMTP_USER || process.env.EMAIL_USER;
+    const smtpPass = process.env.SMTP_PASS || process.env.EMAIL_PASS;
+    const smtpHost = process.env.SMTP_HOST || 'smtp.gmail.com';
+    const smtpPort = parseInt(process.env.SMTP_PORT || '587');
+    const fromEmail = process.env.SMTP_FROM || smtpUser || 'noreply@yallastarter.com';
+    const clientUrl = process.env.CLIENT_URL || 'https://www.yallastarter.com';
+
+    if (!smtpUser || !smtpPass) {
+        console.warn('[EMAIL] SMTP_USER/SMTP_PASS not configured — skipping email confirmation.');
+        return;
+    }
+
+    const transporter = nodemailer.createTransport({
+        host: smtpHost,
+        port: smtpPort,
+        secure: smtpPort === 465,
+        auth: { user: smtpUser, pass: smtpPass }
+    });
+
+    const projectSection = projectTitle ? `
+        <div style="background:#f0fdf4;border:1.5px solid #a7f3d0;border-radius:12px;padding:1rem 1.25rem;margin:1.5rem 0;">
+          <div style="font-size:0.85rem;color:#059669;font-weight:600;margin-bottom:0.25rem;">PROJECT SUPPORTED</div>
+          <div style="font-size:1.1rem;font-weight:700;color:#111;">${projectTitle}</div>
+          ${projectPid ? `<a href="${clientUrl}/project.html?pid=${encodeURIComponent(projectPid)}" style="font-size:0.85rem;color:#006c35;text-decoration:none;">View project →</a>` : ''}
+        </div>` : '';
+
+    const html = `
+    <!DOCTYPE html>
+    <html><head><meta charset="UTF-8"></head>
+    <body style="margin:0;padding:0;font-family:'Segoe UI',Arial,sans-serif;background:#f4f7f6;">
+      <div style="max-width:560px;margin:2rem auto;background:white;border-radius:20px;overflow:hidden;box-shadow:0 8px 40px rgba(0,108,53,0.12);">
+        <div style="background:linear-gradient(135deg,#006c35,#00a651);padding:2.5rem 2rem;text-align:center;">
+          <div style="font-size:3.5rem;margin-bottom:0.5rem;">✅</div>
+          <h1 style="color:white;margin:0;font-size:1.6rem;font-weight:800;">Payment Confirmed!</h1>
+          <p style="color:rgba(255,255,255,0.85);margin:0.5rem 0 0;font-size:1rem;">Thank you for supporting YallaStarter</p>
+        </div>
+        <div style="padding:2rem;">
+          <p style="color:#444;font-size:1rem;">Hi <strong>${toName || 'Backer'}</strong>,</p>
+          <p style="color:#444;">Your payment of <strong>SAR ${amount.toLocaleString()}</strong> was successful. <strong>${coins.toLocaleString()} coins</strong> have been added to your wallet.</p>
+          ${projectSection}
+          <div style="background:#f8f9fa;border-radius:12px;padding:1rem 1.25rem;margin:1.5rem 0;">
+            <table style="width:100%;border-collapse:collapse;font-size:0.9rem;">
+              <tr><td style="color:#666;padding:0.3rem 0;">Coins purchased</td><td style="text-align:right;font-weight:700;">${coins.toLocaleString()}</td></tr>
+              <tr><td style="color:#666;padding:0.3rem 0;">Amount charged</td><td style="text-align:right;font-weight:700;">SAR ${amount.toLocaleString()}</td></tr>
+              ${transactionId ? `<tr><td style="color:#666;padding:0.3rem 0;">Transaction ID</td><td style="text-align:right;font-size:0.8rem;color:#888;">${transactionId}</td></tr>` : ''}
+            </table>
+          </div>
+          <div style="text-align:center;margin:2rem 0;">
+            <a href="${clientUrl}/coins.html" style="background:linear-gradient(135deg,#006c35,#00a651);color:white;padding:0.85rem 2rem;border-radius:50px;text-decoration:none;font-weight:700;font-size:1rem;">View My Wallet</a>
+          </div>
+          <p style="color:#888;font-size:0.8rem;text-align:center;">This email was sent to ${toEmail}. If you did not make this purchase, please contact support immediately.</p>
+        </div>
+      </div>
+    </body></html>`;
+
+    try {
+        await transporter.sendMail({
+            from: `"YallaStarter" <${fromEmail}>`,
+            to: toEmail,
+            subject: `✅ Payment Confirmed — ${coins} Coins Added${projectTitle ? ` | ${projectTitle}` : ''}`,
+            html
+        });
+        console.log(`[EMAIL] Confirmation sent to ${toEmail}`);
+    } catch (err) {
+        console.error('[EMAIL] Failed to send confirmation:', err.message);
+    }
+}
+
 
 // @desc    Get coin balance
 // @route   GET /api/coins/balance
@@ -41,7 +114,7 @@ router.post('/buy', protect, async (req, res) => {
             return res.status(503).json({ success: false, message: 'Payment service not configured' });
         }
 
-        const { amount } = req.body;
+        const { amount, pid, projectTitle } = req.body;
         const coinAmount = parseInt(amount);
 
         if (!coinAmount || coinAmount < 1 || isNaN(coinAmount)) {
@@ -55,14 +128,36 @@ router.post('/buy', protect, async (req, res) => {
         // 1 coin = 1 SAR — Stripe uses halalas (smallest unit), 1 SAR = 100 halalas
         const amountInHalalas = coinAmount * 100;
 
+        // Resolve project info from pid if provided
+        let resolvedProjectTitle = projectTitle || null;
+        let resolvedProjectPid = pid || null;
+        if (pid && !resolvedProjectTitle) {
+            try {
+                const proj = await Project.findOne({ pid: pid.toLowerCase() }).select('title pid').lean();
+                if (proj) { resolvedProjectTitle = proj.title; resolvedProjectPid = proj.pid; }
+            } catch (_) { }
+        }
+
+        // Build line item description
+        const itemName = resolvedProjectTitle
+            ? `${coinAmount} YallaStarter Coins (backing: ${resolvedProjectTitle})`
+            : `${coinAmount} YallaStarter Coins`;
+        const baseUrl = process.env.CLIENT_URL || req.headers.origin;
+        const successUrl = resolvedProjectPid
+            ? `${baseUrl}/checkout.html?pid=${encodeURIComponent(resolvedProjectPid)}&purchase=success&session_id={CHECKOUT_SESSION_ID}`
+            : `${baseUrl}/coins.html?purchase=success&session_id={CHECKOUT_SESSION_ID}`;
+        const cancelUrl = resolvedProjectPid
+            ? `${baseUrl}/checkout.html?pid=${encodeURIComponent(resolvedProjectPid)}&purchase=cancelled`
+            : `${baseUrl}/coins.html?purchase=cancelled`;
+
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             line_items: [{
                 price_data: {
                     currency: 'sar',
                     product_data: {
-                        name: `${coinAmount} YallaStarter Coins`,
-                        description: `Purchase ${coinAmount} coins for your YallaStarter wallet. 1 coin = 1 SAR. No refunds.`,
+                        name: itemName,
+                        description: `1 coin = 1 SAR. Coins are added to your YallaStarter wallet instantly after payment.`,
                         images: []
                     },
                     unit_amount: amountInHalalas,
@@ -70,28 +165,32 @@ router.post('/buy', protect, async (req, res) => {
                 quantity: 1,
             }],
             mode: 'payment',
-            success_url: `${process.env.CLIENT_URL || req.headers.origin}/coins.html?purchase=success&session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${process.env.CLIENT_URL || req.headers.origin}/coins.html?purchase=cancelled`,
+            success_url: successUrl,
+            cancel_url: cancelUrl,
             metadata: {
                 userId: req.user._id.toString(),
+                userEmail: req.user.email,
+                userName: req.user.username || '',
                 coinAmount: coinAmount.toString(),
                 coins: coinAmount.toString(),
                 currency: 'sar',
                 amountMinor: amountInHalalas.toString(),
-                type: 'coin_purchase'
+                type: 'coin_purchase',
+                ...(resolvedProjectPid ? { projectPid: resolvedProjectPid } : {}),
+                ...(resolvedProjectTitle ? { projectTitle: resolvedProjectTitle } : {})
             },
             client_reference_id: req.user._id.toString(),
             customer_email: req.user.email
         });
 
-        // Create pending legacy transaction for backward compatibility (optional)
+        // Create pending legacy transaction
         await Transaction.create({
             type: 'purchase',
             from: req.user._id,
             amount: coinAmount,
             stripeSessionId: session.id,
             status: 'pending',
-            description: `Purchase of ${coinAmount} coins (v1.0.2 audit active)`
+            description: `Purchase of ${coinAmount} coins${resolvedProjectTitle ? ` for ${resolvedProjectTitle}` : ''}`
         });
 
         // Create pending CoinTransaction audit record
@@ -104,7 +203,7 @@ router.post('/buy', protect, async (req, res) => {
             currency: 'sar',
             stripeSessionId: session.id,
             status: 'pending',
-            metadata: { initial: true }
+            metadata: { initial: true, projectPid: resolvedProjectPid, projectTitle: resolvedProjectTitle }
         });
 
         res.json({
@@ -117,6 +216,7 @@ router.post('/buy', protect, async (req, res) => {
         res.status(500).json({ success: false, message: 'Payment processing error' });
     }
 });
+
 
 // @desc    Stripe webhook info
 // @route   GET /api/coins/webhook
@@ -244,6 +344,19 @@ const handleStripeWebhook = async (req, res) => {
             );
 
             console.log(`[WEBHOOK] Credited ${coins} coins to user ${userId} | Event=${eventId}`);
+
+            // Send email confirmation (fire and forget — don't block webhook response)
+            const toEmail = metadata.userEmail || userUpdate.email;
+            const toName = metadata.userName || userUpdate.username || 'Backer';
+            sendPaymentConfirmationEmail({
+                toEmail,
+                toName,
+                coins,
+                amount: coins, // 1 coin = 1 SAR
+                projectTitle: metadata.projectTitle || null,
+                projectPid: metadata.projectPid || null,
+                transactionId: eventId
+            }).catch(e => console.error('[EMAIL] async error:', e.message));
 
             eventLog.status = 'processed';
             await eventLog.save();

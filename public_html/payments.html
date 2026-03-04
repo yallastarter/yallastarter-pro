@@ -775,7 +775,6 @@
 
         loadTransactions();
 
-        // --- Project context from URL ---
         (async function loadProjectContext() {
             const params = new URLSearchParams(window.location.search);
             const pid = params.get('pid');
@@ -783,15 +782,15 @@
             try {
                 const res = await fetch(`/api/projects/${encodeURIComponent(pid)}`);
                 const data = await res.json();
-                if (data.success && data.project) {
-                    const proj = data.project;
+                const proj = data.data || data.project;
+                if (data.success && proj) {
                     const banner = document.getElementById('projectContextBanner');
                     const cta = document.getElementById('buyCoinsCTA');
                     document.getElementById('projectContextTitle').textContent = proj.title || 'Project';
                     document.getElementById('projectContextLink').href = `project.html?pid=${encodeURIComponent(pid)}`;
                     banner.style.display = 'flex';
-                    // Show buy-coins CTA
-                    document.getElementById('buyCoinsBtnLink').href = `coins.html?pid=${encodeURIComponent(pid)}`;
+                    // Show buy-coins CTA with pid preserved
+                    document.getElementById('buyCoinsBtnLink').href = `checkout.html?pid=${encodeURIComponent(pid)}`;
                     cta.style.display = 'flex';
                 }
             } catch (e) { /* ignore if project not found */ }

@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Support a YallaStarter project with coins. Buy coins and back innovative projects from Saudi Arabia.">
+    <title>Support Project — YallaStarter Checkout</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f4f7f6;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .co-header {
+            background: white;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .co-logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #006c35;
+            text-decoration: none;
+        }
+
+        .co-nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .co-nav-links a {
+            color: #555;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .co-nav-links a:hover {
+            color: #006c35;
+        }
+
+        /* Page layout */
+        .co-page {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 2rem 1rem 4rem;
+        }
+
+        .co-grid {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .co-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading / Success / Error states */
+        .co-loading {
+            text-align: center;
+            padding: 5rem 1rem;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .co-spinner {
+            width: 44px;
+            height: 44px;
+            border: 4px solid #e0f2ea;
+            border-top-color: #00a651;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Project card (left) */
+        .project-info-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
+            animation: fadeIn 0.4s ease;
+        }
+
+        .project-hero-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+            background: #e0f2ea;
+        }
+
+        .project-card-body {
+            padding: 1.5rem;
+        }
+
+        .project-cat-badge {
+            display: inline-block;
+            background: #e0f7e9;
+            color: #006c35;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.3rem 0.75rem;
+            border-radius: 20px;
+            margin-bottom: 0.75rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #111;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .project-by {
+            color: #777;
+            font-size: 0.85rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .project-progress-bar {
+            height: 8px;
+            background: #e8f4ed;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #006c35, #00a651);
+            border-radius: 6px;
+            transition: width 1s ease;
+        }
+
+        .project-stats {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .project-stat {
+            text-align: center;
+        }
+
+        .project-stat-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #111;
+        }
+
+        .project-stat-label {
+            font-size: 0.75rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        /* Checkout panel (right) */
+        .checkout-panel {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
+            overflow: hidden;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .checkout-panel-header {
+            background: linear-gradient(135deg, #006c35, #00a651);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .checkout-panel-header h2 {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .checkout-panel-header p {
+            margin: 0.4rem 0 0;
+            opacity: 0.85;
+            font-size: 0.9rem;
+        }
+
+        .checkout-panel-body {
+            padding: 1.5rem;
+        }
+
+        /* Auth state */
+        .auth-banner {
+            background: #f0fdf4;
+            border: 1.5px solid #a7f3d0;
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.25rem;
+            font-size: 0.9rem;
+            color: #166534;
+        }
+
+        .auth-banner i {
+            margin-right: 0.4rem;
+        }
+
+        .auth-banner strong {
+            display: block;
+        }
+
+        .guest-cta {
+            background: #fff7ed;
+            border: 1.5px solid #fed7aa;
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.25rem;
+            text-align: center;
+        }
+
+        .guest-cta p {
+            margin: 0 0 0.75rem;
+            font-size: 0.9rem;
+            color: #92400e;
+        }
+
+        /* Coin packages */
+        .packages-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 0.75rem;
+        }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .pkg-card {
+            border: 2px solid #e8f4ed;
+            border-radius: 12px;
+            padding: 0.85rem 0.75rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.18s;
+        }
+
+        .pkg-card:hover {
+            border-color: #00a651;
+            background: #f0fdf4;
+        }
+
+        .pkg-card.selected {
+            border-color: #006c35;
+            background: linear-gradient(135deg, #f0fdf4, #d1fae5);
+        }
+
+        .pkg-coins {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #006c35;
+        }
+
+        .pkg-coins-label {
+            font-size: 0.7rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .pkg-price {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #333;
+            margin-top: 0.3rem;
+        }
+
+        .pkg-badge {
+            font-size: 0.68rem;
+            background: #006c35;
+            color: white;
+            border-radius: 10px;
+            padding: 0.1rem 0.5rem;
+            display: inline-block;
+            margin-top: 0.3rem;
+        }
+
+        /* Custom amount */
+        .custom-amount-wrap {
+            margin-bottom: 1.25rem;
+        }
+
+        .custom-amount-wrap label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 0.4rem;
+        }
+
+        .custom-amount-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .custom-amount-row span {
+            font-weight: 700;
+            color: #333;
+            white-space: nowrap;
+        }
+
+        .custom-amount-row input {
+            flex: 1;
+            padding: 0.7rem 1rem;
+            border: 2px solid #e8f4ed;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .custom-amount-row input:focus {
+            border-color: #00a651;
+        }
+
+        /* Order summary */
+        .order-summary {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .order-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 0.4rem;
+        }
+
+        .order-row.total {
+            font-weight: 700;
+            color: #111;
+            font-size: 1rem;
+            margin-top: 0.6rem;
+            padding-top: 0.6rem;
+            border-top: 1px solid #ddd;
+        }
+
+        /* CTA Button */
+        .btn-checkout {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #006c35, #00a651);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+        }
+
+        .btn-checkout:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 108, 53, 0.35);
+        }
+
+        .btn-checkout:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .secure-note {
+            text-align: center;
+            color: #aaa;
+            font-size: 0.78rem;
+            margin-top: 0.75rem;
+        }
+
+        .secure-note i {
+            margin-right: 0.3rem;
+        }
+
+        /* Login / Signup CTA for guests */
+        .login-btn {
+            width: 100%;
+            padding: 0.9rem;
+            background: #006c35;
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            margin-bottom: 0.75rem;
+            transition: background 0.2s;
+        }
+
+        .login-btn:hover {
+            background: #005a2b;
+        }
+
+        .signup-btn {
+            width: 100%;
+            padding: 0.87rem;
+            background: white;
+            color: #006c35;
+            border: 2px solid #006c35;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .signup-btn:hover {
+            background: #f0fdf4;
+        }
+
+        /* Success state */
+        .success-panel {
+            text-align: center;
+            padding: 3rem 2rem;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .success-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #006c35;
+            margin-bottom: 0.5rem;
+        }
+
+        .success-sub {
+            color: #555;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .success-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            max-width: 280px;
+            margin: 0 auto;
+        }
+
+        /* Error panel */
+        .error-panel {
+            background: #fff1f1;
+            border: 1.5px solid #fca5a5;
+            border-radius: 14px;
+            padding: 1.25rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: #dc2626;
+            font-size: 0.9rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #006c35, #00a651);
+            color: white;
+        }
+
+        .btn-outline {
+            background: white;
+            color: #006c35;
+            border: 2px solid #006c35;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+        }
+
+        .btn-outline:hover {
+            background: #f0fdf4;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 99999;
+            background: #006c35;
+            color: white;
+            padding: 0.9rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            max-width: 340px;
+        }
+
+        .toast.error {
+            background: #dc2626;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="co-header">
+        <a href="index.html" class="co-logo">YallaStarter</a>
+        <ul class="co-nav-links">
+            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="projects.html"><i class="fas fa-rocket"></i> Projects</a></li>
+            <li id="navDashLink" style="display:none;"><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i>
+                    Dashboard</a></li>
+        </ul>
+    </header>
+
+    <!-- Main content -->
+    <div class="co-page">
+        <!-- Loading state -->
+        <div id="loadingState" class="co-loading">
+            <div class="co-spinner"></div>
+            <p style="color:#777;">Loading project…</p>
+        </div>
+
+        <!-- Main checkout grid (hidden until ready) -->
+        <div id="checkoutGrid" class="co-grid" style="display:none;">
+
+            <!-- LEFT: Project info -->
+            <div class="project-info-card" id="projectCard">
+                <img id="projectImg" class="project-hero-img" src="" alt="Project image">
+                <div class="project-card-body">
+                    <span class="project-cat-badge" id="projectCat">Category</span>
+                    <div class="project-title" id="projectTitle">Loading…</div>
+                    <div class="project-by" id="projectBy"></div>
+                    <div class="project-progress-bar">
+                        <div class="project-progress-fill" id="progressFill" style="width:0%"></div>
+                    </div>
+                    <div class="project-stats">
+                        <div class="project-stat">
+                            <div class="project-stat-value" id="statRaised">SAR 0</div>
+                            <div class="project-stat-label">Raised</div>
+                        </div>
+                        <div class="project-stat">
+                            <div class="project-stat-value" id="statGoal">SAR 0</div>
+                            <div class="project-stat-label">Goal</div>
+                        </div>
+                        <div class="project-stat">
+                            <div class="project-stat-value" id="statDays">—</div>
+                            <div class="project-stat-label">Days Left</div>
+                        </div>
+                        <div class="project-stat">
+                            <div class="project-stat-value" id="statBackers">0</div>
+                            <div class="project-stat-label">Backers</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT: Checkout panel -->
+            <div class="checkout-panel" id="checkoutPanel">
+                <div class="checkout-panel-header">
+                    <h2><i class="fas fa-rocket"></i> Back This Project</h2>
+                    <p id="panelProjectName">Loading…</p>
+                </div>
+                <div class="checkout-panel-body" id="checkoutBody">
+                    <div class="co-spinner" style="margin:2rem auto;"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Success state (shown after redirect from Stripe) -->
+        <div id="successState" class="project-info-card" style="display:none; max-width:560px; margin:2rem auto;">
+            <div class="success-panel">
+                <div class="success-icon">🎉</div>
+                <div class="success-title">Payment Successful!</div>
+                <p class="success-sub">
+                    Your coins have been added to your wallet.<br>
+                    <span id="successProjectRef"></span>
+                    A confirmation email has been sent to your inbox.
+                </p>
+                <div class="success-actions">
+                    <a href="coins.html" class="btn btn-primary"><i class="fas fa-coins"></i> View My Wallet</a>
+                    <a href="" id="backToProjectBtn" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Back to
+                        Project</a>
+                    <a href="projects.html" class="btn btn-outline" style="color:#888;border-color:#ddd;"><i
+                            class="fas fa-rocket"></i> Browse Projects</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cancelled state -->
+        <div id="cancelledState" class="project-info-card" style="display:none; max-width:560px; margin:2rem auto;">
+            <div class="success-panel">
+                <div class="success-icon">😕</div>
+                <div class="success-title" style="color:#92400e;">Payment Cancelled</div>
+                <p class="success-sub">No charge was made. Ready to try again?</p>
+                <div class="success-actions">
+                    <button onclick="showCheckout()" class="btn btn-primary"><i class="fas fa-redo"></i> Try
+                        Again</button>
+                    <a id="cancelProjectBtn" href="#" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Back to
+                        Project</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/auth-handler.js"></script>
+    <script>
+        // ── State ────────────────────────────────────────────────────────────────
+        const params = new URLSearchParams(window.location.search);
+        const PID = params.get('pid');
+        const purchaseStatus = params.get('purchase');  // 'success', 'cancelled', or null
+        let projectData = null;
+        let selectedCoins = 100;
+        const FALLBACK_IMG = 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=800&q=80';
+
+        // ── Helpers ──────────────────────────────────────────────────────────────
+        function showToast(msg, type = 'success') {
+            const t = document.createElement('div');
+            t.className = 'toast' + (type === 'error' ? ' error' : '');
+            t.innerHTML = `<i class="fas fa-${type === 'error' ? 'exclamation-circle' : 'check-circle'}"></i> ${msg}`;
+            document.body.appendChild(t);
+            setTimeout(() => { t.style.opacity = '0'; t.style.transition = 'opacity 0.4s'; setTimeout(() => t.remove(), 400); }, 4000);
+        }
+
+        function isLoggedIn() {
+            return !!(localStorage.getItem('token') || sessionStorage.getItem('token'));
+        }
+
+        function getUser() {
+            try { return JSON.parse(localStorage.getItem('user') || sessionStorage.getItem('user') || 'null'); } catch { return null; }
+        }
+
+        // ── Load Project ─────────────────────────────────────────────────────────
+        async function loadProject() {
+            if (!PID) {
+                document.getElementById('loadingState').innerHTML = `
+                <div style="padding:4rem;text-align:center;color:#dc2626;">
+                    <i class="fas fa-exclamation-circle" style="font-size:3rem;display:block;margin-bottom:1rem;"></i>
+                    <h2>No project specified</h2>
+                    <p><a href="projects.html" style="color:#006c35;font-weight:600;">Browse projects &rarr;</a></p>
+                </div>`;
+                return;
+            }
+            try {
+                const res = await fetch(`/api/projects/${encodeURIComponent(PID)}`);
+                const data = await res.json();
+                if (!data.success || !data.data) {
+                    throw new Error(data.message || 'Project not found');
+                }
+                projectData = data.data;
+                return projectData;
+            } catch (e) {
+                document.getElementById('loadingState').innerHTML = `
+                <div style="padding:4rem;text-align:center;color:#dc2626;">
+                    <i class="fas fa-exclamation-circle" style="font-size:3rem;display:block;margin-bottom:1rem;"></i>
+                    <h2>Project Not Found</h2>
+                    <p>${e.message}</p>
+                    <a href="projects.html" class="btn btn-primary">Browse Projects</a>
+                </div>`;
+                return null;
+            }
+        }
+
+        // ── Populate Project Card ────────────────────────────────────────────────
+        function populateProjectCard(p) {
+            const img = document.getElementById('projectImg');
+            const imgSrc = p.heroImageUrl || p.coverImage || p.cardImageUrl || FALLBACK_IMG;
+            img.src = imgSrc;
+            img.onerror = () => { img.onerror = null; img.src = FALLBACK_IMG; };
+            document.getElementById('projectCat').textContent = (p.category || 'Project').toUpperCase();
+            document.getElementById('projectTitle').textContent = p.title || 'Untitled Project';
+            document.getElementById('panelProjectName').textContent = p.title || '';
+            document.title = `Back "${p.title}" — YallaStarter Checkout`;
+            if (p.creator && p.creator.username) {
+                document.getElementById('projectBy').textContent = `by ${p.creator.username}`;
+            }
+            const pct = p.fundedPercent || 0;
+            document.getElementById('progressFill').style.width = `${Math.min(100, pct)}%`;
+            document.getElementById('statRaised').textContent = `SAR ${(p.raisedAmount || 0).toLocaleString()}`;
+            document.getElementById('statGoal').textContent = `SAR ${(p.goalAmount || 0).toLocaleString()}`;
+            document.getElementById('statDays').textContent = (p.daysLeft > 0 ? p.daysLeft : 'Ended');
+            document.getElementById('statBackers').textContent = p.backersCount || 0;
+        }
+
+        // ── Render Checkout Body ─────────────────────────────────────────────────
+        function renderCheckoutBody() {
+            const body = document.getElementById('checkoutBody');
+            const loggedIn = isLoggedIn();
+            const user = getUser();
+
+            if (!loggedIn) {
+                // Guest UI — show login/signup prompts
+                body.innerHTML = `
+                <div class="guest-cta">
+                    <p><i class="fas fa-lock" style="margin-right:0.4rem;"></i>Log in to back this project and buy coins.</p>
+                </div>
+                <a href="login.html?redirect=${encodeURIComponent(location.href)}" class="login-btn">
+                    <i class="fas fa-sign-in-alt" style="margin-right:0.5rem;"></i>Log In
+                </a>
+                <a href="signup.html?redirect=${encodeURIComponent(location.href)}" class="signup-btn">
+                    <i class="fas fa-user-plus" style="margin-right:0.5rem;"></i>Create Account
+                </a>
+                <p style="text-align:center;color:#aaa;font-size:0.8rem;margin-top:1rem;">
+                    <i class="fas fa-shield-alt" style="margin-right:0.3rem;"></i>Secure payments via Stripe. No data stored without consent.
+                </p>`;
+                return;
+            }
+
+            // Logged-in UI
+            body.innerHTML = `
+            <div class="auth-banner">
+                <i class="fas fa-user-check"></i>
+                <strong>${user ? user.username || 'Welcome back!' : 'Logged in'}</strong>
+                Backing as ${user ? user.email || '' : ''}
+            </div>
+
+            <div class="packages-label">Choose how many coins to buy</div>
+            <div class="packages-grid" id="packagesGrid">
+                <div class="pkg-card" onclick="selectPkg(this, 50)" data-coins="50">
+                    <div class="pkg-coins">50</div>
+                    <div class="pkg-coins-label">coins</div>
+                    <div class="pkg-price">SAR 50</div>
+                </div>
+                <div class="pkg-card selected" onclick="selectPkg(this, 100)" data-coins="100">
+                    <div class="pkg-coins">100</div>
+                    <div class="pkg-coins-label">coins</div>
+                    <div class="pkg-price">SAR 100</div>
+                    <div class="pkg-badge">Popular</div>
+                </div>
+                <div class="pkg-card" onclick="selectPkg(this, 250)" data-coins="250">
+                    <div class="pkg-coins">250</div>
+                    <div class="pkg-coins-label">coins</div>
+                    <div class="pkg-price">SAR 250</div>
+                </div>
+                <div class="pkg-card" onclick="selectPkg(this, 500)" data-coins="500">
+                    <div class="pkg-coins">500</div>
+                    <div class="pkg-coins-label">coins</div>
+                    <div class="pkg-price">SAR 500</div>
+                    <div class="pkg-badge">Best value</div>
+                </div>
+            </div>
+
+            <div class="custom-amount-wrap">
+                <label for="customCoins">Or enter custom amount</label>
+                <div class="custom-amount-row">
+                    <span>SAR</span>
+                    <input type="number" id="customCoins" min="1" max="100000" placeholder="e.g. 200" oninput="onCustomInput(this.value)">
+                </div>
+            </div>
+
+            <div class="order-summary">
+                <div class="order-row"><span>Coins</span><span id="summaryCoins">100</span></div>
+                <div class="order-row"><span>Project</span><span id="summaryProject" style="font-size:0.82rem;color:#555;max-width:160px;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${projectData ? projectData.title : ''}</span></div>
+                <div class="order-row total"><span>Total</span><span id="summaryTotal">SAR 100</span></div>
+            </div>
+
+            <div id="checkoutError" class="error-panel" style="display:none;"></div>
+
+            <button class="btn-checkout" id="payBtn" onclick="startCheckout()">
+                <i class="fas fa-lock"></i> Pay with Stripe — SAR 100
+            </button>
+            <p class="secure-note"><i class="fas fa-shield-alt"></i> Secured by Stripe. 1 coin = 1 SAR.</p>`;
+        }
+
+        // ── Package selection ─────────────────────────────────────────────────────
+        function selectPkg(el, coins) {
+            document.querySelectorAll('.pkg-card').forEach(c => c.classList.remove('selected'));
+            el.classList.add('selected');
+            const customInput = document.getElementById('customCoins');
+            if (customInput) customInput.value = '';
+            setCoins(coins);
+        }
+
+        function onCustomInput(val) {
+            const n = parseInt(val);
+            if (n >= 1) {
+                document.querySelectorAll('.pkg-card').forEach(c => c.classList.remove('selected'));
+                setCoins(n);
+            }
+        }
+
+        function setCoins(n) {
+            selectedCoins = n;
+            const summaryCoins = document.getElementById('summaryCoins');
+            const summaryTotal = document.getElementById('summaryTotal');
+            const payBtn = document.getElementById('payBtn');
+            if (summaryCoins) summaryCoins.textContent = n.toLocaleString();
+            if (summaryTotal) summaryTotal.textContent = `SAR ${n.toLocaleString()}`;
+            if (payBtn) payBtn.innerHTML = `<i class="fas fa-lock"></i> Pay with Stripe — SAR ${n.toLocaleString()}`;
+        }
+
+        // ── Start Stripe Checkout ─────────────────────────────────────────────────
+        async function startCheckout() {
+            const btn = document.getElementById('payBtn');
+            const errEl = document.getElementById('checkoutError');
+            if (!selectedCoins || selectedCoins < 1) { showToast('Please select a coin amount.', 'error'); return; }
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Redirecting to Stripe…';
+            if (errEl) errEl.style.display = 'none';
+
+            const token = window.auth ? window.auth.getToken() : (localStorage.getItem('token') || sessionStorage.getItem('token'));
+            try {
+                const res = await fetch('/api/coins/buy', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                    body: JSON.stringify({
+                        amount: selectedCoins,
+                        pid: PID || undefined,
+                        projectTitle: projectData ? projectData.title : undefined
+                    })
+                });
+                const data = await res.json();
+                if (data.success && data.url) {
+                    window.location.href = data.url;
+                } else {
+                    throw new Error(data.message || 'Payment session creation failed.');
+                }
+            } catch (e) {
+                if (btn) { btn.disabled = false; btn.innerHTML = `<i class="fas fa-lock"></i> Pay with Stripe — SAR ${selectedCoins.toLocaleString()}`; }
+                if (errEl) { errEl.textContent = e.message; errEl.style.display = 'block'; }
+                showToast(e.message, 'error');
+            }
+        }
+
+        function showCheckout() {
+            document.getElementById('successState').style.display = 'none';
+            document.getElementById('cancelledState').style.display = 'none';
+            document.getElementById('checkoutGrid').style.display = 'grid';
+        }
+
+        // ── Init ─────────────────────────────────────────────────────────────────
+        (async function init() {
+            // Show dashboard link if logged in
+            if (isLoggedIn()) document.getElementById('navDashLink').style.display = '';
+
+            // Handle return from Stripe
+            if (purchaseStatus === 'success') {
+                document.getElementById('loadingState').style.display = 'none';
+                const ss = document.getElementById('successState');
+                ss.style.display = 'block';
+                if (PID) {
+                    document.getElementById('backToProjectBtn').href = `project.html?pid=${encodeURIComponent(PID)}`;
+                    // Load project title for the success message
+                    try {
+                        const d = await loadProject();
+                        if (d) document.getElementById('successProjectRef').textContent = `You supported: ${d.title}.`;
+                    } catch (_) { }
+                }
+                return;
+            }
+
+            if (purchaseStatus === 'cancelled') {
+                document.getElementById('loadingState').style.display = 'none';
+                document.getElementById('cancelledState').style.display = 'block';
+                if (PID) document.getElementById('cancelProjectBtn').href = `project.html?pid=${encodeURIComponent(PID)}`;
+                return;
+            }
+
+            // Normal checkout flow — load project
+            const p = await loadProject();
+            if (!p) return; // error already shown
+
+            document.getElementById('loadingState').style.display = 'none';
+            document.getElementById('checkoutGrid').style.display = 'grid';
+
+            populateProjectCard(p);
+            renderCheckoutBody();
+        })();
+    </script>
+</body>
+
+</html>

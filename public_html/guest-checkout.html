@@ -678,8 +678,9 @@
                 try {
                     const res = await fetch(`/api/projects/${encodeURIComponent(projectId)}`);
                     const data = await res.json();
-                    if (data.success && data.project) {
-                        const title = data.project.title || 'this project';
+                    const proj = data.data || data.project;
+                    if (data.success && proj) {
+                        const title = proj.title || 'this project';
                         document.getElementById('projectBanner').style.display = 'block';
                         document.getElementById('projectNameDisplay').textContent = title;
                         return;
