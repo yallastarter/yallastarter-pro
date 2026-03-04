@@ -111,7 +111,7 @@ router.get('/balance', protect, async (req, res) => {
 router.post('/buy', protect, async (req, res) => {
     try {
         if (!stripe) {
-            return res.status(503).json({ success: false, message: 'Payment service not configured' });
+            return res.status(503).json({ success: false, message: 'Payment service not configured. Please contact support.' });
         }
 
         const { amount, pid, projectTitle } = req.body;
@@ -150,61 +150,67 @@ router.post('/buy', protect, async (req, res) => {
             ? `${baseUrl}/checkout.html?pid=${encodeURIComponent(resolvedProjectPid)}&purchase=cancelled`
             : `${baseUrl}/coins.html?purchase=cancelled`;
 
-        const session = await stripe.checkout.sessions.create({
-            payment_method_types: ['card'],
-            line_items: [{
-                price_data: {
-                    currency: 'sar',
-                    product_data: {
-                        name: itemName,
-                        description: `1 coin = 1 SAR. Coins are added to your YallaStarter wallet instantly after payment.`,
-                        images: []
+        let session;
+        try {
+            session = await stripe.checkout.sessions.create({
+                payment_method_types: ['card'],
+                line_items: [{
+                    price_data: {
+                        currency: 'sar',
+                        product_data: {
+                            name: itemName,
+                            description: `1 coin = 1 SAR. Coins are added to your YallaStarter wallet instantly after payment.`,
+                            images: []
+                        },
+                        unit_amount: amountInHalalas,
                     },
-                    unit_amount: amountInHalalas,
+                    quantity: 1,
+                }],
+                mode: 'payment',
+                success_url: successUrl,
+                cancel_url: cancelUrl,
+                metadata: {
+                    userId: req.user._id.toString(),
+                    userEmail: req.user.email,
+                    userName: req.user.username || '',
+                    coinAmount: coinAmount.toString(),
+                    coins: coinAmount.toString(),
+                    currency: 'sar',
+                    amountMinor: amountInHalalas.toString(),
+                    type: 'coin_purchase',
+                    ...(resolvedProjectPid ? { projectPid: resolvedProjectPid } : {}),
+                    ...(resolvedProjectTitle ? { projectTitle: resolvedProjectTitle } : {})
                 },
-                quantity: 1,
-            }],
-            mode: 'payment',
-            success_url: successUrl,
-            cancel_url: cancelUrl,
-            metadata: {
-                userId: req.user._id.toString(),
-                userEmail: req.user.email,
-                userName: req.user.username || '',
-                coinAmount: coinAmount.toString(),
-                coins: coinAmount.toString(),
-                currency: 'sar',
-                amountMinor: amountInHalalas.toString(),
+                client_reference_id: req.user._id.toString(),
+                customer_email: req.user.email
+            });
+        } catch (stripeError) {
+            console.error('Stripe session creation error:', stripeError.message);
+            return res.status(502).json({ success: false, message: stripeError.message || 'Failed to create payment session with Stripe.' });
+        }
+
+        // Create pending records — non-blocking so DB issues do not prevent checkout from starting
+        Promise.all([
+            Transaction.create({
+                type: 'purchase',
+                from: req.user._id,
+                amount: coinAmount,
+                stripeSessionId: session.id,
+                status: 'pending',
+                description: `Purchase of ${coinAmount} coins${resolvedProjectTitle ? ` for ${resolvedProjectTitle}` : ''}`
+            }),
+            CoinTransaction.create({
+                userId: req.user._id,
                 type: 'coin_purchase',
-                ...(resolvedProjectPid ? { projectPid: resolvedProjectPid } : {}),
-                ...(resolvedProjectTitle ? { projectTitle: resolvedProjectTitle } : {})
-            },
-            client_reference_id: req.user._id.toString(),
-            customer_email: req.user.email
-        });
-
-        // Create pending legacy transaction
-        await Transaction.create({
-            type: 'purchase',
-            from: req.user._id,
-            amount: coinAmount,
-            stripeSessionId: session.id,
-            status: 'pending',
-            description: `Purchase of ${coinAmount} coins${resolvedProjectTitle ? ` for ${resolvedProjectTitle}` : ''}`
-        });
-
-        // Create pending CoinTransaction audit record
-        await CoinTransaction.create({
-            userId: req.user._id,
-            type: 'coin_purchase',
-            coins: coinAmount,
-            amount: coinAmount,
-            amountMinor: amountInHalalas,
-            currency: 'sar',
-            stripeSessionId: session.id,
-            status: 'pending',
-            metadata: { initial: true, projectPid: resolvedProjectPid, projectTitle: resolvedProjectTitle }
-        });
+                coins: coinAmount,
+                amount: coinAmount,
+                amountMinor: amountInHalalas,
+                currency: 'sar',
+                stripeSessionId: session.id,
+                status: 'pending',
+                metadata: { initial: true, projectPid: resolvedProjectPid, projectTitle: resolvedProjectTitle }
+            })
+        ]).catch(dbErr => console.error('[COINS/BUY] Non-critical DB write error (checkout still proceeding):', dbErr.message));
 
         res.json({
             success: true,
@@ -213,9 +219,10 @@ router.post('/buy', protect, async (req, res) => {
         });
     } catch (error) {
         console.error('Coin purchase error:', error);
-        res.status(500).json({ success: false, message: 'Payment processing error' });
+        res.status(500).json({ success: false, message: error.message || 'Payment processing error' });
     }
 });
+
 
 // @desc    Create Stripe checkout session for GUEST (no login)
 // @route   POST /api/coins/guest-buy
