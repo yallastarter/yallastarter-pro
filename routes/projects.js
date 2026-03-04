@@ -227,11 +227,28 @@ router.post('/', protect, async (req, res) => {
 
         res.status(201).json({ success: true, data: project });
     } catch (err) {
-        console.error('Create project error:', err.message);
-        if (err.name === 'ValidationError') {
-            return res.status(400).json({ success: false, message: err.message });
+        console.error('Create project error:', err.name, err.code, err.message);
+
+        // MongoDB duplicate key (E11000) — pid collision
+        if (err.code === 11000) {
+            const field = Object.keys(err.keyPattern || {})[0] || 'field';
+            const label = field === 'pid' ? 'project URL (generated from title, already taken)' : field;
+            return res.status(400).json({
+                success: false,
+                message: `Duplicate: a project with this ${label} already exists. Try a slightly different title.`
+            });
         }
-        res.status(500).json({ success: false, message: 'Server error' });
+
+        // Mongoose validation errors — show all fields
+        if (err.name === 'ValidationError') {
+            const messages = Object.values(err.errors).map(e => e.message);
+            return res.status(400).json({
+                success: false,
+                message: 'Validation failed: ' + messages.join(' | ')
+            });
+        }
+
+        res.status(500).json({ success: false, message: `Server error: ${err.message}` });
     }
 });
 

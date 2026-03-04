@@ -1262,12 +1262,32 @@
             // Legacy inline fallback (unused by main flow now)
         }
 
-        function showError(msg, fix) {
-            document.getElementById('errorBannerMsg').textContent = msg;
-            document.getElementById('errorBannerFix').textContent = fix ? '✅ How to fix: ' + fix : '';
+        function showError(title, fix) {
+            const msg = document.getElementById('errorBannerMsg');
+            const fixEl = document.getElementById('errorBannerFix');
+            if (msg) msg.textContent = title;
+
+            if (fixEl) {
+                if (fix) {
+                    // If the fix message contains '|', format as a list
+                    if (fix.includes(' | ')) {
+                        const items = fix.split(' | ');
+                        fixEl.innerHTML = '<strong>Issues found:</strong><ul style="margin:0.4rem 0 0 1.2rem;">' +
+                            items.map(i => `<li>${i}</li>`).join('') + '</ul>';
+                    } else {
+                        fixEl.textContent = fix;
+                    }
+                    fixEl.style.display = '';
+                } else {
+                    fixEl.style.display = 'none';
+                }
+            }
+
             const b = document.getElementById('errorBanner');
-            b.style.display = 'block';
-            b.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            if (b) {
+                b.style.display = 'block';
+                b.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
         }
 
         function copyShareLink() {
