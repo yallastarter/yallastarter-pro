@@ -38,6 +38,16 @@ const UserSchema = new mongoose.Schema({
         type: String,
         default: null
     },
+    bio: {
+        type: String,
+        default: '',
+        maxlength: 500
+    },
+    location: {
+        type: String,
+        default: ''
+    },
+
     coinBalance: {
         type: Number,
         default: 0,

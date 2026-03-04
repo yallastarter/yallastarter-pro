@@ -541,6 +541,40 @@
                 <a href="coins.html" class="btn btn-primary"><i class="fas fa-wallet"></i> My Wallet</a>
             </div>
 
+            <!-- Project Context Banner (shown when coming from a project page) -->
+            <div id="projectContextBanner"
+                style="display:none; background:linear-gradient(135deg,#006c35,#00a651); color:white; border-radius:16px; padding:1.25rem 1.5rem; margin-bottom:1.75rem; display:none; align-items:center; gap:1rem;">
+                <div
+                    style="width:48px;height:48px;background:rgba(255,255,255,0.2);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                    <i class="fas fa-rocket" style="font-size:1.3rem;"></i>
+                </div>
+                <div style="flex:1;">
+                    <div style="font-size:0.8rem;opacity:0.85;margin-bottom:0.15rem;">You are about to support</div>
+                    <div id="projectContextTitle" style="font-size:1.15rem;font-weight:700;"></div>
+                </div>
+                <a id="projectContextLink" href="#"
+                    style="background:rgba(255,255,255,0.2);color:white;padding:0.5rem 1.1rem;border-radius:10px;font-weight:600;font-size:0.9rem;text-decoration:none;white-space:nowrap;">
+                    <i class="fas fa-external-link-alt" style="margin-right:0.35rem;"></i>View Project
+                </a>
+            </div>
+
+            <!-- Buy Coins CTA (shown when coming from a project and user needs coins) -->
+            <div id="buyCoinsCTA"
+                style="display:none; background:white; border:2px solid #e8f4ed; border-radius:16px; padding:1.25rem 1.5rem; margin-bottom:1.75rem; align-items:center; gap:1rem;">
+                <div style="flex:1;">
+                    <div style="font-weight:600;color:var(--neutral-900);margin-bottom:0.25rem;">
+                        <i class="fas fa-coins" style="color:#00a651;margin-right:0.5rem;"></i>Need coins to support
+                        this project?
+                    </div>
+                    <div style="font-size:0.9rem;color:var(--neutral-600);">Buy YallaStarter coins to back projects. 1
+                        Coin = 1 SAR.</div>
+                </div>
+                <a id="buyCoinsBtnLink" href="coins.html" class="btn btn-primary"
+                    style="white-space:nowrap;flex-shrink:0;">
+                    <i class="fas fa-plus-circle"></i> Buy Coins
+                </a>
+            </div>
+
             <!-- Summary Cards -->
             <div class="summary-grid">
                 <div class="summary-card">
@@ -740,6 +774,28 @@
         }
 
         loadTransactions();
+
+        // --- Project context from URL ---
+        (async function loadProjectContext() {
+            const params = new URLSearchParams(window.location.search);
+            const pid = params.get('pid');
+            if (!pid) return;
+            try {
+                const res = await fetch(`/api/projects/${encodeURIComponent(pid)}`);
+                const data = await res.json();
+                if (data.success && data.project) {
+                    const proj = data.project;
+                    const banner = document.getElementById('projectContextBanner');
+                    const cta = document.getElementById('buyCoinsCTA');
+                    document.getElementById('projectContextTitle').textContent = proj.title || 'Project';
+                    document.getElementById('projectContextLink').href = `project.html?pid=${encodeURIComponent(pid)}`;
+                    banner.style.display = 'flex';
+                    // Show buy-coins CTA
+                    document.getElementById('buyCoinsBtnLink').href = `coins.html?pid=${encodeURIComponent(pid)}`;
+                    cta.style.display = 'flex';
+                }
+            } catch (e) { /* ignore if project not found */ }
+        })();
 
         function showAddMethodModal() {
             const toast = document.createElement('div');

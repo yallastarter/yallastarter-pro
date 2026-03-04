@@ -667,14 +667,31 @@
         let selectedCoins = 100;
         let selectedPrice = 100;
 
-        // Read project context from URL params
+        // Read project context from URL params — fetch real project data
         const urlParams = new URLSearchParams(window.location.search);
-        const projectName = urlParams.get('project');
         const projectId = urlParams.get('pid');
-        if (projectName) {
-            document.getElementById('projectBanner').style.display = 'block';
-            document.getElementById('projectNameDisplay').textContent = decodeURIComponent(projectName);
-        }
+        // Also support legacy ?project= param (plain name)
+        const projectNameParam = urlParams.get('project');
+
+        (async function loadProjectContext() {
+            if (projectId) {
+                try {
+                    const res = await fetch(`/api/projects/${encodeURIComponent(projectId)}`);
+                    const data = await res.json();
+                    if (data.success && data.project) {
+                        const title = data.project.title || 'this project';
+                        document.getElementById('projectBanner').style.display = 'block';
+                        document.getElementById('projectNameDisplay').textContent = title;
+                        return;
+                    }
+                } catch (e) { /* fall through */ }
+            }
+            // Fallback: use ?project= name if provided
+            if (projectNameParam) {
+                document.getElementById('projectBanner').style.display = 'block';
+                document.getElementById('projectNameDisplay').textContent = decodeURIComponent(projectNameParam);
+            }
+        })();
 
         function selectPackage(el) {
             document.querySelectorAll('.coin-package').forEach(p => p.classList.remove('selected'));

@@ -2,9 +2,12 @@
 class AuthHandler {
     constructor() {
         this.apiBase = window.location.origin;
+        // Prefer localStorage (remember-me logins), fall back to sessionStorage
         this.token = localStorage.getItem('token') || sessionStorage.getItem('token');
         const userStr = localStorage.getItem('user') || sessionStorage.getItem('user');
         this.user = JSON.parse(userStr || 'null');
+        // Determine which storage holds the active session so idle-timer uses the same one
+        this._storage = localStorage.getItem('token') ? localStorage : sessionStorage;
 
         // Initialize Idle Timer (30 minutes)
         this.idleThreshold = 30 * 60 * 1000;
@@ -45,6 +48,7 @@ class AuthHandler {
                 const storage = userData.remember ? localStorage : sessionStorage;
                 storage.setItem('token', data.token);
                 storage.setItem('user', JSON.stringify(data.user));
+                this._storage = storage;
                 this.updateLastActivity();
                 return { success: true, message: 'Account created successfully!' };
             } else {
@@ -75,6 +79,7 @@ class AuthHandler {
                 const storage = credentials.remember ? localStorage : sessionStorage;
                 storage.setItem('token', data.token);
                 storage.setItem('user', JSON.stringify(data.user));
+                this._storage = storage;
                 this.updateLastActivity();
                 return { success: true, user: data.user };
             } else {
@@ -123,6 +128,7 @@ class AuthHandler {
         sessionStorage.removeItem('token');
         sessionStorage.removeItem('user');
         localStorage.removeItem('lastAuthActivity');
+        sessionStorage.removeItem('lastAuthActivity');
 
         const isAr = window.location.pathname.includes('-ar.');
         let loginUrl = isAr ? '/login-ar.html' : '/login.html';
@@ -250,8 +256,9 @@ class AuthHandler {
     initIdleTimer() {
         if (!this.isAuthenticated()) return;
 
-        // Check for existing inactivity
-        const lastActivity = parseInt(localStorage.getItem('lastAuthActivity') || Date.now());
+        // Check for existing inactivity — use same storage as session
+        const s = this._storage || (localStorage.getItem('token') ? localStorage : sessionStorage);
+        const lastActivity = parseInt(s.getItem('lastAuthActivity') || Date.now());
         if (Date.now() - lastActivity > this.idleThreshold) {
             return this.logout('timeout');
         }
@@ -264,7 +271,7 @@ class AuthHandler {
 
         // Periodic check every minute
         setInterval(() => {
-            const lastActive = parseInt(localStorage.getItem('lastAuthActivity') || Date.now());
+            const lastActive = parseInt(s.getItem('lastAuthActivity') || Date.now());
             if (Date.now() - lastActive > this.idleThreshold) {
                 this.logout('timeout');
             }
@@ -273,7 +280,9 @@ class AuthHandler {
 
     updateLastActivity() {
         if (this.isAuthenticated()) {
-            localStorage.setItem('lastAuthActivity', Date.now());
+            // Use same storage as the active session token
+            const s = this._storage || (localStorage.getItem('token') ? localStorage : sessionStorage);
+            s.setItem('lastAuthActivity', Date.now());
         }
     }
 }

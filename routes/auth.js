@@ -213,19 +213,38 @@ router.get('/me', authMiddleware, async (req, res) => {
         if (!user) {
             return res.status(404).json({ success: false, message: 'User not found' });
         }
-        res.json({ success: true, user });
+        // Count projects created and backed
+        const Project = require('../models/Project');
+        const projectsCreated = await Project.countDocuments({ creator: req.userId });
+        res.json({
+            success: true,
+            user: {
+                id: user._id,
+                username: user.username,
+                email: user.email,
+                role: user.role,
+                photoUrl: user.photoUrl,
+                bio: user.bio || '',
+                location: user.location || '',
+                coinBalance: user.coinBalance || 0,
+                totalSpent: user.totalSpent || 0,
+                createdAt: user.createdAt,
+                projectsCreated
+            }
+        });
     } catch (error) {
         console.error('Get user error:', error);
         res.status(500).json({ success: false, message: 'Server error' });
     }
 });
 
+
 // @desc    Update user profile
 // @route   PUT /api/auth/update-profile
 // @access  Private
 router.put('/update-profile', authMiddleware, async (req, res) => {
     try {
-        const { username, email } = req.body;
+        const { username, email, bio, location } = req.body;
         const user = await User.findById(req.userId);
 
         if (!user) {
@@ -243,6 +262,8 @@ router.put('/update-profile', authMiddleware, async (req, res) => {
         }
 
         if (username && typeof username === 'string') user.username = username.trim();
+        if (typeof bio === 'string') user.bio = bio.trim().substring(0, 500);
+        if (typeof location === 'string') user.location = location.trim();
 
         await user.save();
 
@@ -252,7 +273,9 @@ router.put('/update-profile', authMiddleware, async (req, res) => {
                 id: user._id,
                 username: user.username,
                 email: user.email,
-                photoUrl: user.photoUrl
+                photoUrl: user.photoUrl,
+                bio: user.bio || '',
+                location: user.location || ''
             }
         });
     } catch (error) {
@@ -260,6 +283,7 @@ router.put('/update-profile', authMiddleware, async (req, res) => {
         res.status(500).json({ success: false, message: 'Server error' });
     }
 });
+
 
 // @desc    Upload profile photo
 // @route   POST /api/auth/upload-photo
