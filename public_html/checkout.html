@@ -771,20 +771,9 @@
             const user = getUser();
 
             if (!loggedIn) {
-                // Guest UI — show login/signup prompts
-                body.innerHTML = `
-                <div class="guest-cta">
-                    <p><i class="fas fa-lock" style="margin-right:0.4rem;"></i>Log in to back this project and buy coins.</p>
-                </div>
-                <a href="login.html?redirect=${encodeURIComponent(location.href)}" class="login-btn">
-                    <i class="fas fa-sign-in-alt" style="margin-right:0.5rem;"></i>Log In
-                </a>
-                <a href="signup.html?redirect=${encodeURIComponent(location.href)}" class="signup-btn">
-                    <i class="fas fa-user-plus" style="margin-right:0.5rem;"></i>Create Account
-                </a>
-                <p style="text-align:center;color:#aaa;font-size:0.8rem;margin-top:1rem;">
-                    <i class="fas fa-shield-alt" style="margin-right:0.3rem;"></i>Secure payments via Stripe. No data stored without consent.
-                </p>`;
+                // Guest — redirect to guest checkout page (no account needed)
+                const guestUrl = `guest-checkout.html${PID ? '?pid=' + encodeURIComponent(PID) + (projectData ? '&project=' + encodeURIComponent(projectData.title) : '') : ''}`;
+                window.location.href = guestUrl;
                 return;
             }
 
