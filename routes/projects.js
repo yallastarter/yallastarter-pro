@@ -94,8 +94,10 @@ router.get('/:id', async (req, res) => {
         });
         const raisedAmount = backings.reduce((sum, tx) => sum + tx.amount, 0);
 
-        // backersCount: unique users who backed
-        const backersCount = new Set(backings.map(tx => tx.from.toString())).size;
+        // backersCount: unique users who backed (handling null 'from' for guests)
+        const backersCount = new Set(
+            backings.map(tx => tx.from ? tx.from.toString() : `guest-${tx._id}`)
+        ).size;
 
         // fundedPercent: min(100, (raisedAmount / goal) * 100)
         const fundedPercent = Math.min(100, Math.round((raisedAmount / project.goalAmount) * 100));

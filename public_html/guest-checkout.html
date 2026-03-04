@@ -699,24 +699,6 @@
             document.getElementById('payBtnText').textContent = 'Pay SAR ' + selectedPrice;
         }
 
-        // Card number formatting
-        document.getElementById('cardNumber').addEventListener('input', function (e) {
-            let val = this.value.replace(/\D/g, '').substring(0, 16);
-            this.value = val.replace(/(.{4})/g, '$1 ').trim();
-        });
-
-        // Expiry formatting
-        document.getElementById('cardExpiry').addEventListener('input', function (e) {
-            let val = this.value.replace(/\D/g, '').substring(0, 4);
-            if (val.length >= 2) val = val.substring(0, 2) + '/' + val.substring(2);
-            this.value = val;
-        });
-
-        // CVV — numbers only
-        document.getElementById('cardCVV').addEventListener('input', function () {
-            this.value = this.value.replace(/\D/g, '').substring(0, 4);
-        });
-
         // Form submit integration with Stripe
         document.getElementById('guestCheckoutForm').addEventListener('submit', async function (e) {
             e.preventDefault();

@@ -789,8 +789,17 @@
         function handleBack() {
             const pid = new URLSearchParams(location.search).get('pid');
             if (!pid) return;
-            // Always go to the dedicated checkout page — it handles both guests and logged-in users
-            window.location.href = `checkout.html?pid=${encodeURIComponent(pid)}`;
+
+            // Check if logged in
+            const loggedIn = !!(localStorage.getItem('token') || sessionStorage.getItem('token'));
+
+            if (loggedIn) {
+                // Return to standard checkout for logged in users
+                window.location.href = `checkout.html?pid=${encodeURIComponent(pid)}`;
+            } else {
+                // Direct guests to the simple guest checkout
+                window.location.href = `guest-checkout.html?pid=${encodeURIComponent(pid)}`;
+            }
         }
 
         function handleShare() {
