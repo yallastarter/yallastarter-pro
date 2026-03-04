@@ -44,10 +44,14 @@ if (!process.env.STRIPE_SECRET_KEY) {
 
 const app = express();
 
-app.use((req, res, next) => {
-    console.log("REQ:", req.method, req.originalUrl);
-    next();
-});
+const isProduction = process.env.NODE_ENV === 'production';
+
+if (!isProduction) {
+    app.use((req, res, next) => {
+        console.log("REQ:", req.method, req.originalUrl);
+        next();
+    });
+}
 
 const { handleStripeWebhook } = require('./routes/coins');
 
@@ -92,7 +96,7 @@ app.post("/api/coins/webhook", express.raw({ type: "application/json" }), (req, 
 console.log("✅ DEPLOYED server.js loaded at", new Date().toISOString());
 
 const PORT = process.env.PORT || 3000;
-const isProduction = process.env.NODE_ENV === 'production';
+// isProduction already declared above
 
 // Connect to Database
 const connectDB = require('./config/db');

@@ -232,7 +232,7 @@ router.get('/users/:id', requirePermission('canManageUsers'), async (req, res) =
 // @desc    Delete user
 // @route   DELETE /api/admin/users/:id
 // @access  Admin
-router.delete('/users/:id', async (req, res) => {
+router.delete('/users/:id', adminOnly, async (req, res) => {
     try {
         if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
             return res.status(400).json({ success: false, message: 'Invalid user ID' });
@@ -527,7 +527,7 @@ router.put('/employees/:id', adminOnly, async (req, res) => {
 // @desc    Delete / remove employee or manager
 // @route   DELETE /api/admin/employees/:id
 // @access  Admin only
-router.delete('/employees/:id', async (req, res) => {
+router.delete('/employees/:id', adminOnly, async (req, res) => {
     try {
         if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
             return res.status(400).json({ success: false, message: 'Invalid ID' });

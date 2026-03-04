@@ -277,7 +277,8 @@ router.put('/:id', protect, async (req, res) => {
         if (videoUrl !== undefined) project.videoUrl = videoUrl;
         if (story !== undefined) project.story = story;
         if (rewards !== undefined) project.rewards = rewards;
-        if (status !== undefined && ['draft', 'active', 'completed'].includes(status)) project.status = status;
+        // Users can only revert to draft; 'active'/'completed' require admin approval
+        if (status !== undefined && status === 'draft') project.status = status;
         await project.save();
         res.json({ success: true, data: project });
     } catch (err) {

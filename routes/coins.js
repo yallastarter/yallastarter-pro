@@ -418,15 +418,11 @@ router.post('/confirm-purchase', protect, async (req, res) => {
         );
 
         if (transaction) {
-            // Credit coins — purchase, not earnings
-            await User.findByIdAndUpdate(req.user._id, {
-                $inc: { coinBalance: coinAmount }
-            });
-
+            // Coins already credited by webhook — just mark transaction and return balance
             const user = await User.findById(req.user._id).select('coinBalance');
             return res.json({
                 success: true,
-                message: `${coinAmount} coins added to your wallet!`,
+                message: 'Purchase confirmed!',
                 balance: user.coinBalance
             });
         } else {

@@ -107,7 +107,7 @@ router.post('/signup', async (req, res) => {
             return res.status(400).json({ success: false, message: 'Duplicate field value entered' });
         }
         // Temporary: expose error message for debugging
-        res.status(500).json({ success: false, message: `Server Error: ${error.message}` });
+        res.status(500).json({ success: false, message: 'Server error' });
     }
 });
 
@@ -130,10 +130,12 @@ router.post('/login', async (req, res) => {
         const idNorm = (typeof identifier === 'string') ? identifier.toLowerCase().trim() : '';
         const idTrimmed = (typeof identifier === 'string') ? identifier.trim() : identifier;
 
+        // Escape regex metacharacters to prevent ReDoS
+        const escapedId = idTrimmed.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         const user = await User.findOne({
             $or: [
                 { email: idNorm },
-                { username: { $regex: new RegExp('^' + idTrimmed + '$', 'i') } }
+                { username: { $regex: new RegExp('^' + escapedId + '$', 'i') } }
             ]
         }).select('+password');
 
@@ -334,7 +336,7 @@ router.put('/updatepassword', authMiddleware, async (req, res) => {
         await user.save();
 
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-            expiresIn: '30d'
+            expiresIn: '7d'
         });
 
         res.status(200).json({ success: true, token });
@@ -351,42 +353,16 @@ router.post('/forgot-password', async (req, res) => {
     try {
         const { email } = req.body;
         if (!email) return res.status(400).json({ success: false, message: 'Email is required' });
-        const user = await User.findOne({ email: email.toLowerCase().trim() });
-        // Always respond the same for security (but send found flag)
-        if (!user) {
-            return res.status(404).json({ success: false, message: 'No account found with that email address.' });
-        }
-        // In production this would send an email. For now, return a reset token / flag.
-        res.json({ success: true, message: 'Account found. You can now reset your password.', found: true });
+        // Always respond the same way to prevent email enumeration
+        res.json({ success: true, message: 'If an account with that email exists, you will receive reset instructions.' });
     } catch (error) {
         console.error('Forgot password error:', error);
         res.status(500).json({ success: false, message: 'Server error' });
     }
 });
 
-// @desc    Reset password — set new password (direct reset, no email token needed)
-// @route   POST /api/auth/reset-password
-// @access  Public
-router.post('/reset-password', async (req, res) => {
-    try {
-        const { email, newPassword } = req.body;
-        if (!email || !newPassword) {
-            return res.status(400).json({ success: false, message: 'Email and new password are required' });
-        }
-        if (newPassword.length < 6) {
-            return res.status(400).json({ success: false, message: 'Password must be at least 6 characters' });
-        }
-        const user = await User.findOne({ email: email.toLowerCase().trim() }).select('+password');
-        if (!user) {
-            return res.status(404).json({ success: false, message: 'No account found with that email address' });
-        }
-        user.password = newPassword;
-        await user.save();
-        res.json({ success: true, message: 'Password reset successfully. You can now log in with your new password.' });
-    } catch (error) {
-        console.error('Reset password error:', error);
-        res.status(500).json({ success: false, message: 'Server error' });
-    }
-});
+// NOTE: Unauthenticated reset-password endpoint removed for security.
+// Password changes require authentication via PUT /api/auth/updatepassword.
+// Full forgot-password flow with email tokens is not yet implemented.
 
 module.exports = router;
