@@ -128,13 +128,18 @@ router.post('/buy', protect, async (req, res) => {
         // 1 coin = 1 SAR — Stripe uses halalas (smallest unit), 1 SAR = 100 halalas
         const amountInHalalas = coinAmount * 100;
 
-        // Resolve project info from pid if provided
+        // Resolve project info from pid if provided (must include _id for webhook)
         let resolvedProjectTitle = projectTitle || null;
         let resolvedProjectPid = pid || null;
-        if (pid && !resolvedProjectTitle) {
+        let resolvedProjectMongoId = null;
+        if (pid) {
             try {
-                const proj = await Project.findOne({ pid: pid.toLowerCase() }).select('title pid').lean();
-                if (proj) { resolvedProjectTitle = proj.title; resolvedProjectPid = proj.pid; }
+                const proj = await Project.findOne({ pid: pid.toLowerCase() }).select('title pid _id').lean();
+                if (proj) {
+                    resolvedProjectTitle = proj.title;
+                    resolvedProjectPid = proj.pid;
+                    resolvedProjectMongoId = proj._id.toString();
+                }
             } catch (_) { }
         }
 
@@ -177,9 +182,11 @@ router.post('/buy', protect, async (req, res) => {
                     coins: coinAmount.toString(),
                     currency: 'sar',
                     amountMinor: amountInHalalas.toString(),
-                    type: 'coin_purchase',
+                    // 'backing' if a project is specified, 'coin_purchase' if wallet top-up only
+                    type: resolvedProjectMongoId ? 'backing' : 'coin_purchase',
                     ...(resolvedProjectPid ? { projectPid: resolvedProjectPid } : {}),
-                    ...(resolvedProjectTitle ? { projectTitle: resolvedProjectTitle } : {})
+                    ...(resolvedProjectTitle ? { projectTitle: resolvedProjectTitle } : {}),
+                    ...(resolvedProjectMongoId ? { projectId: resolvedProjectMongoId } : {})
                 },
                 client_reference_id: req.user._id.toString(),
                 customer_email: req.user.email
@@ -395,6 +402,8 @@ const handleStripeWebhook = async (req, res) => {
         const isGuest = metadata.isGuest === 'true';
         const userId = metadata.userId || null;
         const projectId = metadata.projectId || null;
+        const txType = metadata.type || 'coin_purchase'; // 'backing' or 'coin_purchase'
+        const isBacking = txType === 'backing' || !!projectId;
         const coins = parseInt(metadata.coins);
         const amountMinor = parseInt(metadata.amountMinor || (coins * 100));
         const currency = (metadata.currency || 'sar').toLowerCase();
@@ -408,69 +417,64 @@ const handleStripeWebhook = async (req, res) => {
         }
 
         try {
-            // 3. Atomic Updates (using session if possible, but Atlas free tier might not support it reliably without replica sets)
-            // We use fine-grained updates and idempotency guards.
-
-            // Deduplicate at CoinTransaction level too (belt and braces)
-            const existingTx = await CoinTransaction.findOne({ stripeEventId: eventId, type: 'coin_purchase' });
+            // Deduplicate — check if this stripe event was already processed
+            const existingTx = await CoinTransaction.findOne({ stripeEventId: eventId });
             if (existingTx) {
                 eventLog.status = 'processed';
                 await eventLog.save();
                 return res.status(200).json({ received: true, note: 'already_credited' });
             }
 
-            // Perform updates
             let userUpdate = null;
-            if (!isGuest && userId) {
+
+            if (isBacking && projectId) {
+                // ── BACKING FLOW (logged-in OR guest) ───────────────────────────────
+                // Coins go DIRECTLY to the project — user wallet is NOT credited.
+                // This avoids double-counting and reflects intent: user paid to back.
+                const project = await Project.findById(projectId);
+                if (!project) throw new Error(`Project ${projectId} not found`);
+
+                // Credit project's funded amount
+                await Project.findByIdAndUpdate(projectId, {
+                    $inc: { currentAmount: coins, backersCount: 1 }
+                });
+
+                // Credit project creator's earned amount (but NOT their spendable balance, to keep accounting clean)
+                await User.findByIdAndUpdate(project.creator, {
+                    $inc: { totalEarned: coins }
+                });
+
+                // For logged-in users: record the backing in their totalSpent
+                if (!isGuest && userId) {
+                    userUpdate = await User.findByIdAndUpdate(userId, {
+                        $inc: { totalSpent: coins }
+                    }, { new: true });
+                    if (!userUpdate) throw new Error(`User ${userId} not found`);
+                }
+
+                console.log(`[WEBHOOK] Backing: Credited project ${projectId} with ${coins} coins | Event=${eventId}`);
+
+            } else if (!isGuest && userId) {
+                // ── WALLET TOP-UP FLOW (no project backing) ─────────────────────────
+                // User just bought coins for their wallet.
                 userUpdate = await User.findByIdAndUpdate(userId, {
                     $inc: { coinBalance: coins }
                 }, { new: true });
                 if (!userUpdate) throw new Error(`User ${userId} not found`);
+                console.log(`[WEBHOOK] Wallet top-up: Credited ${coins} coins to user ${userId} | Event=${eventId}`);
             }
 
-            // If it's a backing (guest or user), credit the project creator
-            if (projectId) {
-                const project = await Project.findById(projectId);
-                if (project) {
-                    // Credit creator (atomic)
-                    await User.findByIdAndUpdate(project.creator, {
-                        $inc: { coinBalance: coins, totalEarned: coins }
-                    });
+            // Determine the coin transaction type for the audit record
+            const auditType = (isBacking || isGuest) ? 'backing' : 'coin_purchase';
 
-                    // Update project funding (atomic)
-                    await Project.findByIdAndUpdate(projectId, {
-                        $inc: { currentAmount: coins }
-                    });
-
-                    // If user (not guest), deduct the coins we just added to their balance immediately
-                    // OR better: if it was a direct backing purchase, don't even add to user balance?
-                    // The current /buy logic for users says "Purchased X coins for project Y".
-                    // The webhook currently credits the USER. 
-                    // To be consistent with "direct backing", we should either:
-                    // A) Credit user then user sends to project (requires 2 steps)
-                    // B) Credit project creator directly and user record shows "Backed Project X"
-
-                    // The user's metadata has projectPid if they specified it in /buy.
-                    // For now, let's keep it simple: if it's a guest, credit creator.
-                    // If it's a user, they get the coins in their balance (as per existing logic), 
-                    // and if they want to back, the frontend usually calls /send after confirmation OR the purchase was just "buying coins".
-                    // Wait, the existing /buy route doesn't automatically back. It just buys coins.
-                    // But if it's a GUEST, they HAVE to back automatically because they have no wallet.
-
-                    if (isGuest) {
-                        console.log(`[WEBHOOK] Guest backing: Crediting project ${projectId}`);
-                    }
-                }
-            }
-
-            // Create success audit record
+            // Create / update success audit record
             await CoinTransaction.findOneAndUpdate(
-                { stripeSessionId: session.id, type: isGuest ? 'backing' : 'coin_purchase' },
+                { stripeSessionId: session.id, type: auditType },
                 {
                     userId,
-                    projectId,
+                    projectId: projectId || null,
                     coins,
-                    amount: coins, // 1:1 ratio
+                    amount: coins,
                     amountMinor,
                     currency,
                     stripePaymentIntentId: session.payment_intent,
@@ -487,13 +491,11 @@ const handleStripeWebhook = async (req, res) => {
                 {
                     status: 'completed',
                     stripePaymentId: session.payment_intent,
-                    project: projectId,
-                    type: isGuest ? 'send' : 'purchase'
+                    project: projectId || null,
+                    type: (isBacking || isGuest) ? 'send' : 'purchase'
                 },
                 { new: true }
             );
-
-            console.log(`[WEBHOOK] Credited ${coins} coins to user ${userId} | Event=${eventId}`);
 
             // Send email confirmation (fire and forget — don't block webhook response)
             const toEmail = metadata.userEmail || (userUpdate ? userUpdate.email : null);
