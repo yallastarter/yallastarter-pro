@@ -1,30 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
-const fs = require('fs');
 const multer = require('multer');
 const Project = require('../models/Project');
 const User = require('../models/User');
 const mongoose = require('mongoose');
 const { protect } = require('../middleware/auth');
 
-// Ensure upload directory exists before Multer uses it
-const uploadDir = path.join('public_html', 'uploads', 'projects');
-if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir, { recursive: true });
-}
-
-// Multer for project images (cover + gallery)
-const projectStorage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'public_html/uploads/projects/');
-    },
-    filename: function (req, file, cb) {
-        const unique = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        const ext = (path.extname(file.originalname) || '').toLowerCase() || '.jpg';
-        cb(null, 'project-' + unique + ext);
-    }
-});
+// Multer: use memory storage so images survive Render redeploys
+// Images are converted to base64 data URLs and stored in MongoDB
 const imageFilter = (req, file, cb) => {
     const allowed = /jpeg|jpg|png|gif|webp/;
     const ext = path.extname(file.originalname).toLowerCase().replace('.', '');
@@ -33,8 +17,8 @@ const imageFilter = (req, file, cb) => {
     cb(new Error('Only image files (jpeg, jpg, png, gif, webp) are allowed'));
 };
 const uploadProjectImage = multer({
-    storage: projectStorage,
-    limits: { fileSize: 8 * 1024 * 1024 },
+    storage: multer.memoryStorage(),
+    limits: { fileSize: 5 * 1024 * 1024 }, // 5MB max (base64 adds ~33%, keeps under 16MB doc limit)
     fileFilter: imageFilter
 });
 
@@ -160,8 +144,10 @@ router.get('/:id', async (req, res) => {
 router.post('/upload-cover', protect, uploadProjectImage.single('cover'), (req, res) => {
     try {
         if (!req.file) return res.status(400).json({ success: false, message: 'No file uploaded' });
-        const url = '/uploads/projects/' + req.file.filename;
-        res.json({ success: true, url });
+        // Convert buffer to base64 data URL (persists in MongoDB, survives Render redeploys)
+        const base64 = req.file.buffer.toString('base64');
+        const dataUrl = `data:${req.file.mimetype};base64,${base64}`;
+        res.json({ success: true, url: dataUrl });
     } catch (err) {
         res.status(500).json({ success: false, message: err.message || 'Upload failed' });
     }
@@ -173,7 +159,10 @@ router.post('/upload-cover', protect, uploadProjectImage.single('cover'), (req, 
 router.post('/upload-gallery', protect, uploadProjectImage.array('gallery', 10), (req, res) => {
     try {
         if (!req.files || req.files.length === 0) return res.status(400).json({ success: false, message: 'No files uploaded' });
-        const urls = req.files.map(f => '/uploads/projects/' + f.filename);
+        const urls = req.files.map(f => {
+            const base64 = f.buffer.toString('base64');
+            return `data:${f.mimetype};base64,${base64}`;
+        });
         res.json({ success: true, urls });
     } catch (err) {
         res.status(500).json({ success: false, message: err.message || 'Upload failed' });

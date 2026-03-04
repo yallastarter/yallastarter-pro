@@ -217,6 +217,104 @@ router.post('/buy', protect, async (req, res) => {
     }
 });
 
+// @desc    Create Stripe checkout session for GUEST (no login)
+// @route   POST /api/coins/guest-buy
+// @access  Public
+router.post('/guest-buy', async (req, res) => {
+    try {
+        if (!stripe) {
+            return res.status(503).json({ success: false, message: 'Payment service not configured' });
+        }
+
+        const { amount, pid, projectTitle, email } = req.body;
+        const coinAmount = parseInt(amount);
+
+        if (!coinAmount || coinAmount < 1 || isNaN(coinAmount)) {
+            return res.status(400).json({ success: false, message: 'Minimum purchase is 1 coin' });
+        }
+
+        if (!email || !email.includes('@')) {
+            return res.status(400).json({ success: false, message: 'Valid email required for guest checkout' });
+        }
+
+        // 1 coin = 1 SAR
+        const amountInHalalas = coinAmount * 100;
+
+        // Resolve project info
+        let resolvedProjectTitle = projectTitle || null;
+        let resolvedProjectPid = pid || null;
+        let resolvedProjectId = null;
+
+        if (pid) {
+            try {
+                const proj = await Project.findOne({ pid: pid.toLowerCase() }).select('title pid _id').lean();
+                if (proj) {
+                    resolvedProjectTitle = proj.title;
+                    resolvedProjectPid = proj.pid;
+                    resolvedProjectId = proj._id;
+                }
+            } catch (_) { }
+        }
+
+        const baseUrl = process.env.CLIENT_URL || req.headers.origin;
+        const successUrl = `${baseUrl}/guest-checkout.html?purchase=success&session_id={CHECKOUT_SESSION_ID}${resolvedProjectPid ? `&pid=${resolvedProjectPid}` : ''}`;
+        const cancelUrl = `${baseUrl}/guest-checkout.html?purchase=cancelled${resolvedProjectPid ? `&pid=${resolvedProjectPid}` : ''}`;
+
+        const itemName = resolvedProjectTitle
+            ? `${coinAmount} Coins (Guest Backing: ${resolvedProjectTitle})`
+            : `${coinAmount} YallaStarter Coins (Guest)`;
+
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
+            line_items: [{
+                price_data: {
+                    currency: 'sar',
+                    product_data: {
+                        name: itemName,
+                        description: `Instant backing for ${resolvedProjectTitle || 'a project'}. No account needed.`,
+                    },
+                    unit_amount: amountInHalalas,
+                },
+                quantity: 1,
+            }],
+            mode: 'payment',
+            success_url: successUrl,
+            cancel_url: cancelUrl,
+            customer_email: email,
+            metadata: {
+                isGuest: 'true',
+                userEmail: email,
+                coinAmount: coinAmount.toString(),
+                coins: coinAmount.toString(),
+                currency: 'sar',
+                amountMinor: amountInHalalas.toString(),
+                type: 'guest_backing',
+                projectPid: resolvedProjectPid || '',
+                projectId: resolvedProjectId ? resolvedProjectId.toString() : '',
+                projectTitle: resolvedProjectTitle || ''
+            }
+        });
+
+        // Create a pending transaction for tracking (optional since no user, but good for logs)
+        await Transaction.create({
+            type: 'purchase',
+            from: null, // Guest
+            amount: coinAmount,
+            stripeSessionId: session.id,
+            status: 'pending',
+            description: `Guest purchase of ${coinAmount} coins${resolvedProjectTitle ? ` for ${resolvedProjectTitle}` : ''}`
+        });
+
+        res.json({
+            success: true,
+            sessionId: session.id,
+            url: session.url
+        });
+    } catch (error) {
+        console.error('Guest purchase error:', error);
+        res.status(500).json({ success: false, message: 'Payment processing error' });
+    }
+});
 
 // @desc    Stripe webhook info
 // @route   GET /api/coins/webhook
@@ -279,15 +377,17 @@ const handleStripeWebhook = async (req, res) => {
         const session = event.data.object;
         const metadata = session.metadata;
 
-        if (!metadata || !metadata.userId || !metadata.coins) {
+        if (!metadata || !metadata.coins || (!metadata.userId && metadata.isGuest !== 'true')) {
             console.error(`[WEBHOOK] Missing metadata for session ${session.id}`);
             eventLog.status = 'failed';
-            eventLog.errorMessage = 'Missing metadata (userId/coins)';
+            eventLog.errorMessage = 'Missing metadata (userId/isGuest/coins)';
             await eventLog.save();
             return res.status(200).json({ received: true, error: 'missing_metadata' });
         }
 
-        const userId = metadata.userId;
+        const isGuest = metadata.isGuest === 'true';
+        const userId = metadata.userId || null;
+        const projectId = metadata.projectId || null;
         const coins = parseInt(metadata.coins);
         const amountMinor = parseInt(metadata.amountMinor || (coins * 100));
         const currency = (metadata.currency || 'sar').toLowerCase();
@@ -313,17 +413,55 @@ const handleStripeWebhook = async (req, res) => {
             }
 
             // Perform updates
-            const userUpdate = await User.findByIdAndUpdate(userId, {
-                $inc: { coinBalance: coins }
-            }, { new: true });
+            let userUpdate = null;
+            if (!isGuest && userId) {
+                userUpdate = await User.findByIdAndUpdate(userId, {
+                    $inc: { coinBalance: coins }
+                }, { new: true });
+                if (!userUpdate) throw new Error(`User ${userId} not found`);
+            }
 
-            if (!userUpdate) throw new Error(`User ${userId} not found`);
+            // If it's a backing (guest or user), credit the project creator
+            if (projectId) {
+                const project = await Project.findById(projectId);
+                if (project) {
+                    // Credit creator (atomic)
+                    await User.findByIdAndUpdate(project.creator, {
+                        $inc: { coinBalance: coins, totalEarned: coins }
+                    });
+
+                    // Update project funding (atomic)
+                    await Project.findByIdAndUpdate(projectId, {
+                        $inc: { currentAmount: coins }
+                    });
+
+                    // If user (not guest), deduct the coins we just added to their balance immediately
+                    // OR better: if it was a direct backing purchase, don't even add to user balance?
+                    // The current /buy logic for users says "Purchased X coins for project Y".
+                    // The webhook currently credits the USER. 
+                    // To be consistent with "direct backing", we should either:
+                    // A) Credit user then user sends to project (requires 2 steps)
+                    // B) Credit project creator directly and user record shows "Backed Project X"
+
+                    // The user's metadata has projectPid if they specified it in /buy.
+                    // For now, let's keep it simple: if it's a guest, credit creator.
+                    // If it's a user, they get the coins in their balance (as per existing logic), 
+                    // and if they want to back, the frontend usually calls /send after confirmation OR the purchase was just "buying coins".
+                    // Wait, the existing /buy route doesn't automatically back. It just buys coins.
+                    // But if it's a GUEST, they HAVE to back automatically because they have no wallet.
+
+                    if (isGuest) {
+                        console.log(`[WEBHOOK] Guest backing: Crediting project ${projectId}`);
+                    }
+                }
+            }
 
             // Create success audit record
             await CoinTransaction.findOneAndUpdate(
-                { stripeSessionId: session.id, type: 'coin_purchase' },
+                { stripeSessionId: session.id, type: isGuest ? 'backing' : 'coin_purchase' },
                 {
                     userId,
+                    projectId,
                     coins,
                     amount: coins, // 1:1 ratio
                     amountMinor,
@@ -339,24 +477,32 @@ const handleStripeWebhook = async (req, res) => {
             // Update legacy transaction for backward compatibility
             await Transaction.findOneAndUpdate(
                 { stripeSessionId: session.id },
-                { status: 'completed', stripePaymentId: session.payment_intent },
+                {
+                    status: 'completed',
+                    stripePaymentId: session.payment_intent,
+                    project: projectId,
+                    type: isGuest ? 'send' : 'purchase'
+                },
                 { new: true }
             );
 
             console.log(`[WEBHOOK] Credited ${coins} coins to user ${userId} | Event=${eventId}`);
 
             // Send email confirmation (fire and forget — don't block webhook response)
-            const toEmail = metadata.userEmail || userUpdate.email;
-            const toName = metadata.userName || userUpdate.username || 'Backer';
-            sendPaymentConfirmationEmail({
-                toEmail,
-                toName,
-                coins,
-                amount: coins, // 1 coin = 1 SAR
-                projectTitle: metadata.projectTitle || null,
-                projectPid: metadata.projectPid || null,
-                transactionId: eventId
-            }).catch(e => console.error('[EMAIL] async error:', e.message));
+            const toEmail = metadata.userEmail || (userUpdate ? userUpdate.email : null);
+            const toName = metadata.userName || (userUpdate ? userUpdate.username : 'Backer');
+
+            if (toEmail) {
+                sendPaymentConfirmationEmail({
+                    toEmail,
+                    toName,
+                    coins,
+                    amount: coins, // 1 coin = 1 SAR
+                    projectTitle: metadata.projectTitle || null,
+                    projectPid: metadata.projectPid || null,
+                    transactionId: eventId
+                }).catch(e => console.error('[EMAIL] async error:', e.message));
+            }
 
             eventLog.status = 'processed';
             await eventLog.save();

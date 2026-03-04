@@ -528,41 +528,21 @@
                         <!-- Payment Form -->
                         <div class="form-section-title"><i class="fas fa-credit-card"></i> Payment Details</div>
 
-                        <form id="guestCheckoutForm" novalidate>
-                            <div class="form-group">
-                                <label class="form-label" for="cardName">Cardholder Name</label>
-                                <input type="text" id="cardName" class="form-control" placeholder="Name on card"
-                                    required>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label" for="cardNumber">Card Number</label>
-                                <input type="text" id="cardNumber" class="form-control"
-                                    placeholder="1234 5678 9012 3456" maxlength="19" required>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label class="form-label" for="cardExpiry">Expiry Date</label>
-                                    <input type="text" id="cardExpiry" class="form-control" placeholder="MM/YY"
-                                        maxlength="5" required>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label" for="cardCVV">CVV</label>
-                                    <input type="text" id="cardCVV" class="form-control" placeholder="123" maxlength="4"
-                                        required>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label" for="guestEmail">Email <span
-                                        style="color:var(--neutral-500);font-weight:400;">(for receipt)</span></label>
+                        <form id="guestCheckoutForm">
+                            <div class="form-group" style="margin-top:0.5rem;">
+                                <label class="form-label" for="guestEmail">Email Address <span
+                                        style="color:var(--neutral-500);font-weight:400;">(for payment
+                                        receipt)</span></label>
                                 <input type="email" id="guestEmail" class="form-control" placeholder="your@email.com"
                                     required>
+                                <p style="font-size: 0.8rem; color: var(--neutral-500); margin-top: 0.5rem;">
+                                    <i class="fas fa-info-circle"></i> Payments are processed safely via Stripe. We
+                                    never store your card details.
+                                </p>
                             </div>
 
                             <!-- Order Summary -->
-                            <div class="order-summary">
+                            <div class="order-summary" style="margin-top: 2rem;">
                                 <div class="summary-row">
                                     <span>Coins</span>
                                     <span id="summaryCoins">100 coins</span>
@@ -578,8 +558,8 @@
                             </div>
 
                             <button type="submit" class="btn-pay" id="payBtn">
-                                <i class="fas fa-lock"></i>
-                                <span id="payBtnText">Pay SAR 100</span>
+                                <i class="fab fa-stripe"></i>
+                                <span id="payBtnText">Proceed to Payment (SAR 100)</span>
                             </button>
                         </form>
 
@@ -737,33 +717,55 @@
             this.value = this.value.replace(/\D/g, '').substring(0, 4);
         });
 
-        // Form submit
-        document.getElementById('guestCheckoutForm').addEventListener('submit', function (e) {
+        // Form submit integration with Stripe
+        document.getElementById('guestCheckoutForm').addEventListener('submit', async function (e) {
             e.preventDefault();
-            const name = document.getElementById('cardName').value.trim();
-            const num = document.getElementById('cardNumber').value.replace(/\s/g, '');
-            const exp = document.getElementById('cardExpiry').value;
-            const cvv = document.getElementById('cardCVV').value;
             const email = document.getElementById('guestEmail').value.trim();
 
-            if (!name || num.length < 16 || !exp || cvv.length < 3 || !email) {
-                alert('Please fill in all payment details correctly.');
+            if (!email || !email.includes('@')) {
+                alert('Please enter a valid email address for your receipt.');
                 return;
             }
 
             const btn = document.getElementById('payBtn');
             const btnText = document.getElementById('payBtnText');
             btn.disabled = true;
-            btnText.textContent = 'Processing…';
+            btnText.textContent = 'Preparing Secure Payment...';
 
-            // Simulate payment (in production, this would call a real payment API)
-            setTimeout(() => {
+            try {
+                const response = await fetch('/api/coins/guest-buy', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        amount: selectedPrice,
+                        pid: projectId,
+                        email: email
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success && data.url) {
+                    // Redirect to Stripe Checkout
+                    window.location.href = data.url;
+                } else {
+                    throw new Error(data.message || 'Failed to initialize payment session');
+                }
+            } catch (error) {
+                console.error('Payment Error:', error);
+                alert('Sorry, there was an error starting the payment process: ' + error.message);
                 btn.disabled = false;
-                btnText.textContent = 'Pay SAR ' + selectedPrice;
-                // Store project association for backend processing
-                console.log('Payment completed:', { projectId, projectName, coins: selectedCoins, amount: selectedPrice, email });
+                btnText.textContent = 'Proceed to Payment (SAR ' + selectedPrice + ')';
+            }
+        });
+
+        // Handle success/cancel states on return
+        window.addEventListener('DOMContentLoaded', () => {
+            if (urlParams.get('purchase') === 'success') {
                 document.getElementById('successOverlay').classList.add('show');
-            }, 2000);
+            } else if (urlParams.get('purchase') === 'cancelled') {
+                alert('Payment was cancelled. You can try again whenever you are ready.');
+            }
         });
     </script>
 </body>
