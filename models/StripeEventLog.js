@@ -43,8 +43,6 @@ const StripeEventLogSchema = new mongoose.Schema({
     }
 });
 
-// Unique index on eventId is already handled by unique: true
-// but we can be explicit
-StripeEventLogSchema.index({ eventId: 1 }, { unique: true });
+// eventId unique index is already created by `unique: true` on the field
 
 module.exports = mongoose.model('StripeEventLog', StripeEventLogSchema);
