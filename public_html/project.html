@@ -4,16 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Details - YallaStarter</title>
-    <meta name="description" content="Support innovative projects on YallaStarter.">
+    <title id="page-title">Project - YallaStarter</title>
+    <meta name="description" id="page-description" content="Support innovative projects on YallaStarter.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" id="og-title" content="Project - YallaStarter">
+    <meta property="og:description" id="og-description" content="">
+    <meta property="og:image" id="og-image" content="">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <!-- Mobile Menu CSS -->
     <link rel="stylesheet" href="mobile-menu.css">
 
@@ -27,6 +38,12 @@
             --border-color: #e9ecef;
         }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
@@ -34,7 +51,7 @@
             background-color: #fff;
         }
 
-        /* Header Styles (Unified) */
+        /* ── HEADER ── */
         .header {
             background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -48,7 +65,6 @@
         .navbar {
             display: flex;
             align-items: center;
-            justify-content: flex-start;
             gap: 1rem;
             width: 100%;
         }
@@ -61,7 +77,7 @@
         .logo-text {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--primary-color);
+            color: #006c35;
         }
 
         .nav-links {
@@ -73,36 +89,58 @@
         }
 
         .nav-links a {
-            color: var(--text-color);
+            color: #333;
             font-weight: 500;
             text-decoration: none;
             padding: 0.5rem 1rem;
-            transition: all 0.3s ease;
+            border-radius: 6px;
+            transition: all 0.2s;
         }
 
         .nav-links a:hover {
-            color: var(--primary-color);
+            color: #006c35;
+            background: rgba(0, 108, 53, 0.06);
         }
 
-        /* Project Hero Section */
+        /* ── LOADING ── */
+        #loading-overlay {
+            position: fixed;
+            inset: 0;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            z-index: 9000;
+        }
+
+        #loading-overlay .spinner-border {
+            width: 3rem;
+            height: 3rem;
+            color: #00d4aa;
+        }
+
+        #loading-overlay p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* ── HERO ── */
         .project-hero {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            background: linear-gradient(135deg, #0f0f0f 0%, #1e2a1e 60%, #0a1a0a 100%);
             color: white;
-            padding: 4rem 0;
+            padding: 5rem 0 4rem;
             position: relative;
             overflow: hidden;
         }
 
         #hero-bg {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            inset: 0;
             background-size: cover;
             background-position: center;
-            opacity: 0.3;
-            z-index: 1;
+            opacity: 0.18;
         }
 
         .project-hero .container {
@@ -110,281 +148,661 @@
             z-index: 2;
         }
 
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(0, 212, 170, 0.15);
+            border: 1px solid rgba(0, 212, 170, 0.4);
+            color: #00d4aa;
+            padding: 0.3rem 0.9rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.25rem;
+        }
+
         .project-hero h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.15;
             margin-bottom: 1rem;
+            letter-spacing: -0.02em;
         }
 
         .project-hero .lead {
-            font-size: 1.25rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
         }
 
-        .project-stats {
+        /* Stats strip */
+        .hero-stats {
             display: flex;
-            gap: 2rem;
-            margin-top: 2rem;
+            gap: 0;
+            flex-wrap: wrap;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 16px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
         }
 
-        .stat-item {
+        .hero-stat {
+            flex: 1;
+            min-width: 120px;
+            padding: 1.25rem 1.5rem;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
         }
 
-        .stat-number {
+        .hero-stat:last-child {
+            border-right: none;
+        }
+
+        .hero-stat-number {
             font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary-color);
+            font-weight: 800;
+            color: #00d4aa;
+            line-height: 1;
         }
 
-        .stat-label {
-            font-size: 0.9rem;
-            opacity: 0.8;
+        .hero-stat-label {
+            font-size: 0.78rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 0.3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
-        /* Project Content */
-        .project-content {
+        /* Right card image */
+        .hero-image-card {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            aspect-ratio: 4/3;
+        }
+
+        .hero-image-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .hero-image-card:hover img {
+            transform: scale(1.04);
+        }
+
+        /* ── CONTENT ── */
+        .project-body {
             padding: 4rem 0;
         }
 
-        .project-image {
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            margin-bottom: 2rem;
-        }
-
-        .project-image img {
-            width: 100%;
-            height: auto;
-            transition: transform 0.3s ease;
-        }
-
         .section-title {
-            font-size: 2.5rem;
+            font-size: 1.75rem;
             font-weight: 700;
-            margin-bottom: 2rem;
-            color: var(--secondary-color);
+            color: #111;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 3px solid #00d4aa;
+            display: inline-block;
         }
 
-        .project-description {
+        .about-paragraph {
+            font-size: 1.05rem;
+            line-height: 1.85;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Creator card */
+        .creator-card {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            padding: 1rem 1.25rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            margin-bottom: 2.5rem;
+        }
+
+        .creator-avatar {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #006c35, #00a651);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 2rem;
-            color: #666;
-            white-space: pre-wrap;
+            color: white;
+            font-weight: 700;
+            flex-shrink: 0;
         }
 
-        /* Right Side Support Card */
+        .creator-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #333;
+        }
+
+        .creator-label {
+            font-size: 0.78rem;
+            color: #888;
+        }
+
+        /* ── SUPPORT CARD ── */
         .support-card {
             background: white;
-            border-radius: 15px;
+            border-radius: 20px;
             padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+            border: 1px solid #eee;
             position: sticky;
-            top: 100px;
+            top: 80px;
+        }
+
+        .raised-amount {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: #111;
+            line-height: 1;
+        }
+
+        .raised-currency {
+            font-size: 1rem;
+            color: #888;
+            margin-top: 0.2rem;
+        }
+
+        .goal-text {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 0.4rem;
         }
 
         .funding-progress {
             background: #e9ecef;
             height: 10px;
-            border-radius: 5px;
+            border-radius: 100px;
             overflow: hidden;
+            margin: 1.25rem 0;
+        }
+
+        .funding-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #00d4aa, #00a651);
+            border-radius: 100px;
+            transition: width 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .funded-pct {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #00a651;
+        }
+
+        .support-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
             margin: 1.5rem 0;
         }
 
-        .funding-progress-bar {
-            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-            height: 100%;
-            width: 0%;
-            transition: width 1s ease;
+        .support-stat {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 0.85rem 1rem;
+            text-align: center;
         }
 
-        .raised-amount {
-            font-size: 2rem;
+        .support-stat-number {
+            font-size: 1.4rem;
             font-weight: 700;
-            color: var(--primary-color);
+            color: #111;
         }
 
-        .goal-amount {
-            color: #666;
-            margin-bottom: 1rem;
+        .support-stat-label {
+            font-size: 0.75rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
-        .btn-support {
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            border: none;
-            color: white;
-            padding: 1rem 2rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border-radius: 50px;
+        .btn-back-project {
             width: 100%;
-            margin-top: 1.5rem;
-            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #00d4aa, #006c35);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 0.5rem;
+            letter-spacing: 0.01em;
         }
 
-        .btn-support:hover {
+        .btn-back-project:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 212, 170, 0.3);
+            box-shadow: 0 12px 28px rgba(0, 212, 170, 0.35);
+            opacity: 0.95;
         }
 
-        /* Rewards */
+        .btn-share {
+            width: 100%;
+            background: transparent;
+            border: 2px solid #e9ecef;
+            color: #555;
+            padding: 0.75rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 0.75rem;
+        }
+
+        .btn-share:hover {
+            border-color: #00d4aa;
+            color: #00a651;
+        }
+
+        .deadline-notice {
+            font-size: 0.78rem;
+            color: #aaa;
+            text-align: center;
+            margin-top: 1rem;
+            line-height: 1.6;
+        }
+
+        /* ── REWARDS ── */
         .reward-card {
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            transition: all 0.3s ease;
+            border: 2px solid #e9ecef;
+            border-radius: 16px;
+            padding: 1.75rem;
+            margin-bottom: 1.25rem;
+            transition: all 0.25s;
+            cursor: default;
         }
 
         .reward-card:hover {
-            border-color: var(--primary-color);
-            background: #f0fffb;
+            border-color: #00d4aa;
+            box-shadow: 0 4px 20px rgba(0, 212, 170, 0.12);
+            transform: translateY(-2px);
         }
 
-        .reward-amount {
-            font-size: 1.25rem;
+        .reward-amount-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            background: linear-gradient(135deg, #00d4aa20, #00a65120);
+            border: 1px solid #00d4aa50;
+            color: #006c35;
+            padding: 0.35rem 0.9rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
             font-weight: 700;
-            color: var(--primary-color);
+            margin-bottom: 0.85rem;
         }
 
-        /* Loading Overlay */
-        #loading-overlay {
-            position: fixed;
+        .reward-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 0.5rem;
+        }
+
+        .reward-desc {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .reward-delivery {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: #888;
+            background: #f8f9fa;
+            padding: 0.3rem 0.7rem;
+            border-radius: 20px;
+        }
+
+        /* ── GALLERY ── */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .gallery-item {
+            border-radius: 12px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            background: #f0f0f0;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.06);
+        }
+
+        /* ── VIDEO ── */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .video-container iframe {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
+            border: 0;
         }
 
-        /* Footer */
-        .footer {
-            background: var(--secondary-color);
-            color: white;
-            padding: 4rem 0 2rem;
+        /* ── ERROR ── */
+        .error-state {
+            text-align: center;
+            padding: 6rem 2rem;
+        }
+
+        .error-icon {
+            font-size: 4rem;
+            color: #dc3545;
+            margin-bottom: 1.5rem;
+        }
+
+        .error-state h2 {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .error-state p {
+            color: #888;
+            margin-bottom: 2rem;
+        }
+
+        /* ── STATUS BADGE ── */
+        .status-badge {
+            display: inline-block;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .status-active {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-funded {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .status-closed {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            .project-hero {
+                padding: 3rem 0;
+            }
+
+            .project-hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-stats {
+                gap: 0;
+            }
+
+            .hero-stat {
+                padding: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .support-card {
+                position: static;
+            }
+
+            .project-body {
+                padding: 2.5rem 0;
+            }
         }
     </style>
 </head>
 
 <body>
+
+    <!-- Loading Overlay -->
     <div id="loading-overlay">
-        <div class="spinner-border text-primary" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
+        <div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div>
+        <p>Loading project…</p>
     </div>
 
-    <!-- Main Header -->
+    <!-- ── HEADER ── -->
     <header class="header">
         <nav class="navbar">
-            <a href="index.html" class="logo">
-                <span class="logo-text">YallaStarter</span>
-            </a>
+            <a href="index.html" class="logo"><span class="logo-text">YallaStarter</span></a>
             <ul class="nav-links d-none d-lg-flex">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="projects.html">Browse Projects</a></li>
                 <li><a href="how-it-works.html">How It Works</a></li>
                 <li><a href="about.html">About</a></li>
             </ul>
-            <div class="ms-auto d-flex gap-2">
-                <a href="create-project.html" class="btn btn-outline-primary rounded-pill d-none d-sm-inline">Start a
-                    Project</a>
-                <a href="login.html" id="nav-login-btn" class="btn btn-primary rounded-pill">Log In</a>
+            <div class="ms-auto d-flex gap-2 align-items-center">
+                <a href="create-project.html" class="btn btn-outline-success rounded-pill d-none d-sm-inline"
+                    style="font-size:0.88rem">Start a Project</a>
+                <a href="login.html" id="nav-auth-btn" class="btn btn-success rounded-pill"
+                    style="font-size:0.88rem">Log In</a>
             </div>
         </nav>
     </header>
 
-    <!-- Project Hero Section -->
-    <section class="project-hero">
-        <div id="hero-bg"></div>
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-8">
-                    <h1 id="proj-title">Loading Project...</h1>
-                    <p class="lead" id="proj-tagline"></p>
-                    <div class="project-stats">
-                        <div class="stat-item">
-                            <div class="stat-number" id="proj-funded-percent">0%</div>
-                            <div class="stat-label">Funded</div>
+    <!-- ── PAGE CONTENT (populated by JS) ── -->
+    <div id="page-content" style="display:none;">
+
+        <!-- PROJECT HERO -->
+        <section class="project-hero">
+            <div id="hero-bg"></div>
+            <div class="container">
+                <div class="row align-items-center g-5">
+                    <!-- Left -->
+                    <div class="col-lg-7">
+                        <div class="hero-badge">
+                            <i class="fas fa-fire-flame-curved"></i>
+                            <span id="proj-category">Project</span>
                         </div>
-                        <div class="stat-item">
-                            <div class="stat-number" id="proj-backers">0</div>
-                            <div class="stat-label">Backers</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number" id="proj-days-left">0</div>
-                            <div class="stat-label">Days Left</div>
+                        <h1 id="proj-title">Loading…</h1>
+                        <p class="lead" id="proj-tagline"></p>
+                        <div class="hero-stats">
+                            <div class="hero-stat">
+                                <div class="hero-stat-number" id="proj-funded-pct">0%</div>
+                                <div class="hero-stat-label">Funded</div>
+                            </div>
+                            <div class="hero-stat">
+                                <div class="hero-stat-number" id="proj-backers">0</div>
+                                <div class="hero-stat-label">Backers</div>
+                            </div>
+                            <div class="hero-stat">
+                                <div class="hero-stat-number" id="proj-days-left">–</div>
+                                <div class="hero-stat-label">Days Left</div>
+                            </div>
+                            <div class="hero-stat">
+                                <div class="hero-stat-number" id="proj-raised-hero">0</div>
+                                <div class="hero-stat-label">SAR Raised</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="project-image">
-                        <img id="proj-hero-img" src="" alt="Project Image" class="img-fluid">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Project Content -->
-    <section class="project-content">
-        <div class="container">
-            <div class="row">
-                <!-- Left Column: Story -->
-                <div class="col-lg-8">
-                    <h2 class="section-title">About this project</h2>
-                    <div id="proj-about-content">
-                        <!-- Dynamic about sections -->
-                    </div>
-
-                    <h2 class="section-title mt-5">Rewards</h2>
-                    <div id="proj-rewards-list">
-                        <!-- Dynamic reward cards -->
-                    </div>
-                </div>
-
-                <!-- Right Column: Support Card -->
-                <div class="col-lg-4">
-                    <div class="support-card">
-                        <div class="raised-amount" id="proj-raised">SAR 0</div>
-                        <div class="goal-amount">pledged of SAR <span id="proj-goal">0</span> goal</div>
-
-                        <div class="funding-progress">
-                            <div class="funding-progress-bar" id="proj-progress-bar"></div>
-                        </div>
-
-                        <div class="mb-4">
-                            <strong id="prog-backers-2">0</strong> backers support this project
-                        </div>
-
-                        <button class="btn btn-support" onclick="handleBackProject()">Back this project</button>
-
-                        <div class="mt-3 text-center text-muted small">
-                            All or nothing. This project will only be funded if it reaches its goal by <span
-                                id="proj-deadline">...</span>.
+                    <!-- Right -->
+                    <div class="col-lg-5">
+                        <div class="hero-image-card">
+                            <img id="proj-hero-img" src="" alt="Project Cover">
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Scripts -->
+        <!-- PROJECT BODY -->
+        <section class="project-body">
+            <div class="container">
+                <div class="row g-5">
+
+                    <!-- ── LEFT: Story + Rewards + Gallery ── -->
+                    <div class="col-lg-8">
+
+                        <!-- Creator -->
+                        <div class="creator-card" id="creator-card" style="display:none;">
+                            <div class="creator-avatar" id="creator-avatar">?</div>
+                            <div>
+                                <div class="creator-label">Project by</div>
+                                <div class="creator-name" id="creator-name">–</div>
+                            </div>
+                            <span id="proj-status-badge" class="ms-auto status-badge"></span>
+                        </div>
+
+                        <!-- About -->
+                        <div class="mb-5">
+                            <h2 class="section-title">About this project</h2>
+                            <div id="proj-about-content"></div>
+                        </div>
+
+                        <!-- Video (if available) -->
+                        <div id="proj-video-section" class="mb-5" style="display:none;">
+                            <h2 class="section-title">Project Video</h2>
+                            <div class="video-container" id="proj-video-embed"></div>
+                        </div>
+
+                        <!-- Gallery -->
+                        <div id="proj-gallery-section" class="mb-5" style="display:none;">
+                            <h2 class="section-title">Gallery</h2>
+                            <div class="gallery-grid" id="proj-gallery-grid"></div>
+                        </div>
+
+                        <!-- Rewards -->
+                        <div class="mb-5">
+                            <h2 class="section-title">Reward Tiers</h2>
+                            <div id="proj-rewards-list"></div>
+                        </div>
+
+                    </div>
+
+                    <!-- ── RIGHT: Support Card ── -->
+                    <div class="col-lg-4">
+                        <div class="support-card">
+                            <div class="raised-amount" id="proj-raised-card">SAR 0</div>
+                            <div class="goal-text">pledged of <strong id="proj-goal">0</strong> SAR goal</div>
+
+                            <div class="funding-progress">
+                                <div class="funding-bar" id="proj-progress-bar"></div>
+                            </div>
+                            <div class="funded-pct" id="proj-pct-label">0% funded</div>
+
+                            <div class="support-stats">
+                                <div class="support-stat">
+                                    <div class="support-stat-number" id="proj-backers-card">0</div>
+                                    <div class="support-stat-label">Backers</div>
+                                </div>
+                                <div class="support-stat">
+                                    <div class="support-stat-number" id="proj-days-left-card">–</div>
+                                    <div class="support-stat-label">Days Left</div>
+                                </div>
+                            </div>
+
+                            <button class="btn-back-project" id="btn-back" onclick="handleBack()">
+                                <i class="fas fa-rocket me-2"></i>Back this project
+                            </button>
+                            <button class="btn-share" onclick="handleShare()">
+                                <i class="fas fa-share-alt me-2"></i>Share this project
+                            </button>
+
+                            <div class="deadline-notice" id="proj-deadline-text">
+                                All or nothing. This project will only be funded if it reaches its goal.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div><!-- /page-content -->
+
+    <!-- Error state (hidden by default) -->
+    <div id="error-state" style="display:none;">
+        <div class="error-state">
+            <div class="error-icon"><i class="fas fa-exclamation-circle"></i></div>
+            <h2>Project Not Found</h2>
+            <p id="error-message">We couldn't find the project you were looking for.</p>
+            <a href="projects.html" class="btn btn-success rounded-pill px-4">Browse All Projects</a>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Project Renderer -->
     <script src="js/project-render.js"></script>
+
+    <!-- Mobile Menu -->
+    <script src="mobile-menu.js"></script>
+
     <script>
-        function handleBackProject() {
-            // Redirect to coins page or specific project backing flow
-            const pid = new URLSearchParams(location.search).get("pid");
-            location.href = `coins.html?pid=${pid}`;
+        function handleBack() {
+            const pid = new URLSearchParams(location.search).get('pid');
+            // For now, redirect to coins page or alert
+            alert('Backing flow coming soon! Contact the creator to support this project.');
+        }
+
+        function handleShare() {
+            if (navigator.share) {
+                navigator.share({ title: document.title, url: location.href });
+            } else {
+                navigator.clipboard.writeText(location.href).then(() => {
+                    alert('Link copied to clipboard!');
+                });
+            }
         }
     </script>
+
 </body>
 
 </html>

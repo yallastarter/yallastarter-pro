@@ -1088,11 +1088,18 @@
                     btn.disabled = true;
                     btn.textContent = 'Processing...';
 
-                    // Ensure user is using a valid auth token
-                    let token = window.auth ? window.auth.getToken() : localStorage.getItem('token');
+                    // Ensure user is using a valid auth token — check both storage locations
+                    let token = null;
+                    if (window.auth) {
+                        token = window.auth.getToken();
+                    }
                     if (!token) {
-                        alert('Your session has expired or you are not logged in. Redirecting to login page...');
-                        window.location.href = 'login.html';
+                        token = localStorage.getItem('token') || sessionStorage.getItem('token');
+                    }
+                    if (!token) {
+                        showError('Not logged in', 'Please log in before submitting a project. Your form data has been preserved.');
+                        btn.disabled = false;
+                        btn.textContent = origText;
                         return;
                     }
 
@@ -1213,7 +1220,9 @@
                     if (data.success && data.data) {
                         console.log('Project created successfully!');
                         const proj = data.data;
-                        const shareUrl = window.location.origin + '/project-details.html?id=' + proj._id;
+                        // Use pid-based URL if available, fallback to _id
+                        const pid = proj.pid || proj._id;
+                        const shareUrl = window.location.origin + '/project.html?pid=' + pid;
 
                         // Fill success modal
                         if (document.getElementById('smProjectTitle')) document.getElementById('smProjectTitle').textContent = proj.title;
