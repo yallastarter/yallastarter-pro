@@ -528,6 +528,13 @@
                         <!-- Payment Form -->
                         <div class="form-section-title"><i class="fas fa-credit-card"></i> Payment Details</div>
 
+                        <!-- Error Display -->
+                        <div id="checkoutError"
+                            style="display:none; background:#fee2e2; border:1px solid #fecaca; color:#dc2626; padding:1rem; border-radius:12px; margin-bottom:1.5rem; font-size:0.95rem;">
+                            <i class="fas fa-exclamation-circle" style="margin-right:0.5rem;"></i>
+                            <span id="errorText"></span>
+                        </div>
+
                         <form id="guestCheckoutForm">
                             <div class="form-group" style="margin-top:0.5rem;">
                                 <label class="form-label" for="guestEmail">Email Address <span
@@ -735,7 +742,21 @@
                 }
             } catch (error) {
                 console.error('Payment Error:', error);
-                alert('Sorry, there was an error starting the payment process: ' + error.message);
+
+                // Show visible error on page
+                const errorDiv = document.getElementById('checkoutError');
+                const errorText = document.getElementById('errorText');
+                errorDiv.style.display = 'block';
+
+                if (error.message.includes('503') || error.message.includes('configured')) {
+                    errorText.textContent = 'The payment service is currently not configured on this server. Please ensure Stripe API keys are set in the .env file.';
+                } else {
+                    errorText.textContent = 'Error: ' + error.message;
+                }
+
+                // Scroll to error
+                errorDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
                 btn.disabled = false;
                 btnText.textContent = 'Proceed to Payment (SAR ' + selectedPrice + ')';
             }
